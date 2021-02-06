@@ -1,0 +1,77 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<link rel="stylesheet" href="form/snow.min.css">
+<style>
+    .flex-wrapper {
+        max-width: 20em;
+        display: flex
+    }
+    .flex-wrapper > .formulate-input:nth-child(odd) {
+        margin-right: 1em;
+    }
+
+    .flex-wrapper > .formulate-input.flex-item-small {
+        width: 5em;
+        flex-basis: 5em;
+        flex-shrink: 0;
+    }
+
+    .flex-wrapper > .formulate-input {
+        flex-grow: 1;
+    }
+</style>
+
+<div id="form">
+    @*<template>
+            <formulate-form v-model="values"
+                            :schema="schema"></formulate-form>
+        </template>*@
+    <template>
+        <formulate-form v-model="contenuform">
+            <formulate-input type="select"
+                             name="planet"
+                             label="What is your favorite rocky planet?"
+                             :options="{ mercury: 'Mercury', venus: 'Venus', earth: 'Earth', mars: 'Mars' }"></formulate-input>
+            <formulate-input v-if="contenuform.planet === 'earth'"
+                             key="earth"
+                             name="earth_moon"
+                             label="What is the name of earth’s moon?"></formulate-input>
+            <formulate-input 
+                             key="mars"
+                             name="mars_sunset"
+                             label="What color is the Martian sunset?"></formulate-input>
+        </formulate-form>
+        </template>
+</div>
+
+<script src="https://unpkg.com/vue"></script>
+<script src="form/formulate.min.js"></script>
+
+<script>
+    Vue.use(VueFormulate)
+
+    const App = {
+        el: '#form',
+        data: {
+            values: {}
+        },
+       @*/* data: {
+            values: {},
+            schema: @Html.Raw(Model.Formulaire)
+        },
+        */*@
+        mounted() {
+            console.log('Application mounted.')
+        }
+    }
+
+
+    window.addEventListener('load', () => {
+        new Vue(App)
+    })
+
+</script>

@@ -1,0 +1,63 @@
+﻿#Entête
+- component: h3
+  children: Order pizza
+
+- type: select
+  label: Pizza size
+  name: pizzasize
+  placeholder: Select a size
+  options:
+    small: Small
+    large: Large
+    extra_large: Extra Large
+  validation: required
+
+#Groupe d'input
+- component: div
+  class: flex-wrapper
+  children:
+  - name: cheese
+    label: Cheese options
+    type: checkbox
+    options:
+      mozzarella: Mozzarella
+      feta: Feta
+      parmesan: Parmesan
+      extra: Extra cheese
+  - name: toppings
+    label: Toppings
+    type: checkbox
+    validation: required|max:3
+    options:
+      salami: Salami
+      prosciutto: Prosciutto
+      avocado: Avocado
+      onion: Onion
+
+#Groupe d'input
+- component: div
+  class: flex-wrapper
+  children:
+  - type: select
+    v-if: "values.pizzasize === 'large'"
+    name: country_code
+    label: Code
+    outer-class:
+    - flex-item-small
+    value: '1'
+    options:
+      '1': "+1"
+      '49': "+49"
+      '55': "+55"
+  - type: text
+    v-if: "values.pizzasize === 'small'"
+    label: Phone number
+    name: phone
+    inputmode: numeric
+    pattern: "[0-9]*"
+    validation: matches:/^[0-9-]+$/
+    validation-messages:
+      matches: Phone number should only include numbers and dashes.
+
+- type: submit
+  label: Order pizza
