@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "IY7KWZZYB/InOyc/9nr/Bevpx928bdCY6yT/irDdFG/EVVH5pumYX3ZR2EJK4r467jUVq6TmQ9quFSAVG+BPLQ==",
+  "dgSpecHash": "ovw8P49n57oiI6w2/0NRAGyToYS7HPDidSsxcSY89+2HuV0XPH7MTCTbWnd28+YyUDI2wezQGzoep5WjkZd/aA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\infol\\source\\repos\\WebApplication2\\WebApplication2\\WebApplication2.csproj",
+  "projectFilePath": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\WebApplication2.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\infol\\.nuget\\packages\\yamldotnet\\9.1.4\\yamldotnet.9.1.4.nupkg.sha512"
+    "C:\\Users\\Dany\\.nuget\\packages\\anglesharp\\0.14.0\\anglesharp.0.14.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\Dany\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Dany\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.0\\system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.text.encoding.codepages\\4.5.0\\system.text.encoding.codepages.4.5.0.nupkg.sha512",
+    "C:\\Users\\Dany\\.nuget\\packages\\yamldotnet\\9.1.4\\yamldotnet.9.1.4.nupkg.sha512"
   ],
   "logs": []
 }
