@@ -3,8 +3,9 @@
     # Section 1
     - section: Informations sur la demande
       inputs:
-        - type: group
+        - #----------------------------------------
           name: test
+          type: group
           label: Label
           help: "Choose your hand-packed pints whipped up by our expert servers :)"
           addLabel: + Ajouter une saveur
@@ -12,23 +13,25 @@
             required: trim
           repeatable: true
           inputs:
-            - type: select
+            - #----------------------------------------
               name: flavor
+              type: select
               label: Saveur
               help: TEST
               validationName: La saveur
               validations: 
                 required: trim
               options: { vanilla: 'Vanilla', chocolate: 'Chocolate', strawberry: 'Strawberry', pineapple: 'Pineapple'}
-            - type: number
+            - #----------------------------------------
               name: quantity
+              type: number
               label: Quantité
               validationName: La quantité
               validations: 
                 required: trim
-        #Question
-        - type: text
+        - #----------------------------------------
           label: Test
+          type: text
           help: TEST MAN!
           validations:
             required: trim

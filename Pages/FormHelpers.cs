@@ -14,7 +14,7 @@ namespace WebApplication2.Pages
         public static string JsArray(HelperContext context, IDictionary<string, string>? dict)
         {
 
-            return "[" + string.Join(", ", dict.Select(kv => $"['{kv.Key}', {(kv.Value.Contains(",") ? $"'{kv.Value}'" : kv.Value)}]").ToArray()) + "]";
+            return "[" + string.Join(", ", dict.Select(kv => $"['{kv.Key}', '{kv.Value}']").ToArray()) + "]";
         }
         /*
          :validation="[
