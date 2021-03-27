@@ -40,10 +40,11 @@ namespace WebApplication2.Pages
 
         public async Task OnGet(string? id)
         {
+            /* Section TEST pour le v-if "SERVER-SIDE" */
             var lambdaParser = new NReco.Linq.LambdaParser();
             var varContext = new Dictionary<string, object>();
             varContext["pi"] = 3.14;
-            var equation = "pi===3.14";
+            var equation = "pi===3.13";
             //Normalize JS to C#
             equation = equation.Replace("===", "==");
             var ttt = lambdaParser.Eval(equation, varContext);
