@@ -1,10 +1,15 @@
 ﻿form:
+  #template: default
   sections:
     # Section 1
     - section: Informations sur la demande
       inputs:
         - #----------------------------------------
           name: test
+          if: 
+            server: ($.ne_qc === 'oui')
+            client: 
+            all: 
           type: group
           label: Label
           help: "Choose your hand-packed pints whipped up by our expert servers :)"
@@ -30,12 +35,9 @@
               validations: 
                 required: trim
         - #----------------------------------------
-          label: Test
-          type: text
-          help: TEST MAN!
-          validations:
+          name: quantity
+          type: number
+          label: Quantité
+          validationName: La quantité
+          validations: 
             required: trim
-          options:
-            val1: Valeur1
-            val2: Valeur2
-            

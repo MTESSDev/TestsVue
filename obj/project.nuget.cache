@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ws4JQhycPCnOedh9hWt3SRVtzUpK0VdJIQMD3YTZmrnxJV1/9UR3Ta/3SFRvyJkibKbfM3695uPrF6TtnsJI3w==",
+  "dgSpecHash": "Pa0qZdOtA8eCWTCwUacEAW7DMq9zmK/lajoormumhyFJCm/noh2/zuqJ2RFbarOXACJMHVKU2hpCD7knqVIT9w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\WebApplication2.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Dany\\.nuget\\packages\\nreco.lambdaparser\\1.0.12\\nreco.lambdaparser.1.0.12.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\stubble.core\\1.9.3\\stubble.core.1.9.3.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\stubble.helpers\\1.1.3\\stubble.helpers.1.1.3.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\system.collections.immutable\\1.5.0\\system.collections.immutable.1.5.0.nupkg.sha512",

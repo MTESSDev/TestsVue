@@ -23,8 +23,8 @@ namespace WebApplication2.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        Func<HelperContext, IDictionary<string,string>?, string> jsObject = FormHelpers.JsObject;
-        Func<HelperContext, IDictionary<string,string>?, string> jsArray = FormHelpers.JsArray;
+        Func<HelperContext, IDictionary<object, object>?, string> jsObject = FormHelpers.JsObject;
+        Func<HelperContext, IDictionary<object, object>?, string> jsArray = FormHelpers.JsArray;
 
         public DynamicForm Form { get; set; }
         public string FormRaw { get; set; }
@@ -40,7 +40,15 @@ namespace WebApplication2.Pages
 
         public async Task OnGet(string? id)
         {
-            using (var r = new StreamReader(@$"{id ?? "default"}.ecsform.yaml"))
+            var lambdaParser = new NReco.Linq.LambdaParser();
+            var varContext = new Dictionary<string, object>();
+            varContext["pi"] = 3.14;
+            var equation = "pi===3.14";
+            //Normalize JS to C#
+            equation = equation.Replace("===", "==");
+            var ttt = lambdaParser.Eval(equation, varContext);
+
+            using (var r = new StreamReader(@$"{id ?? "default"}.ecsform.yml"))
             {
                 var deserializer = new DeserializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)  // see height_in_inches in sample yml 
@@ -60,7 +68,11 @@ namespace WebApplication2.Pages
                     .Register("JsArray", jsArray);
 
                 var stubble = new StubbleBuilder()
-                    .Configure(conf => conf.AddHelpers(helpers))
+                    .Configure(conf =>
+                    {
+                        conf.AddHelpers(helpers);
+                        conf.SetIgnoreCaseOnKeyLookup(true);
+                    })
                     .Build();
 
                 using (StreamReader streamReader = new StreamReader(@"formTemplate.vue", Encoding.UTF8))

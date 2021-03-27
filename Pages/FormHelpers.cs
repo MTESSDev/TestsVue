@@ -6,14 +6,13 @@ namespace WebApplication2.Pages
 {
     internal class FormHelpers
     {
-        public static string JsObject(HelperContext context, IDictionary<string, string>? dict)
+        public static string JsObject(HelperContext context, IDictionary<object, object>? dict)
         {
-            return "{" + string.Join(", ", dict.Select(kv => kv.Key + $": '{kv.Value.Replace("'", "\\'")}'").ToArray()) + "}";
+            return "{" + string.Join(", ", dict.Select(kv => kv.Key + $": '{kv.Value.ToString().Replace("'", "\\'")}'").ToArray()) + "}";
         }
 
-        public static string JsArray(HelperContext context, IDictionary<string, string>? dict)
+        public static string JsArray(HelperContext context, IDictionary<object, object>? dict)
         {
-
             return "[" + string.Join(", ", dict.Select(kv => $"['{kv.Key}', '{kv.Value}']").ToArray()) + "]";
         }
         /*

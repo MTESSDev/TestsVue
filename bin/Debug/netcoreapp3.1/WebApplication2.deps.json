@@ -25,6 +25,7 @@
       "WebApplication2/1.0.0": {
         "dependencies": {
           "AngleSharp": "0.14.0",
+          "NReco.LambdaParser": "1.0.12",
           "Newtonsoft.Json": "12.0.3",
           "Stubble.Core": "1.9.3",
           "Stubble.Helpers": "1.1.3",
@@ -344,6 +345,17 @@
         },
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "NReco.LambdaParser/1.0.12": {
+        "runtime": {
+          "lib/netstandard2.0/NReco.LambdaParser.dll": {
+            "assemblyVersion": "1.0.11.0",
+            "fileVersion": "1.0.11.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/NReco.LambdaParser.dll": {}
         }
       },
       "Stubble.Core/1.9.3": {
@@ -2124,6 +2136,13 @@
       "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
+    "NReco.LambdaParser/1.0.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-f1nye8fMJCYfJeR+Qb7qlcvC8et4Y4TLf2GLfaFoeISgI+yisaJkbNSGfKCpFBNeVF/iPDkyFmr4J28dv342/Q==",
+      "path": "nreco.lambdaparser/1.0.12",
+      "hashPath": "nreco.lambdaparser.1.0.12.nupkg.sha512"
     },
     "Stubble.Core/1.9.3": {
       "type": "package",

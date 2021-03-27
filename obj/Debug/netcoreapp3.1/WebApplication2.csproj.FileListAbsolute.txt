@@ -84,3 +84,4 @@ C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreap
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Debug\netcoreapp3.1\Razor\Pages\generic.cshtml.g.cs
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\Stubble.Core.dll
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\Stubble.Helpers.dll
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\NReco.LambdaParser.dll

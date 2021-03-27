@@ -6,37 +6,37 @@
                 :errors="inputErrors">
     {{#Form.Sections}}
     <div class="section">
-        <h2>{{Section}}</h2>
+        <h2>{{section}}</h2>
         {{#MessageUrgent}}<div>{{.}}</div>{{/MessageUrgent}}
-        {{#Inputs}}
-        <formulate-input {{# Type}} type="{{.}}" {{/ Type}}
-                         {{# Name}} name="{{.}}" {{/ Name}}
-                         {{# ValidationName}} validation-name="{{.}}" {{/ ValidationName}}
-                         {{# Label}} label="{{.}}" {{/ Label}}
-                         {{# Help}} help="{{.}}" {{/ Help}}
-                         {{# AddLabel}} add-label="{{.}}" {{/ AddLabel}}
-                         {{# Validations}} :validation="{{JsArray .}}" {{/ Validations}}
-                         {{# Options}} :options="{{JsObject .}}" {{/ Options}}
-                         {{# Repeatable}}
+        {{#InputsHandled}}
+        {{#attributes}}
+        <formulate-input {{# type}} type="{{.}}" {{/ type}}
+                         {{# name}} name="{{.}}" {{/ name}}
+                         {{# validationName}} validation-name="{{.}}" {{/ validationName}}
+                         {{# label}} label="{{.}}" {{/ label}}
+                         {{# help}} help="{{.}}" {{/ help}}
+                         {{# addLabel}} add-label="{{.}}" {{/ addLabel}}
+                         {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
+                         {{# options}} :options="{{JsObject .}}" {{/ options}}
+                         {{# repeatable}}
                          :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
-                         {{/ Repeatable}}>
+                         {{/ repeatable}}>
+            {{#isGroup}}
             <div class="group">
-                {{#Inputs}}
-                <formulate-input {{# Type}} type="{{.}}" {{/ Type}}
-                                 {{# Name}} name="{{.}}" {{/ Name}}
-                                 {{# ValidationName}} validation-name="{{.}}" {{/ ValidationName}}
-                                 {{# Label}} label="{{.}}" {{/ Label}}
-                                 {{# Help}} help="{{.}}" {{/ Help}}
-                                 {{# AddLabel}} add-label="{{.}}" {{/ AddLabel}}
-                                 {{# Validations}} :validation="{{JsArray .}}" {{/ Validations}}
-                                 {{# Options}} :options="{{JsObject .}}" {{/ Options}}
-                                 {{# Repeatable}}
-                                 :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
-                                 {{/ Repeatable}}></formulate-input>
-                {{/Inputs}}
+                {{#inputs}}
+                <formulate-input {{# type}} type="{{.}}" {{/ type}}
+                                 {{# name}} name="{{.}}" {{/ name}}
+                                 {{# validationName}} validation-name="{{.}}" {{/ validationName}}
+                                 {{# label}} label="{{.}}" {{/ label}}
+                                 {{# help}} help="{{.}}" {{/ help}}
+                                 {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
+                                 {{# options}} :options="{{JsObject .}}" {{/ options}}></formulate-input>
+                {{/inputs}}
             </div>
+            {{/isGroup}}
         </formulate-input>
-        {{/Inputs}}
+        {{/attributes}}
+        {{/InputsHandled}}
     </div>
     {{/Form.Sections}}
 
