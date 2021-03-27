@@ -79,4 +79,8 @@ C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Debug\netcoreap
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\form.vue
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\AngleSharp.dll
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\form - Copier.vue
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\form - Copier (2).vue
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\formTemplate.vue
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Debug\netcoreapp3.1\Razor\Pages\generic.cshtml.g.cs
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\Stubble.Core.dll
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\Stubble.Helpers.dll

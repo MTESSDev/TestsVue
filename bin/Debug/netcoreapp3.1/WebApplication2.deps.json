@@ -26,6 +26,8 @@
         "dependencies": {
           "AngleSharp": "0.14.0",
           "Newtonsoft.Json": "12.0.3",
+          "Stubble.Core": "1.9.3",
+          "Stubble.Helpers": "1.1.3",
           "YamlDotNet": "9.1.4",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
@@ -104,7 +106,7 @@
           "Microsoft.AspNetCore.StaticFiles": "3.1.0.0",
           "Microsoft.AspNetCore.WebSockets": "3.1.0.0",
           "Microsoft.AspNetCore.WebUtilities": "3.1.0.0",
-          "Microsoft.CSharp": "4.0.0.0",
+          "Microsoft.CSharp.Reference": "4.0.0.0",
           "Microsoft.Extensions.Caching.Abstractions": "3.1.0.0",
           "Microsoft.Extensions.Caching.Memory": "3.1.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "3.1.0.0",
@@ -160,7 +162,7 @@
           "System.Buffers": "4.0.2.0",
           "System.Collections.Concurrent": "4.0.15.0",
           "System.Collections": "4.1.2.0",
-          "System.Collections.Immutable": "1.2.5.0",
+          "System.Collections.Immutable.Reference": "1.2.5.0",
           "System.Collections.NonGeneric": "4.1.2.0",
           "System.Collections.Specialized": "4.1.2.0",
           "System.ComponentModel.Annotations": "4.3.1.0",
@@ -287,7 +289,7 @@
           "System.Threading.Overlapped": "4.1.2.0",
           "System.Threading.Tasks.Dataflow": "4.6.5.0",
           "System.Threading.Tasks": "4.1.2.0",
-          "System.Threading.Tasks.Extensions": "4.3.1.0",
+          "System.Threading.Tasks.Extensions.Reference": "4.3.1.0",
           "System.Threading.Tasks.Parallel": "4.0.4.0",
           "System.Threading.Thread": "4.1.2.0",
           "System.Threading.ThreadPool": "4.1.2.0",
@@ -331,6 +333,7 @@
           "lib/netstandard2.0/AngleSharp.dll": {}
         }
       },
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.NETCore.Platforms/2.0.0": {},
       "Newtonsoft.Json/12.0.3": {
         "runtime": {
@@ -343,6 +346,38 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "Stubble.Core/1.9.3": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Collections.Immutable": "1.5.0",
+          "System.Threading.Tasks.Extensions": "4.5.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Stubble.Core.dll": {
+            "assemblyVersion": "1.9.0.0",
+            "fileVersion": "1.9.3.56947"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Stubble.Core.dll": {}
+        }
+      },
+      "Stubble.Helpers/1.1.3": {
+        "dependencies": {
+          "Stubble.Core": "1.9.3",
+          "System.Collections.Immutable": "1.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Stubble.Helpers.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.3.3405"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Stubble.Helpers.dll": {}
+        }
+      },
+      "System.Collections.Immutable/1.5.0": {},
       "System.Runtime.CompilerServices.Unsafe/4.5.0": {},
       "System.Text.Encoding.CodePages/4.5.0": {
         "dependencies": {
@@ -350,6 +385,7 @@
           "System.Runtime.CompilerServices.Unsafe": "4.5.0"
         }
       },
+      "System.Threading.Tasks.Extensions/4.5.1": {},
       "YamlDotNet/9.1.4": {
         "runtime": {
           "lib/netstandard2.1/YamlDotNet.dll": {
@@ -823,7 +859,7 @@
         },
         "compileOnly": true
       },
-      "Microsoft.CSharp/4.0.0.0": {
+      "Microsoft.CSharp.Reference/4.0.0.0": {
         "compile": {
           "Microsoft.CSharp.dll": {}
         },
@@ -1159,7 +1195,7 @@
         },
         "compileOnly": true
       },
-      "System.Collections.Immutable/1.2.5.0": {
+      "System.Collections.Immutable.Reference/1.2.5.0": {
         "compile": {
           "System.Collections.Immutable.dll": {}
         },
@@ -1921,7 +1957,7 @@
         },
         "compileOnly": true
       },
-      "System.Threading.Tasks.Extensions/4.3.1.0": {
+      "System.Threading.Tasks.Extensions.Reference/4.3.1.0": {
         "compile": {
           "System.Threading.Tasks.Extensions.dll": {}
         },
@@ -2068,6 +2104,13 @@
       "path": "anglesharp/0.14.0",
       "hashPath": "anglesharp.0.14.0.nupkg.sha512"
     },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
+    },
     "Microsoft.NETCore.Platforms/2.0.0": {
       "type": "package",
       "serviceable": true,
@@ -2082,6 +2125,27 @@
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
+    "Stubble.Core/1.9.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wwE2Qns+oa/vDm9iR8FczayefGE+1smW/B3SvtXfowxYJn3f0NUyYC4bcn+HSy7+EFk0jiTlVZNfK7BgAG0tsQ==",
+      "path": "stubble.core/1.9.3",
+      "hashPath": "stubble.core.1.9.3.nupkg.sha512"
+    },
+    "Stubble.Helpers/1.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/t/tioAX1S+Q9hcJyiZTua8qqYcXzIcxO3OUFsJ1AygeHR0PYG9c7uDj9b4Qy87jDZCWFfE7mszDri1DFHvzmA==",
+      "path": "stubble.helpers/1.1.3",
+      "hashPath": "stubble.helpers.1.1.3.nupkg.sha512"
+    },
+    "System.Collections.Immutable/1.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EXKiDFsChZW0RjrZ4FYHu9aW6+P4MCgEDCklsVseRfhoO0F+dXeMSsMRAlVXIo06kGJ/zv+2w1a2uc2+kxxSaQ==",
+      "path": "system.collections.immutable/1.5.0",
+      "hashPath": "system.collections.immutable.1.5.0.nupkg.sha512"
+    },
     "System.Runtime.CompilerServices.Unsafe/4.5.0": {
       "type": "package",
       "serviceable": true,
@@ -2095,6 +2159,13 @@
       "sha512": "sha512-S0wEUiKcLvRlkFUXca8uio1UQ5bYQzYgOmOKtCqaBQC3GR9AJjh43otcM32IGsAyvadFTaAMw9Irm6dS4Evfng==",
       "path": "system.text.encoding.codepages/4.5.0",
       "hashPath": "system.text.encoding.codepages.4.5.0.nupkg.sha512"
+    },
+    "System.Threading.Tasks.Extensions/4.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WSKUTtLhPR8gllzIWO2x6l4lmAIfbyMAiTlyXAis4QBDonXK4b4S6F8zGARX4/P8wH3DH+sLdhamCiHn+fTU1A==",
+      "path": "system.threading.tasks.extensions/4.5.1",
+      "hashPath": "system.threading.tasks.extensions.4.5.1.nupkg.sha512"
     },
     "YamlDotNet/9.1.4": {
       "type": "package",
@@ -2488,7 +2559,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.CSharp/4.0.0.0": {
+    "Microsoft.CSharp.Reference/4.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -2768,7 +2839,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Collections.Immutable/1.2.5.0": {
+    "System.Collections.Immutable.Reference/1.2.5.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -3403,7 +3474,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Threading.Tasks.Extensions/4.3.1.0": {
+    "System.Threading.Tasks.Extensions.Reference/4.3.1.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

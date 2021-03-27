@@ -1,10 +1,10 @@
-﻿@page
-@model IndexModel
+﻿@page "{id?}"
+@model GenericModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Formulaire";
 }
-
-<link rel="stylesheet" href="form/snow.min.css">
+<base href="~/" />
+<link rel="stylesheet" href="./form/snow.min.css">
 <style>
     @@media (min-width: 650px) {
         .order {
@@ -59,19 +59,15 @@
 </style>
 
 <div id="form">
-    @*<template>
-            <formulate-form v-model="values"
-                            :schema="schema"></formulate-form>
-        </template>*@
     <template>
-        @Html.Raw(Model.Formulaire)
+        @Html.Raw(Model.FormRaw)
     </template>
 </div>
 
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="form/formulate.min.js"></script>
-<script src="form/locales.min.js"></script>
+<script src="./form/formulate.min.js"></script>
+<script src="./form/locales.min.js"></script>
 
 <script>
     Vue.use(VueFormulate, {
@@ -82,7 +78,6 @@
 
     const App = {
         el: '#form',
-
 
         methods: {
             failedValidation(data) {

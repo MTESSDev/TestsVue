@@ -9,17 +9,17 @@ namespace WebApplication2.Pages
     {
         public FormData()
         {
-            Form = new Input();
-            Inputs = new List<Input>();
+            Form = new InputV();
+            Inputs = new List<InputV>();
         }
 
-        public Input Form { get; set; }
-        public List<Input> Inputs { get; set; }
+        public InputV Form { get; set; }
+        public List<InputV> Inputs { get; set; }
     }
 
-    public class Input
+    public class InputV
     {
-        public Input()
+        public InputV()
         {
             Attributes = new List<Attribute>();
             //AcceptedValues = new List<string>();

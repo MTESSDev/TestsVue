@@ -8,8 +8,8 @@
           label: Label
           help: "Choose your hand-packed pints whipped up by our expert servers :)"
           addLabel: + Ajouter une saveur
-          validations: required
-          # - required: true
+          validations:
+            required: trim
           repeatable: true
           inputs:
             - type: select
@@ -17,18 +17,22 @@
               label: Saveur
               help: TEST
               validationName: La saveur
-              validations: required
+              validations: 
+                required: trim
               options: { vanilla: 'Vanilla', chocolate: 'Chocolate', strawberry: 'Strawberry', pineapple: 'Pineapple'}
             - type: number
               name: quantity
               label: Quantité
               validationName: La quantité
-              validations: required
+              validations: 
+                required: trim
         #Question
-        - type: checkbox
+        - type: text
           label: Test
           help: TEST MAN!
-          validations: required
+          validations:
+            required: trim
           options:
             val1: Valeur1
             val2: Valeur2
+            

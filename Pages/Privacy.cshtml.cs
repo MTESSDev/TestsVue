@@ -63,7 +63,7 @@ namespace WebApplication2.Pages
                         }
                         else
                         {
-                            var input = new Input();
+                            var input = new InputV();
 
                             foreach (var attr in item.Attributes)
                             {
