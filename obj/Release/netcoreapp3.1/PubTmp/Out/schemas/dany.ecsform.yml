@@ -67,7 +67,7 @@
             fr: Êtes-vous né au Québec?
           options: yesno
         - name: Req00_Etatcivil #Req00-Etatcivil ça ne fonctionne pas ?!
-          type: select
+          type: radio
           #pdfBind: Req00-Etatcivil_Celibataire
           label:
             fr: "État civil:"
@@ -80,7 +80,7 @@
             ConjointSurvivant: Conjoint de survivant
             Divorce: Divorcé ou dissolution d'union civile
         - name: date_separation
-          v-if: contenuform.Req00_Etatcivil === 'SepareSansJugement'
+          v-if: contenuform.Req00_Etatcivil === 'SepareSansJugement' || contenuform.Req00_Etatcivil === 'SepareLegalement'
           type: date
           label:  
             fr: Inscrivez la date de la séparation

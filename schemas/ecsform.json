@@ -36,6 +36,10 @@
             "additionalProperties": false,
             "properties": {
                 "section": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
+                "id": {
                     "type": "string"
                 },
                 "inputs": {
@@ -46,7 +50,6 @@
                 }
             },
             "required": [
-                "inputs",
                 "section"
             ],
             "title": "Section"
@@ -60,19 +63,28 @@
                 },
                 "type": {
                     "type": "string",
-                    "default": "text",
+                    "default": ["text"],
                     "enum": ["text", "button", "submit", "file", "image", "group", "radio", "checkbox", "select", "number", "slider", "textarea", "color", "date", "datetime-local", "email", "hidden", "month", "password", "search", "tel", "time", "url", "week"]
                 },
                 "if": {
                     "type": "string"
                  },
                 "validationName": {
-                    "type": "string"
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
                 },
                 "label": {
-                    "type": "string"
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
                 },
                 "help": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
+                "pdfBind": {
+                    "type": "string"
+                },
+                "v-if": {
                     "type": "string"
                 },
                 "helpPosition": {
@@ -80,10 +92,12 @@
                   "enum": ["before", "after"]
                 },
                 "addLabel": {
-                    "type": "string"
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
                 },
                 "options": {
-                    "type": "object"
+                    "type": ["object", "null", "string", "array"],
+                    "examples": ["yesno"]
                 },
                 "validations": {
                     "type": "object",
@@ -205,6 +219,23 @@
                 "name"
             ],
             "title": "Input"
+        },
+        "Translation": {
+            "type": "object",
+            "additionalProperties": true,
+            "default": {"fr":"", "en": ""},
+            "properties": {
+                "fr": {
+                    "type": ["string", "null"]
+                },
+                "en": {
+                    "type": ["string", "null"]
+                }
+            },
+            "required": [
+                "fr"
+            ],
+            "title": "Translation"
         }
     }
 }
