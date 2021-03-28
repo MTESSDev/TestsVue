@@ -66,11 +66,12 @@
           label:
             fr: Êtes-vous né au Québec?
           options: yesno
-        - name: Req00_Etatcivil #Req00-Etatcivil ça ne fonctionne pas ?!
+        - name: Req00-Etatcivil #Req00-Etatcivil ça ne fonctionne pas ?!
           type: radio
           #pdfBind: Req00-Etatcivil_Celibataire
           label:
-            fr: "État civil:"
+            fr: État civil
+            en: Civil status
           options: 
             Celibataire: Célibataire
             Marie: Marié ou uni civilement
@@ -80,7 +81,9 @@
             ConjointSurvivant: Conjoint de survivant
             Divorce: Divorcé ou dissolution d'union civile
         - name: date_separation
-          v-if: contenuform.Req00_Etatcivil === 'SepareSansJugement' || contenuform.Req00_Etatcivil === 'SepareLegalement'
+          v-if: |  #Solution à réfléchir ... concernant les tirets dans les noms.
+            contenuform['Req00-Etatcivil'] === 'SepareSansJugement' || 
+            contenuform['Req00-Etatcivil'] === 'SepareLegalement'
           type: date
           label:  
             fr: Inscrivez la date de la séparation

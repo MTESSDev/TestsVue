@@ -47,5 +47,9 @@
 
     <formulate-input type="submit"
                      label="Register"></formulate-input>
-
+    {{! ceci est un commentaire, pour dire que le }}
+    {{! block ci-dessous sert à forcer stubble à skipper contenuform }}
+    {{=<% %>=}}
+    {{contenuform}}
+    <%={{ }}=%>
 </formulate-form>
