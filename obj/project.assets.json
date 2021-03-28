@@ -502,9 +502,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\WebApplication2.csproj",
-      "projectName": "WebApplication2",
-      "projectPath": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\WebApplication2.csproj",
+      "projectUniqueName": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\ECSForm.csproj",
+      "projectName": "ECSForm",
+      "projectPath": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\ECSForm.csproj",
       "packagesPath": "C:\\Users\\Dany\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\obj\\",
       "projectStyle": "PackageReference",

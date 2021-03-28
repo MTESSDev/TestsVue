@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication2", "WebApplication2.csproj", "{A48D7030-3850-4EC1-A59A-3964C4BEE289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECSForm", "ECSForm.csproj", "{A48D7030-3850-4EC1-A59A-3964C4BEE289}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

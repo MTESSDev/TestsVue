@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Pa0qZdOtA8eCWTCwUacEAW7DMq9zmK/lajoormumhyFJCm/noh2/zuqJ2RFbarOXACJMHVKU2hpCD7knqVIT9w==",
+  "dgSpecHash": "hHYDbT81GA95TxJ+el3m/JUGHPftkTz9BFB712FMbXlAL3dBKEu4TmpbIERo0FYSw3CrhdnH9Bdm6ptXLX/K6A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\WebApplication2.csproj",
+  "projectFilePath": "C:\\Users\\Dany\\Documents\\Visual Studio 2012\\Projects\\TestsVue\\ECSForm.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dany\\.nuget\\packages\\anglesharp\\0.14.0\\anglesharp.0.14.0.nupkg.sha512",
     "C:\\Users\\Dany\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
