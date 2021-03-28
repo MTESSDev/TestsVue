@@ -1,9 +1,23 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="schemas\dany.ecsform.yml" />
+    <None Remove="schemas\formTemplate.vue" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="schemas\dany.ecsform.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schemas\formTemplate.vue">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AngleSharp" Version="0.14.0" />
@@ -16,9 +30,6 @@
 
   <ItemGroup>
     <None Update="form - Copier %282%29.vue">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="formTemplate.vue">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="form.vue">
