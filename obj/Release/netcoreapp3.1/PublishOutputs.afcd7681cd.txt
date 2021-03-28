@@ -1,3 +1,5 @@
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcoreapp3.1\PubTmp\Out\schemas\dany.ecsform.yml
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcoreapp3.1\PubTmp\Out\schemas\formTemplate.vue
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcoreapp3.1\PubTmp\Out\form - Copier (2).vue
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcoreapp3.1\PubTmp\Out\form.vue
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcoreapp3.1\PubTmp\Out\form.yml

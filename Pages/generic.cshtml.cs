@@ -50,7 +50,7 @@ namespace WebApplication2.Pages
             equation = equation.Replace("===", "==");
             var ttt = lambdaParser.Eval(equation, varContext);
 
-            using (var r = new StreamReader(@$"{id ?? "default"}.ecsform.yml"))
+            using (var r = new StreamReader(@$"schemas/{id ?? "default"}.ecsform.yml"))
             {
                 var deserializer = new DeserializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)  // see height_in_inches in sample yml 
@@ -78,7 +78,7 @@ namespace WebApplication2.Pages
                     })
                     .Build();
 
-                using (StreamReader streamReader = new StreamReader(@"formTemplate.vue", Encoding.UTF8))
+                using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
                 {
                     var content = await streamReader.ReadToEndAsync();
                     FormRaw = await stubble.RenderAsync(content, yamlObject);

@@ -46,3 +46,5 @@ C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcore
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcoreapp3.1\ECSForm.dll
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcoreapp3.1\ECSForm.pdb
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Release\netcoreapp3.1\ECSForm.genruntimeconfig.cache
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Release\netcoreapp3.1\schemas\dany.ecsform.yml
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Release\netcoreapp3.1\schemas\formTemplate.vue
