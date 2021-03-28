@@ -23,8 +23,9 @@ namespace WebApplication2.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        Func<HelperContext, IDictionary<object, object>?, string> jsObject = FormHelpers.JsObject;
+        Func<HelperContext, dynamic?, string> jsObject = FormHelpers.JsObject;
         Func<HelperContext, IDictionary<object, object>?, string> jsArray = FormHelpers.JsArray;
+        Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
 
         public DynamicForm Form { get; set; }
         public string FormRaw { get; set; }
@@ -65,6 +66,7 @@ namespace WebApplication2.Pages
 
                 var culture = new CultureInfo("fr-CA");
                 var helpers = new Helpers()
+                    .Register("i18n", i18n)
                     .Register("JsObject", jsObject)
                     .Register("JsArray", jsArray);
 

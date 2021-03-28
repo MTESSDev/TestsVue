@@ -24,6 +24,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @if (System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "fr")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="" asp-route-culture="en-CA">English</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="" asp-route-culture="fr-CA">Français</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

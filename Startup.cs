@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +27,15 @@ namespace WebApplication2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           /* services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("fr-CA");
+                options.SupportedCultures = new List<CultureInfo> { new CultureInfo("en-CA"), new CultureInfo("fr-CA") };
+                options.RequestCultureProviders.Clear();
+                options.RequestCultureProviders.Add(new QueryStringRequestCultureProvider() { QueryStringKey = "culture", UIQueryStringKey = "lang" });
+            });
+           */
+
             services.AddControllers();
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
@@ -44,6 +56,12 @@ namespace WebApplication2
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            var supportedCultures = new[] { "en-CA", "fr-CA" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -59,6 +77,34 @@ namespace WebApplication2
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
+        }
+
+
+    }
+    public class CustomerCultureProvider : RequestCultureProvider
+    {
+        public override async Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
+        {
+            //Go away and do a bunch of work to find out what culture we should do. 
+            await Task.Yield();
+
+            httpContext.Request.Query.TryGetValue("lang", out var lang);
+
+            if(lang == string.Empty || lang == "fr")
+            {
+                //Return a provider culture result. 
+                return new ProviderCultureResult("fr-CA");
+            }
+            else
+            {
+                //Return a provider culture result. 
+                return new ProviderCultureResult("en-CA");
+            }
+
+
+            //In the event I can't work out what culture I should use. Return null. 
+            //Code will fall to other providers in the list OR use the default. 
+            //return null;
         }
     }
 }

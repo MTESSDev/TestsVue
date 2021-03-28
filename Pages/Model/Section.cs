@@ -5,7 +5,7 @@ namespace WebApplication2.Pages
 {
     public class SectionBloc
     {
-        public string? Section { get; set; }
+        public IDictionary<object, object>? Section { get; set; }
         public IEnumerable<object>? Inputs { get; set; }
 
         public IEnumerable<object>? InputsHandled(){

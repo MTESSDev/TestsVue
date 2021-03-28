@@ -85,3 +85,4 @@ C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\obj\Debug\netcoreap
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\Stubble.Core.dll
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\Stubble.Helpers.dll
 C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\NReco.LambdaParser.dll
+C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\bin\Debug\netcoreapp3.1\schemas\ecsform.json

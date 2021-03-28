@@ -6,31 +6,33 @@
                 :errors="inputErrors">
     {{#Form.Sections}}
     <div class="section">
-        <h2>{{section}}</h2>
+        <h2>{{i18n section}}</h2>
         {{#MessageUrgent}}<div>{{.}}</div>{{/MessageUrgent}}
         {{#InputsHandled}}
         {{#attributes}}
-        <formulate-input {{# type}} type="{{.}}" {{/ type}}
+        <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+                         {{# type}} type="{{.}}" {{/ type}}
                          {{# name}} name="{{.}}" {{/ name}}
-                         {{# validationName}} validation-name="{{.}}" {{/ validationName}}
-                         {{# label}} label="{{.}}" {{/ label}}
-                         {{# help}} help="{{.}}" {{/ help}}
-                         {{# addLabel}} add-label="{{.}}" {{/ addLabel}}
+                         {{# validationName}} validation-name="{{i18n .}}" {{/ validationName}}
+                         {{# label}} label="{{i18n .}}" {{/ label}}
+                         {{# help}} help="{{i18n .}}" {{/ help}}
+                         {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
                          {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
-                         {{# options}} :options="{{JsObject .}}" {{/ options}}
+                         {{# options}} :options="{{JsObject options}}" {{/ options}}
                          {{# repeatable}}
                          :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
                          {{/ repeatable}}>
             {{#isGroup}}
             <div class="group">
                 {{#inputs}}
-                <formulate-input {{# type}} type="{{.}}" {{/ type}}
+                <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+                                 {{# type}} type="{{.}}" {{/ type}}
                                  {{# name}} name="{{.}}" {{/ name}}
-                                 {{# validationName}} validation-name="{{.}}" {{/ validationName}}
-                                 {{# label}} label="{{.}}" {{/ label}}
-                                 {{# help}} help="{{.}}" {{/ help}}
+                                 {{# validationName}} validation-name="{{i18n .}}" {{/ validationName}}
+                                 {{# label}} label="{{i18n .}}" {{/ label}}
+                                 {{# help}} help="{{i18n .}}" {{/ help}}
                                  {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
-                                 {{# options}} :options="{{JsObject .}}" {{/ options}}></formulate-input>
+                                 {{# options}} :options="{{JsObject options}}" {{/ options}}></formulate-input>
                 {{/inputs}}
             </div>
             {{/isGroup}}
@@ -42,4 +44,5 @@
 
     <formulate-input type="submit"
                      label="Register"></formulate-input>
+    {{contenuform}}
 </formulate-form>
