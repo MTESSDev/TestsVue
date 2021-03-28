@@ -87,5 +87,885 @@
           type: date
           label:  
             fr: Inscrivez la date de la séparation
-          
+        - name: test2
+          type: textarea
+          label:
+            fr: Commentaire
+        - name: test2
+          type: month
+          label:
+            fr: Test
+          min: 2021-03
+    - section: 
+        fr: Grosse page
+      id: bigPage
+      inputs:
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        - type: text
+          label:
+            fr: Test
+        
     

@@ -16,11 +16,12 @@
         <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
                          {{# type}} type="{{.}}" {{/ type}}
                          {{# name}} name="{{.}}" {{/ name}}
-                         {{# validationName}} validation-name="{{i18n .}}" {{/ validationName}}
+                         {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
                          {{# label}} label="{{i18n .}}" {{/ label}}
                          {{# help}} help="{{i18n .}}" {{/ help}}
                          {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
                          {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
+                         {{# min}} min="{{.}}" {{/ min}}
                          {{# options}} :options="{{JsObject options}}" {{/ options}}
                          {{# repeatable}}
                          :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
@@ -31,10 +32,11 @@
                 <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
                                  {{# type}} type="{{.}}" {{/ type}}
                                  {{# name}} name="{{.}}" {{/ name}}
-                                 {{# validationName}} validation-name="{{i18n .}}" {{/ validationName}}
+                                 {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
                                  {{# label}} label="{{i18n .}}" {{/ label}}
                                  {{# help}} help="{{i18n .}}" {{/ help}}
                                  {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
+                                 {{# min}} min="{{.}}" {{/ min}}
                                  {{# options}} :options="{{JsObject options}}" {{/ options}}></formulate-input>
                 {{/inputs}}
             </div>

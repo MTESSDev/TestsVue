@@ -70,7 +70,7 @@
                 "if": {
                     "type": "string"
                  },
-                "validationName": {
+                "validation-name": {
                     "type": "object",
                     "$ref": "#/definitions/Translation"
                 },
@@ -91,6 +91,14 @@
                 "helpPosition": {
                   "type": "string",
                   "enum": ["before", "after"]
+                },
+                "min": {
+                    "type": "string",
+                    "example": ["2018-02"]
+                },
+                "max": {
+                    "type": "string",
+                    "example": ["2018-02"]
                 },
                 "addLabel": {
                     "type": "object",
