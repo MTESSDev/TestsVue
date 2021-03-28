@@ -4,8 +4,11 @@
                 :form-errors="formErrors"
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
-    {{#Form.Sections}}
-    <div class="section">
+    <formulate-input name="page"
+                     :options="{ {{# Form.Sections}}{{Id}}:'{{i18n Section}}', {{/ Form.Sections}} }"
+                     type="select"></formulate-input>
+    {{# Form.Sections}}
+    <div class="section" v-show="contenuform.page === '{{Id}}'">
         <h2>{{i18n section}}</h2>
         {{#MessageUrgent}}<div>{{.}}</div>{{/MessageUrgent}}
         {{#InputsHandled}}
@@ -44,5 +47,5 @@
 
     <formulate-input type="submit"
                      label="Register"></formulate-input>
-    {{contenuform}}
+
 </formulate-form>

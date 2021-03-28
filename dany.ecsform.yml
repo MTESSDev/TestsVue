@@ -5,6 +5,7 @@
     - section: 
         fr: Informations sur la demande
         en: Information on the application
+      id: infos
       inputs:
         - name: type_demande
           type: radio
@@ -57,6 +58,7 @@
     - section: 
         fr: Autres informations
         en: Other information
+      id: autres
       inputs:
         - name: ne_qc
           type: radio

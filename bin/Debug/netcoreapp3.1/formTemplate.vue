@@ -4,13 +4,17 @@
                 :form-errors="formErrors"
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
-    {{#Form.Sections}}
-    <div class="section">
+    <formulate-input name="page"
+                     :options="{ {{# Form.Sections}}{{Id}}:'{{i18n Section}}', {{/ Form.Sections}} }"
+                     type="select"></formulate-input>
+    {{# Form.Sections}}
+    <div class="section" v-show="contenuForm.page === '{{Id}}'">
         <h2>{{i18n section}}</h2>
         {{#MessageUrgent}}<div>{{.}}</div>{{/MessageUrgent}}
         {{#InputsHandled}}
         {{#attributes}}
-        <formulate-input {{# type}} type="{{.}}" {{/ type}}
+        <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+                         {{# type}} type="{{.}}" {{/ type}}
                          {{# name}} name="{{.}}" {{/ name}}
                          {{# validationName}} validation-name="{{i18n .}}" {{/ validationName}}
                          {{# label}} label="{{i18n .}}" {{/ label}}
@@ -24,7 +28,8 @@
             {{#isGroup}}
             <div class="group">
                 {{#inputs}}
-                <formulate-input {{# type}} type="{{.}}" {{/ type}}
+                <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+                                 {{# type}} type="{{.}}" {{/ type}}
                                  {{# name}} name="{{.}}" {{/ name}}
                                  {{# validationName}} validation-name="{{i18n .}}" {{/ validationName}}
                                  {{# label}} label="{{i18n .}}" {{/ label}}
@@ -42,4 +47,5 @@
 
     <formulate-input type="submit"
                      label="Register"></formulate-input>
+
 </formulate-form>
