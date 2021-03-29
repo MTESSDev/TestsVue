@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\mtess-vueformulate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="schemas\dany.ecsform.yml" />
     <None Remove="schemas\formTemplate.vue" />
   </ItemGroup>
@@ -39,6 +43,14 @@
     <None Update="form.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\form\mtess-vueformulate.min.js" />
   </ItemGroup>
 
 </Project>

@@ -72,39 +72,77 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="form/formulate.min.js"></script>
 <script src="form/locales.min.js"></script>
+<script src="form/mtess-vueformulate.min.js"></script>
 
 <script>
+
+    Vue.component('Label', MtessVueformulate.Label)
+    Vue.component('ErrorList', MtessVueformulate.ErrorList)
+    Vue.component('RepeatableRemove', MtessVueformulate.RepeatableRemove)
+
     Vue.use(VueFormulate, {
         plugins: [this.VueFormulateI18n.fr],
+        slotComponents: {
+            label: 'Label',
+            errorList: 'ErrorList',
+            remove: 'RepeatableRemove'
+        },
         locale: 'fr',
         validationNameStrategy: ['validationName', 'label', 'name', 'type']
     });
 
     const App = {
         el: '#form',
-
-
         methods: {
             failedValidation(data) {
-                debugger;
+                this.$el.setAttribute('data-submit', true)
+                console.log('failedValidation')
+                // console.log(data)
             },
             submitHandler(data) {
-                axios.post('/Privacy', data);
+                axios.post('/Privacy', data)
             },
             invalidMessage(fields) {
-                debugger;
-                const fieldNames = Object.keys(fields)
-                const listOfNames = fieldNames.map(fieldName => fieldName.replace('_', ' '))
-                return `Invalid fields: ${listOfNames}`
-            },
-            //validate() {
-            //    debugger;
-            //    this.isValidate = !this.$refs.form.$children.some(
-            //       (input) => typeof input.isValid !== 'undefined' && !input.isValid
-            //    )
-            //}
-        },
+                console.log('invalidMessage')
+                const listeErreurs = []
+                const nomChamps = Object.keys(fields)
 
+                nomChamps.forEach(nomChamp => {
+                    const champ = fields[nomChamp]
+                    if (champ.hasVisibleErrors) {
+                        if (champ.context && champ.context.type !== 'group') {
+                            this.ajouterErreursChamp(champ, listeErreurs)
+                        } else {
+                            this.ajouterErreursGroupe(champ, listeErreurs)
+                        }
+                    }
+                })
+                return JSON.stringify(listeErreurs)
+            },
+            ajouterErreursChamp(champ, listeErreurs) {
+                champ.context.visibleValidationErrors.forEach(message => {
+                    listeErreurs.push({ id: champ.context.id, message: message })
+                })
+            },
+            ajouterErreursGroupe(groupe, listeErreurs) {
+                const conteneursChamps = groupe.$el.querySelectorAll('.formulate-input')
+
+                conteneursChamps.forEach(conteneurChamp => {
+                    if (conteneurChamp.hasAttribute('data-is-showing-errors')) {
+                        const label = conteneurChamp.querySelector('label')
+                        const messages = conteneurChamp.querySelectorAll('.formulate-input-error')
+
+                        if (label && messages.length > 0) {
+                            const id = label.getAttribute('for')
+
+                            messages.forEach(message => {
+                                listeErreurs.push({ id: id, message: message.innerText })
+                            })
+                        }
+                    }
+                })
+            }
+        },
         data: {
             contenuform: {},
             formErrors: [],
