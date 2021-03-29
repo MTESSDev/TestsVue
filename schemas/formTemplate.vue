@@ -2,6 +2,7 @@
                 @submit="submitHandler"
                 :invalid-message="invalidMessage"
                 :form-errors="formErrors"
+                :debounce="10"
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
     <formulate-input name="page"
@@ -22,6 +23,8 @@
                          {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
                          {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
                          {{# min}} min="{{.}}" {{/ min}}
+                         {{# max}} max="{{.}}" {{/ max}}
+                         {{# limit}} limit="{{.}}" {{/ limit}}
                          {{# options}} :options="{{JsObject options}}" {{/ options}}
                          {{# repeatable}}
                          :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
@@ -37,6 +40,7 @@
                                  {{# help}} help="{{i18n .}}" {{/ help}}
                                  {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
                                  {{# min}} min="{{.}}" {{/ min}}
+                                 {{# max}} max="{{.}}" {{/ max}}
                                  {{# options}} :options="{{JsObject options}}" {{/ options}}></formulate-input>
                 {{/inputs}}
             </div>

@@ -60,33 +60,39 @@
             "additionalProperties": false,
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Adds a name attribute, and when used with <FormulateForm> this is the key of the field. If no name is defined a random hash will be assigned"
                 },
                 "type": {
                     "type": "string",
                     "default": "text",
+                    "description": "Required. The type of input element. See the input library for a full range of options.",
                     "enum": ["text", "button", "submit", "file", "image", "group", "radio", "checkbox", "select", "number", "slider", "textarea", "color", "date", "datetime-local", "email", "hidden", "month", "password", "search", "tel", "time", "url", "week"]
                 },
-                "if": {
-                    "type": "string"
-                 },
+                "limit":{ 
+                    "type": ["number"]
+                },
                 "validation-name": {
                     "type": "object",
+                    "description": "The name to use in validation error messages. By default, this uses the name prop if available and falls back to the label prop. It can be explicitly overridden here if needed.",
                     "$ref": "#/definitions/Translation"
                 },
                 "label": {
                     "type": "object",
+                    "description": "A descriptive label for the input element.",
                     "$ref": "#/definitions/Translation"
                 },
                 "help": {
                     "type": "object",
+                    "description": "Help text to be displayed with the input.",
                     "$ref": "#/definitions/Translation"
                 },
                 "pdfBind": {
                     "type": "string"
                 },
                 "v-if": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Conditionnal display on another property/form field."
                 },
                 "helpPosition": {
                   "type": "string",
@@ -106,12 +112,13 @@
                 },
                 "options": {
                     "type": ["object", "null", "string", "array"],
+                    "description": "Array or object of options (select or box classifications)",
                     "examples": ["yesno"]
                 },
                 "validations": {
                     "type": "object",
                     "additionalProperties": false,
-                    "default": { "required": "trim" },
+                    "default": {},
                     "properties": {
                         "required": {
                             "type": ["string", "null"],
@@ -216,6 +223,9 @@
                 "repeatable": {
                     "type": "boolean"
                 },
+                "minimum": {
+                    "type": "number"
+                },
                 "inputs": {
                     "type": "array",
                     "items": {
@@ -223,11 +233,29 @@
                     }
                 }
             },
+            "examples": ["validations"],
             "required": [
                 "label",
                 "type",
                 "name"
             ],
+            "dependencies": {
+                "minimum": {
+                    "properties": {
+                        "type": { "const": "group" }
+                    }
+                },
+                "limit": {
+                    "properties": {
+                        "type": { "const": "group" }
+                    }
+                },
+                "addLabel": {
+                    "properties": {
+                        "type": { "const": ["group", "file"] }
+                    }
+                }
+            },
             "title": "Input"
         },
         "Translation": {
