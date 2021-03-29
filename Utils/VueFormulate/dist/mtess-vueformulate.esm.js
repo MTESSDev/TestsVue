@@ -180,9 +180,6 @@ const __vue_component__$2 = /*#__PURE__*/normalizeComponent({
 //
 //
 //
-//
-//
-//
 var script$1 = {
   props: {
     visibleErrors: {
@@ -229,9 +226,25 @@ var script$1 = {
   methods: {
     setInputFocus(id) {
       // setTimeout requis pour que le focus et le scroll se fasse.
-      setTimeout(() => {
-        document.getElementById(id).focus();
-      }, 10);
+      setTimeout(controlId => {
+        const errorControl = document.getElementById(controlId);
+
+        if (errorControl) {
+          errorControl.focus();
+        } else {
+          // Nous n'avons pas trouvé le contrôle (ex. radio button). On recherche les contrôles dont l'id débute par notre id, et on conserve le premier contrôle de type input.
+          const errorControls = document.querySelectorAll('*[id^="' + controlId + '"]');
+
+          for (let i = 0; i < errorControls.length; i++) {
+            const control = errorControls[i];
+
+            if (control.tagName.toLowerCase() === 'input') {
+              control.focus();
+              break;
+            }
+          }
+        }
+      }, 10, id);
       return false;
     }
 
