@@ -6,57 +6,11 @@
 }
 
 @section style{
-    <link rel="stylesheet" href="form/snow.min.css">
+    
     <style>
-        @@media (min-width: 650px) {
-            .order {
-                display: flex;
-            }
-        }
-
-        @@media (min-width: 720px) {
-            .order {
-                display: block;
-            }
-        }
-
-        @@media (min-width: 850px) {
-            .order {
-                display: flex;
-            }
-
-                .order .formulate-input {
-                    margin-right: 1.5em;
-                }
-        }
-
-        .order .formulate-input {
-            margin-right: 2em;
-            margin-bottom: 0;
-        }
-
-        .flex-wrapper {
-            max-width: 20em;
-            display: flex
-        }
-
-            .flex-wrapper > .formulate-input:nth-child(odd) {
-                margin-right: 1em;
-            }
-
-            .flex-wrapper > .formulate-input.flex-item-small {
-                width: 5em;
-                flex-basis: 5em;
-                flex-shrink: 0;
-            }
-
-            .flex-wrapper > .formulate-input {
-                flex-grow: 1;
-            }
-
-
-        .formulate-input[data-classification=text] .formulate-input-element--date input {
-            padding: .60em;
+        .formulate-input-errors{
+            margin: 0;
+            padding: 0;
         }
     </style>
 }
@@ -86,12 +40,30 @@
     <script src="form/mtess-vueformulate.min.js"></script>
 
     <script>
+        
     Vue.component('Label', MtessVueformulate.Label)
     Vue.component('ErrorList', MtessVueformulate.ErrorList)
     Vue.component('RepeatableRemove', MtessVueformulate.RepeatableRemove)
 
+/*        classes: {
+            outer: 'form-group',
+                input: 'form-control',
+                    inputHasErrors: 'is-invalid',
+                        help: 'form-text text-muted',
+                            errors: 'list-unstyled text-danger'
+        },*/
+
     Vue.use(VueFormulate, {
         plugins: [this.VueFormulateI18n.fr],
+        classes: {
+            outer: (context, baseClasses) => {
+                return obtenirClassesOuter(context, baseClasses)
+            },
+            error: 'text-danger field-validation-error',
+            input: (context, baseClasses) => {
+                return obtenirClassesInput(context, baseClasses)
+            }
+        },
         slotComponents: {
             label: 'Label',
             errorList: 'ErrorList',
@@ -109,6 +81,12 @@
                 console.log('failedValidation')
                 // console.log(data)
             },
+            submitRawHandler(data) {
+                // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.                 
+                setTimeout(function () {
+                    terminerTraitementEnCoursSoumissionForm() 
+                },100)  
+            },           
             submitHandler(data) {
                 axios.post('/Privacy', data)
             },
@@ -172,5 +150,39 @@
         new Vue(App)
     })
 
-        </script>
-    }
+        function obtenirClassesInput(context, baseClasses) {
+            switch (context.classification) {
+                case "text":
+                case "textArea":
+                case "select": 
+                    baseClasses.push('form-control')
+                    break
+                case "button":
+                    if (context.type === 'submit') {
+                        baseClasses.push('btn btn-primaire')
+                    }
+                    break
+            }
+
+            return baseClasses
+        }
+
+        function obtenirClassesOuter(context, baseClasses) {
+            switch (context.classification) {
+                case "text":
+                case "group":
+                case "textArea":
+                case "select":
+                    baseClasses.push('form-group')
+                    break
+            }
+
+            return baseClasses
+        }
+
+        function obtenirTexteEdite(id) {
+            return '(Patch) Non défini.'
+        }
+
+    </script>
+}

@@ -1,0 +1,88 @@
+﻿@page
+@model VanilleModel
+@{
+    ViewData["Title"] = "Demande d'aide financière de dernier recours";
+    ViewData["masquerPremierEspaceurConteneurColonnes"] = true;
+}
+
+@section style{
+        
+    <link rel="stylesheet" href="./form/snow.min.css">
+}
+@section colonneGauche{
+    <div id="form">
+        @*<template>
+                <formulate-form v-model="values"
+                                :schema="schema"></formulate-form>
+            </template>*@
+
+
+        <template>
+            @Html.Raw(Model.Formulaire)
+        </template>
+    </div>
+}
+
+@section colonneDroite{
+
+}
+
+@section scripts{
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="form/formulate.min.js"></script>
+    <script src="form/locales.min.js"></script>
+
+    <script>
+
+    Vue.use(VueFormulate, {
+        plugins: [this.VueFormulateI18n.fr],
+        locale: 'fr',
+        validationNameStrategy: ['validationName', 'label', 'name', 'type']
+    });
+
+    const App = {
+        el: '#form',
+        methods: {
+            failedValidation(data) {
+                this.$el.setAttribute('data-submit', true)
+                console.log('failedValidation')
+                // console.log(data)
+            },
+            submitRawHandler(data) {
+                // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.
+
+                setTimeout(function () {
+                    terminerTraitementEnCoursSoumissionForm()
+                }, 100)
+            },           
+            submitHandler(data) {
+                axios.post('/Privacy', data)
+            },
+            invalidMessage(fields) {
+                const fieldNames = Object.keys(fields)
+                const listOfNames = fieldNames.map(fieldName => fieldName.replace('_', ' '))
+                return `Invalid fields: ${listOfNames}`
+            }
+        },
+        data: {
+            contenuform: {},
+            formErrors: [],
+            inputErrors: {}
+        },
+       @*/* data: {
+            values: {},
+            schema: @Html.Raw(Model.Formulaire)
+        },
+        */*@
+        mounted() {
+            console.log('Application mounted.')
+        }
+    }
+
+    window.addEventListener('load', () => {
+        new Vue(App)
+    })
+
+    </script>
+}

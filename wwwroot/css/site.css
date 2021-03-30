@@ -1,1 +1,137 @@
-﻿
+﻿/*====================================================================================================*/
+/*  -Z10- Radio button
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
+/*====================================================================================================*/
+
+/*====================================================================================================*/
+/*  -Z10- Radio button
+/*====================================================================================================*/
+
+/* --------------- Radios ET checkbox (Commun) --------------- */
+
+.formulate-input[data-classification=box] .formulate-input-wrapper {
+    display: flex;
+    align-items: center;
+    height: 32px;
+}
+.formulate-input[data-classification=box] .formulate-input-element {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.formulate-input[data-classification=box] .formulate-input-element-decorator {
+    display: block;
+    width: 1em;
+    height: 1em;
+    border-radius: .25em;
+    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios */
+    border: 1px solid #808a9d;
+    position: relative;
+}
+
+.formulate-input[data-classification=box] .formulate-input-element-decorator:before {
+    content: "";
+    display: block;
+    background-size: contain;
+    background-position: 100%;
+    width: calc(100% - .125em);
+    height: calc(100% - .125em);
+    box-sizing: border-box;
+    position: absolute;
+    top: .0625em;
+    left: .0625em;
+}
+
+
+/* Radio disabled */
+.formulate-input[data-classification=box] .formulate-input-element input:disabled ~ .formulate-input-element-decorator {
+    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... Outline ne fonctionne pas... trouver un moyen plus tard. */
+    border: 1px solid #bfc4ce;
+}
+
+/* Focus checkbox et radios */
+.formulate-input[data-classification=box] .formulate-input-element input:focus ~ .formulate-input-element-decorator {
+    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... Outline ne fonctionne pas... trouver un moyen plus tard. */
+    border: 2px solid #5b6476;
+    /*outline: 2px solid #89BCE5;*/
+}
+
+/* Le vrai input est hors écran (radios et checkbox) */
+.formulate-input[data-classification=box] .formulate-input-element input {
+    position: absolute;
+    left: -999px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Labels radios et checkbox */
+.formulate-input[data-classification=box] label.formulate-input-label {
+    margin-bottom: 0;
+    margin-left: 8px;
+    font-family: 'OpenSans-Regular';
+}
+
+
+/* --------------- Radio buttons --------------- */
+
+.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator {
+    border-radius: 1em;
+}
+
+.formulate-input[data-classification=box] .formulate-input-element input[type=radio]:checked ~ .formulate-input-element-decorator:before {
+    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios */
+    background-color: #1479cc;
+}
+
+.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:before {
+    border-radius: 1em;
+    width: 10px;
+    height: 10px;
+    top: 2px;
+    left: 2px;
+}
+
+/* Checkbox */
+.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox] ~ .formulate-input-element-decorator {
+    border-radius: 0;
+}
+
+.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox]:checked ~ .formulate-input-element-decorator {
+    border-color: #808a9d;
+}
+
+.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox]:checked ~ .formulate-input-element-decorator:before {
+    background-color: #1479cc;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>');
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>')
+}
+
+/*====================================================================================================*/
+/*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
+/*====================================================================================================*/
+
+.icone-champ-requis {
+    font-size: 1rem;
+    vertical-align: top;
+    font-family: OpenSans-Bold;
+}
+
+
+input.form-input:focus {
+    border: 3px solid #89bce5
+}
+
+
+
+
+
+/*====================================================================================================*/
+/*  -Z91- Ajustements pour règles SCG - Désaccord
+/*====================================================================================================*/
+/*
+form .input-validation-error, form .input-validation-error + .note-editor {
+    border-color: var(--couleur-erreur);
+    border-width: 2px; /* Ici devrait être 3px!  TROP GROS! 
+}*/

@@ -1,5 +1,6 @@
 ﻿<formulate-form v-model="contenuform"
                 @submit="submitHandler"
+                @submit-raw="submitRawHandler"
                 :invalid-message="invalidMessage"
                 :form-errors="formErrors"
                 @failed-validation="failedValidation"
@@ -80,7 +81,6 @@
         </formulate-input>
 
 
-
         <formulate-input v-if="contenuform.demandeur_asile === 'non'"
                          type="radio"
                          key="refugie_protege"
@@ -88,6 +88,37 @@
                          validation="required"
                          label="Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?"
                          :options="{oui: 'Oui', non: 'Non'}">
+        </formulate-input>
+
+        <formulate-input type="checkbox"
+                         validation="required"
+                         name="personnage_prefere"
+                         label="Votre personnage préféré"
+                         :options="{first: 'Tony Stark', second: 'Fonzi', third: 'Mr. T', fourth: 'The Governator'}">
+        </formulate-input>
+        <formulate-input type="group"
+                         name="attendees"
+                         :repeatable="true"
+                         label="Who is going to attend?"
+                         add-label="+ Add Attendee"
+                         validation="required">
+            <div class="attendee">
+                <formulate-input name="name"
+                                 validation="required"
+                                 label="Attendee’s name">
+                </formulate-input>
+                <formulate-input name="tata"
+                                 validation="required"
+                                 label="Tata">
+                </formulate-input>
+
+                <formulate-input type="email"
+                                 name="email"
+                                 validation="required|email"
+                                 label="Attendee’s email">
+                </formulate-input>
+
+            </div>
         </formulate-input>
     </div>
 
