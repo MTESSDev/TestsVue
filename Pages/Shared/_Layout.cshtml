@@ -1,55 +1,282 @@
-﻿<!DOCTYPE html>
+﻿@{
+    //Nom du service à afficher en entête
+    ViewData["nom-service-entete"] = ViewData["nom-service-entete"] ?? "";
+
+    //Ces éléments de ViewData permettent de modifier la couleur de fond des différentes zones de la section de contenu principal (main)
+    ViewData["classe-fond-section-entete"] = ViewData["classe-fond-section-entete"] ?? "fond-blanc";
+    ViewData["classe-fond-section-contenu1"] = ViewData["classe-fond-section-contenu1"] ?? "fond-blanc";
+    ViewData["classe-fond-section-2colonnes"] = ViewData["classe-fond-section-2colonnes"] ?? "fond-blanc";
+    ViewData["classe-fond-section-contenu2"] = ViewData["classe-fond-section-contenu2"] ?? "fond-blanc";
+
+    var couleurFondEnteteIdentiqueContenu1 = ViewData["classe-fond-section-entete"] == ViewData["classe-fond-section-contenu1"];
+    var h1HorsEcran = ((bool?)ViewData["H1HorsEcran"]).GetValueOrDefault();
+    var h1NonRendu = ((bool?)ViewData["H1NonRendu"]).GetValueOrDefault();
+
+    // Masquer le premier espaceur de la zone contenu1 si la zone d'entête n'est pas vide et que sa couleur de fond est identique à celle de la section de contenu 1.
+    var zoneEnteteVide = h1NonRendu;
+    var masquerPremierEspaceurContenu1 = !zoneEnteteVide && couleurFondEnteteIdentiqueContenu1;
+    var masquerPremierEspaceurConteneurColonnes = ((bool?)ViewData["masquerPremierEspaceurConteneurColonnes"]).GetValueOrDefault();
+
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#fff" />
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <title>@ViewData["Title"] - ECS</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    @*Ressources à charger en priorité (on charge les fonts dans le but d'éviter les flicks *@
+    <link rel="preload" as="font" href="~/fonts/open-sans-v18-latin-regular.woff" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" as="font" href="~/fonts/open-sans-v18-latin-600.woff" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" as="font" href="~/fonts/open-sans-v18-latin-700.woff" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" as="font" href="~/fonts/roboto-v20-latin-500.woff" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" as="font" href="~/fonts/roboto-v20-latin-700.woff" type="font/woff" crossorigin="anonymous">
+
+    @*Ressources moins importantes (on laisse la mécanique de chargement native du fureteur décider l'ordre de chargement normalement dans l'ordre d'inclusion)*@
+    <link rel="stylesheet" href="~/css/base.min.css" data-include asp-append-version="true" />
+    <link rel="stylesheet" href="/Sprite" />
+
+    @*Ressources non importantes dont le chargement est effectué en différé (après que la page soit chargée)*@
+    <link rel="stylesheet" href="~/css/impression.css" media="print" data-include asp-append-version="true" onload="this.media='all' ">
+
+    <link rel="stylesheet" href="~/css/additionnel.min.css" asp-append-version="true" />
+
     <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("style", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ECSForm</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                  
-                        @if (System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "fr")
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="" asp-route-culture="en-CA">English</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="" asp-route-culture="fr-CA">Français</a>
-                            </li>
-                        }
-                    </ul>
+    <div class="conteneur-principal">
+        <header role="banner">
+            <div style="position: absolute; width: 100%;">
+                <div class="d-flex flex-column align-items-center">
+                    <a href="#main" class="passer-contenu">Passer au contenu </a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+
+            <!-- Fureteur désuet -->
+            <noscript>
+                <div id="javascriptDesactive" class="fureteur-desuet">
+                    <div class="container d-flex align-items-center" role="alert" aria-atomic="true">
+                        <div class="icone">
+                            <img src="/images/ico-avertissement.svg" aria-hidden="true" />
+                        </div>
+                        <div class="texte">
+                            Activez JavaScript dans votre navigateur pour que Mon dossier fonctionne correctement.
+                        </div>
+                    </div>
+                </div>
+            </noscript>
+            <div id="fureteurDesuet" class="fureteur-desuet" style="display:none">
+                <div class="container d-flex align-items-center" role="alert" aria-atomic="true">
+                    <div class="icone-svg lg averti" aria-hidden="true">
+                    </div>
+                    <div class="texte">
+                        <p>Le navigateur que vous utilisez est désuet.</p> <p>Nous vous recommandons de mettre à jour votre navigateur ou d'en utiliser un autre.</p>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // Vérification si le navigateur est considéré comme étant désuet
+                function estFureteurDesuet() {
+                    try {
+                        var fureteurDesuet = localStorage.getItem('fureteurDesuet');
+                        if (fureteurDesuet === null) {
+                            fureteurDesuet = !estCompatibleIE11etMoins();
+                            localStorage.setItem('fureteurDesuet', fureteurDesuet);
+                        }
+                        return fureteurDesuet === 'true';
+                    }
+                    catch (err) {
+                        return true;
+                    }
+                };
+
+                // Vérification si le navigateur est compatible
+                function estCompatibleIE11etMoins() {
+                    try {
+                        var test = "aaa".includes("a");
+                        return true;
+                    } catch (err) {
+                        return false;
+                    }
+                };
+
+                if (estFureteurDesuet()) { document.getElementById('fureteurDesuet').style.display = 'block'; };
+            </script>
+            <img id="pivLogoGouvernementPrint" alt="Logo du gouvernement du Québec." src="/images/quebecPrint.gif" width="199" height="60">
+            <div class="piv piv-entete">
+                <div class="container">
+                    <div class="d-flex justify-content-between">
+                        <div class="section-gauche d-flex align-items-center signature-gouvernement" lang="fr">
+                            <a href="/">
+                                <img height="72" alt="Signature du gouvernement du Québec. Accédez à Mon dossier — Aide à l'emploi – Assistance sociale." src="/images/QUEBEC_blanc.svg">
+                            </a>
+                        </div>
+                        <div class="section-centre d-none d-md-flex align-items-center">
+                            <div class="titre-site">
+                                <a class="d-flex flex-column" href="/">
+                                    <span>Mon dossier</span>
+                                    <span class="description">Aide à l'emploi - Assistance sociale</span>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <div class="section-droite d-flex justify-content-end">
+                            <ul class="d-flex flex-column justify-content-center">
+                                @if (System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "fr")
+                                {
+                                    <li>
+                                        <a asp-area="" asp-page="" asp-route-culture="en-CA">English</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a asp-area="" asp-page="" asp-route-culture="fr-CA">Français</a>
+                                    </li>
+                                }
+                                <li><a href="#">Nous joindre</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="titre-site d-flex flex-column d-md-none pb-2">
+                        <span>Mon dossier</span>
+                        <span class="description">Aide à l'emploi - Assistance sociale</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conteneur-menu-identification">
+                <div class="container zone-menu-identification d-flex">
+                    <div class="zone-identification d-flex ml-auto">
+                    </div>
+                </div>
+                <div class="container zone-menu-principal d-flex d-md-none">
+                </div>
+            </div>
+
+        </header>
+
+
+
+
+        <main id="main">
+
+            <div class="conteneur-entete @ViewData["classe-fond-section-entete"] @(h1HorsEcran ? "h1-hors-ecran" : "") @(h1NonRendu ? "h1-non-rendu" : "")">
+                <div class="container">
+                    <div class="espaceur-conteneurs"></div>
+                    @if (!string.IsNullOrEmpty(ViewData["nom-service-entete"].ToString()))
+                    {
+                        <div class="nom-service-entete">
+                            @ViewData["nom-service-entete"]
+                        </div>
+                    }
+
+                    @if (!h1NonRendu)
+                    {
+                        <h1 class="@(h1HorsEcran ? "sr-only" : "")">
+                            @ViewData["Title"]
+                        </h1>
+                    }
+
+                    <div class="espaceur-conteneurs"></div>
+                </div>
+            </div>
+            <div class="conteneur-contenu1 conteneur-sans-colonne @ViewData["classe-fond-section-contenu1"]">
+                <div class="container">
+                    <div class="espaceur-conteneurs  @(masquerPremierEspaceurContenu1 ? "d-none" : "")"></div>
+                    @RenderBody()
+                    <div class="espaceur-conteneurs"></div>
+                </div>
+            </div>
+            <div class="conteneur-colonnes @ViewData["classe-fond-section-2colonnes"]">                
+                <div class="container">
+                    <div class="espaceur-conteneurs @(masquerPremierEspaceurConteneurColonnes ? "d-none" : "")"></div>
+                    <div id="conteneur2Colonnes" class="contenu-principal-gauche">
+                        <div id="colonneGauche">
+                            @RenderSection("colonneGauche", required: false)
+                        </div>
+
+                        <div id="colonneDroite">
+                            @RenderSection("colonneDroite", required: false)
+                        </div>
+                    </div>
+                    <div class="espaceur-conteneurs"></div>
+                </div>
+            </div>
+
+            <div class="conteneur-contenu2 conteneur-sans-colonne @ViewData["classe-fond-section-contenu2"]">
+                <div class="container">
+                    <div class="espaceur-conteneurs"></div>
+                    @RenderSection("contenuSection2", required: false)
+                    <div class="espaceur-conteneurs"></div>
+                </div>
+            </div>
+
         </main>
+
+
+        <!-- Zone de notifications visible (nos toasts) -->
+        <div id="zoneNotifications" class="notifications">
+        </div>
+
+        <!-- Zone de notifications lecteur écran seulement -->
+        <div id="zoneNotificationsLecteurEcran" aria-live="polite" class="sr-only">
+        </div>
+
+        <div id="flecheHaut" data-ga-action="@ViewData["Title"]" aria-hidden="true">
+            <div class="contenu">
+                <img src="/images/sprite.svg#ico-fleche-haut-blanche" width="25" height="21" aria-hidden="true" alt="Retour en haut de page." />
+            </div>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="piv-bas-page footer">
+        <h2 id="titreMenuPiedPage" class="sr-only">Menu pied de page</h2>
+        <nav aria-labelledby="titreMenuPiedPage">
+            <section class="liens">
+                <ul class="list-inline d-flex flex-wrap mx-auto justify-content-center">
+                    <li class="list-inline-item"><a asp-page="/Accessibilite">Accessibilité</a></li>
+                </ul>
+                <section class="media-sociaux d-flex justify-content-center align-items-center">
+                    <h3 class="d-flex">Suivez-nous</h3>
+                    <ul class="list-inline d-flex flex-wrap justify-content-center">      <li class="list-inline-item"><a href="https://www.facebook.com/TravailEmploiSolidaritesocialeQuebec" title="Suivez-nous sur Facebook." target="_blank" rel="noreferrer noopener" data-ga-libelle="Facebook"><span class="icone-svg ico-facebook"></span></a></li>     <li class="list-inline-item"><a href="https://twitter.com/Gouv_MTESS" title="Suivez-nous sur Twitter." target="_blank" rel="noreferrer noopener" data-ga-libelle="Twitter"><span class="icone-svg ico-twitter"></span></a></li>    <li class="list-inline-item"><a href="https://www.youtube.com/user/promomess" title="Suivez-nous sur Youtube." target="_blank" rel="noreferrer noopener" data-ga-libelle="Youtube"><span class="icone-svg ico-youtube"></span></a></li>     <li class="list-inline-item"><a href="https://www.linkedin.com/company/550343/" title="Suivez-nous sur Linkedln." target="_blank" rel="noreferrer noopener" data-ga-libelle="LinkedIn"><span class="icone-svg ico-linkedin"></span></a></li></ul>
+                </section>
+            </section>
+        </nav>
+
         <div class="container">
-            &copy; 2021 - ECSForm - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <div class="row no-gutters">
+                <div class="col-12 d-flex align-items-center justify-content-center" lang="fr">
+                    <a href="https://www.mtess.gouv.qc.ca/" target="_blank" rel="noopener">
+                        <img id="logoFooter" alt="Ministère du Travail, de l'Emploi et de la Solidarité sociale. Ce lien sera ouvert dans un nouvel onglet" src="~/images/logo_piv_bas_page.gif">
+                    </a>
+                </div>
+                <div class="col-12 d-flex align-items-center justify-content-center text-xs">
+                    <p>
+                        <a href="http://www.droitauteur.gouv.qc.ca/copyright.php" target="_blank" rel="noopener">
+                            © Gouvernement du Québec, 2021
+                            <span class="sr-only">.Ce lien sera ouvert dans un nouvel onglet</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/base.min.js" asp-append-version="true"></script>
+    <script src="~/js/additionnel.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)

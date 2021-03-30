@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Net.Http.Headers;
 
-namespace ECS.PR.Extra.Areas.Anonyme
+namespace WebApplication2.Pages
 {
     public class SpriteModel : PageModel
     {

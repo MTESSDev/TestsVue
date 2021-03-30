@@ -1,9 +1,8 @@
 ﻿@page
-@model ECS.PR.Extra.Areas.Anonyme.SpriteModel
-@using ECS.PR.Extra.Extensions;
+@model WebApplication2.Pages.SpriteModel
 @{
     Response.ContentType = "text/css";
-    var urlSprite = HttpContext.AddFileVersionToPath("/images/sprite.svg");
+    var urlSprite = "/images/sprite.svg";
     <text>
         .note-editable a[target="_blank"]:after, a.lien-externe[target="_blank"]:after, span.lien-externe:after {
         background-image: url(@urlSprite#ico-lien-externe);
