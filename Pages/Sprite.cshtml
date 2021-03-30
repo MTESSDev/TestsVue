@@ -1,0 +1,78 @@
+﻿@page
+@model ECS.PR.Extra.Areas.Anonyme.SpriteModel
+@using ECS.PR.Extra.Extensions;
+@{
+    Response.ContentType = "text/css";
+    var urlSprite = HttpContext.AddFileVersionToPath("/images/sprite.svg");
+    <text>
+        .note-editable a[target="_blank"]:after, a.lien-externe[target="_blank"]:after, span.lien-externe:after {
+        background-image: url(@urlSprite#ico-lien-externe);
+        }
+        .inform .icone-svg, .icone-svg.inform {
+        background-image: url(@urlSprite#ico-information);
+        }
+        .bienve .icone-svg, .icone-svg.bienve {
+        background-image: url(@urlSprite#ico-information);
+        }
+        .averti .icone-svg, .icone-svg.averti {
+        background-image: url(@urlSprite#ico-avertissement);
+        }
+        .succes .icone-svg, .nouvea .icone-svg, .icone-svg.nouvea, .icone-svg.succes {
+        background-image: url(@urlSprite#ico-succes);
+        }
+        .erreur .icone-svg, .icone-svg.erreur {
+        background-image: url(@urlSprite#ico-erreur);
+        }
+        .icone-svg.fleche-droite {
+        background-image: url(@urlSprite#ico-fleche-droite);
+        }
+        .icone-svg.fleche-haut-blanche {
+        background-image: url(@urlSprite#ico-fleche-blanche);
+        }
+        .icone-svg.loupe {
+        background-image: url(@urlSprite#ico-loupe);
+        }
+        .icone-svg.x-fermer-bleu {
+        background-image: url(@urlSprite#ico-xfermer-bleu);
+        }
+        .icone-svg.x-fermer-bleu-foncee {
+        background-image: url(@urlSprite#ico-xfermer-bleu-foncee);
+        }
+        .icone-svg.chevron-haut {
+        background-image: url(@urlSprite#ico-crochet-bleu);
+        }
+        .icone-svg.chevron-haut-blanc {
+        background-image: url(@urlSprite#ico-crochet-blanc);
+        }
+        .icone-svg.envelope {
+        background-image: url(@urlSprite#ico-envelope-blanc);
+        }
+        .icone-svg.carnetreclamation {
+        background-image: url(@urlSprite#ico-carnetreclamation);
+        }
+        .icone-svg.activites {
+        background-image: url(@urlSprite#ico-activites);
+        }
+        .icone-svg.profil {
+        background-image: url(@urlSprite#ico-user);
+        }
+        .icone-svg.faq {
+        background-image: url(@urlSprite#ico-faq);
+        }
+        .icone-svg.telechargement {
+        background-image: url(@urlSprite#ico-telechargement);
+        }
+        .media-sociaux .icone-svg.ico-facebook {
+        background-image: url(@urlSprite#ico-facebook);
+        }
+        .media-sociaux .icone-svg.ico-twitter {
+        background-image: url(@urlSprite#ico-twitter);
+        }
+        .media-sociaux .icone-svg.ico-youtube {
+        background-image: url(@urlSprite#ico-youtube);
+        }
+        .media-sociaux .icone-svg.ico-linkedin {
+        background-image: url(@urlSprite#ico-linkedin);
+        }
+    </text>
+}

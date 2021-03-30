@@ -1,0 +1,350 @@
+﻿
+/*! siteAdditionnel */
+/* Feuille de style spécifique qui doit être disponible lorsqu'on utilise les fonctionnalités additionnelles(ex. datatables, select2).
+*/
+/*====================================================================================================*/
+/*  -20- Forms
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -81- DataTables 
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -82- Select2
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -99- À Positionner
+/*====================================================================================================*/
+
+
+/*====================================================================================================*/
+/*  -20- Forms (Validations)
+/*====================================================================================================*/
+
+/* Masquer le sommaire des erreurs lorsque valide, car sinon ajoute espace vide (hauteur) dans les forms même si height 0, pas de padding ni margin, etc.. */
+form .validation-summary-valid {
+    display: none;
+}
+
+/* Sommaire des erreurs */
+form .validation-summary-errors {
+    margin-bottom: 2rem;
+}
+
+    form .validation-summary-errors:focus {
+        outline-color: var(--couleur-erreur);
+    }
+
+    form .validation-summary-errors a {
+        color: var(--couleur-erreur);
+        text-decoration: underline;
+    }
+
+    form .validation-summary-errors a:hover, form .validation-summary-errors a:focus {
+        text-decoration: none;
+    }
+
+    form .validation-summary-errors ul {
+        color: var(--couleur-erreur);
+        margin-top: 16px;
+    }
+
+/* Bordure des champs en erreur. Inclus les champs particuliers summernote (.note-editor)*/
+form .input-validation-error, form .input-validation-error + .note-editor {
+    border-color: var(--couleur-erreur);
+    border-width: 2px;
+}
+
+form .field-validation-error {
+    display: inline-block;
+}
+
+/* Indicateurs champs obligatoires */
+.icone-champ-requis {
+    font-size: 1rem;
+    vertical-align: top;
+    font-family: OpenSans-SemiBold;
+}
+
+.texte-explicatif-champs-obligatoires {
+    margin-bottom: 32px;
+}
+
+    .texte-explicatif-champs-obligatoires > span {
+        margin-left: 4px;
+    }
+
+.icone-champ-requis, .texte-explicatif-champs-obligatoires {
+    color: var(--couleur-erreur);
+}
+
+/* Info attendue */
+.info-attendue {
+    font-size: 0.75rem;
+    margin-left: 4px;
+    font-family: OpenSans-Regular;
+}
+
+.overlay-soumission-form {
+    background-color: #000;
+    opacity: 0.2;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99998;
+}
+
+
+/*====================================================================================================*/
+/*  -80- TABLES (c'est dupliqué de siteBase.css afin d'overrider ce qui pourrait être défini sans additionnel.js (qui contient datatables) sinon c'est le css de datatables qui s'applique sur certains éléments de base des tables.)
+/*====================================================================================================*/
+
+table.table-hover > tbody > tr:hover,
+table.table-hover > tbody tr:focus-within {
+    background-color: #ecf2f7 !important;
+    color: inherit;
+}
+
+
+table.row-clickable > tbody > tr {
+    cursor: pointer;
+}
+
+.table thead th, .table tbody td {
+    vertical-align: middle;
+}
+
+.table {
+    margin-bottom: 0;
+    background-color: #fff;
+}
+
+    .table > thead {
+        background-color: var(--couleur-texte-base);
+        color: white;
+        border: 1px solid var(--couleur-texte-base);
+    }
+
+        .table > thead th {
+            font-family: OpenSans-Bold;
+            font-size: 18px;
+        }
+
+    .table th, .table td {
+        vertical-align: middle;
+        height: 44px; /* Hauteur minimale des cellules */
+    }
+
+.table-sm td, .table-sm th {
+    padding: .5rem;
+    height: 28px; /* Va donner 44px incluant padding */
+}
+
+.table-bordered th:first-child {
+    border-left: 1px solid #4c4c4c;
+}
+
+.table-bordered th:last-child {
+    border-right: 1px solid #4c4c4c;
+}
+
+.table > tbody, .table > tfoot {
+    border: 1px solid #dee2e6;
+}
+
+
+/*====================================================================================================*/
+/*  -81- DataTables 
+/*====================================================================================================*/
+table.dataTable {
+    border-collapse: collapse !important;
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+}
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        font-family: 'Font Awesome 5 Free' !important; /*rdatatable*/
+        font-weight: 900;
+    }
+
+    table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before {
+        display: none !important;
+    }
+
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after {
+        opacity: 1 !important; /*rdatatable*/
+    }
+
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        opacity: 0.5 !important; /*rdatatable*/
+    }
+
+    table.dataTable thead .sorting:after {
+        content: '\f0dc' !important; /*rdatatable*/
+    }
+
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc_disabled:after {
+        content: '\f0de' !important; /*rdatatable   '\f160'*/
+    }
+
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc_disabled:after {
+        content: '\f0dd' !important; /*rdatatable    '\f161'*/
+    }
+
+
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:before,
+    table.dataTable thead .sorting_desc_disabled:after {
+        position: relative;
+        bottom: inherit;
+        display: inline;
+        opacity: 0.8;
+        right: inherit;
+        margin-left: 5px;
+    }
+
+
+    table.dataTable thead > tr > th.sorting_asc,
+    table.dataTable thead > tr > th.sorting_desc,
+    table.dataTable thead > tr > th.sorting,
+    table.dataTable thead > tr > td.sorting_asc,
+    table.dataTable thead > tr > td.sorting_desc,
+    table.dataTable thead > tr > td.sorting {
+        padding-right: 8px;
+    }
+
+
+    table.dataTable.table-sm .sorting:after,
+    table.dataTable.table-sm .sorting_asc:after,
+    table.dataTable.table-sm .sorting_desc:after {
+        top: inherit;
+    }
+
+
+    /* Alignement des listes à puces dans une cellule de tableau */
+    table.dataTable td ul {
+        padding-left: 16px;
+        margin-bottom: 0;
+    }
+
+nav.dataTables_paginate {
+    display: flex;
+    justify-content: flex-end;
+}
+
+ul.pagination {
+    flex-wrap: wrap;
+    justify-content: center !important;
+    margin-top: 24px;
+}
+
+    ul.pagination li {
+        margin-right: 16px;
+    }
+
+        ul.pagination li:last-of-type {
+            margin-right: 0;
+        }
+
+/* Pagination, ne pas afficher les boutons inactifs (ex. Première si on est sur la 1ère page)*/
+.paginate_button.disabled {
+    display: none;
+}
+
+/* Pagination, pas de coins arrondis pour le 1er et dernier boutons */
+.page-item:first-child .page-link, .page-item:last-child .page-link {
+    border-radius: 0;
+}
+
+
+ul.pagination a.page-link {
+    color: var(--couleur-liens);
+}
+
+ul.pagination li.active a.page-link, ul.pagination li.active span.page-link {
+    background-color: var(--couleur-texte-base);
+    border-color: var(--couleur-texte-base);
+    font-weight: 600;
+}
+
+
+    ul.pagination li.active span.page-link:hover {
+        cursor: inherit;
+    }
+
+ul.pagination a.page-link:focus {
+    text-decoration: none;
+}
+
+/*====================================================================================================*/
+/*  -82- Select2
+/*====================================================================================================*/
+
+/* Largeur automatique pour select2 (évite que le texte d'une pill défonce) */
+.select2-container.select2-container--bootstrap4 {
+    width: auto !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__rendered {
+    padding: 0 8px 4px 8px;
+}
+
+
+    .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__rendered .select2-search__field {
+        margin-top: 8px;
+    }
+
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice {
+    background-color: #dae6f0;
+    border: 1px solid #dae6f0;
+    border-radius: 0;
+    color: var(--couleur-liens);
+    padding: 8px 12px;
+    height: auto;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+    .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice:hover,
+    .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice:focus {
+        border: 1px solid #6991d0;
+    }
+
+
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice__remove {
+    line-height: 1;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 4px;
+}
+
+input.select2-search__field:disabled{
+    background-color: #fff;
+}
+
+/*====================================================================================================*/
+/*  -99- À Positionner
+/*====================================================================================================*/
+/* Sections extensibles */
+.card .card-title a .fas:before {
+    content: "\f106";
+}
+
+.card .card-title a.collapsed .fas:before {
+    content: "\f107";
+}
+

@@ -1,0 +1,218 @@
+﻿/*! impression */
+/* Feuille de style de base pour impression.
+*/
+/*====================================================================================================*/
+/*  -01- Général                                                                                  
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -05- Accueil
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -10- Versements
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -15- Communications
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -20- Cartes de type section de base
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -25- Tableaux
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -30- FAQ
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -35- Profil
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -99- À Positionner
+/*====================================================================================================*/
+
+@media print {
+
+/*====================================================================================================*/
+/*  -01- Général
+/*====================================================================================================*/
+#pivLogoGouvernementPrint{
+    display: block;
+}
+
+/* Police */
+body {
+    color: #000 !important;
+    line-height: normal !important;
+}
+
+h1, h2, h3, h4, h5, h6, .couleur-base {
+    color: #000 !important;
+}
+
+/* Éléments à masquer lors impression */
+.no-print,
+.piv-entete,
+.conteneur-menu-identification,
+footer nav,
+.infos-developpeurs,
+#flecheHaut,
+.btn, /* Boutons */
+.message .entete, .message-entete-section .entete .icone-svg, /* Message généraux et messages page profil - zone couleur fond et icône */
+.recherche-communications .card-title a.bouton, /* Liste des communications lien entête critères recherche affiché en mode mobile */
+.zone-boutons, /* Zone de boutons */
+.conteneur.sondage, /*Sondage page nous joindre */
+.select2-selection__choice__remove /* X de désélection choix select2 */ {
+    display: none !important;
+}
+
+/* Disposition */
+#conteneur2Colonnes {
+    display: block !important;
+}
+
+#colonneGauche, #colonneDroite {
+    width:100%!important;
+    max-width:100%!important;
+}
+
+.separateur.secondaire {
+    border-bottom: 1px solid var(--couleur-filet-secondaire);
+}
+
+/* Éléments ayant le focus ou hover */
+:focus, :hover, :focus-within {
+    outline: 0;
+    box-shadow: none;    
+}
+
+a:focus, a:hover, a:focus-within {
+    text-decoration: inherit;
+}
+
+/* Hyperliens */
+a {
+    text-decoration: none !important;
+    color: #000!important;
+}
+
+.page-texte a  {
+    color: var(--couleur-liens) !important;
+    text-decoration: underline !important;
+}
+
+/* Badge nombre nouveaux éléments */
+.badge-nouveau {
+    border: 1px solid #9f4a3b;
+}
+
+/* Zones déployables (ouvrir tout lors de l'impression) */
+.collapse {
+    display: block !important;
+    height: auto !important;
+}
+
+/*====================================================================================================*/
+/*  -05- Accueil
+/*====================================================================================================*/
+.resume-element .jour-calendrier {
+    border: 1px solid var(--couleur-filet-secondaire);
+}
+
+.tuile-resume.card.focusable:focus-within, .tuile-resume.card.focusable:hover {
+    border: 1px solid var(--couleur-filet-secondaire);
+}
+
+.tuile-resume.card.focusable:hover .comme-lien, .tuile-resume.card.focusable:focus-within .comme-lien {
+    text-decoration: none;
+}
+/*====================================================================================================*/
+/*  -10- Versements
+/*====================================================================================================*/
+.versement, .calendrierVersement {
+    page-break-inside: avoid;
+}
+
+.calendrierVersement ul li {
+    border-left: 0;
+}
+
+.calendrierVersement .puce {
+    display: none;
+}
+
+.versementsAVenir {
+    width: 100% !important;
+}
+
+/*====================================================================================================*/
+/*  -15- Communications
+/*====================================================================================================*/
+.recherche-communications{
+    border: 1px solid var(--couleur-filet-secondaire);
+}
+
+.lien-toutes-communications a {
+    color: var(--couleur-liens) !important;
+}
+
+.communications a .objet{
+    color: #000!important;
+}
+
+/*====================================================================================================*/
+/*  -20- Cartes de type section de base
+/*====================================================================================================*/
+.card.section-base {
+    page-break-inside: avoid;
+}
+
+.card.section-base .card-title {
+    color: #000;
+    border: 1px solid var(--couleur-filet-secondaire);
+    background-color: var(--couleur-filet-secondaire);
+}
+
+.icone-svg.chevron-haut, .icone-svg.chevron-bas,
+.icone-svg.chevron-haut-blanc, .icone-svg.chevron-bas-blanc {
+    display: none!important;
+}
+
+/*====================================================================================================*/
+/*  -25- Tableaux
+/*====================================================================================================*/
+th {
+    border-top: 1px solid var(--couleur-filet-secondaire) !important;
+    border-bottom: 1px solid var(--couleur-filet-secondaire) !important;
+    color: #000;
+}
+
+/*====================================================================================================*/
+/*  -30- FAQ
+/*====================================================================================================*/
+.lien-faq-complete a{
+    color: var(--couleur-liens)!important;
+}
+
+.faq .reponse a {
+    color: var(--couleur-liens) !important;
+    text-decoration: underline !important;
+}
+
+/*====================================================================================================*/
+/*  -35- Profil
+/*====================================================================================================*/
+#lienEnvoiCourriel, .section-localisateur-cle a, .section-plainte a {
+    color: var(--couleur-liens) !important;
+}
+
+/*====================================================================================================*/
+/*  -99- À positionner
+/*====================================================================================================*/
+.form-group {
+    page-break-inside: avoid;
+}
+
+.jour-calendrier-rectangle {
+    border-bottom: 1px solid var(--couleur-filet-secondaire) !important;
+}
+
+
+
+
+
+
+
+
+
+}

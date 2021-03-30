@@ -1,0 +1,227 @@
+[
+  {
+    "outputFileName": "src/temp/base.min.css",
+    "inputFiles": [
+      "src/interne/css/siteBase.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "adjustRelativePaths": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/base.min.css",
+    "inputFiles": [
+      "src/externe/bootstrap/bootstrap.min.css",
+      "src/temp/base.min.css"
+    ],
+    "minify": {
+      "enabled": false,
+      "adjustRelativePaths": false
+    }
+  },
+  {
+    "outputFileName": "src/temp/additionnel.min.css",
+    "inputFiles": [
+      "src/externe/select2/select2-bootstrap4.css",
+      "src/interne/css/siteAdditionnel.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "adjustRelativePaths": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/additionnel.min.css",
+    "inputFiles": [
+      "src/externe/fontawesome/css/all.min.css",
+      "src/externe/dataTables/datatables.min.css",
+      "src/externe/select2/select2.min.css",
+      "src/externe/select2/select2-bootstrap4.min.css",
+      "src/externe/pretty-print-json/pretty-print-json.css",
+      "src/temp/additionnel.min.css"
+    ],
+    "minify": {
+      "enabled": false,
+      "adjustRelativePaths": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/pilotage.min.css",
+    "inputFiles": [
+      "src/externe/Summernote/summernote-bs4.css",
+      "src/interne/css/pilotageBase.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "adjustRelativePaths": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/TransmissionDocuments/externe.min.css",
+    "inputFiles": [
+      "src/externe/TransmissionDocuments/bootstrap.min.css",
+      "src/externe/fontawesome/css/all.min.css"
+    ],
+    "minify": {
+      "enabled": false,
+      "adjustRelativePaths": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/supportCssVars.min.js",
+    "inputFiles": [
+      "src/externe/CssVarsPonyfill/cssvarsponyfill.min.js",
+      "src/interne/js/supportCssVars.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "src/temp/baseAsync.min.js",
+    "inputFiles": [
+      "src/interne/js/siteBaseAsync.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/baseAsync.min.js",
+    "inputFiles": [
+      "src/externe/bootstrap/bootstrap.bundle.min.js",
+      "src/temp/baseAsync.min.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "src/temp/base.min.js",
+    "inputFiles": [
+      "src/interne/js/siteBase.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/base.min.js",
+    "inputFiles": [
+      "src/externe/jQuery/jQuery.min.js",
+      "src/temp/base.min.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "src/temp/additionnel.min.js",
+    "inputFiles": [
+      "src/externe/dataTables/french.js",
+      "src/externe/dataTables/english.js",
+      "src/externe/dataTables/datatables-plugins.js",
+      "src/externe/dataTables/datatables-bootstrap4.js",
+      "src/interne/js/CAC.ValidationsClient.js",
+      "src/externe/select2/select2.js",
+      "src/externe/select2/fr.js",
+      "src/interne/js/siteAdditionnel.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/additionnel.min.js",
+    "inputFiles": [
+      "src/externe/dataTables/datatables.min.js",
+      "src/externe/jquery-validation/dist/jquery.validate.min.js",
+      "src/externe/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "src/externe/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.min.js",
+      "src/externe/pretty-print-json/pretty-print-json.min.js",
+      "src/temp/additionnel.min.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/TransmissionDocuments/base.min.js",
+    "inputFiles": [
+      "src/externe/jQuery/jQuery.min.js",
+      "src/temp/base.min.js",
+      "src/externe/jquery-validation/dist/jquery.validate.min.js",
+      "src/externe/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "src/externe/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.min.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+
+  {
+    "outputFileName": "src/temp/pilotage.min.js",
+    "inputFiles": [
+      "src/interne/js/pilotageBase.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/pilotage.min.js",
+    "inputFiles": [
+      "src/externe/Summernote/summernote-bs4.min.js",
+      "src/externe/Summernote/lang/summernote-fr-FR.js",
+      "src/externe/Sortable/Sortable.min.js",
+      "src/externe/Sortable/jquery-sortable.js",
+      "src/externe/autosize/autosize.min.js",
+      "src/temp/pilotage.min.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/TransmissionDocuments/externe.min.js",
+    "inputFiles": [
+      "src/externe/TransmissionDocuments/jquery.min.js",
+      "src/externe/TransmissionDocuments/jquery.validate.js",
+      "src/externe/TransmissionDocuments/jquery.validate.unobtrusive.js",
+      "src/externe/TransmissionDocuments/popper.min.js",
+      "src/externe/TransmissionDocuments/bootstrap.min.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "src/temp/FAQ.min.js",
+    "inputFiles": [
+      "src/interne/js/FAQ.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/FAQ.min.js",
+    "inputFiles": [
+      "src/temp/FAQ.min.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/images/sprite.svg",
+    "inputFiles": [
+      "src/sprites/dist/view/svg/sprite.view.svg"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  }
+
+]
