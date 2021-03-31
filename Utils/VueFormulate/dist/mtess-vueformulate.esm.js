@@ -124,7 +124,7 @@ var __vue_render__$2 = function () {
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v(" " + _vm._s(_vm.requiredFieldIndicator))]) : _vm._e()]);
+  }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e()]);
 };
 
 var __vue_staticRenderFns__$2 = [];
