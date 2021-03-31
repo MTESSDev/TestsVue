@@ -133,10 +133,21 @@ input.form-input:focus {
 
 
 /*====================================================================================================*/
-/*  -Z91- Ajustements pour règles SCG - Désaccord
+/*  -Z91- Ajustements pour règles SCG - Désaccord / Questionnements
 /*====================================================================================================*/
 /*
 form .input-validation-error, form .input-validation-error + .note-editor {
     border-color: var(--couleur-erreur);
     border-width: 2px; /* Ici devrait être 3px!  TROP GROS! 
 }*/
+
+
+
+/* --------------- Messages d'erreurs sur champs --------------- */
+/* Selon normes, 16px BOLD. */
+/* Il me semble que bold c'est TRÈS exagéré... */
+/* Réduire à 14px? */
+/* Ajouter marge supérieur afin d'espacer d'avec le champ au dessus ?  Selon norme à l'oeil il y en a une mais de combien? Semble plus que 4px. */
+form .field-validation-error {
+     margin-top: 8px;
+}
