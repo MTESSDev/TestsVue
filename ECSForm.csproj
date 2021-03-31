@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\form\mtess-vueformulate.min.js" />
     <Content Remove="wwwroot\js\mtess-vueformulate.min.js" />
   </ItemGroup>
 
@@ -44,10 +45,6 @@
     <None Update="form.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Utils\" />
   </ItemGroup>
 
   <ItemGroup>

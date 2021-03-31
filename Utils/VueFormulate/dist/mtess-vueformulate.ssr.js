@@ -221,6 +221,14 @@ var __vue_component__$2 = /*#__PURE__*/normalizeComponent({
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var script$1 = {
   props: {
     visibleErrors: {
@@ -297,9 +305,9 @@ var __vue_render__$1 = function __vue_render__() {
 
   var _c = _vm._self._c || _h;
 
-  return _vm.visibleErrors.length > 0 ? _c('div', [_vm._ssrNode(_vm.type === 'form' ? "<div>" + (_vm.visibleErrors.length > 0 ? "<div id=\"errorSummary\" tabindex=\"-1\"><h2>Des erreurs sont présentes dans le formulaire</h2> <ul" + _vm._ssrClass(null, _vm.outerClass) + ">" + _vm._ssrList(_vm.errorSummary, function (error, index) {
+  return _vm.visibleErrors.length > 0 ? _c('div', [_vm._ssrNode(_vm.type === 'form' ? "<div>" + (_vm.visibleErrors.length > 0 ? "<div id=\"errorSummary\" data-valmsg-summary=\"true\" tabindex=\"-1\" class=\"validation-summary-errors\"><div class=\"message erreur text-sm\"><div class=\"entete d-flex\"><div aria-hidden=\"true\" class=\"icone-svg\"></div></div> <div class=\"contenu zone-html\"><h2 class=\"text-sm\">Des erreurs sont présentes dans le formulaire</h2> <ul" + _vm._ssrClass(null, _vm.outerClass) + ">" + _vm._ssrList(_vm.errorSummary, function (error, index) {
     return "<li" + _vm._ssrAttr("role", _vm.role) + _vm._ssrAttr("aria-live", _vm.ariaLive) + _vm._ssrClass(null, _vm.itemClass) + "><a href=\"#\">" + _vm._ssrEscape(_vm._s(error.message)) + "</a></li>";
-  }) + "</ul></div>" : "<!---->") + "</div>" : "<div><ul" + _vm._ssrClass(null, _vm.outerClass) + ">" + _vm._ssrList(_vm.visibleErrors, function (error) {
+  }) + "</ul></div></div></div>" : "<!---->") + "</div>" : "<div><ul" + _vm._ssrClass(null, _vm.outerClass) + ">" + _vm._ssrList(_vm.visibleErrors, function (error) {
     return "<li" + _vm._ssrAttr("role", _vm.role) + _vm._ssrAttr("aria-live", _vm.ariaLive) + _vm._ssrClass(null, _vm.itemClass) + ">" + _vm._ssrEscape(_vm._s(error)) + "</li>";
   }) + "</ul></div>")]) : _vm._e();
 };
@@ -313,7 +321,7 @@ var __vue_inject_styles__$1 = undefined;
 var __vue_scope_id__$1 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-6b394d97";
+var __vue_module_identifier__$1 = "data-v-75a387a7";
 /* functional template */
 
 var __vue_is_functional_template__$1 = false;
