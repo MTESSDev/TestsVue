@@ -6,42 +6,13 @@
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
-    <!--<formulate-input type="group"
-                     name="noms"
-                     validation-name="La saveur"
-                     label="Nom de famille et prénom selon le certificat de naissance ou le document d’immigration"
-                     help="Entrez votre nom de famille et prénom selon le certificat de naissance ou le document d’immigration.
-                              Si vous utilisez habituellement un autre nom que celui qui figure sur votre
-                              certificat de naissance, ou si vous vous êtes marié avant le 2 avril 1981 et que
-                              vous portez le nom de votre conjoint ou les deux noms combinés, ajoutez-le en utilisant le bouton «Ajouter un autre nom»."
-                     add-label="+ Ajouter un autre nom usuel"
-                     validation="required|max:2"
-                     limit="2"
-                     :repeatable="true">
-
-        <div class="order">
-            <formulate-input type="text"
-                             name="nom"
-                             label="Nom de famille"
-                             validation="required"
-                             error-behavior="value"
-                             validation-name="autre nom"></formulate-input>
-
-            <formulate-input type="text"
-                             name="prenom"
-                             label="Prénom"
-                             validation="required"></formulate-input>
-
-
-        </div>
-    </formulate-input>-->
     <formulate-input type="select"
                      name="page"
                      label="Page"
-                     :options="{un: 'un', deux: 'deux'}">
+                     :options="{1: 'Section 1 - Raison de la demande', 2: 'Section 2 - Renseignements personnels', 7: 'Section 7 - Emploi'}">
     </formulate-input>
 
-    <div v-show="contenuform.page === 'un'">
+    <div v-show="contenuform.page === '1'">
         <formulate-input type="radio"
                          name="ne_qc"
                          label="Êtes-vous né au Québec?"
@@ -90,47 +61,88 @@
                          :options="{oui: 'Oui', non: 'Non'}">
         </formulate-input>
 
-        <formulate-input type="checkbox"
+
+        <formulate-input type="radio"
+                         name="deja_travaille"
+                         label="Avez-vous déjà travaillé?"
                          validation="required"
-                         name="personnage_prefere"
-                         label="Votre personnage préféré"
-                         :options="{first: 'Tony Stark', second: 'Fonzi', third: 'Mr. T', fourth: 'The Governator'}">
+                         :options="{oui: 'Oui', non: 'Non'}">
         </formulate-input>
+
+
         <formulate-input type="group"
-                         name="attendees"
+                         v-if="contenuform.deja_travaille === 'oui'"
+                         name="emplois"
                          :repeatable="true"
-                         label="Who is going to attend?"
-                         add-label="+ Add Attendee"
-                         validation="required">
-            <div class="attendee">
-                <formulate-input name="name"
-                                 validation="required"
-                                 label="Attendee’s name">
-                </formulate-input>
-                <formulate-input name="tata"
-                                 validation="required"
-                                 label="Tata">
-                </formulate-input>
+                         label="Emplois"
+                         validation="required"
+                         add-label="+ Ajouter un emploi">
+            <formulate-input name="nom_entreprise"
+                             validation="required"
+                             label="Nom de l'entreprise">
+            </formulate-input>
 
-                <formulate-input type="email"
-                                 name="email"
-                                 validation="required|email"
-                                 label="Attendee’s email">
-                </formulate-input>
+            <formulate-input name="periode_du"
+                             type="date"
+                             validation="required"
+                             label="Période du">
+            </formulate-input>
 
-            </div>
+            <formulate-input name="periode_au"
+                             type="date"
+                             validation="required"
+                             label="Période au">
+            </formulate-input>
+            <formulate-input name="salaire_hebdo"
+                             type="number"
+                             validation="required"
+                             label="Salaire par semaine">
+            </formulate-input>
+            <formulate-input name="heures_hebdo"
+                             type="number"
+                             validation="required"
+                             label="Heures par semaine">
+            </formulate-input>
+
+            <formulate-input type="radio"
+                             validation="required"
+                             name="raison_fin_emploi"
+                             label="Raison de la fin de l'emploi"
+                             :options="{1: 'Manque de travail', 2: 'Problème de santé', 3: 'Changement d\'emploi', 4: 'Changement de l\'entreprise',
+                                           5: 'Fermeture de l\'entreprise', 6: 'Naissance ou prise en charge d\'un enfant', 7: 'Congédiement', 8: 'Abandon de l\'emploi',
+                                           9: 'Autre'}">
+            </formulate-input>
+            <formulate-input v-if="contenuform.raison_fin_emploi === '9'"
+                             name="raison_fin_emploi_autre"
+                             validation="required"
+                             label="Précisez la raison de fin d'emploi">
+            </formulate-input>
+
+        </formulate-input>
+
+        <formulate-input type="radio"
+                         name="a_limitations_fonctionnelles"
+                         label="Avez-vous des limitations fonctionnelles faisant suite à des lésions professionnelles (ex. accident du travail)?"
+                         validation="required"
+                         :options="{oui: 'Oui', non: 'Non'}">
+        </formulate-input>
+        <formulate-input v-if="contenuform.a_limitations_fonctionnelles === 'oui'"
+                         name="limitations_fonctionnelles_precisions"
+                         validation="required"
+                         label="Précisez :">
         </formulate-input>
     </div>
 
-    <div v-show="contenuform.page === 'deux'">
-        Rien encore :(
+    <div v-show="contenuform.page === '2'">
+        Sectino 2 avec rien :(
     </div>
-    <!--<template v-if="contenuform.planet !== 'earth'">
-        <div>page 3</div>
-    </template>-->
+
+    <div v-show="contenuform.page === '3'">
+        Section 7 avec rien :(
+    </div>
 
     <formulate-input type="submit"
-                     label="Register"></formulate-input>
+                     label="Soumettre"></formulate-input>
 
 
     <template>

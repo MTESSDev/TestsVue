@@ -114,22 +114,53 @@
                 })
             },
             ajouterErreursGroupe(groupe, listeErreurs) {
-                const conteneursChamps = groupe.$el.querySelectorAll('.formulate-input')
+                if (groupe.allErrors.length > 1) {
+                    // Erreurs haut niveau du groupe
+                    const idGroupe = groupe._data.defaultId
+                    groupe.$el.setAttribute('id', idGroupe)
+                    for (var i = 1; i < groupe.allErrors.length; i++) {
+                        listeErreurs.push({ id: idGroupe, message: groupe.allErrors[i] })
+                    }
+                }
+                groupe.$children.forEach(enfant => {
+                    this.ajouterErreursEnfant(enfant, listeErreurs)
+                })
+                // listeErreurs.push({ id: idGroupe, message: 'Le groupe "' + groupe.label + '" contient au moins une erreur."' })
+            },
+            ajouterErreursEnfant(enfant, listeErreurs) {
+                if (enfant.isSubField && enfant.isSubField()) {
+                    const idEnfant = enfant.context.attributes.id
 
+                    enfant.visibleValidationErrors.forEach(message => {
+                        listeErreurs.push({ id: idEnfant, message: message })
+                    })
+                } else {
+                    enfant.$children.forEach(enfant => {
+                        this.ajouterErreursEnfant(enfant, listeErreurs)
+                    })
+                }
+            },
+            ajouterErreursGroupe2(groupe, listeErreurs) {
+                const conteneursChamps = groupe.$el.querySelectorAll('.formulate-input')
+                console.log('A -> ' + conteneursChamps.length)
                 conteneursChamps.forEach(conteneurChamp => {
-                    if (conteneurChamp.hasAttribute('data-is-showing-errors')) {
+//                    if (conteneurChamp.hasAttribute('data-has-errors')) {
+                        console.log('B')
                         const label = conteneurChamp.querySelector('label')
                         const messages = conteneurChamp.querySelectorAll('.formulate-input-error')
 
                         if (label && messages.length > 0) {
+                            console.log('C')
                             const id = label.getAttribute('for')
 
                             messages.forEach(message => {
+                                console.log('D')
                                 listeErreurs.push({ id: id, message: message.innerText })
                             })
                         }
-                    }
+                    //}
                 })
+                console.log("Erreurs -> " + listeErreurs)
             }
         },
         data: {
