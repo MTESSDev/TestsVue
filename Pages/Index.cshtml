@@ -114,19 +114,26 @@
                 })
             },
             ajouterErreursGroupe(groupe, listeErreurs) {
+                let erreursGroupe = []
+                let erreursGroupeEnfants = []
+
+                // Erreurs dans les enfants du groupe
+                groupe.$children.forEach(enfant => {
+                    this.ajouterErreursEnfant(enfant, erreursGroupeEnfants)
+                })
+
                 if (groupe.allErrors.length) {
                     // Erreurs haut niveau du groupe
-                    const idGroupe = groupe._data.defaultId
-                    groupe.$el.setAttribute('id', idGroupe)
+                    const idPremierControleErreurGroupe = erreursGroupeEnfants.length ? erreursGroupeEnfants[0].id : ""
+
                     groupe.allErrors.forEach(message => {
                         if (message !== true) {
-                            listeErreurs.push({ id: idGroupe, message: message })
+                            erreursGroupe.push({ id: idPremierControleErreurGroupe, message: message })
                         }
                     })
                 }
-                groupe.$children.forEach(enfant => {
-                    this.ajouterErreursEnfant(enfant, listeErreurs)
-                })
+
+                listeErreurs.push(...erreursGroupe, ...erreursGroupeEnfants)                
             },
             ajouterErreursEnfant(enfant, listeErreurs) {
                 if (enfant.isSubField && enfant.isSubField()) {
