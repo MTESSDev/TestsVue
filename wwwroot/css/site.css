@@ -113,6 +113,67 @@
     mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>')
 }
 
+
+/*====================================================================================================*/
+/*  -Z20A- Forms (Champs textes largeurs)
+/*====================================================================================================*/
+
+/*Le xxl n'existe pas dans les règles du SCG, c'est ajouté */
+input[type="text"].form-control.xxl {
+    max-width: 728px;
+}
+
+input[type="text"].form-control.xl {
+    max-width: 528px;
+}
+
+input[type="text"].form-control.lg {
+    max-width: 249px;
+}
+
+input[type="text"].form-control.md, input[type="number"].form-control.md {
+    max-width: 156px;
+}
+
+input[type="text"].form-control.sm, input[type="number"].form-control.sm {
+    max-width: 63px;
+}
+
+
+.col-auto input[type="text"].form-control.xxl {
+    width: 728px;
+}
+
+.col-auto input[type="text"].form-control.xl {
+    width: 528px;
+}
+
+.col-auto input[type="text"].form-control.lg {
+    width: 249px;
+}
+
+.col-auto input[type="text"].form-control.md, .col-auto input[type="number"].form-control.md {
+    width: 156px;
+}
+
+.col-auto input[type="text"].form-control.sm, .col-auto input[type="number"].form-control.sm {
+    width: 63px;
+}
+
+@media (max-width: 560px) {
+
+    .col-auto input[type="text"].form-control.xl {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 760px) {
+
+    .col-auto input[type="text"].form-control.xxl {
+        max-width: 100%;
+    }
+}
+
 /*====================================================================================================*/
 /*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
 /*====================================================================================================*/

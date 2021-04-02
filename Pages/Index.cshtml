@@ -102,7 +102,7 @@
                         if (champ.context && champ.context.type !== 'group') {
                             this.ajouterErreursChamp(champ, listeErreurs)
                         } else {
-                            this.ajouterErreursGroupe(champ, listeErreurs)
+                            this.ajouterErreursGroupe(champ, listeErreurs, true)
                         }
                     }
                 })
@@ -113,23 +113,77 @@
                     listeErreurs.push({ id: champ.context.id, message: message })
                 })
             },
-            ajouterErreursGroupe(groupe, listeErreurs) {
-                const conteneursChamps = groupe.$el.querySelectorAll('.formulate-input')
+            ajouterErreursGroupe(groupe, listeErreurs, ajouterErreursEnfants) {
+                let erreursGroupe = []
+                let erreursGroupeEnfants = []
 
+                // Erreurs dans les enfants du groupe
+                groupe.$children.forEach(enfant => {
+                    this.ajouterErreursEnfant(enfant, erreursGroupeEnfants)
+                })
+
+                // Obtenir l'id du premier contrôle en erreur dans le groupe. S'il n'y en a pas, on utilise l'id du groupe (div) on rend le div focusable
+                let idPremierControleErreurGroupe = erreursGroupeEnfants.length ? erreursGroupeEnfants[0].id : null
+                if (!idPremierControleErreurGroupe) {
+                    idPremierControleErreurGroupe = groupe._data.defaultId
+                    groupe.$el.setAttribute('id', idPremierControleErreurGroupe)
+                    groupe.$el.setAttribute('tabindex', '-1')
+                }
+
+                if (groupe.allErrors.length) {
+                    // Erreurs haut niveau du groupe
+                    groupe.allErrors.forEach(message => {
+                        if (message !== true) {
+                            erreursGroupe.push({ id: idPremierControleErreurGroupe, message: message })
+                        }
+                    })
+                }
+
+                if (erreursGroupe.length <= 0) {
+                    // Aucun message erreur de haut niveau sur le groupe, on indique qu'il y a au moins une erreur et on pointe sur première champ erreur du groupe
+                    erreursGroupe.push({ id: idPremierControleErreurGroupe, message: groupe.label + ' contient au moins une erreur.' })
+                }
+
+                listeErreurs.push(...erreursGroupe)
+
+                if (ajouterErreursEnfants) {
+                    listeErreurs.push(...erreursGroupeEnfants)
+                }
+            },
+            ajouterErreursEnfant(enfant, listeErreurs) {
+                if (enfant.isSubField && enfant.isSubField()) {
+                    const idEnfant = enfant.context.attributes.id
+
+                    enfant.visibleValidationErrors.forEach(message => {
+                        listeErreurs.push({ id: idEnfant, message: message })
+                    })
+                } else {
+                    enfant.$children.forEach(enfant => {
+                        this.ajouterErreursEnfant(enfant, listeErreurs)
+                    })
+                }
+            },
+            ajouterErreursGroupe2(groupe, listeErreurs) {
+                const conteneursChamps = groupe.$el.querySelectorAll('.formulate-input')
+                console.log('A -> ' + conteneursChamps.length)
                 conteneursChamps.forEach(conteneurChamp => {
-                    if (conteneurChamp.hasAttribute('data-is-showing-errors')) {
+//                    if (conteneurChamp.hasAttribute('data-has-errors')) {
+                        console.log('B')
                         const label = conteneurChamp.querySelector('label')
                         const messages = conteneurChamp.querySelectorAll('.formulate-input-error')
 
                         if (label && messages.length > 0) {
+                            console.log('C')
                             const id = label.getAttribute('for')
 
                             messages.forEach(message => {
+                                console.log('D')
                                 listeErreurs.push({ id: id, message: message.innerText })
                             })
                         }
-                    }
+                    //}
                 })
+                console.log("Erreurs -> " + listeErreurs)
             }
         },
         data: {
