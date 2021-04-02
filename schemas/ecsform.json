@@ -72,11 +72,14 @@
             "properties": {
                 "type": {
                     "type":"string",
-                    "enum": ["information", "inline", "h3"]
+                    "enum": ["inline", "dynamic"]
                 },
                 "classes": {
                     "type": "string",
                     "description": ""
+                },
+                "tag": {
+                    "type": "string"
                 },
                 "text": {
                     "type": "object",
