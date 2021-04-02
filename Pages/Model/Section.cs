@@ -7,12 +7,12 @@ namespace WebApplication2.Pages
     {
         public IDictionary<object, object>? Section { get; set; }
         public string Id { get; set; } = string.Empty;
-        public IEnumerable<object>? Inputs { get; set; }
+        public IEnumerable<object>? components { get; set; }
 
         public IEnumerable<object>? InputsHandled(){
-            if (Inputs is null) yield break;
+            if (components is null) yield break;
 
-            foreach (dynamic input in Inputs)
+            foreach (dynamic input in components)
             {
                 yield return new { isGroup = input["type"] == "group", attributes = input };
             }

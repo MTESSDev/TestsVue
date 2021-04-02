@@ -24,6 +24,9 @@
                     "items": {
                         "$ref": "#/definitions/Section"
                     }
+                },
+                "templates": {
+                    "type": "object"
                 }
             },
             "required": [
@@ -42,10 +45,15 @@
                 "id": {
                     "type": "string"
                 },
-                "inputs": {
+                "components": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Input"
+                        "anyOf": [{
+                            "$ref": "#/definitions/Input"
+                        },
+                        {
+                            "$ref": "#/definitions/Display"
+                        }]
                     }
                 }
             },
@@ -53,6 +61,41 @@
                 "section"
             ],
             "title": "Section"
+        },
+        "Display": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type":"string",
+                    "enum": ["information", "inline"]
+                },
+                "classes": {
+                    "type": "string",
+                    "description": ""
+                },
+                "text": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
+                "v-if": {
+                    "type": "string",
+                    "description": "Conditionnal display on another property/form field."
+                },
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [{
+                            "$ref": "#/definitions/Input"
+                        },
+                        {
+                            "$ref": "#/definitions/Display"
+                        }]
+                    }
+                }
+            },
+            "title": "Display",
+            "description": "Display component"
         },
         "Input": {
             "type": "object",
@@ -226,10 +269,15 @@
                 "minimum": {
                     "type": "number"
                 },
-                "inputs": {
+                "components": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Input"
+                        "anyOf": [{
+                            "$ref": "#/definitions/Input"
+                        },
+                        {
+                            "$ref": "#/definitions/Display"
+                        }]
                     }
                 }
             },

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Stubble.Core.Builders;
+using Stubble.Core.Loaders;
 using Stubble.Helpers;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,6 @@ namespace WebApplication2.Pages
     public class GenericModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-
-        Func<HelperContext, dynamic?, string> jsObject = FormHelpers.JsObject;
-        Func<HelperContext, IDictionary<object, object>?, string> jsArray = FormHelpers.JsArray;
-        Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
 
         public DynamicForm Form { get; set; }
         public string FormRaw { get; set; }
@@ -45,7 +42,7 @@ namespace WebApplication2.Pages
             var lambdaParser = new NReco.Linq.LambdaParser();
             var varContext = new Dictionary<string, object>();
             varContext["pi"] = 3.14;
-            var equation = "pi===3.13";
+            var equation = "pi===3.14";
             //Normalize JS to C#
             equation = equation.Replace("===", "==");
             var ttt = lambdaParser.Eval(equation, varContext);
@@ -64,24 +61,19 @@ namespace WebApplication2.Pages
 
                 Form = serializer.Serialize<>(yamlObject,);*/
 
-                var culture = new CultureInfo("fr-CA");
-                var helpers = new Helpers()
-                    .Register("i18n", i18n)
-                    .Register("JsObject", jsObject)
-                    .Register("JsArray", jsArray);
+                /* var partials = new Dictionary<string, string>
+                 {
+                     { "InputTemplate", yamlObject.Form?.InputTemplate ?? "" }
+                 };*/
 
-                var stubble = new StubbleBuilder()
-                    .Configure(conf =>
-                    {
-                        conf.AddHelpers(helpers);
-                        conf.SetIgnoreCaseOnKeyLookup(true);
-                    })
-                    .Build();
+
+
+                FormHelpers.TemplateList = yamlObject.Form.templates;
 
                 using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
                 {
                     var content = await streamReader.ReadToEndAsync();
-                    FormRaw = await stubble.RenderAsync(content, yamlObject);
+                    FormRaw = await FormHelpers.Stubble.RenderAsync(content, yamlObject);
                     // Do Stuff
                 }
             }

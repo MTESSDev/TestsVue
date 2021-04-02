@@ -1,4 +1,6 @@
-﻿using Stubble.Helpers;
+﻿using Stubble.Core;
+using Stubble.Core.Builders;
+using Stubble.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,6 +10,41 @@ namespace WebApplication2.Pages
 {
     internal static class FormHelpers
     {
+        public static bool isStubbleInitialized { get; set; }
+        private static StubbleVisitorRenderer _stubble { get; set; }
+
+        private static Func<HelperContext, dynamic?, string> jsObject = FormHelpers.JsObject;
+        private static Func<HelperContext, IDictionary<object, object>?, string> jsArray = FormHelpers.JsArray;
+        private static Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
+        private static Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
+
+        public static IDictionary<string, string> TemplateList { get; set; }
+
+        public static StubbleVisitorRenderer Stubble
+        {
+            get
+            {
+                if (!isStubbleInitialized)
+                {
+                    var helpers = new Helpers()
+                            .Register("RecursiveComponents", recursiveComponents)
+                            .Register("i18n", i18n)
+                            .Register("JsObject", jsObject)
+                            .Register("JsArray", jsArray);
+                    _stubble = new StubbleBuilder()
+                                .Configure(conf =>
+                                {
+                                    //conf.AddToTemplateLoader(new DictionaryLoader(partials));
+                                    conf.AddHelpers(helpers);
+                                    conf.SetIgnoreCaseOnKeyLookup(true);
+                                })
+                                .Build();
+                }
+                return _stubble;
+            }
+        }
+
+
         public static string JsObject(HelperContext context, dynamic? dict)
         {
             if (dict is null) return string.Empty;
@@ -54,7 +91,7 @@ namespace WebApplication2.Pages
                 }
 
                 if (!vueDict.Any())
-                { 
+                {
                     vueDict = dict;
                 }
             }
@@ -70,6 +107,24 @@ namespace WebApplication2.Pages
         public static string I18n(HelperContext context, IDictionary<object, object>? dict)
         {
             return GetLocalizedObject(dict)?.ToString() ?? string.Empty;
+        }
+
+        public static string RecursiveComponents(HelperContext context, IEnumerable<dynamic> components)
+        {
+            string html = string.Empty;
+            foreach (var component in components)
+            {
+                if (TemplateList.TryGetValue(component["type"], out string template))
+                {
+                    html += Stubble.Render(template, component);
+                }
+                else if (TemplateList.TryGetValue("input", out var inputTemplate))
+                {
+                    html += Stubble.Render(inputTemplate, component);
+                }
+            }
+
+            return html;
         }
 
         public static string Sanitize(this string? value)
