@@ -23,6 +23,7 @@
                      label="Register"></formulate-input>
     {{! ceci est un commentaire, pour dire que le }}
     {{! block ci-dessous sert à forcer stubble à skipper contenuform }}
-
-    {{& contenuform}}
+    {{=<% %>=}}
+    {{contenuform}}
+    <%={{ }}=%>
 </formulate-form>
