@@ -1,4 +1,5 @@
-﻿form:
+﻿# yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
+form:
   templates: 
     inline: |
       <div class="inline {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
