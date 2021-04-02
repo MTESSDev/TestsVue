@@ -133,6 +133,9 @@
                 "pdfBind": {
                     "type": "string"
                 },
+                "additionals": {
+                    "type": "object"
+                },
                 "v-if": {
                     "type": "string",
                     "description": "Conditionnal display on another property/form field."

@@ -23,7 +23,8 @@
               {{# options}} :options="{{JsObject options}}" {{/ options}}
               {{# repeatable}}
               :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
-              {{/ repeatable}}>
+              {{/ repeatable}}
+              {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
           {{RecursiveComponents components}}
       </formulate-input>
   sections:
@@ -38,6 +39,8 @@
             fr: Salut! ceci est une section de texte pour informer!
         - name: type_demande
           type: radio
+          additionals: 
+            label-is-valid-class: "classeTruc"
           label:
             fr: Quel type de demande voulez-vous effectuer?
             en: What type of application do you want to make?
