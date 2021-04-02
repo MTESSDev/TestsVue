@@ -156,6 +156,10 @@
                     "type": "object",
                     "$ref": "#/definitions/Translation"
                 },
+                "tooltip": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
                 "options": {
                     "type": ["object", "null", "string", "array"],
                     "description": "Array or object of options (select or box classifications)",
