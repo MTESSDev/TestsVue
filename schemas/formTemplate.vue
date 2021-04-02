@@ -11,7 +11,7 @@
                      type="select"></formulate-input>
 
     {{# Form.Sections}}
-    <div class="section" v-if="contenuform.page === '{{Id}}'">
+    <div class="section {{Classes}}" v-if="contenuform.page === '{{Id}}'">
         <h2>{{i18n section}}</h2>
 
         {{RecursiveComponents components}}

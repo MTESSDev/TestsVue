@@ -45,6 +45,10 @@
                 "id": {
                     "type": "string"
                 },
+                "classes": {
+                    "type": "string",
+                    "description": ""
+                },
                 "components": {
                     "type": "array",
                     "items": {
@@ -68,7 +72,7 @@
             "properties": {
                 "type": {
                     "type":"string",
-                    "enum": ["information", "inline"]
+                    "enum": ["information", "inline", "h3"]
                 },
                 "classes": {
                     "type": "string",

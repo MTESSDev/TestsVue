@@ -8,6 +8,7 @@
       <div class="{{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
           {{i18n text}}
       </div>
+    h3: <h3 class="{{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>{{i18n text}}</h3>
     input: |
       <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
               {{# type}} type="{{.}}" {{/ type}}
@@ -35,7 +36,7 @@
         en: Information on the application
       id: infos
       components:
-        - type: information
+        - type: h3
           text: 
             fr: Salut! ceci est une section de texte pour informer!
         - name: type_demande
