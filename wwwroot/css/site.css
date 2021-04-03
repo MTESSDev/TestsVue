@@ -25,13 +25,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1em;
-    height: 1em;
+    width: 20px;
+    height: 20px;
     border-radius: .25em;
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios */
-    border: 1px solid #808a9d;
     position: relative;
 }
+
+.formulate-input[data-classification=box] .formulate-input-element input:focus ~ .formulate-input-element-decorator {
+    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios */
+    border: 2px solid #89bce5;
+}
+
 
 .formulate-input[data-classification=box] .formulate-input-element-decorator:before {
     content: "";
@@ -42,18 +46,24 @@
     position: absolute;
 }
 
+.formulate-input[data-classification=box] .formulate-input-element-decorator:after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border: 1px solid #808a9d;
+}
 
-/* Radio disabled */
-.formulate-input[data-classification=box] .formulate-input-element input:disabled ~ .formulate-input-element-decorator {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... Outline ne fonctionne pas... trouver un moyen plus tard. */
+
+/* Radio et checkbox disabled */
+.formulate-input[data-classification=box] .formulate-input-element input:disabled ~ .formulate-input-element-decorator:after {
+    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios...  */
     border: 1px solid #bfc4ce;
 }
 
 /* Focus checkbox et radios */
-.formulate-input[data-classification=box] .formulate-input-element input:focus ~ .formulate-input-element-decorator {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... Outline ne fonctionne pas... trouver un moyen plus tard. */
+.formulate-input[data-classification=box] .formulate-input-element input:focus ~ .formulate-input-element-decorator:after {
+    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
     border: 2px solid #5b6476;
-    /*outline: 2px solid #89BCE5;*/
 }
 
 /* Le vrai input est hors écran (radios et checkbox) */
@@ -89,6 +99,10 @@
     height: 10px;
 }
 
+.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:after {
+    border-radius: 1em;
+}
+
 
 /* Checkbox */
 .formulate-input[data-classification=box] .formulate-input-element input[type=checkbox] ~ .formulate-input-element-decorator {
@@ -101,8 +115,7 @@
     width: 12px;
 }
 
-.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox]:checked ~ .formulate-input-element-decorator {
-    border-color: #808a9d;
+.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox]:checked ~ .formulate-input-element-decorator:after {
     background-color: #1479cc;
 }
 
@@ -186,7 +199,7 @@ input[type="text"].form-control.sm, input[type="number"].form-control.sm {
 
 
 input.form-input:focus {
-    border: 3px solid #89bce5
+    border: 3px solid #89bce5;
 }
 
 
