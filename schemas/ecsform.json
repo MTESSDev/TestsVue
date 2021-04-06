@@ -248,8 +248,8 @@
                             "description": "Checks the value of a Number, or length of a String or Array is more than a maximum length or value. The minimum value/length defaults to 1. You can force the validator to evaluate length or value by passing a second argument of either length or value."
                         },
                         "max": {
-                            "type": ["string"],
-                            "examples": ["5,length", "3", "10,value"],
+                            "type": ["string", "number"],
+                            "examples": ["5,length", 3, "10,value"],
                             "description": "Checks that the value of a Number, or length of a String or Array is less than a maximum length or value. The maximum value/length defaults to 10."
                         },
                         "mime": {
