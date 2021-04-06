@@ -2,9 +2,7 @@
                 @submit="submitHandler"
                 :invalid-message="invalidMessage"
                 :form-errors="formErrors"
-                :debounce="100"
                 @failed-validation="failedValidation"
-                error-behavior="submit"
                 :errors="inputErrors">
 
     <formulate-input name="page"
@@ -12,7 +10,7 @@
                      type="select"></formulate-input>
 
     {{# Form.Sections}}
-    <div class="section {{Classes}}" v-if="contenuform.page === '{{Id}}'">
+    <div class="section {{Classes}}" v-show="contenuform.page === '{{Id}}'">
         <h2>{{i18n section}}</h2>
 
         {{RecursiveComponents components}}
