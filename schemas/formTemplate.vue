@@ -2,8 +2,9 @@
                 @submit="submitHandler"
                 :invalid-message="invalidMessage"
                 :form-errors="formErrors"
-                :debounce="10"
+                :debounce="100"
                 @failed-validation="failedValidation"
+                error-behavior="submit"
                 :errors="inputErrors">
 
     <formulate-input name="page"

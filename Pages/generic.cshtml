@@ -27,7 +27,7 @@
 }
 
 @section scripts{
-    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="form/formulate.min.js"></script>
     <script src="form/locales.min.js"></script>
@@ -35,9 +35,9 @@
 
     <script>
 
-    Vue.component('Label', MtessVueformulate.Label)
-    Vue.component('ErrorList', MtessVueformulate.ErrorList)
-    Vue.component('RepeatableRemove', MtessVueformulate.RepeatableRemove)
+    //Vue.component('Label', MtessVueformulate.Label)
+    //Vue.component('ErrorList', MtessVueformulate.ErrorList)
+    //Vue.component('RepeatableRemove', MtessVueformulate.RepeatableRemove)
 
 /*        classes: {
             outer: 'form-group',
@@ -49,7 +49,7 @@
 
     Vue.use(VueFormulate, {
         plugins: [this.VueFormulateI18n.fr],
-        classes: {
+        /*classes: {
             outer: (context, baseClasses) => {
                 return obtenirClassesOuter(context, baseClasses)
             },
@@ -62,7 +62,7 @@
             label: 'Label',
             errorList: 'ErrorList',
             remove: 'RepeatableRemove'
-        },
+        },*/
         locale: 'fr',
         validationNameStrategy: ['validationName', 'label', 'name', 'type']
     });
@@ -78,15 +78,15 @@
             submitRawHandler(data) {
                 // TODO ici trouver le moyen d'exécuter la méthode terminerTraitementEnCoursSoumissionForm lorsque notre code ECS qui disable le bouton est terminé... Sinon le bouton reste disabled.
                 // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.
-                setTimeout(function () {
+                /*setTimeout(function () {
                     terminerTraitementEnCoursSoumissionForm()
-                },800)
+                },800)*/
             },
             submitHandler(data) {
                 axios.post('/Privacy', data)
             },
             invalidMessage(fields) {
-                console.log('invalidMessage')
+               /* console.log('invalidMessage')
                 const listeErreurs = []
                 const nomChamps = Object.keys(fields)
 
@@ -99,13 +99,13 @@
                             this.ajouterErreursGroupe(champ, listeErreurs, true)
                         }
                     }
-                })
+                })*/
                 return JSON.stringify(listeErreurs)
             },
             ajouterErreursChamp(champ, listeErreurs) {
-                champ.context.visibleValidationErrors.forEach(message => {
+              /*  champ.context.visibleValidationErrors.forEach(message => {
                     listeErreurs.push({ id: champ.context.id, message: message })
-                })
+                })*/
             },
             ajouterErreursGroupe(groupe, listeErreurs, ajouterErreursEnfants) {
                 let erreursGroupe = []
