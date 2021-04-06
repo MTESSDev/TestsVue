@@ -1,11 +1,37 @@
 ﻿/*====================================================================================================*/
-/*  -Z10- Radio button
+/*  -Z01- Base contrôles
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -Z10- Radio button et checkbox
+/* ---------------------------------------------------------------------------------------------------*/
+/*  -Z20A- Forms (Champs textes largeurs)
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
 /*====================================================================================================*/
 
+
 /*====================================================================================================*/
-/*  -Z10- Radio button
+/*  -Z01- Base contrôles
+/*====================================================================================================*/
+
+/* Reproduire tout ce qui est dans form-control */
+.formulate-input[data-classification=text] input, .formulate-input[data-classification=textArea] textarea,
+.formulate-input[data-classification=select] select {
+    border: 1px solid #858b93;
+}
+
+
+/* Reproduire tout ce qui est dans form-group */
+.formulate-input[data-classification=text], .formulate-input[data-classification=textArea],
+.formulate-input[data-classification=select], .formulate-input[data-classification=group] {
+    margin-bottom: 32px; /* On applique le même style que la classe form-group de BS */
+}
+
+.form-control, .select2-container--bootstrap4 .select2-selection {
+    border: 1px solid #858b93;
+}
+
+/*====================================================================================================*/
+/*  -Z10- Radio button et checkbox
 /*====================================================================================================*/
 
 /* --------------- Radios ET checkbox (Commun) --------------- */
