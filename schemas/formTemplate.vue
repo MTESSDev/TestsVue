@@ -2,7 +2,6 @@
                 @submit="submitHandler"
                 :invalid-message="invalidMessage"
                 :form-errors="formErrors"
-                :debounce="100"
                 @failed-validation="failedValidation"
                 error-behavior="submit"
                 :errors="inputErrors">
