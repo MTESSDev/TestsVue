@@ -131,6 +131,19 @@
                          validation="required"
                          label="Précisez :">
         </formulate-input>
+
+        <formulate-input name="langues_parlees"
+                         :options="{francais: 'Français', anglais: 'Anglais', autres: 'Autre(s)'}"
+                         type="checkbox"
+                         validation="required"
+                         label="Langues parlées">
+        </formulate-input>
+        <formulate-input v-if="contenuform.langues_parlees && contenuform.langues_parlees.includes('autres')"
+                         name="autres_langues_parlees"
+                         validation="required"
+                         label="Précisez :">
+        </formulate-input>
+
     </div>
 
     <div v-show="contenuform.page === '2'">
