@@ -191,6 +191,12 @@ input[type="text"].form-control.sm, input[type="number"].form-control.sm {
 /*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
 /*====================================================================================================*/
 
+
+.form-control {
+    height: 40px;
+}
+
+
 .icone-champ-requis {
     font-size: 1rem;
     vertical-align: top;
@@ -198,12 +204,10 @@ input[type="text"].form-control.sm, input[type="number"].form-control.sm {
 }
 
 
-input.form-input:focus {
-    border: 3px solid #89bce5;
+input.form-control:focus, select.form-control:focus {
+    outline: 3px solid #89bce5;
+    border: 2px solid #5b6476;
 }
-
-
-
 
 
 /*====================================================================================================*/
