@@ -27,6 +27,9 @@
                 },
                 "templates": {
                     "type": "object"
+                },
+                "inputDefaultClasses": {
+                    "type": "object"
                 }
             },
             "required": [

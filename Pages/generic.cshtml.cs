@@ -24,16 +24,12 @@ namespace WebApplication2.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public DynamicForm Form { get; set; }
-        public string FormRaw { get; set; }
+        public DynamicForm? Form { get; set; }
+        public string? FormRaw { get; set; }
 
         public GenericModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
-        }
-        public void OnPost(dynamic test)
-        {
-            var tt = "";
         }
 
         public async Task OnGet(string? id)
@@ -66,9 +62,8 @@ namespace WebApplication2.Pages
                      { "InputTemplate", yamlObject.Form?.InputTemplate ?? "" }
                  };*/
 
-
-
-                FormHelpers.TemplateList = yamlObject.Form.templates;
+                FormHelpers.TemplateList = yamlObject.Form?.Templates;
+                FormHelpers.InputDefaultClasses = yamlObject.Form?.InputDefaultClasses;
 
                 using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
                 {

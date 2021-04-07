@@ -17,8 +17,22 @@ namespace WebApplication2.Pages
         private static Func<HelperContext, IDictionary<object, object>?, string> jsArray = FormHelpers.JsArray;
         private static Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
         private static Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
+        private static Func<HelperContext, string, string> generateInputClasses = FormHelpers.GenerateInputClasses;
 
-        public static IDictionary<string, string> TemplateList { get; set; }
+        private static string GenerateInputClasses(HelperContext arg1, string type)
+        {
+            if (InputDefaultClasses != null &&
+                InputDefaultClasses.TryGetValue(type, out var classes))
+            {
+                var classesList = classes.Split(' ').ToList();
+                return $":input-class=\"['{string.Join("', '", classesList.Select(k => k.ToString().Sanitize()))}']\"";
+            }
+
+            return string.Empty;
+        }
+
+        public static IDictionary<string, string>? TemplateList { get; set; }
+        public static IDictionary<string, string>? InputDefaultClasses { get; set; }
 
         public static StubbleVisitorRenderer Stubble
         {
@@ -27,6 +41,7 @@ namespace WebApplication2.Pages
                 if (!isStubbleInitialized)
                 {
                     var helpers = new Helpers()
+                            .Register("GenerateInputClasses", generateInputClasses)
                             .Register("RecursiveComponents", recursiveComponents)
                             .Register("i18n", i18n)
                             .Register("JsObject", jsObject)

@@ -68,7 +68,7 @@ namespace WebApplication2.Pages
 
 
 
-                FormHelpers.TemplateList = yamlObject.Form.templates;
+                FormHelpers.TemplateList = yamlObject.Form?.Templates;
 
                 using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
                 {
