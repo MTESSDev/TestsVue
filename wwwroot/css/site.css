@@ -105,6 +105,7 @@
     margin-bottom: 0;
     margin-left: 8px;
     font-family: 'OpenSans-Regular';
+    width: 100%; /*Important sinon texte écrase parfois les contrôles si texte trop long */
 }
 
 
