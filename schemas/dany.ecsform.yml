@@ -147,3 +147,14 @@ form:
           label:
             fr: Test
           min: 2021-03
+    - section: 
+       fr: Page 3
+      id: p3 
+      components:
+        - type: radio
+          name: valzz
+          label:
+            fr: valzz
+          validations:
+            required: trim
+        
