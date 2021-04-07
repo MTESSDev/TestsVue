@@ -17,18 +17,36 @@ namespace WebApplication2.Pages
         private static Func<HelperContext, IDictionary<object, object>?, string> jsArray = FormHelpers.JsArray;
         private static Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
         private static Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
-        private static Func<HelperContext, string, string> generateInputClasses = FormHelpers.GenerateInputClasses;
+        private static Func<HelperContext, string, object, string> generateInputClasses = FormHelpers.GenerateInputClasses;
 
-        private static string GenerateInputClasses(HelperContext arg1, string type)
+        private static string GenerateInputClasses(HelperContext context, string type, dynamic component)
         {
-            if (InputDefaultClasses != null &&
-                InputDefaultClasses.TryGetValue(type, out var classes))
+            if (InputDefaultClasses is null) return string.Empty;
+
+            var dictComponent = component as Dictionary<object, object>;
+            object? customClasses = null;
+            dictComponent?.TryGetValue("classes", out customClasses);
+            var listInputCustom = customClasses?.ToString()?.Split(' ') ?? new string[] { };
+
+            if (InputDefaultClasses.TryGetValue(type, out var classesType))
             {
-                var classesList = classes.Split(' ').ToList();
-                return $":input-class=\"['{string.Join("', '", classesList.Select(k => k.ToString().Sanitize()))}']\"";
+                return InternalGenerateInputClasses(classesType, listInputCustom);
+            }
+            else if (InputDefaultClasses.TryGetValue("default", out var classesDefault))
+            {
+                return InternalGenerateInputClasses(classesDefault, listInputCustom);
             }
 
             return string.Empty;
+        }
+
+
+        private static string InternalGenerateInputClasses(string classes, string[] listInputCustom)
+        {
+            if (classes is null) return string.Empty;
+            var classesList = classes.Split(' ').ToList();
+            classesList.AddRange(listInputCustom);
+            return $":input-class=\"['{string.Join("', '", classesList.Select(k => k.ToString().Sanitize()))}']\"";
         }
 
         public static IDictionary<string, string>? TemplateList { get; set; }

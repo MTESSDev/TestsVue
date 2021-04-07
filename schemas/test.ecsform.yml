@@ -1,9 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
-  inputDefaultClasses: 
-    text: form-control
-    textarea: form-control
-    select: form-control
+  inputDefaultClasses:
+    default: form-control 
+    group: 
+    radio: 
+    checkbox: 
+    button: btn btn-secondaire
+    submit: btn btn-primaire
   templates: 
     inline: |
       <div class="inline {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
@@ -18,7 +21,7 @@ form:
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{.}}" {{/ name}}
               {{# name}} key="{{.}}" {{/ name}}
-              {{GenerateInputClasses type}}
+              {{GenerateInputClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
               {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
