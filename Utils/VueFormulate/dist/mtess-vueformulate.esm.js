@@ -6,6 +6,7 @@
 //
 //
 //
+//
 var script$2 = {
   props: {
     context: {
@@ -14,15 +15,18 @@ var script$2 = {
     }
   },
   computed: {
-    requiredFieldIndicator() {
-      return this.isRequired ? '*' : '';
-    },
-
-    isRequired() {
-      return this.context.rules.findIndex(element => element.ruleName === 'required') >= 0;
+    messagesErreur() {
+      return this.context.visibleValidationErrors.join(' ');
     }
 
+  },
+
+  created() {
+    this.hasValidationRules = this.context.rules.length > 0;
+    this.isRequired = this.context.rules.findIndex(element => element.ruleName === 'required') >= 0;
+    this.requiredFieldIndicator = this.isRequired ? '*' : '';
   }
+
 };
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -119,12 +123,17 @@ var __vue_render__$2 = function () {
     }
   }, [_c('span', [_vm._v(_vm._s(_vm.context.label))]), _vm._v(" "), _vm.isRequired ? _c('span', {
     staticClass: "sr-only"
-  }, [_vm._v(". Obligatoire")]) : _vm._e(), _vm._v(" "), _vm.isRequired ? _c('span', {
+  }, [_vm._v(". Obligatoire.")]) : _vm._e(), _vm._v(" "), _vm.hasValidationRules && _vm.messagesErreur ? _c('span', {
+    staticClass: "sr-only",
+    attrs: {
+      "aria-live": "polite"
+    }
+  }, [_vm._v(" " + _vm._s(_vm.messagesErreur))]) : _vm._e(), _vm._v(" "), _vm.isRequired ? _c('span', {
     staticClass: "icone-champ-requis",
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e()]);
+  }, [_vm._v(" " + _vm._s(_vm.requiredFieldIndicator))]) : _vm._e()]);
 };
 
 var __vue_staticRenderFns__$2 = [];
@@ -151,14 +160,6 @@ const __vue_component__$2 = /*#__PURE__*/normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$2
 }, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
 
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -271,19 +272,11 @@ var __vue_render__$1 = function () {
   var _c = _vm._self._c || _h;
 
   return _vm.visibleErrors.length > 0 ? _c('div', [_vm.type === 'form' ? _c('div', [_vm.visibleErrors.length > 0 ? _c('div', {
-    staticClass: "validation-summary-errors",
     attrs: {
       "id": "errorSummary",
-      "data-valmsg-summary": "true",
       "tabindex": "-1"
     }
-  }, [_c('div', {
-    staticClass: "message erreur text-sm"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "contenu zone-html"
-  }, [_c('h2', {
-    staticClass: "text-sm"
-  }, [_vm._v("Des erreurs sont présentes dans le formulaire")]), _vm._v(" "), _c('ul', {
+  }, [_c('h2', [_vm._v("Des erreurs sont présentes dans le formulaire")]), _vm._v(" "), _c('ul', {
     class: _vm.outerClass
   }, _vm._l(_vm.errorSummary, function (error, index) {
     return _c('li', {
@@ -303,8 +296,11 @@ var __vue_render__$1 = function () {
         }
       }
     }, [_vm._v(_vm._s(error.message))])]);
-  }), 0)])])]) : _vm._e()]) : _c('div', [_c('ul', {
-    class: _vm.outerClass
+  }), 0)]) : _vm._e()]) : _c('div', [_c('ul', {
+    class: _vm.outerClass,
+    attrs: {
+      "aria-hidden": "true"
+    }
   }, _vm._l(_vm.visibleErrors, function (error) {
     return _c('li', {
       key: error,
@@ -320,22 +316,7 @@ var __vue_render__$1 = function () {
   }), 0)])]) : _vm._e();
 };
 
-var __vue_staticRenderFns__$1 = [function () {
-  var _vm = this;
-
-  var _h = _vm.$createElement;
-
-  var _c = _vm._self._c || _h;
-
-  return _c('div', {
-    staticClass: "entete d-flex"
-  }, [_c('div', {
-    staticClass: "icone-svg",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })]);
-}];
+var __vue_staticRenderFns__$1 = [];
 /* style */
 
 const __vue_inject_styles__$1 = undefined;
@@ -449,10 +430,10 @@ const __vue_component__ = /*#__PURE__*/normalizeComponent({
 /* eslint-disable import/prefer-default-export */
 
 var components = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  Label: __vue_component__$2,
-  ErrorList: __vue_component__$1,
-  RepeatableRemove: __vue_component__
+    __proto__: null,
+    Label: __vue_component__$2,
+    ErrorList: __vue_component__$1,
+    RepeatableRemove: __vue_component__
 });
 
 // Import vue components

@@ -60,6 +60,7 @@ function _nonIterableRest() {
 //
 //
 //
+//
 var script$2 = {
   props: {
     context: {
@@ -68,14 +69,16 @@ var script$2 = {
     }
   },
   computed: {
-    requiredFieldIndicator: function requiredFieldIndicator() {
-      return this.isRequired ? '*' : '';
-    },
-    isRequired: function isRequired() {
-      return this.context.rules.findIndex(function (element) {
-        return element.ruleName === 'required';
-      }) >= 0;
+    messagesErreur: function messagesErreur() {
+      return this.context.visibleValidationErrors.join(' ');
     }
+  },
+  created: function created() {
+    this.hasValidationRules = this.context.rules.length > 0;
+    this.isRequired = this.context.rules.findIndex(function (element) {
+      return element.ruleName === 'required';
+    }) >= 0;
+    this.requiredFieldIndicator = this.isRequired ? '*' : '';
   }
 };function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
     if (typeof shadowMode !== 'boolean') {
@@ -167,7 +170,7 @@ var __vue_render__$2 = function __vue_render__() {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
     }
-  }, [_vm._ssrNode("<span>" + _vm._ssrEscape(_vm._s(_vm.context.label)) + "</span> " + (_vm.isRequired ? "<span class=\"sr-only\">. Obligatoire</span>" : "<!---->") + " " + (_vm.isRequired ? "<span aria-hidden=\"true\" class=\"icone-champ-requis\">" + _vm._ssrEscape(_vm._s(_vm.requiredFieldIndicator)) + "</span>" : "<!---->"))]);
+  }, [_vm._ssrNode("<span>" + _vm._ssrEscape(_vm._s(_vm.context.label)) + "</span> " + (_vm.isRequired ? "<span class=\"sr-only\">. Obligatoire.</span>" : "<!---->") + " " + (_vm.hasValidationRules && _vm.messagesErreur ? "<span aria-live=\"polite\" class=\"sr-only\">" + _vm._ssrEscape(" " + _vm._s(_vm.messagesErreur)) + "</span>" : "<!---->") + " " + (_vm.isRequired ? "<span aria-hidden=\"true\" class=\"icone-champ-requis\">" + _vm._ssrEscape(" " + _vm._s(_vm.requiredFieldIndicator)) + "</span>" : "<!---->"))]);
 };
 
 var __vue_staticRenderFns__$2 = [];
@@ -179,7 +182,7 @@ var __vue_inject_styles__$2 = undefined;
 var __vue_scope_id__$2 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$2 = "data-v-52096c82";
+var __vue_module_identifier__$2 = "data-v-772cedd8";
 /* functional template */
 
 var __vue_is_functional_template__$2 = false;
@@ -193,14 +196,6 @@ var __vue_component__$2 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$2,
   staticRenderFns: __vue_staticRenderFns__$2
 }, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -305,9 +300,9 @@ var __vue_render__$1 = function __vue_render__() {
 
   var _c = _vm._self._c || _h;
 
-  return _vm.visibleErrors.length > 0 ? _c('div', [_vm._ssrNode(_vm.type === 'form' ? "<div>" + (_vm.visibleErrors.length > 0 ? "<div id=\"errorSummary\" data-valmsg-summary=\"true\" tabindex=\"-1\" class=\"validation-summary-errors\"><div class=\"message erreur text-sm\"><div class=\"entete d-flex\"><div aria-hidden=\"true\" class=\"icone-svg\"></div></div> <div class=\"contenu zone-html\"><h2 class=\"text-sm\">Des erreurs sont présentes dans le formulaire</h2> <ul" + _vm._ssrClass(null, _vm.outerClass) + ">" + _vm._ssrList(_vm.errorSummary, function (error, index) {
+  return _vm.visibleErrors.length > 0 ? _c('div', [_vm._ssrNode(_vm.type === 'form' ? "<div>" + (_vm.visibleErrors.length > 0 ? "<div id=\"errorSummary\" tabindex=\"-1\"><h2>Des erreurs sont présentes dans le formulaire</h2> <ul" + _vm._ssrClass(null, _vm.outerClass) + ">" + _vm._ssrList(_vm.errorSummary, function (error, index) {
     return "<li" + _vm._ssrAttr("role", _vm.role) + _vm._ssrAttr("aria-live", _vm.ariaLive) + _vm._ssrClass(null, _vm.itemClass) + "><a href=\"#\">" + _vm._ssrEscape(_vm._s(error.message)) + "</a></li>";
-  }) + "</ul></div></div></div>" : "<!---->") + "</div>" : "<div><ul" + _vm._ssrClass(null, _vm.outerClass) + ">" + _vm._ssrList(_vm.visibleErrors, function (error) {
+  }) + "</ul></div>" : "<!---->") + "</div>" : "<div><ul aria-hidden=\"true\"" + _vm._ssrClass(null, _vm.outerClass) + ">" + _vm._ssrList(_vm.visibleErrors, function (error) {
     return "<li" + _vm._ssrAttr("role", _vm.role) + _vm._ssrAttr("aria-live", _vm.ariaLive) + _vm._ssrClass(null, _vm.itemClass) + ">" + _vm._ssrEscape(_vm._s(error)) + "</li>";
   }) + "</ul></div>")]) : _vm._e();
 };
@@ -321,7 +316,7 @@ var __vue_inject_styles__$1 = undefined;
 var __vue_scope_id__$1 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-75a387a7";
+var __vue_module_identifier__$1 = "data-v-84fc5e24";
 /* functional template */
 
 var __vue_is_functional_template__$1 = false;
