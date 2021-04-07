@@ -5,7 +5,7 @@ form:
     group: 
     radio: 
     checkbox: 
-    button: btn
+    button: btn btn-secondaire
     submit: btn btn-primaire
   templates: 
     inline: |
@@ -21,7 +21,7 @@ form:
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{.}}" {{/ name}}
               {{# name}} key="{{.}}" {{/ name}}
-              {{GenerateInputClasses type}}
+              {{GenerateInputClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
               {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
@@ -47,6 +47,7 @@ form:
       components:
         - name: nom1_Req-00
           type: text
+          classes: bg-secondary text-white
           label: 
             fr: Nom de famille
           validations: 

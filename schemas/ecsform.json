@@ -135,6 +135,10 @@
                     "description": "A descriptive label for the input element.",
                     "$ref": "#/definitions/Translation"
                 },
+                "classes": {
+                    "type": "string",
+                    "description": ""
+                },
                 "help": {
                     "type": "object",
                     "description": "Help text to be displayed with the input.",
