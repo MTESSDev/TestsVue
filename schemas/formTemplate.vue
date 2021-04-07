@@ -6,7 +6,7 @@
                 :errors="inputErrors">
 
     <formulate-input name="page"
-                     {{GenerateInputClasses "select"}}
+                     {{GenerateInputClasses "select" .}}
                      :options="{ {{# Form.Sections}}{{Id}}:'{{i18n Section}}', {{/ Form.Sections}} }"
                      type="select"></formulate-input>
 
