@@ -42,7 +42,6 @@
     margin-top: 16px;
 }
 .formulate-input[data-classification=box] .formulate-input-element {
-    overflow: hidden;
     display: flex;
     align-items: center;
 }
@@ -105,6 +104,7 @@
     margin-bottom: 0;
     margin-left: 8px;
     font-family: 'OpenSans-Regular';
+    width: 100%; /*Important sinon texte écrase parfois les contrôles si texte trop long */
 }
 
 

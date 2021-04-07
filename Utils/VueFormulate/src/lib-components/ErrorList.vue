@@ -1,29 +1,21 @@
 <template>
     <div v-if="visibleErrors.length > 0">
         <div v-if="type === 'form'">
-            <div id="errorSummary" class="validation-summary-errors" data-valmsg-summary="true" tabindex="-1"  v-if="visibleErrors.length > 0">
-                <div class="message erreur text-sm">
-                    <div class="entete d-flex">
-                        <div aria-hidden="true" class="icone-svg"></div>
-                    </div>
-
-                    <div class="contenu zone-html">
-                        <h2 class="text-sm">Des erreurs sont présentes dans le formulaire</h2>
-                        <ul :class="outerClass">
-                            <li v-for="(error, index)  in errorSummary"
-                                :key="index"
-                                :class="itemClass"
-                                :role="role"
-                                :aria-live="ariaLive">
-                                <a href="#" @click="setInputFocus(error.id)">{{error.message}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div id="errorSummary" tabindex="-1" v-if="visibleErrors.length > 0">
+                <h2>Des erreurs sont présentes dans le formulaire</h2>
+                <ul :class="outerClass">
+                    <li v-for="(error, index)  in errorSummary"
+                        :key="index"
+                        :class="itemClass"
+                        :role="role"
+                        :aria-live="ariaLive">
+                        <a href="#" @click="setInputFocus(error.id)">{{error.message}}</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div v-else>
-            <ul :class="outerClass">
+            <ul :class="outerClass" aria-hidden="true">
                 <li v-for="error in visibleErrors"
                     :key="error"
                     :class="itemClass"
