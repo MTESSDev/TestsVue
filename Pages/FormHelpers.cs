@@ -21,10 +21,18 @@ namespace WebApplication2.Pages
 
         private static string GenerateInputClasses(HelperContext arg1, string type)
         {
-            if (InputDefaultClasses != null &&
-                InputDefaultClasses.TryGetValue(type, out var classes))
+            if (InputDefaultClasses is null) return string.Empty;
+
+            if (InputDefaultClasses.TryGetValue(type, out var classesType))
             {
-                var classesList = classes.Split(' ').ToList();
+                if (classesType is null) return string.Empty;
+                var classesList = classesType.Split(' ').ToList();
+                return $":input-class=\"['{string.Join("', '", classesList.Select(k => k.ToString().Sanitize()))}']\"";
+            }
+            else if (InputDefaultClasses.TryGetValue("default", out var classesDefault))
+            {
+                if (classesDefault is null) return string.Empty;
+                var classesList = classesDefault.Split(' ').ToList();
                 return $":input-class=\"['{string.Join("', '", classesList.Select(k => k.ToString().Sanitize()))}']\"";
             }
 
