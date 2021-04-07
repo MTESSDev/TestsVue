@@ -6,6 +6,7 @@
                 :errors="inputErrors">
 
     <formulate-input name="page"
+                     {{GenerateInputClasses "select"}}
                      :options="{ {{# Form.Sections}}{{Id}}:'{{i18n Section}}', {{/ Form.Sections}} }"
                      type="select"></formulate-input>
 
@@ -19,7 +20,8 @@
     {{/ Form.Sections}}
 
     <formulate-input type="submit"
-                     label="Register"></formulate-input>
+                     label="Soumettre"
+                     :input-class="['btn', 'btn-primaire']"></formulate-input>
     {{! ceci est un commentaire, pour dire que le }}
     {{! block ci-dessous sert à forcer stubble à skipper contenuform }}
     {{=<% %>=}}

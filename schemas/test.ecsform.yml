@@ -1,5 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
+  inputDefaultClasses: 
+    text: form-control
+    textarea: form-control
+    select: form-control
   templates: 
     inline: |
       <div class="inline {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
@@ -14,6 +18,7 @@ form:
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{.}}" {{/ name}}
               {{# name}} key="{{.}}" {{/ name}}
+              {{GenerateInputClasses type}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
               {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
@@ -41,49 +46,60 @@ form:
           type: text
           label: 
             fr: Nom de famille
-          validations:
+          validations: 
             required: trim
-    # Section 1
-    - section: 
-        fr: Informations sur la demande2
-        en: Information on the application2
-      id: infos2
-      components:
+            max: 36,length
         - name: prénom1_Req-00
           type: text
           label: 
             fr: Prénom
+          validations: 
+            required: trim
+            max: 22,length
         - name: date_Req-00
-          type: text
+          type: date
           label: 
             fr: Date de naissance (AAAAMMJJ)
+          validations: 
+            required: trim
         - name: nom2_Req-00
           type: text
           label: 
             fr: Nom de famille
+          validations: 
+            max: 20,length
         - name: prénom._Req-00
           type: text
           label: 
             fr: Prénom
+          validations: 
+            max: 20,length
         - name: nas1_Req-00
           type: text
           label: 
             fr: Numéro d'assurance sociale
+          validations: 
+            required: trim
+            max: 9,length
         - name: date2_Req-00
-          type: text
+          type: date
           label: 
-            fr: pour les numéros débutant par 9
+            fr: Date d'expiration (pour les numéros débutant par 9) (AAAAMMJJ)
         - name: Req-00-Sexe
-          type: radio
+          type: checkbox
           label: 
             fr: Sexe
+          validations: 
+            required: trim
           options: 
             Feminin: Féminin 
             Masculin: Masculin 
         - name: Req-00-Langue
-          type: radio
+          type: checkbox
           label: 
             fr: Langue de correspondance
+          validations: 
+            required: trim
           options: 
             Francais: Français 
             Anglais: Anglais 
@@ -91,21 +107,27 @@ form:
           type: radio
           label: 
             fr: Êtes-vous né au Québec?
-          options: 
-            Oui: Oui 
-            Non: Non  
+          validations: 
+            required: trim
+          options: yesno
         - name: nom3_Req-00
           type: text
           label: 
             fr: Si oui, inscrivez le nom de votre mère tel qu'il figure sur votre certificat de naissance - Nom de famille
+          validations: 
+            max: 20,length
         - name: prénom3_Req-00
           type: text
           label: 
             fr: Si oui, inscrivez le nom de votre mère tel qu'il figure sur votre certificat de naissance - Prénom
+          validations: 
+            max: 20,length
         - name: Req00-Etatcivil
-          type: radio
+          type: checkbox
           label: 
             fr: État civil
+          validations: 
+            required: trim
           options: 
             Celibataire: Célibataire 
             Marie: Marié ou uni civilement 
@@ -115,39 +137,33 @@ form:
             ConjointSurvivant: Conjoint survivant 
             Divorce: Divorcé ou dissolution d'union civile 
         - name: date5_Req-00
-          type: text
+          type: date
           label: 
             fr: Iscrivez la date de la séparation (AAAAMMJJ)
         - name: Req00-CitCanadienne
           type: radio
           label: 
             fr: Avez-vous la citoyenneté canadienne?
-          options: 
-            Oui: Oui 
-            Non: Non 
+          validations: 
+            required: trim
+          options: yesno
         - name: Oui3
           type: radio
           label: 
             fr: Êtes-vous un résident permanent?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: Oui4
           type: radio
           label: 
             fr: Êtes-vous un demandeur d'asile?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: Oui5
           type: radio
           label: 
             fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: Autre1
-          type: radio
+          type: checkbox
           label: 
             fr: Autre situation
           options: 
@@ -161,46 +177,62 @@ form:
           label: 
             fr: Si vous êtes né hors du Canada, indiquez votre pays de naissance.
         - name: date6_Req-00
-          type: text
+          type: date
           label: 
             fr: Date d'arrivée au Canada (AAAAMMJJ)
         - name: adresse1_Req-00
           type: text
           label: 
             fr: Numéro
+          validations: 
+            required: trim
+            max: 6,length
         - name: adresse3_Req-00
           type: text
           label: 
             fr: Rue
+          validations: 
+            required: trim
+            max: 24,length
         - name: adresse2_Req-00
           type: text
           label: 
             fr: Appartement
+          validations: 
+            max: 5,length
         - name: telephone1_Req-00
           type: text
           label: 
             fr: même s'il est confidentiel
+          validations: 
+            max: 10,length
         - name: adresse4_Req-00
           type: text
           label: 
             fr: Ville village ou municipalité
+          validations: 
+            required: trim
+            max: 29,length
         - name: codePostal1_Req-00
           type: text
           label: 
             fr: Code postal
+          validations: 
+            required: trim
+            max: 6,length
         - name: telephone2_Req-00
           type: text
           label: 
             fr: même s'il est confidentiel
+          validations: 
+            max: 10,length
         - name: Oui6
           type: radio
           label: 
             fr: Êtes-vous aux études?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: TPlein
-          type: radio
+          type: checkbox
           label: 
             fr: Études
           options: 
@@ -218,30 +250,28 @@ form:
           type: radio
           label: 
             fr: Occupez-vous un emploi?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: Emploi1
-          type: radio
+          type: checkbox
           label: 
             fr: 30 heures ou plus par semaine
           options: 
             Req_00: À temps plein  (Type d'Emploi)
         - name: Emploi2
-          type: radio
+          type: checkbox
           label: 
             fr: moins de 30 heures par semaine
           options: 
             Req_00: À temps partiel  (Type d'Emploi)
         - name: Emploi3
-          type: radio
+          type: checkbox
           label: 
             fr: Type d'Emploi
           options: 
             Req_00: Sur appel 
             Req_001: Travail autonome 
         - name: Parler1
-          type: radio
+          type: checkbox
           label: 
             fr: Langues parlées
           options: 
@@ -253,7 +283,7 @@ form:
           label: 
             fr: Autres, précisez.
         - name: Ecrit1
-          type: radio
+          type: checkbox
           label: 
             fr: Langues écrites
           options: 
@@ -268,38 +298,32 @@ form:
           type: radio
           label: 
             fr: Avez-vous des enfants à charge?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: nbreEnfant_Req
           type: text
           label: 
             fr: Si oui, combien?
+          validations: 
+            max: 2,length
         - name: Oui9
           type: radio
           label: 
             fr: Êtes-vous chef de famille monoparentale?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: Oui10
           type: radio
           label: 
             fr: Êtes-vous enceinte?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: date3_Req-00
-          type: text
+          type: date
           label: 
             fr: Si oui, indiquez la date prévue de l'accouchement. (AAAAMMJJ)
         - name: Oui11
           type: radio
           label: 
             fr: Est-ce que votre état de santé vous permet de travailler?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: etatSante_Req-00
           type: text
           label: 
@@ -308,9 +332,7 @@ form:
           type: radio
           label: 
             fr: Avez-vous un handicap physique, intellectuel ou mental?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: handicap_Req-00
           type: text
           label: 
@@ -319,11 +341,9 @@ form:
           type: radio
           label: 
             fr: Vous considérez-vous comme un autochtone (personne d’ascendance inuit
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: PremiereNation1
-          type: radio
+          type: checkbox
           label: 
             fr: Êtes-vous un...
           options: 
@@ -334,9 +354,7 @@ form:
           type: radio
           label: 
             fr: Vous considérez-vous comme un membre d’une minorité visible?
-          options: 
-            Req_00: Oui 
-            Req_001: Non 
+          options: yesno
         - name: Nom_institution_financière_Req-00
           type: text
           label: 
@@ -349,38 +367,52 @@ form:
           type: text
           label: 
             fr: Code postal de votre succursale
+          validations: 
+            max: 6,length
         - name: Num_succursale_Req-00
           type: text
           label: 
             fr: Numéro de la succursale
+          validations: 
+            max: 5,length
         - name: Num_institution_Req-00
           type: text
           label: 
             fr: Numéro de l'institution financière
+          validations: 
+            max: 3,length
         - name: Num_compte_Req-00
           type: text
           label: 
             fr: Numéro du compte et chiffre de contrôle
+          validations: 
+            max: 12,length
         - name: DepotDirect
-          type: radio
+          type: checkbox
           label: 
             fr: Cochez ici si vous ne cvoulez pas vous inscrire au dépôt direct.
           options: 
             Req_00: Cochez ici si vous ne cvoulez pas vous inscrire au dépôt direct.
         - name: Req00-AffirmationS
-          type: radio
+          type: checkbox
           label: 
             fr: J'affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets
+          validations: 
+            required: trim
         - name: Req00-EngagementInfo
-          type: radio
+          type: checkbox
           label: 
             fr: Je m'engage à informer sans délai le ministère du Travail, de l'Emploi et de la Solidarité sociale de toute modification à ces renseignements
+          validations: 
+            required: trim
         - name: Req00-EnvoiElec
-          type: radio
+          type: checkbox
           label: 
             fr: Je souhaite transmettre ma demande électroniquement
+          validations: 
+            required: trim
         - name: Raison1
-          type: radio
+          type: checkbox
           label: 
             fr: Raison de la demande de services
           options: 
@@ -396,35 +428,41 @@ form:
           type: text
           label: 
             fr: Nom de famille
+          validations: 
+            required: trim
+            max: 36,length
         - name: prénom1_Req-01
           type: text
           label: 
             fr: Prénom
+          validations: 
+            required: trim
+            max: 22,length
         - name: date1_Req-01
-          type: text
+          type: date
           label: 
             fr: "Date de naissance, format de la date : AAAAMMJJ"
+          validations: 
+            required: trim
         - name: Req01-Prestations
           type: radio
           label: 
             fr: Recevez-vous des prestations
-          options: 
-            Oui: Oui 
-            Non: Non 
+          options: yesno
         - name: Prestation1
-          type: radio
+          type: checkbox
           label: 
             fr: Types de prestations reçues
           options: 
             Req_01: Assurance-emploi 
         - name: Prestation3
-          type: radio
+          type: checkbox
           label: 
             fr: "ex. : CNESST, SAAQ, Retraite Québec, prêts et bourses, etc."
           options: 
             Req_01: Autres , précisez. (Types de prestations reçues)
         - name: Prestation2
-          type: radio
+          type: checkbox
           label: 
             fr: Types de prestations reçues
           options: 
@@ -437,130 +475,142 @@ form:
           type: text
           label: 
             fr: "Ordre d'enseignement primaire : Nombre d'années réussi"
+          validations: 
+            max: 1,length
         - name: date2_Req-01
-          type: text
+          type: date
           label: 
-            fr: "format de la date : AAAAMMJJ"
+            fr: "Période du (format de la date : AAAAMMJJ)"
         - name: anneereussis2_Req-01
           type: text
           label: 
             fr: "Ordre d'enseignement secondaire général : Nombre d'années réussi"
+          validations: 
+            max: 1,length
         - name: coche3
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : DES"
           options: 
             Req_01: "Diplôme obtenu : DES"
         - name: date3_Req-01
-          type: text
+          type: month
           label: 
             fr: "Secondaire général : Date de fin des études, Format de la date : AAAAMM"
         - name: anneereussis3_Req-01
           type: text
           label: 
             fr: "Ordre d'enseignement secondaire professionnel : Nombre d'années réussi"
+          validations: 
+            max: 1,length
         - name: specialite1_Req-01
           type: text
           label: 
             fr: "Secondaire professionnel : spécialité"
         - name: coche11
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : AEP"
           options: 
             Req_01: "Diplôme obtenu : AEP"
         - name: coche6
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : DEP"
           options: 
             Req_01: "Diplôme obtenu : DEP"
         - name: coche8
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : ASP"
           options: 
             Req_01: "Diplôme obtenu : ASP"
         - name: date4_Req-01
-          type: text
+          type: month
           label: 
             fr: "Secondaire professionnel : Date de fin des études, Format de la date : AAAAMM"
         - name: anneereussis4_Req-01
           type: text
           label: 
             fr: "Ordre d'enseignement secondaire métier semi-spécialisé: Nombre d'années réussi"
+          validations: 
+            max: 1,length
         - name: specialite2_Req-01
           type: text
           label: 
             fr: "Secondaire métier spécialisé : spécialité"
         - name: date5_Req-01
-          type: text
+          type: month
           label: 
             fr: "Secondaire métier semi-spécialisé : Date de fin des études, Format de la date : AAAAMM"
         - name: anneereussis5_Req-01
           type: text
           label: 
             fr: général ou technique
+          validations: 
+            max: 1,length
         - name: specialite3_Req-01
           type: text
           label: 
             fr: "Collégial: spécialité"
         - name: coche9
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : DEC"
           options: 
             Req_01: "Diplôme obtenu : DEC"
         - name: coche10
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : AEC"
           options: 
             Req_01: "Diplôme obtenu : AEC"
         - name: coche12
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : CEC"
           options: 
             Req_01: "Diplôme obtenu : CEC"
         - name: date6_Req-01
-          type: text
+          type: month
           label: 
             fr: "Collègial : Date de fin des études, Format de la date : AAAAMM"
         - name: anneereussis6_Req-01
           type: text
           label: 
             fr: "Ordre d'enseignement universiraire : Nombre d'années réussi"
+          validations: 
+            max: 1,length
         - name: specialite4_Req-01
           type: text
           label: 
             fr: "Universitaire : spécialité"
         - name: coche13
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : CERT"
           options: 
             Req_01: "Diplôme obtenu : CERT"
         - name: coche15
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : BAC"
           options: 
             Req_01: "Diplôme obtenu : BAC"
         - name: coche16
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : MA"
           options: 
             Req_01: "Diplôme obtenu : MA"
         - name: coche17
-          type: radio
+          type: checkbox
           label: 
             fr: "Diplôme obtenu : DOC"
           options: 
             Req_01: "Diplôme obtenu : DOC"
         - name: date7_Req-01
-          type: text
+          type: month
           label: 
             fr: "Universitaire : Date de fin des études, Format de la date : AAAAMM"
         - name: formation1_Req-01
@@ -587,25 +637,25 @@ form:
           type: text
           label: 
             fr: Nombre d'années d'études réussies
+          validations: 
+            max: 2,length
         - name: Req01-Travaille
           type: radio
           label: 
             fr: Avez-vous déjà travaillé?
-          options: 
-            Oui: Oui, Si oui, indiquez vos expériences de travail, en commençant par la plus récente. 
-            Non: Non 
+          options: yesno
         - name: entreprise1_Req-01
           type: text
           label: 
             fr: "Emploi 1 : Nom de l'entreprise"
         - name: date10_Req-01
-          type: text
+          type: date
           label: 
-            fr: "format de la date : AAAAMMJJ"
+            fr: "Période du (format de la date : AAAAMMJJ)"
         - name: date11_Req-01
-          type: text
+          type: date
           label: 
-            fr: "format de la date : AAAAMMJJ"
+            fr: "au (format de la date : AAAAMMJJ)"
         - name: salaire1_Req-01
           type: text
           label: 
@@ -614,6 +664,8 @@ form:
           type: text
           label: 
             fr: heures par semaine
+          validations: 
+            max: 2,length
         - name: Emploi1_Req-01
           type: text
           label: 
@@ -623,7 +675,7 @@ form:
           label: 
             fr: Principales tâches accomplies
         - name: RaisonEmploi1-1
-          type: radio
+          type: checkbox
           label: 
             fr: Raison de la fin de l'emploi
           options: 
@@ -644,13 +696,13 @@ form:
           label: 
             fr: "Emploi 2 : Nom de l'entreprise"
         - name: date12_Req-01
-          type: text
+          type: date
           label: 
-            fr: "format de la date : AAAAMMJJ"
+            fr: "Période du (format de la date : AAAAMMJJ)"
         - name: date13_Req-01
-          type: text
+          type: date
           label: 
-            fr: "format de la date : AAAAMMJJ"
+            fr: "au (format de la date : AAAAMMJJ)"
         - name: salaire2_Req-01
           type: text
           label: 
@@ -659,6 +711,8 @@ form:
           type: text
           label: 
             fr: heures par semaine
+          validations: 
+            max: 2,length
         - name: Emploi2_Req-01
           type: text
           label: 
@@ -683,9 +737,7 @@ form:
           type: radio
           label: 
             fr: Possédez-vous un permis de conduire?
-          options: 
-            Oui: Oui 
-            Non: Non 
+          options: yesno
         - name: classes_Req-01
           type: text
           label: 
@@ -694,9 +746,7 @@ form:
           type: radio
           label: 
             fr: Possédez-vous une ou plusieurs cartes de qualification?
-          options: 
-            Oui: Oui 
-            Non: Non 
+          options: yesno
         - name: cartequalif_Req-01
           type: text
           label: 
@@ -705,9 +755,7 @@ form:
           type: radio
           label: 
             fr: Êtes-vous membre d’un ordre professionnel?
-          options: 
-            Oui: Oui 
-            Non: Non 
+          options: yesno
         - name: ordreprof_Req-01
           type: text
           label: 
@@ -716,9 +764,7 @@ form:
           type: radio
           label: 
             fr: Si vous avez fait des études à l’étranger, avez-vous obtenu une évaluation comparative des études faites hors du Québec délivrée par le ministère de l’Immigration, de la Diversité et de l’Inclusion?
-          options: 
-            Oui: Oui 
-            Non: Non 
+          options: yesno
         - name: domaine_Req-01
           type: text
           label: 
@@ -731,11 +777,9 @@ form:
           type: radio
           label: 
             fr: Êtes-vous disponible pour travailler?
-          options: 
-            Oui: Oui 
-            Non: Non 
+          options: yesno
         - name: Req01-OuiDispoTravaille
-          type: radio
+          type: checkbox
           label: 
             fr: disponibilité
           options: 
@@ -752,9 +796,7 @@ form:
           type: radio
           label: 
             fr: "Avez-vous des limitations fonctionnelles faisant suite à des lésions professionnelles (ex. : accident du travail"
-          options: 
-            Oui: Oui ?)
-            Non: Non ?)
+          options: yesno
         - name: limitations_Req-01
           type: text
           label: 
@@ -763,15 +805,13 @@ form:
           type: radio
           label: 
             fr: Avez-vous un casier judiciaire?
-          options: 
-            Req_01: Oui 
-            Req_011: Non 
+          options: yesno
         - name: emploisrecherche1_Req-01
           type: text
           label: 
             fr: Titre des emplois recherchés 1/2
         - name: coche35
-          type: radio
+          type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 1
           options: 
@@ -781,13 +821,13 @@ form:
           label: 
             fr: Titre des emplois recherchés 2/2
         - name: coche34
-          type: radio
+          type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 2
           options: 
             Req_01: J'ai de l'expérience pour l'emploi 2
         - name: travail1
-          type: radio
+          type: checkbox
           label: 
             fr: Où êtes-vous prêt à travailler?
           options: 
@@ -799,19 +839,25 @@ form:
           label: 
             fr: autre, précisez.
         - name: Req01-AffirmationS
-          type: radio
+          type: checkbox
           label: 
             fr: J'affirme solonellement que les renseignements qui figurent dans cette demande sont exacts et complets
+          validations: 
+            required: trim
         - name: Req01-EngagementInfo
-          type: radio
+          type: checkbox
           label: 
             fr: Je m’engage à informer sans délai le Ministère de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail
+          validations: 
+            required: trim
         - name: Req01-EnvoiElec
-          type: radio
+          type: checkbox
           label: 
             fr: Je souhaite transmettre ma demande électroniquement
+          validations: 
+            required: trim
         - name: RempliSoiMemeC
-          type: radio
+          type: checkbox
           label: 
             fr: Cochez cette case si vous n'avez pas rempli vous-même ce formulaire.
         - name: adresse-courriel_Conj-02
@@ -819,10 +865,14 @@ form:
           label: 
             fr: Courriel
         - name: Date-Signature
-          type: text
+          type: date
           label: 
-            fr: "format de la date : AAAAMMJJ"
+            fr: "Date de la signature (format de la date : AAAAMMJJ)"
+          validations: 
+            required: trim
         - name: Signature
           type: text
           label: 
             fr: avec votre clavier
+          validations: 
+            required: trim

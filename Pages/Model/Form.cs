@@ -5,6 +5,7 @@ namespace WebApplication2.Pages
     public class Form
     {
         public IEnumerable<SectionBloc>? Sections { get; set; }
-        public IDictionary<string, string> templates { get; set; }
+        public IDictionary<string, string>? Templates { get; set; }
+        public IDictionary<string, string>? InputDefaultClasses { get; set; }
     }
 }
