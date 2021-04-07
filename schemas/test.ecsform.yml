@@ -5,7 +5,8 @@ form:
     group: 
     radio: 
     checkbox: 
-    submit: 
+    button: btn
+    submit: btn btn-primaire
   templates: 
     inline: |
       <div class="inline {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
