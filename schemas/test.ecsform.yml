@@ -47,7 +47,6 @@ form:
       components:
         - name: nom1_Req-00
           type: text
-          classes: bg-secondary text-white
           label: 
             fr: Nom de famille
           validations: 
