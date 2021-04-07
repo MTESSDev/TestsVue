@@ -116,7 +116,19 @@ namespace WebApplication2.Pages
 
         public static string JsArray(HelperContext context, IDictionary<object, object>? dict)
         {
-            return "[" + string.Join(", ", dict.Select(kv => $"['{kv.Key}', '{kv.Value.ToString().Sanitize()}']").ToArray()) + "]";
+            if (dict is null) return string.Empty;
+
+            var element = "[";
+
+            foreach (var item in dict)
+            {
+                if (item.Value is null) continue;
+                var val = item.Value.ToString();
+                if (string.IsNullOrEmpty(val)) continue;
+
+                element += $"['{item.Key}', '{String.Join("','", val.Split(','))}'], ";
+            }
+            return element + "]";
         }
 
         public static string I18n(HelperContext context, IDictionary<object, object>? dict)

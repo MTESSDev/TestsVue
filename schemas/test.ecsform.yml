@@ -48,14 +48,14 @@ form:
             fr: Nom de famille
           validations: 
             required: trim
-            max: 36
+            max: 36,length
         - name: prénom1_Req-00
           type: text
           label: 
             fr: Prénom
           validations: 
             required: trim
-            max: 22
+            max: 22,length
         - name: date_Req-00
           type: date
           label: 
@@ -67,20 +67,20 @@ form:
           label: 
             fr: Nom de famille
           validations: 
-            max: 20
+            max: 20,length
         - name: prénom._Req-00
           type: text
           label: 
             fr: Prénom
           validations: 
-            max: 20
+            max: 20,length
         - name: nas1_Req-00
           type: text
           label: 
             fr: Numéro d'assurance sociale
           validations: 
             required: trim
-            max: 9
+            max: 9,length
         - name: date2_Req-00
           type: date
           label: 
@@ -115,13 +115,13 @@ form:
           label: 
             fr: Si oui, inscrivez le nom de votre mère tel qu'il figure sur votre certificat de naissance - Nom de famille
           validations: 
-            max: 20
+            max: 20,length
         - name: prénom3_Req-00
           type: text
           label: 
             fr: Si oui, inscrivez le nom de votre mère tel qu'il figure sur votre certificat de naissance - Prénom
           validations: 
-            max: 20
+            max: 20,length
         - name: Req00-Etatcivil
           type: checkbox
           label: 
@@ -186,46 +186,46 @@ form:
             fr: Numéro
           validations: 
             required: trim
-            max: 6
+            max: 6,length
         - name: adresse3_Req-00
           type: text
           label: 
             fr: Rue
           validations: 
             required: trim
-            max: 24
+            max: 24,length
         - name: adresse2_Req-00
           type: text
           label: 
             fr: Appartement
           validations: 
-            max: 5
+            max: 5,length
         - name: telephone1_Req-00
           type: text
           label: 
             fr: même s'il est confidentiel
           validations: 
-            max: 10
+            max: 10,length
         - name: adresse4_Req-00
           type: text
           label: 
             fr: Ville village ou municipalité
           validations: 
             required: trim
-            max: 29
+            max: 29,length
         - name: codePostal1_Req-00
           type: text
           label: 
             fr: Code postal
           validations: 
             required: trim
-            max: 6
+            max: 6,length
         - name: telephone2_Req-00
           type: text
           label: 
             fr: même s'il est confidentiel
           validations: 
-            max: 10
+            max: 10,length
         - name: Oui6
           type: radio
           label: 
@@ -304,7 +304,7 @@ form:
           label: 
             fr: Si oui, combien?
           validations: 
-            max: 2
+            max: 2,length
         - name: Oui9
           type: radio
           label: 
@@ -368,25 +368,25 @@ form:
           label: 
             fr: Code postal de votre succursale
           validations: 
-            max: 6
+            max: 6,length
         - name: Num_succursale_Req-00
           type: text
           label: 
             fr: Numéro de la succursale
           validations: 
-            max: 5
+            max: 5,length
         - name: Num_institution_Req-00
           type: text
           label: 
             fr: Numéro de l'institution financière
           validations: 
-            max: 3
+            max: 3,length
         - name: Num_compte_Req-00
           type: text
           label: 
             fr: Numéro du compte et chiffre de contrôle
           validations: 
-            max: 12
+            max: 12,length
         - name: DepotDirect
           type: checkbox
           label: 
@@ -430,14 +430,14 @@ form:
             fr: Nom de famille
           validations: 
             required: trim
-            max: 36
+            max: 36,length
         - name: prénom1_Req-01
           type: text
           label: 
             fr: Prénom
           validations: 
             required: trim
-            max: 22
+            max: 22,length
         - name: date1_Req-01
           type: date
           label: 
@@ -476,7 +476,7 @@ form:
           label: 
             fr: "Ordre d'enseignement primaire : Nombre d'années réussi"
           validations: 
-            max: 1
+            max: 1,length
         - name: date2_Req-01
           type: date
           label: 
@@ -486,7 +486,7 @@ form:
           label: 
             fr: "Ordre d'enseignement secondaire général : Nombre d'années réussi"
           validations: 
-            max: 1
+            max: 1,length
         - name: coche3
           type: checkbox
           label: 
@@ -502,7 +502,7 @@ form:
           label: 
             fr: "Ordre d'enseignement secondaire professionnel : Nombre d'années réussi"
           validations: 
-            max: 1
+            max: 1,length
         - name: specialite1_Req-01
           type: text
           label: 
@@ -534,7 +534,7 @@ form:
           label: 
             fr: "Ordre d'enseignement secondaire métier semi-spécialisé: Nombre d'années réussi"
           validations: 
-            max: 1
+            max: 1,length
         - name: specialite2_Req-01
           type: text
           label: 
@@ -548,7 +548,7 @@ form:
           label: 
             fr: général ou technique
           validations: 
-            max: 1
+            max: 1,length
         - name: specialite3_Req-01
           type: text
           label: 
@@ -580,7 +580,7 @@ form:
           label: 
             fr: "Ordre d'enseignement universiraire : Nombre d'années réussi"
           validations: 
-            max: 1
+            max: 1,length
         - name: specialite4_Req-01
           type: text
           label: 
@@ -618,8 +618,7 @@ form:
           label: 
             fr: Titre du premier cours
         - name: date8_Req-01
-          type: number
-          max: "2999"
+          type: text
           label: 
             fr: "Date de fin du premier cours, format de la date : AAAA"
         - name: formation2_Req-01
@@ -627,8 +626,7 @@ form:
           label: 
             fr: Titre du deuxième cours
         - name: date9_Req-01
-          type: number
-          max: "2999"
+          type: text
           label: 
             fr: "Date de fin du deuxième cours, format de la date : AAAA"
         - name: specialite5_Req-01
@@ -640,7 +638,7 @@ form:
           label: 
             fr: Nombre d'années d'études réussies
           validations: 
-            max: 2
+            max: 2,length
         - name: Req01-Travaille
           type: radio
           label: 
@@ -667,7 +665,7 @@ form:
           label: 
             fr: heures par semaine
           validations: 
-            max: 2
+            max: 2,length
         - name: Emploi1_Req-01
           type: text
           label: 
@@ -714,7 +712,7 @@ form:
           label: 
             fr: heures par semaine
           validations: 
-            max: 2
+            max: 2,length
         - name: Emploi2_Req-01
           type: text
           label: 
