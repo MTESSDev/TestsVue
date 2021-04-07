@@ -42,7 +42,6 @@
     margin-top: 16px;
 }
 .formulate-input[data-classification=box] .formulate-input-element {
-    overflow: hidden;
     display: flex;
     align-items: center;
 }
