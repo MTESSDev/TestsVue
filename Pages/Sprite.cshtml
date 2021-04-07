@@ -2,7 +2,7 @@
 @model WebApplication2.Pages.SpriteModel
 @{
     Response.ContentType = "text/css";
-    var urlSprite = "/images/sprite.svg";
+    var urlSprite = Url.Content("~/images/sprite.svg");
     <text>
         .note-editable a[target="_blank"]:after, a.lien-externe[target="_blank"]:after, span.lien-externe:after {
         background-image: url(@urlSprite#ico-lien-externe);
