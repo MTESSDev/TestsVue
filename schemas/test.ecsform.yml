@@ -879,3 +879,8 @@ form:
             fr: avec votre clavier
           validations: 
             required: trim
+    - section: 
+       fr: Révision
+      id: review
+      components:
+        
