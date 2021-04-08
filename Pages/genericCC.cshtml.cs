@@ -20,20 +20,16 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace WebApplication2.Pages
 {
-    public class GenericCCModel : PageModel
+    public class GenericModelCC : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public DynamicForm Form { get; set; }
-        public string FormRaw { get; set; }
+        public DynamicForm? Form { get; set; }
+        public string? FormRaw { get; set; }
 
-        public GenericCCModel(ILogger<IndexModel> logger)
+        public GenericModelCC(ILogger<IndexModel> logger)
         {
             _logger = logger;
-        }
-        public void OnPost(dynamic test)
-        {
-            var tt = "";
         }
 
         public async Task OnGet(string? id)
@@ -66,9 +62,8 @@ namespace WebApplication2.Pages
                      { "InputTemplate", yamlObject.Form?.InputTemplate ?? "" }
                  };*/
 
-
-
                 FormHelpers.TemplateList = yamlObject.Form?.Templates;
+                FormHelpers.InputDefaultClasses = yamlObject.Form?.InputDefaultClasses;
 
                 using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
                 {

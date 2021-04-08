@@ -235,6 +235,11 @@ input.form-control:focus, select.form-control:focus {
     border: 2px solid #5b6476;
 }
 
+/*TODO ATTENTION ici doit s'appliquer à des pages AVEC un menu à gauche... pas pour nos autres pages 2 colonnes */
+.contenu-principal-gauche #colonneDroite, .contenu-principal-droite #colonneGauche {
+    width: 100%;
+    max-width: 269px;
+}
 
 /*====================================================================================================*/
 /*  -Z91- Ajustements pour règles SCG - Désaccord / Questionnements

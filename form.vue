@@ -6,13 +6,7 @@
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
-    <formulate-input type="select"
-                     name="page"
-                     label="Page"
-                     :options="{1: 'Section 1 - Raison de la demande', 2: 'Section 2 - Renseignements personnels', 7: 'Section 7 - Emploi'}">
-    </formulate-input>
-
-    <div v-show="contenuform.page === '1'">
+    <div v-show="contenuform.noPageCourante === 1">
         <formulate-input type="radio"
                          name="ne_qc"
                          label="Êtes-vous né au Québec?"
@@ -146,11 +140,11 @@
 
     </div>
 
-    <div v-show="contenuform.page === '2'">
-        Sectino 2 avec rien :(
+    <div v-show="contenuform.noPageCourante === 2">
+        Section 2 avec rien :(
     </div>
 
-    <div v-show="contenuform.page === '3'">
+    <div v-show="contenuform.noPageCourante === 3">
         Section 7 avec rien :(
     </div>
 

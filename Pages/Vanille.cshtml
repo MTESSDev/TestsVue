@@ -6,10 +6,15 @@
 }
 
 @section style{
-        
+
     <link rel="stylesheet" href="./form/snow.min.css">
 }
+
 @section colonneGauche{
+
+}
+
+@section colonneDroite{
     <div id="form">
         @*<template>
                 <formulate-form v-model="values"
@@ -21,10 +26,6 @@
             @Html.Raw(Model.Formulaire)
         </template>
     </div>
-}
-
-@section colonneDroite{
-
 }
 
 @section scripts{
@@ -55,7 +56,7 @@
                 setTimeout(function () {
                     terminerTraitementEnCoursSoumissionForm()
                 }, 100)
-            },           
+            },
             submitHandler(data) {
                 axios.post('/Privacy', data)
             },

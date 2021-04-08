@@ -6,15 +6,26 @@
 }
 
 @section style{
-    
+
     <style>
-        .formulate-input-errors{
+        .formulate-input-errors {
             margin: 0;
             padding: 0;
         }
     </style>
 }
+
 @section colonneGauche{
+    <nav>
+        <ul>
+            <li v-for="page in pages" :key="page.no">
+                {{ page.titre }}
+            </li>
+        </ul>
+    </nav>
+}
+
+@section colonneDroite{
     <div id="form">
         @*<template>
                 <formulate-form v-model="values"
@@ -28,19 +39,15 @@
     </div>
 }
 
-@section colonneDroite{
-
-}
-
 @section scripts{
-    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="form/formulate.min.js"></script>
     <script src="form/locales.min.js"></script>
     <script src="form/mtess-vueformulate.min.js"></script>
 
     <script>
-        
+
     Vue.component('Label', MtessVueformulate.Label)
     Vue.component('ErrorList', MtessVueformulate.ErrorList)
     Vue.component('RepeatableRemove', MtessVueformulate.RepeatableRemove)
@@ -56,9 +63,6 @@
     Vue.use(VueFormulate, {
         plugins: [this.VueFormulateI18n.fr],
         classes: {
-            outer: (context, baseClasses) => {
-                return obtenirClassesOuter(context, baseClasses)
-            },
             error: 'text-danger field-validation-error',
             input: (context, baseClasses) => {
                 return obtenirClassesInput(context, baseClasses)
@@ -74,7 +78,7 @@
     });
 
     const App = {
-        el: '#form',
+        el: '#main',
         methods: {
             failedValidation(data) {
                 this.$el.setAttribute('data-submit', true)
@@ -83,11 +87,11 @@
             },
             submitRawHandler(data) {
                 // TODO ici trouver le moyen d'exécuter la méthode terminerTraitementEnCoursSoumissionForm lorsque notre code ECS qui disable le bouton est terminé... Sinon le bouton reste disabled.
-                // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.                 
+                // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.
                 setTimeout(function () {
-                    terminerTraitementEnCoursSoumissionForm() 
-                },800)  
-            },           
+                    terminerTraitementEnCoursSoumissionForm()
+                },800)
+            },
             submitHandler(data) {
                 axios.post('/Privacy', data)
             },
@@ -187,9 +191,10 @@
             }
         },
         data: {
-            contenuform: {},
+            contenuform: {noPageCourante: 1},
             formErrors: [],
-            inputErrors: {}
+            inputErrors: {},
+            pages: obtenirPages()
         },
        @*/* data: {
             values: {},
@@ -205,11 +210,18 @@
         new Vue(App)
     })
 
+        /*TODO ici obtenir les pages à partir de la config. */
+        function obtenirPages() {
+            return [{ no: 1, titre: "Raison de la demande" },
+                { no: 2, titre: "Renseignements généraux" },
+                { no: 3, titre: "Études" }
+            ]
+        }
         function obtenirClassesInput(context, baseClasses) {
             switch (context.classification) {
                 case "text":
                 case "textArea":
-                case "select": 
+                case "select":
                     baseClasses.push('form-control')
                     break
                 case "button":

@@ -13,7 +13,20 @@
         }
     </style>
 }
+
 @section colonneGauche{
+    <nav>
+        <nav>
+            <ul>
+                <li v-for="page in pages" :key="page.no">
+                    {{ page.titre }}
+                </li>
+            </ul>
+        </nav>
+    </nav>
+}
+
+@section colonneDroite{
     <div id="form">
         <template>
             @Html.Raw(Model.FormRaw)
@@ -21,12 +34,9 @@
     </div>
 }
 
-@section colonneDroite{
-
-}
 
 @section scripts{
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="~/form/formulate.min.js"></script>
     <script src="~/form/locales.min.js"></script>
@@ -38,24 +48,10 @@
     Vue.component('ErrorList', MtessVueformulate.ErrorList)
     Vue.component('RepeatableRemove', MtessVueformulate.RepeatableRemove)
 
-/*        classes: {
-            outer: 'form-group',
-                input: 'form-control',
-                    inputHasErrors: 'is-invalid',
-                        help: 'form-text text-muted',
-                            errors: 'list-unstyled text-danger'
-        },*/
-
     Vue.use(VueFormulate, {
         plugins: [this.VueFormulateI18n.fr],
         classes: {
-            /*outer: (context, baseClasses) => {
-                return obtenirClassesOuter(context, baseClasses)
-            },*/
-            error: 'text-danger field-validation-error'/*,
-            input: (context, baseClasses) => {
-                return obtenirClassesInput(context, baseClasses)
-            }*/
+            error: 'text-danger field-validation-error'
         },
         slotComponents: {
             label: 'Label',
@@ -67,7 +63,7 @@
     });
 
     const App = {
-        el: '#form',
+        el: '#main',
         methods: {
             failedValidation(data) {
                 this.$el.setAttribute('data-submit', true)
@@ -156,33 +152,12 @@
                     })
                 }
             },
-            ajouterErreursGroupe2(groupe, listeErreurs) {
-                const conteneursChamps = groupe.$el.querySelectorAll('.formulate-input')
-                console.log('A -> ' + conteneursChamps.length)
-                conteneursChamps.forEach(conteneurChamp => {
-//                    if (conteneurChamp.hasAttribute('data-has-errors')) {
-                        console.log('B')
-                        const label = conteneurChamp.querySelector('label')
-                        const messages = conteneurChamp.querySelectorAll('.formulate-input-error')
-
-                        if (label && messages.length > 0) {
-                            console.log('C')
-                            const id = label.getAttribute('for')
-
-                            messages.forEach(message => {
-                                console.log('D')
-                                listeErreurs.push({ id: id, message: message.innerText })
-                            })
-                        }
-                    //}
-                })
-                console.log("Erreurs -> " + listeErreurs)
-            }
         },
         data: {
             contenuform: {},
             formErrors: [],
-            inputErrors: {}
+            inputErrors: {},
+            pages: obtenirPages()
         },
        @*/* data: {
             values: {},
@@ -197,40 +172,17 @@
     window.addEventListener('load', () => {
         new Vue(App)
     })
+    /*TODO ici obtenir les pages à partir de la config. */
+    function obtenirPages() {
+        return [{ no: 1, titre: "Raison de la demande" },
+        { no: 2, titre: "Renseignements généraux" },
+        { no: 3, titre: "Études" }
+        ]
+    }
 
-        function obtenirClassesInput(context, baseClasses) {
-            switch (context.classification) {
-                case "text":
-                case "textArea":
-                case "select":
-                    baseClasses.push('form-control')
-                    break
-                case "button":
-                    if (context.type === 'submit') {
-                        baseClasses.push('btn btn-primaire')
-                    }
-                    break
-            }
-
-            return baseClasses
-        }
-
-        function obtenirClassesOuter(context, baseClasses) {
-            switch (context.classification) {
-                case "text":
-                case "group":
-                case "textArea":
-                case "select":
-                    baseClasses.push('form-group')
-                    break
-            }
-
-            return baseClasses
-        }
-
-        function obtenirTexteEdite(id) {
-            return '(Patch) Non défini.'
-        }
+    function obtenirTexteEdite(id) {
+        return '(Patch) Non défini.'
+    }
 
     </script>
 }
