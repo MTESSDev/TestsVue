@@ -2226,12 +2226,6 @@ form:
           type: text
           label: 
             fr: Coût mensuel
-        - name: CoutMensuelHabitationDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ChauffageOui
           type: checkbox
           label: 
@@ -2259,12 +2253,6 @@ form:
           type: text
           label: 
             fr: Montant mensuel de l'Allocation-logement
-        - name: MontantAllocationLogementDecimals
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: NomProprio
           type: text
           label: 
@@ -2752,12 +2740,6 @@ form:
           type: text
           label: 
             fr: Montant net du premier revenu
-        - name: MontantRevenuEnfant1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuEnfant1-1
           type: checkbox
           label: 
@@ -2778,12 +2760,6 @@ form:
           type: text
           label: 
             fr: Montant net du deuxième revenu
-        - name: MontantRevenuEnfant2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuEnfant2-1
           type: checkbox
           label: 
@@ -2812,12 +2788,6 @@ form:
           type: text
           label: 
             fr: Montant du premier compte ou valeur du premier bien
-        - name: MontantValeurEnfant1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: EnfantCompte2
           type: text
           label: 
@@ -2826,12 +2796,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième compte ou valeur du deuxième bien
-        - name: MontantValeurEnfant2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: EnfantCompte3
           type: text
           label: 
@@ -2840,12 +2804,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième compte ou valeur du troisième bien
-        - name: MontantValeurEnfant3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: AutresEnfants
           type: text
           label: 
@@ -2861,12 +2819,6 @@ form:
           type: text
           label: 
             fr: Salaire net
-        - name: SalaireNetDecimals
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps1-1
           type: checkbox
           label: 
@@ -2890,12 +2842,6 @@ form:
           type: text
           label: 
             fr: Montant des pourboires
-        - name: PourboiresMontantDecimals
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps2.1
           type: checkbox
           label: 
@@ -2949,12 +2895,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de la garde d'enfants
-        - name: GardeMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps3-1
           type: checkbox
           label: 
@@ -2978,12 +2918,6 @@ form:
           type: text
           label: 
             fr: Si oui, montant brut par semaine provenant du RQAP
-        - name: RQAPMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateDemandeRQAP
           type: date
           label: 
@@ -3003,12 +2937,6 @@ form:
           type: text
           label: 
             fr: Si oui, montant brut des prestations d'assurance-emploi par semaine
-        - name: AssuranceEmploiMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateDemandeAssuranceEmploi
           type: date
           label: 
@@ -3028,12 +2956,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de la CNESST
-        - name: CNESSTMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps4-1
           type: checkbox
           label: 
@@ -3069,12 +2991,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de Retraite Québec
-        - name: RQMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps5-1
           type: checkbox
           label: 
@@ -3098,12 +3014,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de la SAAQ
-        - name: SAAQMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps6-1
           type: checkbox
           label: 
@@ -3139,12 +3049,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant du Régime de pensions du Canada
-        - name: PensionsCanadaMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps7-1
           type: checkbox
           label: 
@@ -3168,12 +3072,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant d'un programme de la sécurité de la vieillesse
-        - name: SecuriteVieillesseMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps8-1
           type: checkbox
           label: 
@@ -3197,12 +3095,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant d'une pension ou d'une allocation des anciens combattants
-        - name: AnciensCombattantsMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps9-1
           type: checkbox
           label: 
@@ -3255,12 +3147,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de prestations d'une autre province, d'un territoire ou d'un autre pays
-        - name: PrestationAutreMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps11-1
           type: checkbox
           label: 
@@ -3299,12 +3185,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de chambreurs ou de pensionnaires
-        - name: RevenusChambreursMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps12-1
           type: checkbox
           label: 
@@ -3336,12 +3216,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de pension alimentaire
-        - name: PensionAlimMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps13-1
           type: checkbox
           label: 
@@ -3381,12 +3255,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de locations
-        - name: RevenuLocationDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps14-1
           type: checkbox
           label: 
@@ -3410,12 +3278,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de placements, d'obligation ou de fiducie
-        - name: RevenusPlacementsDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps15-1
           type: checkbox
           label: 
@@ -3439,12 +3301,6 @@ form:
           type: text
           label: 
             fr: Montant provenant d'un fonds de pension
-        - name: RevenusFondsPensionDecimal
-          type: text
-          label: 
-            fr: décimal
-          validations: 
-            max: 2,length
         - name: temps16-1
           type: checkbox
           label: 
@@ -3472,12 +3328,6 @@ form:
           type: text
           label: 
             fr: Montant du premier revenu
-        - name: MontantAutreRevenu1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre1-1
           type: checkbox
           label: 
@@ -3498,12 +3348,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième revenu
-        - name: MontantAutreRevenu2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre2-1
           type: checkbox
           label: 
@@ -3524,12 +3368,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième revenu
-        - name: MontantAutreRevenu3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre3-1
           type: checkbox
           label: 
@@ -3557,12 +3395,6 @@ form:
           type: text
           label: 
             fr: Montant du premier revenu
-        - name: MontantAutreRevenuAttendu1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu1
           type: date
           label: 
@@ -3575,12 +3407,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième revenu
-        - name: MontantAutreRevenuAttendu2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu2
           type: date
           label: 
@@ -3593,12 +3419,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième revenu
-        - name: MontantAutreRevenuAttendu3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu3
           type: date
           label: 
@@ -3622,12 +3442,6 @@ form:
           type: text
           label: 
             fr: Solde du premier compte
-        - name: Solde1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution2
           type: text
           label: 
@@ -3640,12 +3454,6 @@ form:
           type: text
           label: 
             fr: Solde du deuxième compte
-        - name: Solde2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution3
           type: text
           label: 
@@ -3658,12 +3466,6 @@ form:
           type: text
           label: 
             fr: Solde du troisième compte
-        - name: Solde3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution4
           type: text
           label: 
@@ -3676,12 +3478,6 @@ form:
           type: text
           label: 
             fr: Solde du quatrième compte
-        - name: Solde4Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Argent
           type: radio
           label: 
@@ -3697,12 +3493,6 @@ form:
           type: text
           label: 
             fr: Montant total
-        - name: MontantArgentDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Cheques
           type: radio
           label: 
@@ -3718,12 +3508,6 @@ form:
           type: text
           label: 
             fr: Montant du premier frais
-        - name: MontantFrais1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement1
           type: date
           label: 
@@ -3736,12 +3520,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième frais
-        - name: MontantFrais2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement2
           type: date
           label: 
@@ -3754,12 +3532,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième frais
-        - name: MontantFrais3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement3
           type: date
           label: 
@@ -3779,12 +3551,6 @@ form:
           type: text
           label: 
             fr: Valeur du ou des coffrets de sûreté
-        - name: ValeurCoffretDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-REER
           type: radio
           label: 
@@ -3800,12 +3566,6 @@ form:
           type: text
           label: 
             fr: Valeur du premier placement
-        - name: ValeurPlacement1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement2
           type: text
           label: 
@@ -3814,12 +3574,6 @@ form:
           type: text
           label: 
             fr: Valeur du deuxième placement
-        - name: ValeurPlacement2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement3
           type: text
           label: 
@@ -3828,12 +3582,6 @@ form:
           type: text
           label: 
             fr: Valeur du troisième placement
-        - name: ValeurPlacement3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement4
           type: text
           label: 
@@ -3842,12 +3590,6 @@ form:
           type: text
           label: 
             fr: Valeur du quatrième placement
-        - name: ValeurPlacement4Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Vehicules
           type: radio
           label: 
@@ -3875,22 +3617,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du premier véhicule
-        - name: VersementVehicule1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule1
           type: text
           label: 
             fr: Valeur marchande du premier véhicule
-        - name: ValeurVehicule1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule2
           type: text
           label: 
@@ -3911,22 +3641,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du deuxième véhicule
-        - name: VersementVehicule2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule2
           type: text
           label: 
             fr: Valeur marchande du deuxième véhicule
-        - name: ValeurVehicule2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule3
           type: text
           label: 
@@ -3947,22 +3665,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du troisième véhicule
-        - name: VersementVehicule3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule3
           type: text
           label: 
             fr: Valeur marchande du troisième véhicule
-        - name: ValeurVehicule3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule4
           type: text
           label: 
@@ -3983,22 +3689,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du quatrième véhicule
-        - name: VersementVehicule4Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule4
           type: text
           label: 
             fr: Valeur marchande du quatrième véhicule
-        - name: ValeurVehicule4Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Immobilier
           type: radio
           label: 
@@ -4022,32 +3716,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au premier bien immobilier
-        - name: DetteBienImmo1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo1
           type: text
           label: 
             fr: Versement mensuel du premier bien immobilier
-        - name: VersementBienImmo1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo1
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienImmo2
           type: text
           label: 
@@ -4064,32 +3740,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au deuxième bien immobilier
-        - name: DetteBienImmo2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo2
           type: text
           label: 
             fr: Versement mensuel du deuxième bien immobilier
-        - name: VersementBienImmo2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo2
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienImmo3
           type: text
           label: 
@@ -4106,32 +3764,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au troisième bien immobilier
-        - name: DetteBienImmo3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo3
           type: text
           label: 
             fr: Versement mensuel du troisième bien immobilier
-        - name: VersementBienImmo3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo3
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-ImmobilierAutres
           type: radio
           label: 
@@ -4147,12 +3787,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du premier bien mobilier
-        - name: ValeurBienMobilier1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienMobilier2
           type: text
           label: 
@@ -4161,12 +3795,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du deuxième bien mobilier
-        - name: ValeurBienMobilier2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienMobilier3
           type: text
           label: 
@@ -4175,12 +3803,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du troisième bien mobilier
-        - name: ValeurBienMobilier3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Entreprise
           type: radio
           label: 
@@ -4227,12 +3849,6 @@ form:
           type: text
           label: 
             fr: Valeur du premier bien ou avoir liquide
-        - name: ValeurBienVendu1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Bienvendu2
           type: text
           label: 
@@ -4245,12 +3861,6 @@ form:
           type: text
           label: 
             fr: Valeur du deuxième bien ou avoir liquide
-        - name: ValeurBienVendu2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-AssVie
           type: radio
           label: 
@@ -4282,12 +3892,6 @@ form:
           type: text
           label: 
             fr: Montant des sommes dues
-        - name: MontantSommesDuesDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Dettes
           type: radio
           label: 
@@ -4303,22 +3907,10 @@ form:
           type: text
           label: 
             fr: Montant de la première dette
-        - name: MontantDette1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementDette1
           type: text
           label: 
             fr: Versement mensuel de la première dette
-        - name: VersementDette1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DescriptionDette2
           type: text
           label: 
@@ -4327,22 +3919,10 @@ form:
           type: text
           label: 
             fr: Montant de la deuxième dette
-        - name: MontantDette2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementDette2
           type: text
           label: 
             fr: Versement mensuel de la deuxième dette
-        - name: VersementDette2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Req02-Recconnais
           type: checkbox
           label: 
@@ -4399,12 +3979,6 @@ form:
           type: text
           label: 
             fr: Salaire net
-        - name: SalaireNetDecimalsC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps1-1C
           type: checkbox
           label: 
@@ -4429,12 +4003,6 @@ form:
           type: text
           label: 
             fr: Montant des pourboires
-        - name: PourboiresMontantDecimalsC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps2.1C
           type: checkbox
           label: 
@@ -4491,12 +4059,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de la garde d'enfants
-        - name: GardeMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps3-1C
           type: checkbox
           label: 
@@ -4521,12 +4083,6 @@ form:
           type: text
           label: 
             fr: Si oui, montant brut par semaine provenant du RQAP
-        - name: RQAPMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateDemandeRQAPC
           type: date
           label: 
@@ -4547,12 +4103,6 @@ form:
           type: text
           label: 
             fr: Si oui, montant brut des prestations d'assurance-emploi par semaine
-        - name: AssuranceEmploiMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateDemandeAssuranceEmploiC
           type: date
           label: 
@@ -4573,12 +4123,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de la CNESST
-        - name: CNESSTMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps4-1C
           type: checkbox
           label: 
@@ -4615,12 +4159,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de Retraite Québec
-        - name: RQMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps5-1C
           type: checkbox
           label: 
@@ -4645,12 +4183,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de la SAAQ
-        - name: SAAQMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps6-1C
           type: checkbox
           label: 
@@ -4687,12 +4219,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant du Régime de pensions du Canada
-        - name: PensionsCanadaMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps7-1C
           type: checkbox
           label: 
@@ -4717,12 +4243,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant d'un programme de la sécurité de la vieillesse
-        - name: SecuriteVieillesseMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps8-1C
           type: checkbox
           label: 
@@ -4747,12 +4267,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant d'une pension ou d'une allocation des anciens combattants
-        - name: AnciensCombattantsMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps9-1C
           type: checkbox
           label: 
@@ -4807,12 +4321,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de prestations d'une autre province, d'un territoire ou d'un autre pays
-        - name: PrestationAutreMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps11-1C
           type: checkbox
           label: 
@@ -4853,12 +4361,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de chambreurs ou de pensionnaires
-        - name: RevenusChambreursMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps12-1C
           type: checkbox
           label: 
@@ -4891,12 +4393,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de pensions alimentaires
-        - name: PensionAlimMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps13-1C
           type: checkbox
           label: 
@@ -4937,12 +4433,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de locations
-        - name: RevenuLocationDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps14-1C
           type: checkbox
           label: 
@@ -4967,12 +4457,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de placements, d'obligation ou de fiducie
-        - name: RevenusPlacementsDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps15-1C
           type: checkbox
           label: 
@@ -4997,12 +4481,6 @@ form:
           type: text
           label: 
             fr: Montant provenant d'un fonds de pension
-        - name: RevenusFondsPensionDecimalC
-          type: text
-          label: 
-            fr: décimal
-          validations: 
-            max: 2,length
         - name: temps16-1C
           type: checkbox
           label: 
@@ -5031,12 +4509,6 @@ form:
           type: text
           label: 
             fr: Montant du premier revenu
-        - name: MontantAutreRevenu1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre1-1C
           type: checkbox
           label: 
@@ -5057,12 +4529,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième revenu
-        - name: MontantAutreRevenu2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre2-1C
           type: checkbox
           label: 
@@ -5083,12 +4549,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième revenu
-        - name: MontantAutreRevenu3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre3-1C
           type: checkbox
           label: 
@@ -5117,12 +4577,6 @@ form:
           type: text
           label: 
             fr: Montant du premier revenu attendu
-        - name: MontantAutreRevenuAttendu1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu1C
           type: date
           label: 
@@ -5135,12 +4589,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième revenu attendu
-        - name: MontantAutreRevenuAttendu2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu2C
           type: date
           label: 
@@ -5153,12 +4601,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième revenu attendu
-        - name: MontantAutreRevenuAttendu3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu3C
           type: date
           label: 
@@ -5183,12 +4625,6 @@ form:
           type: text
           label: 
             fr: Solde du premier compte
-        - name: Solde1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution2C
           type: text
           label: 
@@ -5201,12 +4637,6 @@ form:
           type: text
           label: 
             fr: Solde du deuxième compte
-        - name: Solde2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution3C
           type: text
           label: 
@@ -5219,12 +4649,6 @@ form:
           type: text
           label: 
             fr: Solde du troisième compte
-        - name: Solde3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution4C
           type: text
           label: 
@@ -5237,12 +4661,6 @@ form:
           type: text
           label: 
             fr: Solde du quatrième compte
-        - name: Solde4DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ArgentOuiC
           type: checkbox
           label: 
@@ -5259,12 +4677,6 @@ form:
           type: text
           label: 
             fr: Montant total
-        - name: MontantArgentDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ChequesPrelevementsOuiC
           type: checkbox
           label: 
@@ -5281,12 +4693,6 @@ form:
           type: text
           label: 
             fr: Montant du premier frais
-        - name: MontantFrais1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement1C
           type: date
           label: 
@@ -5299,12 +4705,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième frais
-        - name: MontantFrais2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement2C
           type: date
           label: 
@@ -5317,12 +4717,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième frais
-        - name: MontantFrais3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement3C
           type: date
           label: 
@@ -5343,12 +4737,6 @@ form:
           type: text
           label: 
             fr: Valeur du ou des coffrets de sûreté
-        - name: ValeurCoffretDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: REEROuiC
           type: checkbox
           label: 
@@ -5365,12 +4753,6 @@ form:
           type: text
           label: 
             fr: Valeur du premier placement
-        - name: ValeurPlacement1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement2C
           type: text
           label: 
@@ -5379,12 +4761,6 @@ form:
           type: text
           label: 
             fr: Valeur du deuxième placement
-        - name: ValeurPlacement2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement3C
           type: text
           label: 
@@ -5393,12 +4769,6 @@ form:
           type: text
           label: 
             fr: Valeur du troisième placement
-        - name: ValeurPlacement3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement4C
           type: text
           label: 
@@ -5407,12 +4777,6 @@ form:
           type: text
           label: 
             fr: Valeur du quatrième placement
-        - name: ValeurPlacement4DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VehiculesOuiC
           type: checkbox
           label: 
@@ -5441,22 +4805,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du premier véhicule
-        - name: VersementVehicule1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule1C
           type: text
           label: 
             fr: Valeur marchande du premier véhicule
-        - name: ValeurVehicule1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule2C
           type: text
           label: 
@@ -5477,22 +4829,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du deuxième véhicule
-        - name: VersementVehicule2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule2C
           type: text
           label: 
             fr: Valeur marchande du deuxième véhicule
-        - name: ValeurVehicule2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule3C
           type: text
           label: 
@@ -5513,22 +4853,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du troisième véhicule
-        - name: VersementVehicule3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule3C
           type: text
           label: 
             fr: Valeur marchande du troisième véhicule
-        - name: ValeurVehicule3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule4C
           type: text
           label: 
@@ -5549,22 +4877,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du quatrième véhicule
-        - name: VersementVehicule4DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule4C
           type: text
           label: 
             fr: Valeur marchande du quatrième véhicule
-        - name: ValeurVehicule4DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BiensImmoOuiC
           type: checkbox
           label: 
@@ -5589,32 +4905,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au premier bien immobilier
-        - name: DetteBienImmo1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo1C
           type: text
           label: 
             fr: Versement mensuel du premier bien immobilier
-        - name: VersementBienImmo1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo1C
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienImmo2C
           type: text
           label: 
@@ -5631,32 +4929,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au deuxième bien immobilier
-        - name: DetteBienImmo2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo2C
           type: text
           label: 
             fr: Versement mensuel du deuxième bien immobilier
-        - name: VersementBienImmo2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo2C
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienImmo3C
           type: text
           label: 
@@ -5673,32 +4953,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au troisième bien immobilier
-        - name: DetteBienImmo3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo3C
           type: text
           label: 
             fr: Versement mensuel du troisième bien immobilier
-        - name: VersementBienImmo3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo3C
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BiensMobiliersOuiC
           type: checkbox
           label: 
@@ -5715,12 +4977,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du premier bien mobilier
-        - name: ValeurBienMobilier1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienMobilier2C
           type: text
           label: 
@@ -5729,12 +4985,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du deuxième bien mobilier
-        - name: ValeurBienMobilier2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienMobilier3C
           type: text
           label: 
@@ -5743,12 +4993,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du troisième bien mobilier
-        - name: ValeurBienMobilier3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: EntrepriseOuiC
           type: checkbox
           label: 
@@ -5797,12 +5041,6 @@ form:
           type: text
           label: 
             fr: Valeur du premier bien ou avoir liquide
-        - name: ValeurBienVendu1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Bienvendu2C
           type: text
           label: 
@@ -5815,12 +5053,6 @@ form:
           type: text
           label: 
             fr: Valeur du deuxième bien ou avoir liquide
-        - name: ValeurBienVendu2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: AssuranceVieOuiC
           type: checkbox
           label: 
@@ -5857,12 +5089,6 @@ form:
           type: text
           label: 
             fr: Montant des sommes dues
-        - name: MontantSommesDuesDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DettesOuiC
           type: checkbox
           label: 
@@ -5879,22 +5105,10 @@ form:
           type: text
           label: 
             fr: Montant de la première dette
-        - name: MontantDette1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementDette1C
           type: text
           label: 
             fr: Versement mensuel de la première dette
-        - name: VersementDette1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DescriptionDette2C
           type: text
           label: 
@@ -5903,22 +5117,10 @@ form:
           type: text
           label: 
             fr: Montant de la deuxième dette
-        - name: MontantDette2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementDette2C
           type: text
           label: 
             fr: Versement mensuel de la deuxième dette
-        - name: VersementDette2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: reconnais
           type: checkbox
           label: 
