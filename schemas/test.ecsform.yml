@@ -229,6 +229,11 @@ form:
             fr: même s'il est confidentiel
           validations: 
             max: 10,length
+    # Section 2
+    - section: 
+        fr: Formation
+      id: formation
+      components:
         - name: Oui6
           type: radio
           label: 
@@ -642,6 +647,11 @@ form:
             fr: Nombre d'années d'études réussies
           validations: 
             max: 2,length
+    # Section 3
+    - section: 
+        fr: Actuellement
+      id: actuel
+      components:
         - name: Req01-Travaille
           type: radio
           label: 
