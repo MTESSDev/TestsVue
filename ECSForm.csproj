@@ -50,9 +50,6 @@
     <None Update="form.vue">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="form.yml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

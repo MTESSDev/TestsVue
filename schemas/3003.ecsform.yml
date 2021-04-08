@@ -95,8 +95,12 @@ form:
           validations: 
             required: trim
           options: 
-            Feminim: Féminin 
-            Masculin: Masculin 
+            Feminim: 
+              fr: Féminin 
+              en: 
+            Masculin: 
+              fr: Masculin 
+              en: 
         - name: Req-00-Langue
           type: checkbox
           label: 
@@ -104,8 +108,12 @@ form:
           validations: 
             required: trim
           options: 
-            Francais: Français 
-            Anglais: Anglais 
+            Francais: 
+              fr: Français 
+              en: 
+            Anglais: 
+              fr: Anglais 
+              en: 
         - name: Req00-NeQC
           type: radio
           label: 
@@ -132,13 +140,27 @@ form:
           validations: 
             required: trim
           options: 
-            Celibataire: Célibataire 
-            Marie: Marié ou uni civilement 
-            SepareLegalement: Séparé légalement 
-            SepareSansJugement: Séparé sans jugement 
-            ConjointFait: Conjoint de fait 
-            ConjointSurvivant: Conjoint survivant 
-            Divorce: Divorcé ou dissolution d'union civile 
+            Celibataire: 
+              fr: Célibataire 
+              en: 
+            Marie: 
+              fr: Marié ou uni civilement 
+              en: 
+            SepareLegalement: 
+              fr: Séparé légalement 
+              en: 
+            SepareSansJugement: 
+              fr: Séparé sans jugement 
+              en: 
+            ConjointFait: 
+              fr: Conjoint de fait 
+              en: 
+            ConjointSurvivant: 
+              fr: Conjoint survivant 
+              en: 
+            Divorce: 
+              fr: Divorcé ou dissolution d'union civile 
+              en: 
         - name: date5_Req-00
           type: date
           label: 
@@ -169,8 +191,6 @@ form:
           type: checkbox
           label: 
             fr: Autre situation
-          options: 
-            Req: Autre situation
         - name: autre2_Req-00
           type: text
           label: 
@@ -240,14 +260,10 @@ form:
           type: checkbox
           label: 
             fr: à temps plein
-          options: 
-            Req_00: à temps plein
         - name: TPartiel
           type: checkbox
           label: 
             fr: à temps partiel
-          options: 
-            Req_00: à temps partiel
         - name: Diplome_Req-00
           type: text
           label: 
@@ -267,26 +283,18 @@ form:
           type: checkbox
           label: 
             fr: 30 heures ou plus par semaine
-          options: 
-            Req_00: À temps plein 
         - name: Emploi2
           type: checkbox
           label: 
             fr: moins de 30 heures par semaine
-          options: 
-            Req_00: À temps partiel 
         - name: Emploi3
           type: checkbox
           label: 
             fr: Sur appel
-          options: 
-            Req_00: Sur appel
         - name: Emploi4
           type: checkbox
           label: 
             fr: Travail autonome
-          options: 
-            Req_00: Travail autonome
         - name: Req-00-Parlees
           type: checkbox
           label: 
@@ -294,9 +302,15 @@ form:
           validations: 
             required: trim
           options: 
-            Francais: Français 
-            Anglais: Anglais 
-            Autre: Autre, précisez. 
+            Francais: 
+              fr: Français 
+              en: 
+            Anglais: 
+              fr: Anglais 
+              en: 
+            Autre: 
+              fr: Autre, précisez. 
+              en: 
         - name: languesparlees_Req-00
           type: text
           label: 
@@ -308,9 +322,15 @@ form:
           validations: 
             required: trim
           options: 
-            Francais: Français 
-            Anglais: Anglais 
-            Autre: Autre précisez. 
+            Francais: 
+              fr: Français 
+              en: 
+            Anglais: 
+              fr: Anglais 
+              en: 
+            Autre: 
+              fr: Autre précisez. 
+              en: 
         - name: languesecrites_Req-00
           type: text
           label: 
@@ -379,20 +399,14 @@ form:
           type: checkbox
           label: 
             fr: Amérindien vivnat dans une réserve
-          options: 
-            Req_00: Amérindien vivnat dans une réserve
         - name: PremiereNation2
           type: checkbox
           label: 
             fr: Amérindien vivant hors-réserve
-          options: 
-            Req_00: Amérindien vivant hors-réserve
         - name: PremiereNation3
           type: checkbox
           label: 
             fr: Inuit
-          options: 
-            Req_00: Inuit
         - name: Req-00-Minorite
           type: radio
           label: 
@@ -434,8 +448,6 @@ form:
           type: checkbox
           label: 
             fr: Cochez ici si vous ne cvoulez pas vous inscrire au dépôt direct.
-          options: 
-            Req_00: Cochez ici si vous ne cvoulez pas vous inscrire au dépôt direct.
         - name: Req00-AffirmationS
           type: checkbox
           label: 
@@ -496,26 +508,18 @@ form:
           type: checkbox
           label: 
             fr: Féminin
-          options: 
-            Conj_00: Féminin
         - name: Masculin
           type: checkbox
           label: 
             fr: Masculin
-          options: 
-            Conj_00: Masculin
         - name: Francais
           type: checkbox
           label: 
             fr: Français
-          options: 
-            Conj_00: Français
         - name: Anglais
           type: checkbox
           label: 
             fr: Anglais
-          options: 
-            Conj_00: Anglais
         - name: Oui1
           type: radio
           label: 
@@ -537,44 +541,30 @@ form:
           type: checkbox
           label: 
             fr: Célibataire
-          options: 
-            Conj_00: Célibataire
         - name: Marital2
           type: checkbox
           label: 
             fr: Marié ou uni civilement
-          options: 
-            Conj_00: Marié ou uni civilement
         - name: Marital3
           type: checkbox
           label: 
             fr: Séparé légalement
-          options: 
-            Conj_00: Séparé légalement
         - name: Marital4
           type: checkbox
           label: 
             fr: Séparé sans jugement
-          options: 
-            Conj_00: Séparé sans jugement
         - name: Marital5
           type: checkbox
           label: 
             fr: Conjoint de fait
-          options: 
-            Conj_00: Conjoint de fait
         - name: Marital6
           type: checkbox
           label: 
             fr: Conjoint survivant
-          options: 
-            Conj_00: Conjoint survivant
         - name: Marital7
           type: checkbox
           label: 
             fr: Divorcé ou dissolution d'union civile
-          options: 
-            Conj_00: Divorcé ou dissolution d'union civile
         - name: date5_Conj-00
           type: date
           label: 
@@ -603,8 +593,6 @@ form:
           type: checkbox
           label: 
             fr: Autre situation
-          options: 
-            Conj_00: Autre situation
         - name: autre2_Conj-00
           type: text
           label: 
@@ -668,14 +656,10 @@ form:
           type: checkbox
           label: 
             fr: à temps plein
-          options: 
-            Conj_00: à temps plein
         - name: TPartiel
           type: checkbox
           label: 
             fr: à temps partiel
-          options: 
-            Conj_00: à temps partiel
         - name: Diplome_Conj-00
           type: text
           label: 
@@ -693,44 +677,30 @@ form:
           type: checkbox
           label: 
             fr: 30 heures ou plus par semaine
-          options: 
-            Conj_00: À temps plein 
         - name: Emploi2
           type: checkbox
           label: 
             fr: moins de 30 heures par semaine
-          options: 
-            Conj_00: À temps partiel 
         - name: Emploi3
           type: checkbox
           label: 
             fr: Sur appel
-          options: 
-            Conj_00: Sur appel
         - name: Emploi4
           type: checkbox
           label: 
             fr: Travail autonome
-          options: 
-            Conj_00: Travail autonome
         - name: Parler1
           type: checkbox
           label: 
             fr: Français
-          options: 
-            Conj_00: Français
         - name: Parler2
           type: checkbox
           label: 
             fr: Anglais
-          options: 
-            Conj_00: Anglais
         - name: Parler3
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Conj_00: Autre, précisez.
         - name: languesparlees_Conj-00
           type: text
           label: 
@@ -739,20 +709,14 @@ form:
           type: checkbox
           label: 
             fr: Français
-          options: 
-            Conj_00: Français
         - name: Ecrit2
           type: checkbox
           label: 
             fr: Anglais
-          options: 
-            Conj_00: Anglais
         - name: Ecrit3
           type: checkbox
           label: 
             fr: Autre précisez.
-          options: 
-            Conj_00: Autre précisez.
         - name: languesecrites_Conj-00
           type: text
           label: 
@@ -809,20 +773,14 @@ form:
           type: checkbox
           label: 
             fr: Amérindien vivnat dans une réserve
-          options: 
-            Conj_00: Amérindien vivnat dans une réserve
         - name: PremiereNation2
           type: checkbox
           label: 
             fr: Amérindien vivant hors-réserve
-          options: 
-            Conj_00: Amérindien vivant hors-réserve
         - name: PremiereNation3
           type: checkbox
           label: 
             fr: Inuit
-          options: 
-            Conj_00: Inuit
         - name: Oui14
           type: radio
           label: 
@@ -832,44 +790,30 @@ form:
           type: checkbox
           label: 
             fr: J'affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
-          options: 
-            Conj: J'affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
         - name: engagementInfo
           type: checkbox
           label: 
             fr: Je m'engage à informer sans délai le ministère du Travail, de l'Emploi et de la Solidarité sociale de toute modification à ces renseignements.
-          options: 
-            Conj: Je m'engage à informer sans délai le ministère du Travail, de l'Emploi et de la Solidarité sociale de toute modification à ces renseignements.
         - name: envoiElec
           type: checkbox
           label: 
             fr: Je souhaite envoyer ma demande électroniquement.
-          options: 
-            Conj: Je souhaite envoyer ma demande électroniquement.
         - name: Raison1
           type: checkbox
           label: 
             fr: Aide à l'emploi
-          options: 
-            Req_01: Aide à l'emploi
         - name: Raison2
           type: checkbox
           label: 
             fr: Retour aux études
-          options: 
-            Req_01: Retour aux études
         - name: Raison3
           type: checkbox
           label: 
             fr: Dirigé par un employeur ou par un organisme
-          options: 
-            Req_01: Dirigé par un employeur ou par un organisme
         - name: Raison4
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Req_01: Autre, précisez.
         - name: autre1_Req-01
           type: text
           label: 
@@ -905,20 +849,14 @@ form:
           type: checkbox
           label: 
             fr: Assurance-emploi
-          options: 
-            Req_01: Assurance-emploi
         - name: Prestation3
           type: checkbox
           label: 
             fr: "ex. : CNESST, SAAQ, Retraite Québec, prêts et bourses, etc."
-          options: 
-            Req_01: Autres , précisez.
         - name: Prestation2
           type: checkbox
           label: 
             fr: Régime québécois d'assurance parentale
-          options: 
-            Req_01: Régime québécois d'assurance parentale
         - name: autreprestations_Req-01
           type: text
           label: 
@@ -943,8 +881,6 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DES"
-          options: 
-            Req_01: "Diplôme obtenu : DES"
         - name: date3_Req-01
           type: month
           label: 
@@ -963,20 +899,14 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : AEP"
-          options: 
-            Req_01: "Diplôme obtenu : AEP"
         - name: coche6
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DEP"
-          options: 
-            Req_01: "Diplôme obtenu : DEP"
         - name: coche8
           type: checkbox
           label: 
             fr: "Diplôme obtenu : ASP"
-          options: 
-            Req_01: "Diplôme obtenu : ASP"
         - name: date4_Req-01
           type: month
           label: 
@@ -1009,20 +939,14 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DEC"
-          options: 
-            Req_01: "Diplôme obtenu : DEC"
         - name: coche10
           type: checkbox
           label: 
             fr: "Diplôme obtenu : AEC"
-          options: 
-            Req_01: "Diplôme obtenu : AEC"
         - name: coche12
           type: checkbox
           label: 
             fr: "Diplôme obtenu : CEC"
-          options: 
-            Req_01: "Diplôme obtenu : CEC"
         - name: date6_Req-01
           type: month
           label: 
@@ -1041,26 +965,18 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : CERT"
-          options: 
-            Req_01: "Diplôme obtenu : CERT"
         - name: coche15
           type: checkbox
           label: 
             fr: "Diplôme obtenu : BAC"
-          options: 
-            Req_01: "Diplôme obtenu : BAC"
         - name: coche16
           type: checkbox
           label: 
             fr: "Diplôme obtenu : MA"
-          options: 
-            Req_01: "Diplôme obtenu : MA"
         - name: coche17
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DOC"
-          options: 
-            Req_01: "Diplôme obtenu : DOC"
         - name: date7_Req-01
           type: month
           label: 
@@ -1132,50 +1048,34 @@ form:
           type: checkbox
           label: 
             fr: Manque de travail
-          options: 
-            Req_01: Manque de travail
         - name: RaisonEmploi1-2
           type: checkbox
           label: 
             fr: Congédiement
-          options: 
-            Req_01: Congédiement
         - name: RaisonEmploi1-3
           type: checkbox
           label: 
             fr: Problème de santé
-          options: 
-            Req_01: Problème de santé
         - name: RaisonEmploi1-4
           type: checkbox
           label: 
             fr: Abandon de l'emploi
-          options: 
-            Req_01: Abandon de l'emploi
         - name: RaisonEmploi1-5
           type: checkbox
           label: 
             fr: Changement d'emploi
-          options: 
-            Req_01: Changement d'emploi
         - name: RaisonEmploi1-6
           type: checkbox
           label: 
             fr: Fermeture de l'entreprise
-          options: 
-            Req_01: Fermeture de l'entreprise
         - name: RaisonEmploi1-7
           type: checkbox
           label: 
             fr: Naissance ou prise en charge d'un enfant
-          options: 
-            Req_01: Naissance ou prise en charge d'un enfant
         - name: RaisonEmploi1-8
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Req_01: Autre, précisez.
         - name: autre7_Req-01
           type: text
           label: 
@@ -1214,50 +1114,34 @@ form:
           type: checkbox
           label: 
             fr: Manque de travail
-          options: 
-            Req_01: Manque de travail
         - name: RaisonEmploi2-2
           type: checkbox
           label: 
             fr: Congédiement
-          options: 
-            Req_01: Congédiement
         - name: RaisonEmploi2-3
           type: checkbox
           label: 
             fr: Problème de santé
-          options: 
-            Req_01: Problème de santé
         - name: RaisonEmploi2-4
           type: checkbox
           label: 
             fr: Abandon de l'emploi
-          options: 
-            Req_01: Abandon de l'emploi
         - name: RaisonEmploi2-5
           type: checkbox
           label: 
             fr: Changement d'emploi
-          options: 
-            Req_01: Changement d'emploi
         - name: RaisonEmploi2-6
           type: checkbox
           label: 
             fr: Fermeture de l'entreprise
-          options: 
-            Req_01: Fermeture de l'entreprise
         - name: RaisonEmploi2-7
           type: checkbox
           label: 
             fr: Naissance ou prise en charge d'un enfant
-          options: 
-            Req_01: Naissance ou prise en charge d'un enfant
         - name: RaisonEmploi2-8
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Req_01: Autre, précisez.
         - name: autre8_Req-01
           type: text
           label: 
@@ -1312,16 +1196,26 @@ form:
           label: 
             fr: à temps plein
           options: 
-            TempsPlein: à temps plein
-            TempsPartiel: à temps plein
+            TempsPlein: 
+              fr: à temps plein
+              en: 
+            TempsPartiel: 
+              fr: à temps plein
+              en: 
         - name: Req01-OuiTempsPartiel
           type: checkbox
           label: 
             fr: temps partiel de jour
           options: 
-            Jour: temps partiel de jour
-            Soir: temps partiel de Soir
-            Nuit: temps partiel de nuit
+            Jour: 
+              fr: temps partiel de jour
+              en: 
+            Soir: 
+              fr: temps partiel de Soir
+              en: 
+            Nuit: 
+              fr: temps partiel de nuit
+              en: 
         - name: raison_Req-01
           type: text
           label: 
@@ -1348,8 +1242,6 @@ form:
           type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 1
-          options: 
-            Req_01: J'ai de l'expérience pour l'emploi 1
         - name: emploisrecherche2_Req-01
           type: text
           label: 
@@ -1358,26 +1250,18 @@ form:
           type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 2
-          options: 
-            Req_01: J'ai de l'expérience pour l'emploi 2
         - name: travail1
           type: checkbox
           label: 
             fr: ma localité
-          options: 
-            Req_01: ma localité
         - name: travail2
           type: checkbox
           label: 
             fr: ma région
-          options: 
-            Req_01: ma région
         - name: travail3
           type: checkbox
           label: 
             fr: autre, précisez.
-          options: 
-            Req_01: autre, précisez.
         - name: region_Req-01
           type: text
           label: 
@@ -1404,20 +1288,14 @@ form:
           type: checkbox
           label: 
             fr: Aide à l'emploi
-          options: 
-            Conj_01: Aide à l'emploi
         - name: Raison2
           type: checkbox
           label: 
             fr: Retour aux études
-          options: 
-            Conj_01: Retour aux études
         - name: Raison3
           type: checkbox
           label: 
             fr: Dirigé par un employeur ou par un organisme
-          options: 
-            Conj_01: Dirigé par un employeur ou par un organisme
         - name: Raison4-01
           type: checkbox
           label: 
@@ -1451,26 +1329,18 @@ form:
           type: checkbox
           label: 
             fr: Recevez-vous des prestations?
-          options: 
-            Conj_01: Non 
         - name: Prestation1
           type: checkbox
           label: 
             fr: Assurance-emploi
-          options: 
-            Conj_01: Assurance-emploi
         - name: Prestation3
           type: checkbox
           label: 
             fr: "ex. : CNESST, SAAQ, Retraite Québec, prêts et bourses, etc."
-          options: 
-            Conj_01: Autres , précisez.
         - name: Prestation2
           type: checkbox
           label: 
             fr: Régime québécois d'assurance parentale
-          options: 
-            Conj_01: Régime québécois d'assurance parentale
         - name: autreprestations_Conj-01
           type: text
           label: 
@@ -1495,8 +1365,6 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DES"
-          options: 
-            Conj_01: "Diplôme obtenu : DES"
         - name: date3_Conj-01
           type: month
           label: 
@@ -1515,20 +1383,14 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : AEP"
-          options: 
-            Conj_01: "Diplôme obtenu : AEP"
         - name: coche6
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DEP"
-          options: 
-            Conj_01: "Diplôme obtenu : DEP"
         - name: coche8
           type: checkbox
           label: 
             fr: "Diplôme obtenu : ASP"
-          options: 
-            Conj_01: "Diplôme obtenu : ASP"
         - name: date4_Conj-01
           type: month
           label: 
@@ -1561,20 +1423,14 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DEC"
-          options: 
-            Conj_01: "Diplôme obtenu : DEC"
         - name: coche10
           type: checkbox
           label: 
             fr: "Diplôme obtenu : AEC"
-          options: 
-            Conj_01: "Diplôme obtenu : AEC"
         - name: coche12
           type: checkbox
           label: 
             fr: "Diplôme obtenu : CEC"
-          options: 
-            Conj_01: "Diplôme obtenu : CEC"
         - name: date6_Conj-01
           type: month
           label: 
@@ -1593,26 +1449,18 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : CERT"
-          options: 
-            Conj_01: "Diplôme obtenu : CERT"
         - name: coche15
           type: checkbox
           label: 
             fr: "Diplôme obtenu : BAC"
-          options: 
-            Conj_01: "Diplôme obtenu : BAC"
         - name: coche16
           type: checkbox
           label: 
             fr: "Diplôme obtenu : MA"
-          options: 
-            Conj_01: "Diplôme obtenu : MA"
         - name: coche17
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DOC"
-          options: 
-            Conj_01: "Diplôme obtenu : DOC"
         - name: date7_Conj-01
           type: month
           label: 
@@ -1682,50 +1530,34 @@ form:
           type: checkbox
           label: 
             fr: Manque de travail
-          options: 
-            Conj_01: Manque de travail
         - name: RaisonEmploi1-2
           type: checkbox
           label: 
             fr: Congédiement
-          options: 
-            Conj_01: Congédiement
         - name: RaisonEmploi1-3
           type: checkbox
           label: 
             fr: Problème de santé
-          options: 
-            Conj_01: Problème de santé
         - name: RaisonEmploi1-4
           type: checkbox
           label: 
             fr: Abandon de l'emploi
-          options: 
-            Conj_01: Abandon de l'emploi
         - name: RaisonEmploi1-5
           type: checkbox
           label: 
             fr: Changement d'emploi
-          options: 
-            Conj_01: Changement d'emploi
         - name: RaisonEmploi1-6
           type: checkbox
           label: 
             fr: Fermeture de l'entreprise
-          options: 
-            Conj_01: Fermeture de l'entreprise
         - name: RaisonEmploi1-7
           type: checkbox
           label: 
             fr: Naissance ou prise en charge d'un enfant
-          options: 
-            Conj_01: Naissance ou prise en charge d'un enfant
         - name: RaisonEmploi1-8
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Conj_01: Autre, précisez.
         - name: autre7_Conj-01
           type: text
           label: 
@@ -1764,50 +1596,34 @@ form:
           type: checkbox
           label: 
             fr: Manque de travail
-          options: 
-            Conj_01: Manque de travail
         - name: RaisonEmploi2-2
           type: checkbox
           label: 
             fr: Congédiement
-          options: 
-            Conj_01: Congédiement
         - name: RaisonEmploi2-3
           type: checkbox
           label: 
             fr: Problème de santé
-          options: 
-            Conj_01: Problème de santé
         - name: RaisonEmploi2-4
           type: checkbox
           label: 
             fr: Abandon de l'emploi
-          options: 
-            Conj_01: Abandon de l'emploi
         - name: RaisonEmploi2-5
           type: checkbox
           label: 
             fr: Changement d'emploi
-          options: 
-            Conj_01: Changement d'emploi
         - name: RaisonEmploi2-6
           type: checkbox
           label: 
             fr: Fermeture de l'entreprise
-          options: 
-            Conj_01: Fermeture de l'entreprise
         - name: RaisonEmploi2-7
           type: checkbox
           label: 
             fr: Naissance ou prise en charge d'un enfant
-          options: 
-            Conj_01: Naissance ou prise en charge d'un enfant
         - name: RaisonEmploi2-8
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Conj_01: Autre, précisez.
         - name: autre8_Conj-01
           type: text
           label: 
@@ -1861,32 +1677,22 @@ form:
           type: checkbox
           label: 
             fr: à temps plein
-          options: 
-            Conj_01: à temps plein
         - name: Partiel
           type: checkbox
           label: 
             fr: à temps partiel
-          options: 
-            Conj_01: à temps partiel
         - name: Jour
           type: checkbox
           label: 
             fr: temps partiel de jour
-          options: 
-            Conj_01: temps partiel de jour
         - name: Soir
           type: checkbox
           label: 
             fr: temps partiel de Soir
-          options: 
-            Conj_01: temps partiel de Soir
         - name: Nuit
           type: checkbox
           label: 
             fr: temps partiel de nuit
-          options: 
-            Conj_01: temps partiel de nuit
         - name: raison_Conj-01
           type: text
           label: 
@@ -1913,8 +1719,6 @@ form:
           type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 1
-          options: 
-            Conj_01: J'ai de l'expérience pour l'emploi 1
         - name: emploisrecherche2_Conj-01
           type: text
           label: 
@@ -1923,26 +1727,18 @@ form:
           type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 2
-          options: 
-            Conj_01: J'ai de l'expérience pour l'emploi 2
         - name: travail1
           type: checkbox
           label: 
             fr: ma localité
-          options: 
-            Conj_01: ma localité
         - name: travail2
           type: checkbox
           label: 
             fr: ma région
-          options: 
-            Conj_01: ma région
         - name: travail3
           type: checkbox
           label: 
             fr: autre, précisez.
-          options: 
-            Conj_01: autre, précisez.
         - name: region_Conj-01
           type: text
           label: 
@@ -1951,20 +1747,14 @@ form:
           type: checkbox
           label: 
             fr: J’affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
-          options: 
-            Conj: J’affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
         - name: engagementInfo
           type: checkbox
           label: 
             fr: Je m’engage à informer sans délai le Ministère de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail.
-          options: 
-            Conj: Je m’engage à informer sans délai le Ministère de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail.
         - name: envoiElec
           type: checkbox
           label: 
             fr: Je souhaite envoyer ma demande électroniquement.
-          options: 
-            Conj: Je souhaite envoyer ma demande électroniquement.
         - name: 02-RaisonDemande
           type: checkbox
           label: 
@@ -1972,11 +1762,21 @@ form:
           validations: 
             required: trim
           options: 
-            PerteEmploiSansAss: Perte d’emploi sans droit à l’assurance-emploi 
-            PerteEmploiAttAss: Perte d’emploi et en attente de prestations d’assurance-emploi ou du Régime québécois d'assurance parentale 
-            FinPrestations: Fin des prestations d'assurance-emploi ou du Régime québécois d'assurance parentale 
-            FinEtudes: Fin des études à temps plein 
-            PerteConj: Perte du conjoint, précisez 
+            PerteEmploiSansAss: 
+              fr: Perte d’emploi sans droit à l’assurance-emploi 
+              en: 
+            PerteEmploiAttAss: 
+              fr: Perte d’emploi et en attente de prestations d’assurance-emploi ou du Régime québécois d'assurance parentale 
+              en: 
+            FinPrestations: 
+              fr: Fin des prestations d'assurance-emploi ou du Régime québécois d'assurance parentale 
+              en: 
+            FinEtudes: 
+              fr: Fin des études à temps plein 
+              en: 
+            PerteConj: 
+              fr: Perte du conjoint, précisez 
+              en: 
         - name: PerteConjoint1
           type: checkbox
           label: 
@@ -1989,9 +1789,20 @@ form:
           type: checkbox
           label: 
             fr: Divorce
-            Supplement: En supplément à un autre revenu 
-            AttDecision: En attente d'une décision faisant suite à un recours 
-            Sortie: Sortie d'un établissement de santé ou d'un établissement de détention, précisez 
+        - name: 02-RaisonDemande
+          type: checkbox
+          label: 
+            fr: Raison de la demande
+          options: 
+            Supplement: 
+              fr: En supplément à un autre revenu 
+              en: 
+            AttDecision: 
+              fr: En attente d'une décision faisant suite à un recours 
+              en: 
+            Sortie: 
+              fr: Sortie d'un établissement de santé ou d'un établissement de détention, précisez 
+              en: 
         - name: Sortie1
           type: checkbox
           label: 
@@ -2000,10 +1811,23 @@ form:
           type: checkbox
           label: 
             fr: Sortie d'un établissement de détention
-            RembFraisFuneraires: Remboursement de frais funéraires 
-            Naissance: Naissance ou prise en charge d'un enfant 
-            ProblemeSante: Problèmes de santé 
-            Autre: Autres, précisez 
+        - name: 02-RaisonDemande
+          type: checkbox
+          label: 
+            fr: Raison de la demande
+          options: 
+            RembFraisFuneraires: 
+              fr: Remboursement de frais funéraires 
+              en: 
+            Naissance: 
+              fr: Naissance ou prise en charge d'un enfant 
+              en: 
+            ProblemeSante: 
+              fr: Problèmes de santé 
+              en: 
+            Autre: 
+              fr: Autres, précisez 
+              en: 
         - name: Autres1
           type: text
           label: 
@@ -2370,12 +2194,24 @@ form:
           validations: 
             required: trim
           options: 
-            Propriete: Votre propriété 
-            Logement: Logement 
-            LogementSub: Logement subventionné, y compris un HLM ou une coopérative d'habitation 
-            Chambre: Chambre ou pension 
-            RessourceTypeFam: Ressource de type familial, Centre hospitalier ou ressource intermédiaire 
-            Autre: Autre, précisez 
+            Propriete: 
+              fr: Votre propriété 
+              en: 
+            Logement: 
+              fr: Logement 
+              en: 
+            LogementSub: 
+              fr: Logement subventionné, y compris un HLM ou une coopérative d'habitation 
+              en: 
+            Chambre: 
+              fr: Chambre ou pension 
+              en: 
+            RessourceTypeFam: 
+              fr: Ressource de type familial, Centre hospitalier ou ressource intermédiaire 
+              en: 
+            Autre: 
+              fr: Autre, précisez 
+              en: 
         - name: AutreHabitation
           type: text
           label: 
@@ -2482,22 +2318,47 @@ form:
           label: 
             fr: Féminin
           options: 
-            Sexe1: Féminin
-            Sexe2: Masculin
+            Sexe1: 
+              fr: Féminin
+              en: 
+            Sexe2: 
+              fr: Masculin
+              en: 
         - name: E1_NAM
           type: text
           label: 
             fr: Numéro d'assurance maladie de l'enfant 1
           validations: 
             max: 12,length
-            Etude1: Prématernelle
-            Etude2: Maternelle
-            Etude3: Primaire
-            Etude4: Secondaire général
-            Etude5: Secondaire professionnel
-            Etude6: Collégial
-            Etude7: Universitaire
-            Etude8: Autre, précisez.
+        - name: E1
+          type: checkbox
+          label: 
+            fr: Prématernelle
+          options: 
+            Etude1: 
+              fr: Prématernelle
+              en: 
+            Etude2: 
+              fr: Maternelle
+              en: 
+            Etude3: 
+              fr: Primaire
+              en: 
+            Etude4: 
+              fr: Secondaire général
+              en: 
+            Etude5: 
+              fr: Secondaire professionnel
+              en: 
+            Etude6: 
+              fr: Collégial
+              en: 
+            Etude7: 
+              fr: Universitaire
+              en: 
+            Etude8: 
+              fr: Autre, précisez.
+              en: 
         - name: E1_AutreEtude
           type: text
           label: 
@@ -2506,8 +2367,11 @@ form:
           type: text
           label: 
             fr: si l'enfant est âgé de 16 ans ou plus
-            HandicapeOui: Oui, l'enfant 1 est une personne handicapée.
-            HandicapeNon: Non, l'enfant 1 n'est pas une personne handicapée
+        - name: E1
+          type: radio
+          label: 
+            fr: Oui, l'enfant 1 est une personne handicapée.
+          options: yesno
         - name: E1_NomPere
           type: text
           label: 
@@ -2516,8 +2380,17 @@ form:
           type: text
           label: 
             fr: Prénom du parent de l'enfant 1
-            P1: Père
-            P11: Mère
+        - name: E1
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P1: 
+              fr: Père
+              en: 
+            P11: 
+              fr: Mère
+              en: 
         - name: E1_NomMere
           type: text
           label: 
@@ -2526,17 +2399,41 @@ form:
           type: text
           label: 
             fr: Prénom de l'autre parent de l'enfant 1
-            P2: Père
-            P22: Mère
-            GardePartageeOui: Oui, je partage la garde de l'enfant 1.
-            GardePartageeNon: Non, je ne partage pas la garde de l'enfant 1.
+        - name: E1
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P2: 
+              fr: Père
+              en: 
+            P21: 
+              fr: Mère
+              en: 
+            GardePartageeOui: 
+              fr: Oui, je partage la garde de l'enfant 1.
+              en: 
+            GardePartageeNon: 
+              fr: Non, je ne partage pas la garde de l'enfant 1.
+              en: 
         - name: E1_NBJoursGarde
           type: text
           label: 
             fr: Indiquez le nombre de jours où vous avez la garde de l'enfant 1. Cochez s'il s'agit de jours par semaine, par mois ou par année.
-            Garde1: Par semaine
-            Garde2: Par mois
-            Garde3: Par année
+        - name: E1
+          type: checkbox
+          label: 
+            fr: Par semaine
+          options: 
+            Garde1: 
+              fr: Par semaine
+              en: 
+            Garde2: 
+              fr: Par mois
+              en: 
+            Garde3: 
+              fr: Par année
+              en: 
         - name: E1_DocumentGarde
           type: text
           label: 
@@ -2559,27 +2456,52 @@ form:
           type: date
           label: 
             fr: Date de naissance de l'enfant 2
-            Sexe1: Féminin
         - name: E2
           type: checkbox
           label: 
-            fr: Masculin
+            fr: Féminin
           options: 
-            Sexe2: Masculin
+            Sexe1: 
+              fr: Féminin
+              en: 
+            Sexe2: 
+              fr: Masculin
+              en: 
         - name: E2_NAM
           type: text
           label: 
             fr: Numéro d'assurance maladie de l'enfant 2
           validations: 
             max: 12,length
-            Etude1: Prématernelle
-            Etude2: Maternelle
-            Etude3: Primaire
-            Etude4: Secondaire général
-            Etude5: Secondaire professionnel
-            Etude6: Collégial
-            Etude7: Universitaire
-            Etude8: Autre, précisez.
+        - name: E2
+          type: checkbox
+          label: 
+            fr: Prématernelle
+          options: 
+            Etude1: 
+              fr: Prématernelle
+              en: 
+            Etude2: 
+              fr: Maternelle
+              en: 
+            Etude3: 
+              fr: Primaire
+              en: 
+            Etude4: 
+              fr: Secondaire général
+              en: 
+            Etude5: 
+              fr: Secondaire professionnel
+              en: 
+            Etude6: 
+              fr: Collégial
+              en: 
+            Etude7: 
+              fr: Universitaire
+              en: 
+            Etude8: 
+              fr: Autre, précisez.
+              en: 
         - name: E2_AutreEtude
           type: text
           label: 
@@ -2588,8 +2510,11 @@ form:
           type: text
           label: 
             fr: si l'enfant est âgé de 16 ans ou plus
-            HandicapeOui: Oui, l'enfant 2 est une personne handicapée.
-            HandicapeNon: Non, l'enfant 2 n'est pas une personne handicapée.
+        - name: E2
+          type: radio
+          label: 
+            fr: Oui, l'enfant 2 est une personne handicapée.
+          options: yesno
         - name: E2_NomPere
           type: text
           label: 
@@ -2598,8 +2523,17 @@ form:
           type: text
           label: 
             fr: Prénom du parent de l'enfant 2
-            P1: Père
-            P11: Mère
+        - name: E2
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P1: 
+              fr: Père
+              en: 
+            P11: 
+              fr: Mère
+              en: 
         - name: E2_NomMere
           type: text
           label: 
@@ -2608,17 +2542,41 @@ form:
           type: text
           label: 
             fr: Prénom de l'autre parent de l'enfant 2
-            P2: Père
-            P22: Mère
-            GardePartageeOui: Oui, je partage la garde de l'enfant 2.
-            GardePartageeNon: Non, je ne partage pas la garde de l'enfant 2.
+        - name: E2
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P2: 
+              fr: Père
+              en: 
+            P21: 
+              fr: Mère
+              en: 
+            GardePartageeOui: 
+              fr: Oui, je partage la garde de l'enfant 2.
+              en: 
+            GardePartageeNon: 
+              fr: Non, je ne partage pas la garde de l'enfant 2.
+              en: 
         - name: E2_NBJoursGarde
           type: text
           label: 
             fr: Indiquez le nombre de jours où vous avez la garde de l'enfant 2. Cochez s'il s'agit de jours par semaine, par mois ou par année.
-            Garde1: Par semaine
-            Garde2: Par mois
-            Garde3: Par année
+        - name: E2
+          type: checkbox
+          label: 
+            fr: Par semaine
+          options: 
+            Garde1: 
+              fr: Par semaine
+              en: 
+            Garde2: 
+              fr: Par mois
+              en: 
+            Garde3: 
+              fr: Par année
+              en: 
         - name: E2_DocumentGarde
           type: text
           label: 
@@ -2646,22 +2604,47 @@ form:
           label: 
             fr: Féminin
           options: 
-            Sexe1: Féminin
-            Sexe2: Masculin
+            Sexe1: 
+              fr: Féminin
+              en: 
+            Sexe2: 
+              fr: Masculin
+              en: 
         - name: E3_NAM
           type: text
           label: 
             fr: Numéro d'assurance maladie de l'enfant 3
           validations: 
             max: 12,length
-            Etude1: Prématernelle
-            Etude2: Maternelle
-            Etude3: Primaire
-            Etude4: Secondaire général
-            Etude5: Secondaire professionnel
-            Etude6: Collégial
-            Etude7: Universitaire
-            Etude8: Autre, précisez.
+        - name: E3
+          type: checkbox
+          label: 
+            fr: Prématernelle
+          options: 
+            Etude1: 
+              fr: Prématernelle
+              en: 
+            Etude2: 
+              fr: Maternelle
+              en: 
+            Etude3: 
+              fr: Primaire
+              en: 
+            Etude4: 
+              fr: Secondaire général
+              en: 
+            Etude5: 
+              fr: Secondaire professionnel
+              en: 
+            Etude6: 
+              fr: Collégial
+              en: 
+            Etude7: 
+              fr: Universitaire
+              en: 
+            Etude8: 
+              fr: Autre, précisez.
+              en: 
         - name: E3_AutreEtude
           type: text
           label: 
@@ -2670,8 +2653,11 @@ form:
           type: text
           label: 
             fr: si l'enfant est âgé de 16 ans ou plus
-            HandicapeOui: Oui, l'enfant 3 est une personne handicapée.
-            HandicapeNon: Non, l'enfant 3 n'est pas une personne handicapée.
+        - name: E3
+          type: radio
+          label: 
+            fr: Oui, l'enfant 3 est une personne handicapée.
+          options: yesno
         - name: E3_NomPere
           type: text
           label: 
@@ -2680,8 +2666,17 @@ form:
           type: text
           label: 
             fr: Prénom du parent de l'enfant 3
-            P1: Père
-            P11: Mère
+        - name: E3
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P1: 
+              fr: Père
+              en: 
+            P11: 
+              fr: Mère
+              en: 
         - name: E3_NomMere
           type: text
           label: 
@@ -2690,17 +2685,41 @@ form:
           type: text
           label: 
             fr: Prénom de l'autre parent de l'enfant 3
-            P2: Père
-            P22: Mère
-            GardePartageeOui: Oui, je partage la garde de l'enfant 3.
-            GardePartageeNon: Non, je ne partage pas la garde de l'enfant 3.
+        - name: E3
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P2: 
+              fr: Père
+              en: 
+            P21: 
+              fr: Mère
+              en: 
+            GardePartageeOui: 
+              fr: Oui, je partage la garde de l'enfant 3.
+              en: 
+            GardePartageeNon: 
+              fr: Non, je ne partage pas la garde de l'enfant 3.
+              en: 
         - name: E3_NBJoursGarde
           type: text
           label: 
             fr: Indiquez le nombre de jours où vous avez la garde de l'enfant 3. Cochez s'il s'agit de jours par semaine, par mois ou par année.
-            Garde1: Par semaine
-            Garde2: Par mois
-            Garde3: Par année
+        - name: E3
+          type: checkbox
+          label: 
+            fr: Par semaine
+          options: 
+            Garde1: 
+              fr: Par semaine
+              en: 
+            Garde2: 
+              fr: Par mois
+              en: 
+            Garde3: 
+              fr: Par année
+              en: 
         - name: E3_DocumentGarde
           type: text
           label: 
@@ -5904,26 +5923,18 @@ form:
           type: checkbox
           label: 
             fr: Je reconnais que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire au traitement de ma demande et que des vérifications me concernant peuvent être faites, sans mon consentement, auprès de divers organismes  par la Loi sur l’aide aux personnes et aux familles.
-          options: 
-            Conj: Je reconnais que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire au traitement de ma demande et que des vérifications me concernant peuvent être faites, sans mon consentement, auprès de divers organismes  par la Loi sur l’aide aux personnes et aux familles.
         - name: affirmationS
           type: checkbox
           label: 
             fr: J’affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
-          options: 
-            Conj: J’affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
         - name: engagementInfo
           type: checkbox
           label: 
             fr: Je m’engage à informer sans délai le ministère du Travail, de l’Emploi et de la Solidarité sociale de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail.
-          options: 
-            Conj: Je m’engage à informer sans délai le ministère du Travail, de l’Emploi et de la Solidarité sociale de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail.
         - name: envoiElec
           type: checkbox
           label: 
             fr: Je souhaite envoyer ma demande électroniquement.
-          options: 
-            Conj: Je souhaite envoyer ma demande électroniquement.
         - name: adresse-courriel_Conj-02
           type: text
           label: 
