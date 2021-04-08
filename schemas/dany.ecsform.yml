@@ -114,6 +114,7 @@ form:
             fr: Êtes-vous né au Québec?
           options: yesno
         - name: Req00-Etatcivil #Req00-Etatcivil ça ne fonctionne pas ?!
+          v-if: contenuform.avec_conjoint == 'true'
           type: radio
           #pdfBind: Req00-Etatcivil_Celibataire
           label:

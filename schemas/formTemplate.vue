@@ -16,12 +16,19 @@
                      type="checkbox"
                      label="Keep data ?"></formulate-input>
 
+    <formulate-input name="validAll"
+                     type="checkbox"
+                     label="Valider tout"></formulate-input>
+
     {{# Form.Sections}}
-    <div class="section {{Classes}}" v-if="contenuform.page === '{{Id}}'">
-        <h2>{{i18n section}}</h2>
+    <div v-if="contenuform.validAll === true || contenuform.page == '{{Id}}'">
+        <div class="section {{Classes}}"
+             v-show="contenuform.page == '{{Id}}' && contenuform.validAll === false">
+            <h2>{{i18n section}}</h2>
 
-        {{RecursiveComponents components}}
+            {{RecursiveComponents components}}
 
+        </div>
     </div>
     {{/ Form.Sections}}
 
