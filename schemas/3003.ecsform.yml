@@ -95,8 +95,12 @@ form:
           validations: 
             required: trim
           options: 
-            Feminim: Féminin 
-            Masculin: Masculin 
+            Feminim: 
+              fr: Féminin 
+              en: 
+            Masculin: 
+              fr: Masculin 
+              en: 
         - name: Req-00-Langue
           type: checkbox
           label: 
@@ -104,8 +108,12 @@ form:
           validations: 
             required: trim
           options: 
-            Francais: Français 
-            Anglais: Anglais 
+            Francais: 
+              fr: Français 
+              en: 
+            Anglais: 
+              fr: Anglais 
+              en: 
         - name: Req00-NeQC
           type: radio
           label: 
@@ -132,13 +140,27 @@ form:
           validations: 
             required: trim
           options: 
-            Celibataire: Célibataire 
-            Marie: Marié ou uni civilement 
-            SepareLegalement: Séparé légalement 
-            SepareSansJugement: Séparé sans jugement 
-            ConjointFait: Conjoint de fait 
-            ConjointSurvivant: Conjoint survivant 
-            Divorce: Divorcé ou dissolution d'union civile 
+            Celibataire: 
+              fr: Célibataire 
+              en: 
+            Marie: 
+              fr: Marié ou uni civilement 
+              en: 
+            SepareLegalement: 
+              fr: Séparé légalement 
+              en: 
+            SepareSansJugement: 
+              fr: Séparé sans jugement 
+              en: 
+            ConjointFait: 
+              fr: Conjoint de fait 
+              en: 
+            ConjointSurvivant: 
+              fr: Conjoint survivant 
+              en: 
+            Divorce: 
+              fr: Divorcé ou dissolution d'union civile 
+              en: 
         - name: date5_Req-00
           type: date
           label: 
@@ -169,8 +191,6 @@ form:
           type: checkbox
           label: 
             fr: Autre situation
-          options: 
-            Req: Autre situation
         - name: autre2_Req-00
           type: text
           label: 
@@ -240,14 +260,10 @@ form:
           type: checkbox
           label: 
             fr: à temps plein
-          options: 
-            Req_00: à temps plein
         - name: TPartiel
           type: checkbox
           label: 
             fr: à temps partiel
-          options: 
-            Req_00: à temps partiel
         - name: Diplome_Req-00
           type: text
           label: 
@@ -267,26 +283,18 @@ form:
           type: checkbox
           label: 
             fr: 30 heures ou plus par semaine
-          options: 
-            Req_00: À temps plein 
         - name: Emploi2
           type: checkbox
           label: 
             fr: moins de 30 heures par semaine
-          options: 
-            Req_00: À temps partiel 
         - name: Emploi3
           type: checkbox
           label: 
             fr: Sur appel
-          options: 
-            Req_00: Sur appel
         - name: Emploi4
           type: checkbox
           label: 
             fr: Travail autonome
-          options: 
-            Req_00: Travail autonome
         - name: Req-00-Parlees
           type: checkbox
           label: 
@@ -294,9 +302,15 @@ form:
           validations: 
             required: trim
           options: 
-            Francais: Français 
-            Anglais: Anglais 
-            Autre: Autre, précisez. 
+            Francais: 
+              fr: Français 
+              en: 
+            Anglais: 
+              fr: Anglais 
+              en: 
+            Autre: 
+              fr: Autre, précisez. 
+              en: 
         - name: languesparlees_Req-00
           type: text
           label: 
@@ -308,9 +322,15 @@ form:
           validations: 
             required: trim
           options: 
-            Francais: Français 
-            Anglais: Anglais 
-            Autre: Autre précisez. 
+            Francais: 
+              fr: Français 
+              en: 
+            Anglais: 
+              fr: Anglais 
+              en: 
+            Autre: 
+              fr: Autre précisez. 
+              en: 
         - name: languesecrites_Req-00
           type: text
           label: 
@@ -379,20 +399,14 @@ form:
           type: checkbox
           label: 
             fr: Amérindien vivnat dans une réserve
-          options: 
-            Req_00: Amérindien vivnat dans une réserve
         - name: PremiereNation2
           type: checkbox
           label: 
             fr: Amérindien vivant hors-réserve
-          options: 
-            Req_00: Amérindien vivant hors-réserve
         - name: PremiereNation3
           type: checkbox
           label: 
             fr: Inuit
-          options: 
-            Req_00: Inuit
         - name: Req-00-Minorite
           type: radio
           label: 
@@ -434,8 +448,6 @@ form:
           type: checkbox
           label: 
             fr: Cochez ici si vous ne cvoulez pas vous inscrire au dépôt direct.
-          options: 
-            Req_00: Cochez ici si vous ne cvoulez pas vous inscrire au dépôt direct.
         - name: Req00-AffirmationS
           type: checkbox
           label: 
@@ -496,26 +508,18 @@ form:
           type: checkbox
           label: 
             fr: Féminin
-          options: 
-            Conj_00: Féminin
         - name: Masculin
           type: checkbox
           label: 
             fr: Masculin
-          options: 
-            Conj_00: Masculin
         - name: Francais
           type: checkbox
           label: 
             fr: Français
-          options: 
-            Conj_00: Français
         - name: Anglais
           type: checkbox
           label: 
             fr: Anglais
-          options: 
-            Conj_00: Anglais
         - name: Oui1
           type: radio
           label: 
@@ -537,44 +541,30 @@ form:
           type: checkbox
           label: 
             fr: Célibataire
-          options: 
-            Conj_00: Célibataire
         - name: Marital2
           type: checkbox
           label: 
             fr: Marié ou uni civilement
-          options: 
-            Conj_00: Marié ou uni civilement
         - name: Marital3
           type: checkbox
           label: 
             fr: Séparé légalement
-          options: 
-            Conj_00: Séparé légalement
         - name: Marital4
           type: checkbox
           label: 
             fr: Séparé sans jugement
-          options: 
-            Conj_00: Séparé sans jugement
         - name: Marital5
           type: checkbox
           label: 
             fr: Conjoint de fait
-          options: 
-            Conj_00: Conjoint de fait
         - name: Marital6
           type: checkbox
           label: 
             fr: Conjoint survivant
-          options: 
-            Conj_00: Conjoint survivant
         - name: Marital7
           type: checkbox
           label: 
             fr: Divorcé ou dissolution d'union civile
-          options: 
-            Conj_00: Divorcé ou dissolution d'union civile
         - name: date5_Conj-00
           type: date
           label: 
@@ -603,8 +593,6 @@ form:
           type: checkbox
           label: 
             fr: Autre situation
-          options: 
-            Conj_00: Autre situation
         - name: autre2_Conj-00
           type: text
           label: 
@@ -668,14 +656,10 @@ form:
           type: checkbox
           label: 
             fr: à temps plein
-          options: 
-            Conj_00: à temps plein
         - name: TPartiel
           type: checkbox
           label: 
             fr: à temps partiel
-          options: 
-            Conj_00: à temps partiel
         - name: Diplome_Conj-00
           type: text
           label: 
@@ -693,44 +677,30 @@ form:
           type: checkbox
           label: 
             fr: 30 heures ou plus par semaine
-          options: 
-            Conj_00: À temps plein 
         - name: Emploi2
           type: checkbox
           label: 
             fr: moins de 30 heures par semaine
-          options: 
-            Conj_00: À temps partiel 
         - name: Emploi3
           type: checkbox
           label: 
             fr: Sur appel
-          options: 
-            Conj_00: Sur appel
         - name: Emploi4
           type: checkbox
           label: 
             fr: Travail autonome
-          options: 
-            Conj_00: Travail autonome
         - name: Parler1
           type: checkbox
           label: 
             fr: Français
-          options: 
-            Conj_00: Français
         - name: Parler2
           type: checkbox
           label: 
             fr: Anglais
-          options: 
-            Conj_00: Anglais
         - name: Parler3
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Conj_00: Autre, précisez.
         - name: languesparlees_Conj-00
           type: text
           label: 
@@ -739,20 +709,14 @@ form:
           type: checkbox
           label: 
             fr: Français
-          options: 
-            Conj_00: Français
         - name: Ecrit2
           type: checkbox
           label: 
             fr: Anglais
-          options: 
-            Conj_00: Anglais
         - name: Ecrit3
           type: checkbox
           label: 
             fr: Autre précisez.
-          options: 
-            Conj_00: Autre précisez.
         - name: languesecrites_Conj-00
           type: text
           label: 
@@ -809,20 +773,14 @@ form:
           type: checkbox
           label: 
             fr: Amérindien vivnat dans une réserve
-          options: 
-            Conj_00: Amérindien vivnat dans une réserve
         - name: PremiereNation2
           type: checkbox
           label: 
             fr: Amérindien vivant hors-réserve
-          options: 
-            Conj_00: Amérindien vivant hors-réserve
         - name: PremiereNation3
           type: checkbox
           label: 
             fr: Inuit
-          options: 
-            Conj_00: Inuit
         - name: Oui14
           type: radio
           label: 
@@ -832,44 +790,30 @@ form:
           type: checkbox
           label: 
             fr: J'affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
-          options: 
-            Conj: J'affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
         - name: engagementInfo
           type: checkbox
           label: 
             fr: Je m'engage à informer sans délai le ministère du Travail, de l'Emploi et de la Solidarité sociale de toute modification à ces renseignements.
-          options: 
-            Conj: Je m'engage à informer sans délai le ministère du Travail, de l'Emploi et de la Solidarité sociale de toute modification à ces renseignements.
         - name: envoiElec
           type: checkbox
           label: 
             fr: Je souhaite envoyer ma demande électroniquement.
-          options: 
-            Conj: Je souhaite envoyer ma demande électroniquement.
         - name: Raison1
           type: checkbox
           label: 
             fr: Aide à l'emploi
-          options: 
-            Req_01: Aide à l'emploi
         - name: Raison2
           type: checkbox
           label: 
             fr: Retour aux études
-          options: 
-            Req_01: Retour aux études
         - name: Raison3
           type: checkbox
           label: 
             fr: Dirigé par un employeur ou par un organisme
-          options: 
-            Req_01: Dirigé par un employeur ou par un organisme
         - name: Raison4
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Req_01: Autre, précisez.
         - name: autre1_Req-01
           type: text
           label: 
@@ -905,20 +849,14 @@ form:
           type: checkbox
           label: 
             fr: Assurance-emploi
-          options: 
-            Req_01: Assurance-emploi
         - name: Prestation3
           type: checkbox
           label: 
             fr: "ex. : CNESST, SAAQ, Retraite Québec, prêts et bourses, etc."
-          options: 
-            Req_01: Autres , précisez.
         - name: Prestation2
           type: checkbox
           label: 
             fr: Régime québécois d'assurance parentale
-          options: 
-            Req_01: Régime québécois d'assurance parentale
         - name: autreprestations_Req-01
           type: text
           label: 
@@ -943,8 +881,6 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DES"
-          options: 
-            Req_01: "Diplôme obtenu : DES"
         - name: date3_Req-01
           type: month
           label: 
@@ -963,20 +899,14 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : AEP"
-          options: 
-            Req_01: "Diplôme obtenu : AEP"
         - name: coche6
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DEP"
-          options: 
-            Req_01: "Diplôme obtenu : DEP"
         - name: coche8
           type: checkbox
           label: 
             fr: "Diplôme obtenu : ASP"
-          options: 
-            Req_01: "Diplôme obtenu : ASP"
         - name: date4_Req-01
           type: month
           label: 
@@ -1009,20 +939,14 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DEC"
-          options: 
-            Req_01: "Diplôme obtenu : DEC"
         - name: coche10
           type: checkbox
           label: 
             fr: "Diplôme obtenu : AEC"
-          options: 
-            Req_01: "Diplôme obtenu : AEC"
         - name: coche12
           type: checkbox
           label: 
             fr: "Diplôme obtenu : CEC"
-          options: 
-            Req_01: "Diplôme obtenu : CEC"
         - name: date6_Req-01
           type: month
           label: 
@@ -1041,26 +965,18 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : CERT"
-          options: 
-            Req_01: "Diplôme obtenu : CERT"
         - name: coche15
           type: checkbox
           label: 
             fr: "Diplôme obtenu : BAC"
-          options: 
-            Req_01: "Diplôme obtenu : BAC"
         - name: coche16
           type: checkbox
           label: 
             fr: "Diplôme obtenu : MA"
-          options: 
-            Req_01: "Diplôme obtenu : MA"
         - name: coche17
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DOC"
-          options: 
-            Req_01: "Diplôme obtenu : DOC"
         - name: date7_Req-01
           type: month
           label: 
@@ -1132,50 +1048,34 @@ form:
           type: checkbox
           label: 
             fr: Manque de travail
-          options: 
-            Req_01: Manque de travail
         - name: RaisonEmploi1-2
           type: checkbox
           label: 
             fr: Congédiement
-          options: 
-            Req_01: Congédiement
         - name: RaisonEmploi1-3
           type: checkbox
           label: 
             fr: Problème de santé
-          options: 
-            Req_01: Problème de santé
         - name: RaisonEmploi1-4
           type: checkbox
           label: 
             fr: Abandon de l'emploi
-          options: 
-            Req_01: Abandon de l'emploi
         - name: RaisonEmploi1-5
           type: checkbox
           label: 
             fr: Changement d'emploi
-          options: 
-            Req_01: Changement d'emploi
         - name: RaisonEmploi1-6
           type: checkbox
           label: 
             fr: Fermeture de l'entreprise
-          options: 
-            Req_01: Fermeture de l'entreprise
         - name: RaisonEmploi1-7
           type: checkbox
           label: 
             fr: Naissance ou prise en charge d'un enfant
-          options: 
-            Req_01: Naissance ou prise en charge d'un enfant
         - name: RaisonEmploi1-8
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Req_01: Autre, précisez.
         - name: autre7_Req-01
           type: text
           label: 
@@ -1214,50 +1114,34 @@ form:
           type: checkbox
           label: 
             fr: Manque de travail
-          options: 
-            Req_01: Manque de travail
         - name: RaisonEmploi2-2
           type: checkbox
           label: 
             fr: Congédiement
-          options: 
-            Req_01: Congédiement
         - name: RaisonEmploi2-3
           type: checkbox
           label: 
             fr: Problème de santé
-          options: 
-            Req_01: Problème de santé
         - name: RaisonEmploi2-4
           type: checkbox
           label: 
             fr: Abandon de l'emploi
-          options: 
-            Req_01: Abandon de l'emploi
         - name: RaisonEmploi2-5
           type: checkbox
           label: 
             fr: Changement d'emploi
-          options: 
-            Req_01: Changement d'emploi
         - name: RaisonEmploi2-6
           type: checkbox
           label: 
             fr: Fermeture de l'entreprise
-          options: 
-            Req_01: Fermeture de l'entreprise
         - name: RaisonEmploi2-7
           type: checkbox
           label: 
             fr: Naissance ou prise en charge d'un enfant
-          options: 
-            Req_01: Naissance ou prise en charge d'un enfant
         - name: RaisonEmploi2-8
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Req_01: Autre, précisez.
         - name: autre8_Req-01
           type: text
           label: 
@@ -1312,16 +1196,26 @@ form:
           label: 
             fr: à temps plein
           options: 
-            TempsPlein: à temps plein
-            TempsPartiel: à temps plein
+            TempsPlein: 
+              fr: à temps plein
+              en: 
+            TempsPartiel: 
+              fr: à temps plein
+              en: 
         - name: Req01-OuiTempsPartiel
           type: checkbox
           label: 
             fr: temps partiel de jour
           options: 
-            Jour: temps partiel de jour
-            Soir: temps partiel de Soir
-            Nuit: temps partiel de nuit
+            Jour: 
+              fr: temps partiel de jour
+              en: 
+            Soir: 
+              fr: temps partiel de Soir
+              en: 
+            Nuit: 
+              fr: temps partiel de nuit
+              en: 
         - name: raison_Req-01
           type: text
           label: 
@@ -1348,8 +1242,6 @@ form:
           type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 1
-          options: 
-            Req_01: J'ai de l'expérience pour l'emploi 1
         - name: emploisrecherche2_Req-01
           type: text
           label: 
@@ -1358,26 +1250,18 @@ form:
           type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 2
-          options: 
-            Req_01: J'ai de l'expérience pour l'emploi 2
         - name: travail1
           type: checkbox
           label: 
             fr: ma localité
-          options: 
-            Req_01: ma localité
         - name: travail2
           type: checkbox
           label: 
             fr: ma région
-          options: 
-            Req_01: ma région
         - name: travail3
           type: checkbox
           label: 
             fr: autre, précisez.
-          options: 
-            Req_01: autre, précisez.
         - name: region_Req-01
           type: text
           label: 
@@ -1404,20 +1288,14 @@ form:
           type: checkbox
           label: 
             fr: Aide à l'emploi
-          options: 
-            Conj_01: Aide à l'emploi
         - name: Raison2
           type: checkbox
           label: 
             fr: Retour aux études
-          options: 
-            Conj_01: Retour aux études
         - name: Raison3
           type: checkbox
           label: 
             fr: Dirigé par un employeur ou par un organisme
-          options: 
-            Conj_01: Dirigé par un employeur ou par un organisme
         - name: Raison4-01
           type: checkbox
           label: 
@@ -1451,26 +1329,18 @@ form:
           type: checkbox
           label: 
             fr: Recevez-vous des prestations?
-          options: 
-            Conj_01: Non 
         - name: Prestation1
           type: checkbox
           label: 
             fr: Assurance-emploi
-          options: 
-            Conj_01: Assurance-emploi
         - name: Prestation3
           type: checkbox
           label: 
             fr: "ex. : CNESST, SAAQ, Retraite Québec, prêts et bourses, etc."
-          options: 
-            Conj_01: Autres , précisez.
         - name: Prestation2
           type: checkbox
           label: 
             fr: Régime québécois d'assurance parentale
-          options: 
-            Conj_01: Régime québécois d'assurance parentale
         - name: autreprestations_Conj-01
           type: text
           label: 
@@ -1495,8 +1365,6 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DES"
-          options: 
-            Conj_01: "Diplôme obtenu : DES"
         - name: date3_Conj-01
           type: month
           label: 
@@ -1515,20 +1383,14 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : AEP"
-          options: 
-            Conj_01: "Diplôme obtenu : AEP"
         - name: coche6
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DEP"
-          options: 
-            Conj_01: "Diplôme obtenu : DEP"
         - name: coche8
           type: checkbox
           label: 
             fr: "Diplôme obtenu : ASP"
-          options: 
-            Conj_01: "Diplôme obtenu : ASP"
         - name: date4_Conj-01
           type: month
           label: 
@@ -1561,20 +1423,14 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DEC"
-          options: 
-            Conj_01: "Diplôme obtenu : DEC"
         - name: coche10
           type: checkbox
           label: 
             fr: "Diplôme obtenu : AEC"
-          options: 
-            Conj_01: "Diplôme obtenu : AEC"
         - name: coche12
           type: checkbox
           label: 
             fr: "Diplôme obtenu : CEC"
-          options: 
-            Conj_01: "Diplôme obtenu : CEC"
         - name: date6_Conj-01
           type: month
           label: 
@@ -1593,26 +1449,18 @@ form:
           type: checkbox
           label: 
             fr: "Diplôme obtenu : CERT"
-          options: 
-            Conj_01: "Diplôme obtenu : CERT"
         - name: coche15
           type: checkbox
           label: 
             fr: "Diplôme obtenu : BAC"
-          options: 
-            Conj_01: "Diplôme obtenu : BAC"
         - name: coche16
           type: checkbox
           label: 
             fr: "Diplôme obtenu : MA"
-          options: 
-            Conj_01: "Diplôme obtenu : MA"
         - name: coche17
           type: checkbox
           label: 
             fr: "Diplôme obtenu : DOC"
-          options: 
-            Conj_01: "Diplôme obtenu : DOC"
         - name: date7_Conj-01
           type: month
           label: 
@@ -1682,50 +1530,34 @@ form:
           type: checkbox
           label: 
             fr: Manque de travail
-          options: 
-            Conj_01: Manque de travail
         - name: RaisonEmploi1-2
           type: checkbox
           label: 
             fr: Congédiement
-          options: 
-            Conj_01: Congédiement
         - name: RaisonEmploi1-3
           type: checkbox
           label: 
             fr: Problème de santé
-          options: 
-            Conj_01: Problème de santé
         - name: RaisonEmploi1-4
           type: checkbox
           label: 
             fr: Abandon de l'emploi
-          options: 
-            Conj_01: Abandon de l'emploi
         - name: RaisonEmploi1-5
           type: checkbox
           label: 
             fr: Changement d'emploi
-          options: 
-            Conj_01: Changement d'emploi
         - name: RaisonEmploi1-6
           type: checkbox
           label: 
             fr: Fermeture de l'entreprise
-          options: 
-            Conj_01: Fermeture de l'entreprise
         - name: RaisonEmploi1-7
           type: checkbox
           label: 
             fr: Naissance ou prise en charge d'un enfant
-          options: 
-            Conj_01: Naissance ou prise en charge d'un enfant
         - name: RaisonEmploi1-8
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Conj_01: Autre, précisez.
         - name: autre7_Conj-01
           type: text
           label: 
@@ -1764,50 +1596,34 @@ form:
           type: checkbox
           label: 
             fr: Manque de travail
-          options: 
-            Conj_01: Manque de travail
         - name: RaisonEmploi2-2
           type: checkbox
           label: 
             fr: Congédiement
-          options: 
-            Conj_01: Congédiement
         - name: RaisonEmploi2-3
           type: checkbox
           label: 
             fr: Problème de santé
-          options: 
-            Conj_01: Problème de santé
         - name: RaisonEmploi2-4
           type: checkbox
           label: 
             fr: Abandon de l'emploi
-          options: 
-            Conj_01: Abandon de l'emploi
         - name: RaisonEmploi2-5
           type: checkbox
           label: 
             fr: Changement d'emploi
-          options: 
-            Conj_01: Changement d'emploi
         - name: RaisonEmploi2-6
           type: checkbox
           label: 
             fr: Fermeture de l'entreprise
-          options: 
-            Conj_01: Fermeture de l'entreprise
         - name: RaisonEmploi2-7
           type: checkbox
           label: 
             fr: Naissance ou prise en charge d'un enfant
-          options: 
-            Conj_01: Naissance ou prise en charge d'un enfant
         - name: RaisonEmploi2-8
           type: checkbox
           label: 
             fr: Autre, précisez.
-          options: 
-            Conj_01: Autre, précisez.
         - name: autre8_Conj-01
           type: text
           label: 
@@ -1861,32 +1677,22 @@ form:
           type: checkbox
           label: 
             fr: à temps plein
-          options: 
-            Conj_01: à temps plein
         - name: Partiel
           type: checkbox
           label: 
             fr: à temps partiel
-          options: 
-            Conj_01: à temps partiel
         - name: Jour
           type: checkbox
           label: 
             fr: temps partiel de jour
-          options: 
-            Conj_01: temps partiel de jour
         - name: Soir
           type: checkbox
           label: 
             fr: temps partiel de Soir
-          options: 
-            Conj_01: temps partiel de Soir
         - name: Nuit
           type: checkbox
           label: 
             fr: temps partiel de nuit
-          options: 
-            Conj_01: temps partiel de nuit
         - name: raison_Conj-01
           type: text
           label: 
@@ -1913,8 +1719,6 @@ form:
           type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 1
-          options: 
-            Conj_01: J'ai de l'expérience pour l'emploi 1
         - name: emploisrecherche2_Conj-01
           type: text
           label: 
@@ -1923,26 +1727,18 @@ form:
           type: checkbox
           label: 
             fr: J'ai de l'expérience pour l'emploi 2
-          options: 
-            Conj_01: J'ai de l'expérience pour l'emploi 2
         - name: travail1
           type: checkbox
           label: 
             fr: ma localité
-          options: 
-            Conj_01: ma localité
         - name: travail2
           type: checkbox
           label: 
             fr: ma région
-          options: 
-            Conj_01: ma région
         - name: travail3
           type: checkbox
           label: 
             fr: autre, précisez.
-          options: 
-            Conj_01: autre, précisez.
         - name: region_Conj-01
           type: text
           label: 
@@ -1951,20 +1747,14 @@ form:
           type: checkbox
           label: 
             fr: J’affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
-          options: 
-            Conj: J’affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
         - name: engagementInfo
           type: checkbox
           label: 
             fr: Je m’engage à informer sans délai le Ministère de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail.
-          options: 
-            Conj: Je m’engage à informer sans délai le Ministère de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail.
         - name: envoiElec
           type: checkbox
           label: 
             fr: Je souhaite envoyer ma demande électroniquement.
-          options: 
-            Conj: Je souhaite envoyer ma demande électroniquement.
         - name: 02-RaisonDemande
           type: checkbox
           label: 
@@ -1972,11 +1762,21 @@ form:
           validations: 
             required: trim
           options: 
-            PerteEmploiSansAss: Perte d’emploi sans droit à l’assurance-emploi 
-            PerteEmploiAttAss: Perte d’emploi et en attente de prestations d’assurance-emploi ou du Régime québécois d'assurance parentale 
-            FinPrestations: Fin des prestations d'assurance-emploi ou du Régime québécois d'assurance parentale 
-            FinEtudes: Fin des études à temps plein 
-            PerteConj: Perte du conjoint, précisez 
+            PerteEmploiSansAss: 
+              fr: Perte d’emploi sans droit à l’assurance-emploi 
+              en: 
+            PerteEmploiAttAss: 
+              fr: Perte d’emploi et en attente de prestations d’assurance-emploi ou du Régime québécois d'assurance parentale 
+              en: 
+            FinPrestations: 
+              fr: Fin des prestations d'assurance-emploi ou du Régime québécois d'assurance parentale 
+              en: 
+            FinEtudes: 
+              fr: Fin des études à temps plein 
+              en: 
+            PerteConj: 
+              fr: Perte du conjoint, précisez 
+              en: 
         - name: PerteConjoint1
           type: checkbox
           label: 
@@ -1989,9 +1789,20 @@ form:
           type: checkbox
           label: 
             fr: Divorce
-            Supplement: En supplément à un autre revenu 
-            AttDecision: En attente d'une décision faisant suite à un recours 
-            Sortie: Sortie d'un établissement de santé ou d'un établissement de détention, précisez 
+        - name: 02-RaisonDemande
+          type: checkbox
+          label: 
+            fr: Raison de la demande
+          options: 
+            Supplement: 
+              fr: En supplément à un autre revenu 
+              en: 
+            AttDecision: 
+              fr: En attente d'une décision faisant suite à un recours 
+              en: 
+            Sortie: 
+              fr: Sortie d'un établissement de santé ou d'un établissement de détention, précisez 
+              en: 
         - name: Sortie1
           type: checkbox
           label: 
@@ -2000,10 +1811,23 @@ form:
           type: checkbox
           label: 
             fr: Sortie d'un établissement de détention
-            RembFraisFuneraires: Remboursement de frais funéraires 
-            Naissance: Naissance ou prise en charge d'un enfant 
-            ProblemeSante: Problèmes de santé 
-            Autre: Autres, précisez 
+        - name: 02-RaisonDemande
+          type: checkbox
+          label: 
+            fr: Raison de la demande
+          options: 
+            RembFraisFuneraires: 
+              fr: Remboursement de frais funéraires 
+              en: 
+            Naissance: 
+              fr: Naissance ou prise en charge d'un enfant 
+              en: 
+            ProblemeSante: 
+              fr: Problèmes de santé 
+              en: 
+            Autre: 
+              fr: Autres, précisez 
+              en: 
         - name: Autres1
           type: text
           label: 
@@ -2370,12 +2194,24 @@ form:
           validations: 
             required: trim
           options: 
-            Propriete: Votre propriété 
-            Logement: Logement 
-            LogementSub: Logement subventionné, y compris un HLM ou une coopérative d'habitation 
-            Chambre: Chambre ou pension 
-            RessourceTypeFam: Ressource de type familial, Centre hospitalier ou ressource intermédiaire 
-            Autre: Autre, précisez 
+            Propriete: 
+              fr: Votre propriété 
+              en: 
+            Logement: 
+              fr: Logement 
+              en: 
+            LogementSub: 
+              fr: Logement subventionné, y compris un HLM ou une coopérative d'habitation 
+              en: 
+            Chambre: 
+              fr: Chambre ou pension 
+              en: 
+            RessourceTypeFam: 
+              fr: Ressource de type familial, Centre hospitalier ou ressource intermédiaire 
+              en: 
+            Autre: 
+              fr: Autre, précisez 
+              en: 
         - name: AutreHabitation
           type: text
           label: 
@@ -2390,12 +2226,6 @@ form:
           type: text
           label: 
             fr: Coût mensuel
-        - name: CoutMensuelHabitationDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ChauffageOui
           type: checkbox
           label: 
@@ -2423,12 +2253,6 @@ form:
           type: text
           label: 
             fr: Montant mensuel de l'Allocation-logement
-        - name: MontantAllocationLogementDecimals
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: NomProprio
           type: text
           label: 
@@ -2482,22 +2306,47 @@ form:
           label: 
             fr: Féminin
           options: 
-            Sexe1: Féminin
-            Sexe2: Masculin
+            Sexe1: 
+              fr: Féminin
+              en: 
+            Sexe2: 
+              fr: Masculin
+              en: 
         - name: E1_NAM
           type: text
           label: 
             fr: Numéro d'assurance maladie de l'enfant 1
           validations: 
             max: 12,length
-            Etude1: Prématernelle
-            Etude2: Maternelle
-            Etude3: Primaire
-            Etude4: Secondaire général
-            Etude5: Secondaire professionnel
-            Etude6: Collégial
-            Etude7: Universitaire
-            Etude8: Autre, précisez.
+        - name: E1
+          type: checkbox
+          label: 
+            fr: Prématernelle
+          options: 
+            Etude1: 
+              fr: Prématernelle
+              en: 
+            Etude2: 
+              fr: Maternelle
+              en: 
+            Etude3: 
+              fr: Primaire
+              en: 
+            Etude4: 
+              fr: Secondaire général
+              en: 
+            Etude5: 
+              fr: Secondaire professionnel
+              en: 
+            Etude6: 
+              fr: Collégial
+              en: 
+            Etude7: 
+              fr: Universitaire
+              en: 
+            Etude8: 
+              fr: Autre, précisez.
+              en: 
         - name: E1_AutreEtude
           type: text
           label: 
@@ -2506,8 +2355,11 @@ form:
           type: text
           label: 
             fr: si l'enfant est âgé de 16 ans ou plus
-            HandicapeOui: Oui, l'enfant 1 est une personne handicapée.
-            HandicapeNon: Non, l'enfant 1 n'est pas une personne handicapée
+        - name: E1
+          type: radio
+          label: 
+            fr: Oui, l'enfant 1 est une personne handicapée.
+          options: yesno
         - name: E1_NomPere
           type: text
           label: 
@@ -2516,8 +2368,17 @@ form:
           type: text
           label: 
             fr: Prénom du parent de l'enfant 1
-            P1: Père
-            P11: Mère
+        - name: E1
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P1: 
+              fr: Père
+              en: 
+            P11: 
+              fr: Mère
+              en: 
         - name: E1_NomMere
           type: text
           label: 
@@ -2526,17 +2387,41 @@ form:
           type: text
           label: 
             fr: Prénom de l'autre parent de l'enfant 1
-            P2: Père
-            P22: Mère
-            GardePartageeOui: Oui, je partage la garde de l'enfant 1.
-            GardePartageeNon: Non, je ne partage pas la garde de l'enfant 1.
+        - name: E1
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P2: 
+              fr: Père
+              en: 
+            P21: 
+              fr: Mère
+              en: 
+            GardePartageeOui: 
+              fr: Oui, je partage la garde de l'enfant 1.
+              en: 
+            GardePartageeNon: 
+              fr: Non, je ne partage pas la garde de l'enfant 1.
+              en: 
         - name: E1_NBJoursGarde
           type: text
           label: 
             fr: Indiquez le nombre de jours où vous avez la garde de l'enfant 1. Cochez s'il s'agit de jours par semaine, par mois ou par année.
-            Garde1: Par semaine
-            Garde2: Par mois
-            Garde3: Par année
+        - name: E1
+          type: checkbox
+          label: 
+            fr: Par semaine
+          options: 
+            Garde1: 
+              fr: Par semaine
+              en: 
+            Garde2: 
+              fr: Par mois
+              en: 
+            Garde3: 
+              fr: Par année
+              en: 
         - name: E1_DocumentGarde
           type: text
           label: 
@@ -2559,27 +2444,52 @@ form:
           type: date
           label: 
             fr: Date de naissance de l'enfant 2
-            Sexe1: Féminin
         - name: E2
           type: checkbox
           label: 
-            fr: Masculin
+            fr: Féminin
           options: 
-            Sexe2: Masculin
+            Sexe1: 
+              fr: Féminin
+              en: 
+            Sexe2: 
+              fr: Masculin
+              en: 
         - name: E2_NAM
           type: text
           label: 
             fr: Numéro d'assurance maladie de l'enfant 2
           validations: 
             max: 12,length
-            Etude1: Prématernelle
-            Etude2: Maternelle
-            Etude3: Primaire
-            Etude4: Secondaire général
-            Etude5: Secondaire professionnel
-            Etude6: Collégial
-            Etude7: Universitaire
-            Etude8: Autre, précisez.
+        - name: E2
+          type: checkbox
+          label: 
+            fr: Prématernelle
+          options: 
+            Etude1: 
+              fr: Prématernelle
+              en: 
+            Etude2: 
+              fr: Maternelle
+              en: 
+            Etude3: 
+              fr: Primaire
+              en: 
+            Etude4: 
+              fr: Secondaire général
+              en: 
+            Etude5: 
+              fr: Secondaire professionnel
+              en: 
+            Etude6: 
+              fr: Collégial
+              en: 
+            Etude7: 
+              fr: Universitaire
+              en: 
+            Etude8: 
+              fr: Autre, précisez.
+              en: 
         - name: E2_AutreEtude
           type: text
           label: 
@@ -2588,8 +2498,11 @@ form:
           type: text
           label: 
             fr: si l'enfant est âgé de 16 ans ou plus
-            HandicapeOui: Oui, l'enfant 2 est une personne handicapée.
-            HandicapeNon: Non, l'enfant 2 n'est pas une personne handicapée.
+        - name: E2
+          type: radio
+          label: 
+            fr: Oui, l'enfant 2 est une personne handicapée.
+          options: yesno
         - name: E2_NomPere
           type: text
           label: 
@@ -2598,8 +2511,17 @@ form:
           type: text
           label: 
             fr: Prénom du parent de l'enfant 2
-            P1: Père
-            P11: Mère
+        - name: E2
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P1: 
+              fr: Père
+              en: 
+            P11: 
+              fr: Mère
+              en: 
         - name: E2_NomMere
           type: text
           label: 
@@ -2608,17 +2530,41 @@ form:
           type: text
           label: 
             fr: Prénom de l'autre parent de l'enfant 2
-            P2: Père
-            P22: Mère
-            GardePartageeOui: Oui, je partage la garde de l'enfant 2.
-            GardePartageeNon: Non, je ne partage pas la garde de l'enfant 2.
+        - name: E2
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P2: 
+              fr: Père
+              en: 
+            P21: 
+              fr: Mère
+              en: 
+            GardePartageeOui: 
+              fr: Oui, je partage la garde de l'enfant 2.
+              en: 
+            GardePartageeNon: 
+              fr: Non, je ne partage pas la garde de l'enfant 2.
+              en: 
         - name: E2_NBJoursGarde
           type: text
           label: 
             fr: Indiquez le nombre de jours où vous avez la garde de l'enfant 2. Cochez s'il s'agit de jours par semaine, par mois ou par année.
-            Garde1: Par semaine
-            Garde2: Par mois
-            Garde3: Par année
+        - name: E2
+          type: checkbox
+          label: 
+            fr: Par semaine
+          options: 
+            Garde1: 
+              fr: Par semaine
+              en: 
+            Garde2: 
+              fr: Par mois
+              en: 
+            Garde3: 
+              fr: Par année
+              en: 
         - name: E2_DocumentGarde
           type: text
           label: 
@@ -2646,22 +2592,47 @@ form:
           label: 
             fr: Féminin
           options: 
-            Sexe1: Féminin
-            Sexe2: Masculin
+            Sexe1: 
+              fr: Féminin
+              en: 
+            Sexe2: 
+              fr: Masculin
+              en: 
         - name: E3_NAM
           type: text
           label: 
             fr: Numéro d'assurance maladie de l'enfant 3
           validations: 
             max: 12,length
-            Etude1: Prématernelle
-            Etude2: Maternelle
-            Etude3: Primaire
-            Etude4: Secondaire général
-            Etude5: Secondaire professionnel
-            Etude6: Collégial
-            Etude7: Universitaire
-            Etude8: Autre, précisez.
+        - name: E3
+          type: checkbox
+          label: 
+            fr: Prématernelle
+          options: 
+            Etude1: 
+              fr: Prématernelle
+              en: 
+            Etude2: 
+              fr: Maternelle
+              en: 
+            Etude3: 
+              fr: Primaire
+              en: 
+            Etude4: 
+              fr: Secondaire général
+              en: 
+            Etude5: 
+              fr: Secondaire professionnel
+              en: 
+            Etude6: 
+              fr: Collégial
+              en: 
+            Etude7: 
+              fr: Universitaire
+              en: 
+            Etude8: 
+              fr: Autre, précisez.
+              en: 
         - name: E3_AutreEtude
           type: text
           label: 
@@ -2670,8 +2641,11 @@ form:
           type: text
           label: 
             fr: si l'enfant est âgé de 16 ans ou plus
-            HandicapeOui: Oui, l'enfant 3 est une personne handicapée.
-            HandicapeNon: Non, l'enfant 3 n'est pas une personne handicapée.
+        - name: E3
+          type: radio
+          label: 
+            fr: Oui, l'enfant 3 est une personne handicapée.
+          options: yesno
         - name: E3_NomPere
           type: text
           label: 
@@ -2680,8 +2654,17 @@ form:
           type: text
           label: 
             fr: Prénom du parent de l'enfant 3
-            P1: Père
-            P11: Mère
+        - name: E3
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P1: 
+              fr: Père
+              en: 
+            P11: 
+              fr: Mère
+              en: 
         - name: E3_NomMere
           type: text
           label: 
@@ -2690,17 +2673,41 @@ form:
           type: text
           label: 
             fr: Prénom de l'autre parent de l'enfant 3
-            P2: Père
-            P22: Mère
-            GardePartageeOui: Oui, je partage la garde de l'enfant 3.
-            GardePartageeNon: Non, je ne partage pas la garde de l'enfant 3.
+        - name: E3
+          type: checkbox
+          label: 
+            fr: Père
+          options: 
+            P2: 
+              fr: Père
+              en: 
+            P21: 
+              fr: Mère
+              en: 
+            GardePartageeOui: 
+              fr: Oui, je partage la garde de l'enfant 3.
+              en: 
+            GardePartageeNon: 
+              fr: Non, je ne partage pas la garde de l'enfant 3.
+              en: 
         - name: E3_NBJoursGarde
           type: text
           label: 
             fr: Indiquez le nombre de jours où vous avez la garde de l'enfant 3. Cochez s'il s'agit de jours par semaine, par mois ou par année.
-            Garde1: Par semaine
-            Garde2: Par mois
-            Garde3: Par année
+        - name: E3
+          type: checkbox
+          label: 
+            fr: Par semaine
+          options: 
+            Garde1: 
+              fr: Par semaine
+              en: 
+            Garde2: 
+              fr: Par mois
+              en: 
+            Garde3: 
+              fr: Par année
+              en: 
         - name: E3_DocumentGarde
           type: text
           label: 
@@ -2733,12 +2740,6 @@ form:
           type: text
           label: 
             fr: Montant net du premier revenu
-        - name: MontantRevenuEnfant1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuEnfant1-1
           type: checkbox
           label: 
@@ -2759,12 +2760,6 @@ form:
           type: text
           label: 
             fr: Montant net du deuxième revenu
-        - name: MontantRevenuEnfant2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuEnfant2-1
           type: checkbox
           label: 
@@ -2793,12 +2788,6 @@ form:
           type: text
           label: 
             fr: Montant du premier compte ou valeur du premier bien
-        - name: MontantValeurEnfant1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: EnfantCompte2
           type: text
           label: 
@@ -2807,12 +2796,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième compte ou valeur du deuxième bien
-        - name: MontantValeurEnfant2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: EnfantCompte3
           type: text
           label: 
@@ -2821,12 +2804,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième compte ou valeur du troisième bien
-        - name: MontantValeurEnfant3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: AutresEnfants
           type: text
           label: 
@@ -2842,12 +2819,6 @@ form:
           type: text
           label: 
             fr: Salaire net
-        - name: SalaireNetDecimals
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps1-1
           type: checkbox
           label: 
@@ -2871,12 +2842,6 @@ form:
           type: text
           label: 
             fr: Montant des pourboires
-        - name: PourboiresMontantDecimals
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps2.1
           type: checkbox
           label: 
@@ -2930,12 +2895,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de la garde d'enfants
-        - name: GardeMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps3-1
           type: checkbox
           label: 
@@ -2959,12 +2918,6 @@ form:
           type: text
           label: 
             fr: Si oui, montant brut par semaine provenant du RQAP
-        - name: RQAPMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateDemandeRQAP
           type: date
           label: 
@@ -2984,12 +2937,6 @@ form:
           type: text
           label: 
             fr: Si oui, montant brut des prestations d'assurance-emploi par semaine
-        - name: AssuranceEmploiMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateDemandeAssuranceEmploi
           type: date
           label: 
@@ -3009,12 +2956,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de la CNESST
-        - name: CNESSTMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps4-1
           type: checkbox
           label: 
@@ -3050,12 +2991,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de Retraite Québec
-        - name: RQMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps5-1
           type: checkbox
           label: 
@@ -3079,12 +3014,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de la SAAQ
-        - name: SAAQMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps6-1
           type: checkbox
           label: 
@@ -3120,12 +3049,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant du Régime de pensions du Canada
-        - name: PensionsCanadaMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps7-1
           type: checkbox
           label: 
@@ -3149,12 +3072,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant d'un programme de la sécurité de la vieillesse
-        - name: SecuriteVieillesseMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps8-1
           type: checkbox
           label: 
@@ -3178,12 +3095,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant d'une pension ou d'une allocation des anciens combattants
-        - name: AnciensCombattantsMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps9-1
           type: checkbox
           label: 
@@ -3236,12 +3147,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de prestations d'une autre province, d'un territoire ou d'un autre pays
-        - name: PrestationAutreMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps11-1
           type: checkbox
           label: 
@@ -3280,12 +3185,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de chambreurs ou de pensionnaires
-        - name: RevenusChambreursMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps12-1
           type: checkbox
           label: 
@@ -3317,12 +3216,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de pension alimentaire
-        - name: PensionAlimMontantDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps13-1
           type: checkbox
           label: 
@@ -3362,12 +3255,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de locations
-        - name: RevenuLocationDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps14-1
           type: checkbox
           label: 
@@ -3391,12 +3278,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de placements, d'obligation ou de fiducie
-        - name: RevenusPlacementsDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps15-1
           type: checkbox
           label: 
@@ -3420,12 +3301,6 @@ form:
           type: text
           label: 
             fr: Montant provenant d'un fonds de pension
-        - name: RevenusFondsPensionDecimal
-          type: text
-          label: 
-            fr: décimal
-          validations: 
-            max: 2,length
         - name: temps16-1
           type: checkbox
           label: 
@@ -3453,12 +3328,6 @@ form:
           type: text
           label: 
             fr: Montant du premier revenu
-        - name: MontantAutreRevenu1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre1-1
           type: checkbox
           label: 
@@ -3479,12 +3348,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième revenu
-        - name: MontantAutreRevenu2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre2-1
           type: checkbox
           label: 
@@ -3505,12 +3368,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième revenu
-        - name: MontantAutreRevenu3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre3-1
           type: checkbox
           label: 
@@ -3538,12 +3395,6 @@ form:
           type: text
           label: 
             fr: Montant du premier revenu
-        - name: MontantAutreRevenuAttendu1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu1
           type: date
           label: 
@@ -3556,12 +3407,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième revenu
-        - name: MontantAutreRevenuAttendu2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu2
           type: date
           label: 
@@ -3574,12 +3419,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième revenu
-        - name: MontantAutreRevenuAttendu3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu3
           type: date
           label: 
@@ -3603,12 +3442,6 @@ form:
           type: text
           label: 
             fr: Solde du premier compte
-        - name: Solde1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution2
           type: text
           label: 
@@ -3621,12 +3454,6 @@ form:
           type: text
           label: 
             fr: Solde du deuxième compte
-        - name: Solde2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution3
           type: text
           label: 
@@ -3639,12 +3466,6 @@ form:
           type: text
           label: 
             fr: Solde du troisième compte
-        - name: Solde3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution4
           type: text
           label: 
@@ -3657,12 +3478,6 @@ form:
           type: text
           label: 
             fr: Solde du quatrième compte
-        - name: Solde4Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Argent
           type: radio
           label: 
@@ -3678,12 +3493,6 @@ form:
           type: text
           label: 
             fr: Montant total
-        - name: MontantArgentDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Cheques
           type: radio
           label: 
@@ -3699,12 +3508,6 @@ form:
           type: text
           label: 
             fr: Montant du premier frais
-        - name: MontantFrais1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement1
           type: date
           label: 
@@ -3717,12 +3520,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième frais
-        - name: MontantFrais2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement2
           type: date
           label: 
@@ -3735,12 +3532,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième frais
-        - name: MontantFrais3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement3
           type: date
           label: 
@@ -3760,12 +3551,6 @@ form:
           type: text
           label: 
             fr: Valeur du ou des coffrets de sûreté
-        - name: ValeurCoffretDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-REER
           type: radio
           label: 
@@ -3781,12 +3566,6 @@ form:
           type: text
           label: 
             fr: Valeur du premier placement
-        - name: ValeurPlacement1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement2
           type: text
           label: 
@@ -3795,12 +3574,6 @@ form:
           type: text
           label: 
             fr: Valeur du deuxième placement
-        - name: ValeurPlacement2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement3
           type: text
           label: 
@@ -3809,12 +3582,6 @@ form:
           type: text
           label: 
             fr: Valeur du troisième placement
-        - name: ValeurPlacement3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement4
           type: text
           label: 
@@ -3823,12 +3590,6 @@ form:
           type: text
           label: 
             fr: Valeur du quatrième placement
-        - name: ValeurPlacement4Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Vehicules
           type: radio
           label: 
@@ -3856,22 +3617,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du premier véhicule
-        - name: VersementVehicule1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule1
           type: text
           label: 
             fr: Valeur marchande du premier véhicule
-        - name: ValeurVehicule1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule2
           type: text
           label: 
@@ -3892,22 +3641,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du deuxième véhicule
-        - name: VersementVehicule2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule2
           type: text
           label: 
             fr: Valeur marchande du deuxième véhicule
-        - name: ValeurVehicule2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule3
           type: text
           label: 
@@ -3928,22 +3665,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du troisième véhicule
-        - name: VersementVehicule3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule3
           type: text
           label: 
             fr: Valeur marchande du troisième véhicule
-        - name: ValeurVehicule3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule4
           type: text
           label: 
@@ -3964,22 +3689,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du quatrième véhicule
-        - name: VersementVehicule4Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule4
           type: text
           label: 
             fr: Valeur marchande du quatrième véhicule
-        - name: ValeurVehicule4Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Immobilier
           type: radio
           label: 
@@ -4003,32 +3716,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au premier bien immobilier
-        - name: DetteBienImmo1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo1
           type: text
           label: 
             fr: Versement mensuel du premier bien immobilier
-        - name: VersementBienImmo1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo1
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienImmo2
           type: text
           label: 
@@ -4045,32 +3740,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au deuxième bien immobilier
-        - name: DetteBienImmo2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo2
           type: text
           label: 
             fr: Versement mensuel du deuxième bien immobilier
-        - name: VersementBienImmo2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo2
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienImmo3
           type: text
           label: 
@@ -4087,32 +3764,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au troisième bien immobilier
-        - name: DetteBienImmo3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo3
           type: text
           label: 
             fr: Versement mensuel du troisième bien immobilier
-        - name: VersementBienImmo3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo3
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-ImmobilierAutres
           type: radio
           label: 
@@ -4128,12 +3787,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du premier bien mobilier
-        - name: ValeurBienMobilier1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienMobilier2
           type: text
           label: 
@@ -4142,12 +3795,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du deuxième bien mobilier
-        - name: ValeurBienMobilier2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienMobilier3
           type: text
           label: 
@@ -4156,12 +3803,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du troisième bien mobilier
-        - name: ValeurBienMobilier3Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Entreprise
           type: radio
           label: 
@@ -4208,12 +3849,6 @@ form:
           type: text
           label: 
             fr: Valeur du premier bien ou avoir liquide
-        - name: ValeurBienVendu1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Bienvendu2
           type: text
           label: 
@@ -4226,12 +3861,6 @@ form:
           type: text
           label: 
             fr: Valeur du deuxième bien ou avoir liquide
-        - name: ValeurBienVendu2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-AssVie
           type: radio
           label: 
@@ -4263,12 +3892,6 @@ form:
           type: text
           label: 
             fr: Montant des sommes dues
-        - name: MontantSommesDuesDecimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: 02-Dettes
           type: radio
           label: 
@@ -4284,22 +3907,10 @@ form:
           type: text
           label: 
             fr: Montant de la première dette
-        - name: MontantDette1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementDette1
           type: text
           label: 
             fr: Versement mensuel de la première dette
-        - name: VersementDette1Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DescriptionDette2
           type: text
           label: 
@@ -4308,22 +3919,10 @@ form:
           type: text
           label: 
             fr: Montant de la deuxième dette
-        - name: MontantDette2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementDette2
           type: text
           label: 
             fr: Versement mensuel de la deuxième dette
-        - name: VersementDette2Decimal
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Req02-Recconnais
           type: checkbox
           label: 
@@ -4380,12 +3979,6 @@ form:
           type: text
           label: 
             fr: Salaire net
-        - name: SalaireNetDecimalsC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps1-1C
           type: checkbox
           label: 
@@ -4410,12 +4003,6 @@ form:
           type: text
           label: 
             fr: Montant des pourboires
-        - name: PourboiresMontantDecimalsC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps2.1C
           type: checkbox
           label: 
@@ -4472,12 +4059,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de la garde d'enfants
-        - name: GardeMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps3-1C
           type: checkbox
           label: 
@@ -4502,12 +4083,6 @@ form:
           type: text
           label: 
             fr: Si oui, montant brut par semaine provenant du RQAP
-        - name: RQAPMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateDemandeRQAPC
           type: date
           label: 
@@ -4528,12 +4103,6 @@ form:
           type: text
           label: 
             fr: Si oui, montant brut des prestations d'assurance-emploi par semaine
-        - name: AssuranceEmploiMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateDemandeAssuranceEmploiC
           type: date
           label: 
@@ -4554,12 +4123,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de la CNESST
-        - name: CNESSTMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps4-1C
           type: checkbox
           label: 
@@ -4596,12 +4159,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de Retraite Québec
-        - name: RQMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps5-1C
           type: checkbox
           label: 
@@ -4626,12 +4183,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de la SAAQ
-        - name: SAAQMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps6-1C
           type: checkbox
           label: 
@@ -4668,12 +4219,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant du Régime de pensions du Canada
-        - name: PensionsCanadaMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps7-1C
           type: checkbox
           label: 
@@ -4698,12 +4243,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant d'un programme de la sécurité de la vieillesse
-        - name: SecuriteVieillesseMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps8-1C
           type: checkbox
           label: 
@@ -4728,12 +4267,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant d'une pension ou d'une allocation des anciens combattants
-        - name: AnciensCombattantsMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps9-1C
           type: checkbox
           label: 
@@ -4788,12 +4321,6 @@ form:
           type: text
           label: 
             fr: Montant brut provenant de prestations d'une autre province, d'un territoire ou d'un autre pays
-        - name: PrestationAutreMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps11-1C
           type: checkbox
           label: 
@@ -4834,12 +4361,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de chambreurs ou de pensionnaires
-        - name: RevenusChambreursMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps12-1C
           type: checkbox
           label: 
@@ -4872,12 +4393,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de pensions alimentaires
-        - name: PensionAlimMontantDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps13-1C
           type: checkbox
           label: 
@@ -4918,12 +4433,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de locations
-        - name: RevenuLocationDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps14-1C
           type: checkbox
           label: 
@@ -4948,12 +4457,6 @@ form:
           type: text
           label: 
             fr: Montant provenant de placements, d'obligation ou de fiducie
-        - name: RevenusPlacementsDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: temps15-1C
           type: checkbox
           label: 
@@ -4978,12 +4481,6 @@ form:
           type: text
           label: 
             fr: Montant provenant d'un fonds de pension
-        - name: RevenusFondsPensionDecimalC
-          type: text
-          label: 
-            fr: décimal
-          validations: 
-            max: 2,length
         - name: temps16-1C
           type: checkbox
           label: 
@@ -5012,12 +4509,6 @@ form:
           type: text
           label: 
             fr: Montant du premier revenu
-        - name: MontantAutreRevenu1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre1-1C
           type: checkbox
           label: 
@@ -5038,12 +4529,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième revenu
-        - name: MontantAutreRevenu2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre2-1C
           type: checkbox
           label: 
@@ -5064,12 +4549,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième revenu
-        - name: MontantAutreRevenu3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: RevenuAutre3-1C
           type: checkbox
           label: 
@@ -5098,12 +4577,6 @@ form:
           type: text
           label: 
             fr: Montant du premier revenu attendu
-        - name: MontantAutreRevenuAttendu1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu1C
           type: date
           label: 
@@ -5116,12 +4589,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième revenu attendu
-        - name: MontantAutreRevenuAttendu2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu2C
           type: date
           label: 
@@ -5134,12 +4601,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième revenu attendu
-        - name: MontantAutreRevenuAttendu3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DateVersRevenu3C
           type: date
           label: 
@@ -5164,12 +4625,6 @@ form:
           type: text
           label: 
             fr: Solde du premier compte
-        - name: Solde1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution2C
           type: text
           label: 
@@ -5182,12 +4637,6 @@ form:
           type: text
           label: 
             fr: Solde du deuxième compte
-        - name: Solde2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution3C
           type: text
           label: 
@@ -5200,12 +4649,6 @@ form:
           type: text
           label: 
             fr: Solde du troisième compte
-        - name: Solde3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Institution4C
           type: text
           label: 
@@ -5218,12 +4661,6 @@ form:
           type: text
           label: 
             fr: Solde du quatrième compte
-        - name: Solde4DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ArgentOuiC
           type: checkbox
           label: 
@@ -5240,12 +4677,6 @@ form:
           type: text
           label: 
             fr: Montant total
-        - name: MontantArgentDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ChequesPrelevementsOuiC
           type: checkbox
           label: 
@@ -5262,12 +4693,6 @@ form:
           type: text
           label: 
             fr: Montant du premier frais
-        - name: MontantFrais1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement1C
           type: date
           label: 
@@ -5280,12 +4705,6 @@ form:
           type: text
           label: 
             fr: Montant du deuxième frais
-        - name: MontantFrais2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement2C
           type: date
           label: 
@@ -5298,12 +4717,6 @@ form:
           type: text
           label: 
             fr: Montant du troisième frais
-        - name: MontantFrais3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DatePaiement3C
           type: date
           label: 
@@ -5324,12 +4737,6 @@ form:
           type: text
           label: 
             fr: Valeur du ou des coffrets de sûreté
-        - name: ValeurCoffretDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: REEROuiC
           type: checkbox
           label: 
@@ -5346,12 +4753,6 @@ form:
           type: text
           label: 
             fr: Valeur du premier placement
-        - name: ValeurPlacement1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement2C
           type: text
           label: 
@@ -5360,12 +4761,6 @@ form:
           type: text
           label: 
             fr: Valeur du deuxième placement
-        - name: ValeurPlacement2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement3C
           type: text
           label: 
@@ -5374,12 +4769,6 @@ form:
           type: text
           label: 
             fr: Valeur du troisième placement
-        - name: ValeurPlacement3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Placement4C
           type: text
           label: 
@@ -5388,12 +4777,6 @@ form:
           type: text
           label: 
             fr: Valeur du quatrième placement
-        - name: ValeurPlacement4DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VehiculesOuiC
           type: checkbox
           label: 
@@ -5422,22 +4805,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du premier véhicule
-        - name: VersementVehicule1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule1C
           type: text
           label: 
             fr: Valeur marchande du premier véhicule
-        - name: ValeurVehicule1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule2C
           type: text
           label: 
@@ -5458,22 +4829,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du deuxième véhicule
-        - name: VersementVehicule2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule2C
           type: text
           label: 
             fr: Valeur marchande du deuxième véhicule
-        - name: ValeurVehicule2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule3C
           type: text
           label: 
@@ -5494,22 +4853,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du troisième véhicule
-        - name: VersementVehicule3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule3C
           type: text
           label: 
             fr: Valeur marchande du troisième véhicule
-        - name: ValeurVehicule3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: TypeVehicule4C
           type: text
           label: 
@@ -5530,22 +4877,10 @@ form:
           type: text
           label: 
             fr: Versement mensuel du quatrième véhicule
-        - name: VersementVehicule4DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurVehicule4C
           type: text
           label: 
             fr: Valeur marchande du quatrième véhicule
-        - name: ValeurVehicule4DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BiensImmoOuiC
           type: checkbox
           label: 
@@ -5570,32 +4905,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au premier bien immobilier
-        - name: DetteBienImmo1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo1C
           type: text
           label: 
             fr: Versement mensuel du premier bien immobilier
-        - name: VersementBienImmo1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo1C
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienImmo2C
           type: text
           label: 
@@ -5612,32 +4929,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au deuxième bien immobilier
-        - name: DetteBienImmo2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo2C
           type: text
           label: 
             fr: Versement mensuel du deuxième bien immobilier
-        - name: VersementBienImmo2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo2C
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienImmo3C
           type: text
           label: 
@@ -5654,32 +4953,14 @@ form:
           type: text
           label: 
             fr: Dette hypothécaire ou emprunt lié au troisième bien immobilier
-        - name: DetteBienImmo3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementBienImmo3C
           type: text
           label: 
             fr: Versement mensuel du troisième bien immobilier
-        - name: VersementBienImmo3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: ValeurBienImmo3C
           type: text
           label: 
             fr: Consultez votre municipalité au besoin.
-        - name: ValeurBienImmo3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BiensMobiliersOuiC
           type: checkbox
           label: 
@@ -5696,12 +4977,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du premier bien mobilier
-        - name: ValeurBienMobilier1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienMobilier2C
           type: text
           label: 
@@ -5710,12 +4985,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du deuxième bien mobilier
-        - name: ValeurBienMobilier2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: BienMobilier3C
           type: text
           label: 
@@ -5724,12 +4993,6 @@ form:
           type: text
           label: 
             fr: Valeur marchande du troisième bien mobilier
-        - name: ValeurBienMobilier3DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: EntrepriseOuiC
           type: checkbox
           label: 
@@ -5778,12 +5041,6 @@ form:
           type: text
           label: 
             fr: Valeur du premier bien ou avoir liquide
-        - name: ValeurBienVendu1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: Bienvendu2C
           type: text
           label: 
@@ -5796,12 +5053,6 @@ form:
           type: text
           label: 
             fr: Valeur du deuxième bien ou avoir liquide
-        - name: ValeurBienVendu2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: AssuranceVieOuiC
           type: checkbox
           label: 
@@ -5838,12 +5089,6 @@ form:
           type: text
           label: 
             fr: Montant des sommes dues
-        - name: MontantSommesDuesDecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DettesOuiC
           type: checkbox
           label: 
@@ -5860,22 +5105,10 @@ form:
           type: text
           label: 
             fr: Montant de la première dette
-        - name: MontantDette1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementDette1C
           type: text
           label: 
             fr: Versement mensuel de la première dette
-        - name: VersementDette1DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: DescriptionDette2C
           type: text
           label: 
@@ -5884,46 +5117,26 @@ form:
           type: text
           label: 
             fr: Montant de la deuxième dette
-        - name: MontantDette2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: VersementDette2C
           type: text
           label: 
             fr: Versement mensuel de la deuxième dette
-        - name: VersementDette2DecimalC
-          type: text
-          label: 
-            fr: décimals
-          validations: 
-            max: 2,length
         - name: reconnais
           type: checkbox
           label: 
             fr: Je reconnais que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire au traitement de ma demande et que des vérifications me concernant peuvent être faites, sans mon consentement, auprès de divers organismes  par la Loi sur l’aide aux personnes et aux familles.
-          options: 
-            Conj: Je reconnais que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire au traitement de ma demande et que des vérifications me concernant peuvent être faites, sans mon consentement, auprès de divers organismes  par la Loi sur l’aide aux personnes et aux familles.
         - name: affirmationS
           type: checkbox
           label: 
             fr: J’affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
-          options: 
-            Conj: J’affirme solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
         - name: engagementInfo
           type: checkbox
           label: 
             fr: Je m’engage à informer sans délai le ministère du Travail, de l’Emploi et de la Solidarité sociale de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail.
-          options: 
-            Conj: Je m’engage à informer sans délai le ministère du Travail, de l’Emploi et de la Solidarité sociale de toute modification à ces renseignements, dont, entre autres, de la date de mon retour au travail.
         - name: envoiElec
           type: checkbox
           label: 
             fr: Je souhaite envoyer ma demande électroniquement.
-          options: 
-            Conj: Je souhaite envoyer ma demande électroniquement.
         - name: adresse-courriel_Conj-02
           type: text
           label: 
