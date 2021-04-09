@@ -1,5 +1,6 @@
 ﻿<formulate-form v-model="contenuform"
                 @submit="submitHandler"
+                @submit-raw="submitRawHandler"
                 :invalid-message="invalidMessage"
                 :form-errors="formErrors"
                 :keep-model-data="config.keepData"
