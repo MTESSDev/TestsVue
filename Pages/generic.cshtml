@@ -27,6 +27,7 @@
 }
 
 @section colonneDroite{
+    <h1>{{obtenirTitrePageCourante()}}</h1>
     <div id="form">
         <template>
             @Html.Raw(Model.FormRaw)
@@ -168,6 +169,10 @@
                         this.$formulate.submit('form')
                     }
                 })
+            },
+            obtenirTitrePageCourante() {
+                const page = this.pages.find(page => page.id === this.contenuform.idPageCourante)
+                return page ? page.titre : 'Page non trouvée'
             }
         },
         data: {
@@ -175,7 +180,7 @@
             config: {"keepData": false}, //TODO ici pe mettre un autre nom que config. L'idée est de conserver ce qui concerne le form mais qui ne doit pas être dans le model
             formErrors: [],
             inputErrors: {},
-            pages: obtenirPages() 
+            pages: obtenirPages()
         },
        @*/* data: {
             values: {},
