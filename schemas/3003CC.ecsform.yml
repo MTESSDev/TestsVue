@@ -174,5 +174,15 @@ form:
                 fr: Précisez
               validations: 
                 required: trim
+    # Section 3
+    - section: 
+        fr: Test
+        en: (EN)Test
+      id: test
+      components:
+        - type: dynamic
+          tag: h3
+          text: 
+            fr: Salut! ceci est une section bidon juste pour tester!
 
 

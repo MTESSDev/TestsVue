@@ -273,3 +273,7 @@ form .field-validation-error {
 .navigation-form li {
     margin-bottom: 24px;
 }
+
+.navigation-form li a.active {
+    font-weight: 700;
+}

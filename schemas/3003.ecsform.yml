@@ -15,6 +15,7 @@ form:
     dynamic: |
       <{{tag}} class="{{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
         {{i18n text}}
+        {{RecursiveComponents components}}
       </{{tag}}>
     input: |
       <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}

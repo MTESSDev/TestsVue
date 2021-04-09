@@ -6,7 +6,7 @@
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
-    <formulate-input name="page"
+    <formulate-input name="idPageCourante"
                      {{GenerateInputClasses "select" .}}
                      :options="{ {{# Form.Sections}}{{Id}}:'{{i18n Section}}', {{/ Form.Sections}} }"
                      type="select"></formulate-input>
@@ -17,9 +17,9 @@
                      label="Valider tout"></formulate-input>
 
     {{# Form.Sections}}
-    <div v-if="contenuform.validAll === true || contenuform.page == '{{Id}}'">
+    <div v-if="contenuform.validAll === true || contenuform.idPageCourante == '{{Id}}'">
         <div class="section {{Classes}}"
-             v-show="contenuform.page == '{{Id}}' && contenuform.validAll === false">
+             v-show="contenuform.idPageCourante == '{{Id}}' && contenuform.validAll === false">
             <h2>{{i18n section}}</h2>
 
             {{RecursiveComponents components}}

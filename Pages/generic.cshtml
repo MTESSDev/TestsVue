@@ -19,7 +19,7 @@
         <nav class="navigation-form">
             <ul>
                 <li v-for="page in pages" :key="page.no">
-                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.id)">{{ page.titre }}</a>
+                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.id)" v-bind:class="{active : page.id === contenuform.idPageCourante}">{{ page.titre }}</a>
                 </li>
             </ul>
         </nav>
@@ -154,18 +154,18 @@
             },
             effectuerNavigation(idPage) {
                 this.config.keepData = true
-                this.contenuform.page = idPage
+                this.contenuform.idPageCourante = idPage
                 this.$nextTick(function () {
                     this.config.keepData = false
                 })
             }
         },
         data: {
-            contenuform: { "validAll": false },
-            config: {"keepData": false},
+            contenuform: { "validAll": false, idPageCourante: 'infos'}, //TODO ici la page et le contenu pourraient venir du serveur lors d'une reprise de saisie
+            config: {"keepData": false}, //TODO ici pe mettre un autre nom que config. L'idée est de conserver ce qui concerne le form mais qui ne doit pas être dans le model
             formErrors: [],
             inputErrors: {},
-            pages: obtenirPages()
+            pages: obtenirPages() 
         },
        @*/* data: {
             values: {},
@@ -182,8 +182,9 @@
     })
     /*TODO ici obtenir les pages à partir de la config. */
     function obtenirPages() {
-        return [{ no: 1, titre: "Raison de la demande", id: "infos" },
-            { no: 2, titre: "Renseignements généraux", id: "raisonDemande" }        
+        return [{ no: 1, titre: "Renseignements généraux", id: "infos" },
+            { no: 2, titre: "Raison de la demande", id: "raisonDemande" },
+            { no: 3, titre: "Test", id: "test" }
         ]
     }
 
