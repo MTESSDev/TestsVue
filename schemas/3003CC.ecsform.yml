@@ -176,9 +176,9 @@ form:
                 required: trim
     # Section 3
     - section: 
-        fr: Test
+        fr: Révision
         en: (EN)Test
-      id: test
+      id: revision
       components:
         - type: dynamic
           tag: h3

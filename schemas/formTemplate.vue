@@ -1,4 +1,5 @@
-﻿<formulate-form v-model="contenuform"
+﻿<formulate-form name="form"
+                v-model="contenuform"
                 @submit="submitHandler"
                 @submit-raw="submitRawHandler"
                 :invalid-message="invalidMessage"
@@ -7,21 +8,23 @@
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
-    <formulate-input name="idPageCourante"
-                     {{GenerateInputClasses "select" .}}
-                     :options="{ {{# Form.Sections}}{{Id}}:'{{i18n Section}}', {{/ Form.Sections}} }"
-                     type="select"></formulate-input>
+    <div class="d-none">
+        <formulate-input name="idPageCourante"
+                         {{GenerateInputClasses "select" .}}
+                         :options="{ {{# Form.Sections}}{{Id}}:'{{i18n Section}}', {{/ Form.Sections}} }"
+                         type="select"></formulate-input>
 
 
-    <formulate-input name="validAll"
-                     type="checkbox"
-                     label="Valider tout"></formulate-input>
+        <formulate-input name="validAll"
+                         type="checkbox"
+                         label="Valider tout"></formulate-input>
+    </div>
 
     {{# Form.Sections}}
     <div v-if="contenuform.validAll === true || contenuform.idPageCourante == '{{Id}}'">
         <div class="section {{Classes}}"
              v-show="contenuform.idPageCourante == '{{Id}}' && contenuform.validAll === false">
-            <h2>{{i18n section}}</h2>
+            <h1>{{i18n section}}</h1>
 
             {{RecursiveComponents components}}
 

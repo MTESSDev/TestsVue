@@ -1,8 +1,8 @@
 ﻿@page "{id?}"
 @model GenericModel
 @{
+    ViewData["H1NonRendu"] = true;
     ViewData["Title"] = "Formulaire";
-    ViewData["masquerPremierEspaceurConteneurColonnes"] = true;
 }
 @section style{
 
@@ -87,7 +87,8 @@
 
                 nomChamps.forEach(nomChamp => {
                     const champ = fields[nomChamp]
-                    if (champ.hasVisibleErrors) {
+                    //if (champ.hasVisibleErrors) {
+                    if (champ.hasErrors) {
                         if (champ.context && champ.context.type !== 'group') {
                             this.ajouterErreursChamp(champ, listeErreurs)
                         } else {
@@ -98,7 +99,8 @@
                 return JSON.stringify(listeErreurs)
             },
             ajouterErreursChamp(champ, listeErreurs) {
-                champ.context.visibleValidationErrors.forEach(message => {
+                //champ.context.visibleValidationErrors.forEach(message => {
+                champ.context.validationErrors.forEach(message => {
                     listeErreurs.push({ id: champ.context.id, message: message })
                 })
             },
@@ -143,7 +145,8 @@
                 if (enfant.isSubField && enfant.isSubField()) {
                     const idEnfant = enfant.context.attributes.id
 
-                    enfant.visibleValidationErrors.forEach(message => {
+                    //enfant.visibleValidationErrors.forEach(message => {
+                    enfant.validationErrors.forEach(message => {
                         listeErreurs.push({ id: idEnfant, message: message })
                     })
                 } else {
@@ -153,10 +156,17 @@
                 }
             },
             effectuerNavigation(idPage) {
+                this.contenuform.validAll = false
                 this.config.keepData = true
                 this.contenuform.idPageCourante = idPage
+
                 this.$nextTick(function () {
                     this.config.keepData = false
+
+                    if (this.contenuform.idPageCourante === 'revision') {
+                        this.contenuform.validAll = true
+                        this.$formulate.submit('form')
+                    }
                 })
             }
         },
@@ -184,7 +194,7 @@
     function obtenirPages() {
         return [{ no: 1, titre: "Renseignements généraux", id: "infos" },
             { no: 2, titre: "Raison de la demande", id: "raisonDemande" },
-            { no: 3, titre: "Test", id: "test" }
+            { no: 3, titre: "Révision", id: "revision" }
         ]
     }
 
