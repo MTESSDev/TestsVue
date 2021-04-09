@@ -13,12 +13,20 @@
 
   <ItemGroup>
     <None Remove="schemas\3003.ecsform.yml" />
+    <None Remove="schemas\3003BaseFull.yml" />
+    <None Remove="schemas\3003CC.ecsform.yml" />
     <None Remove="schemas\dany.ecsform.yml" />
     <None Remove="schemas\formTemplate.vue" />
     <None Remove="schemas\test.ecsform.yml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="schemas\3003BaseFull.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schemas\3003CC.ecsform.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="schemas\3003.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

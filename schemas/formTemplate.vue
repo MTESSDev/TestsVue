@@ -2,7 +2,7 @@
                 @submit="submitHandler"
                 :invalid-message="invalidMessage"
                 :form-errors="formErrors"
-                :keep-model-data="contenuform.keepData"
+                :keep-model-data="config.keepData"
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
@@ -11,10 +11,6 @@
                      :options="{ {{# Form.Sections}}{{Id}}:'{{i18n Section}}', {{/ Form.Sections}} }"
                      type="select"></formulate-input>
 
-
-    <formulate-input name="keepData"
-                     type="checkbox"
-                     label="Keep data ?"></formulate-input>
 
     <formulate-input name="validAll"
                      type="checkbox"

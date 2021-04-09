@@ -16,10 +16,10 @@
 
 @section colonneGauche{
     <nav>
-        <nav>
+        <nav class="navigation-form">
             <ul>
                 <li v-for="page in pages" :key="page.no">
-                    {{ page.titre }}
+                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.id)">{{ page.titre }}</a>
                 </li>
             </ul>
         </nav>
@@ -152,9 +152,17 @@
                     })
                 }
             },
+            effectuerNavigation(idPage) {
+                this.config.keepData = true
+                this.contenuform.page = idPage
+                this.$nextTick(function () {
+                    this.config.keepData = false
+                })
+            }
         },
         data: {
             contenuform: { "validAll": false },
+            config: {"keepData": false},
             formErrors: [],
             inputErrors: {},
             pages: obtenirPages()
@@ -174,9 +182,8 @@
     })
     /*TODO ici obtenir les pages à partir de la config. */
     function obtenirPages() {
-        return [{ no: 1, titre: "Raison de la demande" },
-        { no: 2, titre: "Renseignements généraux" },
-        { no: 3, titre: "Études" }
+        return [{ no: 1, titre: "Raison de la demande", id: "infos" },
+            { no: 2, titre: "Renseignements généraux", id: "raisonDemande" }        
         ]
     }
 

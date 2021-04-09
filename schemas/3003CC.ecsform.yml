@@ -1,0 +1,178 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
+form:
+  inputDefaultClasses:
+    default: form-control 
+    group: 
+    radio: 
+    checkbox: 
+    button: btn btn-secondaire
+    submit: btn btn-primaire
+  templates: 
+    inline: |
+      <div class="inline {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
+          {{RecursiveComponents components}}
+      </div>
+    dynamic: |
+      <{{tag}} class="{{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
+        {{i18n text}}
+        {{RecursiveComponents components}}
+      </{{tag}}>
+    input: |
+      <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+              {{# type}} type="{{.}}" {{/ type}}
+              {{# name}} name="{{.}}" {{/ name}}
+              {{# name}} key="{{.}}" {{/ name}}
+              {{GenerateInputClasses type .}}
+              {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
+              {{# label}} label="{{i18n .}}" {{/ label}}
+              {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
+              {{# help}} help="{{i18n .}}" {{/ help}}
+              {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
+              {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
+              {{# min}} min="{{.}}" {{/ min}}
+              {{# max}} max="{{.}}" {{/ max}}
+              {{# limit}} limit="{{.}}" {{/ limit}}
+              {{# options}} :options="{{JsObject options}}" {{/ options}}
+              {{# repeatable}}
+              :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
+              {{/ repeatable}}
+              {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
+          {{RecursiveComponents components}}
+      </formulate-input>
+  sections:
+    # Section 1
+    - section: 
+        fr: Informations sur la demande
+        en: Information on the application
+      id: infos
+      components:
+        - name: TypeDemande
+          type: radio
+          label: 
+            fr: Quel type de demande voulez-vous effectuer?
+          validations: 
+            required: trim
+          options: 
+            Afdr: Demande d'aide financière de dernier recours
+            AideEmploi: Demande de service d'aide à l'emploi
+        - name: 02-Conjoint
+          type: radio
+          label: 
+            fr: Avez-vous un conjoint?
+          validations: 
+            required: trim
+          options: yesno
+        - name: Req-00-Enfants
+          type: radio
+          label: 
+            fr: Avez-vous des enfants à charge?
+          validations: 
+            required: trim
+          options: yesno
+        - name: Req01-Travaille
+          type: radio
+          label: 
+            fr: Avez-vous déjà travaillé?
+          validations: 
+            required: trim
+          options: yesno
+        - name: Req-00-etudes
+          type: radio
+          label: 
+            fr: Êtes-vous aux études?
+          validations: 
+            required: trim
+          options: yesno
+    # Section 2
+    - section: 
+        fr: Raison de la demande
+        en: (EN)Raison de la demande
+      id: raisonDemande
+      components:
+        - type: dynamic
+          v-if: contenuform.TypeDemande === 'Afdr'
+          tag: div        
+          components:
+            - name: EvenementsDerniereAnnee
+              type: radio
+              label: 
+                fr: Cochez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
+              validations: 
+                required: trim
+              options: 
+                FinEtudesTempsPleinReq: Une fin d'études à temps plein
+                FinDiminutionRevenusReq: Une fin ou une diminution des revenus
+            - name: FinDiminutionRevenusTypeReq
+              v-if: contenuform.EvenementsDerniereAnnee === 'FinDiminutionRevenusReq'
+              type: radio
+              label: 
+                fr: Type de revenu
+              validations: 
+                required: trim
+              options: 
+                FinRevenusEmploiReq: d'emploi
+                FinRevenusTravailAutonomeReq: de travail autonome
+                FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
+                FinRevenusAutres: autre
+            - name: FinRevenusAutresPrecision
+              v-if: contenuform.FinDiminutionRevenusTypeReq === 'FinRevenusAutres'
+              type: text
+              label: 
+                fr: Précisez
+              validations: 
+                required: trim
+            - name: DateEvenementReq
+              v-if: contenuform.EvenementsDerniereAnnee
+              type: date
+              label: 
+                fr: Date de l'évènement
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeAfdr
+              type: radio
+              label: 
+                fr: Précisez la raison de votre demande d'aide financière
+              validations: 
+                required: trim
+              options: 
+                RevenuInsuffisant: Votre revenu est insuffisant
+                NaissanceEnfant: Naissance ou prise en charge d'un enfant
+                SortieEtablissement: Sortie d'un établissement
+                ArriveeConjoint: Arrivée d'un conjoint
+                PerteConjoint: Perte du conjoint
+                AttenteDecision: Vous êtes en attente d'une décision (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
+                AucunRevenu: Vous êtes sans aucun revenu
+                ProblemeSante: Problème de santé important ayant affecté votre capacité de travailler
+                RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
+                PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
+            - name: PrecisionRaisonDemandeAfdrAutre
+              v-if: contenuform.PrecisionRaisonDemandeAfdr === 'PrecisionRaisonDemandeAfdrAutreRaison'
+              type: text
+              label: 
+                fr: Précisez
+              validations: 
+                required: trim
+        - type: dynamic
+          v-if: contenuform.TypeDemande === 'AideEmploi'
+          tag: div        
+          components:      
+            - name: PrecisionRaisonDemandeEmploi
+              type: radio
+              label: 
+                fr: Précisez la raison de votre demande de services d'aide à l'emploi
+              validations: 
+                required: trim
+              options: 
+                AideRechercheEmploi: Pour de l'aide à la recherche d'emploi
+                RetourEcole: Pour un retour à l'école/ou formation
+                DirigeEmployeurOrganisme: Vous êtes dirigé par un employeur ou un organisme
+                PrecisionRaisonDemandeEmploiAutreRaison: Autre
+            - name: PrecisionRaisonDemandeEmploiAutre
+              v-if: contenuform.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
+              type: text
+              label: 
+                fr: Précisez
+              validations: 
+                required: trim
+
+
