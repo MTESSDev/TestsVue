@@ -189,6 +189,14 @@ const __vue_component__$2 = /*#__PURE__*/normalizeComponent({
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var script$1 = {
   props: {
     visibleErrors: {
@@ -272,11 +280,19 @@ var __vue_render__$1 = function () {
   var _c = _vm._self._c || _h;
 
   return _vm.visibleErrors.length > 0 ? _c('div', [_vm.type === 'form' ? _c('div', [_vm.visibleErrors.length > 0 ? _c('div', {
+    staticClass: "validation-summary-errors",
     attrs: {
       "id": "errorSummary",
+      "data-valmsg-summary": "true",
       "tabindex": "-1"
     }
-  }, [_c('h2', [_vm._v("Des erreurs sont présentes dans le formulaire")]), _vm._v(" "), _c('ul', {
+  }, [_c('div', {
+    staticClass: "message erreur text-sm"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "contenu zone-html"
+  }, [_c('h2', {
+    staticClass: "text-sm"
+  }, [_vm._v("Des erreurs sont présentes dans le formulaire")]), _vm._v(" "), _c('ul', {
     class: _vm.outerClass
   }, _vm._l(_vm.errorSummary, function (error, index) {
     return _c('li', {
@@ -296,7 +312,7 @@ var __vue_render__$1 = function () {
         }
       }
     }, [_vm._v(_vm._s(error.message))])]);
-  }), 0)]) : _vm._e()]) : _c('div', [_c('ul', {
+  }), 0)])])]) : _vm._e()]) : _c('div', [_c('ul', {
     class: _vm.outerClass,
     attrs: {
       "aria-hidden": "true"
@@ -316,7 +332,22 @@ var __vue_render__$1 = function () {
   }), 0)])]) : _vm._e();
 };
 
-var __vue_staticRenderFns__$1 = [];
+var __vue_staticRenderFns__$1 = [function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('div', {
+    staticClass: "entete d-flex"
+  }, [_c('div', {
+    staticClass: "icone-svg",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]);
+}];
 /* style */
 
 const __vue_inject_styles__$1 = undefined;
