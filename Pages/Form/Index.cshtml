@@ -170,7 +170,7 @@
                 }
             },
             ajouterErreursEnfant(enfant, listeErreurs) {
-                if (enfant.isSubField && enfant.isSubField()) {
+                if (enfant.isSubField && enfant.isSubFLinkield()) {
                     const idEnfant = enfant.context.attributes.id
 
                     //enfant.visibleValidationErrors.forEach(message => {
@@ -202,7 +202,7 @@
                 return page ? page.titre : 'Page non trouvée'
             },
             sauvegarde() {
-                axios.post('/Form/save/3003CC', this.form);
+                axios.post('@Url.PageLink("save", null, new { id = "3003CC" } )', this.form);
 
                 alert("Sauvegardé!");
             }
