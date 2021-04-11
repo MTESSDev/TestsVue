@@ -175,7 +175,9 @@
                 return page ? page.titre : 'Page non trouvée'
             },
             sauvegarde() {
-                debugger;
+                axios.post('/Privacy', this.form);
+
+                alert("Sauvegardé!");
             }
         },
         data: {
