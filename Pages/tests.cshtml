@@ -1,9 +1,10 @@
-﻿@page "{id?}"
-@model GenericModel
+﻿@page
+@model TestsModel
 @{
-    ViewData["H1NonRendu"] = true;
-    ViewData["Title"] = "Formulaire";
+    ViewData["Title"] = "Demande d'aide financière de dernier recours";
+    ViewData["masquerPremierEspaceurConteneurColonnes"] = true;
 }
+
 @section style{
 
     <style>
@@ -16,32 +17,34 @@
 
 @section colonneGauche{
     <nav>
-        <nav class="navigation-form">
-            <ul>
-                <li v-for="page in pages" :key="page.no">
-                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.id)" v-bind:class="{active : page.id === form.idPageCourante}">{{ page.titre }}</a>
-                </li>
-            </ul>
-        </nav>
+        <ul>
+            <li v-for="page in pages" :key="page.no">
+                {{ page.titre }}
+            </li>
+        </ul>
     </nav>
 }
 
 @section colonneDroite{
-    <h1>{{obtenirTitrePageCourante()}}</h1>
     <div id="form">
+        @*<template>
+                <formulate-form v-model="values"
+                                :schema="schema"></formulate-form>
+            </template>*@
+
+
         <template>
-            @Html.Raw(Model.FormRaw)
+            @Html.Raw(Model.Formulaire)
         </template>
     </div>
 }
 
-
 @section scripts{
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="~/form/formulate.min.js"></script>
-    <script src="~/form/locales.min.js"></script>
-    <script src="~/form/mtess-vueformulate.min.js"></script>
+    <script src="form/formulate.min.js"></script>
+    <script src="form/locales.min.js"></script>
+    <script src="form/mtess-vueformulate.min.js"></script>
 
     <script>
 
@@ -49,10 +52,21 @@
     Vue.component('ErrorList', MtessVueformulate.ErrorList)
     Vue.component('RepeatableRemove', MtessVueformulate.RepeatableRemove)
 
+/*        classes: {
+            outer: 'form-group',
+                input: 'form-control',
+                    inputHasErrors: 'is-invalid',
+                        help: 'form-text text-muted',
+                            errors: 'list-unstyled text-danger'
+        },*/
+
     Vue.use(VueFormulate, {
         plugins: [this.VueFormulateI18n.fr],
         classes: {
-            error: 'text-danger field-validation-error'
+            error: 'text-danger field-validation-error',
+            input: (context, baseClasses) => {
+                return obtenirClassesInput(context, baseClasses)
+            }
         },
         slotComponents: {
             label: 'Label',
@@ -76,7 +90,7 @@
                 // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.
                 setTimeout(function () {
                     terminerTraitementEnCoursSoumissionForm()
-                }, 800);
+                },800)
             },
             submitHandler(data) {
                 axios.post('/Privacy', data)
@@ -88,8 +102,7 @@
 
                 nomChamps.forEach(nomChamp => {
                     const champ = fields[nomChamp]
-                    //if (champ.hasVisibleErrors) {
-                    if (champ.hasErrors) {
+                    if (champ.hasVisibleErrors) {
                         if (champ.context && champ.context.type !== 'group') {
                             this.ajouterErreursChamp(champ, listeErreurs)
                         } else {
@@ -100,8 +113,7 @@
                 return JSON.stringify(listeErreurs)
             },
             ajouterErreursChamp(champ, listeErreurs) {
-                //champ.context.visibleValidationErrors.forEach(message => {
-                champ.context.validationErrors.forEach(message => {
+                champ.context.visibleValidationErrors.forEach(message => {
                     listeErreurs.push({ id: champ.context.id, message: message })
                 })
             },
@@ -146,8 +158,7 @@
                 if (enfant.isSubField && enfant.isSubField()) {
                     const idEnfant = enfant.context.attributes.id
 
-                    //enfant.visibleValidationErrors.forEach(message => {
-                    enfant.validationErrors.forEach(message => {
+                    enfant.visibleValidationErrors.forEach(message => {
                         listeErreurs.push({ id: idEnfant, message: message })
                     })
                 } else {
@@ -156,33 +167,31 @@
                     })
                 }
             },
-            effectuerNavigation(idPage) {
-                this.form.validAll = false
-                this.config.keepData = true
-                this.form.idPageCourante = idPage
+            ajouterErreursGroupe2(groupe, listeErreurs) {
+                const conteneursChamps = groupe.$el.querySelectorAll('.formulate-input')
+                console.log('A -> ' + conteneursChamps.length)
+                conteneursChamps.forEach(conteneurChamp => {
+//                    if (conteneurChamp.hasAttribute('data-has-errors')) {
+                        console.log('B')
+                        const label = conteneurChamp.querySelector('label')
+                        const messages = conteneurChamp.querySelectorAll('.formulate-input-error')
 
-                this.$nextTick(function () {
-                    this.config.keepData = false
+                        if (label && messages.length > 0) {
+                            console.log('C')
+                            const id = label.getAttribute('for')
 
-                    if (this.form.idPageCourante === 'revision') {
-                        this.form.validAll = true
-                        this.$formulate.submit('form')
-                    }
+                            messages.forEach(message => {
+                                console.log('D')
+                                listeErreurs.push({ id: id, message: message.innerText })
+                            })
+                        }
+                    //}
                 })
-            },
-            obtenirTitrePageCourante() {
-                const page = this.pages.find(page => page.id === this.form.idPageCourante)
-                return page ? page.titre : 'Page non trouvée'
-            },
-            sauvegarde() {
-                axios.post('/Privacy', this.form);
-
-                alert("Sauvegardé!");
+                console.log("Erreurs -> " + listeErreurs)
             }
         },
         data: {
-            form: { "validAll": false, idPageCourante: 'infos'}, //TODO ici la page et le contenu pourraient venir du serveur lors d'une reprise de saisie
-            config: {"keepData": false}, //TODO ici pe mettre un autre nom que config. L'idée est de conserver ce qui concerne le form mais qui ne doit pas être dans le model
+            form: {noPageCourante: 1},
             formErrors: [],
             inputErrors: {},
             pages: obtenirPages()
@@ -200,17 +209,47 @@
     window.addEventListener('load', () => {
         new Vue(App)
     })
-    /*TODO ici obtenir les pages à partir de la config. */
-    function obtenirPages() {
-        return [{ no: 1, titre: "Renseignements généraux", id: "infos" },
-            { no: 2, titre: "Raison de la demande", id: "raisonDemande" },
-            { no: 3, titre: "Révision", id: "revision" }
-        ]
-    }
 
-    function obtenirTexteEdite(id) {
-        return '(Patch) Non défini.'
-    }
+        /*TODO ici obtenir les pages à partir de la config. */
+        function obtenirPages() {
+            return [{ no: 1, titre: "Raison de la demande" },
+                { no: 2, titre: "Renseignements généraux" },
+                { no: 3, titre: "Études" }
+            ]
+        }
+        function obtenirClassesInput(context, baseClasses) {
+            switch (context.classification) {
+                case "text":
+                case "textArea":
+                case "select":
+                    baseClasses.push('form-control')
+                    break
+                case "button":
+                    if (context.type === 'submit') {
+                        baseClasses.push('btn btn-primaire')
+                    }
+                    break
+            }
+
+            return baseClasses
+        }
+
+        function obtenirClassesOuter(context, baseClasses) {
+            switch (context.classification) {
+                case "text":
+                case "group":
+                case "textArea":
+                case "select":
+                    baseClasses.push('form-group')
+                    break
+            }
+
+            return baseClasses
+        }
+
+        function obtenirTexteEdite(id) {
+            return '(Patch) Non défini.'
+        }
 
     </script>
 }

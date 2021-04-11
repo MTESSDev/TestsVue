@@ -26,16 +26,40 @@ namespace ECSForm.Pages
     {
         private readonly ILogger<GenericModel> _logger;
 
-        public DynamicForm? Form { get; set; }
+        //public DynamicForm? Form { get; set; }
         public string? FormRaw { get; set; }
+        public Dictionary<string, object?> VueData { get; set; } = new Dictionary<string, object?>();
+
+        [VueData("formErrors")]
+        public object[] FormErrors { get; set; }
+
+        [VueData("inputErrors")]
+        public Dictionary<string, string> InputErrors { get; set; }
+
+        [VueData("config")]
+        public Dictionary<string, object?>? Config { get; set; }
+
+        [VueData("form")]
+        public dynamic Form { get; set; }
+
+        [VueData("pages")]
+        public List<Pages>? Pages { get; set; } = new List<Pages>() {
+            new Pages() { No= 1, Titre= "Renseignements généraux", Id= "infos" },
+            new Pages() { No= 2, Titre= "Raison de la demande", Id= "raisonDemande" },
+            new Pages() { No= 3, Titre= "Révision", Id= "revision" } };
 
         public GenericModel(ILogger<GenericModel> logger)
         {
             _logger = logger;
+            InputErrors = new Dictionary<string, string>();
+            FormErrors = new object[0];
+            Config = new Dictionary<string, object?>() { { "keepData", false } };
+            Form = new { };
         }
 
         public async Task OnGet(string? id)
         {
+
             /* Section TEST pour le v-if "SERVER-SIDE" */
             var lambdaParser = new NReco.Linq.LambdaParser();
             var varContext = new Dictionary<string, object>();
@@ -109,6 +133,17 @@ namespace ECSForm.Pages
 
                  Formulaire = serializer.Serialize(yamlObject);
              }*/
+
+            HttpContext.Request.Cookies.TryGetValue("ECSForm3003CC", out var form);
+            if (string.IsNullOrEmpty(form))
+                Form = new { validAll = false, idPageCourante = "infos" };
+            else
+                Form = JsonConvert.DeserializeObject<dynamic>(form);
+
+            var parser = new VueParser(); // in the real app you would use DI
+
+            // in a real app, this would be placed somewhere in the base controller
+            VueData = parser.ParseData(this);
         }
 
         private static bool TryValidate(object value, ValidationContext validationContext, ValidationAttribute attribute, out ValidationError validationError)
