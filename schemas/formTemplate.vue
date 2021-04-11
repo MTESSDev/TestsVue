@@ -1,5 +1,5 @@
 ﻿<formulate-form name="form"
-                v-model="contenuform"
+                v-model="form"
                 @submit="submitHandler"
                 @submit-raw="submitRawHandler"
                 :invalid-message="invalidMessage"
@@ -9,9 +9,9 @@
                 :errors="inputErrors">
 
     {{# Form.Sections}}
-    <div v-if="contenuform.validAll === true || contenuform.idPageCourante == '{{Id}}'">
+    <div v-if="form.validAll === true || form.idPageCourante == '{{Id}}'">
         <div class="section {{Classes}}"
-             v-show="contenuform.idPageCourante == '{{Id}}' && contenuform.validAll === false">
+             v-show="form.idPageCourante == '{{Id}}' && form.validAll === false">
             {{RecursiveComponents components}}
         </div>
     </div>
@@ -23,12 +23,12 @@
                      :input-class="['btn', 'btn-secondaire']"></formulate-input>
 
     <formulate-input type="submit"
-                     v-if="contenuform.idPageCourante === 'revision'"
+                     v-if="form.idPageCourante === 'revision'"
                      label="Soumettre"
                      :input-class="['btn', 'btn-primaire']"></formulate-input>
     {{! ceci est un commentaire, pour dire que le }}
-    {{! block ci-dessous sert à forcer stubble à skipper contenuform }}
+    {{! block ci-dessous sert à forcer stubble à skipper form }}
     {{=<% %>=}}
-    {{contenuform}}
+    {{form}}
     <%={{ }}=%>
 </formulate-form>

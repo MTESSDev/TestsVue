@@ -114,7 +114,7 @@ form:
             fr: Êtes-vous né au Québec?
           options: yesno
         - name: Req00-Etatcivil #Req00-Etatcivil ça ne fonctionne pas ?!
-          v-if: contenuform.avec_conjoint == 'true'
+          v-if: form.avec_conjoint == 'true'
           type: radio
           #pdfBind: Req00-Etatcivil_Celibataire
           label:
@@ -130,8 +130,8 @@ form:
             Divorce: Divorcé ou dissolution d'union civile
         - name: date_separation
           v-if: |  #Solution à réfléchir ... concernant les tirets dans les noms.
-            contenuform['Req00-Etatcivil'] === 'SepareSansJugement' || 
-            contenuform['Req00-Etatcivil'] === 'SepareLegalement'
+            form['Req00-Etatcivil'] === 'SepareSansJugement' || 
+            form['Req00-Etatcivil'] === 'SepareLegalement'
           type: date
           validations:
             required: trim

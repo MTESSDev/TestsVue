@@ -19,7 +19,7 @@
         <nav class="navigation-form">
             <ul>
                 <li v-for="page in pages" :key="page.no">
-                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.id)" v-bind:class="{active : page.id === contenuform.idPageCourante}">{{ page.titre }}</a>
+                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.id)" v-bind:class="{active : page.id === form.idPageCourante}">{{ page.titre }}</a>
                 </li>
             </ul>
         </nav>
@@ -157,21 +157,21 @@
                 }
             },
             effectuerNavigation(idPage) {
-                this.contenuform.validAll = false
+                this.form.validAll = false
                 this.config.keepData = true
-                this.contenuform.idPageCourante = idPage
+                this.form.idPageCourante = idPage
 
                 this.$nextTick(function () {
                     this.config.keepData = false
 
-                    if (this.contenuform.idPageCourante === 'revision') {
-                        this.contenuform.validAll = true
+                    if (this.form.idPageCourante === 'revision') {
+                        this.form.validAll = true
                         this.$formulate.submit('form')
                     }
                 })
             },
             obtenirTitrePageCourante() {
-                const page = this.pages.find(page => page.id === this.contenuform.idPageCourante)
+                const page = this.pages.find(page => page.id === this.form.idPageCourante)
                 return page ? page.titre : 'Page non trouvée'
             },
             sauvegarde() {
@@ -179,7 +179,7 @@
             }
         },
         data: {
-            contenuform: { "validAll": false, idPageCourante: 'infos'}, //TODO ici la page et le contenu pourraient venir du serveur lors d'une reprise de saisie
+            form: { "validAll": false, idPageCourante: 'infos'}, //TODO ici la page et le contenu pourraient venir du serveur lors d'une reprise de saisie
             config: {"keepData": false}, //TODO ici pe mettre un autre nom que config. L'idée est de conserver ce qui concerne le form mais qui ne doit pas être dans le model
             formErrors: [],
             inputErrors: {},

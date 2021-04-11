@@ -1,4 +1,4 @@
-﻿<formulate-form v-model="contenuform"
+﻿<formulate-form v-model="form"
                 @submit="submitHandler"
                 @submit-raw="submitRawHandler"
                 :invalid-message="invalidMessage"
@@ -6,21 +6,21 @@
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
-    <div v-show="contenuform.noPageCourante === 1">
+    <div v-show="form.noPageCourante === 1">
         <formulate-input type="radio"
                          name="ne_qc"
                          label="Êtes-vous né au Québec?"
                          validation="required"
                          :options="{oui: 'Oui', non: 'Non'}">
         </formulate-input>
-        <formulate-input v-if="contenuform.ne_qc === 'oui'"
+        <formulate-input v-if="form.ne_qc === 'oui'"
                          type="text"
                          key="nom_parent"
                          name="nom_parent"
                          validation="required"
                          label="Inscrivez le nom de famille et le prénom d'un de vos parents:">
         </formulate-input>
-        <formulate-input v-if="contenuform.ne_qc === 'non'"
+        <formulate-input v-if="form.ne_qc === 'non'"
                          type="radio"
                          key="citoyen_canadien"
                          name="citoyen_canadien"
@@ -28,7 +28,7 @@
                          label="Avez-vous la citoyenneté canadienne?"
                          :options="{oui: 'Oui', non: 'Non'}">
         </formulate-input>
-        <formulate-input v-if="contenuform.citoyen_canadien === 'non'"
+        <formulate-input v-if="form.citoyen_canadien === 'non'"
                          type="radio"
                          key="resident_permanent"
                          name="resident_permanent"
@@ -36,7 +36,7 @@
                          label="Êtes-vous résident permanent?"
                          :options="{oui: 'Oui', non: 'Non'}">
         </formulate-input>
-        <formulate-input v-if="contenuform.resident_permanent === 'non'"
+        <formulate-input v-if="form.resident_permanent === 'non'"
                          type="radio"
                          key="demandeur_asile"
                          name="demandeur_asile"
@@ -46,7 +46,7 @@
         </formulate-input>
 
 
-        <formulate-input v-if="contenuform.demandeur_asile === 'non'"
+        <formulate-input v-if="form.demandeur_asile === 'non'"
                          type="radio"
                          key="refugie_protege"
                          name="refugie_protege"
@@ -65,7 +65,7 @@
 
 
         <formulate-input type="group"
-                         v-if="contenuform.deja_travaille === 'oui'"
+                         v-if="form.deja_travaille === 'oui'"
                          name="emplois"
                          :repeatable="true"
                          label="Emplois"
@@ -106,7 +106,7 @@
                                            5: 'Fermeture de l\'entreprise', 6: 'Naissance ou prise en charge d\'un enfant', 7: 'Congédiement', 8: 'Abandon de l\'emploi',
                                            9: 'Autre'}">
             </formulate-input>
-            <formulate-input v-if="contenuform.raison_fin_emploi === '9'"
+            <formulate-input v-if="form.raison_fin_emploi === '9'"
                              name="raison_fin_emploi_autre"
                              validation="required"
                              label="Précisez la raison de fin d'emploi">
@@ -120,7 +120,7 @@
                          validation="required"
                          :options="{oui: 'Oui', non: 'Non'}">
         </formulate-input>
-        <formulate-input v-if="contenuform.a_limitations_fonctionnelles === 'oui'"
+        <formulate-input v-if="form.a_limitations_fonctionnelles === 'oui'"
                          name="limitations_fonctionnelles_precisions"
                          validation="required"
                          label="Précisez :">
@@ -132,7 +132,7 @@
                          validation="required"
                          label="Langues parlées">
         </formulate-input>
-        <formulate-input v-if="contenuform.langues_parlees && contenuform.langues_parlees.includes('autres')"
+        <formulate-input v-if="form.langues_parlees && form.langues_parlees.includes('autres')"
                          name="autres_langues_parlees"
                          validation="required"
                          label="Précisez :">
@@ -140,11 +140,11 @@
 
     </div>
 
-    <div v-show="contenuform.noPageCourante === 2">
+    <div v-show="form.noPageCourante === 2">
         Section 2 avec rien :(
     </div>
 
-    <div v-show="contenuform.noPageCourante === 3">
+    <div v-show="form.noPageCourante === 3">
         Section 7 avec rien :(
     </div>
 
@@ -153,6 +153,6 @@
 
 
     <template>
-        {{ contenuform  }}
+        {{ form  }}
     </template>
 </formulate-form>

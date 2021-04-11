@@ -90,7 +90,7 @@ form:
       id: raisonDemande
       components:
         - type: dynamic
-          v-if: contenuform.TypeDemande === 'Afdr'
+          v-if: form.TypeDemande === 'Afdr'
           tag: div        
           components:
             - name: EvenementsDerniereAnnee
@@ -103,7 +103,7 @@ form:
                 FinEtudesTempsPleinReq: Une fin d'études à temps plein
                 FinDiminutionRevenusReq: Une fin ou une diminution des revenus
             - name: FinDiminutionRevenusTypeReq
-              v-if: contenuform.EvenementsDerniereAnnee === 'FinDiminutionRevenusReq'
+              v-if: form.EvenementsDerniereAnnee === 'FinDiminutionRevenusReq'
               type: radio
               label: 
                 fr: Type de revenu
@@ -115,14 +115,14 @@ form:
                 FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
                 FinRevenusAutres: autre
             - name: FinRevenusAutresPrecision
-              v-if: contenuform.FinDiminutionRevenusTypeReq === 'FinRevenusAutres'
+              v-if: form.FinDiminutionRevenusTypeReq === 'FinRevenusAutres'
               type: text
               label: 
                 fr: Précisez
               validations: 
                 required: trim
             - name: DateEvenementReq
-              v-if: contenuform.EvenementsDerniereAnnee
+              v-if: form.EvenementsDerniereAnnee
               type: date
               label: 
                 fr: Date de l'évènement
@@ -146,14 +146,14 @@ form:
                 RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
                 PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
             - name: PrecisionRaisonDemandeAfdrAutre
-              v-if: contenuform.PrecisionRaisonDemandeAfdr === 'PrecisionRaisonDemandeAfdrAutreRaison'
+              v-if: form.PrecisionRaisonDemandeAfdr === 'PrecisionRaisonDemandeAfdrAutreRaison'
               type: text
               label: 
                 fr: Précisez
               validations: 
                 required: trim
         - type: dynamic
-          v-if: contenuform.TypeDemande === 'AideEmploi'
+          v-if: form.TypeDemande === 'AideEmploi'
           tag: div        
           components:      
             - name: PrecisionRaisonDemandeEmploi
@@ -168,7 +168,7 @@ form:
                 DirigeEmployeurOrganisme: Vous êtes dirigé par un employeur ou un organisme
                 PrecisionRaisonDemandeEmploiAutreRaison: Autre
             - name: PrecisionRaisonDemandeEmploiAutre
-              v-if: contenuform.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
+              v-if: form.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
               type: text
               label: 
                 fr: Précisez
