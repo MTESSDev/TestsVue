@@ -173,6 +173,9 @@
             obtenirTitrePageCourante() {
                 const page = this.pages.find(page => page.id === this.contenuform.idPageCourante)
                 return page ? page.titre : 'Page non trouvée'
+            },
+            sauvegarde() {
+                debugger;
             }
         },
         data: {

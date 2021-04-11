@@ -13,15 +13,15 @@ using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace WebApplication2.Pages
+namespace ECSForm.Pages
 {
     public class VanilleModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<VanilleModel> _logger;
 
         public string Formulaire { get; set; }
 
-        public VanilleModel(ILogger<IndexModel> logger)
+        public VanilleModel(ILogger<VanilleModel> logger)
         {
             _logger = logger;
         }

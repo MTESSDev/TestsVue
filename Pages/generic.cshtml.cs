@@ -17,17 +17,19 @@ using System.Text;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+using ECSForm.Utils;
+using ECSForm.Model;
 
-namespace WebApplication2.Pages
+namespace ECSForm.Pages
 {
     public class GenericModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<GenericModel> _logger;
 
         public DynamicForm? Form { get; set; }
         public string? FormRaw { get; set; }
 
-        public GenericModel(ILogger<IndexModel> logger)
+        public GenericModel(ILogger<GenericModel> logger)
         {
             _logger = logger;
         }

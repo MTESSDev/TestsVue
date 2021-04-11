@@ -1,4 +1,4 @@
-﻿namespace WebApplication2.Pages
+﻿namespace ECSForm.Pages
 {
     public class Validation
     {

@@ -17,7 +17,13 @@
     </div>
     {{/ Form.Sections}}
 
+    <formulate-input type="button"
+                     @click="sauvegarde"
+                     label="Sauvegarder"
+                     :input-class="['btn', 'btn-secondaire']"></formulate-input>
+
     <formulate-input type="submit"
+                     v-if="contenuform.idPageCourante === 'revision'"
                      label="Soumettre"
                      :input-class="['btn', 'btn-primaire']"></formulate-input>
     {{! ceci est un commentaire, pour dire que le }}

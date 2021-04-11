@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace WebApplication2.Pages
+namespace ECSForm.Utils
 {
     internal static class FormHelpers
     {

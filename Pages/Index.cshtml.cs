@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace WebApplication2.Pages
+namespace ECSForm.Pages
 {
     public class IndexModel : PageModel
     {

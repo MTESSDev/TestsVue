@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebApplication2.Pages
+namespace ECSForm.Model
 {
     public class LowBool
     {

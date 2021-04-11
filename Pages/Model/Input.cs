@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Primitives;
 using System.Collections.Generic;
 
-namespace WebApplication2.Pages
+namespace ECSForm.Pages
 {
     public class Input
     {

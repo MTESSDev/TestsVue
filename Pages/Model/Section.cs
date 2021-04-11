@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using YamlDotNet.Serialization;
 
-namespace WebApplication2.Pages
+namespace ECSForm.Model
 {
     public class SectionBloc
     {

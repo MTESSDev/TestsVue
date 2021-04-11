@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApplication2.Pages
+namespace ECSForm.Pages
 {
     public class PrivacyModel : PageModel
     {
