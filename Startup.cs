@@ -1,3 +1,4 @@
+using ECSForm.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,15 +28,7 @@ namespace ECSForm
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           /* services.Configure<RequestLocalizationOptions>(options =>
-            {
-                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("fr-CA");
-                options.SupportedCultures = new List<CultureInfo> { new CultureInfo("en-CA"), new CultureInfo("fr-CA") };
-                options.RequestCultureProviders.Clear();
-                options.RequestCultureProviders.Add(new QueryStringRequestCultureProvider() { QueryStringKey = "culture", UIQueryStringKey = "lang" });
-            });
-           */
-
+            services.AddSingleton<IVueParser>(new VueParser());
             services.AddControllers();
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
@@ -70,8 +63,6 @@ namespace ECSForm
 
             app.UseAuthorization();
 
-
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
@@ -81,6 +72,7 @@ namespace ECSForm
 
 
     }
+
     public class CustomerCultureProvider : RequestCultureProvider
     {
         public override async Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)

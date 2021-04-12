@@ -25,6 +25,7 @@ namespace ECSForm.Pages
     public class GenericModel : PageModel
     {
         private readonly ILogger<GenericModel> _logger;
+        private readonly IVueParser _vueParser;
 
         //public DynamicForm? Form { get; set; }
         public string? FormRaw { get; set; }
@@ -48,9 +49,11 @@ namespace ECSForm.Pages
             new Pages() { No= 2, Titre= "Raison de la demande", Id= "raisonDemande" },
             new Pages() { No= 3, Titre= "Révision", Id= "revision" } };
 
-        public GenericModel(ILogger<GenericModel> logger)
+        public GenericModel(ILogger<GenericModel> logger, IVueParser vueParser)
         {
             _logger = logger;
+            _vueParser = vueParser;
+
             InputErrors = new Dictionary<string, string>();
             FormErrors = new object[0];
             Config = new Dictionary<string, object?>() { { "keepData", false } };
@@ -93,10 +96,7 @@ namespace ECSForm.Pages
             else
                 Form = JsonConvert.DeserializeObject<dynamic>(form);
 
-            var parser = new VueParser(); // in the real app you would use DI
-
-            // in a real app, this would be placed somewhere in the base controller
-            VueData = parser.ParseData(this);
+            VueData = _vueParser.ParseData(this);
         }
 
         private static bool TryValidate(object value, ValidationContext validationContext, ValidationAttribute attribute, out ValidationError validationError)
