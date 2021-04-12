@@ -176,7 +176,7 @@ form:
                 required: trim
     # Section 3
     - section: 
-        fr: Révision2
+        fr: Révision
         en: (EN)Test
       id: revision
       components:

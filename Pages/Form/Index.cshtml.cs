@@ -38,16 +38,13 @@ namespace ECSForm.Pages
         public Dictionary<string, string> InputErrors { get; set; }
 
         [VueData("config")]
-        public Dictionary<string, object?>? Config { get; set; }
+        public Dictionary<string, object?> Config { get; set; }
 
         [VueData("form")]
         public dynamic Form { get; set; }
 
         [VueData("pages")]
-        public List<Pages>? Pages { get; set; } = new List<Pages>() {
-            new Pages() { No= 1, Titre= "Renseignements généraux", Id= "infos" },
-            new Pages() { No= 2, Titre= "Raison de la demande", Id= "raisonDemande" },
-            new Pages() { No= 3, Titre= "Révision", Id= "revision" } };
+        public List<Section>? Sections { get; set; } = new List<Section>();
 
         public GenericModel(ILogger<GenericModel> logger, IVueParser vueParser)
         {
@@ -56,12 +53,15 @@ namespace ECSForm.Pages
 
             InputErrors = new Dictionary<string, string>();
             FormErrors = new object[0];
-            Config = new Dictionary<string, object?>() { { "keepData", false } };
+            Config = new Dictionary<string, object?>();
             Form = new { };
         }
 
-        public async Task OnGet(string? id)
+        public async Task<IActionResult> OnGet(string? id)
         {
+            var configName = id ?? "default";
+            Config.Add("keepData", false);
+            Config.Add("configName", configName);
 
             /* Section TEST pour le v-if "SERVER-SIDE" */
             /*var lambdaParser = new NReco.Linq.LambdaParser();
@@ -72,31 +72,52 @@ namespace ECSForm.Pages
             equation = equation.Replace("===", "==");
             var ttt = lambdaParser.Eval(equation, varContext);*/
 
-            using (var r = new StreamReader(@$"schemas/{id ?? "default"}.ecsform.yml"))
+            if (!System.IO.File.Exists(@$"schemas/{configName}.ecsform.yml"))
+            {
+                return NotFound();
+            }
+
+            DynamicForm? dynamicForm;
+
+            using (var configFile = new StreamReader(@$"schemas/{configName}.ecsform.yml"))
             {
                 var deserializer = new DeserializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .Build();
 
-                var yamlObject = deserializer.Deserialize<DynamicForm>(r);
+                dynamicForm = deserializer.Deserialize<DynamicForm>(configFile);
 
-                FormHelpers.TemplateList = yamlObject.Form?.Templates;
-                FormHelpers.InputDefaultClasses = yamlObject.Form?.InputDefaultClasses;
+                FormHelpers.TemplateList = dynamicForm.Form?.Templates;
+                FormHelpers.InputDefaultClasses = dynamicForm.Form?.InputDefaultClasses;
 
                 using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
                 {
                     var content = await streamReader.ReadToEndAsync();
-                    FormRaw = await FormHelpers.Stubble.RenderAsync(content, yamlObject);
+                    FormRaw = await FormHelpers.Stubble.RenderAsync(content, dynamicForm);
                 }
             }
 
-            HttpContext.Request.Cookies.TryGetValue("ECSForm3003CC", out var form);
+            if (dynamicForm.Form is null) { return NotFound(); }
+
+            // Load sections from YAML
+            var sectionId = 0;
+            foreach (var section in dynamicForm.Form.Sections)
+            {
+                Sections?.Add(new Section() { No = sectionId++, Id = section.Id, Titre = section.Section.GetLocalizedObject() ?? "Title not found" });
+            }
+
+            // Restore last state
+            HttpContext.Request.Cookies.TryGetValue($"ECSForm{configName}", out var form);
+
             if (string.IsNullOrEmpty(form))
                 Form = new { validAll = false, idPageCourante = "infos" };
             else
                 Form = JsonConvert.DeserializeObject<dynamic>(form);
 
+            // Parse Vue data
             VueData = _vueParser.ParseData(this);
+
+            return Page();
         }
 
         private static bool TryValidate(object value, ValidationContext validationContext, ValidationAttribute attribute, out ValidationError validationError)

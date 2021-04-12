@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Primitives;
 using System.Collections.Generic;
 
-namespace ECSForm.Pages
+namespace ECSForm.Model
 {
-    public class Pages
+    public class Section
     {
         public int No { get; set; }
         public string Id { get; set; } = string.Empty;
