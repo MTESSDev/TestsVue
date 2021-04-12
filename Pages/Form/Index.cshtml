@@ -208,21 +208,8 @@
             }
         },
         data: function() {
-        // parse the serialized data
-        return JSON.parse('@data');
-    },
-        /*data: {
-            form: { "validAll": false, idPageCourante: 'infos'}, //TODO ici la page et le contenu pourraient venir du serveur lors d'une reprise de saisie
-            config: {"keepData": false}, //TODO ici pe mettre un autre nom que config. L'idée est de conserver ce qui concerne le form mais qui ne doit pas être dans le model
-            formErrors: [],
-            inputErrors: {},
-            pages: obtenirPages()
-        },*/
-       @*/* data: {
-            values: {},
-            schema: @Html.Raw(Model.Formulaire)
+            return JSON.parse('@data');
         },
-        */*@
         mounted() {
             console.log('Application mounted.')
         }
@@ -231,13 +218,6 @@
     window.addEventListener('load', () => {
         new Vue(App)
     })
-    /*TODO ici obtenir les pages à partir de la config. */
-    function obtenirPages() {
-        return [{ no: 1, titre: "Renseignements généraux", id: "infos" },
-            { no: 2, titre: "Raison de la demande", id: "raisonDemande" },
-            { no: 3, titre: "Révision", id: "revision" }
-        ]
-    }
 
     function obtenirTexteEdite(id) {
         return '(Patch) Non défini.'

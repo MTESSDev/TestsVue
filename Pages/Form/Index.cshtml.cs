@@ -61,32 +61,21 @@ namespace ECSForm.Pages
         {
 
             /* Section TEST pour le v-if "SERVER-SIDE" */
-            var lambdaParser = new NReco.Linq.LambdaParser();
+            /*var lambdaParser = new NReco.Linq.LambdaParser();
             var varContext = new Dictionary<string, object>();
             varContext["pi"] = 3.14;
             var equation = "pi===3.14";
             //Normalize JS to C#
             equation = equation.Replace("===", "==");
-            var ttt = lambdaParser.Eval(equation, varContext);
+            var ttt = lambdaParser.Eval(equation, varContext);*/
 
             using (var r = new StreamReader(@$"schemas/{id ?? "default"}.ecsform.yml"))
             {
                 var deserializer = new DeserializerBuilder()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance)  // see height_in_inches in sample yml 
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .Build();
 
                 var yamlObject = deserializer.Deserialize<DynamicForm>(r);
-
-                /*var serializer = new SerializerBuilder()
-                 .JsonCompatible()
-                 .Build();
-
-                Form = serializer.Serialize<>(yamlObject,);*/
-
-                /* var partials = new Dictionary<string, string>
-                 {
-                     { "InputTemplate", yamlObject.Form?.InputTemplate ?? "" }
-                 };*/
 
                 FormHelpers.TemplateList = yamlObject.Form?.Templates;
                 FormHelpers.InputDefaultClasses = yamlObject.Form?.InputDefaultClasses;
@@ -95,44 +84,8 @@ namespace ECSForm.Pages
                 {
                     var content = await streamReader.ReadToEndAsync();
                     FormRaw = await FormHelpers.Stubble.RenderAsync(content, yamlObject);
-                    // Do Stuff
                 }
             }
-
-            /*using (var r = new StreamReader(@"form.vue"))
-            {
-                Formulaire = await r.ReadToEndAsync();
-            }*/
-
-            /* var test = new { planet = "lol", test = "" };
-
-             var context = new ValidationContext(test, serviceProvider: null, items: null);
-             var validationResults = new List<ValidationResult>();
-
-             //bool isValid = Validator..TryValidateObject(test, context, validationResults, true);
-
-
-             TryValidate(test.test, context, new RequiredAttribute() { }, out var validationError);
-
-         */
-
-            //document = null;
-            // }
-
-            /* using (var r = new StreamReader(@"form.yml"))
-             {
-                 var deserializer = new DeserializerBuilder()
-                 .WithNamingConvention(UnderscoredNamingConvention.Instance)  // see height_in_inches in sample yml 
-                 .Build();
-
-                 var yamlObject = deserializer.Deserialize(r);
-
-                 var serializer = new SerializerBuilder()
-                  .JsonCompatible()
-                  .Build();
-
-                 Formulaire = serializer.Serialize(yamlObject);
-             }*/
 
             HttpContext.Request.Cookies.TryGetValue("ECSForm3003CC", out var form);
             if (string.IsNullOrEmpty(form))
