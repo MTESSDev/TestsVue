@@ -61,9 +61,9 @@
         </template>
 
         <div class="zone-boutons">
-            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no - 1)" :disabled="pageCourante.no === 1">Précédent</button>
+            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no - 1)" :disabled="pageCourante.no === 0">Précédent</button>
             <button class="btn btn-secondaire" v-on:click="enregistrer">Enregistrer</button>
-            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no + 1)" :disabled="pageCourante.no === pages.length">Suivant</button>
+            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no + 1)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
         </div>
     </div>
 }
@@ -193,11 +193,12 @@
                 this.form.validAll = false
                 this.config.keepData = true
 
-                //Obtenir les données VueFormulate de notre form
-                const form = this.$formulate.registry.get("form")
 
-                //Obtenir la page courante et mettre à jour son indicateur d'erreurs
-                this.pages[this.pageCourante.no - 1].contientErreurs = form.hasErrors
+                //Obtenir la page courante et mettre à jour son indicateur d'erreurs (sauf page révision)
+                if (this.pageCourante.id !== 'revision') {
+                    const form = this.$formulate.registry.get("form")
+                    this.pages[this.pageCourante.no].contientErreurs = form.hasErrors
+                }
 
                 this.noPageCourante = noPage
 
@@ -217,7 +218,6 @@
         },
         computed: {
             pageCourante() {
-                this.noPageCourante = this.noPageCourante || 1  //TODO ici je ne comprend pas pkoi noPageCourante n'est pas initialisé (c'est encore idPageCourante qui traîne)
                 return this.pages.find(page => page.no === this.noPageCourante)
             }
         },

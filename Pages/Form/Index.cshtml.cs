@@ -44,7 +44,7 @@ namespace ECSForm.Pages
         public dynamic Form { get; set; }
 
         [VueData("noPageCourante")]
-        public int NoPageCourante { get; set; } = 1;
+        public int NoPageCourante { get; set; } = 0;
 
         [VueData("pages")]
         public List<Section>? Sections { get; set; } = new List<Section>();
