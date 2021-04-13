@@ -110,7 +110,7 @@ namespace ECSForm.Utils
 
                 if (checkVal.ContainsKey("fr"))
                 {
-                    return JsObject(context, GetLocalizedObject(checkVal));
+                    return JsObject(context, checkVal.GetLocalizedObject());
                 }
                 else
                 {
@@ -179,7 +179,7 @@ namespace ECSForm.Utils
             return value.Replace("'", "\\'");
         }
 
-        private static dynamic? GetLocalizedObject(IDictionary<object, object>? dict)
+        public static dynamic? GetLocalizedObject(this IDictionary<object, object>? dict)
         {
             if (dict is null) return null;
             dict.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out var value);

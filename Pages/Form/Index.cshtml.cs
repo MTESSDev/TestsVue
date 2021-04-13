@@ -25,6 +25,7 @@ namespace ECSForm.Pages
     public class GenericModel : PageModel
     {
         private readonly ILogger<GenericModel> _logger;
+        private readonly IVueParser _vueParser;
 
         //public DynamicForm? Form { get; set; }
         public string? FormRaw { get; set; }
@@ -37,7 +38,7 @@ namespace ECSForm.Pages
         public Dictionary<string, string> InputErrors { get; set; }
 
         [VueData("config")]
-        public Dictionary<string, object?>? Config { get; set; }
+        public Dictionary<string, object?> Config { get; set; }
 
         [VueData("form")]
         public dynamic Form { get; set; }
@@ -46,107 +47,80 @@ namespace ECSForm.Pages
         public int NoPageCourante { get; set; } = 1;
 
         [VueData("pages")]
-        public List<Pages>? Pages { get; set; } = new List<Pages>() {
-            new Pages() { No= 1, Titre= "Renseignements généraux", Id= "infos" },
-            new Pages() { No= 2, Titre= "Raison de la demande", Id= "raisonDemande" },
-            new Pages() { No= 3, Titre= "Révision", Id= "revision" } };
+        public List<Section>? Sections { get; set; } = new List<Section>();
 
-        public GenericModel(ILogger<GenericModel> logger)
+        public GenericModel(ILogger<GenericModel> logger, IVueParser vueParser)
         {
             _logger = logger;
+            _vueParser = vueParser;
+
             InputErrors = new Dictionary<string, string>();
             FormErrors = new object[0];
-            Config = new Dictionary<string, object?>() { { "keepData", false } };
-            Form = new { validAll = false};
+            Config = new Dictionary<string, object?>();
+            Form = new { };
         }
 
-        public async Task OnGet(string? id)
+        public async Task<IActionResult> OnGet(string? id)
         {
+            var configName = id ?? "default";
+            Config.Add("keepData", false);
+            Config.Add("configName", configName);
 
             /* Section TEST pour le v-if "SERVER-SIDE" */
-            var lambdaParser = new NReco.Linq.LambdaParser();
+            /*var lambdaParser = new NReco.Linq.LambdaParser();
             var varContext = new Dictionary<string, object>();
             varContext["pi"] = 3.14;
             var equation = "pi===3.14";
             //Normalize JS to C#
             equation = equation.Replace("===", "==");
-            var ttt = lambdaParser.Eval(equation, varContext);
+            var ttt = lambdaParser.Eval(equation, varContext);*/
 
-            using (var r = new StreamReader(@$"schemas/{id ?? "default"}.ecsform.yml"))
+            if (!System.IO.File.Exists(@$"schemas/{configName}.ecsform.yml"))
+            {
+                return NotFound();
+            }
+
+            DynamicForm? dynamicForm;
+
+            using (var configFile = new StreamReader(@$"schemas/{configName}.ecsform.yml"))
             {
                 var deserializer = new DeserializerBuilder()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance)  // see height_in_inches in sample yml 
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .Build();
 
-                var yamlObject = deserializer.Deserialize<DynamicForm>(r);
+                dynamicForm = deserializer.Deserialize<DynamicForm>(configFile);
 
-                /*var serializer = new SerializerBuilder()
-                 .JsonCompatible()
-                 .Build();
-
-                Form = serializer.Serialize<>(yamlObject,);*/
-
-                /* var partials = new Dictionary<string, string>
-                 {
-                     { "InputTemplate", yamlObject.Form?.InputTemplate ?? "" }
-                 };*/
-
-                FormHelpers.TemplateList = yamlObject.Form?.Templates;
-                FormHelpers.InputDefaultClasses = yamlObject.Form?.InputDefaultClasses;
+                FormHelpers.TemplateList = dynamicForm.Form?.Templates;
+                FormHelpers.InputDefaultClasses = dynamicForm.Form?.InputDefaultClasses;
 
                 using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
                 {
                     var content = await streamReader.ReadToEndAsync();
-                    FormRaw = await FormHelpers.Stubble.RenderAsync(content, yamlObject);
-                    // Do Stuff
+                    FormRaw = await FormHelpers.Stubble.RenderAsync(content, dynamicForm);
                 }
             }
 
-            /*using (var r = new StreamReader(@"form.vue"))
+            if (dynamicForm.Form is null) { return NotFound(); }
+
+            // Load sections from YAML
+            var sectionId = 0;
+            foreach (var section in dynamicForm.Form.Sections)
             {
-                Formulaire = await r.ReadToEndAsync();
-            }*/
+                Sections?.Add(new Section() { No = sectionId++, Id = section.Id, Titre = section.Section.GetLocalizedObject() ?? "Title not found" });
+            }
 
-            /* var test = new { planet = "lol", test = "" };
+            // Restore last state
+            HttpContext.Request.Cookies.TryGetValue($"ECSForm{configName}", out var form);
 
-             var context = new ValidationContext(test, serviceProvider: null, items: null);
-             var validationResults = new List<ValidationResult>();
-
-             //bool isValid = Validator..TryValidateObject(test, context, validationResults, true);
-
-
-             TryValidate(test.test, context, new RequiredAttribute() { }, out var validationError);
-
-         */
-
-            //document = null;
-            // }
-
-            /* using (var r = new StreamReader(@"form.yml"))
-             {
-                 var deserializer = new DeserializerBuilder()
-                 .WithNamingConvention(UnderscoredNamingConvention.Instance)  // see height_in_inches in sample yml 
-                 .Build();
-
-                 var yamlObject = deserializer.Deserialize(r);
-
-                 var serializer = new SerializerBuilder()
-                  .JsonCompatible()
-                  .Build();
-
-                 Formulaire = serializer.Serialize(yamlObject);
-             }*/
-
-            HttpContext.Request.Cookies.TryGetValue("ECSForm3003CC", out var form);
             if (string.IsNullOrEmpty(form))
                 Form = new { validAll = false };
             else
                 Form = JsonConvert.DeserializeObject<dynamic>(form);
 
-            var parser = new VueParser(); // in the real app you would use DI
+            // Parse Vue data
+            VueData = _vueParser.ParseData(this);
 
-            // in a real app, this would be placed somewhere in the base controller
-            VueData = parser.ParseData(this);
+            return Page();
         }
 
         private static bool TryValidate(object value, ValidationContext validationContext, ValidationAttribute attribute, out ValidationError validationError)
