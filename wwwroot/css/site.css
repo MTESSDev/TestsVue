@@ -1,4 +1,5 @@
-﻿/*====================================================================================================*/
+﻿/*Les éléments débutants par Z doivent être ajoutés ou modifiés dans le css original de ECS */
+/*====================================================================================================*/
 /*  -Z01- Base contrôles
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -Z10- Radio button et checkbox
@@ -100,8 +101,10 @@
 }
 
 /* Labels radios et checkbox */
-.formulate-input[data-classification=box] label.formulate-input-label {
+.formulate-input[data-classification=box] label {
     margin-bottom: 0;
+}
+.formulate-input[data-classification=box] label.formulate-input-label {
     margin-left: 8px;
     font-family: 'OpenSans-Regular';
     width: 100%; /*Important sinon texte écrase parfois les contrôles si texte trop long */
@@ -152,9 +155,20 @@
     mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>')
 }
 
+/*====================================================================================================*/
+/*  -Z20- Forms  
+/*====================================================================================================*/
+
+.zone-boutons button, .zone-boutons input[type="submit"] {
+    margin-right: 32px;
+}
+
+.zone-boutons button:last-child, .zone-boutons input[type="submit"]:last-child {
+    margin-right: 0;
+}
 
 /*====================================================================================================*/
-/*  -Z20A- Forms (Champs textes largeurs)
+/*  -Z20A- Forms (Champs textes largeurs)  
 /*====================================================================================================*/
 
 /*Le xxl n'existe pas dans les règles du SCG, c'est ajouté */

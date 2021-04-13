@@ -43,6 +43,9 @@ namespace ECSForm.Pages
         [VueData("form")]
         public dynamic Form { get; set; }
 
+        [VueData("noPageCourante")]
+        public int NoPageCourante { get; set; } = 0;
+
         [VueData("pages")]
         public List<Section>? Sections { get; set; } = new List<Section>();
 
@@ -129,7 +132,7 @@ namespace ECSForm.Pages
             HttpContext.Request.Cookies.TryGetValue($"ECSForm{configName}", out var form);
 
             if (string.IsNullOrEmpty(form))
-                Form = new { validAll = false, idPageCourante = "infos" };
+                Form = new { validAll = false };
             else
                 Form = JsonConvert.DeserializeObject<dynamic>(form);
 

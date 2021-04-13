@@ -46,7 +46,7 @@
         <nav class="navigation-form">
             <ul>
                 <li v-for="page in pages" :key="page.no">
-                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.id)" v-bind:class="{active : page.id === form.idPageCourante}">{{ page.titre }}</a>
+                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)" v-bind:class="{active : page.no === noPageCourante, 'text-danger' : page.contientErreurs}">{{ page.titre }}</a>
                 </li>
             </ul>
         </nav>
@@ -54,11 +54,17 @@
 }
 
 @section colonneDroite{
-    <h1>{{obtenirTitrePageCourante()}}</h1>
+    <h1>{{pageCourante.titre}}</h1>
     <div id="form">
         <template>
             @Html.Raw(Model.FormRaw)
         </template>
+
+        <div class="zone-boutons">
+            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no - 1)" :disabled="pageCourante.no === 0">Précédent</button>
+            <button class="btn btn-secondaire" v-on:click="enregistrer">Enregistrer</button>
+            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no + 1)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
+        </div>
     </div>
 }
 
@@ -183,28 +189,36 @@
                     })
                 }
             },
-            effectuerNavigation(idPage) {
+            effectuerNavigation(noPage) {
                 this.form.validAll = false
                 this.config.keepData = true
-                this.form.idPageCourante = idPage
+
+
+                //Obtenir la page courante et mettre à jour son indicateur d'erreurs (sauf page révision)
+                if (this.pageCourante.id !== 'revision') {
+                    const form = this.$formulate.registry.get("form")
+                    this.pages[this.pageCourante.no].contientErreurs = form.hasErrors
+                }
+
+                this.noPageCourante = noPage
 
                 this.$nextTick(function () {
                     this.config.keepData = false
 
-                    if (this.form.idPageCourante === 'revision') {
+                    if (this.pageCourante.id === 'revision') {
                         this.form.validAll = true
                         this.$formulate.submit('form')
                     }
                 })
             },
-            obtenirTitrePageCourante() {
-                const page = this.pages.find(page => page.id === this.form.idPageCourante)
-                return page ? page.titre : 'Page non trouvée'
-            },
-            sauvegarde() {
+            enregistrer() {
                 axios.post('@Url.PageLink("save", null, new { id = "3003CC" } )', this.form);
-
                 alert("Sauvegardé!");
+            }
+        },
+        computed: {
+            pageCourante() {
+                return this.pages.find(page => page.no === this.noPageCourante)
             }
         },
         data: function() {
