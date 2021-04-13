@@ -42,6 +42,9 @@ namespace ECSForm.Pages
         [VueData("form")]
         public dynamic Form { get; set; }
 
+        [VueData("noPageCourante")]
+        public int NoPageCourante { get; set; } = 1;
+
         [VueData("pages")]
         public List<Pages>? Pages { get; set; } = new List<Pages>() {
             new Pages() { No= 1, Titre= "Renseignements généraux", Id= "infos" },
@@ -54,7 +57,7 @@ namespace ECSForm.Pages
             InputErrors = new Dictionary<string, string>();
             FormErrors = new object[0];
             Config = new Dictionary<string, object?>() { { "keepData", false } };
-            Form = new { };
+            Form = new { validAll = false};
         }
 
         public async Task OnGet(string? id)
@@ -136,7 +139,7 @@ namespace ECSForm.Pages
 
             HttpContext.Request.Cookies.TryGetValue("ECSForm3003CC", out var form);
             if (string.IsNullOrEmpty(form))
-                Form = new { validAll = false, idPageCourante = "infos" };
+                Form = new { validAll = false };
             else
                 Form = JsonConvert.DeserializeObject<dynamic>(form);
 

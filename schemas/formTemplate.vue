@@ -9,21 +9,16 @@
                 :errors="inputErrors">
 
     {{# Form.Sections}}
-    <div v-if="form.validAll === true || form.idPageCourante == '{{Id}}'">
+    <div v-if="form.validAll === true || pageCourante.id == '{{Id}}'">
         <div class="section {{Classes}}"
-             v-show="form.idPageCourante == '{{Id}}' && form.validAll === false">
+             v-show="pageCourante.id == '{{Id}}' && form.validAll === false">
             {{RecursiveComponents components}}
         </div>
     </div>
     {{/ Form.Sections}}
 
-    <formulate-input type="button"
-                     @click="sauvegarde"
-                     label="Sauvegarder"
-                     :input-class="['btn', 'btn-secondaire']"></formulate-input>
-
     <formulate-input type="submit"
-                     v-if="form.idPageCourante === 'revision'"
+                     v-if="pageCourante.id === 'revision'"
                      label="Soumettre"
                      :input-class="['btn', 'btn-primaire']"></formulate-input>
     {{! ceci est un commentaire, pour dire que le }}

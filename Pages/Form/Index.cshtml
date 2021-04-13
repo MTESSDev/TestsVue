@@ -46,7 +46,7 @@
         <nav class="navigation-form">
             <ul>
                 <li v-for="page in pages" :key="page.no">
-                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.id)" v-bind:class="{active : page.id === form.idPageCourante}">{{ page.titre }}</a>
+                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)" v-bind:class="{active : page.no === noPageCourante, 'text-danger' : page.contientErreurs}">{{ page.titre }}</a>
                 </li>
             </ul>
         </nav>
@@ -54,11 +54,17 @@
 }
 
 @section colonneDroite{
-    <h1>{{obtenirTitrePageCourante()}}</h1>
+    <h1>{{pageCourante.titre}}</h1>
     <div id="form">
         <template>
             @Html.Raw(Model.FormRaw)
         </template>
+
+        <div class="zone-boutons">
+            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no - 1)" :disabled="pageCourante.no === 1">Précédent</button>
+            <button class="btn btn-secondaire" v-on:click="enregistrer">Enregistrer</button>
+            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no + 1)" :disabled="pageCourante.no === pages.length">Suivant</button>
+        </div>
     </div>
 }
 
@@ -183,28 +189,36 @@
                     })
                 }
             },
-            effectuerNavigation(idPage) {
+            effectuerNavigation(noPage) {
                 this.form.validAll = false
                 this.config.keepData = true
-                this.form.idPageCourante = idPage
+
+                //Obtenir les données VueFormulate de notre form
+                const form = this.$formulate.registry.get("form")
+
+                //Obtenir la page courante et mettre à jour son indicateur d'erreurs
+                this.pages[this.pageCourante.no - 1].contientErreurs = form.hasErrors
+
+                this.noPageCourante = noPage
 
                 this.$nextTick(function () {
                     this.config.keepData = false
 
-                    if (this.form.idPageCourante === 'revision') {
+                    if (this.pageCourante.id === 'revision') {
                         this.form.validAll = true
                         this.$formulate.submit('form')
                     }
                 })
             },
-            obtenirTitrePageCourante() {
-                const page = this.pages.find(page => page.id === this.form.idPageCourante)
-                return page ? page.titre : 'Page non trouvée'
-            },
-            sauvegarde() {
+            enregistrer() {
                 axios.post('@Url.PageLink("save", null, new { id = "3003CC" } )', this.form);
-
                 alert("Sauvegardé!");
+            }
+        },
+        computed: {
+            pageCourante() {
+                this.noPageCourante = this.noPageCourante || 1  //TODO ici je ne comprend pas pkoi noPageCourante n'est pas initialisé (c'est encore idPageCourante qui traîne)
+                return this.pages.find(page => page.no === this.noPageCourante)
             }
         },
         data: function() {
@@ -231,13 +245,6 @@
     window.addEventListener('load', () => {
         new Vue(App)
     })
-    /*TODO ici obtenir les pages à partir de la config. */
-    function obtenirPages() {
-        return [{ no: 1, titre: "Renseignements généraux", id: "infos" },
-            { no: 2, titre: "Raison de la demande", id: "raisonDemande" },
-            { no: 3, titre: "Révision", id: "revision" }
-        ]
-    }
 
     function obtenirTexteEdite(id) {
         return '(Patch) Non défini.'
