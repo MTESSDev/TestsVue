@@ -3,7 +3,7 @@
         <span>{{context.label}}</span>
         <span v-if="isRequired" class="sr-only">.&nbsp;Obligatoire.</span>
         <span v-if="hasValidationRules && messagesErreur" class="sr-only" aria-live="polite"> {{messagesErreur}}</span>
-        <span v-if="isRequired" aria-hidden="true" class="icone-champ-requis">&nbsp;{{requiredFieldIndicator}}</span>
+        <span v-if="isRequired" aria-hidden="true" class="icone-champ-requis">{{requiredFieldIndicator}}</span>
     </label>
 </template>
 
