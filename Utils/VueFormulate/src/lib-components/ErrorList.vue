@@ -82,21 +82,25 @@
                 setTimeout((controlId) => {
                     const errorControl = document.getElementById(controlId)
 
-                    if (errorControl) {
-                        errorControl.focus()
+                    if (errorControl) {                       
+                        this.$root.effectuerNavigationParId(this.obtenirIdPage(errorControl), errorControl)
                     } else {
                         // Nous n'avons pas trouvé le contrôle (ex. radio button). On recherche les contrôles dont l'id débute par notre id, et on conserve le premier contrôle de type input.
                         const errorControls = document.querySelectorAll('*[id^="' + controlId + '"]')
                         for (let i = 0; i < errorControls.length; i++) {
                             const control = errorControls[i]
                             if (control.tagName.toLowerCase() === 'input') {
-                                control.focus()
+                                
+                                this.$root.effectuerNavigationParId(this.obtenirIdPage(control), control)
                                 break
                             }
                         }
                     }
                 }, 10, id)
                 return false
+            },
+            obtenirIdPage(controle) {
+                return $(controle).parents('.section:first').attr('data-id-page')
             }
         }
     }

@@ -133,7 +133,7 @@ var __vue_render__$2 = function () {
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v(" " + _vm._s(_vm.requiredFieldIndicator))]) : _vm._e()]);
+  }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e()]);
 };
 
 var __vue_staticRenderFns__$2 = [];
@@ -247,7 +247,7 @@ var script$1 = {
         const errorControl = document.getElementById(controlId);
 
         if (errorControl) {
-          errorControl.focus();
+          this.$root.effectuerNavigationParId(this.obtenirIdPage(errorControl), errorControl);
         } else {
           // Nous n'avons pas trouvé le contrôle (ex. radio button). On recherche les contrôles dont l'id débute par notre id, et on conserve le premier contrôle de type input.
           const errorControls = document.querySelectorAll('*[id^="' + controlId + '"]');
@@ -256,13 +256,17 @@ var script$1 = {
             const control = errorControls[i];
 
             if (control.tagName.toLowerCase() === 'input') {
-              control.focus();
+              this.$root.effectuerNavigationParId(this.obtenirIdPage(control), control);
               break;
             }
           }
         }
       }, 10, id);
       return false;
+    },
+
+    obtenirIdPage(controle) {
+      return $(controle).parents('.section:first').attr('data-id-page');
     }
 
   }

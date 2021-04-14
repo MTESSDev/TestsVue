@@ -170,7 +170,7 @@ var __vue_render__$2 = function __vue_render__() {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
     }
-  }, [_vm._ssrNode("<span>" + _vm._ssrEscape(_vm._s(_vm.context.label)) + "</span> " + (_vm.isRequired ? "<span class=\"sr-only\">. Obligatoire.</span>" : "<!---->") + " " + (_vm.hasValidationRules && _vm.messagesErreur ? "<span aria-live=\"polite\" class=\"sr-only\">" + _vm._ssrEscape(" " + _vm._s(_vm.messagesErreur)) + "</span>" : "<!---->") + " " + (_vm.isRequired ? "<span aria-hidden=\"true\" class=\"icone-champ-requis\">" + _vm._ssrEscape(" " + _vm._s(_vm.requiredFieldIndicator)) + "</span>" : "<!---->"))]);
+  }, [_vm._ssrNode("<span>" + _vm._ssrEscape(_vm._s(_vm.context.label)) + "</span> " + (_vm.isRequired ? "<span class=\"sr-only\">. Obligatoire.</span>" : "<!---->") + " " + (_vm.hasValidationRules && _vm.messagesErreur ? "<span aria-live=\"polite\" class=\"sr-only\">" + _vm._ssrEscape(" " + _vm._s(_vm.messagesErreur)) + "</span>" : "<!---->") + " " + (_vm.isRequired ? "<span aria-hidden=\"true\" class=\"icone-champ-requis\">" + _vm._ssrEscape(_vm._s(_vm.requiredFieldIndicator)) + "</span>" : "<!---->"))]);
 };
 
 var __vue_staticRenderFns__$2 = [];
@@ -182,7 +182,7 @@ var __vue_inject_styles__$2 = undefined;
 var __vue_scope_id__$2 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$2 = "data-v-772cedd8";
+var __vue_module_identifier__$2 = "data-v-79994810";
 /* functional template */
 
 var __vue_is_functional_template__$2 = false;
@@ -274,12 +274,14 @@ var script$1 = {
   },
   methods: {
     setInputFocus: function setInputFocus(id) {
+      var _this = this;
+
       // setTimeout requis pour que le focus et le scroll se fasse.
       setTimeout(function (controlId) {
         var errorControl = document.getElementById(controlId);
 
         if (errorControl) {
-          errorControl.focus();
+          _this.$root.effectuerNavigationParId(_this.obtenirIdPage(errorControl), errorControl);
         } else {
           // Nous n'avons pas trouvé le contrôle (ex. radio button). On recherche les contrôles dont l'id débute par notre id, et on conserve le premier contrôle de type input.
           var errorControls = document.querySelectorAll('*[id^="' + controlId + '"]');
@@ -288,13 +290,17 @@ var script$1 = {
             var control = errorControls[i];
 
             if (control.tagName.toLowerCase() === 'input') {
-              control.focus();
+              _this.$root.effectuerNavigationParId(_this.obtenirIdPage(control), control);
+
               break;
             }
           }
         }
       }, 10, id);
       return false;
+    },
+    obtenirIdPage: function obtenirIdPage(controle) {
+      return $(controle).parents('.section:first').attr('data-id-page');
     }
   }
 };/* script */
@@ -324,7 +330,7 @@ var __vue_inject_styles__$1 = undefined;
 var __vue_scope_id__$1 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-1cc9ac3d";
+var __vue_module_identifier__$1 = "data-v-67297556";
 /* functional template */
 
 var __vue_is_functional_template__$1 = false;
