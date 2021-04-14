@@ -16,6 +16,7 @@
     <None Remove="schemas\3003BaseFull.yml" />
     <None Remove="schemas\3003CC.ecsform.yml" />
     <None Remove="schemas\dany.ecsform.yml" />
+    <None Remove="schemas\default.ecsform.yml" />
     <None Remove="schemas\formTemplate.vue" />
     <None Remove="schemas\test.ecsform.yml" />
   </ItemGroup>
@@ -62,6 +63,12 @@
 
   <ItemGroup>
     <None Include="wwwroot\form\mtess-vueformulate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="schemas\default.ecsform.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

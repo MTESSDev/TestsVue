@@ -58,6 +58,7 @@ namespace ECSForm
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseFileServer();
 
             app.UseRouting();
 

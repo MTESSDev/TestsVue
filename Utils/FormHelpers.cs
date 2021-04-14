@@ -190,6 +190,18 @@ namespace ECSForm.Utils
 
             return value;
         }
+
+        public static void TryAdd<TKey, TValue>(this IDictionary<TKey, TValue>? dictionary, IDictionary<TKey, TValue>? source) where TKey : notnull
+        {
+            if (dictionary is null) throw new Exception("Target dict need to be init.");
+
+            if (source is null) return;
+
+            foreach (var item in source)
+            {
+                dictionary?.TryAdd(item.Key, item.Value);
+            }
+        }
     }
 
 }
