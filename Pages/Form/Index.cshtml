@@ -1,5 +1,10 @@
 ﻿@page "{id?}"
 @model GenericModel
+
+@{
+    Layout = Model.Layout ?? "_NoLayout";
+}
+
 @{
     ViewData["H1NonRendu"] = true;
     ViewData["Title"] = "Formulaire";
