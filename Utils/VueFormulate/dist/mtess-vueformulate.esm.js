@@ -241,27 +241,15 @@ var script$1 = {
 
   },
   methods: {
-    setInputFocus(id) {
+    setInputFocus(name) {
       // setTimeout requis pour que le focus et le scroll se fasse.
-      setTimeout(controlId => {
-        const errorControl = document.getElementById(controlId);
+      setTimeout(controlName => {
+        const errorControl = document.getElementsByName(controlName);
 
         if (errorControl) {
-          this.$root.effectuerNavigationParId(this.obtenirIdPage(errorControl), errorControl);
-        } else {
-          // Nous n'avons pas trouvé le contrôle (ex. radio button). On recherche les contrôles dont l'id débute par notre id, et on conserve le premier contrôle de type input.
-          const errorControls = document.querySelectorAll('*[id^="' + controlId + '"]');
-
-          for (let i = 0; i < errorControls.length; i++) {
-            const control = errorControls[i];
-
-            if (control.tagName.toLowerCase() === 'input') {
-              this.$root.effectuerNavigationParId(this.obtenirIdPage(control), control);
-              break;
-            }
-          }
+          this.$root.effectuerNavigationParId(this.obtenirIdPage(errorControl[0]), controlName);
         }
-      }, 10, id);
+      }, 10, name);
       return false;
     },
 
@@ -312,7 +300,7 @@ var __vue_render__$1 = function () {
       },
       on: {
         "click": function ($event) {
-          return _vm.setInputFocus(error.id);
+          return _vm.setInputFocus(error.name);
         }
       }
     }, [_vm._v(_vm._s(error.message))])]);

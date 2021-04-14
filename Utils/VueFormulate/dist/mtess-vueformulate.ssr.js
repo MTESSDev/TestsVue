@@ -273,30 +273,17 @@ var script$1 = {
     }
   },
   methods: {
-    setInputFocus: function setInputFocus(id) {
+    setInputFocus: function setInputFocus(name) {
       var _this = this;
 
       // setTimeout requis pour que le focus et le scroll se fasse.
-      setTimeout(function (controlId) {
-        var errorControl = document.getElementById(controlId);
+      setTimeout(function (controlName) {
+        var errorControl = document.getElementsByName(controlName);
 
         if (errorControl) {
-          _this.$root.effectuerNavigationParId(_this.obtenirIdPage(errorControl), errorControl);
-        } else {
-          // Nous n'avons pas trouvé le contrôle (ex. radio button). On recherche les contrôles dont l'id débute par notre id, et on conserve le premier contrôle de type input.
-          var errorControls = document.querySelectorAll('*[id^="' + controlId + '"]');
-
-          for (var i = 0; i < errorControls.length; i++) {
-            var control = errorControls[i];
-
-            if (control.tagName.toLowerCase() === 'input') {
-              _this.$root.effectuerNavigationParId(_this.obtenirIdPage(control), control);
-
-              break;
-            }
-          }
+          _this.$root.effectuerNavigationParId(_this.obtenirIdPage(errorControl[0]), controlName);
         }
-      }, 10, id);
+      }, 10, name);
       return false;
     },
     obtenirIdPage: function obtenirIdPage(controle) {
@@ -330,7 +317,7 @@ var __vue_inject_styles__$1 = undefined;
 var __vue_scope_id__$1 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-67297556";
+var __vue_module_identifier__$1 = "data-v-ee76eaac";
 /* functional template */
 
 var __vue_is_functional_template__$1 = false;
