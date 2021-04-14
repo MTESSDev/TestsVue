@@ -28,6 +28,7 @@ namespace ECSForm.Pages
         private readonly IVueParser _vueParser;
 
         //public DynamicForm? Form { get; set; }
+        public string? Layout { get; set; } = "_Layout";
         public string? FormRaw { get; set; }
         public Dictionary<string, object?> VueData { get; set; } = new Dictionary<string, object?>();
 
@@ -67,6 +68,7 @@ namespace ECSForm.Pages
 
         public async Task<IActionResult> OnPost(string? id, string render)
         {
+            Layout = null;
             return await RenderPage(id, Base64Decode(render));
         }
 
