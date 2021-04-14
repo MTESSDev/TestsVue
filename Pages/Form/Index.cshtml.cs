@@ -49,6 +49,11 @@ namespace ECSForm.Pages
         [VueData("pages")]
         public List<Section>? Sections { get; set; } = new List<Section>();
 
+        public static IDeserializer deserializer = new DeserializerBuilder()
+                             .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                             .IgnoreUnmatchedProperties()
+                             .Build();
+
         public GenericModel(ILogger<GenericModel> logger, IVueParser vueParser)
         {
             _logger = logger;
@@ -60,7 +65,17 @@ namespace ECSForm.Pages
             Form = new { };
         }
 
+        public async Task<IActionResult> OnPost(string? id, string render)
+        {
+            return await RenderPage(id, Base64Decode(render));
+        }
+
         public async Task<IActionResult> OnGet(string? id)
+        {
+            return await RenderPage(id);
+        }
+
+        private async Task<IActionResult> RenderPage(string? id, string? render = null)
         {
             var configName = id ?? "default";
             Config.Add("keepData", false);
@@ -75,34 +90,47 @@ namespace ECSForm.Pages
             equation = equation.Replace("===", "==");
             var ttt = lambdaParser.Eval(equation, varContext);*/
 
-            if (!System.IO.File.Exists(@$"schemas/{configName}.ecsform.yml"))
+            DynamicForm? dynamicForm = null;
+            DynamicForm? defaultCfg = null;
+
+            if (System.IO.File.Exists(@$"schemas/default.ecsform.yml"))
             {
-                return NotFound();
+                defaultCfg = ReadYamlCfg(@$"schemas/default.ecsform.yml");
             }
 
-            DynamicForm? dynamicForm;
-
-            using (var configFile = new StreamReader(@$"schemas/{configName}.ecsform.yml"))
+            if (id == "render" && render != null)
             {
-                var deserializer = new DeserializerBuilder()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                .Build();
-
-                dynamicForm = deserializer.Deserialize<DynamicForm>(configFile);
-
-                FormHelpers.TemplateList = dynamicForm.Form?.Templates;
-                FormHelpers.InputDefaultClasses = dynamicForm.Form?.InputDefaultClasses;
-
-                using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
+                dynamicForm = deserializer.Deserialize<DynamicForm>(render);
+            }
+            else
+            {
+                if (!System.IO.File.Exists(@$"schemas/{configName}.ecsform.yml"))
                 {
-                    var content = await streamReader.ReadToEndAsync();
-                    FormRaw = await FormHelpers.Stubble.RenderAsync(content, dynamicForm);
+                    return NotFound();
                 }
+
+                dynamicForm = ReadYamlCfg(@$"schemas/{configName}.ecsform.yml");
             }
 
-            if (dynamicForm.Form is null) { return NotFound(); }
+            if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?.Sections is null) { return NotFound(); }
 
-            // Load sections from YAML
+            if (defaultCfg != null)
+            {
+                dynamicForm.Form.InputDefaultClasses.TryAdd(defaultCfg?.Form?.InputDefaultClasses);
+                dynamicForm.Form.Templates.TryAdd(defaultCfg?.Form?.Templates);
+            }
+
+            FormHelpers.TemplateList = dynamicForm.Form?.Templates;
+            FormHelpers.InputDefaultClasses = dynamicForm.Form?.InputDefaultClasses;
+
+            using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
+            {
+                var content = await streamReader.ReadToEndAsync();
+                FormRaw = await FormHelpers.Stubble.RenderAsync(content, dynamicForm);
+            }
+
+            if (dynamicForm?.Form?.Sections is null) { return NotFound(); }
+
             var sectionId = 0;
             foreach (var section in dynamicForm.Form.Sections)
             {
@@ -121,6 +149,16 @@ namespace ECSForm.Pages
             VueData = _vueParser.ParseData(this);
 
             return Page();
+        }
+
+        private DynamicForm ReadYamlCfg(string filename)
+        {
+            DynamicForm cfg;
+            using (var configFile = new StreamReader(filename))
+            {
+                cfg = deserializer.Deserialize<DynamicForm>(configFile);
+            }
+            return cfg;
         }
 
         private static bool TryValidate(object value, ValidationContext validationContext, ValidationAttribute attribute, out ValidationError validationError)
@@ -165,6 +203,11 @@ namespace ECSForm.Pages
             }
         }
 
+        public static string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
         /*  private void ParseValidation(ref FormData validations, string name, string value, Dictionary<string, string> msg)
           {
               if (validations.Elements == null) { validations.Elements = new Dictionary<string, Validation>(); }

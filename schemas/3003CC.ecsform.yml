@@ -1,44 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
-  inputDefaultClasses:
-    default: form-control 
-    group: 
-    radio: 
-    checkbox: 
-    button: btn btn-secondaire
-    submit: btn btn-primaire
-  templates: 
-    inline: |
-      <div class="inline {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
-          {{RecursiveComponents components}}
-      </div>
-    dynamic: |
-      <{{tag}} class="{{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
-        {{i18n text}}
-        {{RecursiveComponents components}}
-      </{{tag}}>
-    input: |
-      <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
-              {{# type}} type="{{.}}" {{/ type}}
-              {{# name}} name="{{.}}" {{/ name}}
-              {{# name}} key="{{.}}" {{/ name}}
-              {{GenerateInputClasses type .}}
-              {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
-              {{# label}} label="{{i18n .}}" {{/ label}}
-              {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
-              {{# help}} help="{{i18n .}}" {{/ help}}
-              {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
-              {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
-              {{# min}} min="{{.}}" {{/ min}}
-              {{# max}} max="{{.}}" {{/ max}}
-              {{# limit}} limit="{{.}}" {{/ limit}}
-              {{# options}} :options="{{JsObject options}}" {{/ options}}
-              {{# repeatable}}
-              :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
-              {{/ repeatable}}
-              {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
-          {{RecursiveComponents components}}
-      </formulate-input>
   sections:
     # Section 1
     - section: 
