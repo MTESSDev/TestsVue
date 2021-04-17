@@ -2,6 +2,7 @@
                 v-model="form"
                 @submit="submitHandler"
                 @submit-raw="submitRawHandler"
+                @created="created"
                 :invalid-message="invalidMessage"
                 :form-errors="formErrors"
                 :keep-model-data="config.keepData"

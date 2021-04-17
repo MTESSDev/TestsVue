@@ -104,6 +104,9 @@
     const App = {
         el: '#main',
         methods: {
+            created(data) {
+                @Html.Raw(Model.Created)
+            },
             failedValidation(data) {
                 this.$el.setAttribute('data-submit', true)
                 console.log('failedValidation')
@@ -196,7 +199,7 @@
             obtenirIdPageControle(controle) {
                 return controle.parents('.section:first').attr('data-id-page')
             },
-            effectuerNavigation(noPage, nomControleFocus) {
+            effectuerNavigation(noPage, nomControleFocus, pasFocus) {
                 this.form.validAll = false
                 this.config.keepData = true
 
@@ -220,8 +223,11 @@
                     if (nomControleFocus) {
                         const controles = document.getElementsByName(nomControleFocus)
                         if (controles) {
-                            controles[0].focus()
-                            controles[0].scrollIntoView()
+                            if (!pasFocus) {
+                                controles[0].focus()
+                            }
+                            var label = controles[0].id.split('_');
+                            $("label[for^='" + label[0] + "']")[0].scrollIntoView();
                         }
                     }
                 })
@@ -247,7 +253,7 @@
             return JSON.parse('@data');
         },
         mounted() {
-            console.log('Application mounted.')
+            console.log('Application mounted.');
         }
     }
 

@@ -18,6 +18,7 @@ namespace ECSForm
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +30,18 @@ namespace ECSForm
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IVueParser>(new VueParser());
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("https://infologique.net",
+                                                          "http://127.0.0.1:8080",
+                                                          "http://192.168.1.137:8080");
+            });
+            });
+
             services.AddControllers();
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
@@ -49,18 +62,23 @@ namespace ECSForm
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            var supportedCultures = new[] { "en-CA", "fr-CA" };
+            var supportedCultures = new[] { "fr-CA", "en-CA" };
             var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
                 .AddSupportedCultures(supportedCultures)
                 .AddSupportedUICultures(supportedCultures);
 
             app.UseRequestLocalization(localizationOptions);
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseFileServer();
 
             app.UseRouting();
+            app.UseCors(x => x
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .SetIsOriginAllowed(origin => true) // allow any origin
+              .AllowCredentials()); // allow credentials
 
             app.UseAuthorization();
 
@@ -83,7 +101,7 @@ namespace ECSForm
 
             httpContext.Request.Query.TryGetValue("lang", out var lang);
 
-            if(lang == string.Empty || lang == "fr")
+            if (lang == string.Empty || lang == "fr")
             {
                 //Return a provider culture result. 
                 return new ProviderCultureResult("fr-CA");

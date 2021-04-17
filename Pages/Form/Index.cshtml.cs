@@ -29,6 +29,7 @@ namespace ECSForm.Pages
 
         //public DynamicForm? Form { get; set; }
         public string? Layout { get; set; } = "_Layout";
+        public string Created { get; set; } = string.Empty;
         public string? FormRaw { get; set; }
         public Dictionary<string, object?> VueData { get; set; } = new Dictionary<string, object?>();
 
@@ -66,9 +67,52 @@ namespace ECSForm.Pages
             Form = new { };
         }
 
-        public async Task<IActionResult> OnPost(string? id, string render)
+        public async Task<IActionResult> OnPost(string? id, string render, int currentCursorLine)
         {
             Layout = null;
+            var yamlCfg = Base64Decode(render);
+
+            if (currentCursorLine != -1)
+            {
+                var currentLine = -1;
+                var nameBlock = "";
+                var sectionId = -1;
+
+                using (StringReader reader = new StringReader(yamlCfg))
+                {
+                    if (reader is null) return NotFound();
+
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        currentLine++;
+
+                        if(line.StartsWith("    -"))
+                        {
+                            sectionId++;
+                        }
+
+                        if (line.Contains("        - name:") || line.Contains("        name:"))
+                        {
+                            nameBlock = line.Trim(' ', '-');
+                        }
+
+                        if (currentLine < currentCursorLine - 1)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                nameBlock = nameBlock.Replace("name", "");
+                nameBlock = nameBlock.TrimStart(' ', ':');
+
+                Created = @$"this.effectuerNavigation({sectionId}, '{nameBlock}', true); ";
+            }
             return await RenderPage(id, Base64Decode(render));
         }
 
