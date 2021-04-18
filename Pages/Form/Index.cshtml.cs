@@ -70,19 +70,18 @@ namespace ECSForm.Pages
         public async Task<IActionResult> OnPost(string? id, string render, int currentCursorLine, [FromQuery] Guid? uniqueID)
         {
             Layout = null;
+            string? readFile = null;
+            var cfg = Base64Decode(render);
+
             if (uniqueID.HasValue)
             {
                 if (uniqueID.Value != Guid.Empty)
                 {
-                    var cfg = Base64Decode(render);
-                    var uuid = "snapshots/" + uniqueID.Value.ToString();
-                    System.IO.File.WriteAllText(@$"schemas/{uuid}.ecsform.yml", cfg);
 
-                    return await RenderPage(uuid);
+                    readFile = "snapshots/" + uniqueID.Value.ToString();
+                    System.IO.File.WriteAllText(@$"schemas/{readFile}.ecsform.yml", cfg);
                 }
             }
-
-            var yamlCfg = Base64Decode(render);
 
             if (currentCursorLine != -1)
             {
@@ -90,7 +89,7 @@ namespace ECSForm.Pages
                 var nameBlock = "";
                 var sectionId = -1;
 
-                using (StringReader reader = new StringReader(yamlCfg))
+                using (StringReader reader = new StringReader(cfg))
                 {
                     if (reader is null) return NotFound();
 
@@ -125,7 +124,15 @@ namespace ECSForm.Pages
 
                 Created = @$"this.effectuerNavigation({sectionId}, '{nameBlock}', true); ";
             }
-            return await RenderPage(id, Base64Decode(render));
+
+            if (readFile is null)
+            {
+                return await RenderPage(id, cfg);
+            }
+            else
+            {
+                return await RenderPage(readFile);
+            }
         }
 
         public async Task<IActionResult> OnGet(string? id)
@@ -135,7 +142,7 @@ namespace ECSForm.Pages
 
         private async Task<IActionResult> RenderPage(string? id, string? render = null)
         {
-            var configName = id.Replace('@','/') ?? "default";
+            var configName = id.Replace('@', '/') ?? "default";
             Config.Add("keepData", false);
             Config.Add("configName", configName);
 
