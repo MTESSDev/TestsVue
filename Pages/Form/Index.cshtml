@@ -43,11 +43,15 @@
             margin: 0;
             padding: 0;
         }
+
+        [v-cloak] {
+            display: none;
+        }
     </style>
 }
 
 @section colonneGauche{
-    <nav>
+    <nav v-cloak>
         <nav class="navigation-form">
             <ul>
                 <li v-for="page in pages" :key="page.no">
@@ -59,16 +63,18 @@
 }
 
 @section colonneDroite{
-    <h1>{{pageCourante.titre}}</h1>
-    <div id="form">
-        <template>
-            @Html.Raw(Model.FormRaw)
-        </template>
+    <div v-cloak>
+        <h1>{{pageCourante.titre}}</h1>
+        <div id="form">
+            <template>
+                @Html.Raw(Model.FormRaw)
+            </template>
 
-        <div class="zone-boutons">
-            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no - 1)" :disabled="pageCourante.no === 0">Précédent</button>
-            <button class="btn btn-secondaire" v-on:click="enregistrer">Enregistrer</button>
-            <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no + 1)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
+            <div class="zone-boutons">
+                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no - 1)" :disabled="pageCourante.no === 0">Précédent</button>
+                <button class="btn btn-secondaire" v-on:click="enregistrer">Enregistrer</button>
+                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no + 1)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
+            </div>
         </div>
     </div>
 }
@@ -157,7 +163,7 @@
 
                 // Obtenir l'id du premier contrôle en erreur dans le groupe. S'il n'y en a pas, on utilise l'id du groupe (div) on rend le div focusable
                 let nomPremierControleErreurGroupe = erreursGroupeEnfants.length ? erreursGroupeEnfants[0].name : null
-                if (!nomPremierControleErreurGroupe) {                    
+                if (!nomPremierControleErreurGroupe) {
                     nomPremierControleErreurGroupe = groupe._data.defaultId
                     groupe.$el.setAttribute('name', nomPremierControleErreurGroupe)
                     groupe.$el.setAttribute('tabindex', '-1')
