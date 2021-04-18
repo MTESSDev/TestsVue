@@ -17,16 +17,18 @@ namespace ECSForm.Pages
             _logger = logger;
         }
 
+       
         public async Task<IActionResult> OnGet(string id)
         {
-            if (!System.IO.File.Exists(@$"schemas/{id}.ecsform.yml"))
+            var cleanId = id.Replace('@', '/');
+            if (!System.IO.File.Exists(@$"schemas/{cleanId}.ecsform.yml"))
             {
                 return NotFound();
             }
 
             string cfg;
 
-            using (var configFile = new StreamReader(@$"schemas/{id}.ecsform.yml"))
+            using (var configFile = new StreamReader(@$"schemas/{cleanId}.ecsform.yml"))
             {
                 cfg = await configFile.ReadToEndAsync();
             }

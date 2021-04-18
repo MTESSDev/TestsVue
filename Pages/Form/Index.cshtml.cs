@@ -67,9 +67,21 @@ namespace ECSForm.Pages
             Form = new { };
         }
 
-        public async Task<IActionResult> OnPost(string? id, string render, int currentCursorLine)
+        public async Task<IActionResult> OnPost(string? id, string render, int currentCursorLine, [FromQuery] Guid? uniqueID)
         {
             Layout = null;
+            if (uniqueID.HasValue)
+            {
+                if (uniqueID.Value != Guid.Empty)
+                {
+                    var cfg = Base64Decode(render);
+                    var uuid = "snapshots/" + uniqueID.Value.ToString();
+                    System.IO.File.WriteAllText(@$"schemas/{uuid}.ecsform.yml", cfg);
+
+                    return await RenderPage(uuid);
+                }
+            }
+
             var yamlCfg = Base64Decode(render);
 
             if (currentCursorLine != -1)
@@ -87,7 +99,7 @@ namespace ECSForm.Pages
                     {
                         currentLine++;
 
-                        if(line.StartsWith("    -"))
+                        if (line.StartsWith("    -"))
                         {
                             sectionId++;
                         }
@@ -123,7 +135,7 @@ namespace ECSForm.Pages
 
         private async Task<IActionResult> RenderPage(string? id, string? render = null)
         {
-            var configName = id ?? "default";
+            var configName = id.Replace('@','/') ?? "default";
             Config.Add("keepData", false);
             Config.Add("configName", configName);
 
