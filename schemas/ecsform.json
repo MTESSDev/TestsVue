@@ -120,7 +120,7 @@
                     "description": "Required. The type of input element. See the input library for a full range of options.",
                     "enum": ["text", "button", "submit", "file", "image", "group", "radio", "checkbox", "select", "number", "slider", "textarea", "color", "date", "datetime-local", "email", "hidden", "month", "password", "search", "tel", "time", "url", "week"]
                 },
-                "limit":{ 
+                "limit":{
                     "type": ["number"]
                 },
                 "validation-name": {
@@ -165,6 +165,10 @@
                     "example": ["2018-02"]
                 },
                 "addLabel": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
+                "instanceLabel": {
                     "type": "object",
                     "$ref": "#/definitions/Translation"
                 },
@@ -319,7 +323,7 @@
                 },
                 "addLabel": {
                     "properties": {
-                        "type": { "const": ["group", "file"] }
+                        "type": { "enum": ["group", "file"] }
                     }
                 }
             },

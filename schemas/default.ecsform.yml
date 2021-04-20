@@ -39,3 +39,38 @@ form:
               {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
           {{RecursiveComponents components}}
       </formulate-input>
+    group: |
+      <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+              {{# type}} type="{{.}}" {{/ type}}
+              {{# name}} name="{{.}}" {{/ name}}
+              {{# name}} key="{{.}}" {{/ name}}
+              {{GenerateInputClasses type .}}
+              {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
+              {{# label}} label="{{i18n .}}" {{/ label}}
+              {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
+              {{# help}} help="{{i18n .}}" {{/ help}}
+              {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
+              {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
+              {{# min}} min="{{.}}" {{/ min}}
+              {{# max}} max="{{.}}" {{/ max}}
+              {{# limit}} limit="{{.}}" {{/ limit}}
+              {{# repeatable}}
+              :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
+              {{/ repeatable}}
+              #default="{ index }"
+              {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
+
+            <div class="tirroir">
+                <a role="button" data-toggle="collapse" aria-expanded="true" v-bind:href="'#{{name}}-' + index" v-bind:aria-controls="'{{name}}-' + index">
+                    <span class="libelle-instance">
+                        <span class="libelle">{{i18n instanceLabel}}</span>
+                        <span class="numero">{{=<% %>=}} {{ index + 1 }} <%={{ }}=%></span>
+                        <span class="icone-svg chevron-haut sm" aria-hidden="true"></span>
+                    </span>
+                </a>
+            </div>
+
+            <div v-bind:id="'{{name}}-' + index" class="contenu-collapse show">
+              {{RecursiveComponents components}}
+            </div>
+      </formulate-input>

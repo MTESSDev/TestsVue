@@ -1,0 +1,31 @@
+﻿#aml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
+form:
+  sections:
+    # Section 1
+    - section:
+        fr: Test de groupes
+      id: test
+      components:
+        - name: attendes
+          type: group
+          repeatable: true
+          label:
+            fr: label global
+            en:
+          instanceLabel:
+            fr: Invité
+          addLabel:
+            fr: Ajouter
+          components:
+            - name: name
+              type: text
+              label:
+                fr: Nom de l'invité
+              validations:
+                required: trim
+            - name: email
+              type: email
+              label:
+                fr: Courriel de l'invité
+              validations:
+                required: trim
