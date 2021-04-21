@@ -374,6 +374,7 @@ const __vue_component__$1 = /*#__PURE__*/normalizeComponent({
 //
 //
 //
+//
 var script = {
   props: {
     index: {
@@ -403,6 +404,7 @@ var __vue_render__ = function () {
   var _c = _vm._self._c || _h;
 
   return _vm.context.repeatable ? _c('button', {
+    staticClass: "btn btn-secondaire",
     class: _vm.context.classes.groupRepeatableRemove,
     attrs: {
       "data-disabled": _vm.context.model.length <= _vm.context.minimum

@@ -317,7 +317,7 @@ var __vue_inject_styles__$1 = undefined;
 var __vue_scope_id__$1 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$1 = "data-v-ee76eaac";
+var __vue_module_identifier__$1 = "data-v-6c719c97";
 /* functional template */
 
 var __vue_is_functional_template__$1 = false;
@@ -331,6 +331,7 @@ var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$1,
   staticRenderFns: __vue_staticRenderFns__$1
 }, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);//
+//
 //
 //
 //
@@ -368,6 +369,7 @@ var __vue_render__ = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _vm.context.repeatable ? _c('button', {
+    staticClass: "btn btn-secondaire",
     class: _vm.context.classes.groupRepeatableRemove,
     attrs: {
       "data-disabled": _vm.context.model.length <= _vm.context.minimum
@@ -400,7 +402,7 @@ var __vue_inject_styles__ = undefined;
 var __vue_scope_id__ = undefined;
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-1c05b729";
+var __vue_module_identifier__ = "data-v-5255d467";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

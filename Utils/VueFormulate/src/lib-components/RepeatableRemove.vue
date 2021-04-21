@@ -6,6 +6,7 @@
     @click.prevent="removeItem"
     @keypress.enter="removeItem"
     v-text="context.removeLabel"
+    class="btn btn-secondaire"
   />
 </template>
 

@@ -40,7 +40,7 @@
 .formulate-input[data-classification=box] .formulate-input-wrapper {
     display: flex;
     align-items: center;
-    margin-top: 16px;
+    margin-top: 20px;
 }
 .formulate-input[data-classification=box] .formulate-input-element {
     display: flex;
