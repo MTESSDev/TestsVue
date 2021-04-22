@@ -47,7 +47,7 @@ form:
               {{GenerateInputClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
-              {{# instanceLabel}} instanceLabel="{{i18n .}}" {{/ instanceLabel}}
+              {{# instanceLabel}} instance-label="{{i18n .}}" {{/ instanceLabel}}
               {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
               {{# help}} help="{{i18n .}}" {{/ help}}
               {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
