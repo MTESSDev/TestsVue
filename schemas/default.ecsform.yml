@@ -47,6 +47,7 @@ form:
               {{GenerateInputClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
+              {{# instanceLabel}} instanceLabel="{{i18n .}}" {{/ instanceLabel}}
               {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
               {{# help}} help="{{i18n .}}" {{/ help}}
               {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
@@ -55,22 +56,9 @@ form:
               {{# max}} max="{{.}}" {{/ max}}
               {{# limit}} limit="{{.}}" {{/ limit}}
               {{# repeatable}}
+              remove-position="after"
               :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
               {{/ repeatable}}
-              #default="{ index }"
               {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
-
-            <div class="tirroir">
-                <a role="button" data-toggle="collapse" aria-expanded="true" v-bind:href="'#{{name}}-' + index" v-bind:aria-controls="'{{name}}-' + index">
-                    <span class="libelle-instance">
-                        <span class="libelle">{{i18n instanceLabel}}</span>
-                        <span class="numero">{{=<% %>=}} {{ index + 1 }} <%={{ }}=%></span>
-                        <span class="icone-svg chevron-haut sm" aria-hidden="true"></span>
-                    </span>
-                </a>
-            </div>
-
-            <div v-bind:id="'{{name}}-' + index" class="contenu-collapse show">
               {{RecursiveComponents components}}
-            </div>
       </formulate-input>

@@ -92,6 +92,7 @@
     Vue.component('Label', MtessVueformulate.Label)
     Vue.component('ErrorList', MtessVueformulate.ErrorList)
     Vue.component('RepeatableRemove', MtessVueformulate.RepeatableRemove)
+    Vue.component('Repeatable', MtessVueformulate.Repeatable)
 
     Vue.use(VueFormulate, {
         plugins: [this.VueFormulateI18n.fr],
@@ -101,7 +102,11 @@
         slotComponents: {
             label: 'Label',
             errorList: 'ErrorList',
-            remove: 'RepeatableRemove'
+            remove: 'RepeatableRemove',
+            repeatable: 'Repeatable'
+        },
+        slotProps: {
+            repeatable: ['instanceLabel']
         },
         locale: 'fr',
         validationNameStrategy: ['validationName', 'label', 'name', 'type']

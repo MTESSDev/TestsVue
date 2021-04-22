@@ -2,3 +2,4 @@
 export { default as Label } from './Label.vue';
 export { default as ErrorList } from './ErrorList.vue';
 export { default as RepeatableRemove } from './RepeatableRemove.vue';
+export { default as Repeatable } from './Repeatable.vue';
