@@ -51,6 +51,7 @@ form:
               {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
               {{# help}} help="{{i18n .}}" {{/ help}}
               {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
+              {{# removeLabel}} remove-label="{{i18n .}}" {{/ removeLabel}}
               {{# validations}} :validation="{{JsArray .}}" {{/ validations}}
               {{# min}} min="{{.}}" {{/ min}}
               {{# max}} max="{{.}}" {{/ max}}
