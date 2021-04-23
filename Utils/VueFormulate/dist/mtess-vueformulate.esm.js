@@ -519,7 +519,9 @@ var __vue_render__ = function () {
   return _c('div', {
     class: [_vm.context.classes.groupRepeatable]
   }, [_c('div', {
-    staticClass: "tirroir"
+    staticClass: "contenu-extensible instance-groupe card section-secondaire sans-bordure"
+  }, [_c('div', {
+    staticClass: "card-title "
   }, [_c('a', {
     attrs: {
       "role": "button",
@@ -529,19 +531,24 @@ var __vue_render__ = function () {
       "aria-controls": _vm.context.name + '-' + _vm.index
     }
   }, [_c('span', {
-    staticClass: "libelle-instance"
+    staticClass: "libelle",
+    attrs: {
+      "id": 'label' + _vm.context.name + '-' + _vm.index
+    }
   }, [_c('span', {
-    staticClass: "libelle"
-  }, [_vm._v(_vm._s(_vm.instanceLabel))]), _vm._v(" "), _c('span', {
+    staticClass: "libelle-instance"
+  }, [_vm._v(_vm._s(_vm.instanceLabel) + " ")]), _vm._v(" "), _c('span', {
     staticClass: "numero"
-  }, [_vm._v(_vm._s(_vm.index + 1))]), _vm._v(" "), _c('span', {
-    staticClass: "icone-svg chevron-haut sm",
+  }, [_vm._v(_vm._s(_vm.index + 1))])]), _vm._v(" "), _c('span', {
+    staticClass: "icone-svg md chevron-haut-texte",
     attrs: {
       "aria-hidden": "true"
     }
   })])]), _vm._v(" "), _c('div', {
-    staticClass: "collapse show",
+    staticClass: "card-body collapse show",
     attrs: {
+      "role": "group",
+      "aria-labelledby": 'label' + _vm.context.name + '-' + _vm.index,
       "id": _vm.context.name + '-' + _vm.index
     }
   }, [_vm.context.removePosition === 'after' ? _vm._t("default") : _vm._e(), _vm._v(" "), _c('FormulateSlot', {
