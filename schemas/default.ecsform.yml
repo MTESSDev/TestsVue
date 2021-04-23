@@ -59,7 +59,9 @@ form:
               {{# repeatable}}
               remove-position="after"
               :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
-              {{/ repeatable}}
+              {{/ repeatable}}              
+              #default="{ name, index }"
+              :value="[{}]"
               {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
               {{RecursiveComponents components}}
       </formulate-input>

@@ -139,7 +139,7 @@ form:
         fr: Emplois
       id: emplois
       components:
-        - name: attendes
+        - name: emplois
           type: group
           repeatable: true
           label:
@@ -211,7 +211,7 @@ form:
                 Congediement: Congédiement
                 AutreRaison: Autre
             - name: emploiPrecisionAutre
-              v-if: form.emploiRaisonFinEmploi === 'AutreRaison'
+              v-if: form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
               type: text
               label: 
                 fr: Précisez la raison de fin d'emploi
