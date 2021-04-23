@@ -200,7 +200,7 @@
                     <div class="espaceur-conteneurs"></div>
                 </div>
             </div>
-            <div class="conteneur-colonnes @ViewData["classe-fond-section-2colonnes"]">                
+            <div class="conteneur-colonnes @ViewData["classe-fond-section-2colonnes"]">
                 <div class="container">
                     <div class="espaceur-conteneurs @(masquerPremierEspaceurConteneurColonnes ? "d-none" : "")"></div>
                     <div id="conteneur2Colonnes" class="contenu-principal-droite">
@@ -277,7 +277,10 @@
 
     <script src="~/js/base.min.js" asp-append-version="true"></script>
     <script src="~/js/additionnel.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/additionnel.min.js" asp-append-version="true"></script>
+    
+    
+    <script src="~/js/baseAsync.min.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

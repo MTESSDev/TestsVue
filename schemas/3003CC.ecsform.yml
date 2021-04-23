@@ -135,7 +135,90 @@ form:
                 fr: Précisez
               validations: 
                 required: trim
-    # Section 3
+    - section:
+        fr: Emplois
+      id: emplois
+      components:
+        - name: emplois
+          type: group
+          repeatable: true
+          label:
+            fr: Emplois
+            en: Jobs
+          instanceLabel:
+            fr: Emploi
+          addLabel:
+            fr: Ajouter un emploi
+            en: Add a job
+          removeLabel:
+            fr: Supprimer cet emploi
+            en: Delete this job
+          components:
+            - name: emploiNomEntreprise
+              type: text
+              label:
+                fr: Nom de l'entreprise
+              validations:
+                required: trim
+            - name: emploiPeriodeDu
+              type: date
+              label:
+                fr: Période du
+              validations:
+                required: trim
+            - name: emploiPeriodeAu
+              type: date
+              label:
+                fr: Période au
+              validations:
+                required: trim
+            - name: emploiSalaireHebdo
+              type: number
+              label:
+                fr: Salaire par semaine
+              validations:
+                required: trim
+            - name: emploiHeuresHebdo
+              type: number
+              label:
+                fr: Heures par semaine
+              validations:
+                required: trim
+            - name: emploiEmploiOccupe
+              type: text
+              label:
+                fr: Emploi occupé
+              validations:
+                required: trim
+            - name: emploiPrincipalesTachesAccomplies
+              type: textarea
+              label:
+                fr: Principales tâches accomplies
+              validations:
+                required: trim
+            - name: emploiRaisonFinEmploi
+              type: select
+              label: 
+                fr: Raison de la fin d'emploi
+              validations: 
+                required: trim
+              options: 
+                ManqueTravail: Manque de travail
+                ProblemeSante: Problème de santé
+                ChangementEmploi: Changement d'emploi
+                FermetureEntreprise: Fermeture de l'entreprise
+                NaissancePriseChargeEnfant: Naissance ou prise en chage d'un enfant
+                Congediement: Congédiement
+                AutreRaison: Autre
+            - name: emploiPrecisionAutre
+              v-if: form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
+              type: text
+              label: 
+                fr: Précisez la raison de fin d'emploi
+              validations: 
+                required: trim
+
+    # Section 
     - section: 
         fr: Révision
         en: (EN)Test

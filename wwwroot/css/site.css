@@ -2,6 +2,8 @@
 /*====================================================================================================*/
 /*  -Z01- Base contrôles
 /* ---------------------------------------------------------------------------------------------------*/
+/*  -Z03- Boutons
+/* ---------------------------------------------------------------------------------------------------*/
 /*  -Z10- Radio button et checkbox
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -Z20A- Forms (Champs textes largeurs)
@@ -15,14 +17,14 @@
 /*====================================================================================================*/
 
 /* Reproduire tout ce qui est dans form-control */
-.formulate-input[data-classification=text] input, .formulate-input[data-classification=textArea] textarea,
+.formulate-input[data-classification=text] input, .formulate-input[data-classification=textarea] textarea,
 .formulate-input[data-classification=select] select {
     border: 1px solid #858b93;
 }
 
 
 /* Reproduire tout ce qui est dans form-group */
-.formulate-input[data-classification=text], .formulate-input[data-classification=textArea],
+.formulate-input[data-classification=text], .formulate-input[data-classification=textarea],
 .formulate-input[data-classification=select], .formulate-input[data-classification=group] {
     margin-bottom: 32px; /* On applique le même style que la classe form-group de BS */
 }
@@ -30,6 +32,55 @@
 .form-control, .select2-container--bootstrap4 .select2-selection {
     border: 1px solid #858b93;
 }
+
+/*====================================================================================================*/
+/*  -Z03- Boutons
+/*====================================================================================================*/
+/* Boutons ECS */
+
+/* Vient du .btn de bootstrap */
+.formulate-input-group-add-more button {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: 0; /*override*/
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+
+
+.btn, .formulate-input-group-add-more button {
+    line-height: 1rem;
+}
+
+.btn.btn-primaire:not([disabled]):focus, .btn.btn-secondaire:not([disabled]):focus, .formulate-input-group-add-more button:not([disabled]):focus {
+    border: 3px solid var(--couleur-texte-base);
+}
+
+.btn.btn-secondaire, .formulate-input-group-add-more button {
+    background-color: #fff;
+    border: 2px solid var(--couleur-bouton-primaire);
+    color: var(--couleur-bouton-primaire);
+    font-family: 'OpenSans-Bold', sans-serif;
+    box-shadow: none;
+}
+
+.btn.btn-secondaire:hover, .btn.btn-secondaire:focus, .formulate-input-group-add-more button:hover, .formulate-input-group-add-more button:focus {
+    text-decoration: underline !important;
+}
+
+.btn-defaut:disabled:hover, .btn.btn-primaire:disabled:hover, .btn.btn-secondaire:disabled:hover, .formulate-input-group-add-more button:disabled:hover {
+    cursor: not-allowed;
+}
+
 
 /*====================================================================================================*/
 /*  -Z10- Radio button et checkbox
@@ -40,7 +91,7 @@
 .formulate-input[data-classification=box] .formulate-input-wrapper {
     display: flex;
     align-items: center;
-    margin-top: 16px;
+    margin-top: 20px;
 }
 .formulate-input[data-classification=box] .formulate-input-element {
     display: flex;
@@ -155,10 +206,43 @@
     mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>')
 }
 
+
+
+/* ==== Personnalisations pour les groupes ==== */
+
+/* Label de groupe */
+.formulate-input[data-type="group"] > .formulate-input-wrapper > label {
+    margin-bottom: 16px;
+}
+
+/* Bouton d'ajout d'instance de groupe */
+.formulate-input-group-add-more {
+    text-align: end;
+}
+
+
+/*====================================================================================================*/
+/*  -Z11- Instances de groupes
+/*====================================================================================================*/
+
+.instance-groupe{
+    margin-bottom: 32px;
+}
+
+.card.instance-groupe .card-title{
+    padding: 0;
+}
+
+.card.instance-groupe .card-title a {
+    padding: 12px 16px;
+}
+
+.icone-svg.chevron-haut path{
+    fill:var(--couleur-texte-base);
+}
 /*====================================================================================================*/
 /*  -Z20- Forms  
 /*====================================================================================================*/
-
 .zone-boutons button, .zone-boutons input[type="submit"] {
     margin-right: 32px;
 }
@@ -227,6 +311,37 @@ input[type="text"].form-control.sm, input[type="number"].form-control.sm {
     }
 }
 
+
+
+
+
+/*====================================================================================================*/
+/*  -Z89- Contenu extensible 
+/*====================================================================================================*/
+
+/*---- Liens plus ou moins de détails ----*/
+.developper, .reduire {
+    display: none;
+}
+
+a.collapsed .developper, a:not(.collapsed) .reduire {
+    display: inline-block;
+}
+
+.contenu-extensible.entete a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contenu-extensible .icone-svg {
+    margin-left: 8px;
+}
+
+.contenu-extensible a.collapsed .icone-svg, .contenu-extensible a.collapsed .developper .icone-svg {
+    transform: rotate(-180deg);
+}
+
 /*====================================================================================================*/
 /*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
 /*====================================================================================================*/
@@ -247,6 +362,10 @@ input[type="text"].form-control.sm, input[type="number"].form-control.sm {
 input.form-control:focus, select.form-control:focus {
     outline: 3px solid #89bce5;
     border: 2px solid #5b6476;
+}
+
+form .field-validation-error {
+    margin-top: 8px;
 }
 
 /*TODO ATTENTION ici doit s'appliquer à des pages AVEC un menu à gauche... pas pour nos autres pages 2 colonnes */
@@ -271,9 +390,6 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 /* Il me semble que bold c'est TRÈS exagéré... */
 /* Réduire à 14px? */
 /* Ajouter marge supérieur afin d'espacer d'avec le champ au dessus ?  Selon norme à l'oeil il y en a une mais de combien? Semble plus que 4px. */
-form .field-validation-error {
-     margin-top: 8px;
-}
 
 
 /*====================================================================================================*/
@@ -290,4 +406,31 @@ form .field-validation-error {
 
 .navigation-form li a.active {
     font-weight: 700;
+}
+
+
+
+.card.section-secondaire .card-title {
+    background-color: var(--couleur-fond-gris);
+}
+
+
+.card.section-secondaire {
+    border: 0;
+    border-top: 1px solid var(--couleur-filet-secondaire);
+    border-bottom: 1px solid var(--couleur-filet-secondaire);
+}
+
+
+
+/*====================================================================================================*/
+/*  -100- À positionner
+/*====================================================================================================*/
+/*====================================================================================================*/
+/*  -900- SPRITES
+/*====================================================================================================*/
+/* Ajouter le sprite crochet-bleu-texte */
+/* Pour raison inconnue, dans ce projet il faut réajuster la taille des icônes. Il faudra revérifier une fois dans ECS. */
+.icone-svg.md.chevron-haut-texte {
+    height: 12px;
 }

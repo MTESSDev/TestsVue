@@ -7,7 +7,7 @@
 //
 //
 //
-var script$2 = {
+var script$3 = {
   props: {
     context: {
       type: Object,
@@ -105,10 +105,10 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
 }
 
 /* script */
-const __vue_script__$2 = script$2;
+const __vue_script__$3 = script$3;
 /* template */
 
-var __vue_render__$2 = function () {
+var __vue_render__$3 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -136,29 +136,29 @@ var __vue_render__$2 = function () {
   }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e()]);
 };
 
-var __vue_staticRenderFns__$2 = [];
+var __vue_staticRenderFns__$3 = [];
 /* style */
 
-const __vue_inject_styles__$2 = undefined;
+const __vue_inject_styles__$3 = undefined;
 /* scoped */
 
-const __vue_scope_id__$2 = undefined;
+const __vue_scope_id__$3 = undefined;
 /* module identifier */
 
-const __vue_module_identifier__$2 = undefined;
+const __vue_module_identifier__$3 = undefined;
 /* functional template */
 
-const __vue_is_functional_template__$2 = false;
+const __vue_is_functional_template__$3 = false;
 /* style inject */
 
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-const __vue_component__$2 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$2,
-  staticRenderFns: __vue_staticRenderFns__$2
-}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
+const __vue_component__$3 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$3,
+  staticRenderFns: __vue_staticRenderFns__$3
+}, __vue_inject_styles__$3, __vue_script__$3, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
 
 //
 //
@@ -197,7 +197,7 @@ const __vue_component__$2 = /*#__PURE__*/normalizeComponent({
 //
 //
 //
-var script$1 = {
+var script$2 = {
   props: {
     visibleErrors: {
       type: Array,
@@ -261,10 +261,10 @@ var script$1 = {
 };
 
 /* script */
-const __vue_script__$1 = script$1;
+const __vue_script__$2 = script$2;
 /* template */
 
-var __vue_render__$1 = function () {
+var __vue_render__$2 = function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -324,7 +324,7 @@ var __vue_render__$1 = function () {
   }), 0)])]) : _vm._e();
 };
 
-var __vue_staticRenderFns__$1 = [function () {
+var __vue_staticRenderFns__$2 = [function () {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -340,6 +340,95 @@ var __vue_staticRenderFns__$1 = [function () {
     }
   })]);
 }];
+/* style */
+
+const __vue_inject_styles__$2 = undefined;
+/* scoped */
+
+const __vue_scope_id__$2 = undefined;
+/* module identifier */
+
+const __vue_module_identifier__$2 = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$2 = false;
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__$2 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$2,
+  staticRenderFns: __vue_staticRenderFns__$2
+}, __vue_inject_styles__$2, __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var script$1 = {
+  props: {
+    index: {
+      type: Number,
+      default: null
+    },
+    context: {
+      type: Object,
+      required: true
+    },
+    removeItem: {
+      type: Function,
+      required: true
+    }
+  }
+};
+
+/* script */
+const __vue_script__$1 = script$1;
+/* template */
+
+var __vue_render__$1 = function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _vm.context.repeatable ? _c('button', {
+    staticClass: "btn btn-secondaire",
+    class: _vm.context.classes.groupRepeatableRemove,
+    attrs: {
+      "data-disabled": _vm.context.model.length <= _vm.context.minimum
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.context.removeLabel)
+    },
+    on: {
+      "click": function ($event) {
+        $event.preventDefault();
+        return _vm.removeItem($event);
+      },
+      "keypress": function ($event) {
+        if (!$event.type.indexOf('key') && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) {
+          return null;
+        }
+
+        return _vm.removeItem($event);
+      }
+    }
+  }) : _vm._e();
+};
+
+var __vue_staticRenderFns__$1 = [];
 /* style */
 
 const __vue_inject_styles__$1 = undefined;
@@ -374,18 +463,43 @@ const __vue_component__$1 = /*#__PURE__*/normalizeComponent({
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var script = {
   props: {
-    index: {
-      type: Number,
-      default: null
-    },
     context: {
       type: Object,
       required: true
     },
     removeItem: {
       type: Function,
+      required: true
+    },
+    index: {
+      type: Number,
+      required: true
+    },
+    instanceLabel: {
+      type: String,
       required: true
     }
   }
@@ -402,28 +516,56 @@ var __vue_render__ = function () {
 
   var _c = _vm._self._c || _h;
 
-  return _vm.context.repeatable ? _c('button', {
-    class: _vm.context.classes.groupRepeatableRemove,
+  return _c('div', {
+    class: [_vm.context.classes.groupRepeatable]
+  }, [_c('div', {
+    staticClass: "contenu-extensible instance-groupe card section-secondaire sans-bordure"
+  }, [_c('div', {
+    staticClass: "card-title "
+  }, [_c('a', {
     attrs: {
-      "data-disabled": _vm.context.model.length <= _vm.context.minimum
-    },
-    domProps: {
-      "textContent": _vm._s(_vm.context.removeLabel)
-    },
-    on: {
-      "click": function ($event) {
-        $event.preventDefault();
-        return _vm.removeItem($event);
-      },
-      "keypress": function ($event) {
-        if (!$event.type.indexOf('key') && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) {
-          return null;
-        }
-
-        return _vm.removeItem($event);
-      }
+      "role": "button",
+      "data-toggle": "collapse",
+      "aria-expanded": "true",
+      "href": '#' + _vm.context.name + '-' + _vm.index,
+      "aria-controls": _vm.context.name + '-' + _vm.index
     }
-  }) : _vm._e();
+  }, [_c('span', {
+    staticClass: "libelle",
+    attrs: {
+      "id": 'label' + _vm.context.name + '-' + _vm.index
+    }
+  }, [_c('span', {
+    staticClass: "libelle-instance"
+  }, [_vm._v(_vm._s(_vm.instanceLabel) + " ")]), _vm._v(" "), _c('span', {
+    staticClass: "numero"
+  }, [_vm._v(_vm._s(_vm.index + 1))])]), _vm._v(" "), _c('span', {
+    staticClass: "icone-svg md chevron-haut-texte",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "card-body collapse show",
+    attrs: {
+      "role": "group",
+      "aria-labelledby": 'label' + _vm.context.name + '-' + _vm.index,
+      "id": _vm.context.name + '-' + _vm.index
+    }
+  }, [_vm.context.removePosition === 'after' ? _vm._t("default") : _vm._e(), _vm._v(" "), _c('FormulateSlot', {
+    attrs: {
+      "name": "remove",
+      "context": _vm.context,
+      "index": _vm.index,
+      "remove-item": _vm.removeItem
+    }
+  }, [_c(_vm.context.slotComponents.remove, _vm._b({
+    tag: "component",
+    attrs: {
+      "context": _vm.context,
+      "index": _vm.index,
+      "remove-item": _vm.removeItem
+    }
+  }, 'component', _vm.context.slotProps.remove, false))], 1), _vm._v(" "), _vm.context.removePosition === 'before' ? _vm._t("default") : _vm._e()], 2)])]);
 };
 
 var __vue_staticRenderFns__ = [];
@@ -454,9 +596,10 @@ const __vue_component__ = /*#__PURE__*/normalizeComponent({
 
 var components = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    Label: __vue_component__$2,
-    ErrorList: __vue_component__$1,
-    RepeatableRemove: __vue_component__
+    Label: __vue_component__$3,
+    ErrorList: __vue_component__$2,
+    RepeatableRemove: __vue_component__$1,
+    Repeatable: __vue_component__
 });
 
 // Import vue components
@@ -468,4 +611,4 @@ const install = function installMtessVueformulate(Vue) {
 }; // Create module definition for Vue.use()
 
 export default install;
-export { __vue_component__$1 as ErrorList, __vue_component__$2 as Label, __vue_component__ as RepeatableRemove };
+export { __vue_component__$2 as ErrorList, __vue_component__$3 as Label, __vue_component__ as Repeatable, __vue_component__$1 as RepeatableRemove };
