@@ -14,6 +14,7 @@
     <None Remove="schemas\3003.ecsform.yml" />
     <None Remove="schemas\3003BaseFull.yml" />
     <None Remove="schemas\3003CC.ecsform.yml" />
+    <None Remove="schemas\attendees.ecsform.yml" />
     <None Remove="schemas\dany.ecsform.yml" />
     <None Remove="schemas\default.ecsform.yml" />
     <None Remove="schemas\formTemplate.vue" />
@@ -28,6 +29,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="schemas\3003.ecsform.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schemas\attendees.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="schemas\dany.ecsform.yml">
