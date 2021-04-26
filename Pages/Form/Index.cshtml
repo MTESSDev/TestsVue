@@ -195,7 +195,8 @@
                 }
             },
             ajouterErreursEnfant(enfant, listeErreurs) {
-                if (enfant.isSubField && enfant.isSubFLinkield()) {
+                //if (enfant.isSubField && enfant.isSubFLinkield()) {
+                if (enfant.isSubField) {
                     const nameEnfant = enfant.context.attributes.name
 
                     enfant.validationErrors.forEach(message => {
