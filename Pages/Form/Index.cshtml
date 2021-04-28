@@ -161,7 +161,7 @@
                 let erreursGroupe = []
                 let erreursGroupeEnfants = []
 
-                // Erreurs dans les enfants du groupe
+                // Traiter les erreurs dans les enfants du groupe
                 groupe.$children.forEach(enfant => {
                     this.ajouterErreursEnfant(enfant, erreursGroupeEnfants)
                 })
@@ -183,7 +183,7 @@
                     })
                 }
 
-                if (erreursGroupe.length <= 0) {
+                if (erreursGroupeEnfants.length > 0 && erreursGroupe.length == 0) {
                     // Aucun message erreur de haut niveau sur le groupe, on indique qu'il y a au moins une erreur et on pointe sur première champ erreur du groupe
                     erreursGroupe.push({ name: nomPremierControleErreurGroupe, message: groupe.label + ' contient au moins une erreur.' })
                 }

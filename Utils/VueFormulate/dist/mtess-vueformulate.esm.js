@@ -271,7 +271,7 @@ var __vue_render__$2 = function () {
 
   var _c = _vm._self._c || _h;
 
-  return _vm.visibleErrors.length > 0 ? _c('div', [_vm.type === 'form' ? _c('div', [_vm.visibleErrors.length > 0 ? _c('div', {
+  return _vm.visibleErrors.length > 0 ? _c('div', [_vm.type === 'form' ? _c('div', [_vm.errorSummary.length > 0 ? _c('div', {
     staticClass: "validation-summary-errors",
     attrs: {
       "id": "errorSummary",

@@ -1,7 +1,7 @@
 <template>
     <div v-if="visibleErrors.length > 0">
         <div v-if="type === 'form'">
-            <div id="errorSummary" class="validation-summary-errors" data-valmsg-summary="true" tabindex="-1" v-if="visibleErrors.length > 0">
+            <div id="errorSummary" class="validation-summary-errors" data-valmsg-summary="true" tabindex="-1" v-if="errorSummary.length > 0">
                 <div class="message erreur text-sm">
                     <div class="entete d-flex">
                         <div aria-hidden="true" class="icone-svg"></div>

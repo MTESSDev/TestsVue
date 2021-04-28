@@ -141,6 +141,7 @@ form:
       components:
         - name: emplois
           type: group
+          v-if: form['Req01-Travaille'] === 'true'
           repeatable: true
           label:
             fr: Emplois
@@ -153,6 +154,8 @@ form:
           removeLabel:
             fr: Supprimer cet emploi
             en: Delete this job
+          validations:
+            required: trim
           components:
             - name: emploiNomEntreprise
               type: text
