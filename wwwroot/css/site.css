@@ -251,6 +251,9 @@
     margin-right: 0;
 }
 
+select[data-placeholder-selected="true"] {
+    color: #a8a8a8;
+}
 
 /* Bordure des champs en erreur. TODO déterminer si on inclus dans css base ECS ou pas.*/
 .formulate-input[data-is-showing-errors="true"] .form-control {
