@@ -133,6 +133,11 @@
                     "description": "A descriptive label for the input element.",
                     "$ref": "#/definitions/Translation"
                 },
+                "placeholder": {
+                    "type": "object",
+                    "description": "Placeholder value",
+                    "$ref": "#/definitions/Translation"
+                },
                 "classes": {
                     "type": "string",
                     "description": ""
@@ -170,6 +175,7 @@
                 },
                 "instanceLabel": {
                     "type": "object",
+                    "description": "Label of one instance of a group.",
                     "$ref": "#/definitions/Translation"
                 },
                 "tooltip": {
