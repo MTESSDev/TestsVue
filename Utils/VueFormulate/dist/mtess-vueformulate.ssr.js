@@ -263,7 +263,11 @@ var script$2 = {
     this.$nextTick(function () {
       if (this.type === 'form' && this.$root.$el.getAttribute('data-submit')) {
         this.$root.$el.removeAttribute('data-submit');
-        document.getElementById('errorSummary').focus();
+        var errorSummary = document.getElementById('errorSummary');
+
+        if (errorSummary) {
+          errorSummary.focus();
+        }
       }
     });
   },
@@ -317,7 +321,7 @@ var __vue_inject_styles__$2 = undefined;
 var __vue_scope_id__$2 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$2 = "data-v-2893ab0e";
+var __vue_module_identifier__$2 = "data-v-7ada0d93";
 /* functional template */
 
 var __vue_is_functional_template__$2 = false;

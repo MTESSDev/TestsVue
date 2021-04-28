@@ -67,7 +67,12 @@
             this.$nextTick(function () {
                 if (this.type === 'form' && this.$root.$el.getAttribute('data-submit')) {
                     this.$root.$el.removeAttribute('data-submit')
-                    document.getElementById('errorSummary').focus()
+
+                    const errorSummary = document.getElementById('errorSummary')
+
+                    if (errorSummary) {
+                        errorSummary.focus()
+                    }
                 }
             })
         },

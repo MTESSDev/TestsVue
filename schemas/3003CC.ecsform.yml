@@ -139,6 +139,10 @@ form:
         fr: Emplois
       id: emplois
       components:
+        - name: testABC
+          type: text
+          label:
+            fr: C'Est quoi le putain de bug??
         - name: emplois
           type: group
           v-if: form['Req01-Travaille'] === 'true'
@@ -208,6 +212,7 @@ form:
                 fr: Raison de la fin d'emploi
               validations: 
                 required: trim
+              placeholder: 'Select an option'
               options: 
                 ManqueTravail: Manque de travail
                 ProblemeSante: Problème de santé
@@ -217,12 +222,49 @@ form:
                 Congediement: Congédiement
                 AutreRaison: Autre
             - name: emploiPrecisionAutre
-              v-if: form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
+              v-if: index && form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
               type: text
               label: 
                 fr: Précisez la raison de fin d'emploi
               validations: 
                 required: trim
+    - section:
+        fr: Test de groupes
+      id: test
+      components:
+        - name: attendes
+          type: group
+          repeatable: true
+          label:
+            fr: label global
+            en:
+          instanceLabel:
+            fr: Invité
+          addLabel:
+            fr: Ajouter
+          components:
+            - name: name
+              type: text
+              label:
+                fr: Nom de l'invité
+              validations:
+                required: trim
+            - name: email
+              type: email
+              label:
+                fr: Courriel de l'invité
+              validations:
+                required: trim
+            - name: testSelectGroupe
+              type: select
+              label: 
+                fr: Test de sélect
+              validations: 
+                required: trim
+              options: 
+                ManqueTravail: AAA
+                ProblemeSante: BBB
+
 
     # Section 
     - section: 
