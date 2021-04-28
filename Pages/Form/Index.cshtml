@@ -222,7 +222,9 @@
                 //Obtenir la page courante et mettre à jour son indicateur d'erreurs (sauf page révision)
                 if (this.pageCourante.id !== 'revision') {
                     const form = this.$formulate.registry.get("form")
-                    this.pages[this.pageCourante.no].contientErreurs = form.hasErrors
+
+                    //La 2ème portion de validation sert à palier un bug avec les groupes (prop hasErrors = true, suite à navigation à partir page révision, même si aucune erreur pour vrai)
+                    this.pages[this.pageCourante.no].contientErreurs = form.hasErrors && (form.invalidErrors.length === 0 || form.invalidErrors[0] !== false)
                 }
 
                 this.noPageCourante = noPage
