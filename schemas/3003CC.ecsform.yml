@@ -90,7 +90,7 @@ form:
               validations: 
                 required: trim
             - name: PrecisionRaisonDemandeAfdr
-              type: radio
+              type: select
               label: 
                 fr: Précisez la raison de votre demande d'aide financière
               validations: 
@@ -161,17 +161,20 @@ form:
               validations:
                 required: trim
             - name: emploiPeriodeDu
-              type: date
-              label:
-                fr: Période du
-              validations:
-                required: trim
-            - name: emploiPeriodeAu
-              type: date
-              label:
-                fr: Période au
-              validations:
-                required: trim
+              type: inline
+              components: 
+              - name: emploiPeriodeDu
+                type: date
+                label:
+                  fr: Période du
+                validations:
+                  required: trim
+              - name: emploiPeriodeAu
+                type: date
+                label:
+                  fr: Période au
+                validations:
+                  required: trim
             - name: emploiSalaireHebdo
               type: number
               label:

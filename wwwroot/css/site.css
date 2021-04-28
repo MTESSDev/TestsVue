@@ -251,10 +251,35 @@
     margin-right: 0;
 }
 
+
+/* Bordure des champs en erreur. TODO déterminer si on inclus dans css base ECS ou pas.*/
+.formulate-input[data-is-showing-errors="true"] .form-control {
+    border-color: var(--couleur-erreur);
+    border-width: 2px;
+}
+
+/* Contrôles sur une même ligne (inline) */
+.inline {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.inline > * {
+    margin-right: 32px;
+}
+.inline > *:last-child {
+    margin-right: 0;
+}
+
+
+/* Limiter la largeur max des champs dates si affichés en inline afin d'éviter que les messages d'erreurs provoquent un affichage sur 2 lignes des contrôles */
+.inline .formulate-input[data-type="date"]{
+    max-width: 203px;
+}
+
 /*====================================================================================================*/
 /*  -Z20A- Forms (Champs textes largeurs)  
 /*====================================================================================================*/
-
 /*Le xxl n'existe pas dans les règles du SCG, c'est ajouté */
 input[type="text"].form-control.xxl {
     max-width: 728px;
@@ -389,7 +414,10 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 /* Selon normes, 16px BOLD. */
 /* Il me semble que bold c'est TRÈS exagéré... */
 /* Réduire à 14px? */
-/* Ajouter marge supérieur afin d'espacer d'avec le champ au dessus ?  Selon norme à l'oeil il y en a une mais de combien? Semble plus que 4px. */
+/*form .field-validation-error {
+    font-family: 'OpenSans-SemiBold';
+}
+*/
 
 
 /*====================================================================================================*/
