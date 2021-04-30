@@ -464,6 +464,11 @@ form .input-validation-error, form .input-validation-error + .note-editor {
     border-color: var(--couleur-erreur);
 }
 
+.navigation-form ul li.sans-erreur .puce {
+    background-color: var(--couleur-succes);
+    border-color: var(--couleur-succes);
+}
+
 .navigation-form ul li.active .puce {
     background-color: #1479CC;
     border-width: 3px;

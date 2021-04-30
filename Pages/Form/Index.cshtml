@@ -53,7 +53,7 @@
 @section colonneGauche{
     <nav v-cloak class="navigation-form">
         <ul>
-            <li v-for="page in pages" :key="page.no" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs}">
+            <li v-for="page in pages" :key="page.no" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}">
                 <span class="puce"></span>
                 <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>                
             </li>
@@ -230,6 +230,7 @@
 
                     //La 2ème portion de validation sert à pallier un bug avec les groupes (prop hasErrors = true, suite à navigation à partir page révision, même si aucune erreur pour vrai)
                     this.pages[this.pageCourante.no].contientErreurs = form.hasErrors && (form.invalidErrors.length === 0 || form.invalidErrors[0] !== false)
+                    this.pages[this.pageCourante.no].sansErreur = !this.pages[this.pageCourante.no].contientErreurs
                 }
 
                 this.noPageCourante = noPage
