@@ -199,7 +199,13 @@ namespace ECSForm.Pages
             var sectionId = 0;
             foreach (var section in dynamicForm.Form.Sections)
             {
-                Sections?.Add(new Section() { No = sectionId++, Id = section.Id, Titre = section.Section.GetLocalizedObject() ?? "Title not found" });
+                Sections?.Add(new Section()
+                {
+                    No = sectionId++,
+                    Id = section.Id,
+                    Titre = section.Section.GetLocalizedObject() ?? "Title not found",
+                    VIf = section.VIf
+                });
             }
 
             // Restore last state
