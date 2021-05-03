@@ -50,6 +50,10 @@
                     "type": "string",
                     "description": ""
                 },
+                "v-if": {
+                    "type": "string",
+                    "description": "Conditionnal display on another property/form field."
+                },
                 "components": {
                     "type": "array",
                     "items": {
