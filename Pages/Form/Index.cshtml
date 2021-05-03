@@ -51,14 +51,13 @@
 }
 
 @section colonneGauche{
-    <nav v-cloak>
-        <nav class="navigation-form">
-            <ul>
-                <li v-for="page in pages" :key="page.no">
-                    <a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)" v-bind:class="{active : page.no === noPageCourante, 'text-danger' : page.contientErreurs}">{{ page.titre }}</a>
-                </li>
-            </ul>
-        </nav>
+    <nav v-cloak class="navigation-form">
+        <ul>
+            <li v-for="page in pages" :key="page.no" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}">
+                <span class="puce"></span>
+                <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>                
+            </li>
+        </ul>
     </nav>
 }
 
@@ -155,7 +154,7 @@
                 return listeErreurs.length > 0 ? JSON.stringify(listeErreurs) : false
             },
             ajouterErreursChamp(champ, listeErreurs) {
-
+                champ.formShouldShowErrors = true
                 champ.context.validationErrors.forEach(message => {
                     listeErreurs.push({ name: champ.context.name, message: message })
                 })
@@ -163,6 +162,7 @@
             ajouterErreursGroupe(groupe, listeErreurs, ajouterErreursEnfants) {
                 let erreursGroupe = []
                 let erreursGroupeEnfants = []
+                groupe.formShouldShowErrors = true
 
                 // Traiter les erreurs dans les enfants du groupe
                 groupe.$children.forEach(enfant => {
@@ -174,6 +174,7 @@
                 if (!nomPremierControleErreurGroupe) {
                     nomPremierControleErreurGroupe = groupe._data.defaultId
                     groupe.$el.setAttribute('name', nomPremierControleErreurGroupe)
+                    groupe.$el.setAttribute('id', nomPremierControleErreurGroupe)
                     groupe.$el.setAttribute('tabindex', '-1')
                 }
 
@@ -199,6 +200,9 @@
             },
             ajouterErreursEnfant(enfant, listeErreurs) {
                 //if (enfant.isSubField && enfant.isSubFLinkield()) {
+
+                enfant.formShouldShowErrors = true
+
                 if (enfant.isSubField) {
                     const nameEnfant = enfant.context.attributes.name
 
@@ -218,13 +222,15 @@
                 this.form.validAll = false
                 this.config.keepData = true
 
-
                 //Obtenir la page courante et mettre à jour son indicateur d'erreurs (sauf page révision)
                 if (this.pageCourante.id !== 'revision') {
                     const form = this.$formulate.registry.get("form")
 
-                    //La 2ème portion de validation sert à palier un bug avec les groupes (prop hasErrors = true, suite à navigation à partir page révision, même si aucune erreur pour vrai)
+                    this.pages[this.pageCourante.no].dirty = form.formContext.hasValue
+
+                    //La 2ème portion de validation sert à pallier un bug avec les groupes (prop hasErrors = true, suite à navigation à partir page révision, même si aucune erreur pour vrai)
                     this.pages[this.pageCourante.no].contientErreurs = form.hasErrors && (form.invalidErrors.length === 0 || form.invalidErrors[0] !== false)
+                    this.pages[this.pageCourante.no].sansErreur = !this.pages[this.pageCourante.no].contientErreurs
                 }
 
                 this.noPageCourante = noPage
@@ -234,17 +240,25 @@
                     if (this.pageCourante.id === 'revision') {
                         this.form.validAll = true
                         this.$formulate.submit('form')
-
                     }
 
                     if (nomControleFocus) {
                         const controles = document.getElementsByName(nomControleFocus)
-                        if (controles) {
+                        if (controles.length) {
                             if (!pasFocus) {
                                 controles[0].focus()
                             }
-                            var label = controles[0].id.split('_');
-                            $("label[for^='" + label[0] + "']")[0].scrollIntoView();
+                            this.repositionnerEcranLabelQuestion(controles[0].id)
+                        } else {
+                            /* Ici on traite essentiellement les erreurs de haut niveau sur les groupes (ex. un groupe obligatoire sans occurence)
+                               setTimeout nécessaire afin que le rendering des erreurs soit fait. */
+                            setTimeout(function (formulate) {
+                                var controlesErreur = $("[data-has-errors]").find("input,textarea")
+                                if (controlesErreur.length) {
+                                    controlesErreur[0].focus()
+                                    formulate.repositionnerEcranLabelQuestion(controlesErreur[0].id)
+                                }
+                            },0 ,this)                           
                         }
                     }
                 })
@@ -252,6 +266,11 @@
             effectuerNavigationParId(idPage, nomControleFocus) {
                 const page = this.obtenirPage(idPage)
                 this.effectuerNavigation(page.no, nomControleFocus)
+            },
+            repositionnerEcranLabelQuestion(idControle) {
+                //Le split permet d'aller chercher le label de la question associée à un bouton radio ou un checkbox. Pour les autres types de contrôles c'est le label du contrôle lui même (n'aura pas de _)
+                var label = idControle.split('_');
+                $("label[for^='" + label[0] + "']")[0].scrollIntoView();
             },
             obtenirPage(idPage) {
                 return this.pages.find(page => page.id === idPage)

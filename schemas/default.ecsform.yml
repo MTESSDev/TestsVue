@@ -34,8 +34,9 @@ form:
               {{# max}} max="{{.}}" {{/ max}}
               {{# limit}} limit="{{.}}" {{/ limit}}
               {{# options}} :options="{{JsObject options}}" {{/ options}}
+              error-behavior="value"
               {{# repeatable}}
-              :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
+              :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"                            
               {{/ repeatable}}
               {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
           {{RecursiveComponents components}}
@@ -57,6 +58,7 @@ form:
               {{# min}} min="{{.}}" {{/ min}}
               {{# max}} max="{{.}}" {{/ max}}
               {{# limit}} limit="{{.}}" {{/ limit}}
+              error-behavior="value"
               {{# repeatable}}
               remove-position="after"
               :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
