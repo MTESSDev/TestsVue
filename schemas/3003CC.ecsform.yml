@@ -49,6 +49,7 @@ form:
         fr: Raison de la demande
         en: (EN)Raison de la demande
       id: raisonDemande
+      v-if: form.TypeDemande
       components:
         - type: dynamic
           v-if: form.TypeDemande === 'Afdr'

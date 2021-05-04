@@ -448,6 +448,12 @@ form .input-validation-error, form .input-validation-error + .note-editor {
     border-left: 1px solid var(--couleur-piv);
 }
 
+/* Petite twist qui nous permet d'inverser la puce et le texte afin de pouvoir utiliser le selector de sibling et modifier couleur de fond de la puce sur hover/focus du lien */
+.navigation-form ul li *:last-child {
+    order: -1;
+}
+
+
 .navigation-form ul li .puce {
     height: 20px;
     width: 20px;
@@ -455,24 +461,50 @@ form .input-validation-error, form .input-validation-error + .note-editor {
     display: block;
     border-radius: 50%;
     background-color: #fff;
-    border: 2px solid var(--couleur-piv);
+    border: 3px solid #1479CC;
     margin-left: -11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.navigation-form ul li:not(.active) .texte:hover + .puce {
+    background-color: var(--couleur-bleu-pale);
+    border-color: #1479CC;
+}
+
+.navigation-form ul li.contient-erreur .texte:hover + .puce, .navigation-form ul li.sans-erreur .texte:hover + .puce {
+    background-color: #1479CC;
+    border-color: #1479CC;
+}
+
 
 .navigation-form ul li.contient-erreur .puce {
     background-color: var(--couleur-erreur);
     border-color: var(--couleur-erreur);
 }
 
+.navigation-form ul li.contient-erreur .puce .icone-svg {
+    background-image: url(/images/sprite.svg#ico-exclamation-blanc);
+}
+
 .navigation-form ul li.sans-erreur .puce {
-    background-color: var(--couleur-succes);
-    border-color: var(--couleur-succes);
+    background-color: var(--couleur-piv);
+    border-color: var(--couleur-piv);
+}
+
+.navigation-form ul li.sans-erreur .puce .icone-svg {
+    background-image: url(/images/sprite.svg#ico-check-blanc);
 }
 
 .navigation-form ul li.active .puce {
-    background-color: #1479CC;
-    border-width: 3px;
-    border-color: var(--couleur-piv);
+    background-color: #1479CC!important;
+    border-color: var(--couleur-piv)!important;
+    background-image: none!important;
+}
+
+.navigation-form ul li.active .puce .icone-svg {
+    background-image: none;
 }
 
 .navigation-form ul li:first-child .puce:before {
@@ -512,7 +544,7 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 /*====================================================================================================*/
 /*  -900- SPRITES
 /*====================================================================================================*/
-/* Ajouter le sprite crochet-bleu-texte */
+/* Ajouter les sprites crochet-bleu-texte, check-blanc, exlamation-blanc */
 /* Pour raison inconnue, dans ce projet il faut réajuster la taille des icônes. Il faudra revérifier une fois dans ECS. */
 .icone-svg.md.chevron-haut-texte {
     height: 12px;
