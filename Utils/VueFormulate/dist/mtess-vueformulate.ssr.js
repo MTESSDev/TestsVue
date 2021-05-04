@@ -483,7 +483,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     class: [_vm.context.classes.groupRepeatable]
-  }, [_vm._ssrNode("<div class=\"contenu-extensible instance-groupe card section-secondaire sans-bordure\">", "</div>", [_vm._ssrNode("<div class=\"card-title \"><a role=\"button\" data-toggle=\"collapse\" aria-expanded=\"true\"" + _vm._ssrAttr("href", '#' + _vm.context.name + '-' + _vm.index) + _vm._ssrAttr("aria-controls", _vm.context.name + '-' + _vm.index) + "><span" + _vm._ssrAttr("id", 'label' + _vm.context.name + '-' + _vm.index) + " class=\"libelle\"><span class=\"libelle-instance\">" + _vm._ssrEscape(_vm._s(_vm.instanceLabel) + " ") + "</span> <span class=\"numero\">" + _vm._ssrEscape(_vm._s(_vm.index + 1)) + "</span></span> <span aria-hidden=\"true\" class=\"icone-svg md chevron-haut-texte\"></span></a></div> "), _vm._ssrNode("<div role=\"group\"" + _vm._ssrAttr("aria-labelledby", 'label' + _vm.context.name + '-' + _vm.index) + _vm._ssrAttr("id", _vm.context.name + '-' + _vm.index) + " class=\"card-body collapse show\">", "</div>", [_vm.context.removePosition === 'after' ? _vm._t("default") : _vm._e(), _vm._ssrNode(" "), _c('FormulateSlot', {
+  }, [_vm._ssrNode("<div class=\"contenu-extensible instance-groupe card section-secondaire sans-bordure\">", "</div>", [_vm._ssrNode("<div class=\"card-title \"><a role=\"button\" data-toggle=\"collapse\" aria-expanded=\"true\"" + _vm._ssrAttr("href", '#' + _vm.context.name + '-' + _vm.index) + _vm._ssrAttr("aria-controls", _vm.context.name + '-' + _vm.index) + "><span" + _vm._ssrAttr("id", 'label' + _vm.context.name + '-' + _vm.index) + " class=\"libelle\"><span class=\"libelle-instance\">" + _vm._ssrEscape(_vm._s(_vm.instanceLabel) + " ") + "</span> <span class=\"numero\">" + _vm._ssrEscape(_vm._s(_vm.index + 1)) + "</span></span> <span aria-hidden=\"true\" class=\"icone-svg md chevron-haut-texte\"></span></a></div> "), _vm._ssrNode("<div role=\"group\"" + _vm._ssrAttr("aria-labelledby", 'label' + _vm.context.name + '-' + _vm.index) + _vm._ssrAttr("id", _vm.context.name + '-' + _vm.index) + " class=\"collapse show\">", "</div>", [_vm._ssrNode("<div class=\"card-body\">", "</div>", [_vm.context.removePosition === 'after' ? _vm._t("default") : _vm._e(), _vm._ssrNode(" "), _c('FormulateSlot', {
     attrs: {
       "name": "remove",
       "context": _vm.context,
@@ -497,7 +497,7 @@ var __vue_render__ = function __vue_render__() {
       "index": _vm.index,
       "remove-item": _vm.removeItem
     }
-  }, 'component', _vm.context.slotProps.remove, false))], 1), _vm._ssrNode(" "), _vm.context.removePosition === 'before' ? _vm._t("default") : _vm._e()], 2)], 2)]);
+  }, 'component', _vm.context.slotProps.remove, false))], 1), _vm._ssrNode(" "), _vm.context.removePosition === 'before' ? _vm._t("default") : _vm._e()], 2)])], 2)]);
 };
 
 var __vue_staticRenderFns__ = [];
@@ -509,7 +509,7 @@ var __vue_inject_styles__ = undefined;
 var __vue_scope_id__ = undefined;
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-13758fec";
+var __vue_module_identifier__ = "data-v-23c3adb0";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

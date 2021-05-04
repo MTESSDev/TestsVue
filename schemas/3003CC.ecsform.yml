@@ -218,11 +218,11 @@ form:
                 ProblemeSante: Problème de santé
                 ChangementEmploi: Changement d'emploi
                 FermetureEntreprise: Fermeture de l'entreprise
-                NaissancePriseChargeEnfant: Naissance ou prise en chage d'un enfant
+                NaissancePriseChargeEnfant: Naissance ou prise en charge d'un enfant
                 Congediement: Congédiement
                 AutreRaison: Autre
             - name: emploiPrecisionAutre
-              v-if: index && form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
+              v-if: index && form[name] && form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
               type: text
               label: 
                 fr: Précisez la raison de fin d'emploi
@@ -231,6 +231,7 @@ form:
     - section:
         fr: Test de groupes
       id: test
+      v-if: 1 === 2
       components:
         - name: attendes
           type: group
