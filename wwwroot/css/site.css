@@ -485,7 +485,7 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 }
 
 .navigation-form ul li.contient-erreur .puce .icone-svg {
-    background-image: url(/images/sprite.svg#ico-exclamation-blanc);
+    background-image: url(../images/sprite.svg#ico-exclamation-blanc);
 }
 
 .navigation-form ul li.sans-erreur .puce {
@@ -494,7 +494,7 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 }
 
 .navigation-form ul li.sans-erreur .puce .icone-svg {
-    background-image: url(/images/sprite.svg#ico-check-blanc);
+    background-image: url(../images/sprite.svg#ico-check-blanc);
 }
 
 .navigation-form ul li.active .puce {
