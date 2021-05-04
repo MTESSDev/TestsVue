@@ -52,20 +52,18 @@ form:
       v-if: form.TypeDemande
       components:
         - type: dynamic
-          v-if: form.TypeDemande
+          v-if: form.TypeDemande === 'Afdr'
           tag: div        
           components:
             - name: EvenementsDerniereAnnee
               type: radio
               label: 
-                fr: Cochez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
-              validations: 
-                required: trim
+                fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
               options: 
-                FinEtudesTempsPleinReq: Une fin d'études à temps plein
-                FinDiminutionRevenusReq: Une fin ou une diminution des revenus
-            - name: FinDiminutionRevenusTypeReq
-              v-if: form.EvenementsDerniereAnnee === 'FinDiminutionRevenusReq'
+                ReqFinDiminutionRevenus: Une fin ou une diminution des revenus
+                ReqFinEtudesTempsPlein: Une fin d'études à temps plein  
+            - name: ReqFinDiminutionRevenusType
+              v-if: form.EvenementsDerniereAnnee === 'ReqFinDiminutionRevenus'
               type: radio
               label: 
                 fr: Type de revenu
@@ -76,11 +74,18 @@ form:
                 FinRevenusTravailAutonomeReq: de travail autonome
                 FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
                 FinRevenusAutres: autre
-            - name: FinRevenusAutresPrecision
-              v-if: form.FinDiminutionRevenusTypeReq === 'FinRevenusAutres'
+            - name: FinRevenusPrestationsPrecision
+              v-if: form.ReqFinDiminutionRevenusType === 'FinRevenusPrestations'
               type: text
               label: 
-                fr: Précisez
+                fr: Précisez le type de prestations gouvernementales
+              validations: 
+                required: trim
+            - name: FinRevenusAutresPrecision
+              v-if: form.ReqFinDiminutionRevenusType === 'FinRevenusAutres'
+              type: text
+              label: 
+                fr: Précisez le type de revenu
               validations: 
                 required: trim
             - name: DateEvenementReq
@@ -99,21 +104,75 @@ form:
               validations: 
                 required: trim
               options: 
+                AttenteDecision: Vous êtes en attente d'une décision (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
+                AucunRevenu: Vous êtes sans aucun revenu
                 RevenuInsuffisant: Votre revenu est insuffisant
                 NaissanceEnfant: Naissance ou prise en charge d'un enfant
                 SortieEtablissement: Sortie d'un établissement
                 ArriveeConjoint: Arrivée d'un conjoint
                 PerteConjoint: Perte du conjoint
-                AttenteDecision: Vous êtes en attente d'une décision (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
-                AucunRevenu: Vous êtes sans aucun revenu
-                ProblemeSante: Problème de santé important ayant affecté votre capacité de travailler
+                ProblemeSante: Problème de santé
                 RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
                 PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
+            - name: PrecisionRaisonDemandeAfdrAttenteDecision
+              v-if: form.PrecisionRaisonDemandeAfdr === 'AttenteDecision'
+              type: text
+              label: 
+                fr: Précisez
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
+              v-if: form.PrecisionRaisonDemandeAfdr === 'RevenuInsuffisant'
+              type: radio
+              label: 
+                fr: Type de revenu insuffisant
+              validations: 
+                required: trim
+              options: 
+                RevenuInsuffisantRevenusEmploi: d'emploi
+                RevenuInsuffisantTravailAutonome: de travail autonome
+                RevenuInsuffisantPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
+                RevenuInsuffisantAutres: autre
+            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
+              v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantPrestations'
+              type: text
+              label: 
+                fr: Précisez le type de prestation insuffisante
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
+              v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantAutres'
+              type: text
+              label: 
+                fr: Précisez le type de revenu autre
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeAfdrSortieEtablissement
+              v-if: form.PrecisionRaisonDemandeAfdr === 'SortieEtablissement'
+              type: radio
+              label: 
+                fr: Précisez le type d'établissement
+              validations: 
+                required: trim
+              options: 
+                SortieEtablissementSante: de santé
+                SortieEtablissementDetention: de détention
+            - name: PrecisionRaisonDemandeAfdrPerteConjoint
+              v-if: form.PrecisionRaisonDemandeAfdr === 'PerteConjoint'
+              type: radio
+              label: 
+                fr: Précisez la raison de perte du conjoint
+              validations: 
+                required: trim
+              options: 
+                PerteConjointDeces: décès
+                PerteConjointSeparation: separation
+                PerteConjointDivorce: divorce
             - name: PrecisionRaisonDemandeAfdrAutre
               v-if: form.PrecisionRaisonDemandeAfdr === 'PrecisionRaisonDemandeAfdrAutreRaison'
               type: text
               label: 
-                fr: Précisez
+                fr: Précisez la raison autre
               validations: 
                 required: trim
         - type: dynamic
@@ -132,10 +191,17 @@ form:
                 DirigeEmployeurOrganisme: Vous êtes dirigé par un employeur ou un organisme
                 PrecisionRaisonDemandeEmploiAutreRaison: Autre
             - name: PrecisionRaisonDemandeEmploiAutre
+              v-if: form.PrecisionRaisonDemandeEmploi === 'DirigeEmployeurOrganisme'
+              type: text
+              label: 
+                fr: Précisez l'employeur ou l'organisme
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeEmploiAutre
               v-if: form.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
               type: text
               label: 
-                fr: Précisez
+                fr: Précisez la raison autre
               validations: 
                 required: trim
     - section:
