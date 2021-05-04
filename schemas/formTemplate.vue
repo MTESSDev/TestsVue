@@ -10,10 +10,12 @@
                 :errors="inputErrors">
 
     {{# Form.Sections}}
-    <div v-if="form.validAll === true || pageCourante.id == '{{Id}}'">
-        <div class="section {{Classes}}" data-id-page="{{Id}}"
-             v-show="pageCourante.id == '{{Id}}' && form.validAll === false">
-            {{RecursiveComponents components}}
+    <div {{# VIf}}v-if="{{.}}"{{/ VIf}}>
+        <div v-if="form.validAll === true || pageCourante.id == '{{Id}}'">
+            <div class="section {{Classes}}" data-id-page="{{Id}}"
+                 v-show="pageCourante.id == '{{Id}}' && form.validAll === false">
+                {{RecursiveComponents components}}
+            </div>
         </div>
     </div>
     {{/ Form.Sections}}
