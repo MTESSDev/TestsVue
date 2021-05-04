@@ -549,12 +549,14 @@ var __vue_render__ = function () {
       "aria-hidden": "true"
     }
   })])]), _vm._v(" "), _c('div', {
-    staticClass: "card-body collapse show",
+    staticClass: "collapse show",
     attrs: {
       "role": "group",
       "aria-labelledby": 'label' + _vm.context.name + '-' + _vm.index,
       "id": _vm.context.name + '-' + _vm.index
     }
+  }, [_c('div', {
+    staticClass: "card-body"
   }, [_vm.context.removePosition === 'after' ? _vm._t("default") : _vm._e(), _vm._v(" "), _c('FormulateSlot', {
     attrs: {
       "name": "remove",
@@ -569,7 +571,7 @@ var __vue_render__ = function () {
       "index": _vm.index,
       "remove-item": _vm.removeItem
     }
-  }, 'component', _vm.context.slotProps.remove, false))], 1), _vm._v(" "), _vm.context.removePosition === 'before' ? _vm._t("default") : _vm._e()], 2)])]);
+  }, 'component', _vm.context.slotProps.remove, false))], 1), _vm._v(" "), _vm.context.removePosition === 'before' ? _vm._t("default") : _vm._e()], 2)])])]);
 };
 
 var __vue_staticRenderFns__ = [];

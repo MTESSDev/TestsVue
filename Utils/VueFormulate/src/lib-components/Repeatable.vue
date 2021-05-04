@@ -10,21 +10,21 @@
                 <span class="icone-svg md chevron-haut-texte" aria-hidden="true"></span>
             </a>
         </div>
-        <div role="group" v-bind:aria-labelledby="'label' + context.name +'-' + index" v-bind:id="context.name + '-' + index" class="card-body collapse show">
-            <slot v-if="context.removePosition === 'after'" />
-            <FormulateSlot
-                name="remove"
-                :context="context"
-                :index="index"
-                :remove-item="removeItem">
-                <component
-                :is="context.slotComponents.remove"
-                :context="context"
-                :index="index"
-                :remove-item="removeItem"
-                v-bind="context.slotProps.remove"/>
-            </FormulateSlot>
-            <slot v-if="context.removePosition === 'before'" />
+        <div role="group" v-bind:aria-labelledby="'label' + context.name +'-' + index" v-bind:id="context.name + '-' + index" class="collapse show" >
+            <div class="card-body">
+                <slot v-if="context.removePosition === 'after'" />
+                <FormulateSlot name="remove"
+                               :context="context"
+                               :index="index"
+                               :remove-item="removeItem">
+                    <component :is="context.slotComponents.remove"
+                               :context="context"
+                               :index="index"
+                               :remove-item="removeItem"
+                               v-bind="context.slotProps.remove" />
+                </FormulateSlot>
+                <slot v-if="context.removePosition === 'before'" />
+            </div>
         </div>
     </div>
   </div>
