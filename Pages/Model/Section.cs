@@ -8,7 +8,7 @@ namespace ECSForm.Model
         public IDictionary<object, object>? Section { get; set; }
         public string? Classes { get; set; }
         public string Id { get; set; } = string.Empty;
-        [YamlMember(Alias ="v-if")]
+        [YamlMember(Alias = "v-if", ApplyNamingConventions = false)]
         public string VIf { get; set; } = string.Empty;
         public IEnumerable<object>? components { get; set; }
 
