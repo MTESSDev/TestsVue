@@ -52,7 +52,7 @@ form:
       v-if: form.TypeDemande
       components:
         - type: dynamic
-          v-if: form.TypeDemande === 'Afdr'
+          v-if: form.TypeDemande
           tag: div        
           components:
             - name: EvenementsDerniereAnnee
@@ -141,10 +141,10 @@ form:
     - section:
         fr: Emplois
       id: emplois
+      v-if: form['Req01-Travaille'] === 'true'
       components:
         - name: emplois
           type: group
-          v-if: form['Req01-Travaille'] === 'true'
           repeatable: true
           label:
             fr: Emplois
