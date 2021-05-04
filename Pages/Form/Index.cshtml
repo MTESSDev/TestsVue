@@ -72,9 +72,9 @@
             </template>
 
             <div class="zone-boutons">
-                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no - 1)" :disabled="pageCourante.no === 0">Précédent</button>
+                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPagePrecedente)" :disabled="pageCourante.no === 0">Précédent</button>
                 <button class="btn btn-secondaire" v-on:click="enregistrer">Enregistrer</button>
-                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(pageCourante.no + 1)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
+                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPageSuivante)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
             </div>
         </div>
     </div>
@@ -265,6 +265,9 @@
                     }
                 })
             },
+            obtenirNoProchainePageVisible() {
+
+            },
             effectuerNavigationParId(idPage, nomControleFocus) {
                 const page = this.obtenirPage(idPage)
                 this.effectuerNavigation(page.no, nomControleFocus)
@@ -285,7 +288,32 @@
         computed: {
             pageCourante() {
                 return this.pages.find(page => page.no === this.noPageCourante)
+            },
+            noPageSuivante() {
+                for (var i = this.noPageCourante + 1; i < this.pages.length; i++) {
+                    if (this.pages[i]['v-if']) {
+                        if (eval(this.pages[i]['v-if'].replace('form', 'this.form'))) {
+                            return i;
+                        }
+                    } else {
+                        return i;
+                    }
+                }
+                return this.pages.length - 1;
+            },
+            noPagePrecedente() {
+                for (var i = this.noPageCourante - 1; i > 0; i--) {
+                    if (this.pages[i]['v-if']) {
+                        if (eval(this.pages[i]['v-if'].replace('form', 'this.form'))) {
+                            return i;
+                        }
+                    } else {
+                        return i;
+                    }
+                }
+                return 0;
             }
+
         },
         data: function() {
             return JSON.parse('@data');
