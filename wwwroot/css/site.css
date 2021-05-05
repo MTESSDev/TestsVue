@@ -96,13 +96,8 @@
     margin-top: 20px;
 }
 
-.formulate-input[data-classification=box] .formulate-input-wrapper:first-child {
+.formulate-input[data-classification=box].formulate-input-group-item:first-of-type .formulate-input-wrapper {
     margin-top: 16px;
-}
-
-.formulate-input[data-classification=box] .formulate-input-element {
-    display: flex;
-    align-items: center;
 }
 
 .formulate-input[data-classification=box] .formulate-input-element-decorator {
@@ -111,7 +106,6 @@
     justify-content: center;
     width: 20px;
     height: 20px;
-    border-radius: .25em;
     position: relative;
 }
 
@@ -124,9 +118,6 @@
 .formulate-input[data-classification=box] .formulate-input-element-decorator:before {
     content: "";
     display: block;
-    background-size: cover ;
-    background-position: 100%;
-    box-sizing: border-box;
     position: absolute;
 }
 
@@ -176,21 +167,20 @@
     border-radius: 1em;
 }
 
+
 .formulate-input[data-classification=box] .formulate-input-element input[type=radio]:checked ~ .formulate-input-element-decorator:before {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios */
-    background-color: #1479cc;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='-4.5 -4.5 8 8'%3e%3ccircle r='3' fill='%231479cc'/%3e%3c/svg%3e");
 }
 
 .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:before {
-    border-radius: 1em;
-    width: 10px;
-    height: 10px;
+    width: 1rem;
+    height: 1rem;
+    background-repeat: no-repeat;
 }
 
 .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:after {
     border-radius: 1em;
 }
-
 
 /* Checkbox */
 .formulate-input[data-classification=box] .formulate-input-element input[type=checkbox] ~ .formulate-input-element-decorator {
