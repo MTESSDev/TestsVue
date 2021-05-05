@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
   sections:
-    # Section 1
+    # Section 0
     - section: 
         fr: Informations sur la demande
         en: Information on the application
@@ -44,7 +44,7 @@ form:
           validations: 
             required: trim
           options: yesno
-    # Section 2
+    # Section 1
     - section: 
         fr: Raison de la demande
         en: (EN)Raison de la demande
@@ -204,6 +204,76 @@ form:
                 fr: Précisez la raison autre
               validations: 
                 required: trim
+    # Section 2
+    - section: 
+        fr: Renseignements personnels
+      id: renseignementsPersonnels
+      components:
+        - name: nom1_Req-00
+          type: text
+          label: 
+            fr: Nom de famille
+          validations: 
+            required: trim
+            max: 36,length
+        - name: prénom1_Req-00
+          type: text
+          label: 
+            fr: Prénom
+          validations: 
+            required: trim
+            max: 22,length
+        - name: date_Req-00
+          type: date
+          label: 
+            fr: Date de naissance
+          validations: 
+            required: trim
+        - name: Req-00_nas1
+          type: text
+          label: 
+            fr: Numéro d'assurance sociale
+          validations: 
+            required: trim
+            max: 9,length
+        - name: date2_Req-00
+          type: date
+          label: 
+            fr: Date d'expiration (pour les numéros débutant par 9)
+        - name: Req-00-Sexe
+          type: radio
+          label: 
+            fr: Sexe
+          validations: 
+            required: trim
+          options: 
+            Feminim: Féminin 
+            Masculin: Masculin 
+        - name: Req-00-Langue
+          type: radio
+          label: 
+            fr: Langue de correspondance
+          validations: 
+            required: trim
+          options: 
+            Francais: Français 
+            Anglais: Anglais 
+        - name: Req00-NeQC
+          type: radio
+          label: 
+            fr: Êtes-vous né au Québec?
+          validations: 
+            required: trim
+          options: yesno
+        - name: nom3_Req-00
+          type: text
+          label: 
+            fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
+          validations: 
+            max: 50,length
+
+
+    # Section 4
     - section:
         fr: Emplois
       id: emplois

@@ -95,6 +95,11 @@
     align-items: center;
     margin-top: 20px;
 }
+
+.formulate-input[data-classification=box] .formulate-input-wrapper:first-child {
+    margin-top: 16px;
+}
+
 .formulate-input[data-classification=box] .formulate-input-element {
     display: flex;
     align-items: center;
@@ -158,6 +163,7 @@
     margin-bottom: 0;
 }
 .formulate-input[data-classification=box] label.formulate-input-label {
+    line-height: 1;
     margin-left: 8px;
     font-family: 'OpenSans-Regular';
     width: 100%; /*Important sinon texte écrase parfois les contrôles si texte trop long */
