@@ -166,11 +166,11 @@
                   "enum": ["before", "after"]
                 },
                 "min": {
-                    "type": "string",
+                    "type": ["string", "number"],
                     "example": ["2018-02"]
                 },
                 "max": {
-                    "type": "string",
+                    "type": ["string", "number"],
                     "example": ["2018-02"]
                 },
                 "addLabel": {
