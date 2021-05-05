@@ -11,8 +11,6 @@ form:
           type: radio
           label: 
             fr: Quel type de demande voulez-vous effectuer?
-          validations: 
-            required: trim
           options: 
             Afdr: Demande d'aide financière de dernier recours
             AideEmploi: Demande de service d'aide à l'emploi
@@ -20,31 +18,23 @@ form:
           type: radio
           label: 
             fr: Avez-vous un conjoint?
-          validations: 
-            required: trim
           options: yesno
         - name: Req-00-Enfants
           type: radio
           label: 
             fr: Avez-vous des enfants à charge?
-          validations: 
-            required: trim
           options: yesno
         - name: Req01-Travaille
           type: radio
           label: 
             fr: Avez-vous déjà travaillé?
-          validations: 
-            required: trim
           options: yesno
         - name: Req-00-etudes
           type: radio
           label: 
             fr: Êtes-vous aux études?
-          validations: 
-            required: trim
           options: yesno
-    # Section 1
+    # Section 1 - Raison de la demande
     - section: 
         fr: Raison de la demande
         en: (EN)Raison de la demande
@@ -56,53 +46,45 @@ form:
           tag: div        
           components:
             - name: EvenementsDerniereAnnee
-              type: radio
+              type: checkbox
               label: 
                 fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
               options: 
                 ReqFinDiminutionRevenus: Une fin ou une diminution des revenus
                 ReqFinEtudesTempsPlein: Une fin d'études à temps plein  
+              validations: 
+                optional: null
             - name: ReqFinDiminutionRevenusType
-              v-if: form.EvenementsDerniereAnnee === 'ReqFinDiminutionRevenus'
-              type: radio
+              v-if: form.EvenementsDerniereAnnee && form.EvenementsDerniereAnnee.includes('ReqFinDiminutionRevenus')
+              type: checkbox
               label: 
                 fr: Type de revenu
-              validations: 
-                required: trim
               options: 
                 FinRevenusEmploiReq: d'emploi
                 FinRevenusTravailAutonomeReq: de travail autonome
                 FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
                 FinRevenusAutres: autre
             - name: FinRevenusPrestationsPrecision
-              v-if: form.ReqFinDiminutionRevenusType === 'FinRevenusPrestations'
+              v-if: form.ReqFinDiminutionRevenusType && form.ReqFinDiminutionRevenusType.includes('FinRevenusPrestations')
               type: text
               label: 
                 fr: Précisez le type de prestations gouvernementales
-              validations: 
-                required: trim
             - name: FinRevenusAutresPrecision
-              v-if: form.ReqFinDiminutionRevenusType === 'FinRevenusAutres'
+              v-if: form.ReqFinDiminutionRevenusType && form.ReqFinDiminutionRevenusType.includes('FinRevenusAutres')
               type: text
               label: 
                 fr: Précisez le type de revenu
-              validations: 
-                required: trim
             - name: DateEvenementReq
-              v-if: form.EvenementsDerniereAnnee
+              v-if: form.EvenementsDerniereAnnee && form.EvenementsDerniereAnnee.length
               type: date
               label: 
                 fr: Date de l'évènement
-              validations: 
-                required: trim
             - name: PrecisionRaisonDemandeAfdr
               type: select
               label: 
                 fr: Précisez la raison de votre demande d'aide financière
               placeholder:
                 fr: Veuillez effectuer une sélection...
-              validations: 
-                required: trim
               options: 
                 AttenteDecision: Vous êtes en attente d'une décision (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
                 AucunRevenu: Vous êtes sans aucun revenu
@@ -119,15 +101,11 @@ form:
               type: text
               label: 
                 fr: Précisez
-              validations: 
-                required: trim
             - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
               v-if: form.PrecisionRaisonDemandeAfdr === 'RevenuInsuffisant'
               type: radio
               label: 
                 fr: Type de revenu insuffisant
-              validations: 
-                required: trim
               options: 
                 RevenuInsuffisantRevenusEmploi: d'emploi
                 RevenuInsuffisantTravailAutonome: de travail autonome
@@ -138,22 +116,16 @@ form:
               type: text
               label: 
                 fr: Précisez le type de prestation insuffisante
-              validations: 
-                required: trim
             - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
               v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantAutres'
               type: text
               label: 
                 fr: Précisez le type de revenu autre
-              validations: 
-                required: trim
             - name: PrecisionRaisonDemandeAfdrSortieEtablissement
               v-if: form.PrecisionRaisonDemandeAfdr === 'SortieEtablissement'
               type: radio
               label: 
                 fr: Précisez le type d'établissement
-              validations: 
-                required: trim
               options: 
                 SortieEtablissementSante: de santé
                 SortieEtablissementDetention: de détention
@@ -162,8 +134,6 @@ form:
               type: radio
               label: 
                 fr: Précisez la raison de perte du conjoint
-              validations: 
-                required: trim
               options: 
                 PerteConjointDeces: décès
                 PerteConjointSeparation: separation
@@ -173,8 +143,6 @@ form:
               type: text
               label: 
                 fr: Précisez la raison autre
-              validations: 
-                required: trim
         - type: dynamic
           v-if: form.TypeDemande === 'AideEmploi'
           tag: div        
@@ -183,8 +151,6 @@ form:
               type: radio
               label: 
                 fr: Précisez la raison de votre demande de services d'aide à l'emploi
-              validations: 
-                required: trim
               options: 
                 AideRechercheEmploi: Pour de l'aide à la recherche d'emploi
                 RetourEcole: Pour un retour à l'école/ou formation
@@ -195,15 +161,11 @@ form:
               type: text
               label: 
                 fr: Précisez l'employeur ou l'organisme
-              validations: 
-                required: trim
             - name: PrecisionRaisonDemandeEmploiAutre
               v-if: form.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
               type: text
               label: 
                 fr: Précisez la raison autre
-              validations: 
-                required: trim
     # Section 2
     - section: 
         fr: Renseignements personnels
@@ -214,42 +176,33 @@ form:
           label: 
             fr: Nom de famille
           validations: 
-            required: trim
             max: 36,length
         - name: prénom1_Req-00
           type: text
           label: 
             fr: Prénom
           validations: 
-            required: trim
             max: 22,length
         - name: date_Req-00
           type: date
           label: 
             fr: Date de naissance
-          validations: 
-            required: trim
         - name: Req-00_nas1
           type: text
           outerClasses: md          
           label: 
             fr: Numéro d'assurance sociale
           validations: 
-            required: trim
             max: 9,length
         - name: date2_Req-00
           v-if: form['Req-00_nas1'] && form['Req-00_nas1'].startsWith('9')
           type: date
           label: 
             fr: Date d'expiration
-          validations: 
-            required: trim
         - name: Req-00-Sexe
           type: radio
           label: 
             fr: Sexe
-          validations: 
-            required: trim
           options: 
             Feminim: Féminin 
             Masculin: Masculin 
@@ -257,8 +210,6 @@ form:
           type: radio
           label: 
             fr: Langue de correspondance
-          validations: 
-            required: trim
           options: 
             Francais: Français 
             Anglais: Anglais 
@@ -266,8 +217,6 @@ form:
           type: radio
           label: 
             fr: Êtes-vous né au Québec?
-          validations: 
-            required: trim
           options: yesno
         - name: nom3_Req-00
           v-if: form['Req00-NeQC'] && form['Req00-NeQC'] === 'true'
@@ -275,30 +224,23 @@ form:
           label: 
             fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
           validations: 
-            required: trim
             max: 50,length
         - name: neCanada
           v-if: form['Req00-NeQC'] && form['Req00-NeQC'] === 'false'        
           type: radio
           label: 
             fr: Êtes-vous né au Canada ?
-          validations: 
-            required: trim
           options: yesno
         - name: pays1_Req-00
           v-if: form['neCanada'] && form['neCanada'] === 'false'
           type: text
           label: 
             fr: Indiquez votre pays de naissance
-          validations: 
-            required: trim
         - name: date6_Req-00
           v-if: form['neCanada'] && form['neCanada'] === 'false'
           type: date
           label: 
             fr: Date d'arrivée au Canada
-          validations: 
-            required: trim
         - type: dynamic
           v-if: form['neCanada'] && form['neCanada'] === 'false'
           tag: div        
@@ -307,32 +249,24 @@ form:
               type: radio
               label: 
                 fr: Avez-vous la citoyenneté canadienne?
-              validations: 
-                required: trim
               options: yesno
             - name: Oui3
               v-if: form['Req00-CitCanadienne'] && form['Req00-CitCanadienne'] === 'false'
               type: radio
               label: 
                 fr: Êtes-vous un résident permanent?
-              validations: 
-                required: trim
               options: yesno
             - name: Oui4
               v-if: form['Oui3'] && form['Oui3'] === 'false'            
               type: radio
               label: 
                 fr: Êtes-vous un demandeur d'asile?
-              validations: 
-                required: trim
               options: yesno
             - name: Oui5
               v-if: form['Oui4'] && form['Oui4'] === 'false'                        
               type: radio
               label: 
                 fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
-              validations: 
-                required: trim
               options: yesno
             - name: autre2_Req-00
               v-if: form['Oui5'] && form['Oui5'] === 'false'                        
@@ -343,16 +277,12 @@ form:
           type: radio
           label: 
             fr: Vous considérez-vous comme un autochtone ?
-          validations: 
-            required: trim
           options: yesno
         - name: Req-00-AutochtoneType        
           v-if: form['Req-00-Autochtone'] && form['Req-00-Autochtone'] === 'true'
           type: radio
           label: 
             fr: Êtes-vous
-          validations: 
-            required: trim
           options: 
             AmerindienReserve: Amérindien vivant dans une réserve 
             AmerindienHorsReserve: Amérindien vivant hors-réserve
@@ -371,7 +301,6 @@ form:
               label: 
                 fr: Numéro
               validations: 
-                required: trim
                 max: 6,length
             - name: adresse3_Req-00
               type: text
@@ -379,7 +308,6 @@ form:
               label: 
                 fr: Rue
               validations: 
-                required: trim
                 max: 24,length
             - name: adresse2_Req-00
               type: text
@@ -387,6 +315,7 @@ form:
               label: 
                 fr: Appartement
               validations: 
+                optional: null
                 max: 5,length
         - name: telephone1_Req-00
           type: text
@@ -399,27 +328,32 @@ form:
           label: 
             fr: Ville village ou municipalité
           validations: 
-            required: trim
             max: 29,length
         - name: codePostal1_Req-00
           type: text
           label: 
             fr: Code postal
           validations: 
-            required: trim
             max: 6,length
         - name: telephone2_Req-00
           type: text
           label: 
             fr: Autre téléphone
           validations: 
+            optional: null
             max: 10,length
     # Section 4 - Situation actuelle
     - section: 
         fr: Situation actuelle
       id: SituationActuelle
       components:
+        - name: Req01-EnEmploi
+          type: radio
+          label: 
+            fr: Êtes-vous en emploi?
+          options: yesno
         - name: PrecisionStatutEmploi_Req-00
+          v-if: form['Req01-EnEmploi'] === 'true'
           type: checkbox
           label:
             fr: Précisez le statut d'emploi que vous occupez
@@ -460,7 +394,9 @@ form:
           options: yesno
         - name: NbrEnfants
           v-if: form['EnfantsACharge_Req-00'] && form['EnfantsACharge_Req-00'] === 'true'
-          type: text
+          type: number
+          min: 1
+          outerClasses: sm
           label: 
             fr: Combien d'enfants avez-vous à charge ?
         - name: ChefMonoparentale_Req-00
@@ -543,6 +479,8 @@ form:
               type: select
               label: 
                 fr: Précisez votre niveau d'études
+              placeholder:
+                fr: Veuillez effectuer une sélection...
               options: 
                 SecondaireGeneral: Secondaire général
                 SecondairePro: Secondaire professionnel
@@ -628,15 +566,11 @@ form:
           removeLabel:
             fr: Supprimer cet emploi
             en: Delete this job
-          validations:
-            required: trim
           components:
             - name: emploiNomEntreprise
               type: text
               label:
                 fr: Nom de l'entreprise
-              validations:
-                required: trim
             - name: emploiPeriodeDuAu
               type: inline
               components: 
@@ -644,44 +578,30 @@ form:
                 type: date
                 label:
                   fr: Période du
-                validations:
-                  required: trim
               - name: emploiPeriodeAu
                 type: date
                 label:
                   fr: Période au
-                validations:
-                  required: trim
             - name: emploiSalaireHebdo
               type: number
               label:
                 fr: Salaire par semaine
-              validations:
-                required: trim
             - name: emploiHeuresHebdo
               type: number
               label:
                 fr: Heures par semaine
-              validations:
-                required: trim
             - name: emploiEmploiOccupe
               type: text
               label:
                 fr: Emploi occupé
-              validations:
-                required: trim
             - name: emploiPrincipalesTachesAccomplies
               type: textarea
               label:
                 fr: Principales tâches accomplies
-              validations:
-                required: trim
             - name: emploiRaisonFinEmploi
               type: select
               label: 
                 fr: Raison de la fin d'emploi
-              validations: 
-                required: trim
               placeholder:
                 fr: Veuillez effectuer une sélection...
               options: 
@@ -697,37 +617,6 @@ form:
               type: text
               label: 
                 fr: Précisez la raison de fin d'emploi
-              validations: 
-                required: trim
-    - section:
-        fr: Test de groupes
-      id: test
-      v-if: 1 === 2
-      components:
-        - name: attendes
-          type: group
-          repeatable: true
-          label:
-            fr: label global
-            en:
-          instanceLabel:
-            fr: Invité
-          addLabel:
-            fr: Ajouter
-          components:
-            - name: name
-              type: text
-              label:
-                fr: Nom de l'invité
-              validations:
-                required: trim
-            - name: email
-              type: email
-              label:
-                fr: Courriel de l'invité
-              validations:
-                required: trim
-
     # Section 
     - section: 
         fr: Révision
