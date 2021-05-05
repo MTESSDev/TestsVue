@@ -313,6 +313,45 @@ form:
               type: text
               label: 
                 fr: Autre situation, précisez
+            - name: neCanada
+              type: radio
+              label: 
+                fr: Êtes-vous né au Canada ?
+              validations: 
+                required: trim
+              options: yesno
+            - name: pays1_Req-00
+              v-if: form['neCanada'] && form['neCanada'] === 'false'
+              type: text
+              label: 
+                fr: Indiquez votre pays de naissance
+              validations: 
+                required: trim
+            - name: date6_Req-00
+              v-if: form['neCanada'] && form['neCanada'] === 'false'
+              type: date
+              label: 
+                fr: Date d'arrivée au Canada
+              validations: 
+                required: trim
+        - name: Req-00-Autochtone
+          type: radio
+          label: 
+            fr: Vous considérez-vous comme un autochtone ?
+          validations: 
+            required: trim
+          options: yesno
+        - name: Req-00-AutochtoneType        
+          v-if: form['Req-00-Autochtone'] && form['Req-00-Autochtone'] === 'true'
+          type: radio
+          label: 
+            fr: Êtes-vous
+          validations: 
+            required: trim
+          options: 
+            AmerindienReserve: Amérindien vivant dans une réserve 
+            AmerindienHorsReserve: Amérindien vivant hors-réserve
+            Inuit: Inuit
 
     # Section 4
     - section:
