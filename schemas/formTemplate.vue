@@ -27,6 +27,5 @@
     {{! ceci est un commentaire, pour dire que le }}
     {{! block ci-dessous sert à forcer stubble à skipper form }}
     {{=<% %>=}}
-    {{form}}
     <%={{ }}=%>
 </formulate-form>

@@ -391,7 +391,7 @@ form:
         - name: telephone1_Req-00
           type: text
           label: 
-            fr: même s'il est confidentiel
+            fr: Téléphone
           validations: 
             max: 10,length
         - name: adresse4_Req-00
@@ -411,7 +411,7 @@ form:
         - name: telephone2_Req-00
           type: text
           label: 
-            fr: même s'il est confidentiel
+            fr: Autre téléphone
           validations: 
             max: 10,length
     # Section 4 - Situation actuelle
@@ -517,7 +517,7 @@ form:
           label: 
             fr: Vous considérez-vous comme un membre d'une monorité visible ?
           options: yesno
-# Section 5
+    # Section 5 - Statut d'étudiant
     - section: 
         fr: Statut d'étudiant
       id: StatutEtudiant
