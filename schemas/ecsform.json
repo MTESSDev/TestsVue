@@ -30,6 +30,9 @@
                 },
                 "inputDefaultClasses": {
                     "type": "object"
+                },
+                "outerDefaultClasses": {
+                    "type": "object"
                 }
             },
             "required": [],
@@ -75,6 +78,10 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Adds a name attribute."
+                },
                 "type": {
                     "type":"string",
                     "enum": ["inline", "dynamic"]
@@ -142,7 +149,11 @@
                     "description": "Placeholder value",
                     "$ref": "#/definitions/Translation"
                 },
-                "classes": {
+                "inputClasses": {
+                    "type": "string",
+                    "description": ""
+                },
+                "outerClasses": {
                     "type": "string",
                     "description": ""
                 },
@@ -166,14 +177,18 @@
                   "enum": ["before", "after"]
                 },
                 "min": {
-                    "type": "string",
+                    "type": ["string", "number"],
                     "example": ["2018-02"]
                 },
                 "max": {
-                    "type": "string",
+                    "type": ["string", "number"],
                     "example": ["2018-02"]
                 },
                 "addLabel": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
+                "removeLabel": {
                     "type": "object",
                     "$ref": "#/definitions/Translation"
                 },
@@ -332,6 +347,11 @@
                     }
                 },
                 "addLabel": {
+                    "properties": {
+                        "type": { "enum": ["group", "file"] }
+                    }
+                },
+                "removeLabel": {
                     "properties": {
                         "type": { "enum": ["group", "file"] }
                     }

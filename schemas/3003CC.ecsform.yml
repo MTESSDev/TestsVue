@@ -231,7 +231,7 @@ form:
             required: trim
         - name: Req-00_nas1
           type: text
-          classes: md          
+          outerClasses: md          
           label: 
             fr: Numéro d'assurance sociale
           validations: 
@@ -367,7 +367,7 @@ form:
           components:       
             - name: adresse1_Req-00
               type: text
-              classes: md
+              outerClasses: md
               label: 
                 fr: Numéro
               validations: 
@@ -375,7 +375,7 @@ form:
                 max: 6,length
             - name: adresse3_Req-00
               type: text
-              classes: lg
+              outerClasses: lg
               label: 
                 fr: Rue
               validations: 
@@ -383,7 +383,7 @@ form:
                 max: 24,length
             - name: adresse2_Req-00
               type: text
-              classes: sm
+              outerClasses: sm
               label: 
                 fr: Appartement
               validations: 
