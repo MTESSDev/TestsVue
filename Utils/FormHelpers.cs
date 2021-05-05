@@ -14,7 +14,7 @@ namespace ECSForm.Utils
         private static StubbleVisitorRenderer _stubble { get; set; }
 
         private static Func<HelperContext, dynamic?, string> jsObject = FormHelpers.JsObject;
-        private static Func<HelperContext, IDictionary<object, object>?, string> jsArray = FormHelpers.JsArray;
+        private static Func<HelperContext, IDictionary<object, object>?, string> generateValidations = FormHelpers.GenerateValidations;
         private static Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
         private static Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
         private static Func<HelperContext, string, object, string> generateInputClasses = FormHelpers.GenerateInputClasses;
@@ -63,7 +63,7 @@ namespace ECSForm.Utils
                             .Register("RecursiveComponents", recursiveComponents)
                             .Register("i18n", i18n)
                             .Register("JsObject", jsObject)
-                            .Register("JsArray", jsArray);
+                            .Register("GenerateValidations", generateValidations);
                     _stubble = new StubbleBuilder()
                                 .Configure(conf =>
                                 {
@@ -132,13 +132,30 @@ namespace ECSForm.Utils
             return "{" + string.Join(", ", vueDict.Select(kv => kv.Key + $": '{kv.Value?.ToString().Sanitize()}'").ToArray()) + "}";
         }
 
-        public static string JsArray(HelperContext context, IDictionary<object, object>? dict)
+        public static string GenerateValidations(HelperContext context, IDictionary<object, object>? dict)
         {
             if (dict is null) return string.Empty;
 
+            Dictionary<object, object>? dictValidations = null;
+
+            if (dict.TryGetValue("validations", out var validations))
+            {
+                dictValidations = validations as Dictionary<object, object>;
+            }
+
+            if (dictValidations is null)
+            {
+                dictValidations = new Dictionary<object, object>();
+            }
+
+            if (!dictValidations.ContainsKey("optional"))
+            {
+                dictValidations.TryAdd("required", "trim");
+            }
+
             var element = "[";
 
-            foreach (var item in dict)
+            foreach (var item in dictValidations)
             {
                 if (item.Value is null) continue;
                 var val = item.Value.ToString();
@@ -146,7 +163,7 @@ namespace ECSForm.Utils
 
                 element += $"['{item.Key}', '{String.Join("','", val.Split(','))}'], ";
             }
-            return element + "]";
+            return $":validation=\"{element}]\"";
         }
 
         public static string I18n(HelperContext context, IDictionary<object, object>? dict)
