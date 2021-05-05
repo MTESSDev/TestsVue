@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
   sections:
-    # Section 1
+    # Section 0
     - section: 
         fr: Informations sur la demande
         en: Information on the application
@@ -44,7 +44,7 @@ form:
           validations: 
             required: trim
           options: yesno
-    # Section 2
+    # Section 1
     - section: 
         fr: Raison de la demande
         en: (EN)Raison de la demande
@@ -52,20 +52,18 @@ form:
       v-if: form.TypeDemande
       components:
         - type: dynamic
-          v-if: form.TypeDemande
+          v-if: form.TypeDemande === 'Afdr'
           tag: div        
           components:
             - name: EvenementsDerniereAnnee
               type: radio
               label: 
-                fr: Cochez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
-              validations: 
-                required: trim
+                fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
               options: 
-                FinEtudesTempsPleinReq: Une fin d'études à temps plein
-                FinDiminutionRevenusReq: Une fin ou une diminution des revenus
-            - name: FinDiminutionRevenusTypeReq
-              v-if: form.EvenementsDerniereAnnee === 'FinDiminutionRevenusReq'
+                ReqFinDiminutionRevenus: Une fin ou une diminution des revenus
+                ReqFinEtudesTempsPlein: Une fin d'études à temps plein  
+            - name: ReqFinDiminutionRevenusType
+              v-if: form.EvenementsDerniereAnnee === 'ReqFinDiminutionRevenus'
               type: radio
               label: 
                 fr: Type de revenu
@@ -76,11 +74,18 @@ form:
                 FinRevenusTravailAutonomeReq: de travail autonome
                 FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
                 FinRevenusAutres: autre
-            - name: FinRevenusAutresPrecision
-              v-if: form.FinDiminutionRevenusTypeReq === 'FinRevenusAutres'
+            - name: FinRevenusPrestationsPrecision
+              v-if: form.ReqFinDiminutionRevenusType === 'FinRevenusPrestations'
               type: text
               label: 
-                fr: Précisez
+                fr: Précisez le type de prestations gouvernementales
+              validations: 
+                required: trim
+            - name: FinRevenusAutresPrecision
+              v-if: form.ReqFinDiminutionRevenusType === 'FinRevenusAutres'
+              type: text
+              label: 
+                fr: Précisez le type de revenu
               validations: 
                 required: trim
             - name: DateEvenementReq
@@ -99,21 +104,75 @@ form:
               validations: 
                 required: trim
               options: 
+                AttenteDecision: Vous êtes en attente d'une décision (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
+                AucunRevenu: Vous êtes sans aucun revenu
                 RevenuInsuffisant: Votre revenu est insuffisant
                 NaissanceEnfant: Naissance ou prise en charge d'un enfant
                 SortieEtablissement: Sortie d'un établissement
                 ArriveeConjoint: Arrivée d'un conjoint
                 PerteConjoint: Perte du conjoint
-                AttenteDecision: Vous êtes en attente d'une décision (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
-                AucunRevenu: Vous êtes sans aucun revenu
-                ProblemeSante: Problème de santé important ayant affecté votre capacité de travailler
+                ProblemeSante: Problème de santé
                 RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
                 PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
+            - name: PrecisionRaisonDemandeAfdrAttenteDecision
+              v-if: form.PrecisionRaisonDemandeAfdr === 'AttenteDecision'
+              type: text
+              label: 
+                fr: Précisez
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
+              v-if: form.PrecisionRaisonDemandeAfdr === 'RevenuInsuffisant'
+              type: radio
+              label: 
+                fr: Type de revenu insuffisant
+              validations: 
+                required: trim
+              options: 
+                RevenuInsuffisantRevenusEmploi: d'emploi
+                RevenuInsuffisantTravailAutonome: de travail autonome
+                RevenuInsuffisantPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
+                RevenuInsuffisantAutres: autre
+            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
+              v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantPrestations'
+              type: text
+              label: 
+                fr: Précisez le type de prestation insuffisante
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
+              v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantAutres'
+              type: text
+              label: 
+                fr: Précisez le type de revenu autre
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeAfdrSortieEtablissement
+              v-if: form.PrecisionRaisonDemandeAfdr === 'SortieEtablissement'
+              type: radio
+              label: 
+                fr: Précisez le type d'établissement
+              validations: 
+                required: trim
+              options: 
+                SortieEtablissementSante: de santé
+                SortieEtablissementDetention: de détention
+            - name: PrecisionRaisonDemandeAfdrPerteConjoint
+              v-if: form.PrecisionRaisonDemandeAfdr === 'PerteConjoint'
+              type: radio
+              label: 
+                fr: Précisez la raison de perte du conjoint
+              validations: 
+                required: trim
+              options: 
+                PerteConjointDeces: décès
+                PerteConjointSeparation: separation
+                PerteConjointDivorce: divorce
             - name: PrecisionRaisonDemandeAfdrAutre
               v-if: form.PrecisionRaisonDemandeAfdr === 'PrecisionRaisonDemandeAfdrAutreRaison'
               type: text
               label: 
-                fr: Précisez
+                fr: Précisez la raison autre
               validations: 
                 required: trim
         - type: dynamic
@@ -132,12 +191,169 @@ form:
                 DirigeEmployeurOrganisme: Vous êtes dirigé par un employeur ou un organisme
                 PrecisionRaisonDemandeEmploiAutreRaison: Autre
             - name: PrecisionRaisonDemandeEmploiAutre
+              v-if: form.PrecisionRaisonDemandeEmploi === 'DirigeEmployeurOrganisme'
+              type: text
+              label: 
+                fr: Précisez l'employeur ou l'organisme
+              validations: 
+                required: trim
+            - name: PrecisionRaisonDemandeEmploiAutre
               v-if: form.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
               type: text
               label: 
-                fr: Précisez
+                fr: Précisez la raison autre
               validations: 
                 required: trim
+    # Section 2
+    - section: 
+        fr: Renseignements personnels
+      id: renseignementsPersonnels
+      components:
+        - name: nom1_Req-00
+          type: text
+          label: 
+            fr: Nom de famille
+          validations: 
+            required: trim
+            max: 36,length
+        - name: prénom1_Req-00
+          type: text
+          label: 
+            fr: Prénom
+          validations: 
+            required: trim
+            max: 22,length
+        - name: date_Req-00
+          type: date
+          label: 
+            fr: Date de naissance
+          validations: 
+            required: trim
+        - name: Req-00_nas1
+          type: text
+          classes: md          
+          label: 
+            fr: Numéro d'assurance sociale
+          validations: 
+            required: trim
+            max: 9,length
+        - name: date2_Req-00
+          v-if: form['Req-00_nas1'] && form['Req-00_nas1'].startsWith('9')
+          type: date
+          label: 
+            fr: Date d'expiration
+          validations: 
+            required: trim
+        - name: Req-00-Sexe
+          type: radio
+          label: 
+            fr: Sexe
+          validations: 
+            required: trim
+          options: 
+            Feminim: Féminin 
+            Masculin: Masculin 
+        - name: Req-00-Langue
+          type: radio
+          label: 
+            fr: Langue de correspondance
+          validations: 
+            required: trim
+          options: 
+            Francais: Français 
+            Anglais: Anglais 
+        - name: Req00-NeQC
+          type: radio
+          label: 
+            fr: Êtes-vous né au Québec?
+          validations: 
+            required: trim
+          options: yesno
+        - name: nom3_Req-00
+          v-if: form['Req00-NeQC'] && form['Req00-NeQC'] === 'true'
+          type: text
+          label: 
+            fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
+          validations: 
+            required: trim
+            max: 50,length
+        - type: dynamic
+          v-if: form['Req00-NeQC'] && form['Req00-NeQC'] === 'false'
+          tag: div        
+          components:
+            - name: Req00-CitCanadienne
+              type: radio
+              label: 
+                fr: Avez-vous la citoyenneté canadienne?
+              validations: 
+                required: trim
+              options: yesno
+            - name: Oui3
+              type: radio
+              label: 
+                fr: Êtes-vous un résident permanent?
+              validations: 
+                required: trim
+              options: yesno
+            - name: Oui4
+              type: radio
+              label: 
+                fr: Êtes-vous un demandeur d'asile?
+              validations: 
+                required: trim
+              options: yesno
+            - name: Oui5
+              type: radio
+              label: 
+                fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
+              validations: 
+                required: trim
+              options: yesno
+            - name: autre2_Req-00
+              type: text
+              label: 
+                fr: Autre situation, précisez
+            - name: neCanada
+              type: radio
+              label: 
+                fr: Êtes-vous né au Canada ?
+              validations: 
+                required: trim
+              options: yesno
+            - name: pays1_Req-00
+              v-if: form['neCanada'] && form['neCanada'] === 'false'
+              type: text
+              label: 
+                fr: Indiquez votre pays de naissance
+              validations: 
+                required: trim
+            - name: date6_Req-00
+              v-if: form['neCanada'] && form['neCanada'] === 'false'
+              type: date
+              label: 
+                fr: Date d'arrivée au Canada
+              validations: 
+                required: trim
+        - name: Req-00-Autochtone
+          type: radio
+          label: 
+            fr: Vous considérez-vous comme un autochtone ?
+          validations: 
+            required: trim
+          options: yesno
+        - name: Req-00-AutochtoneType        
+          v-if: form['Req-00-Autochtone'] && form['Req-00-Autochtone'] === 'true'
+          type: radio
+          label: 
+            fr: Êtes-vous
+          validations: 
+            required: trim
+          options: 
+            AmerindienReserve: Amérindien vivant dans une réserve 
+            AmerindienHorsReserve: Amérindien vivant hors-réserve
+            Inuit: Inuit
+
+    # Section 4
     - section:
         fr: Emplois
       id: emplois
