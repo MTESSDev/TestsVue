@@ -281,6 +281,18 @@ select[data-placeholder-selected="true"] {
 /*====================================================================================================*/
 /*  -Z20A- Forms (Champs textes largeurs)  
 /*====================================================================================================*/
+
+/* On applique une largeur xl à tous les contrôles de type texte par défaut */
+input[type="text"].form-control {
+    max-width: 528px;
+}
+
+.col-auto input[type="text"].form-control {
+    width: 528px;
+}
+
+
+
 /*Le xxl n'existe pas dans les règles du SCG, c'est ajouté */
 input[type="text"].form-control.xxl {
     max-width: 728px;
@@ -323,9 +335,10 @@ input[type="text"].form-control.sm, input[type="number"].form-control.sm {
     width: 63px;
 }
 
+
 @media (max-width: 560px) {
 
-    .col-auto input[type="text"].form-control.xl {
+    .col-auto input[type="text"].form-control, .col-auto input[type="text"].form-control.xl {
         max-width: 100%;
     }
 }

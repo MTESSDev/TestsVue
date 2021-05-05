@@ -231,15 +231,19 @@ form:
             required: trim
         - name: Req-00_nas1
           type: text
+          classes: md          
           label: 
             fr: Numéro d'assurance sociale
           validations: 
             required: trim
             max: 9,length
         - name: date2_Req-00
+          v-if: form['Req-00_nas1'] && form['Req-00_nas1'].startsWith('9')
           type: date
           label: 
-            fr: Date d'expiration (pour les numéros débutant par 9)
+            fr: Date d'expiration
+          validations: 
+            required: trim
         - name: Req-00-Sexe
           type: radio
           label: 
@@ -266,12 +270,49 @@ form:
             required: trim
           options: yesno
         - name: nom3_Req-00
+          v-if: form['Req00-NeQC'] && form['Req00-NeQC'] === 'true'
           type: text
           label: 
             fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
           validations: 
+            required: trim
             max: 50,length
-
+        - type: dynamic
+          v-if: form['Req00-NeQC'] && form['Req00-NeQC'] === 'false'
+          tag: div        
+          components:
+            - name: Req00-CitCanadienne
+              type: radio
+              label: 
+                fr: Avez-vous la citoyenneté canadienne?
+              validations: 
+                required: trim
+              options: yesno
+            - name: Oui3
+              type: radio
+              label: 
+                fr: Êtes-vous un résident permanent?
+              validations: 
+                required: trim
+              options: yesno
+            - name: Oui4
+              type: radio
+              label: 
+                fr: Êtes-vous un demandeur d'asile?
+              validations: 
+                required: trim
+              options: yesno
+            - name: Oui5
+              type: radio
+              label: 
+                fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
+              validations: 
+                required: trim
+              options: yesno
+            - name: autre2_Req-00
+              type: text
+              label: 
+                fr: Autre situation, précisez
 
     # Section 4
     - section:
