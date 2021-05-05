@@ -184,6 +184,10 @@
                     "type": "object",
                     "$ref": "#/definitions/Translation"
                 },
+                "removeLabel": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
                 "instanceLabel": {
                     "type": "object",
                     "description": "Label of one instance of a group.",
@@ -339,6 +343,11 @@
                     }
                 },
                 "addLabel": {
+                    "properties": {
+                        "type": { "enum": ["group", "file"] }
+                    }
+                },
+                "removeLabel": {
                     "properties": {
                         "type": { "enum": ["group", "file"] }
                     }
