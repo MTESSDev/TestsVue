@@ -30,6 +30,9 @@
                 },
                 "inputDefaultClasses": {
                     "type": "object"
+                },
+                "outerDefaultClasses": {
+                    "type": "object"
                 }
             },
             "required": [],
@@ -142,7 +145,11 @@
                     "description": "Placeholder value",
                     "$ref": "#/definitions/Translation"
                 },
-                "classes": {
+                "inputClasses": {
+                    "type": "string",
+                    "description": ""
+                },
+                "outerClasses": {
                     "type": "string",
                     "description": ""
                 },
