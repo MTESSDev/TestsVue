@@ -414,8 +414,201 @@ form:
             fr: même s'il est confidentiel
           validations: 
             max: 10,length
-
-    # Section 4
+    # Section 4 - Situation actuelle
+    - section: 
+        fr: Situation actuelle
+      id: SituationActuelle
+      components:
+        - name: PrecisionStatutEmploi_Req-00
+          type: checkbox
+          label:
+            fr: Précisez le statut d'emploi que vous occupez
+          placeholder:
+            fr: Veuillez effectuer une sélection...
+          options: 
+            TempsPlein: Temps plein
+            TempsPartiel: Temps partiel
+            SurAppel: Sur appel
+            TravailleurAutonome: Travailleur autonome
+        - name: AideGouvRecue_Req-00
+          type: radio
+          label: 
+            fr: Recevez-vous des prestations, des indemnités ou tout autre aide financière gouvernementale ?
+          options: yesno
+        - name: TypeAideRecue
+          type: checkbox
+          label: 
+            fr: Précisez le type d'aide que vous recevez
+          v-if: form['AideGouvRecue_Req-00'] && form['AideGouvRecue_Req-00'] === 'true'
+          options: 
+            AssuranceEmploi: Assurance-emploi
+            RQAP: Régime québécois d'assurance parentale
+            CNESST: CNESST
+            SAAQ: SAAQ
+            RevenuRetraite: Revenu de retraite
+            PretBourse: Prêts et bourses
+            AutresAide: Autres
+        - name: AideRecueAutrePrecision
+          v-if: form['TypeAideRecue'] && form['TypeAideRecue'].includes('AutresAide')
+          type: text
+          label: 
+            fr: Précisez
+        - name: EnfantsACharge_Req-00
+          type: radio      
+          label: 
+            fr: Avez-vous des enfants à charge?
+          options: yesno
+        - name: NbrEnfants
+          v-if: form['EnfantsACharge_Req-00'] && form['EnfantsACharge_Req-00'] === 'true'
+          type: text
+          label: 
+            fr: Combien d'enfants avez-vous à charge ?
+        - name: ChefMonoparentale_Req-00
+          v-if: form['EnfantsACharge_Req-00'] && form['EnfantsACharge_Req-00'] === 'true'
+          type: radio
+          label: 
+            fr: Êtes-vous chef de famille monoparentale ?
+          options: yesno
+        #TODO: Ajouter un texte informationnel ici
+        - name: Handicap_Req-00
+          type: radio
+          label: 
+            fr: Avez-vous un handicap physique, intellectuel ou mental ?
+          options: yesno
+        - name: TypeHandicap_Req-00
+          v-if: form['Handicap_Req-00'] && form['Handicap_Req-00'] === 'true'
+          type: text
+          label: 
+            fr: Précisez le handicap
+        - name: LanguesParlees_Req-00
+          type: checkbox
+          label: 
+            fr: Langues parlées
+          options: 
+            Francais: Français
+            Anglais: Anglais
+            AutresLanguesParlees: Autres
+        - name: PrecisionLanguesParlees
+          v-if: form['LanguesParlees_Req-00'] && form['LanguesParlees_Req-00'].includes('AutresLanguesParlees')
+          type: text
+          label: 
+            fr: Précisez les autres langues parlées
+        - name: LanguesEcrites_Req-00
+          type: checkbox
+          label: 
+            fr: Langues écrites
+          options: 
+            Francais: Français
+            Anglais: Anglais
+            AutresLanguesEcrites: Autres
+        - name: PrecisionLanguesEcrites
+          v-if: form['LanguesEcrites_Req-00'] && form['LanguesEcrites_Req-00'].includes('AutresLanguesEcrites')
+          type: text
+          label: 
+            fr: Précisez les autres langues écrites
+        - name: CasierJudiciaire_Req-00
+          type: radio
+          label: 
+            fr: Avez-vous un casier judiciaire ?
+          options: yesno
+        - name: MinoriteVisible_Req-00
+        #Ajouter une infobulle ici
+          type: radio
+          label: 
+            fr: Vous considérez-vous comme un membre d'une monorité visible ?
+          options: yesno
+# Section 5
+    - section: 
+        fr: Statut d'étudiant
+      id: StatutEtudiant
+      v-if: form['Req-00-etudes']
+      components:
+        - type: dynamic
+          v-if: form['Req-00-etudes'] === 'true'
+          tag: div
+          components:
+            - name: PrecisionStatutEtudes_Req-00
+              type: radio
+              label:
+                fr: Précisez votre statut d'étudiant
+              options: 
+                TempsPlein: Temps plein
+                TempsPartiel: Temps partiel
+            - name: DiplomeVise_Req-00
+              v-if: form['PrecisionStatutEtudes_Req-00'] && form['PrecisionStatutEtudes_Req-00'] === 'TempsPartiel'
+              type: text
+              label: 
+                fr: En quelle année prévoyez-vous obtenir votre diplôme ?
+            - name: NiveauEtudes_Req-00
+              type: select
+              label: 
+                fr: Précisez votre niveau d'études
+              options: 
+                SecondaireGeneral: Secondaire général
+                SecondairePro: Secondaire professionnel
+                Collegial: Collégial
+                Universite1: Université 1er cycle
+                Universite2: Université 2e cycle
+                AutreNiveau: Autre
+            - name: NiveauEtudeAutrePrecision
+              v-if: form['NiveauEtudes_Req-00'] && form['NiveauEtudes_Req-00'].includes('AutreNiveau')
+              type: text
+              label: 
+                fr: Précisez le niveau d'études
+            - name: DomaineEtudes_Req-00
+              type: text
+              label: 
+                fr: Précisez votre domaine d'études
+            #Une condition d'affichage est à définir pour les champs suivants
+            - name: NbrCoursSuivis_Req-00
+              type: number
+              min: 1
+              label: 
+                fr: Nombre de cours suivis
+            - name: NbrHeuresSemaine_Req-00
+              type: number
+              min: 1
+              label: 
+                fr: Nombre d'heures de cours par semaine
+            - name: NbrCreditsUnites_Req-00
+              type: number
+              min: 1
+              label: 
+                fr: Nombre de crédits ou d'unités
+            - name: NbrPeriodesSemaine_Req-00
+              type: number
+              min: 1
+              label: 
+                fr: Nombre de périodes par semaine
+            #fin des champs qui doivent être gérés par une condition d'affichage à définir
+        - type: dynamic
+          v-if: form['Req-00-etudes'] === 'false'
+          tag: div     
+          components:
+            - name: Inscription_Req-00
+              type: radio
+              label:
+                fr: Êtes-vous inscrit à un programme d'études ?
+              options: 
+                yesno
+            - name: DateInscription_Req-00
+              type: date
+              v-if: form['Inscription_Req-00'] && form['Inscription_Req-00'] === 'true'
+              label:
+                fr: Pour quelle date vous êtes-vous inscrit ?
+            - name: InscriptionPrevue_Req-00
+              type: radio
+              v-if: form['Inscription_Req-00'] && form['Inscription_Req-00'] === 'false'
+              label:
+                fr: Prévoyez-vous vous inscrire ?
+              options: 
+                yesno
+            - name: DateInscriptionPrevue_Req-00
+              type: date
+              v-if: form['InscriptionPrevue_Req-00'] && form['InscriptionPrevue_Req-00'] === 'true'
+              label:
+                fr: Pour quelle date prévoyez-vous vous inscrire ?
+    # Section 7 - Emplois
     - section:
         fr: Emplois
       id: emplois
