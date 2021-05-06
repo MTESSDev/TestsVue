@@ -102,8 +102,8 @@
     Vue.use(VueFormulate, {
         plugins: [this.VueFormulateI18n.fr],
         classes: {
-            error: 'text-danger field-validation-error',
-            help: 'precision'
+            error: ['text-danger', 'field-validation-error'],
+            help: ['precision']
         },
         slotComponents: {
             label: 'Label',

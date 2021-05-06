@@ -7,6 +7,7 @@
 //
 //
 //
+//
 var script$3 = {
   props: {
     context: {
@@ -24,7 +25,17 @@ var script$3 = {
   created() {
     this.hasValidationRules = this.context.rules.length > 0;
     this.isRequired = this.context.rules.findIndex(element => element.ruleName === 'required') >= 0;
-    this.requiredFieldIndicator = this.isRequired ? '*' : '';
+    this.requiredFieldIndicator = this.isRequired ? '*' : ''; // Ne pas lire la pr�cision au lecteur �cran car nous l'avons ajout�e dans le label.
+
+    if (this.context.help) {
+      this.$nextTick(function () {
+        const help = this.$parent.$el.querySelector(".formulate-input-help");
+
+        if (help) {
+          help.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
   }
 
 };
@@ -123,7 +134,9 @@ var __vue_render__$3 = function () {
     }
   }, [_c('span', [_vm._v(_vm._s(_vm.context.label))]), _vm._v(" "), _vm.isRequired ? _c('span', {
     staticClass: "sr-only"
-  }, [_vm._v(". Obligatoire.")]) : _vm._e(), _vm._v(" "), _vm.hasValidationRules && _vm.messagesErreur ? _c('span', {
+  }, [_vm._v(". Obligatoire.")]) : _vm._e(), _vm._v(" "), _vm.context.help ? _c('span', {
+    staticClass: "sr-only"
+  }, [!_vm.isRequired ? _c('span', [_vm._v(".")]) : _vm._e(), _vm._v(" " + _vm._s(_vm.context.help))]) : _vm._e(), _vm._v(" "), _vm.hasValidationRules && _vm.messagesErreur ? _c('span', {
     staticClass: "sr-only",
     attrs: {
       "aria-live": "polite"
