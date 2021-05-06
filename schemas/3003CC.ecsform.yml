@@ -318,7 +318,8 @@ form:
                 optional: null
                 max: 5,length
         - name: telephone1_Req-00
-          type: text
+          outerClasses: md
+          type: tel
           label: 
             fr: Téléphone
           validations: 
@@ -331,12 +332,14 @@ form:
             max: 29,length
         - name: codePostal1_Req-00
           type: text
+          outerClasses: md          
           label: 
             fr: Code postal
           validations: 
             max: 6,length
         - name: telephone2_Req-00
-          type: text
+          outerClasses: md
+          type: tel
           label: 
             fr: Autre téléphone
           validations: 
