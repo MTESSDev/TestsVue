@@ -12,6 +12,11 @@ form:
       <div class="inline {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
           {{RecursiveComponents components}}
       </div>
+    bandeau-notification: |
+      <div class="bandeau-notification {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
+          {{i18n text}}
+          {{RecursiveComponents components}}
+      </div>
     dynamic: |
       <{{tag}} class="{{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
         {{i18n text}}
