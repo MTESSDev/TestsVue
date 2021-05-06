@@ -175,6 +175,8 @@ form:
           type: text
           label: 
             fr: Nom de famille
+          help: 
+            fr: Selon le certificat de naissance ou le document d'immigration.
           validations: 
             max: 36,length
         - name: prénom1_Req-00

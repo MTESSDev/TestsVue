@@ -1502,6 +1502,12 @@ label, .libelle-groupe-radio {
     margin-bottom: .2rem;
 }
 
+.precision {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.875rem;
+}
+
 /* Font normal pour libellés qui sont à l'intérieur d'un groupe de radio boutons */
 .groupe-radio label {
     font-family: inherit;
