@@ -72,8 +72,9 @@
             </template>
 
             <div class="zone-boutons">
+                <button class="btn btn-secondaire btn-enregistrer mobile" v-on:click="enregistrer">Enregistrer</button>
                 <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPagePrecedente)" :disabled="pageCourante.no === 0">Précédent</button>
-                <button class="btn btn-secondaire" v-on:click="enregistrer">Enregistrer</button>
+                <button class="btn btn-secondaire btn-enregistrer" v-on:click="enregistrer">Enregistrer</button>
                 <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPageSuivante)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
             </div>
             <div v-if="new URLSearchParams(window.location.search).get('debug')" class="infos-developpeurs">

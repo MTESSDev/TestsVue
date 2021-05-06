@@ -84,6 +84,22 @@
 }
 
 
+.btn-enregistrer.mobile{
+    display:none;
+}
+
+@media (max-width: 410px) {
+    .btn-enregistrer{
+        display: none;
+    }
+
+    .btn-enregistrer.mobile {
+        display: block;
+        margin-bottom: 32px;
+    }
+}
+
+
 /*====================================================================================================*/
 /*  -Z10- Radio button et checkbox
 /*====================================================================================================*/
