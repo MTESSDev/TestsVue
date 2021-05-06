@@ -84,7 +84,7 @@
                 },
                 "type": {
                     "type":"string",
-                    "enum": ["inline", "dynamic"]
+                    "description": "Types from custom templates list."
                 },
                 "classes": {
                     "type": "string",
