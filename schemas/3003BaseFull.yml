@@ -21,7 +21,7 @@ form:
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{.}}" {{/ name}}
               {{# name}} key="{{.}}" {{/ name}}
-              {{GenerateInputClasses type .}}
+              {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
               {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}

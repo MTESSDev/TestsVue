@@ -17,40 +17,62 @@ namespace ECSForm.Utils
         private static Func<HelperContext, IDictionary<object, object>?, string> generateValidations = FormHelpers.GenerateValidations;
         private static Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
         private static Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
-        private static Func<HelperContext, string, object, string> generateInputClasses = FormHelpers.GenerateInputClasses;
+        private static Func<HelperContext, string, object, string> generateClasses = FormHelpers.GenerateClasses;
 
-        private static string GenerateInputClasses(HelperContext context, string type, dynamic component)
+        private static string GenerateClasses(HelperContext context, string type, dynamic component)
         {
-            if (InputDefaultClasses is null) return string.Empty;
-
             var dictComponent = component as Dictionary<object, object>;
+
+            if (dictComponent is null) return string.Empty;
+
+            var input = InternalGenerateClassesFromObject(dictComponent, "inputClasses", type, ":input-class", InputDefaultClasses);
+            var outer = InternalGenerateClassesFromObject(dictComponent, "outerClasses", type, ":outer-class", OuterDefaultClasses);
+
+            return $"{input} {outer}";
+        }
+
+        private static string InternalGenerateClassesFromObject(Dictionary<object, object> dictComponent, string yamlKey, string type, string attributeName, IDictionary<string, string>? defaultClasses)
+        {
+
+            if (defaultClasses is null) return string.Empty;
+
             object? customClasses = null;
-            dictComponent?.TryGetValue("classes", out customClasses);
+
+            dictComponent?.TryGetValue(yamlKey, out customClasses);
+
             var listInputCustom = customClasses?.ToString()?.Split(' ') ?? new string[] { };
 
-            if (InputDefaultClasses.TryGetValue(type, out var classesType))
+            if (defaultClasses.TryGetValue(type, out var classesType))
             {
-                return InternalGenerateInputClasses(classesType, listInputCustom);
+                return InternalGenerateClasses(attributeName, classesType, listInputCustom);
             }
-            else if (InputDefaultClasses.TryGetValue("default", out var classesDefault))
+            else if (defaultClasses.TryGetValue("default", out var classesDefault))
             {
-                return InternalGenerateInputClasses(classesDefault, listInputCustom);
+                return InternalGenerateClasses(attributeName, classesDefault, listInputCustom);
             }
-
-            return string.Empty;
+            else
+            {
+                return InternalGenerateClasses(attributeName, "", listInputCustom);
+            }
         }
 
 
-        private static string InternalGenerateInputClasses(string classes, string[] listInputCustom)
+        private static string InternalGenerateClasses(string attributeName, string classes, string[] listInputCustom)
         {
-            if (classes is null) return string.Empty;
-            var classesList = classes.Split(' ').ToList();
+            var classesList = (classes ?? "").Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
             classesList.AddRange(listInputCustom);
-            return $":input-class=\"['{string.Join("', '", classesList.Select(k => k.ToString().Sanitize()))}']\"";
+
+            if (!classesList.Any())
+            {
+                return string.Empty;
+            }
+
+            return $"{attributeName}=\"['{string.Join("', '", classesList.Select(k => k.ToString().Sanitize()))}']\"";
         }
 
         public static IDictionary<string, string>? TemplateList { get; set; }
         public static IDictionary<string, string>? InputDefaultClasses { get; set; }
+        public static IDictionary<string, string>? OuterDefaultClasses { get; set; }
 
         public static StubbleVisitorRenderer Stubble
         {
@@ -59,7 +81,7 @@ namespace ECSForm.Utils
                 if (!isStubbleInitialized)
                 {
                     var helpers = new Helpers()
-                            .Register("GenerateInputClasses", generateInputClasses)
+                            .Register("GenerateClasses", generateClasses)
                             .Register("RecursiveComponents", recursiveComponents)
                             .Register("i18n", i18n)
                             .Register("JsObject", jsObject)

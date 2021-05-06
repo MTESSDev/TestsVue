@@ -23,7 +23,7 @@ form:
               {{# name}} name="{{.}}" {{/ name}}
               {{# name}} key="{{.}}" {{/ name}}
               {{# placeholder}} placeholder="{{i18n .}}" {{/ placeholder}}
-              {{GenerateInputClasses type .}}
+              {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
               {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
@@ -46,7 +46,7 @@ form:
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{.}}" {{/ name}}
               {{# name}} key="{{.}}" {{/ name}}
-              {{GenerateInputClasses type .}}
+              {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
               {{# instanceLabel}} instance-label="{{i18n .}}" {{/ instanceLabel}}

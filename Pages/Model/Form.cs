@@ -7,5 +7,6 @@ namespace ECSForm.Model
         public IEnumerable<SectionBloc>? Sections { get; set; }
         public IDictionary<string, string>? Templates { get; set; } = new Dictionary<string, string>();
         public IDictionary<string, string>? InputDefaultClasses { get; set; } = new Dictionary<string, string>();
+        public IDictionary<string, string>? OuterDefaultClasses { get; set; } = new Dictionary<string, string>();
     }
 }

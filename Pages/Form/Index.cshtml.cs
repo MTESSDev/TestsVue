@@ -182,11 +182,13 @@ namespace ECSForm.Pages
             if (defaultCfg != null)
             {
                 dynamicForm.Form.InputDefaultClasses.TryAdd(defaultCfg?.Form?.InputDefaultClasses);
+                dynamicForm.Form.OuterDefaultClasses.TryAdd(defaultCfg?.Form?.OuterDefaultClasses);
                 dynamicForm.Form.Templates.TryAdd(defaultCfg?.Form?.Templates);
             }
 
             FormHelpers.TemplateList = dynamicForm.Form?.Templates;
             FormHelpers.InputDefaultClasses = dynamicForm.Form?.InputDefaultClasses;
+            FormHelpers.OuterDefaultClasses = dynamicForm.Form?.OuterDefaultClasses;
 
             using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
             {
