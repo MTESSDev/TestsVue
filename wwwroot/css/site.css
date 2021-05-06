@@ -260,17 +260,21 @@ select[data-placeholder-selected="true"] {
 }
 
 /* Contrôles sur une même ligne (inline) */
-.inline {
-    display: flex;
-    flex-wrap: wrap;
+@media (min-width: 576px) {
+    .inline {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .inline > * {
+        margin-right: 32px;
+    }
+
+    .inline > *:last-child {
+        margin-right: 0;
+    }
 }
 
-.inline > * {
-    margin-right: 32px;
-}
-.inline > *:last-child {
-    margin-right: 0;
-}
 
 
 /* Limiter la largeur max des champs dates si affichés en inline afin d'éviter que les messages d'erreurs provoquent un affichage sur 2 lignes des contrôles */
@@ -379,13 +383,12 @@ input.form-control.sm, input.form-control.sm {
 }
 
 
-@media (max-width: 746px) {
+@media (max-width: 575px) {
 
     .inline .formulate-input  {
         max-width: 100%!important;
     }
 }
-
 
 
 /*====================================================================================================*/

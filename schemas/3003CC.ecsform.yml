@@ -474,10 +474,9 @@ form:
                 TempsPlein: Temps plein
                 TempsPartiel: Temps partiel
             - name: DiplomeVise_Req-00
-              v-if: form['PrecisionStatutEtudes_Req-00'] && form['PrecisionStatutEtudes_Req-00'] === 'TempsPartiel'
               type: text
               label: 
-                fr: En quelle année prévoyez-vous obtenir votre diplôme ?
+                fr: Diplôme visé ?
             - name: NiveauEtudes_Req-00
               type: select
               label: 
@@ -503,21 +502,25 @@ form:
             #Une condition d'affichage est à définir pour les champs suivants
             - name: NbrCoursSuivis_Req-00
               type: number
+              outerClasses: sm              
               min: 1
               label: 
                 fr: Nombre de cours suivis
             - name: NbrHeuresSemaine_Req-00
               type: number
+              outerClasses: sm              
               min: 1
               label: 
                 fr: Nombre d'heures de cours par semaine
             - name: NbrCreditsUnites_Req-00
               type: number
+              outerClasses: sm              
               min: 1
               label: 
                 fr: Nombre de crédits ou d'unités
             - name: NbrPeriodesSemaine_Req-00
               type: number
+              outerClasses: sm              
               min: 1
               label: 
                 fr: Nombre de périodes par semaine
