@@ -83,8 +83,6 @@ form:
               type: select
               label: 
                 fr: Précisez la raison de votre demande d'aide financière
-              placeholder:
-                fr: Veuillez effectuer une sélection...
               options: 
                 AttenteDecision: Vous attendez la réponse à une autre demande (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
                 AucunRevenu: Vous n'avez aucun revenu
@@ -365,8 +363,6 @@ form:
           type: checkbox
           label:
             fr: Précisez le statut d'emploi que vous occupez
-          placeholder:
-            fr: Veuillez effectuer une sélection...
           options: 
             TempsPlein: Temps plein
             TempsPartiel: Temps partiel
@@ -516,8 +512,6 @@ form:
               type: select
               label: 
                 fr: Précisez votre niveau d'études
-              placeholder:
-                fr: Veuillez effectuer une sélection...
               options: 
                 SecondaireGeneral: Secondaire général
                 SecondairePro: Secondaire professionnel
@@ -644,8 +638,6 @@ form:
               type: select
               label: 
                 fr: Raison de la fin d'emploi
-              placeholder:
-                fr: Veuillez effectuer une sélection...
               options: 
                 ManqueTravail: Manque de travail
                 ProblemeSante: Problème de santé

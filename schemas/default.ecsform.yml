@@ -1,5 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
+  selectDefaultPlaceholder:
+    fr: Veuillez effectuer une sélection...
+    en: Please select an option...
   inputDefaultClasses:
     default: form-control 
     group: 
@@ -32,7 +35,7 @@ form:
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{.}}" {{/ name}}
               {{# name}} key="{{.}}" {{/ name}}
-              {{# placeholder}} placeholder="{{i18n .}}" {{/ placeholder}}
+              {{GeneratePlaceholder type .}}
               {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
