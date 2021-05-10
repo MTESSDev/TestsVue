@@ -591,11 +591,12 @@ form:
     - section:
         fr: Emplois
       id: emplois
-      v-if: form['Req01-Travaille'] === 'true'
+      v-if: form['Req01-Travaille']          
       components:
         - name: emplois
           type: group
           repeatable: true
+          v-if: form['Req01-Travaille'] === 'true'          
           label:
             fr: Emplois
             en: Jobs
@@ -658,6 +659,53 @@ form:
               type: text
               label: 
                 fr: Précisez la raison de fin d'emploi
+        - name: Req01-Limitations
+          type: radio
+          label:
+            fr: "Avez-vous des limitations fonctionnelles faisant suite à des lésions professionnelles causées, par exemple, par un accident de travail?"
+          options: yesno            
+        - name: limitations_Req-01
+          type: text
+          v-if: form['Req01-Limitations'] === 'true'          
+          label:
+            fr: "Précisez ces limitations"
+        - name: Req01-DisponibleTravail
+          type: radio
+          label:
+            fr: "Êtes-vous disponible pour travailler?"
+          options: yesno            
+        - name: Req01-DisponibilitesTravail
+          type: checkbox
+          v-if: form['Req01-DisponibleTravail'] === 'true'                    
+          label:
+            fr: "Précisez le type d'emploi recherché?"
+          options: 
+            ReqDispoTravailTempsPlein: À temps plein
+            ReqDispoTravailTempsPartiel: À temps partiel
+            ReqDispoTravailJour: De jour
+            ReqDispoTravailSoir: De soir
+            ReqDispoTravailNuit: De nuit
+        - name: Req01-LieuxDisponibiliteTravail
+          type: checkbox
+          v-if: form['Req01-DisponibleTravail'] === 'true'                    
+          label:
+            fr: "Où êtes-vous prêt à travailler?"
+          options: 
+            ReqLieuDispoTravailLocalite: Dans votre localité
+            ReqLieuDispoTravailRegion: Dans votre région
+            ReqLieuDispoTravailAutre: Autre
+        - name: Req01-LieuxDisponibiliteTravailPrecision
+          type: text
+          v-if: form['Req01-LieuxDisponibiliteTravail'] && form['Req01-LieuxDisponibiliteTravail'].includes('ReqLieuDispoTravailAutre')   
+          label:
+            fr: "Précisez où vous êtes prêt à travailler"
+        - name: raisonNonDisponibiliteTravail_Req-01
+          type: text
+          v-if: form['Req01-DisponibleTravail'] === 'false'   
+          outerClasses: xxl                           
+          label:
+            fr: "Inscrivez la raison de votre indisponibilité à travailler"
+#TODO ajouter question pour emplois recherché (attente discussion avec Julie)
     # Section 
     - section: 
         fr: Révision
