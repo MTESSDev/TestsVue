@@ -282,7 +282,8 @@ namespace ECSForm.Utils
             dict.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out var value);
             if (value is null)
             {
-                return dict.FirstOrDefault();
+                var first = dict.FirstOrDefault();
+                return $"[{first.Key},{first.Value}]";
             }
 
             return value;
