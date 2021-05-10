@@ -102,13 +102,20 @@
 
 
 /*====================================================================================================*/
-/*  -Z04- Bandeau notification
+/*  -Z04- Bandeaux
 /*====================================================================================================*/
-.bandeau-notification {
+.bandeau {
     padding: 0.75rem 1.25rem;
     background-color: var(--couleur-fond-gris);
-    border-left: 12px solid var(--couleur-secondaire-entete-soulignee);
     margin-bottom: 32px;
+    border-top: 1px solid var(--couleur-filet-secondaire);
+    border-bottom: 1px solid var(--couleur-filet-secondaire);
+}
+
+.bandeau.notification {
+    border-left: 12px solid var(--couleur-secondaire-entete-soulignee);
+    border-top: 0;
+    border-bottom: 0;
 }
 
 /*====================================================================================================*/

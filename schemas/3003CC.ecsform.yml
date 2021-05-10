@@ -718,6 +718,10 @@ form:
           v-if: form['DepotDirect'] === 'true'
           tag: div     
           components:
+            - type: bandeau
+              v-if: form['DepotDirect'] === 'true'
+              text: 
+                fr: Veuillez fournir les renseignements demandés ci-dessous. Ils nous permettront de procéder au versement de vos prestations ou de vos allocations dans le cadre de tous les services qui vous seront offerts par le Ministère.             
             - name: Nom_institution_financière_Req-00
               type: text
               label: 
