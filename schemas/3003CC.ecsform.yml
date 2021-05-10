@@ -705,6 +705,56 @@ form:
           outerClasses: xxl                           
           label:
             fr: "Inscrivez la raison de votre indisponibilité à travailler"
+    - section: 
+        fr: Dépôt direct
+      id: depotDirect
+      components:
+        - name: DepotDirect
+          type: radio
+          label: 
+            fr: Souhaitez-vous vous inscrire au dépôt direct?
+          options: yesno            
+        - type: dynamic
+          v-if: form['DepotDirect'] === 'true'
+          tag: div     
+          components:
+            - name: Nom_institution_financière_Req-00
+              type: text
+              label: 
+                fr: Nom de votre institution financière
+            - name: Adresse_succursale_Req-00
+              type: text
+              label: 
+                fr: Adresse de votre institution financière
+            - name: CP_succursale_Req-00
+              type: text
+              outerClasses: md
+              label: 
+                fr: Code postal de votre succursale
+              validations: 
+                max: 6,length
+            - name: Num_succursale_Req-00
+              type: text
+              label: 
+                fr: Numéro de la succursale
+              outerClasses: lg                
+              validations: 
+                max: 5,length
+            - name: Num_institution_Req-00
+              type: text
+              label: 
+                fr: Numéro de l'institution financière
+              outerClasses: lg                                
+              validations: 
+                max: 3,length
+            - name: Num_compte_Req-00
+              type: text
+              label: 
+                fr: Numéro du compte et chiffre de contrôle
+              outerClasses: lg                                
+              validations: 
+                max: 12,length
+
 #TODO ajouter question pour emplois recherché (attente discussion avec Julie)
     # Section 
     - section: 
