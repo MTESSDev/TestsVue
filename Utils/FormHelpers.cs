@@ -8,33 +8,68 @@ using System.Linq;
 
 namespace ECSForm.Utils
 {
-    internal static class FormHelpers
+    public class FormHelpers
     {
-        public static bool isStubbleInitialized { get; set; }
-        private static StubbleVisitorRenderer _stubble { get; set; }
 
-        private static Func<HelperContext, dynamic?, string> jsObject = FormHelpers.JsObject;
-        private static Func<HelperContext, IDictionary<object, object>?, string> generateValidations = FormHelpers.GenerateValidations;
-        private static Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
-        private static Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
-        private static Func<HelperContext, string, object, string> generateClasses = FormHelpers.GenerateClasses;
+        public static bool IsStubbleInitialized { get; set; }
+        private static StubbleVisitorRenderer? _stubble;
+
+        private static readonly Func<HelperContext, dynamic?, string> jsObject = FormHelpers.JsObject;
+        private static readonly Func<HelperContext, IDictionary<object, object>?, string> generateValidations = FormHelpers.GenerateValidations;
+        private static readonly Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
+        private static readonly Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
+        private static readonly Func<HelperContext, string, object, string> generateClasses = FormHelpers.GenerateClasses;
+        private static readonly Func<HelperContext, string, object, string> generatePlaceholder = FormHelpers.GeneratePlaceholder;
 
         private static string GenerateClasses(HelperContext context, string type, dynamic component)
         {
-            var dictComponent = component as Dictionary<object, object>;
+            var dictComponent = component as IDictionary<object, object>;
 
             if (dictComponent is null) return string.Empty;
 
-            var input = InternalGenerateClassesFromObject(dictComponent, "inputClasses", type, ":input-class", InputDefaultClasses);
-            var outer = InternalGenerateClassesFromObject(dictComponent, "outerClasses", type, ":outer-class", OuterDefaultClasses);
+            var input = InternalGenerateClassesFromObject(dictComponent, "inputClasses", type, ":input-class", component["Form"], "inputDefaultClasses");
+            var outer = InternalGenerateClassesFromObject(dictComponent, "outerClasses", type, ":outer-class", component["Form"], "outerDefaultClasses");
 
             return $"{input} {outer}";
         }
 
-        private static string InternalGenerateClassesFromObject(Dictionary<object, object> dictComponent, string yamlKey, string type, string attributeName, IDictionary<string, string>? defaultClasses)
+        private static string GeneratePlaceholder(HelperContext context, string type, dynamic component)
         {
+            var dictComponent = component as IDictionary<object, object>;
 
-            if (defaultClasses is null) return string.Empty;
+            if (dictComponent is null) return string.Empty;
+
+            dictComponent.TryGetValue("placeholder", out var componentPlaceholder);
+
+            if (componentPlaceholder is null)
+            {
+                var defaultDict = context.Lookup<Dictionary<object, object>>($"Form.{type}DefaultPlaceholder");
+
+                var localPlaceholder = defaultDict.GetLocalizedObject();
+
+                if (localPlaceholder != null)
+                {
+                    return $" placeholder=\"{localPlaceholder}\" ";
+                }
+            }
+            else
+            {
+                return $" placeholder=\"{(componentPlaceholder as IDictionary<object, object>).GetLocalizedObject()}\" ";
+            }
+
+            return string.Empty;
+        }
+
+        private static string InternalGenerateClassesFromObject(IDictionary<object, object> dictComponent, string yamlKey,
+                                                                string type, string attributeName, IDictionary<object, object>? form,
+                                                                string defaultDictAttributeName)
+        {
+            if (form is null) { throw new ArgumentNullException(nameof(form) + " parameter is empty"); }
+
+            form.TryGetValue(defaultDictAttributeName, out var defaultClassesObj);
+            var defaultClasses = defaultClassesObj as IDictionary<object, object>;
+
+            if (defaultClasses is null) defaultClasses = new Dictionary<object, object>();
 
             object? customClasses = null;
 
@@ -44,11 +79,11 @@ namespace ECSForm.Utils
 
             if (defaultClasses.TryGetValue(type, out var classesType))
             {
-                return InternalGenerateClasses(attributeName, classesType, listInputCustom);
+                return InternalGenerateClasses(attributeName, (classesType as string) ?? string.Empty, listInputCustom);
             }
             else if (defaultClasses.TryGetValue("default", out var classesDefault))
             {
-                return InternalGenerateClasses(attributeName, classesDefault, listInputCustom);
+                return InternalGenerateClasses(attributeName, (classesDefault as string) ?? string.Empty, listInputCustom);
             }
             else
             {
@@ -70,18 +105,15 @@ namespace ECSForm.Utils
             return $"{attributeName}=\"['{string.Join("', '", classesList.Select(k => k.ToString().Sanitize()))}']\"";
         }
 
-        public static IDictionary<string, string>? TemplateList { get; set; }
-        public static IDictionary<string, string>? InputDefaultClasses { get; set; }
-        public static IDictionary<string, string>? OuterDefaultClasses { get; set; }
-
         public static StubbleVisitorRenderer Stubble
         {
             get
             {
-                if (!isStubbleInitialized)
+                if (!IsStubbleInitialized)
                 {
                     var helpers = new Helpers()
                             .Register("GenerateClasses", generateClasses)
+                            .Register("GeneratePlaceholder", generatePlaceholder)
                             .Register("RecursiveComponents", recursiveComponents)
                             .Register("i18n", i18n)
                             .Register("JsObject", jsObject)
@@ -89,16 +121,15 @@ namespace ECSForm.Utils
                     _stubble = new StubbleBuilder()
                                 .Configure(conf =>
                                 {
-                                    //conf.AddToTemplateLoader(new DictionaryLoader(partials));
                                     conf.AddHelpers(helpers);
                                     conf.SetIgnoreCaseOnKeyLookup(true);
                                 })
                                 .Build();
                 }
-                return _stubble;
+
+                return _stubble ?? throw new Exception("_stubble not init.");
             }
         }
-
 
         public static string JsObject(HelperContext context, dynamic? dict)
         {
@@ -140,7 +171,7 @@ namespace ECSForm.Utils
                     {
                         foreach (var val in checkVal)
                         {
-                            vueDict.Add(val.Key, GetLocalizedObject(val.Value as Dictionary<object, object>));
+                            vueDict.Add(val.Key, FormHelpersExtensions.GetLocalizedObject(val.Value as Dictionary<object, object>));
                         }
                     }
                 }
@@ -190,25 +221,52 @@ namespace ECSForm.Utils
 
         public static string I18n(HelperContext context, IDictionary<object, object>? dict)
         {
-            return GetLocalizedObject(dict)?.ToString() ?? string.Empty;
+            return FormHelpersExtensions.GetLocalizedObject(dict)?.ToString() ?? string.Empty;
         }
 
         public static string RecursiveComponents(HelperContext context, IEnumerable<dynamic> components)
         {
             string html = string.Empty;
+
+            var form = new Dictionary<object, object>();
+            form.TryAdd("Form", context.Lookup<object>("Form"));
+
             foreach (var component in components)
             {
-                if (TemplateList.TryGetValue(component["type"], out string template))
+                if (context.Lookup<Dictionary<object, object>>("Form.templates").TryGetValue(component["type"], out object template))
                 {
-                    html += Stubble.Render(template, component);
+                    html += Stubble.Render(template.ToString(), FormHelpersExtensions.Combine(component, form));
                 }
-                else if (TemplateList.TryGetValue("input", out var inputTemplate))
+                else if (context.Lookup<Dictionary<object, object>>("Form.templates").TryGetValue("input", out object? inputTemplate))
                 {
-                    html += Stubble.Render(inputTemplate, component);
+                    html += Stubble.Render(inputTemplate.ToString(), FormHelpersExtensions.Combine(component, form));
                 }
             }
 
             return html;
+        }
+
+    }
+
+    public static class FormHelpersExtensions
+    {
+        public static dynamic Combine(dynamic item1, IDictionary<object, object> item2)
+        {
+            var dictionary1 = (IDictionary<object, object>)item1;
+            //var dictionary2 = item2 as IDictionary<object, object>;
+            var result = new Dictionary<object, object>();
+            var d = result as IDictionary<object, object>; //work with the Expando as a Dictionary
+
+            foreach (var pair in item2)
+            {
+                d.Add(pair.Key, pair.Value);
+            }
+            foreach (var pair in dictionary1)
+            {
+                d.Add(pair.Key, pair.Value);
+            }
+
+            return result;
         }
 
         public static string Sanitize(this string? value)

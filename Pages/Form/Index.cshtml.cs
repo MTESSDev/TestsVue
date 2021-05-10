@@ -1,18 +1,11 @@
-﻿using AngleSharp;
-using AngleSharp.Html.Parser;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Stubble.Core.Builders;
-using Stubble.Core.Loaders;
-using Stubble.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
@@ -27,7 +20,6 @@ namespace ECSForm.Pages
         private readonly ILogger<GenericModel> _logger;
         private readonly IVueParser _vueParser;
 
-        //public DynamicForm? Form { get; set; }
         public string? Layout { get; set; } = "_Layout";
         public string Created { get; set; } = string.Empty;
         public string? FormRaw { get; set; }
@@ -91,9 +83,9 @@ namespace ECSForm.Pages
 
                 using (StringReader reader = new StringReader(cfg))
                 {
-                    if (reader is null) return NotFound();
+                    //if (reader is null) return NotFound();
 
-                    string line;
+                    string? line;
                     while ((line = reader.ReadLine()) != null)
                     {
                         currentLine++;
@@ -142,7 +134,7 @@ namespace ECSForm.Pages
 
         private async Task<IActionResult> RenderPage(string? id, string? render = null)
         {
-            var configName = id.Replace('@', '/') ?? "default";
+            var configName = id?.Replace('@', '/') ?? "default";
             Config.Add("keepData", false);
             Config.Add("configName", configName);
 
@@ -155,8 +147,8 @@ namespace ECSForm.Pages
             equation = equation.Replace("===", "==");
             var ttt = lambdaParser.Eval(equation, varContext);*/
 
-            DynamicForm? dynamicForm = null;
             DynamicForm? defaultCfg = null;
+            DynamicForm? dynamicForm;
 
             if (System.IO.File.Exists(@$"schemas/default.ecsform.yml"))
             {
@@ -177,18 +169,23 @@ namespace ECSForm.Pages
                 dynamicForm = ReadYamlCfg(@$"schemas/{configName}.ecsform.yml");
             }
 
-            if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?.Sections is null) { return NotFound(); }
+            if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?["sections"] is null) { return NotFound(); }
 
-            if (defaultCfg != null)
+            if (defaultCfg != null && defaultCfg.Form != null)
             {
-                dynamicForm.Form.InputDefaultClasses.TryAdd(defaultCfg?.Form?.InputDefaultClasses);
-                dynamicForm.Form.OuterDefaultClasses.TryAdd(defaultCfg?.Form?.OuterDefaultClasses);
-                dynamicForm.Form.Templates.TryAdd(defaultCfg?.Form?.Templates);
-            }
+                var dynamicFormDict = dynamicForm.Form as IDictionary<object, object>;
 
-            FormHelpers.TemplateList = dynamicForm.Form?.Templates;
-            FormHelpers.InputDefaultClasses = dynamicForm.Form?.InputDefaultClasses;
-            FormHelpers.OuterDefaultClasses = dynamicForm.Form?.OuterDefaultClasses;
+                foreach (KeyValuePair<object, object> item in defaultCfg?.Form ?? throw new Exception("No form element in YAML default."))
+                {
+                    if (dynamicFormDict != null && !dynamicFormDict.TryAdd(item.Key, item.Value))
+                    {
+                        var defaultVal = item.Value as IDictionary<object, object>;
+                        var newDict = new Dictionary<object, object>();
+                        newDict.TryAdd(defaultVal);
+                        (dynamicFormDict[item.Key] as IDictionary<object, object>).TryAdd(newDict);
+                    }
+                }
+            }
 
             using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
             {
@@ -196,17 +193,19 @@ namespace ECSForm.Pages
                 FormRaw = await FormHelpers.Stubble.RenderAsync(content, dynamicForm);
             }
 
-            if (dynamicForm?.Form?.Sections is null) { return NotFound(); }
+
+            if (dynamicForm?.Form?["sections"] is null) { return NotFound(); }
 
             var sectionId = 0;
-            foreach (var section in dynamicForm.Form.Sections)
+            foreach (Dictionary<object, object>? section in dynamicForm.Form["sections"])
             {
+                if (section is null) { continue; }
                 Sections?.Add(new Section()
                 {
                     No = sectionId++,
-                    Id = section.Id,
-                    Titre = section.Section.GetLocalizedObject() ?? "Title not found",
-                    VIf = section.VIf
+                    Id = section["id"].ToString() ?? string.Empty,
+                    Titre = (section["section"] as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found",
+                    VIf = (section.TryGetValue("v-if", out object? vif) ? vif?.ToString() ?? string.Empty : string.Empty)
                 });
             }
 
@@ -248,7 +247,7 @@ namespace ECSForm.Pages
                 return false;
             }
 
-            validationError = null;
+            validationError = default!;
             return true;
         }
         /// <summary>

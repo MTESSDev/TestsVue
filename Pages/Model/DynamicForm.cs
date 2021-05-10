@@ -2,6 +2,6 @@
 {
     public class DynamicForm
     {
-        public Form? Form { get; set; }
+        public dynamic? Form { get; set; }
     }
 }

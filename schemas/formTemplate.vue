@@ -9,16 +9,16 @@
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
-    {{# Form.Sections}}
-    <div {{# VIf}}v-if="{{.}}"{{/ VIf}}>
-        <div v-if="form.validAll === true || pageCourante.id == '{{Id}}'">
-            <div class="section {{Classes}}" data-id-page="{{Id}}"
-                 v-show="pageCourante.id == '{{Id}}' && form.validAll === false">
+    {{# Form.sections}}
+    <div {{# v-if}}v-if="{{.}}"{{/ v-if}}>
+        <div v-if="form.validAll === true || pageCourante.id == '{{id}}'">
+            <div class="section {{classes}}" data-id-page="{{id}}"
+                 v-show="pageCourante.id == '{{id}}' && form.validAll === false">
                 {{RecursiveComponents components}}
             </div>
         </div>
     </div>
-    {{/ Form.Sections}}
+    {{/ Form.sections}}
 
     <formulate-input type="submit"
                      v-if="pageCourante.id === 'revision'"

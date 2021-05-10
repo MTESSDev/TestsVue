@@ -31,6 +31,10 @@
                 "inputDefaultClasses": {
                     "type": "object"
                 },
+                "selectDefaultPlaceholder": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
                 "outerDefaultClasses": {
                     "type": "object"
                 }
