@@ -50,8 +50,8 @@ form:
               label: 
                 fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
               options: 
-                ReqFinDiminutionRevenus: Une fin ou une diminution des revenus
-                ReqFinEtudesTempsPlein: Une fin d'études à temps plein  
+                ReqFinDiminutionRevenus: Perte ou diminution de revenus
+                ReqFinEtudesTempsPlein: Fin d'études à temps plein  
               validations: 
                 optional: null
             - name: ReqFinDiminutionRevenusType
@@ -86,14 +86,14 @@ form:
               placeholder:
                 fr: Veuillez effectuer une sélection...
               options: 
-                AttenteDecision: Vous êtes en attente d'une décision (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
-                AucunRevenu: Vous êtes sans aucun revenu
+                AttenteDecision: Vous attendez la réponse à une autre demande (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
+                AucunRevenu: Vous n'avez aucun revenu
                 RevenuInsuffisant: Votre revenu est insuffisant
-                NaissanceEnfant: Naissance ou prise en charge d'un enfant
-                SortieEtablissement: Sortie d'un établissement
-                ArriveeConjoint: Arrivée d'un conjoint
-                PerteConjoint: Perte du conjoint
-                ProblemeSante: Problème de santé
+                NaissanceEnfant: Vous avez eu ou pris en charge un enfant
+                SortieEtablissement: Vous venez de sortir d'un établissement
+                ArriveeConjoint: Vous vivez maintenant avec un conjoint
+                PerteConjoint: Vous n'avez plus de conjoint
+                ProblemeSante: Vous avez un problème de santé
                 RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
                 PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
             - name: PrecisionRaisonDemandeAfdrAttenteDecision
@@ -152,9 +152,9 @@ form:
               label: 
                 fr: Précisez la raison de votre demande de services d'aide à l'emploi
               options: 
-                AideRechercheEmploi: Pour de l'aide à la recherche d'emploi
-                RetourEcole: Pour un retour à l'école/ou formation
-                DirigeEmployeurOrganisme: Vous êtes dirigé par un employeur ou un organisme
+                AideRechercheEmploi: Aide à la recherche d'emploi
+                RetourEcole: Retour aux études ou en formation
+                DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
                 PrecisionRaisonDemandeEmploiAutreRaison: Autre
             - name: PrecisionRaisonDemandeEmploiAutre
               v-if: form.PrecisionRaisonDemandeEmploi === 'DirigeEmployeurOrganisme'
@@ -281,16 +281,16 @@ form:
         - name: Req-00-Autochtone
           type: radio
           label: 
-            fr: Vous considérez-vous comme un autochtone ?
+            fr: Vous considérez-vous comme un autochtone?
           options: yesno
         - name: Req-00-AutochtoneType        
           v-if: form['Req-00-Autochtone'] && form['Req-00-Autochtone'] === 'true'
           type: radio
           label: 
-            fr: Êtes-vous
+            fr: Êtes-vous un membre d'une Première Nation ou un Inuit?
           options: 
-            AmerindienReserve: Amérindien vivant dans une réserve 
-            AmerindienHorsReserve: Amérindien vivant hors-réserve
+            AmerindienReserve: Membre d'une Première Nation vivant dans une collectivité
+            AmerindienHorsReserve: Membre d'une Première Nation vivant à l'extérieur d'une collectivité
             Inuit: Inuit
     # Section 3 - Adresse
     - section: 
@@ -413,6 +413,34 @@ form:
           label: 
             fr: Êtes-vous chef de famille monoparentale ?
           options: yesno
+        - name: PermisConduire_Req-00
+          type: radio
+          label: 
+            fr: Possédez-vous un permis de conduire ?
+          options: yesno
+        - name: ClassePermisConduire-Req-00
+          type: text
+          outerClasses: md
+          label: 
+            fr: Précisez la/les classe(s)
+          v-if: form['PermisConduire_Req-00'] && form['PermisConduire_Req-00'] === 'true'
+#          type: checkbox
+#          label: 
+#            fr: Précisez la/les classe(s)
+#          v-if: form['PermisConduire_Req-00'] && form['PermisConduire_Req-00'] === 'true'
+#          options: 
+#            C1: '1'
+#            C2: '2'
+#            C3: '3'
+#            C4A: 4A
+#            C4B: 4B
+#            C5: '5'
+#            C6A: 6A
+#            C6B: 6B
+#            C6C: 6C
+#            C6D: 6D
+#            C6E: 6E
+#            C8: '8'
         #TODO: Ajouter un texte informationnel ici
         - name: Handicap_Req-00
           type: radio
@@ -460,6 +488,8 @@ form:
           type: radio
           label: 
             fr: Vous considérez-vous comme un membre d'une monorité visible ?
+          help: 
+            fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
           options: yesno
     # Section 5 - Statut d'étudiant
     - section: 
