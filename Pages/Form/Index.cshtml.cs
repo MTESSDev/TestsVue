@@ -12,6 +12,7 @@ using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using ECSForm.Utils;
 using ECSForm.Model;
+using System.Globalization;
 
 namespace ECSForm.Pages
 {
@@ -21,6 +22,7 @@ namespace ECSForm.Pages
         private readonly IVueParser _vueParser;
 
         public string? Layout { get; set; } = "_Layout";
+        public string Language => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         public string Created { get; set; } = string.Empty;
         public string? FormRaw { get; set; }
         public Dictionary<string, object?> VueData { get; set; } = new Dictionary<string, object?>();
