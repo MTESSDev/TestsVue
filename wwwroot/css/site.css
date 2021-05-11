@@ -300,6 +300,10 @@ select[data-placeholder-selected="true"] {
         flex-wrap: wrap;
     }
 
+    .inline.no-wrap {
+        flex-wrap: nowrap;
+    }
+
     .inline > * {
         margin-right: 32px;
     }
@@ -311,10 +315,6 @@ select[data-placeholder-selected="true"] {
 
 
 
-/* Limiter la largeur max des champs dates si affichés en inline afin d'éviter que les messages d'erreurs provoquent un affichage sur 2 lignes des contrôles */
-.inline .formulate-input[data-type="date"]{
-    max-width: 203px;
-}
 
 /*====================================================================================================*/
 /*  -Z20A- Forms (Champs textes largeurs)  
@@ -322,68 +322,43 @@ select[data-placeholder-selected="true"] {
 /*TODO les types ont été retirés aussi dans ECS [type="text"], on se fou du type en fait... on doit le retirer dans ECS, sauf pour largeur par défaut. */
 /* On applique une largeur xl à tous les contrôles de type texte par défaut */
 input[type="text"].form-control {
-    max-width: 528px;
-}
-
-.col-auto input[type="text"].form-control {
     width: 528px;
 }
 
 /*Le xxl n'existe pas dans les règles du SCG, c'est ajouté */
 input.form-control.xxl {
-    max-width: 728px;
+    width: 728px;
 }
 
 input.form-control.xl {
-    max-width: 528px;
+    width: 528px;
 }
 
 
 input.form-control.lg {
-    max-width: 249px;
-}
-
-input.form-control.md, input.form-control.md {
-    max-width: 156px;
-}
-
-input.form-control.sm, input.form-control.sm {
-    max-width: 63px;
-}
-
-
-.col-auto input.form-control.xxl {
-    width: 728px;
-}
-
-.col-auto input.form-control.xl {
-    width: 528px;
-}
-
-.col-auto input.form-control.lg {
     width: 249px;
 }
 
-.col-auto input.form-control.md, .col-auto input[type="number"].form-control.md {
+input.form-control.md, input.form-control.md {
     width: 156px;
 }
 
-.col-auto input.form-control.sm, .col-auto input[type="number"].form-control.sm {
+input.form-control.sm, input.form-control.sm {
     width: 63px;
 }
 
 
 @media (max-width: 560px) {
 
-    .col-auto input.form-control, .col-auto input.form-control.xl {
-        max-width: 100%;
+    input[type="text"].form-control, input.form-control.xl {
+        width: 100%;
     }
 }
 
 @media (max-width: 760px) {
 
-    .col-auto input.form-control.xxl {
-        max-width: 100%;
+    input.form-control.xxl {
+        width: 100%;
     }
 }
 
@@ -393,34 +368,57 @@ input.form-control.sm, input.form-control.sm {
 
 /* Largeur par défaut pour contrôles vue formulate */
 .inline .formulate-input, .formulate-input input.form-control {
-    max-width: 528px;
+    width: 528px;
 }
 
 .inline .formulate-input.xxl, .formulate-input.xxl input.form-control {
-    max-width: 728px;
+    width: 728px;
 }
 
 .inline .formulate-input.xl, .formulate-input.xl input.form-control {
-    max-width: 528px;
+    width: 528px;
 }
 
 .inline .formulate-input.lg, .formulate-input.lg input.form-control {
-    max-width: 249px;
+    width: 249px;
 }
 
 .inline .formulate-input.md, .formulate-input.md input.form-control {
-    max-width: 156px;
+    width: 156px;
 }
 
 .inline .formulate-input.sm, .formulate-input.sm input.form-control {
-    max-width: 63px;
+    width: 63px;
 }
 
+
+.formulate-input.w-100 input.form-control {
+    width: 100% !important;
+}
+
+/* Limiter la largeur max des champs dates si affichés en inline afin d'éviter que les messages d'erreurs provoquent un affichage sur 2 lignes des contrôles */
+.inline .formulate-input[data-type="date"] {
+    max-width: 203px;
+}
 
 @media (max-width: 575px) {
 
     .inline .formulate-input  {
-        max-width: 100%!important;
+        width: 100%!important;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .inline .formulate-input, .inline .formulate-input.xl, .formulate-input input.form-control, .formulate-input.xl input.form-control {
+        width: 100%;
+    }
+}
+
+@media (max-width: 760px) {
+
+    .inline .formulate-input.xxl, .formulate-input.xxl input.form-control {
+        width: 100%;
     }
 }
 

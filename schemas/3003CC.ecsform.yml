@@ -219,30 +219,30 @@ form:
             fr: Êtes-vous né au Québec?
           options: yesno
         - name: nom3_Req-00
-          v-if: form['Req00-NeQC'] && form['Req00-NeQC'] === 'true'
+          v-if: form['Req00-NeQC'] === 'true'
           type: text
           label: 
             fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
           validations: 
             max: 50,length
         - name: neCanada
-          v-if: form['Req00-NeQC'] && form['Req00-NeQC'] === 'false'        
+          v-if: form['Req00-NeQC'] === 'false'        
           type: radio
           label: 
             fr: Êtes-vous né au Canada ?
           options: yesno
         - name: pays1_Req-00
-          v-if: form['neCanada'] && form['neCanada'] === 'false'
+          v-if: form['neCanada'] === 'false'
           type: text
           label: 
             fr: Indiquez votre pays de naissance
         - name: date6_Req-00
-          v-if: form['neCanada'] && form['neCanada'] === 'false'
+          v-if: form['neCanada'] === 'false'
           type: date
           label: 
             fr: Date d'arrivée au Canada
         - type: dynamic
-          v-if: form['neCanada'] && form['neCanada'] === 'false'
+          v-if: form['neCanada'] === 'false'
           tag: div        
           components:
             - name: Req00-CitCanadienne
@@ -251,25 +251,25 @@ form:
                 fr: Avez-vous la citoyenneté canadienne?
               options: yesno
             - name: Oui3
-              v-if: form['Req00-CitCanadienne'] && form['Req00-CitCanadienne'] === 'false'
+              v-if: form['Req00-CitCanadienne'] === 'false'
               type: radio
               label: 
                 fr: Êtes-vous un résident permanent?
               options: yesno
             - name: Oui4
-              v-if: form['Oui3'] && form['Oui3'] === 'false'            
+              v-if: form['Oui3'] === 'false'            
               type: radio
               label: 
                 fr: Êtes-vous un demandeur d'asile?
               options: yesno
             - name: Oui5
-              v-if: form['Oui4'] && form['Oui4'] === 'false'                        
+              v-if: form['Oui4'] === 'false'                        
               type: radio
               label: 
                 fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
               options: yesno              
             - name: autre2_Req-00
-              v-if: form['Oui5'] && form['Oui5'] === 'false'                        
+              v-if: form['Oui5'] === 'false'                        
               type: text
               label: 
                 fr: Autre situation, précisez
@@ -278,11 +278,12 @@ form:
                 fr: Comme vous êtes né hors du Canada, vous devrez fournir les documents confirmant votre statut.
         - name: Req-00-Autochtone
           type: radio
+          v-if: form['neCanada'] === 'true'
           label: 
             fr: Vous considérez-vous comme un autochtone?
           options: yesno
         - name: Req-00-AutochtoneType        
-          v-if: form['Req-00-Autochtone'] && form['Req-00-Autochtone'] === 'true'
+          v-if: form['neCanada'] === 'true' && form['Req-00-Autochtone'] === 'true'
           type: radio
           label: 
             fr: Êtes-vous un membre d'une Première Nation ou un Inuit?
@@ -377,7 +378,7 @@ form:
           type: checkbox
           label: 
             fr: Précisez le type d'aide que vous recevez
-          v-if: form['AideGouvRecue_Req-00'] && form['AideGouvRecue_Req-00'] === 'true'
+          v-if: form['AideGouvRecue_Req-00'] === 'true'
           options: 
             AssuranceEmploi: Assurance-emploi
             RQAP: Régime québécois d'assurance parentale
@@ -397,14 +398,14 @@ form:
             fr: Avez-vous des enfants à charge?
           options: yesno
         - name: NbrEnfants
-          v-if: form['EnfantsACharge_Req-00'] && form['EnfantsACharge_Req-00'] === 'true'
+          v-if: form['EnfantsACharge_Req-00'] === 'true'
           type: number
           min: 1
           outerClasses: sm
           label: 
             fr: Combien d'enfants avez-vous à charge ?
         - name: ChefMonoparentale_Req-00
-          v-if: form['EnfantsACharge_Req-00'] && form['EnfantsACharge_Req-00'] === 'true'
+          v-if: form['EnfantsACharge_Req-00'] === 'true'
           type: radio
           label: 
             fr: Êtes-vous chef de famille monoparentale ?
@@ -419,7 +420,7 @@ form:
           outerClasses: md
           label: 
             fr: Précisez la/les classe(s)
-          v-if: form['PermisConduire_Req-00'] && form['PermisConduire_Req-00'] === 'true'
+          v-if: form['PermisConduire_Req-00'] === 'true'
 #          type: checkbox
 #          label: 
 #            fr: Précisez la/les classe(s)
@@ -444,7 +445,7 @@ form:
             fr: Avez-vous un handicap physique, intellectuel ou mental ?
           options: yesno
         - name: TypeHandicap_Req-00
-          v-if: form['Handicap_Req-00'] && form['Handicap_Req-00'] === 'true'
+          v-if: form['Handicap_Req-00'] === 'true'
           type: text
           label: 
             fr: Précisez le handicap
@@ -566,19 +567,19 @@ form:
                 yesno
             - name: DateInscription_Req-00
               type: date
-              v-if: form['Inscription_Req-00'] && form['Inscription_Req-00'] === 'true'
+              v-if: form['Inscription_Req-00'] === 'true'
               label:
                 fr: Pour quelle date vous êtes-vous inscrit ?
             - name: InscriptionPrevue_Req-00
               type: radio
-              v-if: form['Inscription_Req-00'] && form['Inscription_Req-00'] === 'false'
+              v-if: form['Inscription_Req-00'] === 'false'
               label:
                 fr: Prévoyez-vous vous inscrire ?
               options: 
                 yesno
             - name: DateInscriptionPrevue_Req-00
               type: date
-              v-if: form['InscriptionPrevue_Req-00'] && form['InscriptionPrevue_Req-00'] === 'true'
+              v-if: form['InscriptionPrevue_Req-00'] === 'true'
               label:
                 fr: Pour quelle date prévoyez-vous vous inscrire ?
     # Section 7 - Emplois
@@ -697,6 +698,7 @@ form:
           outerClasses: xxl                           
           label:
             fr: "Inscrivez la raison de votre indisponibilité à travailler"
+    # Section - Dépôt direct
     - section: 
         fr: Dépôt direct
       id: depotDirect
@@ -750,7 +752,67 @@ form:
               outerClasses: lg                                
               validations: 
                 max: 12,length
+    # Section  - Affirmation solenelle
+    - section: 
+        fr: Affirmation solenelle
+      id: affirmationSolennelle
+      v-if: form.TypeDemande
+      components:
+        - type: bandeau
+          components:
+#            - name: AffirmationSolennelleReconnaisReq 
+#              type: checkbox
+#              label: 
+#                fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
+            - type: dynamic
+              tag: p
+              v-if: form.TypeDemande === 'Afdr'              
+              text:
+                fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
+            - type: dynamic
+              tag: p
+              text:
+                fr: <b>J’affirme</b> solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
+            - type: dynamic
+              tag: p
+              text:
+                fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, entre autres de mon retour au travail ou aux études ou encore de toute nouvelle source de revenus.
+        - type: inline
+          classes: no-wrap
+          components: 
+            - name: DateSignatureReq
+              type: date
+              label: 
+                fr: Date
+            - name: SignatureReq
+              type: text
+              outerClasses: w-100
+              v-if: form.TypeDemande !== 'Afdr' || form['02-Conjoint'] !== 'true'
+              label: 
+                fr: Signature
+            - name: SignatureReq
+              type: text
+              outerClasses: w-100
+              v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+              label: 
+                fr: Signature du requérant
+        - type: inline
+          classes: no-wrap
+          components: 
+            - name: DateSignatureConjoint
+              type: date
+              v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+              label: 
+                fr: Date
+            - name: SignatureConjoint
+              type: text
+              outerClasses: w-100
+              v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+              label: 
+                fr: Signature du conjoint
 
+
+#          v-if: form.TypeDemande === 'Afdr'
 #TODO ajouter question pour emplois recherché (attente discussion avec Julie)
     # Section 
     - section: 
