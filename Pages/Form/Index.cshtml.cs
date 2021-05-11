@@ -12,6 +12,7 @@ using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using ECSForm.Utils;
 using ECSForm.Model;
+using System.Globalization;
 
 namespace ECSForm.Pages
 {
@@ -21,6 +22,7 @@ namespace ECSForm.Pages
         private readonly IVueParser _vueParser;
 
         public string? Layout { get; set; } = "_Layout";
+        public string Language => CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         public string Created { get; set; } = string.Empty;
         public string? FormRaw { get; set; }
         public Dictionary<string, object?> VueData { get; set; } = new Dictionary<string, object?>();
@@ -196,15 +198,15 @@ namespace ECSForm.Pages
 
             if (dynamicForm?.Form?["sections"] is null) { return NotFound(); }
 
-            var sectionId = 0;
+            var sectionNo = 0;
             foreach (Dictionary<object, object>? section in dynamicForm.Form["sections"])
             {
                 if (section is null) { continue; }
                 Sections?.Add(new Section()
                 {
-                    No = sectionId++,
-                    Id = section["id"].ToString() ?? string.Empty,
-                    Titre = (section["section"] as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found",
+                    No = sectionNo++,
+                    Id = section.TryGetValue("id", out var sectionId) ? sectionId?.ToString() ?? string.Empty : string.Empty,
+                    Titre = section.TryGetValue("section", out var sectionName) ? (sectionName as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found" : "Title not found",
                     VIf = (section.TryGetValue("v-if", out object? vif) ? vif?.ToString() ?? string.Empty : string.Empty)
                 });
             }

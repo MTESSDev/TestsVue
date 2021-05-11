@@ -88,6 +88,7 @@
                 },
                 "type": {
                     "type":"string",
+                    "examples": ["inline", "dynamic", "bandeau", "bandeau-notification"],
                     "description": "Types from custom templates list."
                 },
                 "classes": {
