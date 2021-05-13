@@ -250,12 +250,47 @@ namespace ECSForm.Utils
 
     public static class FormHelpersExtensions
     {
+        public static IDictionary<object, object>? GetComponent(this object form, string componentName)
+        {
+            var obj = form as IDictionary<object, object>;
+            var obj2 = form as IList<object>;
+            if (obj != null && obj.ContainsKey("sections"))
+            {
+                return obj["sections"].GetComponent(componentName);
+            }
+            else if (obj2 != null)
+            {
+                foreach (var item in obj2)
+                {
+                    var dictItem = item as IDictionary<object, object>;
+                    if (dictItem.TryGetValue("components", out var components))
+                    {
+                        var returnComp = components.GetComponent(componentName);
+                        if (returnComp != null)
+                        {
+                            return returnComp;
+                        }
+                    }
+
+                    if (dictItem !=null && dictItem.TryGetValue("name", out var name))
+                    {
+                        if (name.Equals(componentName))
+                        {
+                            return dictItem;
+                        }
+                    }
+
+                }
+            }
+
+            return null;
+        }
+
         public static dynamic Combine(dynamic item1, IDictionary<object, object> item2)
         {
             var dictionary1 = (IDictionary<object, object>)item1;
-            //var dictionary2 = item2 as IDictionary<object, object>;
             var result = new Dictionary<object, object>();
-            var d = result as IDictionary<object, object>; //work with the Expando as a Dictionary
+            var d = result as IDictionary<object, object>;
 
             foreach (var pair in item2)
             {
