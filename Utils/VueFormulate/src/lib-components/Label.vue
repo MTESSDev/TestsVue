@@ -5,11 +5,13 @@
         <span v-if="context.help" class="sr-only"><span v-if="!isRequired">.</span>&nbsp;{{context.help}}</span>
         <span v-if="hasValidationRules && messagesErreur" class="sr-only" aria-live="polite"> {{messagesErreur}}</span>
         <span v-if="isRequired" aria-hidden="true" class="icone-champ-requis">{{requiredFieldIndicator}}</span>
-        <button v-if="tooltip" type="button" class="tooltip-toggle" data-toggle="tooltip" :title="tooltip">
-            <span class="puce" aria-hidden="true">
-                <span class="icone-svg question" aria-hidden="true"></span>
-            </span>
-        </button>
+        <span class="conteneur-tooltip">
+            <button v-if="tooltip" type="button" class="tooltip-toggle" data-toggle="tooltip" :title="tooltip">
+                <span class="puce" aria-hidden="true">
+                    <span class="icone-svg question" aria-hidden="true"></span>
+                </span>
+            </button>
+        </span>
     </label>
 </template>
 

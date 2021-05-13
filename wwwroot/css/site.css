@@ -464,6 +464,7 @@ input.form-control.sm, input.form-control.sm {
     border: 1px solid var(--couleur-filet-secondaire);
     padding: 0 0 16px 0;
     background-color: #fff;
+    left: -2px!important;
 }
 
 .tooltip .arrow {

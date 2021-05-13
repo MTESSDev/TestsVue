@@ -13,6 +13,8 @@
 //
 //
 //
+//
+//
 var script$3 = {
   props: {
     context: {
@@ -158,14 +160,16 @@ var __vue_render__$3 = function () {
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e(), _vm._v(" "), _vm.tooltip ? _c('button', {
+  }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e(), _vm._v(" "), _c('span', {
+    staticClass: "conteneur-tooltip"
+  }, [_vm.tooltip ? _c('button', {
     staticClass: "tooltip-toggle",
     attrs: {
       "type": "button",
       "data-toggle": "tooltip",
       "title": _vm.tooltip
     }
-  }, [_vm._m(0)]) : _vm._e()]);
+  }, [_vm._m(0)]) : _vm._e()])]);
 };
 
 var __vue_staticRenderFns__$3 = [function () {

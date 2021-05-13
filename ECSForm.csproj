@@ -70,10 +70,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\form\mtess-vueformulate.min.js">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
 </Project>

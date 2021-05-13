@@ -67,6 +67,8 @@ function _nonIterableRest() {
 //
 //
 //
+//
+//
 var script$3 = {
   props: {
     context: {
@@ -193,7 +195,7 @@ var __vue_render__$3 = function __vue_render__() {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
     }
-  }, [_vm._ssrNode("<span>" + _vm._ssrEscape(_vm._s(_vm.context.label)) + "</span> " + (_vm.isRequired ? "<span class=\"sr-only\">. Obligatoire.</span>" : "<!---->") + " " + (_vm.context.help ? "<span class=\"sr-only\">" + (!_vm.isRequired ? "<span>.</span>" : "<!---->") + _vm._ssrEscape(" " + _vm._s(_vm.context.help)) + "</span>" : "<!---->") + " " + (_vm.hasValidationRules && _vm.messagesErreur ? "<span aria-live=\"polite\" class=\"sr-only\">" + _vm._ssrEscape(" " + _vm._s(_vm.messagesErreur)) + "</span>" : "<!---->") + " " + (_vm.isRequired ? "<span aria-hidden=\"true\" class=\"icone-champ-requis\">" + _vm._ssrEscape(_vm._s(_vm.requiredFieldIndicator)) + "</span>" : "<!---->") + " " + (_vm.tooltip ? "<button type=\"button\" data-toggle=\"tooltip\"" + _vm._ssrAttr("title", _vm.tooltip) + " class=\"tooltip-toggle\"><span aria-hidden=\"true\" class=\"puce\"><span aria-hidden=\"true\" class=\"icone-svg question\"></span></span></button>" : "<!---->"))]);
+  }, [_vm._ssrNode("<span>" + _vm._ssrEscape(_vm._s(_vm.context.label)) + "</span> " + (_vm.isRequired ? "<span class=\"sr-only\">. Obligatoire.</span>" : "<!---->") + " " + (_vm.context.help ? "<span class=\"sr-only\">" + (!_vm.isRequired ? "<span>.</span>" : "<!---->") + _vm._ssrEscape(" " + _vm._s(_vm.context.help)) + "</span>" : "<!---->") + " " + (_vm.hasValidationRules && _vm.messagesErreur ? "<span aria-live=\"polite\" class=\"sr-only\">" + _vm._ssrEscape(" " + _vm._s(_vm.messagesErreur)) + "</span>" : "<!---->") + " " + (_vm.isRequired ? "<span aria-hidden=\"true\" class=\"icone-champ-requis\">" + _vm._ssrEscape(_vm._s(_vm.requiredFieldIndicator)) + "</span>" : "<!---->") + " <span class=\"conteneur-tooltip\">" + (_vm.tooltip ? "<button type=\"button\" data-toggle=\"tooltip\"" + _vm._ssrAttr("title", _vm.tooltip) + " class=\"tooltip-toggle\"><span aria-hidden=\"true\" class=\"puce\"><span aria-hidden=\"true\" class=\"icone-svg question\"></span></span></button>" : "<!---->") + "</span>")]);
 };
 
 var __vue_staticRenderFns__$3 = [];
@@ -205,7 +207,7 @@ var __vue_inject_styles__$3 = undefined;
 var __vue_scope_id__$3 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$3 = "data-v-d24528e6";
+var __vue_module_identifier__$3 = "data-v-7ad1602e";
 /* functional template */
 
 var __vue_is_functional_template__$3 = false;
