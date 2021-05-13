@@ -140,15 +140,6 @@ namespace ECSForm.Pages
             Config.Add("keepData", false);
             Config.Add("configName", configName);
 
-            /* Section TEST pour le v-if "SERVER-SIDE" */
-            /*var lambdaParser = new NReco.Linq.LambdaParser();
-            var varContext = new Dictionary<string, object>();
-            varContext["pi"] = 3.14;
-            var equation = "pi===3.14";
-            //Normalize JS to C#
-            equation = equation.Replace("===", "==");
-            var ttt = lambdaParser.Eval(equation, varContext);*/
-
             DynamicForm? defaultCfg = null;
             DynamicForm? dynamicForm;
 
@@ -172,6 +163,18 @@ namespace ECSForm.Pages
             }
 
             if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?["sections"] is null) { return NotFound(); }
+
+            ///* Section TEST pour le v-if "SERVER-SIDE" */
+            //var lambdaParser = new NReco.Linq.LambdaParser();
+            //
+            //var varContext = new Dictionary<string, object>();
+            //varContext["pi"] = 3.14;
+            ////varContext["form"] = dynamicForm.Form;
+            //varContext["eq"] = new FormHelpers().equalsFormulate;
+            //var equation = "eq(\"TypeDemande\", false)";
+            ////Normalize JS to C#
+            ////equation = equation.Replace("===", "==");
+            //var ttt = lambdaParser.Eval(equation, varContext);
 
             if (defaultCfg != null && defaultCfg.Form != null)
             {

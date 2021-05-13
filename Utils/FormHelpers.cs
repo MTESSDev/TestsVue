@@ -20,6 +20,16 @@ namespace ECSForm.Utils
         private static readonly Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
         private static readonly Func<HelperContext, string, object, string> generateClasses = FormHelpers.GenerateClasses;
         private static readonly Func<HelperContext, string, object, string> generatePlaceholder = FormHelpers.GeneratePlaceholder;
+        public readonly Func<string, string, string> equalsFormulate = FormHelpers.EqualsFormulate;
+
+        public static string EqualsFormulate(string componentName, string value)
+        {
+           /* WIP  if (form.GetComponent(componentName)["type"] == "")
+            {
+                return "1";
+            }*/
+            return "";
+        }
 
         private static string GenerateClasses(HelperContext context, string type, dynamic component)
         {
@@ -272,7 +282,7 @@ namespace ECSForm.Utils
                         }
                     }
 
-                    if (dictItem !=null && dictItem.TryGetValue("name", out var name))
+                    if (dictItem != null && dictItem.TryGetValue("name", out var name))
                     {
                         if (name.Equals(componentName))
                         {
