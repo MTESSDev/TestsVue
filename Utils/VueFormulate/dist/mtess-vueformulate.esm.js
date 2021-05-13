@@ -8,11 +8,20 @@
 //
 //
 //
+//
+//
+//
+//
+//
 var script$3 = {
   props: {
     context: {
       type: Object,
       required: true
+    },
+    tooltip: {
+      type: String,
+      required: false
     }
   },
   computed: {
@@ -128,6 +137,9 @@ var __vue_render__$3 = function () {
 
   return _c('label', {
     class: _vm.context.classes.label,
+    style: [_vm.tooltip ? {
+      'position': 'relative'
+    } : {}],
     attrs: {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
@@ -146,10 +158,35 @@ var __vue_render__$3 = function () {
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e()]);
+  }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e(), _vm._v(" "), _vm.tooltip ? _c('button', {
+    staticClass: "tooltip-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "tooltip",
+      "title": _vm.tooltip
+    }
+  }, [_vm._m(0)]) : _vm._e()]);
 };
 
-var __vue_staticRenderFns__$3 = [];
+var __vue_staticRenderFns__$3 = [function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c('span', {
+    staticClass: "puce",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_c('span', {
+    staticClass: "icone-svg question",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]);
+}];
 /* style */
 
 const __vue_inject_styles__$3 = undefined;

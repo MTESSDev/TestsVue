@@ -112,6 +112,7 @@
             repeatable: 'Repeatable'
         },
         slotProps: {
+            label: ['tooltip'],
             repeatable: ['instanceLabel']
         },
         locale: '@Model.Language',
@@ -159,6 +160,45 @@
                 })
 
                 return listeErreurs.length > 0 ? JSON.stringify(listeErreurs) : false
+            },
+            initialiserToolTips() {
+
+                const template = `<div class="tooltip" role="tooltip">                                    
+                                    <div class="tooltip-header">
+                                        <span class="text"></span>
+                                        <a href="#" class="btn-fermer-tooltip" role="button"><span class="icone-svg" aria-hidden="true"></span></a>
+                                    </div>
+                                    <div class="arrow"></div>
+                                    <div class="tooltip-inner">
+                                    </div>
+                                  </div>`
+
+                $('[data-toggle="tooltip"]').each(function () {
+
+                    const $iconeTooltip = $(this)
+                    const $conteneur = $iconeTooltip.parent()
+
+                    //Initialisation du tooltip
+                    $iconeTooltip.tooltip({ trigger: 'click', placement: 'top', template: template, container: $conteneur })
+
+                    //Ajout des événements permettant de fermer le tooltip
+                    $iconeTooltip.on('shown.bs.tooltip', function () {
+                        const $tooltip = $conteneur.find('.tooltip').attr('tabindex', '-1').focus()
+
+                        //Fermer le tooltip sur click du bouton X (fermer)
+                        $conteneur.find('.btn-fermer-tooltip').on('click', function (e) {
+                            e.preventDefault()
+                            $iconeTooltip.tooltip('hide')    
+                        })
+
+                        //Fermer le tooltip lorsque qu'il n'a plus le focus ou que le focus n'est plus à l'intérieur
+                        $tooltip.on('focusout', function () {
+                            if ($tooltip[0].matches(':not(:focus-within)')){
+                                $iconeTooltip.tooltip('hide')
+                            }
+                        })
+                    })
+                })
             },
             ajouterErreursChamp(champ, listeErreurs) {
                 champ.formShouldShowErrors = true
@@ -249,6 +289,8 @@
                         this.$formulate.submit('form')
                     }
 
+                    this.initialiserToolTips()
+
                     if (nomControleFocus) {
                         const controles = document.getElementsByName(nomControleFocus)
                         if (controles.length) {
@@ -325,12 +367,17 @@
         },
         mounted() {
             console.log('Application mounted.');
+            this.initialiserToolTips()
         }
     }
 
     window.addEventListener('load', () => {
         new Vue(App)
     })
+
+    function fermerTooltip() {
+        alert('banane')
+    }
 
     function obtenirTexteEdite(id) {
         return '(Patch) Non défini.'

@@ -11,6 +11,8 @@ form:
           type: radio
           label: 
             fr: Quel type de demande voulez-vous effectuer?
+          tooltip: 
+            fr: Les gars qui on créé cet outil de formulaires sont des machines! Quand Graham Bell a inventé le téléphone en 1876, il avait déjà 3 appels en absence de Chuck Norris. Un jour Chuck Norris a eu un zero en latin, depuis c'est une langue morte. L'avenir se demande parfois ce que Chuck Norris lui réserve.
           options: 
             Afdr: Demande d'aide financière de dernier recours
             AideEmploi: Demande de service d'aide à l'emploi
@@ -28,6 +30,9 @@ form:
           type: radio
           label: 
             fr: Avez-vous déjà travaillé?
+          tooltip: 
+            fr: Un jour Chuck Norris a eu un zero en latin, depuis c'est une langue morte. L'avenir se demande parfois ce que Chuck Norris lui réserve.
+
           options: yesno
         - name: Req-00-etudes
           type: radio

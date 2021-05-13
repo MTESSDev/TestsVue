@@ -11,8 +11,10 @@
 /*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
 /*====================================================================================================*/
 
-
-
+/* TODO À revoir dans ECS? */
+body {
+    line-height: 1.5;
+}
 
 /*====================================================================================================*/
 /*  -Z01- Base contrôles
@@ -424,9 +426,136 @@ input.form-control.sm, input.form-control.sm {
 
 
 /*====================================================================================================*/
+/*  -Z88- Tooltip (Redefinitions bootstrap)
+/*====================================================================================================*/
+.tooltip-toggle {
+    width: 40px;
+    height: 40px;
+    min-height: 40px!important;
+    min-width: 40px!important;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background-color: transparent;
+    position: absolute;
+    bottom: -2px;
+}
+
+.tooltip-toggle .puce {
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background-color: var(--couleur-piv);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tooltip-toggle .icone-svg {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+}
+
+.tooltip.show {
+    opacity: 1;
+    border: 1px solid var(--couleur-filet-secondaire);
+    padding: 0 0 16px 0;
+    background-color: #fff;
+}
+
+.tooltip .arrow {
+    height: 0.5rem;
+}
+.tooltip-inner {
+    width: 320px;
+    max-width: 320px;
+    max-height: 118px;
+    overflow-y: auto;
+    padding: 0 24px 0 16px;
+    background-color: #fff;
+    color: inherit;
+    border-radius: 0;
+    text-align: left;
+}
+
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+    bottom: 9px;
+    border-bottom-color: var(--couleur-filet-secondaire);
+    border-width: 0 .5rem .5rem;
+}
+
+.bs-tooltip-bottom .arrow::after {
+    content: "";
+    position: absolute;
+    bottom: 10.5px;
+    border-width: 0 .5rem .5rem;
+    transform: translateY(3px);
+    border-color: transparent;
+    border-style: solid;
+    border-bottom-color: #fff;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow, .bs-tooltip-top .arrow {
+    bottom: -9px;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow::before,
+.bs-tooltip-top .arrow::before {
+    bottom: -9px;
+    border-top-color: var(--couleur-filet-secondaire);
+    border-width: .5rem .5rem 0;
+}
+
+
+.bs-tooltip-top .arrow::after {
+    content: "";
+    position: absolute;
+    bottom: 1.5px;
+    border-width: 0 .5rem .5rem;
+    transform: rotate(180deg);
+    border-color: transparent;
+    border-style: solid;
+    border-bottom-color: #fff;
+}
+
+.tooltip-header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    /* TODO ici on a ajouté 2px bottom vs SCG car sinon si ascenceur le X est collé dessus */
+    padding: 8px 8px 2px 16px;
+    line-height: 0;
+}
+
+.tooltip-header button {
+    position: relative;
+    text-align: right;
+    /* TODO ici on a ajouté 2px bottom vs SCG car sinon si ascenceur le X est collé dessus */
+    padding: 8px 8px 2px 0;
+    line-height: 0;
+}
+
+.tooltip-header .icone-svg {
+    background-image: url(../images/sprite.svg#ico-xfermer-bleu);
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+}
+
+@media (max-width: 425px) {
+    .tooltip-inner {
+        width: calc(100vw - 16px);
+        max-width: 320px;
+    }
+}
+
+/* TODO si requis css pour placement left, right. Cela dit on privilégie top/bottom */
+/*====================================================================================================*/
 /*  -Z89- Contenu extensible 
 /*====================================================================================================*/
-
 /*---- Liens plus ou moins de détails ----*/
 .developper, .reduire {
     display: none;
@@ -622,7 +751,7 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 /*====================================================================================================*/
 /*  -900- SPRITES
 /*====================================================================================================*/
-/* Ajouter les sprites crochet-bleu-texte, check-blanc, exlamation-blanc */
+/* Ajouter les sprites crochet-bleu-texte, check-blanc, exlamation-blanc, question */
 /* Pour raison inconnue, dans ce projet il faut réajuster la taille des icônes. Il faudra revérifier une fois dans ECS. */
 .icone-svg.md.chevron-haut-texte {
     height: 12px;
