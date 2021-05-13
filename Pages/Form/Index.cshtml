@@ -142,10 +142,14 @@
             submitHandler(data) {
                 axios.post('/Privacy', data)
             },
-            repeatableAdded(model) {
+            testRepeatableAdded() {
 //                console.log('repeatableAdded model')
-                console.log('repeatableAdded model -> ' + model)
+                console.log('testRepeatableAdded')
             },
+            testRepeatableRemoved() {
+                console.log('testRepeatableRemoved')
+            },
+
             invalidMessage(fields) {
                 const listeErreurs = []
                 const nomChamps = Object.keys(fields)
@@ -385,6 +389,5 @@
     function obtenirTexteEdite(id) {
         return '(Patch) Non défini.'
     }
-
     </script>
 }

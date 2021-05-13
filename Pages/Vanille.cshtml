@@ -22,7 +22,7 @@
               name="name"
               label="What is your name?"
               validation="required"
-                             error-behavior="live"
+                error-behavior="live"
             >
             </formulate-input>
             <formulate-input
@@ -30,11 +30,30 @@
               label="How old are you?"
               validation="required|number|max:120"
             ></formulate-input>
-            <formulate-input
-              type="submit"
-              label="Sign up"
-            ></formulate-input>
-        </formulate-form>
+
+            <formulate-input type="group"
+                            name="attendees"
+                            :repeatable="true"
+                            label="Who is going to attend?"
+                            add-label="+ Add Attendee"
+                            @@repeatable-added="testRepeatableAdded"
+                            @@repeatable-removed="testRepeatableRemoved"                            
+                            validation="required">
+
+                <formulate-input name="name"
+                                validation="required"
+                                label="Attendee’s name">
+                    </formulate-input>
+                    <formulate-input type="email"
+                                    name="email"
+                                    validation="required|email"
+                                    label="Attendee’s email">
+                        </formulate-input>
+            </formulate-input>
+
+                        <formulate-input type="submit"
+                                         label="Sign up"></formulate-input>
+</formulate-form>
     </template>
 
     </div>
@@ -57,6 +76,13 @@
     const App = {
         el: '#form',
         methods: {
+            testRepeatableAdded() {
+                //                console.log('repeatableAdded model')
+                console.log('repeatableAdded')
+            },
+            testRepeatableRemoved() {
+                console.log('repeatableRemoved')
+            },
             failedValidation(data) {
                 this.$el.setAttribute('data-submit', true)
                 console.log('failedValidation')
