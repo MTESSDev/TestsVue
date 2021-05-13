@@ -328,6 +328,10 @@ input[type="text"].form-control {
     width: 528px;
 }
 
+input[type="number"].form-control {
+    width: auto;
+}
+
 /*Le xxl n'existe pas dans les règles du SCG, c'est ajouté */
 input.form-control.xxl {
     width: 728px;
@@ -372,6 +376,11 @@ input.form-control.sm, input.form-control.sm {
 /* Largeur par défaut pour contrôles vue formulate */
 .inline .formulate-input, .formulate-input input.form-control {
     width: 528px;
+}
+
+/* Largeur défaut type number */
+.inline .formulate-input[data-type=number], .formulate-input[data-type=number] input.form-control {
+    width: auto;
 }
 
 .inline .formulate-input.xxl, .formulate-input.xxl input.form-control {
