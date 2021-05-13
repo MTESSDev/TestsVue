@@ -635,6 +635,10 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 /*====================================================================================================*/
 /*  -99- À positionner
 /*====================================================================================================*/
+.navigation-form{
+    line-height: 1;
+}
+
 .navigation-form ul {
     padding: 0;
     list-style-type: none;
