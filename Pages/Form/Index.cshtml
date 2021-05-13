@@ -142,8 +142,11 @@
             submitHandler(data) {
                 axios.post('/Privacy', data)
             },
+            repeatableAdded(model) {
+//                console.log('repeatableAdded model')
+                console.log('repeatableAdded model -> ' + model)
+            },
             invalidMessage(fields) {
-                console.log('invalidMessage')
                 const listeErreurs = []
                 const nomChamps = Object.keys(fields)
 

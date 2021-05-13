@@ -73,6 +73,7 @@ form:
               {{# max}} max="{{.}}" {{/ max}}
               {{# limit}} limit="{{.}}" {{/ limit}}
               error-behavior="value"
+              @repeatableAdded="repeatableAdded"
               {{# repeatable}}
               remove-position="after"
               :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
