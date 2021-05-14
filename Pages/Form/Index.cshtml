@@ -158,16 +158,31 @@
                             if ($contenuTirroirAjoute.length) {
                                 this.donnerFocusPremierElementFocusable($contenuTirroirAjoute[0])
 
-                                const $enteteTirroirAjoute = $conteneurGroupe.find('[data-toggle=collapse]')
-                                if ($enteteTirroirAjoute.length)
-                                $conteneurGroupe.find('[data-toggle=collapse]')[0].scrollIntoView()
+                                //setTimeout requis pour FFox... Comme si animation tirroir bloquait le scrollIntoView. On scroll à l'avant dernier tirroir (ou au 1er si un seul)
+                                setTimeout(function () {
+                                    const $entetesTirroirs = $conteneurGroupe.find('[data-toggle=collapse]')
+                                    if ($entetesTirroirs.length) {
+                                        const i = $entetesTirroirs.length > 1 ? $entetesTirroirs.length - 2 : 0
+                                        $entetesTirroirs[i].scrollIntoView()
+                                    }
+                                })
                             }
                         })
                     }
                 }
             },
             repeatableRemoved(model) {
-                console.log('testRepeatableRemoved model -> ' + model)
+                if (document.activeElement) {
+                    const $conteneurGroupe = $(document.activeElement).parents('[data-type=group]:first')
+
+                    this.$nextTick(function () {
+                        const $boutonAjouter = $conteneurGroupe.find('.formulate-input-group-add-more')
+
+                        if ($boutonAjouter.length) {
+                            $boutonAjouter[0].scrollIntoView()
+                        }
+                    })
+                }
             },
             //TODO évaluer possibilité d'en faire une fonction commune
             donnerFocusPremierElementFocusable(conteneur) {
