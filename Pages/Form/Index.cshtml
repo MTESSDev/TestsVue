@@ -142,14 +142,42 @@
             submitHandler(data) {
                 axios.post('/Privacy', data)
             },
-            testRepeatableAdded() {
-//                console.log('repeatableAdded model')
-                console.log('testRepeatableAdded')
-            },
-            testRepeatableRemoved() {
-                console.log('testRepeatableRemoved')
-            },
+            repeatableAdded(model) {
+                if (document.activeElement) {
+                    const $conteneurGroupe = $(document.activeElement).parents('[data-type=group]:first')
 
+                    if ($conteneurGroupe.length) {
+                        const $tirroirs = $conteneurGroupe.find('.collapse')
+
+                        if ($tirroirs.length) {
+                            $tirroirs.collapse('hide')
+                        }
+
+                        this.$nextTick(function () {
+                            const $contenuTirroirAjoute = $conteneurGroupe.find('.collapse:last')
+                            if ($contenuTirroirAjoute.length) {
+                                this.donnerFocusPremierElementFocusable($contenuTirroirAjoute[0])
+
+                                const $enteteTirroirAjoute = $conteneurGroupe.find('[data-toggle=collapse]')
+                                if ($enteteTirroirAjoute.length)
+                                $conteneurGroupe.find('[data-toggle=collapse]')[0].scrollIntoView()
+                            }
+                        })
+                    }
+                }
+            },
+            repeatableRemoved(model) {
+                console.log('testRepeatableRemoved model -> ' + model)
+            },
+            //TODO évaluer possibilité d'en faire une fonction commune
+            donnerFocusPremierElementFocusable(conteneur) {
+                var elementsFocusables = obtenirElementsFocusables(conteneur);
+                if (elementsFocusables.length > 0) {
+                    elementsFocusables[0].focus();            
+                    return true
+                }
+                return false
+            },
             invalidMessage(fields) {
                 const listeErreurs = []
                 const nomChamps = Object.keys(fields)
