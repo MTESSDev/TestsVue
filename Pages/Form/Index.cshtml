@@ -176,10 +176,12 @@
                     const $conteneurGroupe = $(document.activeElement).parents('[data-type=group]:first')
 
                     this.$nextTick(function () {
-                        const $boutonAjouter = $conteneurGroupe.find('.formulate-input-group-add-more')
 
-                        if ($boutonAjouter.length) {
-                            $boutonAjouter[0].scrollIntoView()
+                        //On scroll à l'avant dernier tirroir (ou au 1er si un seul)
+                        const $entetesTirroirs = $conteneurGroupe.find('[data-toggle=collapse]')
+                        if ($entetesTirroirs.length) {
+                            const i = $entetesTirroirs.length > 1 ? $entetesTirroirs.length - 2 : 0
+                            $entetesTirroirs[i].scrollIntoView()
                         }
                     })
                 }
