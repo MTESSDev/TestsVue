@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -72,9 +73,6 @@ namespace ECSForm.Pages
                     case "TYPE":
                         SetType(item.Value.ToString());
                         break;
-                    //case "V-IF":
-                    //    Vif = true;
-                    //    break;
                     case "VALIDATIONS":
                         var validationsDict = item.Value as IDictionary<object, object>;
                         if (validationsDict.ContainsKey("optional"))
@@ -91,8 +89,6 @@ namespace ECSForm.Pages
                     default:
                         break;
                 }
-
-               // Attributes.Add(item.Value);
             }
         }
 
@@ -105,7 +101,13 @@ namespace ECSForm.Pages
                     case "required":
                         yield return new RequiredAttribute() { };
                         break;
+                    case "max":
+                        yield return new MaxLengthAttribute(int.Parse(item.Param));
+                        break;
+                    case "optional":
+                        break;
                     default:
+                        throw new InvalidOperationException(item.Name + " unknown");
                         break;
                 }
             }
