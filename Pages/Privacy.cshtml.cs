@@ -1,4 +1,7 @@
 ﻿using AngleSharp.Html.Parser;
+using ECSForm.Model;
+using ECSForm.Utils;
+using Jint;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -24,7 +27,7 @@ namespace ECSForm.Pages
         }
 
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(string id)
         {
             string tt;
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
@@ -33,83 +36,115 @@ namespace ECSForm.Pages
                 tt = await reader.ReadToEndAsync();
             }
 
-            var data = JsonConvert.DeserializeObject<JObject>(tt);
+            var data = JsonConvert.DeserializeObject<IDictionary<object, object>>(
+            tt, new JsonConverter[] {
+                new MyConverter() }
+            );
 
-            var parser = new HtmlParser(new HtmlParserOptions
-            {
-                IsEmbedded = true,
-
-            });
-
-            var formData = new FormData();
-
-            using (var r = new StreamReader(@"form.vue"))
-            {
-                var vue = await r.ReadToEndAsync();
-                //Just get the DOM representation
-                //var document = await context.OpenAsync(async req => req.Content(await r.ReadToEndAsync()));
-                var document = await parser.ParseDocumentAsync(vue);
-
-                foreach (var item in document.Body.GetElementsByTagName("*"))
-                {
-                    if (item.TagName.StartsWith("formulate", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        if (item.TagName.EndsWith("FORM"))
-                        {
-                            foreach (var attr in item.Attributes)
-                            {
-                                formData.Form.Attributes.Add(new Attribute() { Name = attr.LocalName, Value = attr.Value });
-                            }
-                        }
-                        else
-                        {
-                            var input = new InputV();
-
-                            foreach (var attr in item.Attributes)
-                            {
-                                input.ParseAttribute(new Attribute() { Name = attr.LocalName, Value = attr.Value });
-                            }
-                            formData.Inputs.Add(input);
-                        }
-
-                        /*var val = item.Attributes.Where(e => e.LocalName == "validation").FirstOrDefault();
-                        var valmsg = item.Attributes.Where(e => e.LocalName == ":validation-messages").FirstOrDefault();
-                        var name = item.Attributes.Where(e => e.LocalName == "name").FirstOrDefault();
-
-                        if (val != null)
-                        {
-                            Dictionary<string, string> msg = null;
-                            if (valmsg != null)
-                            {
-                                msg = JsonConvert.DeserializeObject<Dictionary<string, string>>(valmsg.Value);
-                            }
-                            ParseValidation(ref validations, name.Value, val.Value, msg);
-                        }*/
-                        //validations.Elements.Add(item.Attributes["name"], new Validation() {  TypeValidation = new TypeValidation()  })
-                    }
-                }
-            }
+            var dynamicForm = GenericModel.ReadYamlCfg(@$"schemas/{id}.ecsform.yml");
 
 
             var context = new ValidationContext(data, serviceProvider: null, items: null);
 
+            FormData formData = new FormData();
 
-            foreach (var item in formData.Inputs)
+            GetEffectiveComponents(data, dynamicForm.Form, ref formData);
+
+
+            /* foreach (var item in dynamicForm.Form as IDictionary<object, object>)
+             {
+
+                 var ttt = 5;*/
+            /*if (item.Validations != null)
             {
-                if (item.Validations != null)
+                foreach (var validation in item.Validations.ToList())
                 {
-                    foreach (var validation in item.Validations.ToList())
-                    {
-                        data.TryGetValue(item.Name, out var val).ToString();
+                    data.TryGetValue(item.Name, out var val).ToString();
 
-                        if (!item.Vif && !validation.IsValid(val))
-                        {
-                            return NotFound();
-                        }
+                    if (!item.Vif && !validation.IsValid(val))
+                    {
+                        return NotFound();
                     }
                 }
-            }
+            }*/
+            //  }
             return new OkResult();
+        }
+
+        public static IDictionary<object, object>? GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData)
+        {
+            var obj = components as IDictionary<object, object>;
+            var obj2 = components as IList<object>;
+
+
+
+            if (obj != null && obj.ContainsKey("sections"))
+            {
+                return GetEffectiveComponents(data, obj["sections"], ref formData);
+            }
+            else if (obj2 != null)
+            {
+                foreach (var item in obj2)
+                {
+
+
+                    var dictItem = item as IDictionary<object, object>;
+
+                    if (dictItem != null && dictItem.TryGetValue("v-if", out var vif))
+                    {
+                        //Run v-if
+                        //var lambdaParser = new NReco.Linq.LambdaParser();
+                        //
+                        //var varContext = new Dictionary<string, object>();
+                        //
+                        //varContext["form"] = data;
+                        ////varContext["form"] = dynamicForm.Form;
+                        //varContext["eq"] = new FormHelpers().equalsFormulate;
+                        //varContext["hasValue"] = new FormHelpers().hasValueFormulate;
+                        //var equation = vif.ToString().Replace('\'','"');
+                        ////Normalize JS to C#
+                        ////equation = equation.Replace("===", "==");
+                        //var ttt = lambdaParser.Eval(equation, varContext);
+
+                        var formref = new ComponentValue(data);
+
+                        var fff = new DynamicForm();
+                        fff.Form = data;
+
+                        var result = new Engine()
+                                        .SetValue("form", data) // define a new variable
+                                                                //.SetValue("comp", new Action<string, object,>(formref.GetComponent)) // define a new variable
+                                        .Execute($"({vif} ? true : false)") // execute a statement
+                                        .GetCompletionValue() // get the latest statement completion value
+                                        .AsBoolean();
+                        if (!result) { continue; }
+                    }
+
+                    if (dictItem.TryGetValue("components", out var innerComponents))
+                    {
+                        var returnComp = GetEffectiveComponents(data, innerComponents, ref formData);
+                        if (returnComp != null)
+                        {
+                            return returnComp;
+                        }
+                    }
+
+                    var inputV = new InputV();
+                    inputV.ParseAttributes(dictItem);
+                    /* if (dictItem != null && dictItem.TryGetValue("v-if", out var vIf))
+                     {
+                         inputV.Vif = vIf;
+                     }
+
+                     if (dictItem != null && dictItem.TryGetValue("validation", out var validations))
+                     {
+
+                     }*/
+                    formData.Inputs.Add(inputV);
+                }
+            }
+
+            return null;
         }
     }
 }

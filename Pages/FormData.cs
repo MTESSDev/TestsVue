@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ECSForm.Pages
 {
-    internal class FormData
+    public class FormData
     {
         public FormData()
         {
@@ -22,6 +22,7 @@ namespace ECSForm.Pages
         public InputV()
         {
             Attributes = new List<Attribute>();
+            Validations = new List<ValidationAttribute>();
             //AcceptedValues = new List<string>();
         }
 
@@ -35,6 +36,9 @@ namespace ECSForm.Pages
                 case "CHECKBOX":
                     Type = TypeInput.CHECKBOX;
                     break;
+                case "RADIO":
+                    Type = TypeInput.RADIO;
+                    break;
                 default:
                     Type = TypeInput.TEXT;
                     break;
@@ -43,59 +47,56 @@ namespace ECSForm.Pages
 
         public string Name { get; set; }
         public TypeInput Type { get; set; }
-        public Dictionary<string, string> AcceptedValues { get; set; }
+        public IDictionary<object, object> AcceptedValues { get; set; }
 
         public List<ValidationAttribute> Validations { get; set; }
 
-        public void ParseAttribute(Attribute attr)
+        public void ParseAttributes(IDictionary<object, object> attr)
         {
-            switch (attr.Name.ToUpper())
+            Validations.Add(new RequiredAttribute() { });
+
+            foreach (var item in attr)
             {
-                case "NAME":
-                    Name = attr.Value;
-                    break;
-                case "TYPE":
-                    SetType(attr.Value);
-                    break;
-                case "V-IF":
-                    Vif = true;
-                    break;
-                case "VALIDATION":
-                    var rules = ParseValidations(attr.Value);
-                    Validations = ConvertRules(rules).ToList();
-                    break;
-                case ":OPTIONS":
-                    var val = JsonConvert.DeserializeObject<Dictionary<string, string>>(attr.Value);
-                    AcceptedValues = val;
-                    break;
-                default:
-                    break;
+                switch (item.Key.ToString().ToUpper())
+                {
+                    case "NAME":
+                        Name = item.Value.ToString();
+                        break;
+                    case "TYPE":
+                        SetType(item.Value.ToString());
+                        break;
+                    case "V-IF":
+                        Vif = true;
+                        break;
+                    case "VALIDATIONS":
+                        var validationsDict = item.Value as IDictionary<object, object>;
+                        if (validationsDict.ContainsKey("optional"))
+                        {
+                            //Enlever le required par défaut
+                            Validations.Clear();
+                        }
+                        var rules = ParseValidations(validationsDict);
+                        Validations.AddRange(ConvertRules(rules));
+                        break;
+                    case "OPTIONS":
+                        AcceptedValues = item.Value as IDictionary<object, object>;
+                        break;
+                    default:
+                        break;
+                }
+
+               // Attributes.Add(item.Value);
             }
-            /* if (attr.Name.Equals("TYPE", System.StringComparison.InvariantCultureIgnoreCase))
-             {
-                 SetType(attr.Value);
-             }
-             else if (attr.Name.Equals("validation", System.StringComparison.InvariantCultureIgnoreCase))
-             {
-
-             }
-             else if (attr.Name.Equals(":options", System.StringComparison.InvariantCultureIgnoreCase))
-             {
-                 var val = JsonConvert.DeserializeObject<Dictionary<string, string>>(attr.Value);
-                 AcceptedValues = val;
-             }*/
-
-            Attributes.Add(attr);
         }
 
         private IEnumerable<ValidationAttribute> ConvertRules(List<Rule> rules)
         {
             foreach (var item in rules)
-            { 
+            {
                 switch (item.Name.ToLower())
                 {
                     case "required":
-                        yield return new RequiredAttribute() {  };
+                        yield return new RequiredAttribute() { };
                         break;
                     default:
                         break;
@@ -103,20 +104,20 @@ namespace ECSForm.Pages
             }
         }
 
-        private List<Rule> ParseValidations(string value)
+        private List<Rule> ParseValidations(IDictionary<object, object> valdationsDict)
         {
             List<Rule> rules = new List<Rule>();
 
-            var list = value.Split('|');
-            foreach (var item in list)
+            //var list = value.Split('|');
+            foreach (var item in valdationsDict)
             {
                 var newRule = new Rule();
 
-                var keyPair = item.Split(':');
-                newRule.Name = keyPair[0].Trim('^');
-                if (keyPair.Length > 1)
+                //var keyPair = item.Split(':');
+                newRule.Name = item.Key.ToString().Trim('^');
+                if (item.Value != null)
                 {
-                    newRule.Param = keyPair[1];
+                    newRule.Param = item.Value.ToString();
                     var valueOptions = newRule.Param.Split(',');
 
                     if (valueOptions.Length > 1)

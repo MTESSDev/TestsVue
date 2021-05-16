@@ -133,8 +133,8 @@
             submitRawHandler(data) {
                 // TODO ici trouver le moyen d'exécuter la méthode terminerTraitementEnCoursSoumissionForm lorsque notre code ECS qui disable le bouton est terminé... Sinon le bouton reste disabled.
                 // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.
+                axios.post('/Privacy/3003cc', this.form)
 
-                
                 setTimeout(function () {
                     terminerTraitementEnCoursSoumissionForm()
                 }, 800);

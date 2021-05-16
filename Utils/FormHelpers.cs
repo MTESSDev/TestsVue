@@ -1,4 +1,6 @@
-﻿using Stubble.Core;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Stubble.Core;
 using Stubble.Core.Builders;
 using Stubble.Helpers;
 using System;
@@ -20,15 +22,25 @@ namespace ECSForm.Utils
         private static readonly Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
         private static readonly Func<HelperContext, string, object, string> generateClasses = FormHelpers.GenerateClasses;
         private static readonly Func<HelperContext, string, object, string> generatePlaceholder = FormHelpers.GeneratePlaceholder;
-        public readonly Func<string, string, string> equalsFormulate = FormHelpers.EqualsFormulate;
+        private static readonly Func<HelperContext, object, string> generateVif = FormHelpers.GenerateVif;
+        public readonly Func<string, string, bool> equalsFormulate = FormHelpers.EqualsFormulate;
+        //public readonly Func<string, bool> hasValueFormulate = FormHelpers.HasValueFormulate;
 
-        public static string EqualsFormulate(string componentName, string value)
+        public static bool EqualsFormulate(string componentName, string value)
         {
-           /* WIP  if (form.GetComponent(componentName)["type"] == "")
-            {
-                return "1";
-            }*/
-            return "";
+            /* WIP  if (form.GetComponent(componentName)["type"] == "")
+             {
+                 return "1";
+             }*/
+            return true;
+        }
+        public static bool HasValueFormulate(object form, IDictionary<object, object> data, string componentName)
+        {
+            // if (form.GetComponent(componentName)["value"] == "")
+            //  {
+            //      return "1";
+            //  }
+            return true;
         }
 
         private static string GenerateClasses(HelperContext context, string type, dynamic component)
@@ -69,6 +81,22 @@ namespace ECSForm.Utils
 
             return string.Empty;
         }
+
+        public static string GenerateVif(object vif)
+        {
+
+            string result = System.Text.RegularExpressions.Regex.Replace(vif.ToString(), "comp\\((.*)\\)", "form[$1]");
+            //System.Text.RegularExpressions.Regex.Replace(vif, "hasValue(.*)");
+
+            return result;
+        }
+
+        private static string GenerateVif(HelperContext context, object vif)
+        {
+            return $" v-if=\"{GenerateVif(vif)}\"";
+        }
+
+
 
         private static string InternalGenerateClassesFromObject(IDictionary<object, object> dictComponent, string yamlKey,
                                                                 string type, string attributeName, IDictionary<object, object>? form,
@@ -124,6 +152,7 @@ namespace ECSForm.Utils
                     var helpers = new Helpers()
                             .Register("GenerateClasses", generateClasses)
                             .Register("GeneratePlaceholder", generatePlaceholder)
+                            .Register("GenerateVif", generateVif)
                             .Register("RecursiveComponents", recursiveComponents)
                             .Register("i18n", i18n)
                             .Register("JsObject", jsObject)
@@ -347,4 +376,35 @@ namespace ECSForm.Utils
         }
     }
 
+    class MyConverter : CustomCreationConverter<IDictionary<object, object>>
+    {
+        public override IDictionary<object, object> Create(Type objectType)
+        {
+            return new Dictionary<object, object>();
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            // in addition to handling IDictionary<string, object>
+            // we want to handle the deserialization of dict value
+            // which is of type object
+            return objectType == typeof(object) || base.CanConvert(objectType);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.StartObject
+                || reader.TokenType == JsonToken.Null)
+                return base.ReadJson(reader, objectType, existingValue, serializer);
+
+            // if the next token is not an object
+            // then fall back on standard deserializer (strings, numbers etc.)
+
+            if (reader.TokenType == JsonToken.String && reader.Value.Equals("true"))
+            {
+                return serializer.Deserialize<bool>(reader);
+            }
+            return serializer.Deserialize(reader);
+        }
+    }
 }
