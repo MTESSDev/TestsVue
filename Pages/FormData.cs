@@ -10,26 +10,25 @@ namespace ECSForm.Pages
     {
         public FormData()
         {
-            Form = new InputV();
-            Inputs = new List<InputV>();
+            Form = new Inputs();
+            Inputs = new List<Inputs>();
         }
 
-        public InputV Form { get; set; }
-        public List<InputV> Inputs { get; set; }
+        public Inputs Form { get; set; }
+        public List<Inputs> Inputs { get; set; }
     }
 
-    public class InputV
+    public class Inputs
     {
-        public InputV()
+        public Inputs()
         {
             Attributes = new List<Attribute>();
             Validations = new List<ValidationAttribute>();
-            //AcceptedValues = new List<string>();
         }
 
-        public void SetType(string type)
+        public void SetType(string? type)
         {
-            switch (type.ToUpper())
+            switch (type?.ToUpper())
             {
                 case "TEXT":
                     Type = TypeInput.TEXT;
@@ -52,20 +51,21 @@ namespace ECSForm.Pages
             }
         }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string? GroupName { get; set; }
         public TypeInput Type { get; set; }
-        public IDictionary<object, object> AcceptedValues { get; set; }
+        public IDictionary<object, object>? AcceptedValues { get; set; }
 
         public List<ValidationAttribute> Validations { get; set; }
 
-        public void ParseAttributes(IDictionary<object, object> attr)
+        public void ParseAttributes(IDictionary<object, object>? attr)
         {
+            if (attr is null) return;
             Validations.Add(new RequiredAttribute() { });
 
             foreach (var item in attr)
             {
-                switch (item.Key.ToString().ToUpper())
+                switch (item.Key.ToString()?.ToUpper())
                 {
                     case "NAME":
                         Name = item.Value.ToString();
@@ -75,7 +75,7 @@ namespace ECSForm.Pages
                         break;
                     case "VALIDATIONS":
                         var validationsDict = item.Value as IDictionary<object, object>;
-                        if (validationsDict.ContainsKey("optional"))
+                        if (validationsDict is { } && validationsDict.ContainsKey("optional"))
                         {
                             //Enlever le required par défaut
                             Validations.Clear();
@@ -96,38 +96,37 @@ namespace ECSForm.Pages
         {
             foreach (var item in rules)
             {
-                switch (item.Name.ToLower())
+                switch (item.Name?.ToLower())
                 {
                     case "required":
                         yield return new RequiredAttribute() { };
                         break;
                     case "max":
-                        yield return new MaxLengthAttribute(int.Parse(item.Param));
+                        yield return new MaxLengthAttribute(int.Parse(item.Param ?? "0"));
                         break;
                     case "optional":
                         break;
                     default:
                         throw new InvalidOperationException(item.Name + " unknown");
-                        break;
+                        //break;
                 }
             }
         }
 
-        private List<Rule> ParseValidations(IDictionary<object, object> valdationsDict)
+        private List<Rule> ParseValidations(IDictionary<object, object>? validationsDict)
         {
             List<Rule> rules = new List<Rule>();
-
-            //var list = value.Split('|');
-            foreach (var item in valdationsDict)
+            if (validationsDict is null) { return rules; }
+            foreach (var item in validationsDict)
             {
                 var newRule = new Rule();
 
-                //var keyPair = item.Split(':');
-                newRule.Name = item.Key.ToString().Trim('^');
-                if (item.Value != null)
+                newRule.Name = item.Key?.ToString()?.Trim('^');
+
+                if (item.Value != null && newRule.Name is { })
                 {
-                    newRule.Param = item.Value.ToString();
-                    var valueOptions = newRule.Param.Split(',');
+                    newRule.Param = item.Value?.ToString();
+                    var valueOptions = newRule.Param?.Split(',') ?? new string[0];
 
                     if (valueOptions.Length > 1)
                     {
@@ -141,32 +140,13 @@ namespace ECSForm.Pages
         }
 
         public List<Attribute> Attributes { get; private set; }
-        //public bool Vif { get; private set; }
     }
 
     public class Rule
     {
-        public string Name { get; set; }
-        public string Param { get; set; }
-        public string Option { get; set; }
-    }
-
-    public class Attribute
-    {
-        public string Name { get; set; }
-        public string Value { get; set; }
-    }
-
-    public class TypeValidation : IValidationTemplate
-    {
-        public string NomValidation { get; set; }
-        public string Value { get; set; }
-    }
-
-    public interface IValidationTemplate
-    {
-        string NomValidation { get; set; }
-        string Value { get; set; }
+        public string? Name { get; set; }
+        public string? Param { get; set; }
+        public string? Option { get; set; }
     }
 }
 

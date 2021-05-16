@@ -302,7 +302,7 @@ namespace ECSForm.Utils
                 foreach (var item in obj2)
                 {
                     var dictItem = item as IDictionary<object, object>;
-                    if (dictItem.TryGetValue("components", out var components))
+                    if (dictItem is { } && dictItem.TryGetValue("components", out var components))
                     {
                         var returnComp = components.GetComponent(componentName);
                         if (returnComp != null)
@@ -391,7 +391,7 @@ namespace ECSForm.Utils
             return objectType == typeof(object) || base.CanConvert(objectType);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.StartObject
                 || reader.TokenType == JsonToken.Null)

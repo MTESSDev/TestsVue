@@ -29,17 +29,19 @@ namespace ECSForm.Pages
 
         public async Task<IActionResult> OnPost(string id)
         {
-            string tt;
+            string jsonDataFromUser;
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             {
-                // tt = await System.Text.Json.JsonSerializer.DeserializeAsync<Dictionary<string,object>>(reader.BaseStream);
-                tt = await reader.ReadToEndAsync();
+                jsonDataFromUser = await reader.ReadToEndAsync();
             }
 
             var data = JsonConvert.DeserializeObject<IDictionary<object, object>>(
-            tt, new JsonConverter[] {
-                new MyConverter() }
-            );
+                                    jsonDataFromUser,
+                                        new JsonConverter[] {
+                                                new MyConverter() }
+                                    );
+
+            if (data is null) { throw new Exception("No data received."); }
 
             var dynamicForm = GenericModel.ReadYamlCfg(@$"schemas/{id}.ecsform.yml");
 
@@ -53,15 +55,18 @@ namespace ECSForm.Pages
 
             foreach (var item in formData.Inputs)
             {
-                if (item.Validations != null)
+                if (item is { } && item.Validations != null)
                 {
                     foreach (var validation in item.Validations.ToList())
                     {
-                        data.TryGetValue(item.Name, out var val);
-
-                        if (!validation.IsValid(val))
+                        if (!string.IsNullOrEmpty(item.Name))
                         {
-                            return BadRequest($"{validation.FormatErrorMessage(item.Name)}");
+                            data.TryGetValue(item.Name, out var val);
+
+                            if (!validation.IsValid(val))
+                            {
+                                return BadRequest($"{validation.FormatErrorMessage(item.Name)}");
+                            }
                         }
                     }
                 }
@@ -90,50 +95,52 @@ namespace ECSForm.Pages
                 {
                     var dictItem = item as IDictionary<object, object>;
 
-                    if (dictItem != null && dictItem.TryGetValue("v-if", out var vif))
+                    if (dictItem != null)
                     {
-                        //Run v-if
-                        try
+                        if (dictItem.TryGetValue("v-if", out var vif))
                         {
-                            var result = new Engine()
-                                .SetValue("index", 0)
-                                .SetValue("name", groupName)
-                                .SetValue("form", data)
-                                //.Execute($"form.EvenementsDerniereAnnee")
-                                .Execute($"({vif} ? true : false)")
-                                .GetCompletionValue()
-                                .AsBoolean();
-                            if (!result)
+                            //Run v-if
+                            try
                             {
-                                continue;
+                                var result = new Engine()
+                                    .SetValue("index", 0)
+                                    .SetValue("name", groupName)
+                                    .SetValue("form", data)
+                                    //.Execute($"form.EvenementsDerniereAnnee")
+                                    .Execute($"({vif} ? true : false)")
+                                    .GetCompletionValue()
+                                    .AsBoolean();
+                                if (!result)
+                                {
+                                    continue;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                throw;
+                            }
+
+                        }
+
+                        if (dictItem.TryGetValue("components", out var innerComponents))
+                        {
+                            if (dictItem.TryGetValue("type", out var componentType))
+                            {
+                                if (componentType.Equals("group"))
+                                {
+                                    groupName = dictItem["name"].ToString();
+                                }
+                            }
+
+                            var returnComp = GetEffectiveComponents(data, innerComponents, ref formData, groupName);
+                            if (returnComp != null)
+                            {
+                                return returnComp;
                             }
                         }
-                        catch (Exception ex)
-                        {
-
-                            throw;
-                        }
-
                     }
 
-                    if (dictItem.TryGetValue("components", out var innerComponents))
-                    {
-                        if (dictItem.TryGetValue("type", out var componentType))
-                        {
-                            if (componentType.Equals("group"))
-                            {
-                                groupName = dictItem["name"].ToString();
-                            }
-                        }
-
-                        var returnComp = GetEffectiveComponents(data, innerComponents, ref formData, groupName);
-                        if (returnComp != null)
-                        {
-                            return returnComp;
-                        }
-                    }
-
-                    var inputV = new InputV();
+                    var inputV = new Inputs();
                     inputV.ParseAttributes(dictItem);
                     inputV.GroupName = groupName;
                     if (inputV.Type != TypeInput.SKIP)
