@@ -106,11 +106,6 @@ namespace ECSForm.Pages
                         ////equation = equation.Replace("===", "==");
                         //var ttt = lambdaParser.Eval(equation, varContext);
 
-                        var formref = new ComponentValue(data);
-
-                        var fff = new DynamicForm();
-                        fff.Form = data;
-
                         var result = new Engine()
                                         .SetValue("form", data) // define a new variable
                                                                 //.SetValue("comp", new Action<string, object,>(formref.GetComponent)) // define a new variable
