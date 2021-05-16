@@ -400,10 +400,16 @@ namespace ECSForm.Utils
             // if the next token is not an object
             // then fall back on standard deserializer (strings, numbers etc.)
 
-            if (reader.TokenType == JsonToken.String && reader.Value.Equals("true"))
+            /*if (reader.TokenType == JsonToken.String && reader.Value.Equals("true"))
             {
                 return serializer.Deserialize<bool>(reader);
+            }*/
+
+            if (reader.TokenType == JsonToken.StartArray)
+            {
+                return serializer.Deserialize<string[]>(reader);
             }
+
             return serializer.Deserialize(reader);
         }
     }

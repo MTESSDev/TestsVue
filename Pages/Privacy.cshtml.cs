@@ -48,76 +48,85 @@ namespace ECSForm.Pages
 
             FormData formData = new FormData();
 
-            GetEffectiveComponents(data, dynamicForm.Form, ref formData);
+            GetEffectiveComponents(data, dynamicForm.Form, ref formData, null);
 
 
-            /* foreach (var item in dynamicForm.Form as IDictionary<object, object>)
-             {
-
-                 var ttt = 5;*/
-            /*if (item.Validations != null)
+            foreach (var item in formData.Inputs)
             {
-                foreach (var validation in item.Validations.ToList())
+                if (item.Validations != null)
                 {
-                    data.TryGetValue(item.Name, out var val).ToString();
-
-                    if (!item.Vif && !validation.IsValid(val))
+                    foreach (var validation in item.Validations.ToList())
                     {
-                        return NotFound();
+                        data.TryGetValue(item.Name, out var val);
+
+                        if (!validation.IsValid(val))
+                        {
+                            return BadRequest($"{validation.FormatErrorMessage(item.Name)}");
+                        }
                     }
                 }
-            }*/
-            //  }
+            }
             return new OkResult();
         }
 
-        public static IDictionary<object, object>? GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData)
+        public enum ComponentType
+        {
+            None = 0,
+            group = 1
+        }
+
+        public static IDictionary<object, object>? GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData, string? groupName = null)
         {
             var obj = components as IDictionary<object, object>;
             var obj2 = components as IList<object>;
 
-
-
             if (obj != null && obj.ContainsKey("sections"))
             {
-                return GetEffectiveComponents(data, obj["sections"], ref formData);
+                return GetEffectiveComponents(data, obj["sections"], ref formData, null);
             }
             else if (obj2 != null)
             {
                 foreach (var item in obj2)
                 {
-
-
                     var dictItem = item as IDictionary<object, object>;
 
                     if (dictItem != null && dictItem.TryGetValue("v-if", out var vif))
                     {
                         //Run v-if
-                        //var lambdaParser = new NReco.Linq.LambdaParser();
-                        //
-                        //var varContext = new Dictionary<string, object>();
-                        //
-                        //varContext["form"] = data;
-                        ////varContext["form"] = dynamicForm.Form;
-                        //varContext["eq"] = new FormHelpers().equalsFormulate;
-                        //varContext["hasValue"] = new FormHelpers().hasValueFormulate;
-                        //var equation = vif.ToString().Replace('\'','"');
-                        ////Normalize JS to C#
-                        ////equation = equation.Replace("===", "==");
-                        //var ttt = lambdaParser.Eval(equation, varContext);
+                        try
+                        {
+                            var result = new Engine()
+                                .SetValue("index", 0)
+                                .SetValue("name", groupName)
+                                .SetValue("form", data)
+                                //.Execute($"form.EvenementsDerniereAnnee")
+                                .Execute($"({vif} ? true : false)")
+                                .GetCompletionValue()
+                                .AsBoolean();
+                            if (!result)
+                            {
+                                continue;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
 
-                        var result = new Engine()
-                                        .SetValue("form", data) // define a new variable
-                                                                //.SetValue("comp", new Action<string, object,>(formref.GetComponent)) // define a new variable
-                                        .Execute($"({vif} ? true : false)") // execute a statement
-                                        .GetCompletionValue() // get the latest statement completion value
-                                        .AsBoolean();
-                        if (!result) { continue; }
+                            throw;
+                        }
+
                     }
 
                     if (dictItem.TryGetValue("components", out var innerComponents))
                     {
-                        var returnComp = GetEffectiveComponents(data, innerComponents, ref formData);
+                        if (dictItem.TryGetValue("type", out var componentType))
+                        {
+                            if (componentType.Equals("group"))
+                            {
+                                groupName = dictItem["name"].ToString();
+                            }
+                        }
+
+                        var returnComp = GetEffectiveComponents(data, innerComponents, ref formData, groupName);
                         if (returnComp != null)
                         {
                             return returnComp;
@@ -126,16 +135,11 @@ namespace ECSForm.Pages
 
                     var inputV = new InputV();
                     inputV.ParseAttributes(dictItem);
-                    /* if (dictItem != null && dictItem.TryGetValue("v-if", out var vIf))
-                     {
-                         inputV.Vif = vIf;
-                     }
-
-                     if (dictItem != null && dictItem.TryGetValue("validation", out var validations))
-                     {
-
-                     }*/
-                    formData.Inputs.Add(inputV);
+                    inputV.GroupName = groupName;
+                    if (inputV.Type != TypeInput.SKIP)
+                    {
+                        formData.Inputs.Add(inputV);
+                    }
                 }
             }
 

@@ -30,6 +30,12 @@ namespace ECSForm.Pages
         {
             switch (type.ToUpper())
             {
+                case "TEXT":
+                    Type = TypeInput.TEXT;
+                    break;
+                case "DATE":
+                    Type = TypeInput.DATE;
+                    break;
                 case "SELECT":
                     Type = TypeInput.SELECT;
                     break;
@@ -40,12 +46,13 @@ namespace ECSForm.Pages
                     Type = TypeInput.RADIO;
                     break;
                 default:
-                    Type = TypeInput.TEXT;
+                    Type = TypeInput.SKIP;
                     break;
             }
         }
 
         public string Name { get; set; }
+        public string? GroupName { get; set; }
         public TypeInput Type { get; set; }
         public IDictionary<object, object> AcceptedValues { get; set; }
 
@@ -65,9 +72,9 @@ namespace ECSForm.Pages
                     case "TYPE":
                         SetType(item.Value.ToString());
                         break;
-                    case "V-IF":
-                        Vif = true;
-                        break;
+                    //case "V-IF":
+                    //    Vif = true;
+                    //    break;
                     case "VALIDATIONS":
                         var validationsDict = item.Value as IDictionary<object, object>;
                         if (validationsDict.ContainsKey("optional"))
@@ -132,7 +139,7 @@ namespace ECSForm.Pages
         }
 
         public List<Attribute> Attributes { get; private set; }
-        public bool Vif { get; private set; }
+        //public bool Vif { get; private set; }
     }
 
     public class Rule
@@ -164,8 +171,10 @@ namespace ECSForm.Pages
 
 public enum TypeInput
 {
+    SKIP,
     SELECT,
     CHECKBOX,
     RADIO,
-    TEXT
+    TEXT,
+    DATE
 }
