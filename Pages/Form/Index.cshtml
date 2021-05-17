@@ -86,7 +86,7 @@
 
 
 @section scripts{
-    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="~/form/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="~/form/formulate.min.js"></script>
     <script src="~/form/locales.min.js"></script>
@@ -231,7 +231,7 @@
                     const $conteneur = $iconeTooltip.parent()
 
                     //Initialisation du tooltip
-                    $iconeTooltip.tooltip({ trigger: 'click', placement: 'top', template: template, container: $conteneur })
+                    $iconeTooltip.tooltip({ trigger: 'click', placement: 'top', template: template, container: $conteneur})
 
                     //Ajout des événements permettant de fermer le tooltip
                     $iconeTooltip.on('shown.bs.tooltip', function () {
