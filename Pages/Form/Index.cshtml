@@ -138,7 +138,7 @@
                         console.log(response)
                     })
                     .catch(error => {
-                        alert(error.response.data);
+                        console.log(error.response.data);
                     });
 
                 setTimeout(function () {
@@ -196,7 +196,7 @@
             donnerFocusPremierElementFocusable(conteneur) {
                 var elementsFocusables = obtenirElementsFocusables(conteneur);
                 if (elementsFocusables.length > 0) {
-                    elementsFocusables[0].focus();            
+                    elementsFocusables[0].focus();
                     return true
                 }
                 return false
@@ -213,7 +213,7 @@
                             this.ajouterErreursChamp(champ, listeErreurs)
                         } else {
                             this.ajouterErreursGroupe(champ, listeErreurs, true)
-                        }                        
+                        }
                     }
                 })
 
@@ -221,7 +221,7 @@
             },
             initialiserToolTips() {
 
-                const template = `<div class="tooltip" role="tooltip">                                    
+                const template = `<div class="tooltip" role="tooltip">
                                     <div class="tooltip-header">
                                         <span class="text"></span>
                                         <a href="#" class="btn-fermer-tooltip" role="button"><span class="icone-svg" aria-hidden="true"></span></a>
@@ -246,7 +246,7 @@
                         //Fermer le tooltip sur click du bouton X (fermer)
                         $conteneur.find('.btn-fermer-tooltip').on('click', function (e) {
                             e.preventDefault()
-                            $iconeTooltip.tooltip('hide')    
+                            $iconeTooltip.tooltip('hide')
                         })
 
                         //Fermer le tooltip lorsque qu'il n'a plus le focus ou que le focus n'est plus à l'intérieur
@@ -365,7 +365,7 @@
                                     controlesErreur[0].focus()
                                     formulate.repositionnerEcranLabelQuestion(controlesErreur[0].id)
                                 }
-                            },0 ,this)                           
+                            },0 ,this)
                         }
                     }
                 })
