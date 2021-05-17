@@ -133,8 +133,14 @@
             submitRawHandler(data) {
                 // TODO ici trouver le moyen d'exécuter la méthode terminerTraitementEnCoursSoumissionForm lorsque notre code ECS qui disable le bouton est terminé... Sinon le bouton reste disabled.
                 // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.
+                axios.post('/Privacy/3003cc', this.form)
+                    .then(response => {
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        console.log(error.response.data);
+                    });
 
-                
                 setTimeout(function () {
                     terminerTraitementEnCoursSoumissionForm()
                 }, 800);
@@ -190,7 +196,7 @@
             donnerFocusPremierElementFocusable(conteneur) {
                 var elementsFocusables = obtenirElementsFocusables(conteneur);
                 if (elementsFocusables.length > 0) {
-                    elementsFocusables[0].focus();            
+                    elementsFocusables[0].focus();
                     return true
                 }
                 return false
@@ -207,7 +213,7 @@
                             this.ajouterErreursChamp(champ, listeErreurs)
                         } else {
                             this.ajouterErreursGroupe(champ, listeErreurs, true)
-                        }                        
+                        }
                     }
                 })
 
@@ -215,7 +221,7 @@
             },
             initialiserToolTips() {
 
-                const template = `<div class="tooltip" role="tooltip">                                    
+                const template = `<div class="tooltip" role="tooltip">
                                     <div class="tooltip-header">
                                         <span class="text"></span>
                                         <a href="#" class="btn-fermer-tooltip" role="button"><span class="icone-svg" aria-hidden="true"></span></a>
@@ -240,7 +246,7 @@
                         //Fermer le tooltip sur click du bouton X (fermer)
                         $conteneur.find('.btn-fermer-tooltip').on('click', function (e) {
                             e.preventDefault()
-                            $iconeTooltip.tooltip('hide')    
+                            $iconeTooltip.tooltip('hide')
                         })
 
                         //Fermer le tooltip lorsque qu'il n'a plus le focus ou que le focus n'est plus à l'intérieur
@@ -359,7 +365,7 @@
                                     controlesErreur[0].focus()
                                     formulate.repositionnerEcranLabelQuestion(controlesErreur[0].id)
                                 }
-                            },0 ,this)                           
+                            },0 ,this)
                         }
                     }
                 })

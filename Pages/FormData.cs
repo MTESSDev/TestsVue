@@ -1,101 +1,90 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace ECSForm.Pages
 {
-    internal class FormData
+    public class FormData
     {
         public FormData()
         {
-            Form = new InputV();
-            Inputs = new List<InputV>();
+            Form = new Inputs();
+            Inputs = new List<Inputs>();
         }
 
-        public InputV Form { get; set; }
-        public List<InputV> Inputs { get; set; }
+        public Inputs Form { get; set; }
+        public List<Inputs> Inputs { get; set; }
     }
 
-    public class InputV
+    public class Inputs
     {
-        public InputV()
+        public Inputs()
         {
             Attributes = new List<Attribute>();
-            //AcceptedValues = new List<string>();
+            Validations = new List<ValidationAttribute>();
         }
 
-        public void SetType(string type)
+        public void SetType(string? type)
         {
-            switch (type.ToUpper())
+            switch (type?.ToUpper())
             {
+                case "TEXT":
+                    Type = TypeInput.TEXT;
+                    break;
+                case "DATE":
+                    Type = TypeInput.DATE;
+                    break;
                 case "SELECT":
                     Type = TypeInput.SELECT;
                     break;
                 case "CHECKBOX":
                     Type = TypeInput.CHECKBOX;
                     break;
+                case "RADIO":
+                    Type = TypeInput.RADIO;
+                    break;
                 default:
-                    Type = TypeInput.TEXT;
+                    Type = TypeInput.SKIP;
                     break;
             }
         }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
+        public string? GroupName { get; set; }
         public TypeInput Type { get; set; }
-        public Dictionary<string, string> AcceptedValues { get; set; }
+        public IDictionary<object, object>? AcceptedValues { get; set; }
 
         public List<ValidationAttribute> Validations { get; set; }
 
-        public void ParseAttribute(Attribute attr)
+        public void ParseAttributes(IDictionary<object, object>? attr)
         {
-            switch (attr.Name.ToUpper())
+            if (attr is null) return;
+            Validations.Add(new RequiredAttribute() { });
+
+            foreach (var item in attr)
             {
-                case "NAME":
-                    Name = attr.Value;
-                    break;
-                case "TYPE":
-                    SetType(attr.Value);
-                    break;
-                case "V-IF":
-                    Vif = true;
-                    break;
-                case "VALIDATION":
-                    var rules = ParseValidations(attr.Value);
-                    Validations = ConvertRules(rules).ToList();
-                    break;
-                case ":OPTIONS":
-                    var val = JsonConvert.DeserializeObject<Dictionary<string, string>>(attr.Value);
-                    AcceptedValues = val;
-                    break;
-                default:
-                    break;
-            }
-            /* if (attr.Name.Equals("TYPE", System.StringComparison.InvariantCultureIgnoreCase))
-             {
-                 SetType(attr.Value);
-             }
-             else if (attr.Name.Equals("validation", System.StringComparison.InvariantCultureIgnoreCase))
-             {
-
-             }
-             else if (attr.Name.Equals(":options", System.StringComparison.InvariantCultureIgnoreCase))
-             {
-                 var val = JsonConvert.DeserializeObject<Dictionary<string, string>>(attr.Value);
-                 AcceptedValues = val;
-             }*/
-
-            Attributes.Add(attr);
-        }
-
-        private IEnumerable<ValidationAttribute> ConvertRules(List<Rule> rules)
-        {
-            foreach (var item in rules)
-            { 
-                switch (item.Name.ToLower())
+                switch (item.Key.ToString()?.ToUpper())
                 {
-                    case "required":
-                        yield return new RequiredAttribute() {  };
+                    case "NAME":
+                        Name = item.Value.ToString();
+                        break;
+                    case "TYPE":
+                        SetType(item.Value.ToString());
+                        break;
+                    case "VALIDATIONS":
+                        var validationsDict = item.Value as IDictionary<object, object>;
+                        if (validationsDict is { } && validationsDict.ContainsKey("optional"))
+                        {
+                            //Enlever le required par défaut
+                            Validations.Clear();
+                        }
+                        var rules = ParseValidations(validationsDict);
+                        Validations.AddRange(ConvertRules(rules));
+                        break;
+                    case "OPTIONS":
+                        AcceptedValues = item.Value as IDictionary<object, object>;
                         break;
                     default:
                         break;
@@ -103,21 +92,41 @@ namespace ECSForm.Pages
             }
         }
 
-        private List<Rule> ParseValidations(string value)
+        private IEnumerable<ValidationAttribute> ConvertRules(List<Rule> rules)
+        {
+            foreach (var item in rules)
+            {
+                switch (item.Name?.ToLower())
+                {
+                    case "required":
+                        yield return new RequiredAttribute() { };
+                        break;
+                    case "max":
+                        yield return new MaxLengthAttribute(int.Parse(item.Param ?? "0"));
+                        break;
+                    case "optional":
+                        break;
+                    default:
+                        throw new InvalidOperationException(item.Name + " unknown");
+                        //break;
+                }
+            }
+        }
+
+        private List<Rule> ParseValidations(IDictionary<object, object>? validationsDict)
         {
             List<Rule> rules = new List<Rule>();
-
-            var list = value.Split('|');
-            foreach (var item in list)
+            if (validationsDict is null) { return rules; }
+            foreach (var item in validationsDict)
             {
                 var newRule = new Rule();
 
-                var keyPair = item.Split(':');
-                newRule.Name = keyPair[0].Trim('^');
-                if (keyPair.Length > 1)
+                newRule.Name = item.Key?.ToString()?.Trim('^');
+
+                if (item.Value != null && newRule.Name is { })
                 {
-                    newRule.Param = keyPair[1];
-                    var valueOptions = newRule.Param.Split(',');
+                    newRule.Param = item.Value?.ToString();
+                    var valueOptions = newRule.Param?.Split(',') ?? new string[0];
 
                     if (valueOptions.Length > 1)
                     {
@@ -131,40 +140,23 @@ namespace ECSForm.Pages
         }
 
         public List<Attribute> Attributes { get; private set; }
-        public bool Vif { get; private set; }
     }
 
     public class Rule
     {
-        public string Name { get; set; }
-        public string Param { get; set; }
-        public string Option { get; set; }
-    }
-
-    public class Attribute
-    {
-        public string Name { get; set; }
-        public string Value { get; set; }
-    }
-
-    public class TypeValidation : IValidationTemplate
-    {
-        public string NomValidation { get; set; }
-        public string Value { get; set; }
-    }
-
-    public interface IValidationTemplate
-    {
-        string NomValidation { get; set; }
-        string Value { get; set; }
+        public string? Name { get; set; }
+        public string? Param { get; set; }
+        public string? Option { get; set; }
     }
 }
 
 
 public enum TypeInput
 {
+    SKIP,
     SELECT,
     CHECKBOX,
     RADIO,
-    TEXT
+    TEXT,
+    DATE
 }

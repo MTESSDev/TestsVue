@@ -19,7 +19,7 @@ namespace ECSForm.Pages
     {
         private readonly ILogger<TestsModel> _logger;
 
-        public string Formulaire { get; set; }
+        public string? Formulaire { get; set; }
 
         public TestsModel(ILogger<TestsModel> logger)
         {
@@ -69,7 +69,7 @@ namespace ECSForm.Pages
                  }*/
             }
 
-        private static bool TryValidate(object value, ValidationContext validationContext, ValidationAttribute attribute, out ValidationError validationError)
+        private static bool TryValidate(object value, ValidationContext validationContext, ValidationAttribute attribute, out ValidationError? validationError)
         {
             if (validationContext == null)
             {

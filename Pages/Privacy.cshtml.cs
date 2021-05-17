@@ -1,4 +1,7 @@
 ﻿using AngleSharp.Html.Parser;
+using ECSForm.Model;
+using ECSForm.Utils;
+using Jint;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -24,92 +27,130 @@ namespace ECSForm.Pages
         }
 
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(string id)
         {
-            string tt;
+            string jsonDataFromUser;
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             {
-                // tt = await System.Text.Json.JsonSerializer.DeserializeAsync<Dictionary<string,object>>(reader.BaseStream);
-                tt = await reader.ReadToEndAsync();
+                jsonDataFromUser = await reader.ReadToEndAsync();
             }
 
-            var data = JsonConvert.DeserializeObject<JObject>(tt);
+            var data = JsonConvert.DeserializeObject<IDictionary<object, object>>(
+                                    jsonDataFromUser,
+                                        new JsonConverter[] {
+                                                new MyConverter() }
+                                    );
 
-            var parser = new HtmlParser(new HtmlParserOptions
-            {
-                IsEmbedded = true,
+            if (data is null) { throw new Exception("No data received."); }
 
-            });
-
-            var formData = new FormData();
-
-            using (var r = new StreamReader(@"form.vue"))
-            {
-                var vue = await r.ReadToEndAsync();
-                //Just get the DOM representation
-                //var document = await context.OpenAsync(async req => req.Content(await r.ReadToEndAsync()));
-                var document = await parser.ParseDocumentAsync(vue);
-
-                foreach (var item in document.Body.GetElementsByTagName("*"))
-                {
-                    if (item.TagName.StartsWith("formulate", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        if (item.TagName.EndsWith("FORM"))
-                        {
-                            foreach (var attr in item.Attributes)
-                            {
-                                formData.Form.Attributes.Add(new Attribute() { Name = attr.LocalName, Value = attr.Value });
-                            }
-                        }
-                        else
-                        {
-                            var input = new InputV();
-
-                            foreach (var attr in item.Attributes)
-                            {
-                                input.ParseAttribute(new Attribute() { Name = attr.LocalName, Value = attr.Value });
-                            }
-                            formData.Inputs.Add(input);
-                        }
-
-                        /*var val = item.Attributes.Where(e => e.LocalName == "validation").FirstOrDefault();
-                        var valmsg = item.Attributes.Where(e => e.LocalName == ":validation-messages").FirstOrDefault();
-                        var name = item.Attributes.Where(e => e.LocalName == "name").FirstOrDefault();
-
-                        if (val != null)
-                        {
-                            Dictionary<string, string> msg = null;
-                            if (valmsg != null)
-                            {
-                                msg = JsonConvert.DeserializeObject<Dictionary<string, string>>(valmsg.Value);
-                            }
-                            ParseValidation(ref validations, name.Value, val.Value, msg);
-                        }*/
-                        //validations.Elements.Add(item.Attributes["name"], new Validation() {  TypeValidation = new TypeValidation()  })
-                    }
-                }
-            }
+            var dynamicForm = GenericModel.ReadYamlCfg(@$"schemas/{id}.ecsform.yml");
 
 
             var context = new ValidationContext(data, serviceProvider: null, items: null);
 
+            FormData formData = new FormData();
+
+            GetEffectiveComponents(data, dynamicForm.Form, ref formData, null);
+
 
             foreach (var item in formData.Inputs)
             {
-                if (item.Validations != null)
+                if (item is { } && item.Validations != null)
                 {
                     foreach (var validation in item.Validations.ToList())
                     {
-                        data.TryGetValue(item.Name, out var val).ToString();
-
-                        if (!item.Vif && !validation.IsValid(val))
+                        if (!string.IsNullOrEmpty(item.Name))
                         {
-                            return NotFound();
+                            data.TryGetValue(item.Name, out var val);
+
+                            if (!validation.IsValid(val))
+                            {
+                                return BadRequest($"{validation.FormatErrorMessage(item.Name)}");
+                            }
                         }
                     }
                 }
             }
             return new OkResult();
+        }
+
+        public enum ComponentType
+        {
+            None = 0,
+            group = 1
+        }
+
+        public static IDictionary<object, object>? GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData, string? groupName = null)
+        {
+            var obj = components as IDictionary<object, object>;
+            var obj2 = components as IList<object>;
+
+            if (obj != null && obj.ContainsKey("sections"))
+            {
+                return GetEffectiveComponents(data, obj["sections"], ref formData, null);
+            }
+            else if (obj2 != null)
+            {
+                foreach (var item in obj2)
+                {
+                    var dictItem = item as IDictionary<object, object>;
+
+                    if (dictItem != null)
+                    {
+                        if (dictItem.TryGetValue("v-if", out var vif))
+                        {
+                            //Run v-if
+                            try
+                            {
+                                var result = new Engine()
+                                    .SetValue("index", 0)
+                                    .SetValue("name", groupName)
+                                    .SetValue("form", data)
+                                    //.Execute($"form.EvenementsDerniereAnnee")
+                                    .Execute($"({vif} ? true : false)")
+                                    .GetCompletionValue()
+                                    .AsBoolean();
+                                if (!result)
+                                {
+                                    continue;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                throw;
+                            }
+
+                        }
+
+                        if (dictItem.TryGetValue("components", out var innerComponents))
+                        {
+                            if (dictItem.TryGetValue("type", out var componentType))
+                            {
+                                if (componentType.Equals("group"))
+                                {
+                                    groupName = dictItem["name"].ToString();
+                                }
+                            }
+
+                            var returnComp = GetEffectiveComponents(data, innerComponents, ref formData, groupName);
+                            if (returnComp != null)
+                            {
+                                return returnComp;
+                            }
+                        }
+                    }
+
+                    var inputV = new Inputs();
+                    inputV.ParseAttributes(dictItem);
+                    inputV.GroupName = groupName;
+                    if (inputV.Type != TypeInput.SKIP)
+                    {
+                        formData.Inputs.Add(inputV);
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

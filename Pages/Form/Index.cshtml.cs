@@ -228,7 +228,7 @@ namespace ECSForm.Pages
             return Page();
         }
 
-        private DynamicForm ReadYamlCfg(string filename)
+        public static DynamicForm ReadYamlCfg(string filename)
         {
             DynamicForm cfg;
             using (var configFile = new StreamReader(filename))
