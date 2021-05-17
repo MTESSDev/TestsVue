@@ -65,7 +65,7 @@
 
 @section colonneDroite{
     <div v-cloak>
-        <h1>{{pageCourante.titre}}</h1>
+        <h1 tabindex="-1">{{pageCourante.titre}}</h1>
         <div id="form">
             <template>
                 @Html.Raw(Model.FormRaw)
@@ -365,8 +365,11 @@
                                     controlesErreur[0].focus()
                                     formulate.repositionnerEcranLabelQuestion(controlesErreur[0].id)
                                 }
-                            },0 ,this)
+                            }, 0, this)
                         }
+                    } else {
+                        //On traite une navigation sans contrôle spécifié à qui donner le focus (ex. page suivante/précédente ou clic sur une page dans menu gauche). On donne focus au H1.
+                        document.getElementsByTagName('h1')[0].focus()
                     }
                 })
             },
