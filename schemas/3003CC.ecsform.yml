@@ -493,7 +493,7 @@ form:
           help: 
             fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
           options: yesno
-    # Section 5 - Statut d'étudiant
+    # Section 5 - Études en cours
     - section: 
         fr: Études en cours
       id: EtudesEnCours
@@ -587,6 +587,88 @@ form:
               v-if: form['InscriptionPrevue_Req-00'] === 'true'
               label:
                 fr: Précisez la date de début
+    # Section 6 - Formation
+    - section:
+        fr: Formation
+      id: formation
+      components:
+        - name: Req01-OrdresEnseignementsApplicables
+          type: checkbox
+          label:
+            fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
+          options: 
+            NiveauEtudesPrimaire: Primaire
+            NiveauEtudesSecondaireGen: Secondaire (Général)
+            NiveauEtudesSecondaireFormProf: Secondaire (Formation professionnelle)
+            NiveauEtudesSecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
+            NiveauEtudesCollegial: Collegial (Formation générale ou technique)
+            NiveauEtudesUniversitaire: Universitaire
+
+        - name: primaire        
+          type: group
+          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesPrimaire')
+          label:
+            fr: Primaire
+          instanceLabel:
+            fr: Primaire
+          components:
+            - name: Req01-NbAnneesReussiesPrimaire
+              type: text
+              label:
+                fr: Nombre d'années réussies
+        - name: secondaireGen
+          type: group
+          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireGen')          
+          instanceLabel:
+            fr: Secondaire (général)
+          components:
+            - name: Req01-NbAnneesReussiesSecGeneral
+              type: text
+              label:
+                fr: Nombre d'années réussies
+        - name: secondaireProf
+          type: group
+          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormProf')                    
+          instanceLabel:
+            fr: Secondaire (Formation professionnelle)
+          components:
+            - name: Req01-NbAnneesReussiesSecFormProf
+              type: text
+              label:
+                fr: Nombre d'années réussies
+        - name: secondaireMetier
+          type: group
+          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormMétier')                              
+          instanceLabel:
+            fr: Secondaire (Formation à un métier semi-spécialisé)
+          components:
+            - name: Req01-NbAnneesReussiesSecMetier
+              type: text
+              label:
+                fr: Nombre d'années réussies
+        - name: collegial
+          type: group
+          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesCollegial')                                        
+          instanceLabel:
+            fr: Collégial (Formation générale ou technique)
+          components:
+            - name: Req01-NbAnneesReussiesCollegial
+              type: text
+              label:
+                fr: Nombre d'années réussies
+        - name: universitaire
+          type: group
+          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesUniversitaire')                                                  
+          instanceLabel:
+            fr: Universitaire
+          components:
+            - name: Req01-NbAnneesReussiesUniversitaire
+              type: text
+              label:
+                fr: Nombre d'années réussies
+
+            
+    
     # Section 7 - Emplois
     - section:
         fr: Emplois

@@ -444,24 +444,22 @@ input.form-control.sm, input.form-control.sm {
     left: -4px;
 }
 
-.tooltip-toggle {
+button.tooltip-toggle {
     width: 40px;
     height: 40px;
     min-height: 40px!important;
     min-width: 40px!important;
     display: inline-block;
-    justify-content: center;
-    align-items: center;
     border: 0;
     background-color: transparent;
     position: relative;
+    padding: 0 12px;
 }
-.tooltip-toggle .conteneur-puce {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+button.tooltip-toggle .conteneur-puce {
+    display: block;
+    width:16px;
 }
-.tooltip-toggle .puce {
+button.tooltip-toggle .puce {
     width: 16px;
     height: 16px;
     border-radius: 100%;
@@ -471,7 +469,7 @@ input.form-control.sm, input.form-control.sm {
     align-items: center;
 }
 
-.tooltip-toggle .icone-svg {
+button.tooltip-toggle .icone-svg {
     width: 10px;
     height: 10px;
     min-width: 10px;
