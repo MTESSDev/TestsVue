@@ -15,6 +15,8 @@
 //
 //
 //
+//
+//
 var script$3 = {
   props: {
     context: {
@@ -180,6 +182,8 @@ var __vue_staticRenderFns__$3 = [function () {
   var _c = _vm._self._c || _h;
 
   return _c('span', {
+    staticClass: "conteneur-puce"
+  }, [_c('span', {
     staticClass: "puce",
     attrs: {
       "aria-hidden": "true"
@@ -189,7 +193,7 @@ var __vue_staticRenderFns__$3 = [function () {
     attrs: {
       "aria-hidden": "true"
     }
-  })]);
+  })])]);
 }];
 /* style */
 

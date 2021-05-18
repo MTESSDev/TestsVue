@@ -7,8 +7,10 @@
         <span v-if="isRequired" aria-hidden="true" class="icone-champ-requis">{{requiredFieldIndicator}}</span>
         <span class="conteneur-tooltip">
             <button v-if="tooltip" type="button" class="tooltip-toggle" data-toggle="tooltip" :title="tooltip">
-                <span class="puce" aria-hidden="true">
-                    <span class="icone-svg question" aria-hidden="true"></span>
+                <span class="conteneur-puce">
+                    <span class="puce" aria-hidden="true">
+                        <span class="icone-svg question" aria-hidden="true"></span>
+                    </span>
                 </span>
             </button>
         </span>

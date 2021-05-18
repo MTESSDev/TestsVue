@@ -171,8 +171,8 @@ form:
                 fr: Précisez la raison autre
     # Section 2
     - section: 
-        fr: Renseignements personnels
-      id: renseignementsPersonnels
+        fr: Renseignements sur l'identite
+      id: renseignementsIdentite
       components:
         - name: nom1_Req-00
           type: text
@@ -495,8 +495,8 @@ form:
           options: yesno
     # Section 5 - Statut d'étudiant
     - section: 
-        fr: Statut d'étudiant
-      id: StatutEtudiant
+        fr: Études en cours
+      id: EtudesEnCours
       v-if: form['Req-00-etudes']
       components:
         - type: dynamic
@@ -574,7 +574,7 @@ form:
               type: date
               v-if: form['Inscription_Req-00'] === 'true'
               label:
-                fr: Pour quelle date vous êtes-vous inscrit ?
+                fr: Précisez la date de début
             - name: InscriptionPrevue_Req-00
               type: radio
               v-if: form['Inscription_Req-00'] === 'false'
@@ -586,7 +586,7 @@ form:
               type: date
               v-if: form['InscriptionPrevue_Req-00'] === 'true'
               label:
-                fr: Pour quelle date prévoyez-vous vous inscrire ?
+                fr: Précisez la date de début
     # Section 7 - Emplois
     - section:
         fr: Emplois

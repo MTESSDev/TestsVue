@@ -438,20 +438,29 @@ input.form-control.sm, input.form-control.sm {
 /*====================================================================================================*/
 /*  -Z88- Tooltip (Redefinitions bootstrap)
 /*====================================================================================================*/
+.conteneur-tooltip {
+    position: relative;
+    bottom: 12px;
+    left: -4px;
+}
+
 .tooltip-toggle {
     width: 40px;
     height: 40px;
     min-height: 40px!important;
     min-width: 40px!important;
-    display: inline-flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
     border: 0;
     background-color: transparent;
-    position: absolute;
-    bottom: -2px;
+    position: relative;
 }
-
+.tooltip-toggle .conteneur-puce {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .tooltip-toggle .puce {
     width: 16px;
     height: 16px;
