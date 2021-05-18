@@ -342,7 +342,7 @@ input[type="text"].form-control {
     width: 528px;
 }
 
-input[type="number"].form-control {
+input[type="number"].form-control, input[type="date"].form-control {
     width: auto;
 }
 
@@ -393,9 +393,9 @@ input.form-control.sm, input.form-control.sm {
 }
 
 /* Largeur défaut type number */
-.inline .formulate-input[data-type=number], .formulate-input[data-type=number] input.form-control {
-    width: auto;
-}
+    .inline .formulate-input[data-type=number], .formulate-input[data-type=number] input.form-control, .formulate-input[data-type=date] input.form-control {
+        width: auto;
+    }
 
 .inline .formulate-input.xxl, .formulate-input.xxl input.form-control {
     width: 728px;

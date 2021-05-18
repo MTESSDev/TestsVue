@@ -614,6 +614,10 @@ form:
               type: text
               label:
                 fr: Nombre d'années réussies
+            - name: Req01-DateFinPrimaire
+              type: date
+              label:
+                fr: Date de fin des études
         - name: secondaireGen
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireGen')          
@@ -624,6 +628,10 @@ form:
               type: text
               label:
                 fr: Nombre d'années réussies
+            - name: Req01-DateFinSecGeneral
+              type: date
+              label:
+                fr: Date de fin des études
         - name: secondaireProf
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormProf')                    
@@ -634,6 +642,10 @@ form:
               type: text
               label:
                 fr: Nombre d'années réussies
+            - name: Req01-DateFinSecFormProf
+              type: date
+              label:
+                fr: Date de fin des études
         - name: secondaireMetier
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormMétier')                              
@@ -644,6 +656,10 @@ form:
               type: text
               label:
                 fr: Nombre d'années réussies
+            - name: Req01-DateFinSecMetier
+              type: date
+              label:
+                fr: Date de fin des études
         - name: collegial
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesCollegial')                                        
@@ -654,19 +670,25 @@ form:
               type: text
               label:
                 fr: Nombre d'années réussies
+            - name: Req01-DateFinCollegial
+              type: date
+              label:
+                fr: Date de fin des études
         - name: universitaire
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesUniversitaire')                                                  
           label:
-            fr: Universitaire
+            fr: Universitaire            
           components:
             - name: Req01-NbAnneesReussiesUniversitaire
               type: text
               label:
                 fr: Nombre d'années réussies
-
+            - name: Req01-DateFinUniversitaire
+              type: date
+              label:
+                fr: Date de fin des études
             
-    
     # Section 7 - Emplois
     - section:
         fr: Emplois
