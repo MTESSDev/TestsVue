@@ -37,6 +37,11 @@ body p {
     margin-bottom: 32px; /* On applique le même style que la classe form-group de BS */
 }
 
+
+.formulate-input.group .formulate-input:last-of-type {
+    margin-bottom: 0!important; /* pas de margin bottom sur dernier contrôle d'un groupe non répétable */
+}
+
 .form-control, .select2-container--bootstrap4 .select2-selection {
     border: 1px solid #858b93;
 }
@@ -253,6 +258,11 @@ body p {
 .formulate-input[data-type="group"] > .formulate-input-wrapper > label {
     margin-bottom: 16px;
 }
+
+.formulate-input.group > .formulate-input-wrapper > label {
+    display:none; /* Ne pas afficher le label d'un groupe non répétable */
+}
+
 
 /* Bouton d'ajout d'instance de groupe */
 .formulate-input-group-add-more {

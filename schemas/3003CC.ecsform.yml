@@ -609,8 +609,6 @@ form:
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesPrimaire')
           label:
             fr: Primaire
-          instanceLabel:
-            fr: Primaire
           components:
             - name: Req01-NbAnneesReussiesPrimaire
               type: text
@@ -619,7 +617,7 @@ form:
         - name: secondaireGen
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireGen')          
-          instanceLabel:
+          label:
             fr: Secondaire (général)
           components:
             - name: Req01-NbAnneesReussiesSecGeneral
@@ -629,7 +627,7 @@ form:
         - name: secondaireProf
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormProf')                    
-          instanceLabel:
+          label:
             fr: Secondaire (Formation professionnelle)
           components:
             - name: Req01-NbAnneesReussiesSecFormProf
@@ -639,7 +637,7 @@ form:
         - name: secondaireMetier
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormMétier')                              
-          instanceLabel:
+          label:
             fr: Secondaire (Formation à un métier semi-spécialisé)
           components:
             - name: Req01-NbAnneesReussiesSecMetier
@@ -649,7 +647,7 @@ form:
         - name: collegial
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesCollegial')                                        
-          instanceLabel:
+          label:
             fr: Collégial (Formation générale ou technique)
           components:
             - name: Req01-NbAnneesReussiesCollegial
@@ -659,7 +657,7 @@ form:
         - name: universitaire
           type: group
           v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesUniversitaire')                                                  
-          instanceLabel:
+          label:
             fr: Universitaire
           components:
             - name: Req01-NbAnneesReussiesUniversitaire
@@ -676,7 +674,7 @@ form:
       v-if: form['Req01-Travaille']          
       components:
         - name: emplois
-          type: group
+          type: repeatableGroup
           repeatable: true
           v-if: form['Req01-Travaille'] === 'true'          
           label:

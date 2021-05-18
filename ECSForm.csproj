@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\form\mtess-vueformulate.min.js" />
     <Content Remove="wwwroot\js\mtess-vueformulate.min.js" />
   </ItemGroup>
 
@@ -69,6 +70,10 @@
     <Content Include="schemas\default.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\form\mtess-vueformulate.min.js" />
   </ItemGroup>
 
   <ItemGroup>

@@ -596,7 +596,7 @@ var __vue_render__ = function () {
     }
   }, [_c('span', {
     staticClass: "libelle-instance"
-  }, [_vm._v(_vm._s(_vm.instanceLabel) + " ")]), _vm._v(" "), this.context.repeatable ? _c('span', {
+  }, [_vm._v(_vm._s(_vm.instanceLabel || this.context.label) + " ")]), _vm._v(" "), this.context.repeatable ? _c('span', {
     staticClass: "numero"
   }, [_vm._v(_vm._s(_vm.index + 1))]) : _vm._e()]), _vm._v(" "), _c('span', {
     staticClass: "icone-svg md chevron-haut-texte",

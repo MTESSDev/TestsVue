@@ -56,8 +56,24 @@ form:
           {{RecursiveComponents components}}
       </formulate-input>
     group: |
-      <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+      <formulate-input class="group" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
               {{# type}} type="{{.}}" {{/ type}}
+              {{# name}} name="{{.}}" {{/ name}}
+              {{# name}} key="{{.}}" {{/ name}}
+              {{GenerateClasses type .}}
+              {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
+              {{# label}} label="{{i18n .}}" {{/ label}}
+              {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
+              {{# help}} help="{{i18n .}}" {{/ help}}
+              {{GenerateValidations .}}
+              error-behavior="value"
+              #default="{ name, index }"
+              {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
+              {{RecursiveComponents components}}
+      </formulate-input>
+    repeatableGroup: |
+      <formulate-input class="repeatable-group" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+              {{# type}} type="group" {{/ type}}
               {{# name}} name="{{.}}" {{/ name}}
               {{# name}} key="{{.}}" {{/ name}}
               {{GenerateClasses type .}}
@@ -82,4 +98,4 @@ form:
               #default="{ name, index }"
               {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
               {{RecursiveComponents components}}
-      </formulate-input>
+      </formulate-input>      

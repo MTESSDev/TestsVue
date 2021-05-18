@@ -4,7 +4,7 @@
         <div class="card-title ">
             <a role="button" data-toggle="collapse" aria-expanded="true" v-bind:href="'#' + context.name +'-' + index" v-bind:aria-controls="context.name + '-' + index">
                 <span class="libelle" v-bind:id="'label' + context.name +'-' + index">
-                    <span class="libelle-instance">{{instanceLabel}}&nbsp;</span>
+                    <span class="libelle-instance">{{instanceLabel || this.context.label}}&nbsp;</span>
                     <span v-if="this.context.repeatable" class="numero">{{ index + 1 }}</span>
                 </span>
                 <span class="icone-svg md chevron-haut-texte" aria-hidden="true"></span>
