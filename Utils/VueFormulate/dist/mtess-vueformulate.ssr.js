@@ -189,10 +189,7 @@ var __vue_render__$3 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c('label', {
-    class: _vm.context.classes.label,
-    style: [_vm.tooltip ? {
-      'position': 'relative'
-    } : {}],
+    class: [_vm.context.classes.label, _vm.tooltip ? 'avec-tooltip' : ''],
     attrs: {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
@@ -209,7 +206,7 @@ var __vue_inject_styles__$3 = undefined;
 var __vue_scope_id__$3 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$3 = "data-v-39371b2f";
+var __vue_module_identifier__$3 = "data-v-3c61b721";
 /* functional template */
 
 var __vue_is_functional_template__$3 = false;

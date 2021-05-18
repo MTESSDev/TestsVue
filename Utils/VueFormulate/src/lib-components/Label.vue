@@ -1,5 +1,5 @@
 <template>
-    <label :id="`${context.id}_label`" :class="context.classes.label" :for="context.id" :style="[tooltip ? {'position': 'relative'} : {}]">
+    <label :id="`${context.id}_label`" :class="[context.classes.label, tooltip ? 'avec-tooltip' : '']" :for="context.id">
         <span>{{context.label}}</span>
         <span v-if="isRequired" class="sr-only">.&nbsp;Obligatoire.</span>
         <span v-if="context.help" class="sr-only"><span v-if="!isRequired">.</span>&nbsp;{{context.help}}</span>

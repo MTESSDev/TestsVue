@@ -140,10 +140,7 @@ var __vue_render__$3 = function () {
   var _c = _vm._self._c || _h;
 
   return _c('label', {
-    class: _vm.context.classes.label,
-    style: [_vm.tooltip ? {
-      'position': 'relative'
-    } : {}],
+    class: [_vm.context.classes.label, _vm.tooltip ? 'avec-tooltip' : ''],
     attrs: {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
