@@ -751,6 +751,53 @@ form:
               type: date
               label:
                 fr: Date de fin des études
+        - name: Req01-EtudesEtranger
+          type: radio
+          label: 
+            fr: Avez-vous fait vos études à l'étranger?
+          options: yesno
+        - name: Req01-SpecialiteEtudesEtranger
+          type: text
+          v-if: form['Req01-EtudesEtranger'] === 'true'                            
+          label:
+            fr: Spécialité
+        - name: Req01-NbAnneesReussiesEtudesEtranger
+          type: number
+          v-if: form['Req01-EtudesEtranger'] === 'true'              
+          label:
+            fr: Nombre d'années d'études réussies
+        - name: Req01-EtudesEvaluationComparative
+          type: radio
+          v-if: form['Req01-EtudesEtranger'] === 'true' 
+          label: 
+            fr: Avez-vous obtenu, du ministère de l'Immigration, de la Francisation et de l'Intégration, une évaluation comparative des études faites hors du Québec?
+          options: yesno
+        - name: Req01-EtudesEvaluationComparativeDomaine
+          type: text
+          v-if: form['Req01-EtudesEvaluationComparative'] === 'true'                            
+          label:
+            fr: Précisez le domaine de formation
+        - name: Req01-PossedeCartesQualification
+          type: radio
+          label: 
+            fr: Possédez-vous une ou plusieurs cartes de qualification?
+          options: yesno
+        - name: Req01-CartesQualification
+          type: text
+          v-if: form['Req01-PossedeCartesQualification'] === 'true'                            
+          label:
+            fr: Précisez les cartes de qualification
+        - name: Req01-EstMembreOrdreProfessionnel
+          type: radio
+          label: 
+            fr: Êtes-vous membre d'un ordre professionnel?
+          options: yesno
+        - name: Req01-OrdreProfessionnel
+          type: text
+          v-if: form['Req01-EstMembreOrdreProfessionnel'] === 'true'                            
+          label:
+            fr: Précisez l'ordre professionnel
+
             
     # Section 7 - Emplois
     - section:
