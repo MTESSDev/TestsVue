@@ -632,6 +632,13 @@ form:
               label:
                 fr: Nombre d'années réussies
               options: [1,2,3,4,5]
+            - name: Req01-DiplomeSecGeneral
+              type: select
+              label: 
+                fr: Diplôme obtenu
+              options: 
+                Aucun: Aucun
+                Des: Diplôme d'études secondaires (DES)
             - name: Req01-DateFinSecGeneral
               type: date
               label:
@@ -648,6 +655,19 @@ form:
               label:
                 fr: Nombre d'années réussies
               options: [3,4,5]
+            - name: Req01-DisciplineSecFormProf
+              type: text
+              label:
+                fr: Discipline/Programme de formation
+            - name: Req01-DiplomeSecFormProf
+              type: select
+              label: 
+                fr: Diplôme obtenu
+              options: 
+                Aucun: Aucun
+                Aep: AEP
+                Dep: DEP
+                Asp: ASP
             - name: Req01-DateFinSecFormProf
               type: date
               label:
@@ -664,6 +684,10 @@ form:
               label:
                 fr: Nombre d'années réussies
               options: [1]
+            - name: Req01-DisciplineSecMetier
+              type: text
+              label:
+                fr: Discipline/Programme de formation
             - name: Req01-DateFinSecMetier
               type: date
               label:
@@ -680,6 +704,19 @@ form:
               label:
                 fr: Nombre d'années réussies
               options: [1,2,3]
+            - name: Req01-DisciplineCollegial
+              type: text
+              label:
+                fr: Discipline/Programme de formation
+            - name: Req01-DiplomeCollegial
+              type: select
+              label: 
+                fr: Diplôme obtenu
+              options: 
+                Aucun: Aucun
+                Dec: Diplôme d'études collégiales (DEC)
+                Aec: Attestation d'études collégiales (AEC)
+                Cec: Certificat d'études collégiales (CEC)
             - name: Req01-DateFinCollegial
               type: date
               label:
@@ -696,6 +733,20 @@ form:
               label:
                 fr: Nombre d'années réussies
               options: [1,2,3,4,5,6,7]
+            - name: Req01-DisciplineUniversitaire
+              type: text
+              label:
+                fr: Discipline/Programme de formation
+            - name: Req01-DiplomeUniversitaire
+              type: select
+              label: 
+                fr: Diplôme obtenu
+              options: 
+                Aucun: Aucun
+                Cert: Certificat
+                Bac: Baccalauréat
+                Ma: Maîtrise
+                Doc: Doctorat
             - name: Req01-DateFinUniversitaire
               type: date
               label:
