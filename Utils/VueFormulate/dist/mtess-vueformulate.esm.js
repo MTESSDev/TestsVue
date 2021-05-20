@@ -15,8 +15,8 @@
 //
 //
 //
-//
-//
+//Note Importante! Il ne doit y avoir aucun espace entre le <label> et le <span> d'indicateur de champ obligatoire (seul moyen mettre sur m�me ligne comme c'est fait actuellement) Idem avec le span .conteneur-tooltip
+//aussi les &nbsp et &#xfeff;(espace ins�cable zero width) dans icone-champ-requis et conteneur-tooltip sont essentiels dans la strat�gie css permettant de ne pas afficher un * et/ou un tooltip seuls sur une ligne.
 var script$3 = {
   props: {
     context: {
@@ -145,7 +145,21 @@ var __vue_render__$3 = function () {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
     }
-  }, [_c('span', [_vm._v(_vm._s(_vm.context.label))]), _vm._v(" "), _vm.isRequired ? _c('span', {
+  }, [_c('span', [_vm._v(_vm._s(_vm.context.label))]), _vm.isRequired ? _c('span', {
+    staticClass: "icone-champ-requis",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v(" " + _vm._s(_vm.requiredFieldIndicator))]) : _vm._e(), _vm.tooltip ? _c('span', {
+    staticClass: "conteneur-tooltip"
+  }, [_vm._v("﻿\n    "), _c('button', {
+    staticClass: "tooltip-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "tooltip",
+      "title": _vm.tooltip
+    }
+  }, [_vm._m(0)])]) : _vm._e(), _vm._v(" "), _vm.isRequired ? _c('span', {
     staticClass: "sr-only"
   }, [_vm._v(". Obligatoire.")]) : _vm._e(), _vm._v(" "), _vm.context.help ? _c('span', {
     staticClass: "sr-only"
@@ -154,21 +168,7 @@ var __vue_render__$3 = function () {
     attrs: {
       "aria-live": "polite"
     }
-  }, [_vm._v(" " + _vm._s(_vm.messagesErreur))]) : _vm._e(), _vm._v(" "), _vm.isRequired ? _c('span', {
-    staticClass: "icone-champ-requis",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }, [_vm._v(_vm._s(_vm.requiredFieldIndicator))]) : _vm._e(), _vm._v(" "), _vm.tooltip ? _c('span', {
-    staticClass: "conteneur-tooltip"
-  }, [_c('button', {
-    staticClass: "tooltip-toggle",
-    attrs: {
-      "type": "button",
-      "data-toggle": "tooltip",
-      "title": _vm.tooltip
-    }
-  }, [_vm._m(0)])]) : _vm._e()]);
+  }, [_vm._v(" " + _vm._s(_vm.messagesErreur))]) : _vm._e()]);
 };
 
 var __vue_staticRenderFns__$3 = [function () {

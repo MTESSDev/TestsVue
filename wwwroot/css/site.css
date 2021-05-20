@@ -539,6 +539,7 @@ label.avec-tooltip .icone-champ-requis{
     position: relative;
     bottom: 8px;
     left: -4px;
+    white-space: nowrap;
 }
 
 button.tooltip-toggle {
