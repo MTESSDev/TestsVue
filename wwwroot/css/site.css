@@ -574,6 +574,7 @@ button.tooltip-toggle .icone-svg {
 }
 
 .tooltip {
+    font-size: 14px;
     border: 1px solid var(--couleur-filet-secondaire);
     box-shadow: 0px 3px 4px #22365429;
     padding: 0 0 16px 0;
@@ -645,8 +646,7 @@ button.tooltip-toggle .icone-svg {
     display:flex;
     justify-content: space-between;
     align-items: center;
-    /* TODO ici on a ajouté 2px bottom vs SCG car sinon si ascenceur le X est collé dessus */
-    padding: 8px 8px 2px 16px;
+    padding: 8px 8px 0 16px;
     line-height: 0;
 }
 
@@ -678,7 +678,7 @@ button.tooltip-toggle .icone-svg {
     border-radius: .3125rem;
     height: 50%;
     width: .625rem;
-    margin-top: 6px;
+    margin-top: 8px;
 }
 
 .tooltip .tooltip-inner::-webkit-scrollbar-button, .tooltip .tooltip-inner::-webkit-scrollbar-track-piece, .tooltip .tooltip-inner::-webkit-scrollbar-corner, .tooltip .tooltip-inner::-webkit-resizer {

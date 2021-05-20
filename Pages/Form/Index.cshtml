@@ -67,6 +67,10 @@
     <div v-cloak>
         <h1 tabindex="-1">{{pageCourante.titre}}</h1>
         <div id="form">
+            <div class="texte-explicatif-champs-obligatoires d-flex justify-content-end" aria-hidden="true">
+                <span class="icone-champ-requis" aria-hidden="true">&nbsp;*</span>
+                <span>indique une réponse obligatoire.</span>
+            </div>
             <template>
                 @Html.Raw(Model.FormRaw)
             </template>

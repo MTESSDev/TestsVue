@@ -27,23 +27,27 @@ form .validation-summary-errors {
     margin-bottom: 2rem;
 }
 
-    form .validation-summary-errors:focus {
-        outline-color: var(--couleur-erreur);
-    }
+.page-texte .validation-summary-errors h2 {
+    margin-top: 0;
+}
 
-    form .validation-summary-errors a {
-        color: var(--couleur-erreur);
-        text-decoration: underline;
-    }
+form .validation-summary-errors:focus {
+    outline-color: var(--couleur-erreur);
+}
 
-    form .validation-summary-errors a:hover, form .validation-summary-errors a:focus {
-        text-decoration: none;
-    }
+form .validation-summary-errors a {
+    color: var(--couleur-erreur);
+    text-decoration: underline;
+}
 
-    form .validation-summary-errors ul {
-        color: var(--couleur-erreur);
-        margin-top: 16px;
-    }
+form .validation-summary-errors a:hover, form .validation-summary-errors a:focus {
+    text-decoration: none;
+}
+
+form .validation-summary-errors ul {
+    color: var(--couleur-erreur);
+    margin-top: 16px;
+}
 
 /* Bordure des champs en erreur. Inclus les champs particuliers summernote (.note-editor)*/
 form .input-validation-error, form .input-validation-error + .note-editor {
@@ -53,6 +57,7 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 
 form .field-validation-error {
     display: inline-block;
+    margin-top: 8px;
 }
 
 /* Indicateurs champs obligatoires */
@@ -64,13 +69,14 @@ form .field-validation-error {
 
 .texte-explicatif-champs-obligatoires {
     margin-bottom: 32px;
+    font-size: 0.875rem;
 }
 
-    .texte-explicatif-champs-obligatoires > span {
-        margin-left: 4px;
-    }
+.texte-explicatif-champs-obligatoires > span {
+    margin-left: 4px;
+}
 
-.icone-champ-requis, .texte-explicatif-champs-obligatoires {
+.icone-champ-requis {
     color: var(--couleur-erreur);
 }
 
@@ -91,7 +97,6 @@ form .field-validation-error {
     left: 0;
     z-index: 99998;
 }
-
 
 /*====================================================================================================*/
 /*  -80- TABLES (c'est dupliqué de siteBase.css afin d'overrider ce qui pourrait être défini sans additionnel.js (qui contient datatables) sinon c'est le css de datatables qui s'applique sur certains éléments de base des tables.)
