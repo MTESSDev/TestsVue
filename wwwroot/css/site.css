@@ -95,23 +95,6 @@ body p {
 }
 
 
-.btn-enregistrer.mobile{
-    display:none;
-}
-
-@media (max-width: 410px) {
-    .btn-enregistrer{
-        display: none;
-    }
-
-    .btn-enregistrer.mobile {
-        display: block;
-        margin-bottom: 32px;
-    }
-}
-
-
-
 /*====================================================================================================*/
 /*  -Z04- Bandeaux
 /*====================================================================================================*/
@@ -409,6 +392,26 @@ select[data-placeholder-selected="true"] {
 }
 
 
+/*====================================================================================================*/
+/*  -Z20A- Forms (Boutons bas de page)  
+/*====================================================================================================*/
+.zone-boutons.bas-page button{
+    width: 120px;
+
+}
+
+@media (max-width: 466px) {
+    .zone-boutons.bas-page button {
+        width: 100%;
+        margin-bottom: 32px;
+        margin-right: 0;
+    }
+
+    .zone-boutons.bas-page button:last-of-type {
+        margin-bottom: 0;
+    }
+
+}
 
 
 /*====================================================================================================*/
