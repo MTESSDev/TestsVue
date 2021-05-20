@@ -195,7 +195,7 @@
     --couleur-liens: #095797;
     --couleur-loader: #1073E6;
     --couleur-bouton-primaire: #095797;
-    --couleur-bleu-pale: #DAE7F0;
+    --couleur-bleu-pale: #DAE6F0; /*TODO modifier dans ECS*/ 
     --couleur-orange: #cf4b00;
     --couleur-saumon: #F09686;
     --couleur-primaire-entete-soulignee: var(--couleur-saumon);

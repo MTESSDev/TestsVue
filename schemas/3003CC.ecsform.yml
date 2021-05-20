@@ -611,9 +611,11 @@ form:
             fr: Primaire
           components:
             - name: Req01-NbAnneesReussiesPrimaire
-              type: text
+              type: radio
+              outerClasses: boutons-nombres
               label:
                 fr: Nombre d'années réussies
+              options: [1,2,3,4,5,6,7]
             - name: Req01-DateFinPrimaire
               type: date
               label:
@@ -625,9 +627,11 @@ form:
             fr: Secondaire (général)
           components:
             - name: Req01-NbAnneesReussiesSecGeneral
-              type: text
+              type: radio
+              outerClasses: boutons-nombres
               label:
                 fr: Nombre d'années réussies
+              options: [1,2,3,4,5]
             - name: Req01-DateFinSecGeneral
               type: date
               label:
@@ -639,9 +643,11 @@ form:
             fr: Secondaire (Formation professionnelle)
           components:
             - name: Req01-NbAnneesReussiesSecFormProf
-              type: text
+              type: radio
+              outerClasses: boutons-nombres
               label:
                 fr: Nombre d'années réussies
+              options: [3,4,5]
             - name: Req01-DateFinSecFormProf
               type: date
               label:
@@ -653,9 +659,11 @@ form:
             fr: Secondaire (Formation à un métier semi-spécialisé)
           components:
             - name: Req01-NbAnneesReussiesSecMetier
-              type: text
+              type: radio
+              outerClasses: boutons-nombres
               label:
                 fr: Nombre d'années réussies
+              options: [1]
             - name: Req01-DateFinSecMetier
               type: date
               label:
@@ -667,9 +675,11 @@ form:
             fr: Collégial (Formation générale ou technique)
           components:
             - name: Req01-NbAnneesReussiesCollegial
-              type: text
+              type: radio
+              outerClasses: boutons-nombres
               label:
                 fr: Nombre d'années réussies
+              options: [1,2,3]
             - name: Req01-DateFinCollegial
               type: date
               label:
@@ -681,9 +691,11 @@ form:
             fr: Universitaire            
           components:
             - name: Req01-NbAnneesReussiesUniversitaire
-              type: text
+              type: radio
+              outerClasses: boutons-nombres
               label:
                 fr: Nombre d'années réussies
+              options: [1,2,3,4,5,6,7]
             - name: Req01-DateFinUniversitaire
               type: date
               label:

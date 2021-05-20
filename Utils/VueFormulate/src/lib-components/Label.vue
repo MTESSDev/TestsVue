@@ -5,8 +5,8 @@
         <span v-if="context.help" class="sr-only"><span v-if="!isRequired">.</span>&nbsp;{{context.help}}</span>
         <span v-if="hasValidationRules && messagesErreur" class="sr-only" aria-live="polite"> {{messagesErreur}}</span>
         <span v-if="isRequired" aria-hidden="true" class="icone-champ-requis">{{requiredFieldIndicator}}</span>
-        <span class="conteneur-tooltip">
-            <button v-if="tooltip" type="button" class="tooltip-toggle" data-toggle="tooltip" :title="tooltip">
+        <span v-if="tooltip" class="conteneur-tooltip">
+            <button type="button" class="tooltip-toggle" data-toggle="tooltip" :title="tooltip">
                 <span class="conteneur-puce">
                     <span class="puce" aria-hidden="true">
                         <span class="icone-svg question" aria-hidden="true"></span>
@@ -38,6 +38,8 @@
             this.hasValidationRules = this.context.rules.length > 0
             this.isRequired = this.context.rules.findIndex((element) => element.ruleName === 'required') >= 0
             this.requiredFieldIndicator = this.isRequired ? '*' : ''
+
+
 
             // Ne pas lire la précision au lecteur écran car nous l'avons ajoutée dans le label.
             if (this.context.help) {
