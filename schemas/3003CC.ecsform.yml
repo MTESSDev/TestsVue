@@ -79,15 +79,20 @@ form:
               type: text
               label: 
                 fr: Précisez le type de revenu
-            - name: DateEvenementReq
-              v-if: form.EvenementsDerniereAnnee && form.EvenementsDerniereAnnee.length
+            - name: ReqDateEvenementFinDiminutionRevenus
+              v-if: form['EvenementsDerniereAnnee'] && form['EvenementsDerniereAnnee'].length && form['EvenementsDerniereAnnee'].includes('ReqFinDiminutionRevenus')
               type: date
               label: 
-                fr: Date de l'évènement
+                fr: Date de la fin ou diminution de revenus
+            - name: ReqDateEvenementFinEtudesTempsPlein
+              v-if: form['EvenementsDerniereAnnee'] && form['EvenementsDerniereAnnee'].length && form['EvenementsDerniereAnnee'].includes('ReqFinEtudesTempsPlein')
+              type: date
+              label: 
+                fr: Date de la fin d'études à temps plein
             - name: PrecisionRaisonDemandeAfdr
               type: select
               label: 
-                fr: Précisez la raison de votre demande d'aide financière
+                fr: Indiquez la raison de votre demande d'aide financière de dernier recours
               options: 
                 AttenteDecision: Vous attendez la réponse à une autre demande (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
                 AucunRevenu: Vous n'avez aucun revenu
@@ -103,16 +108,16 @@ form:
               v-if: form.PrecisionRaisonDemandeAfdr === 'AttenteDecision'
               type: text
               label: 
-                fr: Précisez
+                fr: Précisez la raison de votre demande d'aide financière de dernier recours
             - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
               v-if: form.PrecisionRaisonDemandeAfdr === 'RevenuInsuffisant'
               type: radio
               label: 
                 fr: Type de revenu insuffisant
               options: 
-                RevenuInsuffisantRevenusEmploi: d'emploi
-                RevenuInsuffisantTravailAutonome: de travail autonome
-                RevenuInsuffisantPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
+                RevenuInsuffisantRevenusEmploi: Revenus d'emploi
+                RevenuInsuffisantTravailAutonome: Revenus de travail autonome
+                RevenuInsuffisantPrestations: Prestations gouvernementales (prestations d'assurance-emploi ou d'assurance parentale[RQAP], jugement, SAAQ, CNESST, etc.)
                 RevenuInsuffisantAutres: autre
             - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
               v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantPrestations'
@@ -168,7 +173,7 @@ form:
               v-if: form.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
               type: text
               label: 
-                fr: Précisez la raison autre
+                fr: Précisez la raison de votre demande d'aide à l'emploi
     # Section 2
     - section: 
         fr: Renseignements sur l'identite
@@ -277,7 +282,7 @@ form:
               v-if: form['Oui5'] === 'false'                        
               type: text
               label: 
-                fr: Autre situation, précisez
+                fr: Autre statut, précisez
             - type: bandeau-notification
               text: 
                 fr: Comme vous êtes né hors du Canada, vous devrez fournir les documents confirmant votre statut.
@@ -368,7 +373,7 @@ form:
           v-if: form['Req01-EnEmploi'] === 'true'
           type: checkbox
           label:
-            fr: Précisez le statut d'emploi que vous occupez
+            fr: Précisez le type d'emploi
           options: 
             TempsPlein: Temps plein
             TempsPartiel: Temps partiel
@@ -377,7 +382,7 @@ form:
         - name: AideGouvRecue_Req-00
           type: radio
           label: 
-            fr: Recevez-vous des prestations, des indemnités ou tout autre aide financière gouvernementale ?
+            fr: Recevez-vous une aide financière gouvernementale (prestations, indemnités, etc.)?
           options: yesno
         - name: TypeAideRecue
           type: checkbox
@@ -385,18 +390,14 @@ form:
             fr: Précisez le type d'aide que vous recevez
           v-if: form['AideGouvRecue_Req-00'] === 'true'
           options: 
-            AssuranceEmploi: Assurance-emploi
-            RQAP: Régime québécois d'assurance parentale
-            CNESST: CNESST
-            SAAQ: SAAQ
-            RevenuRetraite: Revenu de retraite
-            PretBourse: Prêts et bourses
-            AutresAide: Autres
+            AssuranceEmploi: Prestations d'assurance-emploi
+            RQAP: Prestations d'assurance parentale (RQAP)
+            AutresAide: Autre type d'aide (indemnités versées par la SAAQ ou la CNESST, rente de retraite, prêts et bourses pour études, etc.)
         - name: AideRecueAutrePrecision
           v-if: form['TypeAideRecue'] && form['TypeAideRecue'].includes('AutresAide')
           type: text
           label: 
-            fr: Précisez
+            fr: Précisez le type d'aide
         - name: EnfantsACharge_Req-00
           type: radio      
           label: 
@@ -415,84 +416,64 @@ form:
           label: 
             fr: Êtes-vous chef de famille monoparentale ?
           options: yesno
-        - name: PermisConduire_Req-00
+        - name: QuestionsFacultativesSituationActuelle_Req-00
           type: radio
           label: 
-            fr: Possédez-vous un permis de conduire ?
+            fr: Afin de nous permettre de mieux répondre à vos besoins en matière d'emploi et d'établir des statistiques, désirez-vous répondre à quelques questions supplémentaires?
           options: yesno
-        - name: ClassePermisConduire-Req-00
-          type: text
-          outerClasses: md
-          label: 
-            fr: Précisez la/les classe(s)
-          v-if: form['PermisConduire_Req-00'] === 'true'
-#          type: checkbox
-#          label: 
-#            fr: Précisez la/les classe(s)
-#          v-if: form['PermisConduire_Req-00'] && form['PermisConduire_Req-00'] === 'true'
-#          options: 
-#            C1: '1'
-#            C2: '2'
-#            C3: '3'
-#            C4A: 4A
-#            C4B: 4B
-#            C5: '5'
-#            C6A: 6A
-#            C6B: 6B
-#            C6C: 6C
-#            C6D: 6D
-#            C6E: 6E
-#            C8: '8'
-        #TODO: Ajouter un texte informationnel ici
-        - name: Handicap_Req-00
-          type: radio
-          label: 
-            fr: Avez-vous un handicap physique, intellectuel ou mental ?
-          options: yesno
-        - name: TypeHandicap_Req-00
-          v-if: form['Handicap_Req-00'] === 'true'
-          type: text
-          label: 
-            fr: Précisez le handicap
-        - name: LanguesParlees_Req-00
-          type: checkbox
-          label: 
-            fr: Langues parlées
-          options: 
-            Francais: Français
-            Anglais: Anglais
-            AutresLanguesParlees: Autres
-        - name: PrecisionLanguesParlees
-          v-if: form['LanguesParlees_Req-00'] && form['LanguesParlees_Req-00'].includes('AutresLanguesParlees')
-          type: text
-          label: 
-            fr: Précisez les autres langues parlées
-        - name: LanguesEcrites_Req-00
-          type: checkbox
-          label: 
-            fr: Langues écrites
-          options: 
-            Francais: Français
-            Anglais: Anglais
-            AutresLanguesEcrites: Autres
-        - name: PrecisionLanguesEcrites
-          v-if: form['LanguesEcrites_Req-00'] && form['LanguesEcrites_Req-00'].includes('AutresLanguesEcrites')
-          type: text
-          label: 
-            fr: Précisez les autres langues écrites
-        - name: CasierJudiciaire_Req-00
-          type: radio
-          label: 
-            fr: Avez-vous un casier judiciaire ?
-          options: yesno
-        - name: MinoriteVisible_Req-00
-        #Ajouter une infobulle ici
-          type: radio
-          label: 
-            fr: Vous considérez-vous comme un membre d'une monorité visible ?
-          help: 
-            fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
-          options: yesno
+        - type: dynamic
+          v-if: form['QuestionsFacultativesSituationActuelle_Req-00'] === 'true'
+          tag: div           
+          components:
+            - name: Handicap_Req-00
+              type: radio
+              label: 
+                fr: Avez-vous un handicap physique, intellectuel ou mental?
+              options: yesno
+            - name: TypeHandicap_Req-00
+              v-if: form['Handicap_Req-00'] === 'true'
+              type: text
+              label: 
+                fr: Précisez le handicap
+            - name: LanguesParlees_Req-00
+              type: checkbox
+              label: 
+                fr: Langues parlées
+              options: 
+                Francais: Français
+                Anglais: Anglais
+                AutresLanguesParlees: Autres
+            - name: PrecisionLanguesParlees
+              v-if: form['LanguesParlees_Req-00'] && form['LanguesParlees_Req-00'].includes('AutresLanguesParlees')
+              type: text
+              label: 
+                fr: Précisez les autres langues parlées
+            - name: LanguesEcrites_Req-00
+              type: checkbox
+              label: 
+                fr: Langues écrites
+              options: 
+                Francais: Français
+                Anglais: Anglais
+                AutresLanguesEcrites: Autres
+            - name: PrecisionLanguesEcrites
+              v-if: form['LanguesEcrites_Req-00'] && form['LanguesEcrites_Req-00'].includes('AutresLanguesEcrites')
+              type: text
+              label: 
+                fr: Précisez les autres langues écrites
+            - name: CasierJudiciaire_Req-00
+              type: radio
+              label: 
+                fr: Avez-vous un casier judiciaire ?
+              options: yesno
+            - name: MinoriteVisible_Req-00
+            #Ajouter une infobulle ici
+              type: radio
+              label: 
+                fr: Vous considérez-vous comme un membre d'une monorité visible ?
+              help: 
+                fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
+              options: yesno
     # Section 5 - Études en cours
     - section: 
         fr: Études en cours
@@ -517,7 +498,7 @@ form:
             - name: NiveauEtudes_Req-00
               type: select
               label: 
-                fr: Précisez votre niveau d'études
+                fr: Indiquez l'ordre d'enseignement
               options: 
                 SecondaireGeneral: Secondaire général
                 SecondairePro: Secondaire professionnel
@@ -526,40 +507,41 @@ form:
                 Universite2: Université 2e cycle
                 AutreNiveau: Autre
             - name: NiveauEtudeAutrePrecision
-              v-if: form['NiveauEtudes_Req-00'] && form['NiveauEtudes_Req-00'].includes('AutreNiveau')
+              v-if: form['NiveauEtudes_Req-00'] === 'AutreNiveau'
               type: text
               label: 
-                fr: Précisez le niveau d'études
+                fr: Précisez l'ordre d'enseignement
             - name: DomaineEtudes_Req-00
               type: text
+              v-if: form['NiveauEtudes_Req-00'] && form['NiveauEtudes_Req-00'] !== 'SecondaireGeneral'             
               label: 
-                fr: Précisez votre domaine d'études
-            #Une condition d'affichage est à définir pour les champs suivants
+                fr: Domaine d'études
             - name: NbrCoursSuivis_Req-00
               type: number
               outerClasses: sm              
               min: 1
               label: 
-                fr: Nombre de cours suivis
+                fr: Nombre de cours
             - name: NbrHeuresSemaine_Req-00
               type: number
               outerClasses: sm              
               min: 1
               label: 
-                fr: Nombre d'heures de cours par semaine
+                fr: Nombre d'heures par semaine
             - name: NbrCreditsUnites_Req-00
               type: number
+              v-if: form['NiveauEtudes_Req-00'] === 'Collegial' || form['NiveauEtudes_Req-00'] === 'Universite1' || form['NiveauEtudes_Req-00'] === 'Universite2'
               outerClasses: sm              
               min: 1
               label: 
                 fr: Nombre de crédits ou d'unités
             - name: NbrPeriodesSemaine_Req-00
               type: number
+              v-if: form['NiveauEtudes_Req-00'] === 'SecondaireGeneral' || form['NiveauEtudes_Req-00'] === 'SecondairePro'                           
               outerClasses: sm              
               min: 1
               label: 
                 fr: Nombre de périodes par semaine
-            #fin des champs qui doivent être gérés par une condition d'affichage à définir
         - type: dynamic
           v-if: form['Req-00-etudes'] === 'false'
           tag: div     
@@ -567,7 +549,7 @@ form:
             - name: Inscription_Req-00
               type: radio
               label:
-                fr: Êtes-vous inscrit à un programme d'études ?
+                fr: Êtes-vous inscrit à un établissement d'enseignement?
               options: 
                 yesno
             - name: DateInscription_Req-00
@@ -797,6 +779,34 @@ form:
           v-if: form['Req01-EstMembreOrdreProfessionnel'] === 'true'                            
           label:
             fr: Précisez l'ordre professionnel
+        - name: PermisConduire_Req-00
+          type: radio
+          label: 
+            fr: Possédez-vous un permis de conduire ?
+          options: yesno
+        - name: ClassePermisConduire-Req-00
+          type: text
+          outerClasses: md
+          label: 
+            fr: Précisez la/les classe(s)
+          v-if: form['PermisConduire_Req-00'] === 'true'
+#          type: checkbox
+#          label: 
+#            fr: Précisez la/les classe(s)
+#          v-if: form['PermisConduire_Req-00'] && form['PermisConduire_Req-00'] === 'true'
+#          options: 
+#            C1: '1'
+#            C2: '2'
+#            C3: '3'
+#            C4A: 4A
+#            C4B: 4B
+#            C5: '5'
+#            C6A: 6A
+#            C6B: 6B
+#            C6C: 6C
+#            C6D: 6D
+#            C6E: 6E
+#            C8: '8'
 
             
     # Section 7 - Emplois
