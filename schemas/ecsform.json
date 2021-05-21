@@ -134,7 +134,7 @@
                     "type": "string",
                     "default": "text",
                     "description": "Required. The type of input element. See the input library for a full range of options.",
-                    "enum": ["text", "button", "submit", "file", "image", "group", "radio", "checkbox", "select", "number", "slider", "textarea", "color", "date", "datetime-local", "email", "hidden", "month", "password", "search", "tel", "time", "url", "week"]
+                    "enum": ["text", "button", "submit", "file", "image", "group", "radio", "checkbox", "select", "number", "range", "textarea", "color", "date", "datetime-local", "email", "hidden", "month", "password", "search", "tel", "time", "url", "week"]
                 },
                 "limit":{
                     "type": ["number"]
