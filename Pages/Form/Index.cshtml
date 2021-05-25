@@ -264,7 +264,7 @@
                         //Fermer le tooltip lorsque qu'il n'a plus le focus ou que le focus n'est plus à l'intérieur
                         $tooltip.on('focusout', function () {
                             if ($tooltip[0].matches(':not(:focus-within)')){
-//                                $iconeTooltip.tooltip('hide')
+                                $iconeTooltip.tooltip('hide')
                             }
                         })
                     })
