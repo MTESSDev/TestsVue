@@ -8,6 +8,8 @@
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -Z20A- Forms (Champs textes largeurs)
 /* ---------------------------------------------------------------------------------------------------*/
+/*  -30- Navigation formulaire
+/* ---------------------------------------------------------------------------------------------------*/
 /*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
 /*====================================================================================================*/
 
@@ -23,740 +25,898 @@ body p {
 /*====================================================================================================*/
 /*  -Z01- Base contrôles
 /*====================================================================================================*/
-
-/* Reproduire tout ce qui est dans form-control */
-.formulate-input[data-classification=text] input, .formulate-input[data-classification=textarea] textarea,
-.formulate-input[data-classification=select] select {
-    border: 1px solid #858b93;
-}
-
-
-/* Reproduire tout ce qui est dans form-group */
-.formulate-input[data-classification=text], .formulate-input[data-classification=textarea],
-.formulate-input[data-classification=select], .formulate-input[data-classification=group] {
-    margin-bottom: 32px; /* On applique le même style que la classe form-group de BS */
-}
+    /* Reproduire tout ce qui est dans form-control */
+    .formulate-input[data-classification=text] input, .formulate-input[data-classification=textarea] textarea,
+    .formulate-input[data-classification=select] select {
+        border: 1px solid #858b93;
+    }
 
 
-.formulate-input.group .formulate-input:last-of-type {
-    margin-bottom: 0!important; /* pas de margin bottom sur dernier contrôle d'un groupe non répétable */
-}
+    /* Reproduire tout ce qui est dans form-group */
+    .formulate-input[data-classification=text], .formulate-input[data-classification=textarea],
+    .formulate-input[data-classification=select], .formulate-input[data-classification=group] {
+        margin-bottom: 32px; /* On applique le même style que la classe form-group de BS */
+    }
 
-.form-control, .select2-container--bootstrap4 .select2-selection {
-    border: 1px solid #858b93;
-}
 
+    .formulate-input.group .formulate-input:last-of-type {
+        margin-bottom: 0 !important; /* pas de margin bottom sur dernier contrôle d'un groupe non répétable */
+    }
+
+    .form-control, .select2-container--bootstrap4 .select2-selection {
+        border: 1px solid #858b93;
+    }
+
+    /*====================================================================================================*/
+    /*  -Z03- Boutons
 /*====================================================================================================*/
-/*  -Z03- Boutons
+    /* Boutons ECS */
+
+    /* Vient du .btn de bootstrap */
+    .formulate-input-group-add-more button {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: transparent;
+        border: 1px solid transparent;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        border-radius: 0; /*override*/
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+    }
+
+
+    .btn, .formulate-input-group-add-more button {
+        line-height: 1rem;
+    }
+
+        .btn.btn-primaire:not([disabled]):focus, .btn.btn-secondaire:not([disabled]):focus, .formulate-input-group-add-more button:not([disabled]):focus {
+            border: 3px solid var(--couleur-texte-base);
+        }
+
+        .btn.btn-secondaire, .formulate-input-group-add-more button {
+            background-color: #fff;
+            border: 2px solid var(--couleur-bouton-primaire);
+            color: var(--couleur-bouton-primaire);
+            font-family: 'OpenSans-Bold', sans-serif;
+            box-shadow: none;
+        }
+
+            .btn.btn-secondaire:hover, .btn.btn-secondaire:focus, .formulate-input-group-add-more button:hover, .formulate-input-group-add-more button:focus {
+                text-decoration: underline !important;
+            }
+
+            .btn-defaut:disabled:hover, .btn.btn-primaire:disabled:hover, .btn.btn-secondaire:disabled:hover, .formulate-input-group-add-more button:disabled:hover {
+                cursor: not-allowed;
+            }
+
+
+    /*====================================================================================================*/
+    /*  -Z04- Bandeaux
 /*====================================================================================================*/
-/* Boutons ECS */
+    .bandeau {
+        padding: 0.75rem 1.25rem;
+        background-color: var(--couleur-fond-gris);
+        margin-bottom: 32px;
+        border-top: 1px solid var(--couleur-filet-secondaire);
+        border-bottom: 1px solid var(--couleur-filet-secondaire);
+    }
 
-/* Vient du .btn de bootstrap */
-.formulate-input-group-add-more button {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    border-radius: 0; /*override*/
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
-}
+        .bandeau.notification {
+            border-left: 12px solid var(--couleur-secondaire-entete-soulignee);
+            border-top: 0;
+            border-bottom: 0;
+        }
 
-
-.btn, .formulate-input-group-add-more button {
-    line-height: 1rem;
-}
-
-.btn.btn-primaire:not([disabled]):focus, .btn.btn-secondaire:not([disabled]):focus, .formulate-input-group-add-more button:not([disabled]):focus {
-    border: 3px solid var(--couleur-texte-base);
-}
-
-.btn.btn-secondaire, .formulate-input-group-add-more button {
-    background-color: #fff;
-    border: 2px solid var(--couleur-bouton-primaire);
-    color: var(--couleur-bouton-primaire);
-    font-family: 'OpenSans-Bold', sans-serif;
-    box-shadow: none;
-}
-
-.btn.btn-secondaire:hover, .btn.btn-secondaire:focus, .formulate-input-group-add-more button:hover, .formulate-input-group-add-more button:focus {
-    text-decoration: underline !important;
-}
-
-.btn-defaut:disabled:hover, .btn.btn-primaire:disabled:hover, .btn.btn-secondaire:disabled:hover, .formulate-input-group-add-more button:disabled:hover {
-    cursor: not-allowed;
-}
-
-
-/*====================================================================================================*/
-/*  -Z04- Bandeaux
-/*====================================================================================================*/
-.bandeau {
-    padding: 0.75rem 1.25rem;
-    background-color: var(--couleur-fond-gris);
-    margin-bottom: 32px;
-    border-top: 1px solid var(--couleur-filet-secondaire);
-    border-bottom: 1px solid var(--couleur-filet-secondaire);
-}
-
-.bandeau.notification {
-    border-left: 12px solid var(--couleur-secondaire-entete-soulignee);
-    border-top: 0;
-    border-bottom: 0;
-}
-
-/*====================================================================================================*/
-/*  -Z10- Radio button et checkbox
+    /*====================================================================================================*/
+    /*  -Z10- Radio button et checkbox
 /*====================================================================================================*/
 
-/* --------------- Radios ET checkbox (Commun) --------------- */
+    /* --------------- Radios ET checkbox (Commun) --------------- */
 
-.formulate-input[data-classification=box] .formulate-input-wrapper {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
+    .formulate-input[data-classification=box] .formulate-input-wrapper {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
 
-.formulate-input[data-classification=box].formulate-input-group-item:first-of-type .formulate-input-wrapper {
-    margin-top: 16px;
-}
+    .formulate-input[data-classification=box].formulate-input-group-item:first-of-type .formulate-input-wrapper {
+        margin-top: 16px;
+    }
 
-.formulate-input[data-classification=box] .formulate-input-element-decorator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    position: relative;
-}
+    .formulate-input[data-classification=box] .formulate-input-element-decorator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        position: relative;
+    }
 
-.formulate-input[data-classification=box] .formulate-input-element input:focus ~ .formulate-input-element-decorator {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios */
-    background-color: #89bce5;
-}
-
-
-.formulate-input[data-classification=box] .formulate-input-element-decorator:before {
-    content: "";
-    display: block;
-    position: absolute;
-}
-
-.formulate-input[data-classification=box] .formulate-input-element-decorator:after {
-    content: "";
-    width: 16px;
-    height: 16px;
-    border: 1px solid #808a9d;
-    background-color: #fff;
-}
+    .formulate-input[data-classification=box] .formulate-input-element input:focus ~ .formulate-input-element-decorator {
+        /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios */
+        background-color: #89bce5;
+    }
 
 
-/* Radio et checkbox disabled */
-.formulate-input[data-classification=box] .formulate-input-element input:disabled ~ .formulate-input-element-decorator:after {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios...  */
-    border: 1px solid #bfc4ce;
-}
+    .formulate-input[data-classification=box] .formulate-input-element-decorator:before {
+        content: "";
+        display: block;
+        position: absolute;
+    }
 
-/* Focus checkbox et radios */
-.formulate-input[data-classification=box] .formulate-input-element input:focus ~ .formulate-input-element-decorator:after {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
-    border: 2px solid #5b6476;
-}
-
-/* Le vrai input est hors écran (radios et checkbox) */
-.formulate-input[data-classification=box] .formulate-input-element input {
-    position: absolute;
-    left: -999px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Labels radios et checkbox */
-.formulate-input[data-classification=box] label {
-    margin-bottom: 0;
-}
-.formulate-input[data-classification=box] label.formulate-input-label {
-    line-height: 1;
-    margin-left: 8px;
-    font-family: 'OpenSans-Regular';
-    width: 100%; /*Important sinon texte écrase parfois les contrôles si texte trop long */
-}
+    .formulate-input[data-classification=box] .formulate-input-element-decorator:after {
+        content: "";
+        width: 16px;
+        height: 16px;
+        border: 1px solid #808a9d;
+        background-color: #fff;
+    }
 
 
-/* --------------- Radio buttons --------------- */
+    /* Radio et checkbox disabled */
+    .formulate-input[data-classification=box] .formulate-input-element input:disabled ~ .formulate-input-element-decorator:after {
+        /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios...  */
+        border: 1px solid #bfc4ce;
+    }
 
-.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator {
-    border-radius: 1em;
-}
+    /* Focus checkbox et radios */
+    .formulate-input[data-classification=box] .formulate-input-element input:focus ~ .formulate-input-element-decorator:after {
+        /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
+        border: 2px solid #5b6476;
+    }
 
+    /* Le vrai input est hors écran (radios et checkbox) */
+    .formulate-input[data-classification=box] .formulate-input-element input {
+        position: absolute;
+        left: -999px;
+        opacity: 0;
+        pointer-events: none;
+    }
 
-.formulate-input[data-classification=box] .formulate-input-element input[type=radio]:checked ~ .formulate-input-element-decorator:before {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='-4.5 -4.5 8 8'%3e%3ccircle r='3' fill='%231479cc'/%3e%3c/svg%3e");
-}
+    /* Labels radios et checkbox */
+    .formulate-input[data-classification=box] label {
+        margin-bottom: 0;
+    }
 
-.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:before {
-    width: 1rem;
-    height: 1rem;
-    background-repeat: no-repeat;
-}
-
-.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:after {
-    border-radius: 1em;
-}
-
-/* Checkbox */
-.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox] ~ .formulate-input-element-decorator {
-    border-radius: 0;
-}
-
-.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox] ~ .formulate-input-element-decorator:before {
-    /* TODO obtenir la vraie image de crochet ici afin de respecter parfaitement les normes du SCG... Ça prend un oeil de lynx pour le voir cela dit...*/
-    height: 12px;
-    width: 12px;
-}
-
-.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox]:checked ~ .formulate-input-element-decorator:after {
-    background-color: #1479cc;
-}
+        .formulate-input[data-classification=box] label.formulate-input-label {
+            line-height: 1;
+            margin-left: 8px;
+            font-family: 'OpenSans-Regular';
+            width: 100%; /*Important sinon texte écrase parfois les contrôles si texte trop long */
+        }
 
 
-.formulate-input[data-classification=box] .formulate-input-element input[type=checkbox]:checked ~ .formulate-input-element-decorator:before {
-    background-color: #fff;
-    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>');
-    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>')
-}
+    /* --------------- Radio buttons --------------- */
+
+    .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator {
+        border-radius: 1em;
+    }
+
+
+    .formulate-input[data-classification=box] .formulate-input-element input[type=radio]:checked ~ .formulate-input-element-decorator:before {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='-4.5 -4.5 8 8'%3e%3ccircle r='3' fill='%231479cc'/%3e%3c/svg%3e");
+    }
+
+    .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:before {
+        width: 1rem;
+        height: 1rem;
+        background-repeat: no-repeat;
+    }
+
+    .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:after {
+        border-radius: 1em;
+    }
+
+    /* Checkbox */
+    .formulate-input[data-classification=box] .formulate-input-element input[type=checkbox] ~ .formulate-input-element-decorator {
+        border-radius: 0;
+    }
+
+        .formulate-input[data-classification=box] .formulate-input-element input[type=checkbox] ~ .formulate-input-element-decorator:before {
+            /* TODO obtenir la vraie image de crochet ici afin de respecter parfaitement les normes du SCG... Ça prend un oeil de lynx pour le voir cela dit...*/
+            height: 12px;
+            width: 12px;
+        }
+
+    .formulate-input[data-classification=box] .formulate-input-element input[type=checkbox]:checked ~ .formulate-input-element-decorator:after {
+        background-color: #1479cc;
+    }
+
+
+    .formulate-input[data-classification=box] .formulate-input-element input[type=checkbox]:checked ~ .formulate-input-element-decorator:before {
+        background-color: #fff;
+        -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>');
+        mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M8.76,56.2c-6.38-6.34,3.26-16,9.64-9.69L38,65.88,80.56,23.29c6.38-6.38,16.07,3.32,9.69,9.69L42.84,80.37a6.83,6.83,0,0,1-9.65,0Z"/></svg>')
+    }
 
 
 
-/* ==== Personnalisations pour les groupes ==== */
+    /* ==== Personnalisations pour les groupes ==== */
 
-/* Label de groupe */
-.formulate-input[data-type="group"] > .formulate-input-wrapper > label {
-    margin-bottom: 16px;
-}
+    /* Label de groupe */
+    .formulate-input[data-type="group"] > .formulate-input-wrapper > label {
+        margin-bottom: 16px;
+    }
 
-.formulate-input.group > .formulate-input-wrapper > label {
-    display:none; /* Ne pas afficher le label d'un groupe non répétable */
-}
-
-
-/* Bouton d'ajout d'instance de groupe */
-.formulate-input-group-add-more {
-    text-align: end;
-}
+    .formulate-input.group > .formulate-input-wrapper > label {
+        display: none; /* Ne pas afficher le label d'un groupe non répétable */
+    }
 
 
+    /* Bouton d'ajout d'instance de groupe */
+    .formulate-input-group-add-more {
+        text-align: end;
+    }
+
+
+    /*====================================================================================================*/
+    /*  -Z10A- Radio button affichés sous forme de boutons (nombres) inline
 /*====================================================================================================*/
-/*  -Z10A- Radio button affichés sous forme de boutons (nombres) inline
-/*====================================================================================================*/
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio] >
-.formulate-input-wrapper > .formulate-input-element {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box] .formulate-input-wrapper{
-    margin-top: 16px;
-    margin-right: 16px;
-    position: relative;
-}
-
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator {
-    width: 40px;
-    height: 40px;
-    border-radius: 0;
-    border: 1px solid #858b93;
-    cursor: pointer;
-}
-
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box][data-type=radio] .formulate-input-label--after {
-    cursor: pointer;
-}
-
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:before,
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:after {
-    content: none;
-}
-
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio] 
-.formulate-input[data-classification=box] label.formulate-input-label {
-    text-align: center;
-    margin-left: 0;
-    position: absolute;
-}
-
-
-/* Disabled */
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box] .formulate-input-element input[type=radio]:disabled {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios...  */
-    border: 1px solid #bfc4ce;
-}
-
-/* Focus */
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box] .formulate-input-element input[type=radio]:focus ~ .formulate-input-element-decorator {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
-    border: 2px solid #5b6476;
-    outline: 3px solid #89bce5;
-}
-
-/* Hover */
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box] .formulate-input-wrapper:hover {
-    /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
-    background-color: var(--couleur-hover)!important;
-}
-
-
-/* Active */
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box] .formulate-input-element input[type=radio]:checked ~ .formulate-input-element-decorator {
-    background-color: #1479cc;
-}
-
-.formulate-input.boutons-nombres[data-classification=group][data-type=radio]
-.formulate-input[data-classification=box][data-type=radio][data-has-value=true] .formulate-input-label--after {
-    color: #fff;
-}
-
-/*====================================================================================================*/
-/*  -Z11- Instances de groupes
-/*====================================================================================================*/
-.instance-groupe {
-    margin-bottom: 32px;
-}
-
-.card.instance-groupe .card-title{
-    padding: 0;
-}
-
-.card.instance-groupe .card-title a {
-    padding: 12px 16px;
-}
-
-.icone-svg.chevron-haut path{
-    fill:var(--couleur-texte-base);
-}
-/*====================================================================================================*/
-/*  -Z20- Forms  
-/*====================================================================================================*/
-.zone-boutons button, .zone-boutons input[type="submit"] {
-    margin-right: 32px;
-}
-
-.zone-boutons button:last-child, .zone-boutons input[type="submit"]:last-child {
-    margin-right: 0;
-}
-
-select[data-placeholder-selected="true"] {
-    color: #a8a8a8;
-}
-
-/* Bordure des champs en erreur. TODO déterminer si on inclus dans css base ECS ou pas.*/
-.formulate-input:not([data-classification=group])[data-is-showing-errors="true"] .form-control {
-    border-color: var(--couleur-erreur);
-    border-width: 2px;
-}
-
-/* Contrôles sur une même ligne (inline) */
-@media (min-width: 576px) {
-    .inline {
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio] >
+    .formulate-input-wrapper > .formulate-input-element {
         display: flex;
         flex-wrap: wrap;
     }
 
-    .inline.no-wrap {
-        flex-wrap: nowrap;
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] .formulate-input-wrapper {
+        margin-top: 16px;
+        margin-right: 16px;
+        position: relative;
     }
 
-    .inline > * {
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator {
+        width: 40px;
+        height: 40px;
+        border-radius: 0;
+        border: 1px solid #858b93;
+        cursor: pointer;
+    }
+
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box][data-type=radio] .formulate-input-label--after {
+        cursor: pointer;
+    }
+
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:before,
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:after {
+        content: none;
+    }
+
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] label.formulate-input-label {
+        text-align: center;
+        margin-left: 0;
+        position: absolute;
+    }
+
+
+    /* Disabled */
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] .formulate-input-element input[type=radio]:disabled {
+        /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios...  */
+        border: 1px solid #bfc4ce;
+    }
+
+    /* Focus */
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] .formulate-input-element input[type=radio]:focus ~ .formulate-input-element-decorator {
+        /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
+        border: 2px solid #5b6476;
+        outline: 3px solid #89bce5;
+    }
+
+    /* Hover */
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] .formulate-input-wrapper:hover {
+        /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
+        background-color: var(--couleur-hover) !important;
+    }
+
+
+    /* Active */
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box] .formulate-input-element input[type=radio]:checked ~ .formulate-input-element-decorator {
+        background-color: #1479cc;
+    }
+
+    .formulate-input.boutons-nombres[data-classification=group][data-type=radio]
+    .formulate-input[data-classification=box][data-type=radio][data-has-value=true] .formulate-input-label--after {
+        color: #fff;
+    }
+
+    /*====================================================================================================*/
+    /*  -Z11- Instances de groupes
+/*====================================================================================================*/
+    .instance-groupe {
+        margin-bottom: 32px;
+    }
+
+    .card.instance-groupe .card-title {
+        padding: 0;
+    }
+
+        .card.instance-groupe .card-title a {
+            padding: 12px 16px;
+        }
+
+    .icone-svg.chevron-haut path {
+        fill: var(--couleur-texte-base);
+    }
+    /*====================================================================================================*/
+    /*  -Z20- Forms  
+/*====================================================================================================*/
+    .zone-boutons button, .zone-boutons input[type="submit"] {
         margin-right: 32px;
     }
 
-    .inline > *:last-child {
-        margin-right: 0;
+        .zone-boutons button:last-child, .zone-boutons input[type="submit"]:last-child {
+            margin-right: 0;
+        }
+
+    select[data-placeholder-selected="true"] {
+        color: #a8a8a8;
     }
-}
+
+    /* Bordure des champs en erreur. TODO déterminer si on inclus dans css base ECS ou pas.*/
+    .formulate-input:not([data-classification=group])[data-is-showing-errors="true"] .form-control {
+        border-color: var(--couleur-erreur);
+        border-width: 2px;
+    }
+
+    /* Contrôles sur une même ligne (inline) */
+    @media (min-width: 576px) {
+        .inline {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+            .inline.no-wrap {
+                flex-wrap: nowrap;
+            }
+
+            .inline > * {
+                margin-right: 32px;
+            }
+
+                .inline > *:last-child {
+                    margin-right: 0;
+                }
+    }
 
 
+    /*====================================================================================================*/
+    /*  -Z20A- Forms (Boutons bas de page)  
 /*====================================================================================================*/
-/*  -Z20A- Forms (Boutons bas de page)  
-/*====================================================================================================*/
-.zone-boutons.bas-page button{
-    width: 120px;
-
-}
-
-@media (max-width: 466px) {
     .zone-boutons.bas-page button {
-        width: 100%;
-        margin-bottom: 32px;
-        margin-right: 0;
+        width: 120px;
     }
 
-    .zone-boutons.bas-page button:last-of-type {
-        margin-bottom: 0;
+    @media (max-width: 466px) {
+        .zone-boutons.bas-page button {
+            width: 100%;
+            margin-bottom: 32px;
+            margin-right: 0;
+        }
+
+            .zone-boutons.bas-page button:last-of-type {
+                margin-bottom: 0;
+            }
     }
 
-}
 
-
+    /*====================================================================================================*/
+    /*  -Z20A- Forms (Champs textes largeurs)  
 /*====================================================================================================*/
-/*  -Z20A- Forms (Champs textes largeurs)  
-/*====================================================================================================*/
-/*TODO les types ont été retirés aussi dans ECS [type="text"], on se fou du type en fait... on doit le retirer dans ECS, sauf pour largeur par défaut. */
-/* On applique une largeur xl à tous les contrôles de type texte par défaut */
-input[type="text"].form-control {
-    width: 528px;
-}
-
-input[type="number"].form-control, input[type="date"].form-control {
-    width: auto;
-}
-
-/*Le xxl n'existe pas dans les règles du SCG, c'est ajouté */
-input.form-control.xxl {
-    width: 728px;
-}
-
-input.form-control.xl {
-    width: 528px;
-}
-
-
-input.form-control.lg {
-    width: 249px;
-}
-
-input.form-control.md, input.form-control.md {
-    width: 156px;
-}
-
-input.form-control.sm, input.form-control.sm {
-    width: 63px;
-}
-
-
-@media (max-width: 560px) {
-
-    input[type="text"].form-control, input.form-control.xl {
-        width: 100%;
+    /*TODO les types ont été retirés aussi dans ECS [type="text"], on se fou du type en fait... on doit le retirer dans ECS, sauf pour largeur par défaut. */
+    /* On applique une largeur xl à tous les contrôles de type texte par défaut */
+    input[type="text"].form-control {
+        width: 528px;
     }
-}
 
-@media (max-width: 760px) {
-
-    input.form-control.xxl {
-        width: 100%;
-    }
-}
-
-
-
-/* Spécifique pour vue formulate */
-
-/* Largeur par défaut pour contrôles vue formulate */
-.inline .formulate-input, .formulate-input input.form-control {
-    width: 528px;
-}
-
-/* Largeur défaut type number */
-    .inline .formulate-input[data-type=number], .formulate-input[data-type=number] input.form-control, .formulate-input[data-type=date] input.form-control {
+    input[type="number"].form-control, input[type="date"].form-control {
         width: auto;
     }
 
-.inline .formulate-input.xxl, .formulate-input.xxl input.form-control {
-    width: 728px;
-}
-
-.inline .formulate-input.xl, .formulate-input.xl input.form-control {
-    width: 528px;
-}
-
-.inline .formulate-input.lg, .formulate-input.lg input.form-control {
-    width: 249px;
-}
-
-.inline .formulate-input.md, .formulate-input.md input.form-control {
-    width: 156px;
-}
-
-.inline .formulate-input.sm, .formulate-input.sm input.form-control {
-    width: 63px;
-}
-
-
-.formulate-input.w-100 input.form-control {
-    width: 100% !important;
-}
-
-/* Limiter la largeur max des champs dates si affichés en inline afin d'éviter que les messages d'erreurs provoquent un affichage sur 2 lignes des contrôles */
-.inline .formulate-input[data-type="date"] {
-    max-width: 203px;
-}
-
-@media (max-width: 575px) {
-
-    .inline .formulate-input  {
-        width: 100%!important;
+    /*Le xxl n'existe pas dans les règles du SCG, c'est ajouté */
+    input.form-control.xxl {
+        width: 728px;
     }
-}
 
-@media (max-width: 560px) {
-
-    .inline .formulate-input, .inline .formulate-input.xl, .formulate-input input.form-control, .formulate-input.xl input.form-control {
-        width: 100%;
+    input.form-control.xl {
+        width: 528px;
     }
-}
 
-@media (max-width: 760px) {
 
-    .inline .formulate-input.xxl, .formulate-input.xxl input.form-control {
-        width: 100%;
+    input.form-control.lg {
+        width: 249px;
     }
-}
+
+    input.form-control.md, input.form-control.md {
+        width: 156px;
+    }
+
+    input.form-control.sm, input.form-control.sm {
+        width: 63px;
+    }
 
 
+    @media (max-width: 560px) {
+
+        input[type="text"].form-control, input.form-control.xl {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 760px) {
+
+        input.form-control.xxl {
+            width: 100%;
+        }
+    }
+
+
+
+    /* Spécifique pour vue formulate */
+
+    /* Largeur par défaut pour contrôles vue formulate */
+    .inline .formulate-input, .formulate-input input.form-control {
+        width: 528px;
+    }
+
+        /* Largeur défaut type number */
+        .inline .formulate-input[data-type=number], .formulate-input[data-type=number] input.form-control, .formulate-input[data-type=date] input.form-control {
+            width: auto;
+        }
+
+        .inline .formulate-input.xxl, .formulate-input.xxl input.form-control {
+            width: 728px;
+        }
+
+        .inline .formulate-input.xl, .formulate-input.xl input.form-control {
+            width: 528px;
+        }
+
+        .inline .formulate-input.lg, .formulate-input.lg input.form-control {
+            width: 249px;
+        }
+
+        .inline .formulate-input.md, .formulate-input.md input.form-control {
+            width: 156px;
+        }
+
+        .inline .formulate-input.sm, .formulate-input.sm input.form-control {
+            width: 63px;
+        }
+
+
+    .formulate-input.w-100 input.form-control {
+        width: 100% !important;
+    }
+
+    /* Limiter la largeur max des champs dates si affichés en inline afin d'éviter que les messages d'erreurs provoquent un affichage sur 2 lignes des contrôles */
+    .inline .formulate-input[data-type="date"] {
+        max-width: 203px;
+    }
+
+    @media (max-width: 575px) {
+
+        .inline .formulate-input {
+            width: 100% !important;
+        }
+    }
+
+    @media (max-width: 560px) {
+
+        .inline .formulate-input, .inline .formulate-input.xl, .formulate-input input.form-control, .formulate-input.xl input.form-control {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 760px) {
+
+        .inline .formulate-input.xxl, .formulate-input.xxl input.form-control {
+            width: 100%;
+        }
+    }
+
+
+    /*====================================================================================================*/
+    /*  -30- Navigation formulaire
 /*====================================================================================================*/
-/*  -Z88- Tooltip (Redefinitions bootstrap)
+
+        nav.etapes-form {
+            line-height: 1;
+        }
+
+        nav.etapes-form.navbar {
+            padding: 0;
+        }
+
+        nav.etapes-form .navbar-toggler {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 12px 16px;
+            background-color: var(--couleur-fond-gris);
+            border-radius: 0;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        nav.etapes-form .navbar-toggler .icone-svg {
+            background-image: url(../images/sprite.svg#ico-moins);
+        }
+
+        nav.etapes-form .navbar-toggler.collapsed .icone-svg {
+            background-image: url(../images/sprite.svg#ico-plus);
+        }
+
+
+
+    nav.etapes-form ul {
+        padding: 0;
+        list-style-type: none;
+    }
+
+        @media (max-width: 991px) {
+            nav.etapes-form {
+                border-top: 1px solid var(--couleur-filet-secondaire);
+                border-bottom: 1px solid var(--couleur-filet-secondaire);
+            }
+
+            nav.etapes-form ul {
+                padding: 0 0 0 16px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            nav.etapes-form.navbar-expand-lg .navbar-toggler {
+                display: none;
+            }
+        }
+
+        
+        nav.etapes-form li.active a {
+            font-weight: 700;
+        }
+
+
+        /*Menu*/
+        nav.etapes-form ul li {
+            padding: 16px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+            border-left: 1px solid var(--couleur-piv);
+        }
+
+            /* Petite twist qui nous permet d'inverser la puce et le texte afin de pouvoir utiliser le selector de sibling et modifier couleur de fond de la puce sur hover/focus du lien */
+            nav.etapes-form ul li *:last-child {
+                order: -1;
+            }
+
+
+            nav.etapes-form ul li .puce {
+                height: 20px;
+                width: 20px;
+                min-width: 20px;
+                display: block;
+                border-radius: 50%;
+                background-color: #fff;
+                border: 3px solid #1479CC;
+                margin-left: -11px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            nav.etapes-form ul li:not(.active) .texte:hover + .puce {
+                background-color: var(--couleur-bleu-pale);
+                border-color: #1479CC;
+            }
+
+            nav.etapes-form ul li.contient-erreur .texte:hover + .puce, nav.etapes-form ul li.sans-erreur .texte:hover + .puce {
+                background-color: #1479CC;
+                border-color: #1479CC;
+            }
+
+
+            nav.etapes-form ul li.contient-erreur .puce {
+                background-color: var(--couleur-erreur);
+                border-color: var(--couleur-erreur);
+            }
+
+                nav.etapes-form ul li.contient-erreur .puce .icone-svg {
+                    background-image: url(../images/sprite.svg#ico-exclamation-blanc);
+                }
+
+            nav.etapes-form ul li.sans-erreur .puce {
+                background-color: var(--couleur-piv);
+                border-color: var(--couleur-piv);
+            }
+
+                nav.etapes-form ul li.sans-erreur .puce .icone-svg {
+                    background-image: url(../images/sprite.svg#ico-check-blanc);
+                }
+
+            nav.etapes-form ul li.active .puce {
+                background-color: #1479CC !important;
+                border-color: var(--couleur-piv) !important;
+                background-image: none !important;
+            }
+
+                nav.etapes-form ul li.active .puce .icone-svg {
+                    background-image: none;
+                }
+
+            nav.etapes-form ul li:first-child .puce:before {
+                position: absolute;
+                width: 20px;
+                height: calc(50% - 10px);
+                background-color: #fff;
+                top: 0;
+                content: '';
+            }
+
+            nav.etapes-form ul li .texte {
+                margin-left: 8px;
+            }
+
+            nav.etapes-form ul li:last-child {
+                padding-bottom: 0
+            }
+
+
+    /*====================================================================================================*/
+    /*  -Z88- Tooltip (Redefinitions bootstrap)
 /*====================================================================================================*/
-label.avec-tooltip .icone-champ-requis{
-    position: relative;
-    top: 10px;
-}
+    label.avec-tooltip .icone-champ-requis {
+        position: relative;
+        top: 10px;
+    }
 
-.conteneur-tooltip {
-    position: relative;
-    bottom: 8px;
-    left: -4px;
-    white-space: nowrap;
-}
+    .conteneur-tooltip {
+        position: relative;
+        bottom: 8px;
+        left: -4px;
+        white-space: nowrap;
+    }
 
-button.tooltip-toggle {
-    width: 40px;
-    height: 40px;
-    min-height: 40px!important;
-    min-width: 40px!important;
-    display: inline-block;
-    border: 0;
-    background-color: transparent;
-    position: relative;
-    padding: 0 12px;
-}
-button.tooltip-toggle .conteneur-puce {
-    display: block;
-    width:16px;
-}
-button.tooltip-toggle .puce {
-    width: 16px;
-    height: 16px;
-    border-radius: 100%;
-    background-color: var(--couleur-piv);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    button.tooltip-toggle {
+        width: 40px;
+        height: 40px;
+        min-height: 40px !important;
+        min-width: 40px !important;
+        display: inline-block;
+        border: 0;
+        background-color: transparent;
+        position: relative;
+        padding: 0 12px;
+    }
 
-button.tooltip-toggle .icone-svg {
-    width: 10px;
-    height: 10px;
-    min-width: 10px;
-}
+        button.tooltip-toggle .conteneur-puce {
+            display: block;
+            width: 16px;
+        }
 
-.tooltip {
-    font-size: 14px;
-    border: 1px solid var(--couleur-filet-secondaire);
-    box-shadow: 0px 3px 4px #22365429;
-    padding: 0 0 16px 0;
-    background-color: #fff;
-    left: -2px !important;
-}
+        button.tooltip-toggle .puce {
+            width: 16px;
+            height: 16px;
+            border-radius: 100%;
+            background-color: var(--couleur-piv);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.tooltip.show {
-    opacity: 1;
-}
+        button.tooltip-toggle .icone-svg {
+            width: 10px;
+            height: 10px;
+            min-width: 10px;
+        }
 
-.tooltip .arrow {
-    height: 0.5rem;
-}
-.tooltip-inner {
-    width: 320px;
-    max-width: 320px;
-    max-height: 118px;
-    overflow-y: auto;
-    padding: 0 24px 0 16px;
-    background-color: #fff;
-    color: inherit;
-    border-radius: 0;
-    text-align: left;
-}
+    .tooltip {
+        font-size: 14px;
+        border: 1px solid var(--couleur-filet-secondaire);
+        box-shadow: 0px 3px 4px #22365429;
+        padding: 0 0 16px 0;
+        background-color: #fff;
+        left: -2px !important;
+    }
 
-.bs-tooltip-auto[x-placement^=bottom] .arrow::before,
-.bs-tooltip-bottom .arrow::before {
-    bottom: 9px;
-    border-bottom-color: var(--couleur-filet-secondaire);
-    border-width: 0 .5rem .5rem;
-}
+        .tooltip.show {
+            opacity: 1;
+        }
 
-.bs-tooltip-bottom .arrow::after {
-    content: "";
-    position: absolute;
-    bottom: 10.5px;
-    border-width: 0 .5rem .5rem;
-    transform: translateY(3px);
-    border-color: transparent;
-    border-style: solid;
-    border-bottom-color: #fff;
-}
+        .tooltip .arrow {
+            height: 0.5rem;
+        }
 
-.bs-tooltip-auto[x-placement^=top] .arrow, .bs-tooltip-top .arrow {
-    bottom: -9px;
-}
-
-.bs-tooltip-auto[x-placement^=top] .arrow::before,
-.bs-tooltip-top .arrow::before {
-    bottom: -9px;
-    border-top-color: var(--couleur-filet-secondaire);
-    border-width: .5rem .5rem 0;
-}
-
-
-.bs-tooltip-top .arrow::after {
-    content: "";
-    position: absolute;
-    bottom: 1.5px;
-    border-width: 0 .5rem .5rem;
-    transform: rotate(180deg);
-    border-color: transparent;
-    border-style: solid;
-    border-bottom-color: #fff;
-}
-
-.tooltip-header {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 8px 0 16px;
-    line-height: 0;
-}
-
-.tooltip-header button {
-    position: relative;
-    text-align: right;
-    padding: 8px 8px 0 0;
-    line-height: 0;
-}
-
-.tooltip-header .icone-svg {
-    background-image: url(../images/sprite.svg#ico-xfermer-bleu);
-    width: 16px;
-    height: 16px;
-    min-width: 16px;
-}
-
-@media (max-width: 425px) {
     .tooltip-inner {
-        width: calc(100vw - 16px);
+        width: 320px;
         max-width: 320px;
+        max-height: 118px;
+        overflow-y: auto;
+        padding: 0 24px 0 16px;
+        background-color: #fff;
+        color: inherit;
+        border-radius: 0;
+        text-align: left;
     }
-}
 
-/* Scrollbar tooltip */
-.tooltip .tooltip-inner::-webkit-scrollbar, .tooltip .tooltip-inner::-webkit-scrollbar-thumb, .tooltip .tooltip-inner::-webkit-scrollbar-track {
-    background: transparent;
-    border: none;
-    border-radius: .3125rem;
-    height: 50%;
-    width: .625rem;
-    margin-top: 8px;
-}
+    .bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+    .bs-tooltip-bottom .arrow::before {
+        bottom: 9px;
+        border-bottom-color: var(--couleur-filet-secondaire);
+        border-width: 0 .5rem .5rem;
+    }
 
-.tooltip .tooltip-inner::-webkit-scrollbar-button, .tooltip .tooltip-inner::-webkit-scrollbar-track-piece, .tooltip .tooltip-inner::-webkit-scrollbar-corner, .tooltip .tooltip-inner::-webkit-resizer {
-    display: none;
-}
+    .bs-tooltip-bottom .arrow::after {
+        content: "";
+        position: absolute;
+        bottom: 10.5px;
+        border-width: 0 .5rem .5rem;
+        transform: translateY(3px);
+        border-color: transparent;
+        border-style: solid;
+        border-bottom-color: #fff;
+    }
 
-.tooltip .tooltip-inner::-webkit-scrollbar-thumb {
-    background-color: var(--couleur-bleu-pale);
-    transition: all .35s;
-}
+    .bs-tooltip-auto[x-placement^=top] .arrow, .bs-tooltip-top .arrow {
+        bottom: -9px;
+    }
+
+        .bs-tooltip-auto[x-placement^=top] .arrow::before,
+        .bs-tooltip-top .arrow::before {
+            bottom: -9px;
+            border-top-color: var(--couleur-filet-secondaire);
+            border-width: .5rem .5rem 0;
+        }
 
 
-/* TODO si requis css pour placement left, right. Cela dit on privilégie top/bottom */
+        .bs-tooltip-top .arrow::after {
+            content: "";
+            position: absolute;
+            bottom: 1.5px;
+            border-width: 0 .5rem .5rem;
+            transform: rotate(180deg);
+            border-color: transparent;
+            border-style: solid;
+            border-bottom-color: #fff;
+        }
+
+    .tooltip-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 8px 0 16px;
+        line-height: 0;
+    }
+
+        .tooltip-header button {
+            position: relative;
+            text-align: right;
+            padding: 8px 8px 0 0;
+            line-height: 0;
+        }
+
+        .tooltip-header .icone-svg {
+            background-image: url(../images/sprite.svg#ico-xfermer-bleu);
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+        }
+
+    @media (max-width: 425px) {
+        .tooltip-inner {
+            width: calc(100vw - 16px);
+            max-width: 320px;
+        }
+    }
+
+    /* Scrollbar tooltip */
+    .tooltip .tooltip-inner::-webkit-scrollbar, .tooltip .tooltip-inner::-webkit-scrollbar-thumb, .tooltip .tooltip-inner::-webkit-scrollbar-track {
+        background: transparent;
+        border: none;
+        border-radius: .3125rem;
+        height: 50%;
+        width: .625rem;
+        margin-top: 8px;
+    }
+
+    .tooltip .tooltip-inner::-webkit-scrollbar-button, .tooltip .tooltip-inner::-webkit-scrollbar-track-piece, .tooltip .tooltip-inner::-webkit-scrollbar-corner, .tooltip .tooltip-inner::-webkit-resizer {
+        display: none;
+    }
+
+    .tooltip .tooltip-inner::-webkit-scrollbar-thumb {
+        background-color: var(--couleur-bleu-pale);
+        transition: all .35s;
+    }
+
+
+    /* TODO si requis css pour placement left, right. Cela dit on privilégie top/bottom */
+    /*====================================================================================================*/
+    /*  -Z89- Contenu extensible 
 /*====================================================================================================*/
-/*  -Z89- Contenu extensible 
-/*====================================================================================================*/
-/*---- Liens plus ou moins de détails ----*/
-.developper, .reduire {
-    display: none;
-}
+    /*---- Liens plus ou moins de détails ----*/
+    .developper, .reduire {
+        display: none;
+    }
 
-a.collapsed .developper, a:not(.collapsed) .reduire {
-    display: inline-block;
-}
+    a.collapsed .developper, a:not(.collapsed) .reduire {
+        display: inline-block;
+    }
 
-.contenu-extensible.entete a {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    .contenu-extensible.entete a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-.contenu-extensible .icone-svg {
-    margin-left: 8px;
-}
+    .contenu-extensible .icone-svg {
+        margin-left: 8px;
+    }
 
-.contenu-extensible a.collapsed .icone-svg, .contenu-extensible a.collapsed .developper .icone-svg {
-    transform: rotate(-180deg);
-}
+    .contenu-extensible a.collapsed .icone-svg, .contenu-extensible a.collapsed .developper .icone-svg {
+        transform: rotate(-180deg);
+    }
 
-/*====================================================================================================*/
-/*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
+    /*====================================================================================================*/
+    /*  -Z90- Ajustements pour règles SCG - À modifier dans fichier concerné
 /*====================================================================================================*/
 
 
-.form-control {
-    height: 40px;
-}
+    .form-control {
+        height: 40px;
+    }
 
 
-.icone-champ-requis {
-    font-size: 1rem;
-    vertical-align: top;
-    font-family: OpenSans-Bold;
-}
+    .icone-champ-requis {
+        font-size: 1rem;
+        vertical-align: top;
+        font-family: OpenSans-Bold;
+    }
 
 
-input.form-control:focus, select.form-control:focus {
-    outline: 3px solid #89bce5;
-    border: 2px solid #5b6476;
-}
+    input.form-control:focus, select.form-control:focus {
+        outline: 3px solid #89bce5;
+        border: 2px solid #5b6476;
+    }
 
-form .field-validation-error {
-    margin-top: 8px;
-}
+    form .field-validation-error {
+        margin-top: 8px;
+    }
 
-/*TODO ATTENTION ici doit s'appliquer à des pages AVEC un menu à gauche... pas pour nos autres pages 2 colonnes */
-.contenu-principal-gauche #colonneDroite, .contenu-principal-droite #colonneGauche {
-    width: 100%;
-    max-width: 269px;
-}
+    /*TODO ATTENTION ici doit s'appliquer à des pages AVEC un menu à gauche... pas pour nos autres pages 2 colonnes */
+    .contenu-principal-gauche #colonneDroite, .contenu-principal-droite #colonneGauche {
+        width: 100%;
+        max-width: 269px;
+    }
 
+
+    @media (max-width: 991px) {
+        .contenu-principal-gauche #colonneDroite, .contenu-principal-droite #colonneGauche {
+            max-width: 100%;
+        }
+    }
+
+
+    /*====================================================================================================*/
+    /*  -Z91- Ajustements pour règles SCG - Désaccord / Questionnements
 /*====================================================================================================*/
-/*  -Z91- Ajustements pour règles SCG - Désaccord / Questionnements
-/*====================================================================================================*/
-/*
+    /*
 form .input-validation-error, form .input-validation-error + .note-editor {
     border-color: var(--couleur-erreur);
     border-width: 2px; /* Ici devrait être 3px!  TROP GROS! 
@@ -764,148 +924,49 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 
 
 
-/* --------------- Messages d'erreurs sur champs --------------- */
-/* Selon normes, 16px BOLD. */
-/* Il me semble que bold c'est TRÈS exagéré... */
-/* Réduire à 14px? */
-/*form .field-validation-error {
+    /* --------------- Messages d'erreurs sur champs --------------- */
+    /* Selon normes, 16px BOLD. */
+    /* Il me semble que bold c'est TRÈS exagéré... */
+    /* Réduire à 14px? */
+    /*form .field-validation-error {
     font-family: 'OpenSans-SemiBold';
 }
 */
 
 
+    /*====================================================================================================*/
+    /*  -Z91- Ajustements ECS
 /*====================================================================================================*/
-/*  -Z91- Ajustements ECS
-/*====================================================================================================*/
-.icone-champ-requis {
-    line-height: 1;
-}
+    .icone-champ-requis {
+        line-height: 1;
+    }
 
-/*====================================================================================================*/
-/*  -99- À positionner
-/*====================================================================================================*/
-.navigation-form{
-    line-height: 1;
-}
-
-.navigation-form ul {
-    padding: 0;
-    list-style-type: none;
-}
-
-.navigation-form li.active a {
-    font-weight: 700;
-}
-
-
-/*Menu*/
-.navigation-form ul li {
-    padding: 16px 0;
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-left: 8px;
-    border-left: 1px solid var(--couleur-piv);
-}
-
-/* Petite twist qui nous permet d'inverser la puce et le texte afin de pouvoir utiliser le selector de sibling et modifier couleur de fond de la puce sur hover/focus du lien */
-.navigation-form ul li *:last-child {
-    order: -1;
-}
-
-
-.navigation-form ul li .puce {
-    height: 20px;
-    width: 20px;
-    min-width: 20px;
-    display: block;
-    border-radius: 50%;
-    background-color: #fff;
-    border: 3px solid #1479CC;
-    margin-left: -11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.navigation-form ul li:not(.active) .texte:hover + .puce {
-    background-color: var(--couleur-bleu-pale);
-    border-color: #1479CC;
-}
-
-.navigation-form ul li.contient-erreur .texte:hover + .puce, .navigation-form ul li.sans-erreur .texte:hover + .puce {
-    background-color: #1479CC;
-    border-color: #1479CC;
-}
-
-
-.navigation-form ul li.contient-erreur .puce {
-    background-color: var(--couleur-erreur);
-    border-color: var(--couleur-erreur);
-}
-
-.navigation-form ul li.contient-erreur .puce .icone-svg {
-    background-image: url(../images/sprite.svg#ico-exclamation-blanc);
-}
-
-.navigation-form ul li.sans-erreur .puce {
-    background-color: var(--couleur-piv);
-    border-color: var(--couleur-piv);
-}
-
-.navigation-form ul li.sans-erreur .puce .icone-svg {
-    background-image: url(../images/sprite.svg#ico-check-blanc);
-}
-
-.navigation-form ul li.active .puce {
-    background-color: #1479CC!important;
-    border-color: var(--couleur-piv)!important;
-    background-image: none!important;
-}
-
-.navigation-form ul li.active .puce .icone-svg {
-    background-image: none;
-}
-
-.navigation-form ul li:first-child .puce:before {
-    position: absolute;
-    width: 20px;
-    height: calc(50% - 10px);
-    background-color: #fff;
-    top: 0;
-    content: '';
-}
-
-.navigation-form ul li .texte {
-    margin-left: 8px;
-}
-
-.navigation-form ul li:last-child {
-    padding-bottom: 0
-}
-
-
-
-.card.section-secondaire .card-title {
-    background-color: var(--couleur-fond-gris);
-}
-
-.card.section-secondaire {
-    border: 1px solid var(--couleur-filet-secondaire);
-}
-
-
-
-/*====================================================================================================*/
-/*  -100- À positionner
+    /*====================================================================================================*/
+    /*  -99- À positionner
 /*====================================================================================================*/
 
 
+
+    .card.section-secondaire .card-title {
+        background-color: var(--couleur-fond-gris);
+    }
+
+    .card.section-secondaire {
+        border: 1px solid var(--couleur-filet-secondaire);
+    }
+
+
+
+    /*====================================================================================================*/
+    /*  -100- À positionner
 /*====================================================================================================*/
-/*  -900- SPRITES
+
+
+    /*====================================================================================================*/
+    /*  -900- SPRITES
 /*====================================================================================================*/
-/* Ajouter les sprites crochet-bleu-texte, check-blanc, exlamation-blanc, question */
-/* Pour raison inconnue, dans ce projet il faut réajuster la taille des icônes. Il faudra revérifier une fois dans ECS. */
-.icone-svg.md.chevron-haut-texte {
-    height: 12px;
-}
+    /* Ajouter les sprites crochet-bleu-texte, check-blanc, exlamation-blanc, question */
+    /* Pour raison inconnue, dans ce projet il faut réajuster la taille des icônes. Il faudra revérifier une fois dans ECS. */
+    .icone-svg.md.chevron-haut-texte {
+        height: 12px;
+    }

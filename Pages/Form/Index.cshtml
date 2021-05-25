@@ -51,15 +51,23 @@
 }
 
 @section colonneGauche{
-    <nav v-cloak class="navigation-form">
-        <ul>
-            <li v-for="page in pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}">
-                <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
-                <span class="puce">
-                    <span class="icone-svg sm" aria-hidden="true"></span>
-                </span>
-            </li>
-        </ul>
+    <nav v-cloak class="etapes-form navbar navbar-expand-lg">
+        <a role="button" class="navbar-toggler collapsed" data-toggle="collapse"  aria-controls="navbarSupportedContent" aria-expanded="false"  href="#navbarSupportedContent" >
+            <span class="libelle">
+                Étapes du formulaire
+            </span>
+            <span aria-hidden="true" class="icone-svg md"></span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul>
+                <li v-for="page in pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}">
+                    <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
+                    <span class="puce">
+                        <span class="icone-svg sm" aria-hidden="true"></span>
+                    </span>
+                </li>
+            </ul>
+        </div>
     </nav>
 }
 

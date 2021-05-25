@@ -497,7 +497,8 @@ h1, .text-xxxl {
 
 
 /* Limiter la largeur de la colonne principale en mode mobile */
-@media all and (max-width:1023px) {
+/* TODO ECS 1023-1024 passe à 991-992 */
+@media all and (max-width:991px) {
     #conteneur2Colonnes {
         display: block;
     }
@@ -512,7 +513,8 @@ h1, .text-xxxl {
 }
 
 /* Petite twist... Permet d'avoir une marge à gauche(ou à droite) afin de séparer les 2 colonnes, sera actif uniquement si la colonne de gauche (ou de droite) contient au moins un élément */
-@media screen and (min-width:1024px) {
+/* TODO ECS 1023-1024 passe à 991-992 */
+@media screen and (min-width:992px) {
     .contenu-principal-gauche #colonneDroite > * {
         margin-left: var(--tc-32-24-val);
     }
@@ -2150,13 +2152,14 @@ a.collapsed .developper, a:not(.collapsed) .reduire {
     transform: rotate(-180deg);
 }
 
-@media screen and (max-width: 1023px) {
+/* TODO ECS 1023-1024 passe à 991-992 */
+@media screen and (max-width: 991px) {
     .recherche-communications .card-title .texte {
         display: none !important;
     }
 }
-
-@media screen and (min-width: 1024px) {
+/* TODO ECS 1023-1024 passe à 991-992 */
+@media screen and (min-width: 992px) {
     .recherche-communications .card-title a.bouton {
         display: none !important;
     }
@@ -2617,14 +2620,15 @@ mark {
     .faq .lien-faq-mobile-afficher span, .faq .lien-faq-mobile-fermer span {
         cursor: pointer;
     }
-
-@media (min-width: 1024px) {
+/* TODO ECS 1023-1024 passe à 991-992 */
+@media (min-width: 992px) {
     .lien-faq-mobile-afficher {
         display: none !important;
     }
 }
 
-@media (max-width: 1023px) {
+/* TODO ECS 1023-1024 passe à 991-992 */
+@media (max-width: 991px) {
 
     .faq.slide-out {
         position: absolute;
