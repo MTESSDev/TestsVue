@@ -574,170 +574,174 @@ form:
         fr: Formation
       id: formation
       components:
-        - name: Req01-OrdresEnseignementsApplicables
-          type: checkbox
-          label:
-            fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
-          options: 
-            NiveauEtudesPrimaire: Primaire
-            NiveauEtudesSecondaireGen: Secondaire (Général)
-            NiveauEtudesSecondaireFormProf: Secondaire (Formation professionnelle)
-            NiveauEtudesSecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
-            NiveauEtudesCollegial: Collegial (Formation générale ou technique)
-            NiveauEtudesUniversitaire: Universitaire
-
-        - name: primaire        
-          type: group
-          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesPrimaire')
-          label:
-            fr: Primaire
-          components:
-            - name: Req01-NbAnneesReussiesPrimaire
-              type: radio
-              outerClasses: boutons-nombres
-              label:
-                fr: Nombre d'années réussies
-              options: [1,2,3,4,5,6,7]
-            - name: Req01-DateFinPrimaire
-              type: date
-              label:
-                fr: Date de fin des études
-        - name: secondaireGen
-          type: group
-          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireGen')          
-          label:
-            fr: Secondaire (général)
-          components:
-            - name: Req01-NbAnneesReussiesSecGeneral
-              type: radio
-              outerClasses: boutons-nombres
-              label:
-                fr: Nombre d'années réussies
-              options: [1,2,3,4,5]
-            - name: Req01-DiplomeSecGeneral
-              type: select
-              label: 
-                fr: Diplôme obtenu
-              options: 
-                Aucun: Aucun
-                Des: Diplôme d'études secondaires (DES)
-            - name: Req01-DateFinSecGeneral
-              type: date
-              label:
-                fr: Date de fin des études
-        - name: secondaireProf
-          type: group
-          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormProf')                    
-          label:
-            fr: Secondaire (Formation professionnelle)
-          components:
-            - name: Req01-NbAnneesReussiesSecFormProf
-              type: radio
-              outerClasses: boutons-nombres
-              label:
-                fr: Nombre d'années réussies
-              options: [3,4,5]
-            - name: Req01-DisciplineSecFormProf
-              type: text
-              label:
-                fr: Discipline/Programme de formation
-            - name: Req01-DiplomeSecFormProf
-              type: select
-              label: 
-                fr: Diplôme obtenu
-              options: 
-                Aucun: Aucun
-                Aep: AEP
-                Dep: DEP
-                Asp: ASP
-            - name: Req01-DateFinSecFormProf
-              type: date
-              label:
-                fr: Date de fin des études
-        - name: secondaireMetier
-          type: group
-          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormMétier')                              
-          label:
-            fr: Secondaire (Formation à un métier semi-spécialisé)
-          components:
-            - name: Req01-NbAnneesReussiesSecMetier
-              type: radio
-              outerClasses: boutons-nombres
-              label:
-                fr: Nombre d'années réussies
-              options: [1]
-            - name: Req01-DisciplineSecMetier
-              type: text
-              label:
-                fr: Discipline/Programme de formation
-            - name: Req01-DateFinSecMetier
-              type: date
-              label:
-                fr: Date de fin des études
-        - name: collegial
-          type: group
-          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesCollegial')                                        
-          label:
-            fr: Collégial (Formation générale ou technique)
-          components:
-            - name: Req01-NbAnneesReussiesCollegial
-              type: radio
-              outerClasses: boutons-nombres
-              label:
-                fr: Nombre d'années réussies
-              options: [1,2,3]
-            - name: Req01-DisciplineCollegial
-              type: text
-              label:
-                fr: Discipline/Programme de formation
-            - name: Req01-DiplomeCollegial
-              type: select
-              label: 
-                fr: Diplôme obtenu
-              options: 
-                Aucun: Aucun
-                Dec: Diplôme d'études collégiales (DEC)
-                Aec: Attestation d'études collégiales (AEC)
-                Cec: Certificat d'études collégiales (CEC)
-            - name: Req01-DateFinCollegial
-              type: date
-              label:
-                fr: Date de fin des études
-        - name: universitaire
-          type: group
-          v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesUniversitaire')                                                  
-          label:
-            fr: Universitaire            
-          components:
-            - name: Req01-NbAnneesReussiesUniversitaire
-              type: radio
-              outerClasses: boutons-nombres
-              label:
-                fr: Nombre d'années réussies
-              options: [1,2,3,4,5,6,7]
-            - name: Req01-DisciplineUniversitaire
-              type: text
-              label:
-                fr: Discipline/Programme de formation
-            - name: Req01-DiplomeUniversitaire
-              type: select
-              label: 
-                fr: Diplôme obtenu
-              options: 
-                Aucun: Aucun
-                Cert: Certificat
-                Bac: Baccalauréat
-                Ma: Maîtrise
-                Doc: Doctorat
-            - name: Req01-DateFinUniversitaire
-              type: date
-              label:
-                fr: Date de fin des études
         - name: Req01-EtudesEtranger
           type: radio
           label: 
             fr: Avez-vous fait vos études à l'étranger?
           options: yesno
+        - type: dynamic
+          v-if: form['Req01-EtudesEtranger'] === 'false'
+          tag: div     
+          components:
+            - name: Req01-OrdresEnseignementsApplicables
+              type: checkbox
+              label:
+                fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
+              options: 
+                NiveauEtudesPrimaire: Primaire
+                NiveauEtudesSecondaireGen: Secondaire (Général)
+                NiveauEtudesSecondaireFormProf: Secondaire (Formation professionnelle)
+                NiveauEtudesSecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
+                NiveauEtudesCollegial: Collegial (Formation générale ou technique)
+                NiveauEtudesUniversitaire: Universitaire
+
+            - name: primaire        
+              type: group
+              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesPrimaire')
+              label:
+                fr: Primaire
+              components:
+                - name: Req01-NbAnneesReussiesPrimaire
+                  type: radio
+                  outerClasses: boutons-nombres
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1,2,3,4,5,6,7]
+                - name: Req01-DateFinPrimaire
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: secondaireGen
+              type: group
+              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireGen')          
+              label:
+                fr: Secondaire (général)
+              components:
+                - name: Req01-NbAnneesReussiesSecGeneral
+                  type: radio
+                  outerClasses: boutons-nombres
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1,2,3,4,5]
+                - name: Req01-DiplomeSecGeneral
+                  type: select
+                  label: 
+                    fr: Diplôme obtenu
+                  options: 
+                    Aucun: Aucun
+                    Des: Diplôme d'études secondaires (DES)
+                - name: Req01-DateFinSecGeneral
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: secondaireProf
+              type: group
+              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormProf')                    
+              label:
+                fr: Secondaire (Formation professionnelle)
+              components:
+                - name: Req01-NbAnneesReussiesSecFormProf
+                  type: radio
+                  outerClasses: boutons-nombres
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [3,4,5]
+                - name: Req01-DisciplineSecFormProf
+                  type: text
+                  label:
+                    fr: Discipline/Programme de formation
+                - name: Req01-DiplomeSecFormProf
+                  type: select
+                  label: 
+                    fr: Diplôme obtenu
+                  options: 
+                    Aucun: Aucun
+                    Aep: AEP
+                    Dep: DEP
+                    Asp: ASP
+                - name: Req01-DateFinSecFormProf
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: secondaireMetier
+              type: group
+              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormMétier')                              
+              label:
+                fr: Secondaire (Formation à un métier semi-spécialisé)
+              components:
+                - name: Req01-NbAnneesReussiesSecMetier
+                  type: radio
+                  outerClasses: boutons-nombres
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1]
+                - name: Req01-DisciplineSecMetier
+                  type: text
+                  label:
+                    fr: Discipline/Programme de formation
+                - name: Req01-DateFinSecMetier
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: collegial
+              type: group
+              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesCollegial')                                        
+              label:
+                fr: Collégial (Formation générale ou technique)
+              components:
+                - name: Req01-NbAnneesReussiesCollegial
+                  type: radio
+                  outerClasses: boutons-nombres
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1,2,3]
+                - name: Req01-DisciplineCollegial
+                  type: text
+                  label:
+                    fr: Discipline/Programme de formation
+                - name: Req01-DiplomeCollegial
+                  type: select
+                  label: 
+                    fr: Diplôme obtenu
+                  options: 
+                    Aucun: Aucun
+                    Dec: Diplôme d'études collégiales (DEC)
+                    Aec: Attestation d'études collégiales (AEC)
+                    Cec: Certificat d'études collégiales (CEC)
+                - name: Req01-DateFinCollegial
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: universitaire
+              type: group
+              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesUniversitaire')                                                  
+              label:
+                fr: Universitaire            
+              components:
+                - name: Req01-NbAnneesReussiesUniversitaire
+                  type: radio
+                  outerClasses: boutons-nombres
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1,2,3,4,5,6,7]
+                - name: Req01-DisciplineUniversitaire
+                  type: text
+                  label:
+                    fr: Discipline/Programme de formation
+                - name: Req01-DiplomeUniversitaire
+                  type: select
+                  label: 
+                    fr: Diplôme obtenu
+                  options: 
+                    Aucun: Aucun
+                    Cert: Certificat
+                    Bac: Baccalauréat
+                    Ma: Maîtrise
+                    Doc: Doctorat
+                - name: Req01-DateFinUniversitaire
+                  type: date
+                  label:
+                    fr: Date de fin des études
         - name: Req01-SpecialiteEtudesEtranger
           type: text
           v-if: form['Req01-EtudesEtranger'] === 'true'                            
