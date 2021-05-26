@@ -933,6 +933,7 @@ form:
     - section:
         fr: Biens
       id: biens
+      v-if: form['02-Conjoint']
       components:      
         - name: BiensVehicules
           type: radio
