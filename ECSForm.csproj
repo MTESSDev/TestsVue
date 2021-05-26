@@ -19,6 +19,10 @@
     <None Remove="schemas\default.ecsform.yml" />
     <None Remove="schemas\formTemplate.vue" />
     <None Remove="schemas\test.ecsform.yml" />
+    <None Remove="src\externe\vueFormulate\formulate.min.bak.js" />
+    <None Remove="src\externe\vueFormulate\formulate.min.js" />
+    <None Remove="src\externe\vueFormulate\fr.min.js" />
+    <None Remove="src\externe\vue\vue.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +46,22 @@
     </Content>
     <Content Include="schemas\test.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="src\externe\vueFormulate\formulate.min.bak.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\externe\vueFormulate\formulate.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\externe\vueFormulate\fr.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\externe\vue\vue.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
 
@@ -68,13 +88,6 @@
   <ItemGroup>
     <Content Include="schemas\default.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="wwwroot\form\formulate.min.js">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
 

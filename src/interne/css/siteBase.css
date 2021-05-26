@@ -11,8 +11,6 @@
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -11- PIV bas de page
 /* ---------------------------------------------------------------------------------------------------*/
-/*  -12- Fureteur désuet
-/* ---------------------------------------------------------------------------------------------------*/
 /*  -13- Retour haut de page
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -15- Menu principal (desktop)
@@ -21,11 +19,9 @@
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -20- Forms
 /* ---------------------------------------------------------------------------------------------------*/
+/*  -20A- Forms (Validations)
+/* ---------------------------------------------------------------------------------------------------*/
 /*  -50- ViewComponent Message
-/* ---------------------------------------------------------------------------------------------------*/
-/*  -51- ViewComponent ResumeElementDate
-/* ---------------------------------------------------------------------------------------------------*/
-/*  -52- ViewComponent TraitementEnCours
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -60- Redéfinitions Bootstrap
 /* ---------------------------------------------------------------------------------------------------*/
@@ -37,13 +33,7 @@
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -90- Divers
 /* ---------------------------------------------------------------------------------------------------*/
-/*  -91- Tuile résumé
-/* ---------------------------------------------------------------------------------------------------*/
 /*  -92- CARDS "Section de base"
-/* ---------------------------------------------------------------------------------------------------*/
-/*  -93- Communications
-/* ---------------------------------------------------------------------------------------------------*/
-/*  -94- Versements et événements
 /* ---------------------------------------------------------------------------------------------------*/
 /*  -99- À Positionner
 /*====================================================================================================*/
@@ -730,21 +720,6 @@ a.passer-contenu {
     color: #fff;
 }
 
-#envelopeCommunicationsNonLues {
-    position: relative;
-}
-
-    #envelopeCommunicationsNonLues.badge:after {
-        content: "";
-        position: absolute;
-        background-color: var(--couleur-saumon);
-        height: 8px;
-        top: 0;
-        right: -3px;
-        width: 8px;
-        border-radius: 50%;
-    }
-
 
 .zone-identification .nom-utilisateur {
     font-size: var(--tc-14-12-val);
@@ -872,28 +847,6 @@ html {
     word-break: break-all;
 }
 
-
-/*====================================================================================================*/
-/*  -12- Fureteur désuet
-    /*====================================================================================================*/
-.fureteur-desuet {
-    background-color: #f8e69a;
-    padding: 10px 0;
-}
-
-    .fureteur-desuet .icone-svg {
-        margin-right: 15px;
-    }
-
-    .fureteur-desuet .texte {
-        font-size: var(--text-sm);
-        font-weight: 600;
-    }
-
-        .fureteur-desuet .texte p {
-            margin-bottom: 0.1rem;
-        }
-
 /*====================================================================================================*/
 /*  -13- Retour haut de page
 /*====================================================================================================*/
@@ -964,12 +917,9 @@ html {
     padding: 0;
 }
 
-
-
 /*====================================================================================================*/
 /*  -16- Menu principal (mobile) (classe zone-menu-principal)
-    /*====================================================================================================*/
-
+/*====================================================================================================*/
 .zone-menu-principal .menu-principal .navbar-nav .nav-link {
     padding-top: 8px;
 }
@@ -1015,6 +965,90 @@ select.custom-select {
     margin-top: 32px;
 }
 
+/*====================================================================================================*/
+/*  -20A- Forms (Validations)
+/*====================================================================================================*/
+
+/* Masquer le sommaire des erreurs lorsque valide, car sinon ajoute espace vide (hauteur) dans les forms même si height 0, pas de padding ni margin, etc.. */
+form .validation-summary-valid {
+    display: none;
+}
+
+/* Sommaire des erreurs */
+form .validation-summary-errors {
+    margin-bottom: 2rem;
+}
+
+.page-texte .validation-summary-errors h2 {
+    margin-top: 0;
+}
+
+form .validation-summary-errors:focus {
+    outline-color: var(--couleur-erreur);
+}
+
+form .validation-summary-errors a {
+    color: var(--couleur-erreur);
+    text-decoration: underline;
+}
+
+    form .validation-summary-errors a:hover, form .validation-summary-errors a:focus {
+        text-decoration: none;
+    }
+
+form .validation-summary-errors ul {
+    color: var(--couleur-erreur);
+    margin-top: 16px;
+}
+
+/* Bordure des champs en erreur. Inclus les champs particuliers summernote (.note-editor)*/
+form .input-validation-error, form .input-validation-error + .note-editor {
+    border-color: var(--couleur-erreur);
+    border-width: 2px;
+}
+
+form .field-validation-error {
+    display: inline-block;
+    margin-top: 8px;
+}
+
+/* Indicateurs champs obligatoires */
+.icone-champ-requis {
+    font-size: 1rem;
+    vertical-align: top;
+    font-family: OpenSans-SemiBold;
+}
+
+.texte-explicatif-champs-obligatoires {
+    margin-bottom: 32px;
+    font-size: 0.875rem;
+}
+
+    .texte-explicatif-champs-obligatoires > span {
+        margin-left: 4px;
+    }
+
+.icone-champ-requis {
+    color: var(--couleur-erreur);
+}
+
+/* Info attendue */
+.info-attendue {
+    font-size: 0.75rem;
+    margin-left: 4px;
+    font-family: OpenSans-Regular;
+}
+
+.overlay-soumission-form {
+    background-color: #000;
+    opacity: 0.2;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99998;
+}
 
 /*====================================================================================================*/
 /*  -30- Icônes SVG
@@ -1131,9 +1165,8 @@ a .icone-svg.telechargement {
     height: 27px;
 }
 
-
 /*====================================================================================================*/
-/*  -50- ViewComponent Message
+/*  -50- ViewComponent Message (TODO analyser si commun ou pas)
 /*====================================================================================================*/
 .messages-generaux {
     margin-top: var(--tc-48-40-val);
@@ -1196,69 +1229,6 @@ a .icone-svg.telechargement {
     .message .contenu :last-child {
         margin-bottom: 0;
     }
-/*====================================================================================================*/
-/*  -51- ViewComponent ResumeElementDate
-/*====================================================================================================*/
-
-.resume-element .jour-calendrier {
-    margin-right: var(--tc-16-8-val);
-}
-
-.resume-element .details {
-    width: 100%;
-    height: 106px;
-    overflow: hidden;
-}
-
-.resume-element.hauteur-libre .details {
-    padding: 24px var(--tc-32-16-val)
-}
-
-.resume-element .info-principale {
-    font-family: OpenSans-SemiBold, sans-serif;
-}
-
-.resume-element .info-secondaire {
-    margin-top: 8px;
-}
-
-.resume-element .notes {
-    font-size: 14px;
-}
-
-.evenement .resume-element .notes {
-    margin-top: 8px;
-}
-
-.versement .resume-element .notes {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid var(--couleur-filet-secondaire);
-}
-
-/**** Jour calendrier *****/
-.jour-calendrier .date {
-    line-height: 1;
-    width: 106px;
-    height: 106px;
-    overflow: hidden;
-    padding: 16px 8px;
-    background-color: var(--couleur-bleu-pale);
-    color: var(--couleur-texte-base);
-    font-family: OpenSans-SemiBold;
-}
-
-.jour-calendrier-rectangle {
-    padding: 16px var(--tc-32-16-val);
-    font-size: 18px;
-    background-color: var(--couleur-bleu-pale);
-    font-family: OpenSans-SemiBold;
-}
-
-.jour-calendrier .date .jour {
-    font-family: Roboto-Medium, sans-serif;
-}
-
 /*====================================================================================================*/
 /*  -52- ViewComponent TraitementEnCours
 /*====================================================================================================*/
@@ -1939,7 +1909,7 @@ a.collapsed .developper, a:not(.collapsed) .reduire {
     text-decoration: underline;
 }
 
-
+/*TODO vérifier si info-non-disponible commun ou non */
 .info-non-disponible {
     background-color: #fff;
     width: 100%;
@@ -1955,122 +1925,6 @@ a.collapsed .developper, a:not(.collapsed) .reduire {
     display: block;
     font-weight: 600;
 }
-
-/*====================================================================================================*/
-/*  -91- Tuile résumé  (TODO pe déplacer dans page d'accueil? Ne sert que là.)
-/*====================================================================================================*/
-.tuile-resume {
-    background-color: #fff;
-}
-
-
-    .tuile-resume.card {
-        padding: 0;
-        border: 0;
-    }
-
-    .tuile-resume .card-body {
-        padding: 24px var(--tc-32-16-val);
-    }
-
-    .tuile-resume.card.focusable {
-        -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
-        -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
-        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
-        color: inherit;
-        border: 1px solid #d4d4d4;
-    }
-
-    .tuile-resume.card.focusable a::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-    .tuile-resume.card.focusable .card-title a {
-        display: inline !important;
-    }
-
-    .tuile-resume.card.focusable .card-title a:focus {
-        outline: 0;
-    }
-
-    .tuile-resume.card.focusable:focus-within, .tuile-resume.card.focusable:hover {
-        color: inherit;
-        -moz-box-shadow: 0 3px 20px 0 rgba(34, 54, 84, 0.45);
-        -webkit-box-shadow: 0 3px 20px 0 rgba(34, 54, 84, 0.45);
-        box-shadow: 0 3px 20px 0 rgba(34, 54, 84, 0.45);
-        text-decoration: none;
-        -moz-transition: all 0.3s;
-        -webkit-transition: all 0.3s;
-        transition: all 0.3s;
-        border: 1px solid #5aa1db;
-    }
-
-    .tuile-resume.card.focusable:hover .comme-lien, 
-    .tuile-resume.card.focusable:focus-within .comme-lien {
-        text-decoration: underline;
-        color: #3374cc;
-    }
-
-    .tuile-resume.card.focusable:hover .jour-calendrier .date,
-    .tuile-resume.card.focusable:focus-within .jour-calendrier .date {
-        background-color: #bbd1e3;
-    }
-
-
-    .tuile-resume h2.card-title {
-        line-height: 1;
-        padding-bottom: 8px;
-        border-bottom: 1px solid var(--couleur-texte-base);
-    }
-
-    .tuile-resume .card-title img {
-        max-height: 35px;
-        vertical-align: bottom;
-    }
-
-    .tuile-resume .card-title .titre {
-        margin-left: 5px;
-        vertical-align: middle;
-    }
-
-    .tuile-resume .badge-nouveau {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: -8px;
-        right: var(--tc-32-16-val);
-    }
-
-        .tuile-resume .badge-nouveau .texte {
-            margin-left: 4px;
-        }
-
-
-    .tuile-resume .lien-tous {
-        padding-top: 8px;
-        line-height: 1;
-        border-top: 1px solid var(--couleur-filet-secondaire);
-    }
-
-        .tuile-resume .lien-tous .comme-lien {
-            display: flex;
-            align-items: center;
-        }
-
-        .tuile-resume .lien-tous .fleche-droite {
-            margin-left: 8px;
-        }
-
-    .tuile-resume .contenu {
-        border: 0;
-        margin: 16px 0;
-    }
 
 /*====================================================================================================*/
 /*  -92- CARDS 
@@ -2137,282 +1991,6 @@ a.collapsed .developper, a:not(.collapsed) .reduire {
     align-items: center !important;
 }
 
-/*====================================================================================================*/
-/*  -93- Communications
-/*====================================================================================================*/
-
-
-.recherche-communications .card-title {
-    padding-top: 24px !important;
-    padding-bottom: 24px !important;
-    font-size: 20px;
-}
-
-.recherche-communications .card-title > a.collapsed .icone-svg {
-    transform: rotate(-180deg);
-}
-
-/* TODO ECS 1023-1024 passe à 991-992 */
-@media screen and (max-width: 991px) {
-    .recherche-communications .card-title .texte {
-        display: none !important;
-    }
-}
-/* TODO ECS 1023-1024 passe à 991-992 */
-@media screen and (min-width: 992px) {
-    .recherche-communications .card-title a.bouton {
-        display: none !important;
-    }
-
-    .recherche-communications .card-body {
-        display: block;
-    }
-}
-
-
-/* Override du margin ajouté par datatables */
-table.communications {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-    table.communications, table.communications.dataTable {
-        border-collapse: separate !important;
-        border-spacing: 0;
-    }
-
-
-        table.communications th, table.communications td {
-            border-top: 0;
-            padding-top: var(--tc-24-16-val);
-            padding-bottom: var(--tc-24-16-val);
-            padding-left: var(--tc-24-12-val);
-            padding-right: var(--tc-24-12-val);
-        }
-
-        table.communications thead th {
-            border: 0;
-            padding-top: 16px;
-            padding-bottom: 16px;
-        }
-
-        table.communications th:first-child, table.communications td:first-child {
-            padding-left: 8px;
-        }
-
-        table.communications th:last-child, table.communications td:last-child {
-            padding-right: 8px;
-            white-space: nowrap;
-        }
-
-        table.communications td {
-            border-bottom: 1px solid var(--couleur-filet-secondaire);
-        }
-
-.communications a {
-    min-height: 100%;
-    color: var(--couleur-texte-base);
-}
-
-    .communications a:hover, .communications a:focus {
-        text-decoration: none;
-    }
-
-    .communications a .objet {
-        color: var(--couleur-liens);
-    }
-
-    .communications a .objet, .communications .date {
-        font-family: 'OpenSans-Regular', sans-serif;
-    }
-
-    .communications a:hover .objet, .communications a:focus .objet {
-        text-decoration: underline;
-    }
-
-.communications tr.non-lue .objet, .communications tr.non-lue .date {
-    font-family: 'OpenSans-Bold', sans-serif;
-}
-
-.communications .description {
-    font-weight: normal;
-    font-family: 'OpenSans-Regular', sans-serif;
-}
-
-.communications .date {
-    width: 1px; /* on s'assure que la colonne de droite (date) ne prendra que l'espace dont elle a besoin et pas plus. */
-}
-
-.lien-toutes-communications {
-    margin-top: 16px;
-}
-
-    .lien-toutes-communications a {
-        display: flex;
-        align-items: center;
-    }
-
-    .lien-toutes-communications .fleche-droite {
-        margin-left: 8px;
-    }
-
-/*====================================================================================================*/
-/*  -94- Versements et événements
-/*====================================================================================================*/
-.liste-versements > li, .liste-evenements > li {
-    margin-bottom: var(--tc-48-40-val);
-    border: 1px solid var(--couleur-filet-secondaire);
-}
-
-    .liste-versements > li:last-child, .liste-evenements > li:last-child {
-        margin-bottom: 0;
-    }
-
-.versement, .evenement {
-    background-color: #fff;
-    position: relative;
-}
-
-    /* Lien plus d'informations */
-    .versement .plus-informations, .evenement .plus-informations {
-        border-top: 1px solid var(--couleur-filet-secondaire);
-        padding: 16px 0 24px 0;
-        margin: -8px var(--tc-32-16-val) 0 var(--tc-32-16-val);
-    }
-
-    .versement .badge-nouveau, .evenement .badge-nouveau {
-        display: inline-block;
-        margin-bottom: 8px;
-    }
-
-
-/* Bloc indicateur nouvel élément et nombre nouveaux éléments */
-.badge-nouveau {
-    background-color: #FADAD4;
-    padding: 4px 12px;
-    font-family: 'OpenSans-SemiBold';
-    font-size: 0.75rem;
-    color: #9F4A3B;
-    border-radius: 5rem;
-}
-
-.evenement .lien-communication {
-    padding: 24px var(--tc-32-16-val);
-    padding-top: 0px;
-    font-family: OpenSans-SemiBold;
-}
-
-.evenement .lien-communication a {
-    display: flex;
-    align-items: center;
-}
-
-.evenement .lien-communication span {
-    display: flex;
-    align-items: center;
-}
-
-.evenement a .developper, .evenement a .reduire {
-    font-family: OpenSans-SemiBold;
-}
-
-#btnAfficherTousVersements {
-    margin-top: var(--tc-32-24-val);
-}
-
-
-.calendrierVersement {
-    background-color: #fff;
-    padding: var(--tc-24-16-val) 16px;
-    border: 1px solid var(--couleur-filet-secondaire)
-}
-
-.calendrierVersement-titre {
-    margin-bottom: 4px;
-    line-height: 1;
-    font-size: 1.5rem;
-}
-
-.calendrierVersement .texte-explicatif {
-    font-size: 0.875rem;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--couleur-filet-secondaire);
-}
-
-.calendrierVersement ul {
-    margin-top: 24px;
-}
-
-.calendrierVersement li {
-    font-family: Roboto-Bold;
-}
-
-.calendrierVersement-texte {
-    font-weight: bold;
-    margin-left: 16px;
-}
-
-.calendrierVersement .conteneur-lien-tous {
-    margin-top: 24px;
-    border-top: 1px solid var(--couleur-filet-secondaire);
-    text-align: right;
-}
-
-.calendrierVersement .lien-tous {
-    background: none !important;
-    border: none;
-    padding: 0 !important;
-    font-family: arial, sans-serif;
-    font-size: 0.875rem;
-    color: var(--couleur-liens);
-    cursor: pointer;
-    margin-top: 8px;
-}
-
-    .calendrierVersement .lien-tous:hover, .calendrierVersement .lien-tous:focus {
-        text-decoration: underline;
-    }
-
-.calendrierVersement ul li {
-    padding-bottom: 32px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
-    border-left: 1px solid var(--couleur-piv);
-}
-
-    .calendrierVersement ul li .puce {
-        height: 9px;
-        width: 9px;
-        background-color: blue;
-        display: inline-block;
-        border-radius: 50%;
-        background-color: var(--couleur-piv);
-        margin-left: -5px;
-    }
-
-    .calendrierVersement ul li:first-child .puce:before {
-        position: absolute;
-        width: 9px;
-        height: 5px;
-        background-color: white;
-        top: 0px;
-        content: '';
-    }
-
-    .calendrierVersement ul li:last-child .puce:before {
-        position: absolute;
-        width: 9px;
-        height: 5px;
-        background-color: white;
-        bottom: 0px;
-        content: '';
-    }
-
-ul li:last-child {
-    padding-bottom: 0
-}
 
 /*====================================================================================================*/
 /*  -98- Affichage mobile (téléphone portrait)
@@ -2422,24 +2000,6 @@ ul li:last-child {
         max-width: 100%;
         padding-right: 8px;
         padding-left: 8px;
-    }
-
-    .jour-calendrier .date {
-        width: 96px;
-        height: 96px;
-    }
-
-    .resume-element .details {
-        width: 100%;
-        height: 96px;
-    }
-
-    .tuile-resume .card-title .titre {
-        margin-left: 0;
-    }
-
-    .tuile-resume .card-title img {
-        max-height: 30px;
     }
 
     h1 img {
@@ -2462,8 +2022,6 @@ ul li:last-child {
 /*====================================================================================================*/
 /*  -99- À Positionner
 /*====================================================================================================*/
-
-
 
 html {
     overflow-x: hidden;
@@ -2520,172 +2078,7 @@ iframe.autoheight {
     margin-top: 16px;
 }
 
-/*====================================================================================================*/
-/* FAQ
-/*====================================================================================================*/
 
-.no-transition * {
-    transition: none !important;
-}
-
-mark {
-    background-color: var(--couleur-avertissement);
-    padding: 0;
-}
-
-.faq.slide-in {
-    margin-top: 0;
-    padding: 0 16px;
-}
-
-.faq .bouton-recherche {
-    padding: 2px 6px 0 6px;
-}
-
-.faq-contenu {
-    background-color: #fff;
-    padding: var(--tc-24-16-val) 16px;
-    border: 1px solid var(--couleur-filet-secondaire);
-}
-
-#titreFAQ {
-    margin-bottom: 0 !important;
-}
-
-.faq .questions {
-    margin-top: 8px;
-    font-size: 0.875rem;
-}
-
-.faq .question {
-    border-bottom: 1px solid var(--couleur-filet-secondaire);
-}
-
-    .faq .question > a {
-        color: var(--couleur-piv);
-        cursor: pointer;
-        display: block;
-        padding: 1rem 0;
-        position: relative;
-        text-decoration: none;
-        width: 100%;
-        font-family: OpenSans-SemiBold;
-    }
-
-        .faq .question > a > * {
-            display: table-cell;
-        }
-
-.faq .question .texte {
-    width: 100%;
-    padding-right: 16px;
-}
-
-
-    .faq .question .icone-svg {
-        transition: transform 100ms ease-in-out;
-        background-size: 12px 12px;
-    }
-
-    .faq .card-title > a.collapsed .icone-svg, .faq .question > a.collapsed .icone-svg {
-        transform: rotate(-180deg);
-    }
-
-    .faq .question .reponse {
-        padding-right: 28px;
-        margin-bottom: 1rem;
-    }
-
-.faq .lien-faq-complete {
-    font-size: 0.875rem;
-    margin-top: 16px;
-}
-
-.faq .lien-faq-mobile-afficher {
-    background-color: var(--couleur-piv);
-    color: #fff;
-    position: relative;
-    z-index: 1020;
-    font-family: Roboto-Bold;
-    font-size: 28px;
-    width: 40px;
-    height: 40px;
-}
-
-.faq .lien-faq-mobile-fermer {
-    width: auto;
-    max-height: 32px;
-}
-
-    .faq .lien-faq-mobile-afficher span, .faq .lien-faq-mobile-fermer span {
-        cursor: pointer;
-    }
-/* TODO ECS 1023-1024 passe à 991-992 */
-@media (min-width: 992px) {
-    .lien-faq-mobile-afficher {
-        display: none !important;
-    }
-}
-
-/* TODO ECS 1023-1024 passe à 991-992 */
-@media (max-width: 991px) {
-
-    .faq.slide-out {
-        position: absolute;
-        top: 170px;
-        right: 0;
-        margin-top: 0 !important;
-    }
-
-        .faq.slide-out:not(.slide-in) .faq-contenu {
-            display: none;
-        }
-
-
-        .faq.slide-out .faq-titre {
-            margin-right: 2rem;
-        }
-
-        .faq.slide-out .faq-contenu {
-            background-color: white;
-            box-shadow: 0 0 .5rem rgba(0,0,0,.3) !important;
-            padding: 1rem;
-            position: absolute;
-            transform: translateX(100%);
-            transition: transform 100ms ease-in-out;
-            z-index: 1030;
-        }
-
-    .faq.slide-in .faq-contenu {
-        position: relative;
-        transform: translateX(0%);
-    }
-
-    .faq.slide-in .lien-faq-mobile-afficher {
-        display: none !important;
-    }
-
-    .faq.slide-in:before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1025;
-        width: 100vw;
-        height: 100vh;
-        background-color: #000;
-        opacity: .5;
-    }
-}
-
-@media (max-width: 767px) {
-    .faq.slide-out {
-        top: 230px;
-    }
-}
-
-@media (max-width: 424px) {
-    .faq.slide-in {
-        padding: 0 8px;
-    }
+ul li:last-child {
+    padding-bottom: 0
 }

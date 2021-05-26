@@ -48,7 +48,7 @@
     @*Ressources non importantes dont le chargement est effectué en différé (après que la page soit chargée)*@
     <link rel="stylesheet" href="~/css/impression.css" media="print" data-include asp-append-version="true" onload="this.media='all' ">
 
-    <link rel="stylesheet" href="~/css/additionnel.min.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/css/additionnel.min.css" asp-append-version="true" />*@
 
     <link rel="stylesheet" href="~/css/site.css" />
     @RenderSection("style", required: false)
@@ -276,9 +276,10 @@
     </footer>
 
     <script src="~/js/base.min.js" asp-append-version="true"></script>
-    <script src="~/js/additionnel.min.js" asp-append-version="true"></script>
     
-    
+    @{//<script src="~/js/additionnel.min.js" asp-append-version="true"></script>
+      }
+
     <script src="~/js/baseAsync.min.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
