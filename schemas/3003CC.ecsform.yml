@@ -929,6 +929,127 @@ form:
           outerClasses: xxl                           
           label:
             fr: "Inscrivez la raison de votre indisponibilité à travailler"
+    # Section - Biens
+    - section:
+        fr: Biens
+      id: biens
+      components:      
+        - name: BiensVehicules
+          type: radio
+          label:
+            fr: "Est-ce que vous ou votre conjoint(e) possédez des véhicules (y compris des véhicules remisés)?"
+          help:
+            fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
+          options: yesno
+        - name: BiensVehiculesAppartenance
+          type: checkbox
+          v-if: form.BiensVehicules == 'true'
+          label:
+            fr: "Indiquez la ou les situations qui s'appliquent"
+          options: 
+            VehiculesCopropriete: 'Vous possédez au moins un véhicule (en copropriété) avec votre conjoint(e)'
+            VehiculesPersonnel: 'Vous possédez au moins un véhicule personnellement'
+            VehiculesConjoint: 'Votre conjoint(e) possède un véhicule'
+        - name: BiensVehiculesCopropriete
+          type: repeatableGroup
+          repeatable: true
+          v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesCopropriete')          
+          label:
+            fr: Véhicule(s) en copropriété avec votre conjoint(e)
+          instanceLabel:
+            fr: Véhicule
+          addLabel:
+            fr: Ajouter un véhicule
+          removeLabel:
+            fr: Supprimer ce véhicule
+          components:
+            - name: vehiculeTypeMarqueAnnee
+              type: text
+              label:
+                fr: Type de véhicule, marque, année
+            - name: emploiSalaireHebdo
+              type: radio
+              label:
+                fr: Est-ce qu'il s'agit d'un véhicule adapté?
+              options: yesno
+            - name: vehiculeProprioLocataire
+              type: radio
+              label:
+                fr: "Êtes-vous propriétaire ou locataire du véhicule?"
+              options: 
+                VehiculeProprietaire: 'Propriétaire'
+                VehiculeLocataire: 'Locataire'
+            - name: vehiculeValeurMarchande
+              type: number
+              label:
+                fr: Valeur marchande
+        - name: BiensVehiculesPerso
+          type: repeatableGroup
+          repeatable: true
+          v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesPersonnel')          
+          label:
+            fr: Véhicule(s) vous appartenant personnellement
+          instanceLabel:
+            fr: Véhicule
+          addLabel:
+            fr: Ajouter un véhicule
+          removeLabel:
+            fr: Supprimer ce véhicule
+          components:
+            - name: vehiculeTypeMarqueAnnee
+              type: text
+              label:
+                fr: Type de véhicule, marque, année
+            - name: emploiSalaireHebdo
+              type: radio
+              label:
+                fr: Est-ce qu'il s'agit d'un véhicule adapté?
+              options: yesno
+            - name: vehiculeProprioLocataire
+              type: radio
+              label:
+                fr: "Êtes-vous propriétaire ou locataire du véhicule?"
+              options: 
+                VehiculeProprietaire: 'Propriétaire'
+                VehiculeLocataire: 'Locataire'
+            - name: vehiculeValeurMarchande
+              type: number
+              label:
+                fr: Valeur marchande
+        - name: BiensVehiculesConjoint
+          type: repeatableGroup
+          repeatable: true
+          v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesConjoint')          
+          label:
+            fr: Véhicule(s) appartenant(s) à votre conjoint(e)
+          instanceLabel:
+            fr: Véhicule
+          addLabel:
+            fr: Ajouter un véhicule
+          removeLabel:
+            fr: Supprimer ce véhicule
+          components:
+            - name: vehiculeTypeMarqueAnnee
+              type: text
+              label:
+                fr: Type de véhicule, marque, année
+            - name: emploiSalaireHebdo
+              type: radio
+              label:
+                fr: Est-ce qu'il s'agit d'un véhicule adapté?
+              options: yesno
+            - name: vehiculeProprioLocataire
+              type: radio
+              label:
+                fr: "Êtes-vous propriétaire ou locataire du véhicule?"
+              options: 
+                VehiculeProprietaire: 'Propriétaire'
+                VehiculeLocataire: 'Locataire'
+            - name: vehiculeValeurMarchande
+              type: number
+              label:
+                fr: Valeur marchande
+
     # Section - Dépôt direct
     - section: 
         fr: Dépôt direct
