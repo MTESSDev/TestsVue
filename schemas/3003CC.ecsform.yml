@@ -936,14 +936,23 @@ form:
       components:      
         - name: BiensVehicules
           type: radio
+          v-if: form['02-Conjoint'] === 'true'
           label:
             fr: "Est-ce que vous ou votre conjoint(e) possédez des véhicules (y compris des véhicules remisés)?"
           help:
             fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
           options: yesno
+        - name: BiensVehicules
+          type: radio
+          v-if: form['02-Conjoint'] === 'false'
+          label:
+            fr: "Est-ce que vous possédez des véhicules (y compris des véhicules remisés)?"
+          help:
+            fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
+          options: yesno
         - name: BiensVehiculesAppartenance
           type: checkbox
-          v-if: form.BiensVehicules == 'true'
+          v-if: form['02-Conjoint'] === 'true' && form.BiensVehicules == 'true'
           label:
             fr: "Indiquez la ou les situations qui s'appliquent"
           options: 
@@ -986,7 +995,7 @@ form:
         - name: BiensVehiculesPerso
           type: repeatableGroup
           repeatable: true
-          v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesPersonnel')          
+          v-if: form['02-Conjoint'] === 'false' && form['BiensVehicules'] === 'true' ||  (form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesPersonnel'))          
           label:
             fr: Véhicule(s) vous appartenant personnellement
           instanceLabel:
