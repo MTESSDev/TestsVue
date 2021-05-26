@@ -90,6 +90,7 @@
       "src/externe/vueFormulate/formulate.min.js",
       "src/externe/vueFormulate/fr.min.js",
       "Utils/VueFormulate/dist/mtess-vueformulate.min.js",
+      "src/externe/axios/axios.min.js",
       "src/temp/base.min.js"
     ],
     "minify": {
