@@ -972,7 +972,7 @@ form:
             fr: Ajouter un véhicule
           removeLabel:
             fr: Supprimer ce véhicule
-          components:
+          components: &groupeVehicule
             - name: vehiculeTypeMarqueAnnee
               type: text
               label:
@@ -1005,27 +1005,7 @@ form:
             fr: Ajouter un véhicule
           removeLabel:
             fr: Supprimer ce véhicule
-          components:
-            - name: vehiculeTypeMarqueAnnee
-              type: text
-              label:
-                fr: Type de véhicule, marque, année
-            - name: emploiSalaireHebdo
-              type: radio
-              label:
-                fr: Est-ce qu'il s'agit d'un véhicule adapté?
-              options: yesno
-            - name: vehiculeProprioLocataire
-              type: radio
-              label:
-                fr: "Êtes-vous propriétaire ou locataire du véhicule?"
-              options: 
-                VehiculeProprietaire: 'Propriétaire'
-                VehiculeLocataire: 'Locataire'
-            - name: vehiculeValeurMarchande
-              type: number
-              label:
-                fr: Valeur marchande
+          components: *groupeVehicule
         - name: BiensVehiculesConjoint
           type: repeatableGroup
           repeatable: true
@@ -1038,28 +1018,7 @@ form:
             fr: Ajouter un véhicule
           removeLabel:
             fr: Supprimer ce véhicule
-          components:
-            - name: vehiculeTypeMarqueAnnee
-              type: text
-              label:
-                fr: Type de véhicule, marque, année
-            - name: emploiSalaireHebdo
-              type: radio
-              label:
-                fr: Est-ce qu'il s'agit d'un véhicule adapté?
-              options: yesno
-            - name: vehiculeProprioLocataire
-              type: radio
-              label:
-                fr: "Êtes-vous propriétaire ou locataire du véhicule?"
-              options: 
-                VehiculeProprietaire: 'Propriétaire'
-                VehiculeLocataire: 'Locataire'
-            - name: vehiculeValeurMarchande
-              type: number
-              label:
-                fr: Valeur marchande
-
+          components: *groupeVehicule
     # Section - Dépôt direct
     - section: 
         fr: Dépôt direct
