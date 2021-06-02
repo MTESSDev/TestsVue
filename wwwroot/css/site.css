@@ -682,7 +682,7 @@ body p {
     /*====================================================================================================*/
     /*  -Z88- Tooltip (Redefinitions bootstrap)
 /*====================================================================================================*/
-    label.avec-tooltip .icone-champ-requis {
+    label.has-tooltip .icone-champ-requis {
         position: relative;
         top: 10px;
     }
@@ -964,6 +964,104 @@ form .input-validation-error, form .input-validation-error + .note-editor {
     /*====================================================================================================*/
     /*  -100- À positionner
 /*====================================================================================================*/
+.modal.aide-contextuelle {
+    display: block !important;
+    opacity: 0;
+    transform: translateY(100%) !important;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 3px 12px rgba(34,54,84,.22);
+    border: 1px solid #c5cad2;
+    will-change: bottom,opacity;
+    height: auto;
+    overflow: hidden;
+    z-index: 1000000;
+    transition: transform .6s ease-in-out,opacity .6s linear;
+    padding-top: var(--tc-24-16-val);
+    padding-bottom: var(--tc-24-16-val);
+}
+
+.modal.aide-contextuelle.show {
+    opacity: 1;
+    transform: translateY(0) !important;
+}
+
+
+.modal.aide-contextuelle .modal-header {
+    position: relative;
+    display:flex;
+    align-items: center;
+    margin: 0 auto;
+    border: none;
+    max-width: 714px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.modal.aide-contextuelle .modal-header h1 {
+    font-family: 'Roboto-Bold', sans-serif;
+    font-size: var(--text-lg-val);
+    letter-spacing: 0;
+    max-width: 58.75rem;
+    margin: 0;
+}
+
+.modal.aide-contextuelle .modal-header h1:after {
+    content: none;
+
+}
+
+.modal.aide-contextuelle .modal-header .close {
+    padding: 1rem;
+    font-size: 1rem;
+    opacity: 1;
+}
+
+.modal.aide-contextuelle .modal-header .close {
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.modal.aide-contextuelle .modal-content {
+    max-width: 714px;
+    border: 0;
+    line-height: 1.5rem;
+    margin-top: var(--tc-24-16-val);
+    overflow-y: auto;
+}
+
+    .modal.aide-contextuelle .modal-body {
+        padding: 0 1.5rem 0 0;
+        /*        max-height: 20vh;*/
+        max-height: calc(30vh - var(--tc-24-16) - var(--tc-24-16) - var(--tc-24-16));
+        overflow-y: auto;
+    }
+
+
+/* Scrollbar aide contextuelle */
+    .modal.aide-contextuelle .modal-body::-webkit-scrollbar, .modal.aide-contextuelle .modal-body::-webkit-scrollbar-thumb, .modal.aide-contextuelle .modal-body::-webkit-scrollbar-track {
+        background: transparent;
+        border: none;
+        border-radius: .3125rem;
+        height: 50%;
+        width: .625rem;
+        margin-top: 8px;
+    }
+
+    .modal.aide-contextuelle .modal-body::-webkit-scrollbar-button, .modal.aide-contextuelle .modal-body::-webkit-scrollbar-track-piece, .modal.aide-contextuelle .modal-body::-webkit-scrollbar-corner, .modal.aide-contextuelle .modal-body::-webkit-resizer {
+        display: none;
+    }
+
+    .modal.aide-contextuelle .modal-body::-webkit-scrollbar-thumb {
+        background-color: var(--couleur-bleu-pale);
+        transition: all .35s;
+    }
 
 
     /*====================================================================================================*/

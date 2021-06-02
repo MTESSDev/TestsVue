@@ -154,6 +154,10 @@
     --text-base-ecart: 2; /*min 14px max 16px*/
     --text-base-ecart-px: calc(var(--text-base-ecart) * 1px);
     --text-base-val: var(--text-base);
+    --text-lg: 1.25rem;
+    --text-lg-ecart: 2; /*min 18px max 20x*/
+    --text-lg-ecart-px: calc(var(--text-lg-ecart) * 1px);
+    --text-lg-val: var(--text-lg);
     --text-xl: 1.5rem;
     --text-xl-ecart: 3; /*min 21px max 24x*/
     --text-xl-ecart-px: calc(var(--text-xl-ecart) * 1px);
@@ -185,7 +189,7 @@
     --couleur-liens: #095797;
     --couleur-loader: #1073E6;
     --couleur-bouton-primaire: #095797;
-    --couleur-bleu-pale: #DAE6F0; /*TODO modifier dans ECS*/ 
+    --couleur-bleu-pale: #DAE6F0; /*TODO modifier dans ECS*/
     --couleur-orange: #cf4b00;
     --couleur-saumon: #F09686;
     --couleur-primaire-entete-soulignee: var(--couleur-saumon);
@@ -353,6 +357,7 @@ a:hover .avec-underline, a:focus .avec-underline {
         --tc-48-40-val: calc(var(--tc-48-40) - var(--tc-48-40-ecart-px));
         --tc-80-72-val: calc(var(--tc-80-72) - var(--tc-80-72-ecart-px));
         --text-base-val: calc(var(--text-base) - var(--text-base-ecart-px));
+        --text-lg-val: calc(var(--text-lg) - var(--text-lg-ecart-px));
         --text-xl-val: calc(var(--text-xl) - var(--text-xl-ecart-px));
         --text-xxl-val: calc(var(--text-xxl) - var(--text-xxl-ecart-px));
         --text-xxxl-val: calc(var(--text-xxxl) - var(--text-xxxl-ecart-px));
@@ -403,6 +408,7 @@ a:hover .avec-underline, a:focus .avec-underline {
         --tc-48-40-val: calc(var(--tc-48-40) + (var(--ratio-vw) * var(--tc-48-40-ecart)) - var(--tc-48-40-ecart-px));
         --tc-80-72-val: calc(var(--tc-80-72) + (var(--ratio-vw) * var(--tc-80-72-ecart)) - var(--tc-80-72-ecart-px));
         --text-base-val: calc(var(--text-base) + (var(--ratio-vw) * var(--text-base-ecart)) - var(--text-base-ecart-px));
+        --text-lg-val: calc(var(--text-lg) + (var(--ratio-vw) * var(--text-lg-ecart)) - var(--text-lg-ecart-px));
         --text-xl-val: calc(var(--text-xl) + (var(--ratio-vw) * var(--text-xl-ecart)) - var(--text-xl-ecart-px));
         --text-xxl-val: calc(var(--text-xxl) + (var(--ratio-vw) * var(--text-xxl-ecart)) - var(--text-xxl-ecart-px));
         --text-xxxl-val: calc(var(--text-xxxl) + (var(--ratio-vw) * var(--text-xxxl-ecart)) - var(--text-xxxl-ecart-px));
@@ -432,6 +438,10 @@ h1, .text-xxxl {
 
 .text-xl, .card.section-base > .card-title {
     font-size: var(--text-xl-val);
+}
+
+.text-lg{
+    font-size: var(--text-lg-val);
 }
 
 .text-base {

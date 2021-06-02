@@ -88,6 +88,23 @@
                 <button class="btn btn-secondaire btn-enregistrer" v-on:click="enregistrer">Enregistrer</button>
                 <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPageSuivante)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
             </div>
+
+            <div id="tooltipModal" class="modal aide-contextuelle" tabindex="-1" role="dialog" aria-labelledby="modal-title" style="display: block;" aria-modal="true">
+                <div class="modal-header container" id="modal-header">
+                    <h1 id="modal-title"><span class="sr-only">Aide à propos de</span><span id="dialog-title">{{tooltipTitle}}</span></h1>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span class="icone-svg x-fermer-bleu" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-content container">
+                    <div class="modal-body">
+                        <div id="dialog-description" class="dialog-content">
+                            {{tooltipText}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div v-if="new URLSearchParams(window.location.search).get('debug')" class="infos-developpeurs">
                 {{form}}
             </div>
@@ -118,7 +135,7 @@
             repeatable: 'Repeatable'
         },
         slotProps: {
-            label: ['tooltip'],
+            label: ['tooltipTitle', 'tooltipText'],
             repeatable: ['instanceLabel']
         },
         locale: '@Model.Language',
@@ -225,7 +242,7 @@
 
                 return listeErreurs.length > 0 ? JSON.stringify(listeErreurs) : false
             },
-            initialiserToolTips() {
+/*            initialiserToolTips() {
 
                 const template = `<div class="tooltip" role="tooltip">
                                     <div class="tooltip-header">
@@ -264,7 +281,7 @@
                         })
                     })
                 })
-            },
+            },*/
             ajouterErreursChamp(champ, listeErreurs) {
                 champ.formShouldShowErrors = true
                 champ.context.validationErrors.forEach(message => {
@@ -330,6 +347,22 @@
             obtenirIdPageControle(controle) {
                 return controle.parents('.section:first').attr('data-id-page')
             },
+            showTooltip(title, text) {
+                this.tooltipTitle = title || ''
+                this.tooltipText = text || ''
+                $('#tooltipModal').modal()
+            },
+            initialiserTooltip() {
+                //Fermer le tooltip(modal) lorsque qu'il n'a plus le focus ou que le focus n'est plus à l'intérieur
+                const $tooltipModal = $("#tooltipModal")
+                $tooltipModal.on('focusout', function () {
+                    if ($tooltipModal[0].matches(':not(:focus-within)')) {
+                        $tooltipModal.modal('hide')
+                    }
+                }); //TODO ici trouver pourquoi la modale ne se ferme pas quand on clic en dehors (devrait être le comportement par défaut.)
+                //Conserver le focus dans la modale de tooltip sur TAB, SHIFT-TAB
+                conserverFocusElement($tooltipModal.get(0))
+            },
             effectuerNavigation(noPage, nomControleFocus, pasFocus) {
                 this.form.validAll = false
                 this.config.keepData = true
@@ -353,8 +386,6 @@
                         this.form.validAll = true
                         this.$formulate.submit('form')
                     }
-
-                    this.initialiserToolTips()
 
                     if (nomControleFocus) {
                         const controles = document.getElementsByName(nomControleFocus)
@@ -430,22 +461,21 @@
             }
 
         },
-        data: function() {
-            return JSON.parse('@data');
+        data: function () {
+            let donnees = JSON.parse('@data')
+            donnees['tooltipTitle'] = ''
+            donnees['tooltipText'] = ''
+            return donnees;
         },
         mounted() {
             console.log('Application mounted.');
-            this.initialiserToolTips()
+            this.initialiserTooltip()
         }
     }
 
     window.addEventListener('load', () => {
         new Vue(App)
     })
-
-    function fermerTooltip() {
-        alert('banane')
-    }
 
     function obtenirTexteEdite(id) {
         return '(Patch) Non défini.'

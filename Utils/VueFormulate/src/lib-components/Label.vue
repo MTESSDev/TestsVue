@@ -1,7 +1,7 @@
 <template>
-    <label :id="`${context.id}_label`" :class="[context.classes.label, tooltip ? 'avec-tooltip' : '']" :for="context.id">
-        <span>{{context.label}}</span><span v-if="isRequired" aria-hidden="true" class="icone-champ-requis">&nbsp;{{requiredFieldIndicator}}</span><span v-if="tooltip" class="conteneur-tooltip">&#xfeff;
-    <button type="button" class="tooltip-toggle" data-toggle="tooltip" :title="tooltip">
+    <label :id="`${context.id}_label`" :class="[context.classes.label, tooltipText ? 'has-tooltip' : '']" :for="context.id">
+        <span>{{context.label}}</span><span v-if="isRequired" aria-hidden="true" class="icone-champ-requis">&nbsp;{{requiredFieldIndicator}}</span><span v-if="tooltipText" class="conteneur-tooltip">&#xfeff;
+    <button type="button" class="tooltip-toggle" data-toggle="modal" @click="showTooltip()">
         <span class="conteneur-puce">
             <span class="puce" aria-hidden="true">
                 <span class="icone-svg question" aria-hidden="true"></span>
@@ -24,10 +24,19 @@
                 type: Object,
                 required: true
             },
-            tooltip: {
+            tooltipTitle: {
+                type: String,
+                required: false
+            },
+            tooltipText: {
                 type: String,
                 required: false
             }
+        },
+        methods: {
+            showTooltip() {
+                this.$root.showTooltip(this.tooltipTitle, this.tooltipText)
+            },
         },
         computed: {
             messagesErreur() {

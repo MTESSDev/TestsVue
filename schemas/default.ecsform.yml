@@ -39,7 +39,8 @@ form:
               {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
-              {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
+              {{# tooltipTitle}} tooltip-title="{{i18n .}}" {{/ tooltipTitle}}
+                {{# tooltipText}} tooltip-text="{{i18n .}}" {{/ tooltipText}}
               {{# help}} help="{{i18n .}}" {{/ help}}
               {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
               {{GenerateValidations .}}

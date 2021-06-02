@@ -23,10 +23,20 @@ var script$3 = {
       type: Object,
       required: true
     },
-    tooltip: {
+    tooltipTitle: {
+      type: String,
+      required: false
+    },
+    tooltipText: {
       type: String,
       required: false
     }
+  },
+  methods: {
+    showTooltip() {
+      this.$root.showTooltip(this.tooltipTitle, this.tooltipText);
+    }
+
   },
   computed: {
     messagesErreur() {
@@ -140,7 +150,7 @@ var __vue_render__$3 = function () {
   var _c = _vm._self._c || _h;
 
   return _c('label', {
-    class: [_vm.context.classes.label, _vm.tooltip ? 'avec-tooltip' : ''],
+    class: [_vm.context.classes.label, _vm.tooltipText ? 'has-tooltip' : ''],
     attrs: {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
@@ -150,14 +160,18 @@ var __vue_render__$3 = function () {
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_vm._v(" " + _vm._s(_vm.requiredFieldIndicator))]) : _vm._e(), _vm.tooltip ? _c('span', {
+  }, [_vm._v(" " + _vm._s(_vm.requiredFieldIndicator))]) : _vm._e(), _vm.tooltipText ? _c('span', {
     staticClass: "conteneur-tooltip"
   }, [_vm._v("﻿\n    "), _c('button', {
     staticClass: "tooltip-toggle",
     attrs: {
       "type": "button",
-      "data-toggle": "tooltip",
-      "title": _vm.tooltip
+      "data-toggle": "modal"
+    },
+    on: {
+      "click": function ($event) {
+        return _vm.showTooltip();
+      }
     }
   }, [_vm._m(0)])]) : _vm._e(), _vm._v(" "), _vm.isRequired ? _c('span', {
     staticClass: "sr-only"
