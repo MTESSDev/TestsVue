@@ -21,7 +21,7 @@ namespace ECSForm.Utils
         private static readonly Func<HelperContext, IDictionary<object, object>?, string> i18n = FormHelpers.I18n;
         private static readonly Func<HelperContext, IEnumerable<dynamic>, string> recursiveComponents = FormHelpers.RecursiveComponents;
         private static readonly Func<HelperContext, string, object, string> generateClasses = FormHelpers.GenerateClasses;
-        private static readonly Func<HelperContext, string, object, string> generatePlaceholder = FormHelpers.GeneratePlaceholder;
+        private static readonly Func<HelperContext, string, object, string> generateDefaults = FormHelpers.GenerateDefaults;
         private static readonly Func<HelperContext, object, string> generateVif = FormHelpers.GenerateVif;
         public readonly Func<string, string, bool> equalsFormulate = FormHelpers.EqualsFormulate;
         //public readonly Func<string, bool> hasValueFormulate = FormHelpers.HasValueFormulate;
@@ -55,31 +55,39 @@ namespace ECSForm.Utils
             return $"{input} {outer}";
         }
 
-        private static string GeneratePlaceholder(HelperContext context, string type, dynamic component)
+        private static string GenerateDefaults(HelperContext context, string type, dynamic component)
         {
             var dictComponent = component as IDictionary<object, object>;
 
             if (dictComponent is null) return string.Empty;
 
-            dictComponent.TryGetValue("placeholder", out var componentPlaceholder);
+            var defaultDict = context.Lookup<Dictionary<object, object>>($"Form.{type}Default");
 
-            if (componentPlaceholder is null)
+            var html = string.Empty;
+
+            if (defaultDict != null)
             {
-                var defaultDict = context.Lookup<Dictionary<object, object>>($"Form.{type}DefaultPlaceholder");
-
-                var localPlaceholder = defaultDict.GetLocalizedObject();
-
-                if (localPlaceholder != null)
+                foreach (var defaultVal in defaultDict)
                 {
-                    return $" placeholder=\"{localPlaceholder}\" ";
+                    dictComponent.TryGetValue(defaultVal.Key, out var overrideValue);
+
+                    if (overrideValue is null)
+                    {
+                        var element = (defaultVal.Value as Dictionary<object, object>);
+                        if (element is null)
+                        {
+                            html += $" {defaultVal.Key}=\"{defaultVal.Value}\" ";
+                        }
+                        else
+                        {
+                            var localPlaceholder = (defaultVal.Value as Dictionary<object, object>).GetLocalizedObject();
+                            html += $" {defaultVal.Key}=\"{localPlaceholder}\" ";
+                        }
+                    }
                 }
             }
-            else
-            {
-                return $" placeholder=\"{(componentPlaceholder as IDictionary<object, object>).GetLocalizedObject()}\" ";
-            }
 
-            return string.Empty;
+            return html;
         }
 
         public static string GenerateVif(object vif)
@@ -151,7 +159,7 @@ namespace ECSForm.Utils
                 {
                     var helpers = new Helpers()
                             .Register("GenerateClasses", generateClasses)
-                            .Register("GeneratePlaceholder", generatePlaceholder)
+                            .Register("GenerateDefaults", generateDefaults)
                             .Register("GenerateVif", generateVif)
                             .Register("RecursiveComponents", recursiveComponents)
                             .Register("i18n", i18n)
