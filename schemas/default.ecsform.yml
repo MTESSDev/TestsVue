@@ -1,11 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
-  selectDefault:
-    placeholder:
-      fr: Veuillez effectuer une sélection...
-      en: Please select an option...
-  dateDefault:
-    max: 2999-12-31
+  defaults:
+    select:
+      placeholder:
+        fr: Veuillez effectuer une sélection...
+        en: Please select an option...
+    date:
+      max: 2999-12-31
   inputDefaultClasses:
     default: form-control 
     group: 

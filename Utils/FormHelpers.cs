@@ -61,7 +61,7 @@ namespace ECSForm.Utils
 
             if (dictComponent is null) return string.Empty;
 
-            var defaultDict = context.Lookup<Dictionary<object, object>>($"Form.{type}Default");
+            var defaultDict = context.Lookup<Dictionary<object, object>>($"Form.defaults.{type}");
 
             var html = string.Empty;
 

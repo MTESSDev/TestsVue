@@ -31,13 +31,9 @@
                 "inputDefaultClasses": {
                     "type": "object"
                 },
-                "selectDefault": {
+                "defaults": {
                     "type": "object",
-                    "$ref": "#/definitions/Translation"
-                },
-                "dateDefault": {
-                    "type": "object",
-                    "$ref": "#/definitions/Input"
+                    "$ref": "#/definitions/Defaults"
                 },
                 "outerDefaultClasses": {
                     "type": "object"
@@ -384,6 +380,10 @@
                 "fr"
             ],
             "title": "Translation"
+        },
+        "defaults": {
+            "type": "object",
+            "title": "Defaults values"
         }
     }
 }
