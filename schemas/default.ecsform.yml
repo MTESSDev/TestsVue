@@ -50,6 +50,8 @@ form:
               {{GenerateValidations .}}
               {{# min}} min="{{.}}" {{/ min}}
               {{# max}} max="{{.}}" {{/ max}}
+              {{# inputmode}} inputmode="{{.}}" {{/ inputmode}}
+              {{# pattern}} pattern="{{.}}" {{/ pattern}}
               {{# limit}} limit="{{.}}" {{/ limit}}
               {{# options}} :options="{{JsObject options}}" {{/ options}}
               error-behavior="value"

@@ -64,7 +64,7 @@ form:
               validations: 
                 optional: null
             - name: ReqFinDiminutionRevenusType
-              v-if: form.EvenementsDerniereAnnee && form.EvenementsDerniereAnnee.includes('ReqFinDiminutionRevenus')
+              v-if: val('EvenementsDerniereAnnee').includes('ReqFinDiminutionRevenus')
               type: checkbox
               label: 
                 fr: Type de revenu
@@ -74,22 +74,22 @@ form:
                 FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
                 FinRevenusAutres: autre
             - name: FinRevenusPrestationsPrecision
-              v-if: form.ReqFinDiminutionRevenusType && form.ReqFinDiminutionRevenusType.includes('FinRevenusPrestations')
+              v-if: val('ReqFinDiminutionRevenusType').includes('FinRevenusPrestations')
               type: text
               label: 
                 fr: Précisez le type de prestations gouvernementales
             - name: FinRevenusAutresPrecision
-              v-if: form.ReqFinDiminutionRevenusType && form.ReqFinDiminutionRevenusType.includes('FinRevenusAutres')
+              v-if: val('ReqFinDiminutionRevenusType').includes('FinRevenusAutres')
               type: text
               label: 
                 fr: Précisez le type de revenu
             - name: ReqDateEvenementFinDiminutionRevenus
-              v-if: form['EvenementsDerniereAnnee'] && form['EvenementsDerniereAnnee'].length && form['EvenementsDerniereAnnee'].includes('ReqFinDiminutionRevenus')
+              v-if: val('EvenementsDerniereAnnee').includes('ReqFinDiminutionRevenus')
               type: date
               label: 
                 fr: Date de la fin ou diminution de revenus
             - name: ReqDateEvenementFinEtudesTempsPlein
-              v-if: form['EvenementsDerniereAnnee'] && form['EvenementsDerniereAnnee'].length && form['EvenementsDerniereAnnee'].includes('ReqFinEtudesTempsPlein')
+              v-if: val('EvenementsDerniereAnnee').includes('ReqFinEtudesTempsPlein')
               type: date
               label: 
                 fr: Date de la fin d'études à temps plein
@@ -109,7 +109,7 @@ form:
                 RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
                 PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
             - name: PrecisionRaisonDemandeAfdrAttenteDecision
-              v-if: form.PrecisionRaisonDemandeAfdr === 'AttenteDecision'
+              v-if: val('PrecisionRaisonDemandeAfdr') === 'AttenteDecision'
               type: text
               label: 
                 fr: Précisez la raison de votre demande d'aide financière de dernier recours
@@ -206,10 +206,12 @@ form:
           outerClasses: md          
           label: 
             fr: Numéro d'assurance sociale
+          inputmode: number  
+          pattern: '[0-9]*'
           validations: 
-            max: 9,length
+            matches: '/[0-9]{9}/'
         - name: date2_Req-00
-          v-if: form['Req-00_nas1'] && form['Req-00_nas1'].startsWith('9')
+          v-if: val('Req-00_nas1').startsWith('9')
           type: date
           label: 
             fr: Date d'expiration
@@ -398,7 +400,7 @@ form:
             RQAP: Prestations d'assurance parentale (RQAP)
             AutresAide: Autre type d'aide (indemnités versées par la SAAQ ou la CNESST, rente de retraite, prêts et bourses pour études, etc.)
         - name: AideRecueAutrePrecision
-          v-if: form['TypeAideRecue'] && form['TypeAideRecue'].includes('AutresAide')
+          v-if: val('TypeAideRecue').includes('AutresAide')
           type: text
           label: 
             fr: Précisez le type d'aide
@@ -448,7 +450,7 @@ form:
                 Anglais: Anglais
                 AutresLanguesParlees: Autres
             - name: PrecisionLanguesParlees
-              v-if: form['LanguesParlees_Req-00'] && form['LanguesParlees_Req-00'].includes('AutresLanguesParlees')
+              v-if: val('LanguesParlees_Req-00').includes('AutresLanguesParlees')
               type: text
               label: 
                 fr: Précisez les autres langues parlées
@@ -461,7 +463,7 @@ form:
                 Anglais: Anglais
                 AutresLanguesEcrites: Autres
             - name: PrecisionLanguesEcrites
-              v-if: form['LanguesEcrites_Req-00'] && form['LanguesEcrites_Req-00'].includes('AutresLanguesEcrites')
+              v-if: val('LanguesEcrites_Req-00').includes('AutresLanguesEcrites')
               type: text
               label: 
                 fr: Précisez les autres langues écrites
@@ -601,7 +603,7 @@ form:
 
             - name: primaire        
               type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesPrimaire')
+              v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesPrimaire')
               label:
                 fr: Primaire
               components:
@@ -617,7 +619,7 @@ form:
                     fr: Date de fin des études
             - name: secondaireGen
               type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireGen')          
+              v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireGen')          
               label:
                 fr: Secondaire (général)
               components:
@@ -640,7 +642,7 @@ form:
                     fr: Date de fin des études
             - name: secondaireProf
               type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormProf')                    
+              v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormProf')                    
               label:
                 fr: Secondaire (Formation professionnelle)
               components:
@@ -669,7 +671,7 @@ form:
                     fr: Date de fin des études
             - name: secondaireMetier
               type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormMétier')                              
+              v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormMétier')                              
               label:
                 fr: Secondaire (Formation à un métier semi-spécialisé)
               components:
@@ -689,7 +691,7 @@ form:
                     fr: Date de fin des études
             - name: collegial
               type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesCollegial')                                        
+              v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesCollegial')                                        
               label:
                 fr: Collégial (Formation générale ou technique)
               components:
@@ -718,7 +720,7 @@ form:
                     fr: Date de fin des études
             - name: universitaire
               type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesUniversitaire')                                                  
+              v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesUniversitaire')                                                  
               label:
                 fr: Universitaire            
               components:
@@ -924,7 +926,7 @@ form:
             ReqLieuDispoTravailAutre: Autre
         - name: Req01-LieuxDisponibiliteTravailPrecision
           type: text
-          v-if: form['Req01-LieuxDisponibiliteTravail'] && form['Req01-LieuxDisponibiliteTravail'].includes('ReqLieuDispoTravailAutre')   
+          v-if: val('Req01-LieuxDisponibiliteTravail').includes('ReqLieuDispoTravailAutre')   
           label:
             fr: "Précisez où vous êtes prêt à travailler"
         - name: raisonNonDisponibiliteTravail_Req-01
@@ -967,7 +969,7 @@ form:
         - name: BiensVehiculesCopropriete
           type: repeatableGroup
           repeatable: true
-          v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesCopropriete')          
+          v-if: val('BiensVehiculesAppartenance').includes('VehiculesCopropriete')          
           label:
             fr: Véhicule(s) en copropriété avec votre conjoint(e)
           instanceLabel:
@@ -1000,7 +1002,7 @@ form:
         - name: BiensVehiculesPerso
           type: repeatableGroup
           repeatable: true
-          v-if: form['02-Conjoint'] === 'false' && form['BiensVehicules'] === 'true' ||  (form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesPersonnel'))          
+          v-if: form['02-Conjoint'] === 'false' && form['BiensVehicules'] === 'true' ||  (val('BiensVehiculesAppartenance').includes('VehiculesPersonnel'))          
           label:
             fr: Véhicule(s) vous appartenant personnellement
           instanceLabel:
@@ -1013,7 +1015,7 @@ form:
         - name: BiensVehiculesConjoint
           type: repeatableGroup
           repeatable: true
-          v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesConjoint')          
+          v-if: val('BiensVehiculesAppartenance').includes('VehiculesConjoint')          
           label:
             fr: Véhicule(s) appartenant(s) à votre conjoint(e)
           instanceLabel:

@@ -215,6 +215,10 @@
                     })
                 }
             },
+            val(idChamp) {
+                const valeur = this.form[`${idChamp}`]
+                return valeur || ''
+            },
             //TODO évaluer possibilité d'en faire une fonction commune
             donnerFocusPremierElementFocusable(conteneur) {
                 var elementsFocusables = obtenirElementsFocusables(conteneur);
@@ -352,7 +356,7 @@
                 this.tooltipText = text || ''
                 $('#tooltipModal').modal()
             },
-            initialiserTooltip() {
+            initialiserTooltips() {
                 //Fermer le tooltip(modal) lorsque qu'il n'a plus le focus ou que le focus n'est plus à l'intérieur
                 const $tooltipModal = $("#tooltipModal")
                 $tooltipModal.on('focusout', function () {
@@ -469,7 +473,7 @@
         },
         mounted() {
             console.log('Application mounted.');
-            this.initialiserTooltip()
+            this.initialiserTooltips()
         }
     }
 
@@ -479,6 +483,7 @@
 
     function obtenirTexteEdite(id) {
         return '(Patch) Non défini.'
-    }
+        }
+
     </script>
 }
