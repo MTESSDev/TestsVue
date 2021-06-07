@@ -139,7 +139,24 @@
             repeatable: ['instanceLabel']
         },
         locale: '@Model.Language',
-        validationNameStrategy: ['validationName', 'label', 'name', 'type']
+        validationNameStrategy: ['validationName', 'label', 'name', 'type'],
+        rules: {
+            nas: ({ value }) => {
+                console.log('validation')
+                if (value) {
+                    const match = value.match(/[0-9]{9}/gm)
+                    return match && match.length > 0
+                }
+                return false
+            }
+        },
+        locales: {
+            fr: {
+                nas({ name }) {
+                    return `Le champ ${name} doit être composé de 9 chiffres.`
+                }
+            }
+        }
     });
 
     const App = {
