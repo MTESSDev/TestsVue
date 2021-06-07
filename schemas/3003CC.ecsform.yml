@@ -209,7 +209,7 @@ form:
           inputmode: number  
           pattern: '[0-9]*'
           validations: 
-            nas: 0
+            nas: true
         - name: date2_Req-00
           v-if: val('Req-00_nas1').startsWith('9')
           type: date
