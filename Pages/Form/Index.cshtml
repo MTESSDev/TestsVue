@@ -60,11 +60,17 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul>
-                <li v-for="page in pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}">
-                    <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
-                    <span class="puce">
-                        <span class="icone-svg sm" aria-hidden="true"></span>
-                    </span>
+                <li v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])">
+                    <span class="texte">{{ groupe.titre }}</span>
+                    <ul>
+
+                        <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}">
+                            <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
+                            <span class="puce">
+                                <span class="icone-svg sm" aria-hidden="true"></span>
+                            </span>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -459,10 +465,19 @@
                 }
                 return 0;
             }
-
         },
         data: function () {
             let donnees = JSON.parse('@data')
+            let pagesFlat = []
+
+            for (groupe of donnees.pagesGroup) {
+                for (page of groupe.pages) {
+                    page['v-if-groupe'] = groupe['v-if']
+                    pagesFlat.push(page)
+                }
+            }
+
+            donnees['pages'] = pagesFlat
             donnees['tooltipTitle'] = ''
             donnees['tooltipText'] = ''
             return donnees;
