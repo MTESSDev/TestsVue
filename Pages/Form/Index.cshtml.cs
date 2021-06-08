@@ -230,7 +230,7 @@ namespace ECSForm.Pages
                 {
                     No = groupNo++,
                     Id = pageGroupDict.TryGetValue("id", out var sectionId) ? sectionId?.ToString() ?? string.Empty : string.Empty,
-                    Titre = pageGroupDict.TryGetValue("sectionGroup", out var sectionName) ? (sectionName as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found" : "Title not found",
+                    Titre = pageGroupDict.TryGetValue("sectionGroup", out var sectionName) ? (sectionName as Dictionary<object, object>).GetLocalizedObject() : null,
                     VIf = (pageGroupDict.TryGetValue("v-if", out object? vif) ? vif?.ToString() ?? string.Empty : string.Empty),
                     Pages = pages
                 });
