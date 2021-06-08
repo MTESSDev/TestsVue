@@ -9,18 +9,20 @@
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
-    {{# Form.grouping}}
-    {{# sections}}
-    <div {{# v-if}} v-if="{{.}}" {{/ v-if}}>
-        <div v-if="form.validAll === true || pageCourante.id == '{{id}}'">
-            <div class="section {{classes}}" data-id-page="{{id}}"
-                 v-show="pageCourante.id == '{{id}}' && form.validAll === false">
-                {{RecursiveComponents components}}
+    {{# Form.sectionsGroup}}
+    <div class="sectionGroup" {{# v-if }} v-if="{{.}}" {{/ v-if}}>
+        {{# sections}}
+        <div {{# v-if}} v-if="{{.}}" {{/ v-if}}>
+            <div v-if="form.validAll === true || pageCourante.id == '{{id}}'">
+                <div class="section {{classes}}" data-id-page="{{id}}"
+                     v-show="pageCourante.id == '{{id}}' && form.validAll === false">
+                    {{RecursiveComponents components}}
+                </div>
             </div>
         </div>
+        {{/ sections}}
     </div>
-    {{/ sections}}
-    {{/ Form.grouping}}
+    {{/ Form.sectionsGroup}}
 
     <formulate-input type="submit"
                      v-if="pageCourante.id === 'revision'"

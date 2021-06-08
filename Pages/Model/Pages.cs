@@ -11,5 +11,6 @@ namespace ECSForm.Model
         public string Titre { get; set; } = string.Empty;
         [JsonProperty("v-if")]
         public string VIf { get; set; } = string.Empty;
+        public IEnumerable<Section>? Pages { get; set; }
     }
 }

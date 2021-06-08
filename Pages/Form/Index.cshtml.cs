@@ -42,7 +42,7 @@ namespace ECSForm.Pages
         [VueData("noPageCourante")]
         public int NoPageCourante { get; set; } = 0;
 
-        [VueData("pages")]
+        [VueData("pagesGroup")]
         public List<Section>? Sections { get; set; } = new List<Section>();
 
         public static IDeserializer deserializer = new DeserializerBuilder()
@@ -162,7 +162,7 @@ namespace ECSForm.Pages
                 dynamicForm = ReadYamlCfg(@$"schemas/{configName}.ecsform.yml");
             }
 
-            if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?["grouping"] is null || dynamicForm?.Form?["grouping"]["sections"] is null) { return NotFound(); }
+            if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?["sectionsGroup"] is null) { return NotFound(); }
 
             ///* Section TEST pour le v-if "SERVER-SIDE" */
             //var lambdaParser = new NReco.Linq.LambdaParser();
@@ -201,16 +201,38 @@ namespace ECSForm.Pages
 
             //if (dynamicForm?.Form?["sections"] is null) { return NotFound(); }
 
+            var groupNo = 0;
             var sectionNo = 0;
-            foreach (Dictionary<object, object>? section in dynamicForm.Form["grouping"]["sections"])
+            foreach (var sectionGroup in dynamicForm.Form["sectionsGroup"])
             {
-                if (section is null) { continue; }
+                var pageGroupDict = (sectionGroup as Dictionary<object, object>);
+                List<Section> pages = new List<Section>();
+
+                if (pageGroupDict.TryGetValue("sections", out var sections))
+                {
+                    foreach (Dictionary<object, object>? section in (sections as List<object>))
+                    {
+                        if (section is null) { continue; }
+
+                        pages.Add(new Section()
+                        {
+                            No = sectionNo++,
+                            Id = section.TryGetValue("id", out var pageId) ? pageId?.ToString() ?? string.Empty : string.Empty,
+                            Titre = section.TryGetValue("section", out var pageName) ? (pageName as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found" : "Title not found",
+                            VIf = (section.TryGetValue("v-if", out object? pageVif) ? pageVif?.ToString() ?? string.Empty : string.Empty)
+                        });
+
+                    }
+
+                }
+
                 Sections?.Add(new Section()
                 {
-                    No = sectionNo++,
-                    Id = section.TryGetValue("id", out var sectionId) ? sectionId?.ToString() ?? string.Empty : string.Empty,
-                    Titre = section.TryGetValue("section", out var sectionName) ? (sectionName as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found" : "Title not found",
-                    VIf = (section.TryGetValue("v-if", out object? vif) ? vif?.ToString() ?? string.Empty : string.Empty)
+                    No = groupNo++,
+                    Id = pageGroupDict.TryGetValue("id", out var sectionId) ? sectionId?.ToString() ?? string.Empty : string.Empty,
+                    Titre = pageGroupDict.TryGetValue("sectionGroup", out var sectionName) ? (sectionName as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found" : "Title not found",
+                    VIf = (pageGroupDict.TryGetValue("v-if", out object? vif) ? vif?.ToString() ?? string.Empty : string.Empty),
+                    Pages = pages
                 });
             }
 
