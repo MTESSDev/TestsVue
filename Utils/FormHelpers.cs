@@ -277,10 +277,10 @@ namespace ECSForm.Utils
 
             var form = new Dictionary<object, object>();
             form.TryAdd("Form", context.Lookup<object>("Form"));
+            form.TryAdd("prefixId", context.Lookup<object>("prefixId"));
 
             foreach (var component in components)
             {
-                form.TryAdd("prefixId", context.Lookup<object>("prefixId"));
                 if (context.Lookup<Dictionary<object, object>>("Form.templates").TryGetValue(component["type"], out object template))
                 {
                     html += Stubble.Render(template.ToString(), FormHelpersExtensions.Combine(component, form));
