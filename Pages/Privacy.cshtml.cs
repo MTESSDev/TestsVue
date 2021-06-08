@@ -45,13 +45,11 @@ namespace ECSForm.Pages
 
             var dynamicForm = GenericModel.ReadYamlCfg(@$"schemas/{id}.ecsform.yml");
 
-
             var context = new ValidationContext(data, serviceProvider: null, items: null);
 
             FormData formData = new FormData();
 
-            GetEffectiveComponents(data, dynamicForm.Form, ref formData, null);
-
+            GetEffectiveComponents(data, dynamicForm.Form?["sectionsGroup"], ref formData, null, null);
 
             foreach (var item in formData.Inputs)
             {
@@ -61,7 +59,7 @@ namespace ECSForm.Pages
                     {
                         if (!string.IsNullOrEmpty(item.Name))
                         {
-                            data.TryGetValue(item.Name, out var val);
+                            data.TryGetValue(item.PrefixId + item.Name, out var val);
 
                             if (!validation.IsValid(val))
                             {
@@ -80,16 +78,17 @@ namespace ECSForm.Pages
             group = 1
         }
 
-        public static IDictionary<object, object>? GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData, string? groupName = null)
+        public static IDictionary<object, object>? GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData, string? prefixId, string? groupName)
         {
-            var obj = components as IDictionary<object, object>;
+            //var obj = components as IDictionary<object, object>;
             var obj2 = components as IList<object>;
 
-            if (obj != null && obj.ContainsKey("sections"))
-            {
-                return GetEffectiveComponents(data, obj["sections"], ref formData, null);
-            }
-            else if (obj2 != null)
+            /*if (obj != null && obj.ContainsKey("sections"))
+             {
+                 return GetEffectiveComponents(data, obj["sections"], ref formData, null);
+             }
+             else */
+            if (obj2 != null)
             {
                 foreach (var item in obj2)
                 {
@@ -97,6 +96,12 @@ namespace ECSForm.Pages
 
                     if (dictItem != null)
                     {
+                        if (dictItem.TryGetValue("sections", out var sections))
+                        {
+                            dictItem.TryGetValue("prefixId", out var currentPrefixId);
+                            return GetEffectiveComponents(data, sections, ref formData, currentPrefixId?.ToString(), null);
+                        }
+
                         if (dictItem.TryGetValue("v-if", out var vif))
                         {
                             //Run v-if
@@ -126,13 +131,13 @@ namespace ECSForm.Pages
                         {
                             if (dictItem.TryGetValue("type", out var componentType))
                             {
-                                if (componentType.Equals("group"))
+                                if (componentType != null && componentType.ToString()!.EndsWith("group", StringComparison.InvariantCultureIgnoreCase))
                                 {
                                     groupName = dictItem["name"].ToString();
                                 }
                             }
 
-                            var returnComp = GetEffectiveComponents(data, innerComponents, ref formData, groupName);
+                            var returnComp = GetEffectiveComponents(data, innerComponents, ref formData, prefixId, groupName);
                             if (returnComp != null)
                             {
                                 return returnComp;
@@ -143,6 +148,7 @@ namespace ECSForm.Pages
                     var inputV = new Inputs();
                     inputV.ParseAttributes(dictItem);
                     inputV.GroupName = groupName;
+                    inputV.PrefixId = prefixId;
                     if (inputV.Type != TypeInput.SKIP)
                     {
                         formData.Inputs.Add(inputV);
