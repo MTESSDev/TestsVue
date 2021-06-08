@@ -2,9 +2,8 @@
 form:
   sectionsGroup:
     - sectionGroup: 
-        fr: Groupe 2
+        fr: Demande
       #v-if: form.TypeDemande
-      prefixId: req$
       sections:
         # Section 0
         - section: 
@@ -183,6 +182,12 @@ form:
                   type: text
                   label: 
                     fr: Précisez la raison de votre demande d'aide à l'emploi
+    - sectionGroup: 
+        fr: Adulte 1
+      #v-if: form.TypeDemande
+      prefixId: req$
+      sections:
+
         # Section 2
         - section: 
             fr: Renseignements sur l'identite
@@ -1028,6 +1033,9 @@ form:
               removeLabel:
                 fr: Supprimer ce véhicule
               components: *groupeVehicule
+    - sectionGroup: 
+        fr: Finalisation de la demande
+      sections:
         # Section - Dépôt direct
         - section: 
             fr: Dépôt direct

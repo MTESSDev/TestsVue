@@ -61,7 +61,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul>
                 <li v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])">
-                    <span class="texte">{{ groupe.titre }}</span>
+                    <span class="groupe" v-if="groupe.titre">{{ groupe.titre }}</span>
                     <ul>
 
                         <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}">

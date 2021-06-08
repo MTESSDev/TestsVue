@@ -586,24 +586,31 @@ body p {
             }
         }
 
-        
-        nav.etapes-form li.active a {
-            font-weight: 700;
-        }
 
+nav.etapes-form li.active a {
+    font-family: 'OpenSans-Bold';
+}
 
-        /*Menu*/
-        nav.etapes-form ul li {
-            padding: 16px 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            margin-left: 8px;
-            border-left: 1px solid var(--couleur-piv);
-        }
+nav.etapes-form .groupe {
+    font-family: 'OpenSans-Bold';
+    padding: 16px 0;
+    background-color: var(--couleur-fond-gris);
+    display: block;
+    margin-left: -16px;
+    padding-left: 16px;
+}
+
+nav.etapes-form ul > li > ul > li {
+    padding: 16px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    border-left: 1px solid var(--couleur-piv);
+}
 
             /* Petite twist qui nous permet d'inverser la puce et le texte afin de pouvoir utiliser le selector de sibling et modifier couleur de fond de la puce sur hover/focus du lien */
-            nav.etapes-form ul li *:last-child {
+            nav.etapes-form ul > li > ul > li *:last-child {
                 order: -1;
             }
 
@@ -661,7 +668,7 @@ body p {
                     background-image: none;
                 }
 
-            nav.etapes-form ul li:first-child .puce:before {
+            nav.etapes-form .collapse > ul > li:first-child > .puce:before {
                 position: absolute;
                 width: 20px;
                 height: calc(50% - 10px);
@@ -674,7 +681,7 @@ body p {
                 margin-left: 8px;
             }
 
-            nav.etapes-form ul li:last-child {
+            nav.etapes-form .collapse > ul > li:last-child {
                 padding-bottom: 0
             }
 
