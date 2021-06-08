@@ -75,9 +75,7 @@ form:
                   FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
                   FinRevenusAutres: autre
               - name: FinRevenusPrestationsPrecision
-                v-if: 
-                  adulte1: form.ReqFinDiminutionRevenusType && form.group$ReqFinDiminutionRevenusType.includes('FinRevenusPrestations')
-                  adulte2: form.ReqFinDiminutionRevenusType && form.$group.ReqFinDiminutionRevenusType.includes('FinRevenusPrestations')
+                v-if: form.ReqFinDiminutionRevenusType && form.ReqFinDiminutionRevenusType.includes('FinRevenusPrestations')
                 type: text
                 label: 
                   fr: Précisez le type de prestations gouvernementales
