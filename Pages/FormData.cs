@@ -52,6 +52,7 @@ namespace ECSForm.Pages
         }
 
         public string? Name { get; set; }
+        public string? PrefixId { get; set; }
         public string? GroupName { get; set; }
         public TypeInput Type { get; set; }
         public IDictionary<object, object>? AcceptedValues { get; set; }
