@@ -9,8 +9,9 @@
                 @failed-validation="failedValidation"
                 :errors="inputErrors">
 
-    {{# Form.sections}}
-    <div {{# v-if}}v-if="{{.}}"{{/ v-if}}>
+    {{# Form.grouping}}
+    {{# sections}}
+    <div {{# v-if}} v-if="{{.}}" {{/ v-if}}>
         <div v-if="form.validAll === true || pageCourante.id == '{{id}}'">
             <div class="section {{classes}}" data-id-page="{{id}}"
                  v-show="pageCourante.id == '{{id}}' && form.validAll === false">
@@ -18,7 +19,8 @@
             </div>
         </div>
     </div>
-    {{/ Form.sections}}
+    {{/ sections}}
+    {{/ Form.grouping}}
 
     <formulate-input type="submit"
                      v-if="pageCourante.id === 'revision'"

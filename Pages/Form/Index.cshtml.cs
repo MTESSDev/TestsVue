@@ -162,7 +162,7 @@ namespace ECSForm.Pages
                 dynamicForm = ReadYamlCfg(@$"schemas/{configName}.ecsform.yml");
             }
 
-            if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?["sections"] is null) { return NotFound(); }
+            if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?["grouping"] is null || dynamicForm?.Form?["grouping"]["sections"] is null) { return NotFound(); }
 
             ///* Section TEST pour le v-if "SERVER-SIDE" */
             //var lambdaParser = new NReco.Linq.LambdaParser();
@@ -199,10 +199,10 @@ namespace ECSForm.Pages
             }
 
 
-            if (dynamicForm?.Form?["sections"] is null) { return NotFound(); }
+            //if (dynamicForm?.Form?["sections"] is null) { return NotFound(); }
 
             var sectionNo = 0;
-            foreach (Dictionary<object, object>? section in dynamicForm.Form["sections"])
+            foreach (Dictionary<object, object>? section in dynamicForm.Form["grouping"]["sections"])
             {
                 if (section is null) { continue; }
                 Sections?.Add(new Section()

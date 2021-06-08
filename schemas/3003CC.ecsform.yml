@@ -1,1153 +1,1156 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
-  sections:
-    # Section 0
-    - section: 
-        fr: Informations sur la demande
-        en: Information on the application
-      id: infos
-      components:
-        - name: TypeDemande
-          type: radio
-          label: 
-            fr: Quel type de demande voulez-vous effectuer?
-          tooltipTitle: 
-            fr: Type de demande
-          tooltipText: 
-            fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra. Vivamus arcu nibh, venenatis vel venenatis a, sagittis eget est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nisi magna, porttitor vel augue id, porttitor fringilla sapien. Maecenas sollicitudin, massa facilisis finibus tempor, nibh nunc pharetra ante, in elementum nibh purus a arcu. Nam massa tellus, vehicula nec ante in, tempus ornare urna. Sed eget commodo libero. Nulla tincidunt justo erat, ac volutpat eros maximus in. Nam at malesuada magna. Aenean in magna non lectus viverra consectetur. In porttitor, dolor ac varius lacinia, lacus mauris laoreet neque, vitae.
-          options: 
-            Afdr: Demande d'aide financière de dernier recours
-            AideEmploi: Demande de service d'aide à l'emploi
-        - name: 02-Conjoint
-          type: radio
-          label: 
-            fr: Avez-vous un conjoint?
-          options: yesno
-        - name: Req-00-Enfants
-          type: radio
-          label: 
-            fr: Avez-vous des enfants à charge?
-          options: yesno
-        - name: Req01-Travaille
-          type: radio
-          label: 
-            fr: Avez-vous déjà travaillé?
-          tooltipTitle: 
-            fr: Définition d'un travail
-          tooltipText: 
-            fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.
+  grouping:
+    sections:
+      # Section 0
+      - section: 
+          fr: Informations sur la demande
+          en: Information on the application
+        id: infos
+        components:
+          - name: TypeDemande
+            type: radio
+            label: 
+              fr: Quel type de demande voulez-vous effectuer?
+            tooltipTitle: 
+              fr: Type de demande
+            tooltipText: 
+              fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra. Vivamus arcu nibh, venenatis vel venenatis a, sagittis eget est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nisi magna, porttitor vel augue id, porttitor fringilla sapien. Maecenas sollicitudin, massa facilisis finibus tempor, nibh nunc pharetra ante, in elementum nibh purus a arcu. Nam massa tellus, vehicula nec ante in, tempus ornare urna. Sed eget commodo libero. Nulla tincidunt justo erat, ac volutpat eros maximus in. Nam at malesuada magna. Aenean in magna non lectus viverra consectetur. In porttitor, dolor ac varius lacinia, lacus mauris laoreet neque, vitae.
+            options: 
+              Afdr: Demande d'aide financière de dernier recours
+              AideEmploi: Demande de service d'aide à l'emploi
+          - name: 02-Conjoint
+            type: radio
+            label: 
+              fr: Avez-vous un conjoint?
+            options: yesno
+          - name: Req-00-Enfants
+            type: radio
+            label: 
+              fr: Avez-vous des enfants à charge?
+            options: yesno
+          - name: Req01-Travaille
+            type: radio
+            label: 
+              fr: Avez-vous déjà travaillé?
+            tooltipTitle: 
+              fr: Définition d'un travail
+            tooltipText: 
+              fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.
 
-          options: yesno
-        - name: Req-00-etudes
-          type: radio
-          label: 
-            fr: Êtes-vous aux études?
-          options: yesno
-    # Section 1 - Raison de la demande
-    - section: 
-        fr: Raison de la demande
-        en: (EN)Raison de la demande
-      id: raisonDemande
-      v-if: form.TypeDemande
-      components:
-        - type: dynamic
-          v-if: form.TypeDemande === 'Afdr'
-          tag: div        
-          components:
-            - name: EvenementsDerniereAnnee
-              type: checkbox
-              label: 
-                fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
-              options: 
-                ReqFinDiminutionRevenus: Perte ou diminution de revenus
-                ReqFinEtudesTempsPlein: Fin d'études à temps plein  
-              validations: 
-                optional: null
-            - name: ReqFinDiminutionRevenusType
-              v-if: form.EvenementsDerniereAnnee && form.EvenementsDerniereAnnee.includes('ReqFinDiminutionRevenus')
-              type: checkbox
-              label: 
-                fr: Type de revenu
-              options: 
-                FinRevenusEmploiReq: d'emploi
-                FinRevenusTravailAutonomeReq: de travail autonome
-                FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
-                FinRevenusAutres: autre
-            - name: FinRevenusPrestationsPrecision
-              v-if: form.ReqFinDiminutionRevenusType && form.ReqFinDiminutionRevenusType.includes('FinRevenusPrestations')
-              type: text
-              label: 
-                fr: Précisez le type de prestations gouvernementales
-            - name: FinRevenusAutresPrecision
-              v-if: form.ReqFinDiminutionRevenusType && form.ReqFinDiminutionRevenusType.includes('FinRevenusAutres')
-              type: text
-              label: 
-                fr: Précisez le type de revenu
-            - name: ReqDateEvenementFinDiminutionRevenus
-              v-if: form['EvenementsDerniereAnnee'] && form['EvenementsDerniereAnnee'].length && form['EvenementsDerniereAnnee'].includes('ReqFinDiminutionRevenus')
-              type: date
-              label: 
-                fr: Date de la fin ou diminution de revenus
-            - name: ReqDateEvenementFinEtudesTempsPlein
-              v-if: form['EvenementsDerniereAnnee'] && form['EvenementsDerniereAnnee'].length && form['EvenementsDerniereAnnee'].includes('ReqFinEtudesTempsPlein')
-              type: date
-              label: 
-                fr: Date de la fin d'études à temps plein
-            - name: PrecisionRaisonDemandeAfdr
-              type: select
-              label: 
-                fr: Indiquez la raison de votre demande d'aide financière de dernier recours
-              options: 
-                AttenteDecision: Vous attendez la réponse à une autre demande (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
-                AucunRevenu: Vous n'avez aucun revenu
-                RevenuInsuffisant: Votre revenu est insuffisant
-                NaissanceEnfant: Vous avez eu ou pris en charge un enfant
-                SortieEtablissement: Vous venez de sortir d'un établissement
-                ArriveeConjoint: Vous vivez maintenant avec un conjoint
-                PerteConjoint: Vous n'avez plus de conjoint
-                ProblemeSante: Vous avez un problème de santé
-                RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
-                PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
-            - name: PrecisionRaisonDemandeAfdrAttenteDecision
-              v-if: form.PrecisionRaisonDemandeAfdr === 'AttenteDecision'
-              type: text
-              label: 
-                fr: Précisez la raison de votre demande d'aide financière de dernier recours
-            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
-              v-if: form.PrecisionRaisonDemandeAfdr === 'RevenuInsuffisant'
-              type: radio
-              label: 
-                fr: Type de revenu insuffisant
-              options: 
-                RevenuInsuffisantRevenusEmploi: Revenus d'emploi
-                RevenuInsuffisantTravailAutonome: Revenus de travail autonome
-                RevenuInsuffisantPrestations: Prestations gouvernementales (prestations d'assurance-emploi ou d'assurance parentale[RQAP], jugement, SAAQ, CNESST, etc.)
-                RevenuInsuffisantAutres: autre
-            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
-              v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantPrestations'
-              type: text
-              label: 
-                fr: Précisez le type de prestation insuffisante
-            - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
-              v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantAutres'
-              type: text
-              label: 
-                fr: Précisez le type de revenu autre
-            - name: PrecisionRaisonDemandeAfdrSortieEtablissement
-              v-if: form.PrecisionRaisonDemandeAfdr === 'SortieEtablissement'
-              type: radio
-              label: 
-                fr: Précisez le type d'établissement
-              options: 
-                SortieEtablissementSante: de santé
-                SortieEtablissementDetention: de détention
-            - name: PrecisionRaisonDemandeAfdrPerteConjoint
-              v-if: form.PrecisionRaisonDemandeAfdr === 'PerteConjoint'
-              type: radio
-              label: 
-                fr: Précisez la raison de perte du conjoint
-              options: 
-                PerteConjointDeces: décès
-                PerteConjointSeparation: separation
-                PerteConjointDivorce: divorce
-            - name: PrecisionRaisonDemandeAfdrAutre
-              v-if: form.PrecisionRaisonDemandeAfdr === 'PrecisionRaisonDemandeAfdrAutreRaison'
-              type: text
-              label: 
-                fr: Précisez la raison autre
-        - type: dynamic
-          v-if: form.TypeDemande === 'AideEmploi'
-          tag: div        
-          components:      
-            - name: PrecisionRaisonDemandeEmploi
-              type: radio
-              label: 
-                fr: Précisez la raison de votre demande de services d'aide à l'emploi
-              options: 
-                AideRechercheEmploi: Aide à la recherche d'emploi
-                RetourEcole: Retour aux études ou en formation
-                DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
-                PrecisionRaisonDemandeEmploiAutreRaison: Autre
-            - name: PrecisionRaisonDemandeEmploiAutre
-              v-if: form.PrecisionRaisonDemandeEmploi === 'DirigeEmployeurOrganisme'
-              type: text
-              label: 
-                fr: Précisez l'employeur ou l'organisme
-            - name: PrecisionRaisonDemandeEmploiAutre
-              v-if: form.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
-              type: text
-              label: 
-                fr: Précisez la raison de votre demande d'aide à l'emploi
-    # Section 2
-    - section: 
-        fr: Renseignements sur l'identite
-      id: renseignementsIdentite
-      components:
-        - name: nom1_Req-00
-          type: text
-          label: 
-            fr: Nom de famille
-          help: 
-            fr: Selon le certificat de naissance ou le document d'immigration.
-          validations: 
-            max: 36,length
-        - name: prénom1_Req-00
-          type: text
-          label: 
-            fr: Prénom
-          validations: 
-            max: 22,length
-        - name: date_Req-00
-          type: date
-          label: 
-            fr: Date de naissance
-        - name: Req-00_nas1
-          type: text
-          outerClasses: md          
-          label: 
-            fr: Numéro d'assurance sociale
-          validations: 
-            max: 9,length
-        - name: date2_Req-00
-          v-if: form['Req-00_nas1'] && form['Req-00_nas1'].startsWith('9')
-          type: date
-          label: 
-            fr: Date d'expiration
-        - name: Req-00-Sexe
-          type: radio
-          label: 
-            fr: Sexe
-          options: 
-            Feminim: Féminin 
-            Masculin: Masculin 
-        - name: Req-00-Langue
-          type: radio
-          label: 
-            fr: Langue de correspondance
-          options: 
-            Francais: Français 
-            Anglais: Anglais 
-        - name: Req00-NeQC
-          type: radio
-          label: 
-            fr: Êtes-vous né au Québec?
-          options: yesno
-        - name: nom3_Req-00
-          v-if: form['Req00-NeQC'] === 'true'
-          type: text
-          label: 
-            fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
-          validations: 
-            max: 50,length
-        - name: neCanada
-          v-if: form['Req00-NeQC'] === 'false'        
-          type: radio
-          label: 
-            fr: Êtes-vous né au Canada ?
-          options: yesno
-        - name: pays1_Req-00
-          v-if: form['neCanada'] === 'false'
-          type: text
-          label: 
-            fr: Indiquez votre pays de naissance
-        - name: date6_Req-00
-          v-if: form['neCanada'] === 'false'
-          type: date
-          label: 
-            fr: Date d'arrivée au Canada
-        - type: dynamic
-          v-if: form['neCanada'] === 'false'
-          tag: div        
-          components:
-            - name: Req00-CitCanadienne
-              type: radio
-              label: 
-                fr: Avez-vous la citoyenneté canadienne?
-              options: yesno
-            - name: Oui3
-              v-if: form['Req00-CitCanadienne'] === 'false'
-              type: radio
-              label: 
-                fr: Êtes-vous un résident permanent?
-              options: yesno
-            - name: Oui4
-              v-if: form['Oui3'] === 'false'            
-              type: radio
-              label: 
-                fr: Êtes-vous un demandeur d'asile?
-              options: yesno
-            - name: Oui5
-              v-if: form['Oui4'] === 'false'                        
-              type: radio
-              label: 
-                fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
-              options: yesno              
-            - name: autre2_Req-00
-              v-if: form['Oui5'] === 'false'                        
-              type: text
-              label: 
-                fr: Autre statut, précisez
-            - type: bandeau-notification
-              text: 
-                fr: Comme vous êtes né hors du Canada, vous devrez fournir les documents confirmant votre statut.
-        - name: Req-00-Autochtone
-          type: radio
-          v-if: form['neCanada'] === 'true'
-          label: 
-            fr: Vous considérez-vous comme un autochtone?
-          options: yesno
-        - name: Req-00-AutochtoneType        
-          v-if: form['neCanada'] === 'true' && form['Req-00-Autochtone'] === 'true'
-          type: radio
-          label: 
-            fr: Êtes-vous un membre d'une Première Nation ou un Inuit?
-          options: 
-            AmerindienReserve: Membre d'une Première Nation vivant dans une collectivité
-            AmerindienHorsReserve: Membre d'une Première Nation vivant à l'extérieur d'une collectivité
-            Inuit: Inuit
-    # Section 3 - Adresse
-    - section: 
-        fr: Adresse
-      id: adresse
-      components:
-        - name: addresse1Req
-          type: inline
-          components:       
-            - name: adresse1_Req-00
-              type: text
-              outerClasses: md
-              label: 
-                fr: Numéro
-              validations: 
-                max: 6,length
-            - name: adresse3_Req-00
-              type: text
-              outerClasses: lg
-              label: 
-                fr: Rue
-              validations: 
-                max: 24,length
-            - name: adresse2_Req-00
-              type: text
-              outerClasses: sm
-              label: 
-                fr: Appartement
-              validations: 
-                optional: null
-                max: 5,length
-        - name: telephone1_Req-00
-          outerClasses: md
-          type: tel
-          label: 
-            fr: Téléphone
-          validations: 
-            max: 10,length
-        - name: adresse4_Req-00
-          type: text
-          label: 
-            fr: Ville village ou municipalité
-          validations: 
-            max: 29,length
-        - name: codePostal1_Req-00
-          type: text
-          outerClasses: md          
-          label: 
-            fr: Code postal
-          validations: 
-            max: 6,length
-        - name: telephone2_Req-00
-          outerClasses: md
-          type: tel
-          label: 
-            fr: Autre téléphone
-          validations: 
-            optional: null
-            max: 10,length
-    # Section 4 - Situation actuelle
-    - section: 
-        fr: Situation actuelle
-      id: SituationActuelle
-      components:
-        - name: Req01-EnEmploi
-          type: radio
-          label: 
-            fr: Êtes-vous en emploi?
-          options: yesno
-        - name: PrecisionStatutEmploi_Req-00
-          v-if: form['Req01-EnEmploi'] === 'true'
-          type: checkbox
-          label:
-            fr: Précisez le type d'emploi
-          options: 
-            TempsPlein: Temps plein
-            TempsPartiel: Temps partiel
-            SurAppel: Sur appel
-            TravailleurAutonome: Travailleur autonome
-        - name: AideGouvRecue_Req-00
-          type: radio
-          label: 
-            fr: Recevez-vous une aide financière gouvernementale (prestations, indemnités, etc.)?
-          options: yesno
-        - name: TypeAideRecue
-          type: checkbox
-          label: 
-            fr: Précisez le type d'aide que vous recevez
-          v-if: form['AideGouvRecue_Req-00'] === 'true'
-          options: 
-            AssuranceEmploi: Prestations d'assurance-emploi
-            RQAP: Prestations d'assurance parentale (RQAP)
-            AutresAide: Autre type d'aide (indemnités versées par la SAAQ ou la CNESST, rente de retraite, prêts et bourses pour études, etc.)
-        - name: AideRecueAutrePrecision
-          v-if: form['TypeAideRecue'] && form['TypeAideRecue'].includes('AutresAide')
-          type: text
-          label: 
-            fr: Précisez le type d'aide
-        - name: EnfantsACharge_Req-00
-          type: radio      
-          label: 
-            fr: Avez-vous des enfants à charge?
-          options: yesno
-        - name: NbrEnfants
-          v-if: form['EnfantsACharge_Req-00'] === 'true'
-          type: number
-          min: 1
-          outerClasses: sm
-          label: 
-            fr: Combien d'enfants avez-vous à charge ?
-        - name: ChefMonoparentale_Req-00
-          v-if: form['EnfantsACharge_Req-00'] === 'true'
-          type: radio
-          label: 
-            fr: Êtes-vous chef de famille monoparentale ?
-          options: yesno
-        - name: QuestionsFacultativesSituationActuelle_Req-00
-          type: radio
-          label: 
-            fr: Afin de nous permettre de mieux répondre à vos besoins en matière d'emploi et d'établir des statistiques, désirez-vous répondre à quelques questions supplémentaires?
-          options: yesno
-        - type: dynamic
-          v-if: form['QuestionsFacultativesSituationActuelle_Req-00'] === 'true'
-          tag: div           
-          components:
-            - name: Handicap_Req-00
-              type: radio
-              label: 
-                fr: Avez-vous un handicap physique, intellectuel ou mental?
-              options: yesno
-            - name: TypeHandicap_Req-00
-              v-if: form['Handicap_Req-00'] === 'true'
-              type: text
-              label: 
-                fr: Précisez le handicap
-            - name: LanguesParlees_Req-00
-              type: checkbox
-              label: 
-                fr: Langues parlées
-              options: 
-                Francais: Français
-                Anglais: Anglais
-                AutresLanguesParlees: Autres
-            - name: PrecisionLanguesParlees
-              v-if: form['LanguesParlees_Req-00'] && form['LanguesParlees_Req-00'].includes('AutresLanguesParlees')
-              type: text
-              label: 
-                fr: Précisez les autres langues parlées
-            - name: LanguesEcrites_Req-00
-              type: checkbox
-              label: 
-                fr: Langues écrites
-              options: 
-                Francais: Français
-                Anglais: Anglais
-                AutresLanguesEcrites: Autres
-            - name: PrecisionLanguesEcrites
-              v-if: form['LanguesEcrites_Req-00'] && form['LanguesEcrites_Req-00'].includes('AutresLanguesEcrites')
-              type: text
-              label: 
-                fr: Précisez les autres langues écrites
-            - name: CasierJudiciaire_Req-00
-              type: radio
-              label: 
-                fr: Avez-vous un casier judiciaire ?
-              options: yesno
-            - name: MinoriteVisible_Req-00
-            #Ajouter une infobulle ici
-              type: radio
-              label: 
-                fr: Vous considérez-vous comme un membre d'une monorité visible ?
-              help: 
-                fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
-              options: yesno
-    # Section 5 - Études en cours
-    - section: 
-        fr: Études en cours
-      id: EtudesEnCours
-      v-if: form['Req-00-etudes']
-      components:
-        - type: dynamic
-          v-if: form['Req-00-etudes'] === 'true'
-          tag: div           
-          components:
-            - name: PrecisionStatutEtudes_Req-00
-              type: radio
-              label:
-                fr: Précisez votre statut d'étudiant
-              options: 
-                TempsPlein: Temps plein
-                TempsPartiel: Temps partiel
-            - name: DiplomeVise_Req-00
-              type: text
-              label: 
-                fr: Diplôme visé ?
-            - name: NiveauEtudes_Req-00
-              type: select
-              label: 
-                fr: Indiquez l'ordre d'enseignement
-              options: 
-                SecondaireGeneral: Secondaire général
-                SecondairePro: Secondaire professionnel
-                Collegial: Collégial
-                Universite1: Université 1er cycle
-                Universite2: Université 2e cycle
-                AutreNiveau: Autre
-            - name: NiveauEtudeAutrePrecision
-              v-if: form['NiveauEtudes_Req-00'] === 'AutreNiveau'
-              type: text
-              label: 
-                fr: Précisez l'ordre d'enseignement
-            - name: DomaineEtudes_Req-00
-              type: text
-              v-if: form['NiveauEtudes_Req-00'] && form['NiveauEtudes_Req-00'] !== 'SecondaireGeneral'             
-              label: 
-                fr: Domaine d'études
-            - name: NbrCoursSuivis_Req-00
-              type: number
-              outerClasses: sm              
-              min: 1
-              label: 
-                fr: Nombre de cours
-            - name: NbrHeuresSemaine_Req-00
-              type: number
-              outerClasses: sm              
-              min: 1
-              label: 
-                fr: Nombre d'heures par semaine
-            - name: NbrCreditsUnites_Req-00
-              type: number
-              v-if: form['NiveauEtudes_Req-00'] === 'Collegial' || form['NiveauEtudes_Req-00'] === 'Universite1' || form['NiveauEtudes_Req-00'] === 'Universite2'
-              outerClasses: sm              
-              min: 1
-              label: 
-                fr: Nombre de crédits ou d'unités
-            - name: NbrPeriodesSemaine_Req-00
-              type: number
-              v-if: form['NiveauEtudes_Req-00'] === 'SecondaireGeneral' || form['NiveauEtudes_Req-00'] === 'SecondairePro'                           
-              outerClasses: sm              
-              min: 1
-              label: 
-                fr: Nombre de périodes par semaine
-        - type: dynamic
-          v-if: form['Req-00-etudes'] === 'false'
-          tag: div     
-          components:
-            - name: Inscription_Req-00
-              type: radio
-              label:
-                fr: Êtes-vous inscrit à un établissement d'enseignement?
-              options: 
-                yesno
-            - name: DateInscription_Req-00
-              type: date
-              v-if: form['Inscription_Req-00'] === 'true'
-              label:
-                fr: Précisez la date de début
-            - name: InscriptionPrevue_Req-00
-              type: radio
-              v-if: form['Inscription_Req-00'] === 'false'
-              label:
-                fr: Prévoyez-vous vous inscrire ?
-              options: 
-                yesno
-            - name: DateInscriptionPrevue_Req-00
-              type: date
-              v-if: form['InscriptionPrevue_Req-00'] === 'true'
-              label:
-                fr: Précisez la date de début
-    # Section 6 - Formation
-    - section:
-        fr: Formation
-      id: formation
-      components:
-        - name: Req01-EtudesEtranger
-          type: radio
-          label: 
-            fr: Avez-vous fait vos études à l'étranger?
-          options: yesno
-        - type: dynamic
-          v-if: form['Req01-EtudesEtranger'] === 'false'
-          tag: div     
-          components:
-            - name: Req01-OrdresEnseignementsApplicables
-              type: checkbox
-              label:
-                fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
-              options: 
-                NiveauEtudesPrimaire: Primaire
-                NiveauEtudesSecondaireGen: Secondaire (Général)
-                NiveauEtudesSecondaireFormProf: Secondaire (Formation professionnelle)
-                NiveauEtudesSecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
-                NiveauEtudesCollegial: Collegial (Formation générale ou technique)
-                NiveauEtudesUniversitaire: Universitaire
-
-            - name: primaire        
-              type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesPrimaire')
-              label:
-                fr: Primaire
-              components:
-                - name: Req01-NbAnneesReussiesPrimaire
-                  type: radio
-                  outerClasses: boutons-nombres
-                  label:
-                    fr: Nombre d'années réussies
-                  options: [1,2,3,4,5,6,7]
-                - name: Req01-DateFinPrimaire
-                  type: date
-                  label:
-                    fr: Date de fin des études
-            - name: secondaireGen
-              type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireGen')          
-              label:
-                fr: Secondaire (général)
-              components:
-                - name: Req01-NbAnneesReussiesSecGeneral
-                  type: radio
-                  outerClasses: boutons-nombres
-                  label:
-                    fr: Nombre d'années réussies
-                  options: [1,2,3,4,5]
-                - name: Req01-DiplomeSecGeneral
-                  type: select
-                  label: 
-                    fr: Diplôme obtenu
-                  options: 
-                    Aucun: Aucun
-                    Des: Diplôme d'études secondaires (DES)
-                - name: Req01-DateFinSecGeneral
-                  type: date
-                  label:
-                    fr: Date de fin des études
-            - name: secondaireProf
-              type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormProf')                    
-              label:
-                fr: Secondaire (Formation professionnelle)
-              components:
-                - name: Req01-NbAnneesReussiesSecFormProf
-                  type: radio
-                  outerClasses: boutons-nombres
-                  label:
-                    fr: Nombre d'années réussies
-                  options: [3,4,5]
-                - name: Req01-DisciplineSecFormProf
-                  type: text
-                  label:
-                    fr: Discipline/Programme de formation
-                - name: Req01-DiplomeSecFormProf
-                  type: select
-                  label: 
-                    fr: Diplôme obtenu
-                  options: 
-                    Aucun: Aucun
-                    Aep: AEP
-                    Dep: DEP
-                    Asp: ASP
-                - name: Req01-DateFinSecFormProf
-                  type: date
-                  label:
-                    fr: Date de fin des études
-            - name: secondaireMetier
-              type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormMétier')                              
-              label:
-                fr: Secondaire (Formation à un métier semi-spécialisé)
-              components:
-                - name: Req01-NbAnneesReussiesSecMetier
-                  type: radio
-                  outerClasses: boutons-nombres
-                  label:
-                    fr: Nombre d'années réussies
-                  options: [1]
-                - name: Req01-DisciplineSecMetier
-                  type: text
-                  label:
-                    fr: Discipline/Programme de formation
-                - name: Req01-DateFinSecMetier
-                  type: date
-                  label:
-                    fr: Date de fin des études
-            - name: collegial
-              type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesCollegial')                                        
-              label:
-                fr: Collégial (Formation générale ou technique)
-              components:
-                - name: Req01-NbAnneesReussiesCollegial
-                  type: radio
-                  outerClasses: boutons-nombres
-                  label:
-                    fr: Nombre d'années réussies
-                  options: [1,2,3]
-                - name: Req01-DisciplineCollegial
-                  type: text
-                  label:
-                    fr: Discipline/Programme de formation
-                - name: Req01-DiplomeCollegial
-                  type: select
-                  label: 
-                    fr: Diplôme obtenu
-                  options: 
-                    Aucun: Aucun
-                    Dec: Diplôme d'études collégiales (DEC)
-                    Aec: Attestation d'études collégiales (AEC)
-                    Cec: Certificat d'études collégiales (CEC)
-                - name: Req01-DateFinCollegial
-                  type: date
-                  label:
-                    fr: Date de fin des études
-            - name: universitaire
-              type: group
-              v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesUniversitaire')                                                  
-              label:
-                fr: Universitaire            
-              components:
-                - name: Req01-NbAnneesReussiesUniversitaire
-                  type: radio
-                  outerClasses: boutons-nombres
-                  label:
-                    fr: Nombre d'années réussies
-                  options: [1,2,3,4,5,6,7]
-                - name: Req01-DisciplineUniversitaire
-                  type: text
-                  label:
-                    fr: Discipline/Programme de formation
-                - name: Req01-DiplomeUniversitaire
-                  type: select
-                  label: 
-                    fr: Diplôme obtenu
-                  options: 
-                    Aucun: Aucun
-                    Cert: Certificat
-                    Bac: Baccalauréat
-                    Ma: Maîtrise
-                    Doc: Doctorat
-                - name: Req01-DateFinUniversitaire
-                  type: date
-                  label:
-                    fr: Date de fin des études
-        - name: Req01-SpecialiteEtudesEtranger
-          type: text
-          v-if: form['Req01-EtudesEtranger'] === 'true'                            
-          label:
-            fr: Spécialité
-        - name: Req01-NbAnneesReussiesEtudesEtranger
-          type: number
-          v-if: form['Req01-EtudesEtranger'] === 'true'              
-          label:
-            fr: Nombre d'années d'études réussies
-        - name: Req01-EtudesEvaluationComparative
-          type: radio
-          v-if: form['Req01-EtudesEtranger'] === 'true' 
-          label: 
-            fr: Avez-vous obtenu, du ministère de l'Immigration, de la Francisation et de l'Intégration, une évaluation comparative des études faites hors du Québec?
-          options: yesno
-        - name: Req01-EtudesEvaluationComparativeDomaine
-          type: text
-          v-if: form['Req01-EtudesEvaluationComparative'] === 'true'                            
-          label:
-            fr: Précisez le domaine de formation
-        - name: Req01-PossedeCartesQualification
-          type: radio
-          label: 
-            fr: Possédez-vous une ou plusieurs cartes de qualification?
-          options: yesno
-        - name: Req01-CartesQualification
-          type: text
-          v-if: form['Req01-PossedeCartesQualification'] === 'true'                            
-          label:
-            fr: Précisez les cartes de qualification
-        - name: Req01-EstMembreOrdreProfessionnel
-          type: radio
-          label: 
-            fr: Êtes-vous membre d'un ordre professionnel?
-          options: yesno
-        - name: Req01-OrdreProfessionnel
-          type: text
-          v-if: form['Req01-EstMembreOrdreProfessionnel'] === 'true'                            
-          label:
-            fr: Précisez l'ordre professionnel
-        - name: PermisConduire_Req-00
-          type: radio
-          label: 
-            fr: Possédez-vous un permis de conduire ?
-          options: yesno
-        - name: ClassePermisConduire-Req-00
-          type: text
-          outerClasses: md
-          label: 
-            fr: Précisez la/les classe(s)
-          v-if: form['PermisConduire_Req-00'] === 'true'
-#          type: checkbox
-#          label: 
-#            fr: Précisez la/les classe(s)
-#          v-if: form['PermisConduire_Req-00'] && form['PermisConduire_Req-00'] === 'true'
-#          options: 
-#            C1: '1'
-#            C2: '2'
-#            C3: '3'
-#            C4A: 4A
-#            C4B: 4B
-#            C5: '5'
-#            C6A: 6A
-#            C6B: 6B
-#            C6C: 6C
-#            C6D: 6D
-#            C6E: 6E
-#            C8: '8'
-
-            
-    # Section 7 - Emplois
-    - section:
-        fr: Emplois
-      id: emplois
-      v-if: form['Req01-Travaille']          
-      components:
-        - name: emplois
-          type: repeatableGroup
-          repeatable: true
-          v-if: form['Req01-Travaille'] === 'true'          
-          label:
-            fr: Emplois
-            en: Jobs
-          instanceLabel:
-            fr: Emploi
-          addLabel:
-            fr: Ajouter un emploi
-            en: Add a job
-          removeLabel:
-            fr: Supprimer cet emploi
-            en: Delete this job
-          components:
-            - name: emploiNomEntreprise
-              type: text
-              label:
-                fr: Nom de l'entreprise
-            - name: emploiPeriodeDuAu
-              type: inline
-              components: 
-              - name: emploiPeriodeDu
+            options: yesno
+          - name: Req-00-etudes
+            type: radio
+            label: 
+              fr: Êtes-vous aux études?
+            options: yesno
+      # Section 1 - Raison de la demande
+      - section: 
+          fr: Raison de la demande
+          en: (EN)Raison de la demande
+        id: raisonDemande
+        v-if: form.TypeDemande
+        components:
+          - type: dynamic
+            v-if: form.TypeDemande === 'Afdr'
+            tag: div        
+            components:
+              - name: EvenementsDerniereAnnee
+                type: checkbox
+                label: 
+                  fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
+                options: 
+                  ReqFinDiminutionRevenus: Perte ou diminution de revenus
+                  ReqFinEtudesTempsPlein: Fin d'études à temps plein  
+                validations: 
+                  optional: null
+              - name: ReqFinDiminutionRevenusType
+                v-if: form.EvenementsDerniereAnnee && form.EvenementsDerniereAnnee.includes('ReqFinDiminutionRevenus')
+                type: checkbox
+                label: 
+                  fr: Type de revenu
+                options: 
+                  FinRevenusEmploiReq: d'emploi
+                  FinRevenusTravailAutonomeReq: de travail autonome
+                  FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
+                  FinRevenusAutres: autre
+              - name: FinRevenusPrestationsPrecision
+                v-if: 
+                  adulte1: form.ReqFinDiminutionRevenusType && form.group$ReqFinDiminutionRevenusType.includes('FinRevenusPrestations')
+                  adulte2: form.ReqFinDiminutionRevenusType && form.$group.ReqFinDiminutionRevenusType.includes('FinRevenusPrestations')
+                type: text
+                label: 
+                  fr: Précisez le type de prestations gouvernementales
+              - name: FinRevenusAutresPrecision
+                v-if: form.ReqFinDiminutionRevenusType && form.ReqFinDiminutionRevenusType.includes('FinRevenusAutres')
+                type: text
+                label: 
+                  fr: Précisez le type de revenu
+              - name: ReqDateEvenementFinDiminutionRevenus
+                v-if: form['EvenementsDerniereAnnee'] && form['EvenementsDerniereAnnee'].length && form['EvenementsDerniereAnnee'].includes('ReqFinDiminutionRevenus')
                 type: date
-                label:
-                  fr: Période du
-              - name: emploiPeriodeAu
+                label: 
+                  fr: Date de la fin ou diminution de revenus
+              - name: ReqDateEvenementFinEtudesTempsPlein
+                v-if: form['EvenementsDerniereAnnee'] && form['EvenementsDerniereAnnee'].length && form['EvenementsDerniereAnnee'].includes('ReqFinEtudesTempsPlein')
                 type: date
+                label: 
+                  fr: Date de la fin d'études à temps plein
+              - name: PrecisionRaisonDemandeAfdr
+                type: select
+                label: 
+                  fr: Indiquez la raison de votre demande d'aide financière de dernier recours
+                options: 
+                  AttenteDecision: Vous attendez la réponse à une autre demande (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
+                  AucunRevenu: Vous n'avez aucun revenu
+                  RevenuInsuffisant: Votre revenu est insuffisant
+                  NaissanceEnfant: Vous avez eu ou pris en charge un enfant
+                  SortieEtablissement: Vous venez de sortir d'un établissement
+                  ArriveeConjoint: Vous vivez maintenant avec un conjoint
+                  PerteConjoint: Vous n'avez plus de conjoint
+                  ProblemeSante: Vous avez un problème de santé
+                  RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
+                  PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
+              - name: PrecisionRaisonDemandeAfdrAttenteDecision
+                v-if: form.PrecisionRaisonDemandeAfdr === 'AttenteDecision'
+                type: text
+                label: 
+                  fr: Précisez la raison de votre demande d'aide financière de dernier recours
+              - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
+                v-if: form.PrecisionRaisonDemandeAfdr === 'RevenuInsuffisant'
+                type: radio
+                label: 
+                  fr: Type de revenu insuffisant
+                options: 
+                  RevenuInsuffisantRevenusEmploi: Revenus d'emploi
+                  RevenuInsuffisantTravailAutonome: Revenus de travail autonome
+                  RevenuInsuffisantPrestations: Prestations gouvernementales (prestations d'assurance-emploi ou d'assurance parentale[RQAP], jugement, SAAQ, CNESST, etc.)
+                  RevenuInsuffisantAutres: autre
+              - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
+                v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantPrestations'
+                type: text
+                label: 
+                  fr: Précisez le type de prestation insuffisante
+              - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
+                v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantAutres'
+                type: text
+                label: 
+                  fr: Précisez le type de revenu autre
+              - name: PrecisionRaisonDemandeAfdrSortieEtablissement
+                v-if: form.PrecisionRaisonDemandeAfdr === 'SortieEtablissement'
+                type: radio
+                label: 
+                  fr: Précisez le type d'établissement
+                options: 
+                  SortieEtablissementSante: de santé
+                  SortieEtablissementDetention: de détention
+              - name: PrecisionRaisonDemandeAfdrPerteConjoint
+                v-if: form.PrecisionRaisonDemandeAfdr === 'PerteConjoint'
+                type: radio
+                label: 
+                  fr: Précisez la raison de perte du conjoint
+                options: 
+                  PerteConjointDeces: décès
+                  PerteConjointSeparation: separation
+                  PerteConjointDivorce: divorce
+              - name: PrecisionRaisonDemandeAfdrAutre
+                v-if: form.PrecisionRaisonDemandeAfdr === 'PrecisionRaisonDemandeAfdrAutreRaison'
+                type: text
+                label: 
+                  fr: Précisez la raison autre
+          - type: dynamic
+            v-if: form.TypeDemande === 'AideEmploi'
+            tag: div        
+            components:      
+              - name: PrecisionRaisonDemandeEmploi
+                type: radio
+                label: 
+                  fr: Précisez la raison de votre demande de services d'aide à l'emploi
+                options: 
+                  AideRechercheEmploi: Aide à la recherche d'emploi
+                  RetourEcole: Retour aux études ou en formation
+                  DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
+                  PrecisionRaisonDemandeEmploiAutreRaison: Autre
+              - name: PrecisionRaisonDemandeEmploiAutre
+                v-if: form.PrecisionRaisonDemandeEmploi === 'DirigeEmployeurOrganisme'
+                type: text
+                label: 
+                  fr: Précisez l'employeur ou l'organisme
+              - name: PrecisionRaisonDemandeEmploiAutre
+                v-if: form.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
+                type: text
+                label: 
+                  fr: Précisez la raison de votre demande d'aide à l'emploi
+      # Section 2
+      - section: 
+          fr: Renseignements sur l'identite
+        id: renseignementsIdentite
+        components:
+          - name: nom1_Req-00
+            type: text
+            label: 
+              fr: Nom de famille
+            help: 
+              fr: Selon le certificat de naissance ou le document d'immigration.
+            validations: 
+              max: 36,length
+          - name: prénom1_Req-00
+            type: text
+            label: 
+              fr: Prénom
+            validations: 
+              max: 22,length
+          - name: date_Req-00
+            type: date
+            label: 
+              fr: Date de naissance
+          - name: Req-00_nas1
+            type: text
+            outerClasses: md          
+            label: 
+              fr: Numéro d'assurance sociale
+            validations: 
+              max: 9,length
+          - name: date2_Req-00
+            v-if: form['Req-00_nas1'] && form['Req-00_nas1'].startsWith('9')
+            type: date
+            label: 
+              fr: Date d'expiration
+          - name: Req-00-Sexe
+            type: radio
+            label: 
+              fr: Sexe
+            options: 
+              Feminim: Féminin 
+              Masculin: Masculin 
+          - name: Req-00-Langue
+            type: radio
+            label: 
+              fr: Langue de correspondance
+            options: 
+              Francais: Français 
+              Anglais: Anglais 
+          - name: Req00-NeQC
+            type: radio
+            label: 
+              fr: Êtes-vous né au Québec?
+            options: yesno
+          - name: nom3_Req-00
+            v-if: form['Req00-NeQC'] === 'true'
+            type: text
+            label: 
+              fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
+            validations: 
+              max: 50,length
+          - name: neCanada
+            v-if: form['Req00-NeQC'] === 'false'        
+            type: radio
+            label: 
+              fr: Êtes-vous né au Canada ?
+            options: yesno
+          - name: pays1_Req-00
+            v-if: form['neCanada'] === 'false'
+            type: text
+            label: 
+              fr: Indiquez votre pays de naissance
+          - name: date6_Req-00
+            v-if: form['neCanada'] === 'false'
+            type: date
+            label: 
+              fr: Date d'arrivée au Canada
+          - type: dynamic
+            v-if: form['neCanada'] === 'false'
+            tag: div        
+            components:
+              - name: Req00-CitCanadienne
+                type: radio
+                label: 
+                  fr: Avez-vous la citoyenneté canadienne?
+                options: yesno
+              - name: Oui3
+                v-if: form['Req00-CitCanadienne'] === 'false'
+                type: radio
+                label: 
+                  fr: Êtes-vous un résident permanent?
+                options: yesno
+              - name: Oui4
+                v-if: form['Oui3'] === 'false'            
+                type: radio
+                label: 
+                  fr: Êtes-vous un demandeur d'asile?
+                options: yesno
+              - name: Oui5
+                v-if: form['Oui4'] === 'false'                        
+                type: radio
+                label: 
+                  fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
+                options: yesno              
+              - name: autre2_Req-00
+                v-if: form['Oui5'] === 'false'                        
+                type: text
+                label: 
+                  fr: Autre statut, précisez
+              - type: bandeau-notification
+                text: 
+                  fr: Comme vous êtes né hors du Canada, vous devrez fournir les documents confirmant votre statut.
+          - name: Req-00-Autochtone
+            type: radio
+            v-if: form['neCanada'] === 'true'
+            label: 
+              fr: Vous considérez-vous comme un autochtone?
+            options: yesno
+          - name: Req-00-AutochtoneType        
+            v-if: form['neCanada'] === 'true' && form['Req-00-Autochtone'] === 'true'
+            type: radio
+            label: 
+              fr: Êtes-vous un membre d'une Première Nation ou un Inuit?
+            options: 
+              AmerindienReserve: Membre d'une Première Nation vivant dans une collectivité
+              AmerindienHorsReserve: Membre d'une Première Nation vivant à l'extérieur d'une collectivité
+              Inuit: Inuit
+      # Section 3 - Adresse
+      - section: 
+          fr: Adresse
+        id: adresse
+        components:
+          - name: addresse1Req
+            type: inline
+            components:       
+              - name: adresse1_Req-00
+                type: text
+                outerClasses: md
+                label: 
+                  fr: Numéro
+                validations: 
+                  max: 6,length
+              - name: adresse3_Req-00
+                type: text
+                outerClasses: lg
+                label: 
+                  fr: Rue
+                validations: 
+                  max: 24,length
+              - name: adresse2_Req-00
+                type: text
+                outerClasses: sm
+                label: 
+                  fr: Appartement
+                validations: 
+                  optional: null
+                  max: 5,length
+          - name: telephone1_Req-00
+            outerClasses: md
+            type: tel
+            label: 
+              fr: Téléphone
+            validations: 
+              max: 10,length
+          - name: adresse4_Req-00
+            type: text
+            label: 
+              fr: Ville village ou municipalité
+            validations: 
+              max: 29,length
+          - name: codePostal1_Req-00
+            type: text
+            outerClasses: md          
+            label: 
+              fr: Code postal
+            validations: 
+              max: 6,length
+          - name: telephone2_Req-00
+            outerClasses: md
+            type: tel
+            label: 
+              fr: Autre téléphone
+            validations: 
+              optional: null
+              max: 10,length
+      # Section 4 - Situation actuelle
+      - section: 
+          fr: Situation actuelle
+        id: SituationActuelle
+        components:
+          - name: Req01-EnEmploi
+            type: radio
+            label: 
+              fr: Êtes-vous en emploi?
+            options: yesno
+          - name: PrecisionStatutEmploi_Req-00
+            v-if: form['Req01-EnEmploi'] === 'true'
+            type: checkbox
+            label:
+              fr: Précisez le type d'emploi
+            options: 
+              TempsPlein: Temps plein
+              TempsPartiel: Temps partiel
+              SurAppel: Sur appel
+              TravailleurAutonome: Travailleur autonome
+          - name: AideGouvRecue_Req-00
+            type: radio
+            label: 
+              fr: Recevez-vous une aide financière gouvernementale (prestations, indemnités, etc.)?
+            options: yesno
+          - name: TypeAideRecue
+            type: checkbox
+            label: 
+              fr: Précisez le type d'aide que vous recevez
+            v-if: form['AideGouvRecue_Req-00'] === 'true'
+            options: 
+              AssuranceEmploi: Prestations d'assurance-emploi
+              RQAP: Prestations d'assurance parentale (RQAP)
+              AutresAide: Autre type d'aide (indemnités versées par la SAAQ ou la CNESST, rente de retraite, prêts et bourses pour études, etc.)
+          - name: AideRecueAutrePrecision
+            v-if: form['TypeAideRecue'] && form['TypeAideRecue'].includes('AutresAide')
+            type: text
+            label: 
+              fr: Précisez le type d'aide
+          - name: EnfantsACharge_Req-00
+            type: radio      
+            label: 
+              fr: Avez-vous des enfants à charge?
+            options: yesno
+          - name: NbrEnfants
+            v-if: form['EnfantsACharge_Req-00'] === 'true'
+            type: number
+            min: 1
+            outerClasses: sm
+            label: 
+              fr: Combien d'enfants avez-vous à charge ?
+          - name: ChefMonoparentale_Req-00
+            v-if: form['EnfantsACharge_Req-00'] === 'true'
+            type: radio
+            label: 
+              fr: Êtes-vous chef de famille monoparentale ?
+            options: yesno
+          - name: QuestionsFacultativesSituationActuelle_Req-00
+            type: radio
+            label: 
+              fr: Afin de nous permettre de mieux répondre à vos besoins en matière d'emploi et d'établir des statistiques, désirez-vous répondre à quelques questions supplémentaires?
+            options: yesno
+          - type: dynamic
+            v-if: form['QuestionsFacultativesSituationActuelle_Req-00'] === 'true'
+            tag: div           
+            components:
+              - name: Handicap_Req-00
+                type: radio
+                label: 
+                  fr: Avez-vous un handicap physique, intellectuel ou mental?
+                options: yesno
+              - name: TypeHandicap_Req-00
+                v-if: form['Handicap_Req-00'] === 'true'
+                type: text
+                label: 
+                  fr: Précisez le handicap
+              - name: LanguesParlees_Req-00
+                type: checkbox
+                label: 
+                  fr: Langues parlées
+                options: 
+                  Francais: Français
+                  Anglais: Anglais
+                  AutresLanguesParlees: Autres
+              - name: PrecisionLanguesParlees
+                v-if: form['LanguesParlees_Req-00'] && form['LanguesParlees_Req-00'].includes('AutresLanguesParlees')
+                type: text
+                label: 
+                  fr: Précisez les autres langues parlées
+              - name: LanguesEcrites_Req-00
+                type: checkbox
+                label: 
+                  fr: Langues écrites
+                options: 
+                  Francais: Français
+                  Anglais: Anglais
+                  AutresLanguesEcrites: Autres
+              - name: PrecisionLanguesEcrites
+                v-if: form['LanguesEcrites_Req-00'] && form['LanguesEcrites_Req-00'].includes('AutresLanguesEcrites')
+                type: text
+                label: 
+                  fr: Précisez les autres langues écrites
+              - name: CasierJudiciaire_Req-00
+                type: radio
+                label: 
+                  fr: Avez-vous un casier judiciaire ?
+                options: yesno
+              - name: MinoriteVisible_Req-00
+              #Ajouter une infobulle ici
+                type: radio
+                label: 
+                  fr: Vous considérez-vous comme un membre d'une monorité visible ?
+                help: 
+                  fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
+                options: yesno
+      # Section 5 - Études en cours
+      - section: 
+          fr: Études en cours
+        id: EtudesEnCours
+        v-if: form['Req-00-etudes']
+        components:
+          - type: dynamic
+            v-if: form['Req-00-etudes'] === 'true'
+            tag: div           
+            components:
+              - name: PrecisionStatutEtudes_Req-00
+                type: radio
                 label:
-                  fr: Période au
-            - name: emploiSalaireHebdo
-              type: number
-              label:
-                fr: Salaire par semaine
-            - name: emploiHeuresHebdo
-              type: number
-              label:
-                fr: Heures par semaine
-            - name: emploiEmploiOccupe
-              type: text
-              label:
-                fr: Emploi occupé
-            - name: emploiPrincipalesTachesAccomplies
-              type: textarea
-              label:
-                fr: Principales tâches accomplies
-            - name: emploiRaisonFinEmploi
-              type: select
-              label: 
-                fr: Raison de la fin d'emploi
-              options: 
-                ManqueTravail: Manque de travail
-                ProblemeSante: Problème de santé
-                ChangementEmploi: Changement d'emploi
-                FermetureEntreprise: Fermeture de l'entreprise
-                NaissancePriseChargeEnfant: Naissance ou prise en charge d'un enfant
-                Congediement: Congédiement
-                AutreRaison: Autre
-            - name: emploiPrecisionAutre
-              v-if: index >= 0 && form[name] && form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
-              type: text
-              label: 
-                fr: Précisez la raison de fin d'emploi
-        - name: Req01-Limitations
-          type: radio
-          label:
-            fr: "Avez-vous des limitations fonctionnelles faisant suite à des lésions professionnelles causées, par exemple, par un accident de travail?"
-          options: yesno            
-        - name: limitations_Req-01
-          type: text
-          v-if: form['Req01-Limitations'] === 'true'          
-          label:
-            fr: "Précisez ces limitations"
-        - name: Req01-DisponibleTravail
-          type: radio
-          label:
-            fr: "Êtes-vous disponible pour travailler?"
-          options: yesno            
-        - name: Req01-DisponibilitesTravail
-          type: checkbox
-          v-if: form['Req01-DisponibleTravail'] === 'true'                    
-          label:
-            fr: "Précisez le type d'emploi recherché?"
-          options: 
-            ReqDispoTravailTempsPlein: À temps plein
-            ReqDispoTravailTempsPartiel: À temps partiel
-            ReqDispoTravailJour: De jour
-            ReqDispoTravailSoir: De soir
-            ReqDispoTravailNuit: De nuit
-        - name: Req01-LieuxDisponibiliteTravail
-          type: checkbox
-          v-if: form['Req01-DisponibleTravail'] === 'true'                    
-          label:
-            fr: "Où êtes-vous prêt à travailler?"
-          options: 
-            ReqLieuDispoTravailLocalite: Dans votre localité
-            ReqLieuDispoTravailRegion: Dans votre région
-            ReqLieuDispoTravailAutre: Autre
-        - name: Req01-LieuxDisponibiliteTravailPrecision
-          type: text
-          v-if: form['Req01-LieuxDisponibiliteTravail'] && form['Req01-LieuxDisponibiliteTravail'].includes('ReqLieuDispoTravailAutre')   
-          label:
-            fr: "Précisez où vous êtes prêt à travailler"
-        - name: raisonNonDisponibiliteTravail_Req-01
-          type: text
-          v-if: form['Req01-DisponibleTravail'] === 'false'   
-          outerClasses: xxl                           
-          label:
-            fr: "Inscrivez la raison de votre indisponibilité à travailler"
-    # Section - Biens
-    - section:
-        fr: Biens
-      id: biens
-      v-if: false && form['02-Conjoint']
-      components:      
-        - name: BiensVehicules
-          type: radio
-          v-if: form['02-Conjoint'] === 'true'
-          label:
-            fr: "Est-ce que vous ou votre conjoint(e) possédez des véhicules (y compris des véhicules remisés)?"
-          help:
-            fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
-          options: yesno
-        - name: BiensVehicules
-          type: radio
-          v-if: form['02-Conjoint'] === 'false'
-          label:
-            fr: "Est-ce que vous possédez des véhicules (y compris des véhicules remisés)?"
-          help:
-            fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
-          options: yesno
-        - name: BiensVehiculesAppartenance
-          type: checkbox
-          v-if: form['02-Conjoint'] === 'true' && form.BiensVehicules == 'true'
-          label:
-            fr: "Indiquez la ou les situations qui s'appliquent"
-          options: 
-            VehiculesCopropriete: 'Vous possédez au moins un véhicule (en copropriété) avec votre conjoint(e)'
-            VehiculesPersonnel: 'Vous possédez au moins un véhicule personnellement'
-            VehiculesConjoint: 'Votre conjoint(e) possède un véhicule'
-        - name: BiensVehiculesCopropriete
-          type: repeatableGroup
-          repeatable: true
-          v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesCopropriete')          
-          label:
-            fr: Véhicule(s) en copropriété avec votre conjoint(e)
-          instanceLabel:
-            fr: Véhicule
-          addLabel:
-            fr: Ajouter un véhicule
-          removeLabel:
-            fr: Supprimer ce véhicule
-          components: &groupeVehicule
-            - name: vehiculeTypeMarqueAnnee
-              type: text
-              label:
-                fr: Type de véhicule, marque, année
-            - name: emploiSalaireHebdo
-              type: radio
-              label:
-                fr: Est-ce qu'il s'agit d'un véhicule adapté?
-              options: yesno
-            - name: vehiculeProprioLocataire
-              type: radio
-              label:
-                fr: "Êtes-vous propriétaire ou locataire du véhicule?"
-              options: 
-                VehiculeProprietaire: 'Propriétaire'
-                VehiculeLocataire: 'Locataire'
-            - name: vehiculeValeurMarchande
-              type: number
-              label:
-                fr: Valeur marchande
-        - name: BiensVehiculesPerso
-          type: repeatableGroup
-          repeatable: true
-          v-if: form['02-Conjoint'] === 'false' && form['BiensVehicules'] === 'true' ||  (form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesPersonnel'))          
-          label:
-            fr: Véhicule(s) vous appartenant personnellement
-          instanceLabel:
-            fr: Véhicule
-          addLabel:
-            fr: Ajouter un véhicule
-          removeLabel:
-            fr: Supprimer ce véhicule
-          components: *groupeVehicule
-        - name: BiensVehiculesConjoint
-          type: repeatableGroup
-          repeatable: true
-          v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesConjoint')          
-          label:
-            fr: Véhicule(s) appartenant(s) à votre conjoint(e)
-          instanceLabel:
-            fr: Véhicule
-          addLabel:
-            fr: Ajouter un véhicule
-          removeLabel:
-            fr: Supprimer ce véhicule
-          components: *groupeVehicule
-    # Section - Dépôt direct
-    - section: 
-        fr: Dépôt direct
-      id: depotDirect
-      components:
-        - name: DepotDirect
-          type: radio
-          label: 
-            fr: Souhaitez-vous vous inscrire au dépôt direct?
-          options: yesno            
-        - type: dynamic
-          v-if: form['DepotDirect'] === 'true'
-          tag: div     
-          components:
-            - type: bandeau
-              v-if: form['DepotDirect'] === 'true'
-              text: 
-                fr: Veuillez fournir les renseignements demandés ci-dessous. Ils nous permettront de procéder au versement de vos prestations ou de vos allocations dans le cadre de tous les services qui vous seront offerts par le Ministère.             
-            - name: Nom_institution_financière_Req-00
-              type: text
-              label: 
-                fr: Nom de votre institution financière
-            - name: Adresse_succursale_Req-00
-              type: text
-              label: 
-                fr: Adresse de votre institution financière
-            - name: CP_succursale_Req-00
-              type: text
-              outerClasses: md
-              label: 
-                fr: Code postal de votre succursale
-              validations: 
-                max: 6,length
-            - name: Num_succursale_Req-00
-              type: text
-              label: 
-                fr: Numéro de la succursale
-              outerClasses: lg                
-              validations: 
-                max: 5,length
-            - name: Num_institution_Req-00
-              type: text
-              label: 
-                fr: Numéro de l'institution financière
-              outerClasses: lg                                
-              validations: 
-                max: 3,length
-            - name: Num_compte_Req-00
-              type: text
-              label: 
-                fr: Numéro du compte et chiffre de contrôle
-              outerClasses: lg                                
-              validations: 
-                max: 12,length
-    # Section  - Affirmation solenelle
-    - section: 
-        fr: Affirmation solenelle
-      id: affirmationSolennelle
-      v-if: form.TypeDemande
-      components:
-        - type: bandeau
-          components:
-#            - name: AffirmationSolennelleReconnaisReq 
-#              type: checkbox
-#              label: 
-#                fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
-            - type: dynamic
-              tag: p
-              v-if: form.TypeDemande === 'Afdr'              
-              text:
-                fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
-            - type: dynamic
-              tag: p
-              text:
-                fr: <b>J’affirme</b> solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
-            - type: dynamic
-              tag: p
-              text:
-                fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, entre autres de mon retour au travail ou aux études ou encore de toute nouvelle source de revenus.
-        - type: inline
-          classes: no-wrap
-          components: 
-            - name: DateSignatureReq
-              type: date
-              label: 
-                fr: Date
-            - name: SignatureReq
-              type: text
-              outerClasses: w-100
-              v-if: form.TypeDemande !== 'Afdr' || form['02-Conjoint'] !== 'true'
-              label: 
-                fr: Signature
-            - name: SignatureReq
-              type: text
-              outerClasses: w-100
-              v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
-              label: 
-                fr: Signature du requérant
-        - type: inline
-          classes: no-wrap
-          components: 
-            - name: DateSignatureConjoint
-              type: date
-              v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
-              label: 
-                fr: Date
-            - name: SignatureConjoint
-              type: text
-              outerClasses: w-100
-              v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
-              label: 
-                fr: Signature du conjoint
+                  fr: Précisez votre statut d'étudiant
+                options: 
+                  TempsPlein: Temps plein
+                  TempsPartiel: Temps partiel
+              - name: DiplomeVise_Req-00
+                type: text
+                label: 
+                  fr: Diplôme visé ?
+              - name: NiveauEtudes_Req-00
+                type: select
+                label: 
+                  fr: Indiquez l'ordre d'enseignement
+                options: 
+                  SecondaireGeneral: Secondaire général
+                  SecondairePro: Secondaire professionnel
+                  Collegial: Collégial
+                  Universite1: Université 1er cycle
+                  Universite2: Université 2e cycle
+                  AutreNiveau: Autre
+              - name: NiveauEtudeAutrePrecision
+                v-if: form['NiveauEtudes_Req-00'] === 'AutreNiveau'
+                type: text
+                label: 
+                  fr: Précisez l'ordre d'enseignement
+              - name: DomaineEtudes_Req-00
+                type: text
+                v-if: form['NiveauEtudes_Req-00'] && form['NiveauEtudes_Req-00'] !== 'SecondaireGeneral'             
+                label: 
+                  fr: Domaine d'études
+              - name: NbrCoursSuivis_Req-00
+                type: number
+                outerClasses: sm              
+                min: 1
+                label: 
+                  fr: Nombre de cours
+              - name: NbrHeuresSemaine_Req-00
+                type: number
+                outerClasses: sm              
+                min: 1
+                label: 
+                  fr: Nombre d'heures par semaine
+              - name: NbrCreditsUnites_Req-00
+                type: number
+                v-if: form['NiveauEtudes_Req-00'] === 'Collegial' || form['NiveauEtudes_Req-00'] === 'Universite1' || form['NiveauEtudes_Req-00'] === 'Universite2'
+                outerClasses: sm              
+                min: 1
+                label: 
+                  fr: Nombre de crédits ou d'unités
+              - name: NbrPeriodesSemaine_Req-00
+                type: number
+                v-if: form['NiveauEtudes_Req-00'] === 'SecondaireGeneral' || form['NiveauEtudes_Req-00'] === 'SecondairePro'                           
+                outerClasses: sm              
+                min: 1
+                label: 
+                  fr: Nombre de périodes par semaine
+          - type: dynamic
+            v-if: form['Req-00-etudes'] === 'false'
+            tag: div     
+            components:
+              - name: Inscription_Req-00
+                type: radio
+                label:
+                  fr: Êtes-vous inscrit à un établissement d'enseignement?
+                options: 
+                  yesno
+              - name: DateInscription_Req-00
+                type: date
+                v-if: form['Inscription_Req-00'] === 'true'
+                label:
+                  fr: Précisez la date de début
+              - name: InscriptionPrevue_Req-00
+                type: radio
+                v-if: form['Inscription_Req-00'] === 'false'
+                label:
+                  fr: Prévoyez-vous vous inscrire ?
+                options: 
+                  yesno
+              - name: DateInscriptionPrevue_Req-00
+                type: date
+                v-if: form['InscriptionPrevue_Req-00'] === 'true'
+                label:
+                  fr: Précisez la date de début
+      # Section 6 - Formation
+      - section:
+          fr: Formation
+        id: formation
+        components:
+          - name: Req01-EtudesEtranger
+            type: radio
+            label: 
+              fr: Avez-vous fait vos études à l'étranger?
+            options: yesno
+          - type: dynamic
+            v-if: form['Req01-EtudesEtranger'] === 'false'
+            tag: div     
+            components:
+              - name: Req01-OrdresEnseignementsApplicables
+                type: checkbox
+                label:
+                  fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
+                options: 
+                  NiveauEtudesPrimaire: Primaire
+                  NiveauEtudesSecondaireGen: Secondaire (Général)
+                  NiveauEtudesSecondaireFormProf: Secondaire (Formation professionnelle)
+                  NiveauEtudesSecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
+                  NiveauEtudesCollegial: Collegial (Formation générale ou technique)
+                  NiveauEtudesUniversitaire: Universitaire
+
+              - name: primaire        
+                type: group
+                v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesPrimaire')
+                label:
+                  fr: Primaire
+                components:
+                  - name: Req01-NbAnneesReussiesPrimaire
+                    type: radio
+                    outerClasses: boutons-nombres
+                    label:
+                      fr: Nombre d'années réussies
+                    options: [1,2,3,4,5,6,7]
+                  - name: Req01-DateFinPrimaire
+                    type: date
+                    label:
+                      fr: Date de fin des études
+              - name: secondaireGen
+                type: group
+                v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireGen')          
+                label:
+                  fr: Secondaire (général)
+                components:
+                  - name: Req01-NbAnneesReussiesSecGeneral
+                    type: radio
+                    outerClasses: boutons-nombres
+                    label:
+                      fr: Nombre d'années réussies
+                    options: [1,2,3,4,5]
+                  - name: Req01-DiplomeSecGeneral
+                    type: select
+                    label: 
+                      fr: Diplôme obtenu
+                    options: 
+                      Aucun: Aucun
+                      Des: Diplôme d'études secondaires (DES)
+                  - name: Req01-DateFinSecGeneral
+                    type: date
+                    label:
+                      fr: Date de fin des études
+              - name: secondaireProf
+                type: group
+                v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormProf')                    
+                label:
+                  fr: Secondaire (Formation professionnelle)
+                components:
+                  - name: Req01-NbAnneesReussiesSecFormProf
+                    type: radio
+                    outerClasses: boutons-nombres
+                    label:
+                      fr: Nombre d'années réussies
+                    options: [3,4,5]
+                  - name: Req01-DisciplineSecFormProf
+                    type: text
+                    label:
+                      fr: Discipline/Programme de formation
+                  - name: Req01-DiplomeSecFormProf
+                    type: select
+                    label: 
+                      fr: Diplôme obtenu
+                    options: 
+                      Aucun: Aucun
+                      Aep: AEP
+                      Dep: DEP
+                      Asp: ASP
+                  - name: Req01-DateFinSecFormProf
+                    type: date
+                    label:
+                      fr: Date de fin des études
+              - name: secondaireMetier
+                type: group
+                v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesSecondaireFormMétier')                              
+                label:
+                  fr: Secondaire (Formation à un métier semi-spécialisé)
+                components:
+                  - name: Req01-NbAnneesReussiesSecMetier
+                    type: radio
+                    outerClasses: boutons-nombres
+                    label:
+                      fr: Nombre d'années réussies
+                    options: [1]
+                  - name: Req01-DisciplineSecMetier
+                    type: text
+                    label:
+                      fr: Discipline/Programme de formation
+                  - name: Req01-DateFinSecMetier
+                    type: date
+                    label:
+                      fr: Date de fin des études
+              - name: collegial
+                type: group
+                v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesCollegial')                                        
+                label:
+                  fr: Collégial (Formation générale ou technique)
+                components:
+                  - name: Req01-NbAnneesReussiesCollegial
+                    type: radio
+                    outerClasses: boutons-nombres
+                    label:
+                      fr: Nombre d'années réussies
+                    options: [1,2,3]
+                  - name: Req01-DisciplineCollegial
+                    type: text
+                    label:
+                      fr: Discipline/Programme de formation
+                  - name: Req01-DiplomeCollegial
+                    type: select
+                    label: 
+                      fr: Diplôme obtenu
+                    options: 
+                      Aucun: Aucun
+                      Dec: Diplôme d'études collégiales (DEC)
+                      Aec: Attestation d'études collégiales (AEC)
+                      Cec: Certificat d'études collégiales (CEC)
+                  - name: Req01-DateFinCollegial
+                    type: date
+                    label:
+                      fr: Date de fin des études
+              - name: universitaire
+                type: group
+                v-if: form['Req01-OrdresEnseignementsApplicables'] && form['Req01-OrdresEnseignementsApplicables'].includes('NiveauEtudesUniversitaire')                                                  
+                label:
+                  fr: Universitaire            
+                components:
+                  - name: Req01-NbAnneesReussiesUniversitaire
+                    type: radio
+                    outerClasses: boutons-nombres
+                    label:
+                      fr: Nombre d'années réussies
+                    options: [1,2,3,4,5,6,7]
+                  - name: Req01-DisciplineUniversitaire
+                    type: text
+                    label:
+                      fr: Discipline/Programme de formation
+                  - name: Req01-DiplomeUniversitaire
+                    type: select
+                    label: 
+                      fr: Diplôme obtenu
+                    options: 
+                      Aucun: Aucun
+                      Cert: Certificat
+                      Bac: Baccalauréat
+                      Ma: Maîtrise
+                      Doc: Doctorat
+                  - name: Req01-DateFinUniversitaire
+                    type: date
+                    label:
+                      fr: Date de fin des études
+          - name: Req01-SpecialiteEtudesEtranger
+            type: text
+            v-if: form['Req01-EtudesEtranger'] === 'true'                            
+            label:
+              fr: Spécialité
+          - name: Req01-NbAnneesReussiesEtudesEtranger
+            type: number
+            v-if: form['Req01-EtudesEtranger'] === 'true'              
+            label:
+              fr: Nombre d'années d'études réussies
+          - name: Req01-EtudesEvaluationComparative
+            type: radio
+            v-if: form['Req01-EtudesEtranger'] === 'true' 
+            label: 
+              fr: Avez-vous obtenu, du ministère de l'Immigration, de la Francisation et de l'Intégration, une évaluation comparative des études faites hors du Québec?
+            options: yesno
+          - name: Req01-EtudesEvaluationComparativeDomaine
+            type: text
+            v-if: form['Req01-EtudesEvaluationComparative'] === 'true'                            
+            label:
+              fr: Précisez le domaine de formation
+          - name: Req01-PossedeCartesQualification
+            type: radio
+            label: 
+              fr: Possédez-vous une ou plusieurs cartes de qualification?
+            options: yesno
+          - name: Req01-CartesQualification
+            type: text
+            v-if: form['Req01-PossedeCartesQualification'] === 'true'                            
+            label:
+              fr: Précisez les cartes de qualification
+          - name: Req01-EstMembreOrdreProfessionnel
+            type: radio
+            label: 
+              fr: Êtes-vous membre d'un ordre professionnel?
+            options: yesno
+          - name: Req01-OrdreProfessionnel
+            type: text
+            v-if: form['Req01-EstMembreOrdreProfessionnel'] === 'true'                            
+            label:
+              fr: Précisez l'ordre professionnel
+          - name: PermisConduire_Req-00
+            type: radio
+            label: 
+              fr: Possédez-vous un permis de conduire ?
+            options: yesno
+          - name: ClassePermisConduire-Req-00
+            type: text
+            outerClasses: md
+            label: 
+              fr: Précisez la/les classe(s)
+            v-if: form['PermisConduire_Req-00'] === 'true'
+  #          type: checkbox
+  #          label: 
+  #            fr: Précisez la/les classe(s)
+  #          v-if: form['PermisConduire_Req-00'] && form['PermisConduire_Req-00'] === 'true'
+  #          options: 
+  #            C1: '1'
+  #            C2: '2'
+  #            C3: '3'
+  #            C4A: 4A
+  #            C4B: 4B
+  #            C5: '5'
+  #            C6A: 6A
+  #            C6B: 6B
+  #            C6C: 6C
+  #            C6D: 6D
+  #            C6E: 6E
+  #            C8: '8'
+
+              
+      # Section 7 - Emplois
+      - section:
+          fr: Emplois
+        id: emplois
+        v-if: form['Req01-Travaille']          
+        components:
+          - name: emplois
+            type: repeatableGroup
+            repeatable: true
+            v-if: form['Req01-Travaille'] === 'true'          
+            label:
+              fr: Emplois
+              en: Jobs
+            instanceLabel:
+              fr: Emploi
+            addLabel:
+              fr: Ajouter un emploi
+              en: Add a job
+            removeLabel:
+              fr: Supprimer cet emploi
+              en: Delete this job
+            components:
+              - name: emploiNomEntreprise
+                type: text
+                label:
+                  fr: Nom de l'entreprise
+              - name: emploiPeriodeDuAu
+                type: inline
+                components: 
+                - name: emploiPeriodeDu
+                  type: date
+                  label:
+                    fr: Période du
+                - name: emploiPeriodeAu
+                  type: date
+                  label:
+                    fr: Période au
+              - name: emploiSalaireHebdo
+                type: number
+                label:
+                  fr: Salaire par semaine
+              - name: emploiHeuresHebdo
+                type: number
+                label:
+                  fr: Heures par semaine
+              - name: emploiEmploiOccupe
+                type: text
+                label:
+                  fr: Emploi occupé
+              - name: emploiPrincipalesTachesAccomplies
+                type: textarea
+                label:
+                  fr: Principales tâches accomplies
+              - name: emploiRaisonFinEmploi
+                type: select
+                label: 
+                  fr: Raison de la fin d'emploi
+                options: 
+                  ManqueTravail: Manque de travail
+                  ProblemeSante: Problème de santé
+                  ChangementEmploi: Changement d'emploi
+                  FermetureEntreprise: Fermeture de l'entreprise
+                  NaissancePriseChargeEnfant: Naissance ou prise en charge d'un enfant
+                  Congediement: Congédiement
+                  AutreRaison: Autre
+              - name: emploiPrecisionAutre
+                v-if: index >= 0 && form[name] && form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
+                type: text
+                label: 
+                  fr: Précisez la raison de fin d'emploi
+          - name: Req01-Limitations
+            type: radio
+            label:
+              fr: "Avez-vous des limitations fonctionnelles faisant suite à des lésions professionnelles causées, par exemple, par un accident de travail?"
+            options: yesno            
+          - name: limitations_Req-01
+            type: text
+            v-if: form['Req01-Limitations'] === 'true'          
+            label:
+              fr: "Précisez ces limitations"
+          - name: Req01-DisponibleTravail
+            type: radio
+            label:
+              fr: "Êtes-vous disponible pour travailler?"
+            options: yesno            
+          - name: Req01-DisponibilitesTravail
+            type: checkbox
+            v-if: form['Req01-DisponibleTravail'] === 'true'                    
+            label:
+              fr: "Précisez le type d'emploi recherché?"
+            options: 
+              ReqDispoTravailTempsPlein: À temps plein
+              ReqDispoTravailTempsPartiel: À temps partiel
+              ReqDispoTravailJour: De jour
+              ReqDispoTravailSoir: De soir
+              ReqDispoTravailNuit: De nuit
+          - name: Req01-LieuxDisponibiliteTravail
+            type: checkbox
+            v-if: form['Req01-DisponibleTravail'] === 'true'                    
+            label:
+              fr: "Où êtes-vous prêt à travailler?"
+            options: 
+              ReqLieuDispoTravailLocalite: Dans votre localité
+              ReqLieuDispoTravailRegion: Dans votre région
+              ReqLieuDispoTravailAutre: Autre
+          - name: Req01-LieuxDisponibiliteTravailPrecision
+            type: text
+            v-if: form['Req01-LieuxDisponibiliteTravail'] && form['Req01-LieuxDisponibiliteTravail'].includes('ReqLieuDispoTravailAutre')   
+            label:
+              fr: "Précisez où vous êtes prêt à travailler"
+          - name: raisonNonDisponibiliteTravail_Req-01
+            type: text
+            v-if: form['Req01-DisponibleTravail'] === 'false'   
+            outerClasses: xxl                           
+            label:
+              fr: "Inscrivez la raison de votre indisponibilité à travailler"
+      # Section - Biens
+      - section:
+          fr: Biens
+        id: biens
+        v-if: false && form['02-Conjoint']
+        components:      
+          - name: BiensVehicules
+            type: radio
+            v-if: form['02-Conjoint'] === 'true'
+            label:
+              fr: "Est-ce que vous ou votre conjoint(e) possédez des véhicules (y compris des véhicules remisés)?"
+            help:
+              fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
+            options: yesno
+          - name: BiensVehicules
+            type: radio
+            v-if: form['02-Conjoint'] === 'false'
+            label:
+              fr: "Est-ce que vous possédez des véhicules (y compris des véhicules remisés)?"
+            help:
+              fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
+            options: yesno
+          - name: BiensVehiculesAppartenance
+            type: checkbox
+            v-if: form['02-Conjoint'] === 'true' && form.BiensVehicules == 'true'
+            label:
+              fr: "Indiquez la ou les situations qui s'appliquent"
+            options: 
+              VehiculesCopropriete: 'Vous possédez au moins un véhicule (en copropriété) avec votre conjoint(e)'
+              VehiculesPersonnel: 'Vous possédez au moins un véhicule personnellement'
+              VehiculesConjoint: 'Votre conjoint(e) possède un véhicule'
+          - name: BiensVehiculesCopropriete
+            type: repeatableGroup
+            repeatable: true
+            v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesCopropriete')          
+            label:
+              fr: Véhicule(s) en copropriété avec votre conjoint(e)
+            instanceLabel:
+              fr: Véhicule
+            addLabel:
+              fr: Ajouter un véhicule
+            removeLabel:
+              fr: Supprimer ce véhicule
+            components: &groupeVehicule
+              - name: vehiculeTypeMarqueAnnee
+                type: text
+                label:
+                  fr: Type de véhicule, marque, année
+              - name: emploiSalaireHebdo
+                type: radio
+                label:
+                  fr: Est-ce qu'il s'agit d'un véhicule adapté?
+                options: yesno
+              - name: vehiculeProprioLocataire
+                type: radio
+                label:
+                  fr: "Êtes-vous propriétaire ou locataire du véhicule?"
+                options: 
+                  VehiculeProprietaire: 'Propriétaire'
+                  VehiculeLocataire: 'Locataire'
+              - name: vehiculeValeurMarchande
+                type: number
+                label:
+                  fr: Valeur marchande
+          - name: BiensVehiculesPerso
+            type: repeatableGroup
+            repeatable: true
+            v-if: form['02-Conjoint'] === 'false' && form['BiensVehicules'] === 'true' ||  (form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesPersonnel'))          
+            label:
+              fr: Véhicule(s) vous appartenant personnellement
+            instanceLabel:
+              fr: Véhicule
+            addLabel:
+              fr: Ajouter un véhicule
+            removeLabel:
+              fr: Supprimer ce véhicule
+            components: *groupeVehicule
+          - name: BiensVehiculesConjoint
+            type: repeatableGroup
+            repeatable: true
+            v-if: form['BiensVehiculesAppartenance'] && form['BiensVehiculesAppartenance'].includes('VehiculesConjoint')          
+            label:
+              fr: Véhicule(s) appartenant(s) à votre conjoint(e)
+            instanceLabel:
+              fr: Véhicule
+            addLabel:
+              fr: Ajouter un véhicule
+            removeLabel:
+              fr: Supprimer ce véhicule
+            components: *groupeVehicule
+      # Section - Dépôt direct
+      - section: 
+          fr: Dépôt direct
+        id: depotDirect
+        components:
+          - name: DepotDirect
+            type: radio
+            label: 
+              fr: Souhaitez-vous vous inscrire au dépôt direct?
+            options: yesno            
+          - type: dynamic
+            v-if: form['DepotDirect'] === 'true'
+            tag: div     
+            components:
+              - type: bandeau
+                v-if: form['DepotDirect'] === 'true'
+                text: 
+                  fr: Veuillez fournir les renseignements demandés ci-dessous. Ils nous permettront de procéder au versement de vos prestations ou de vos allocations dans le cadre de tous les services qui vous seront offerts par le Ministère.             
+              - name: Nom_institution_financière_Req-00
+                type: text
+                label: 
+                  fr: Nom de votre institution financière
+              - name: Adresse_succursale_Req-00
+                type: text
+                label: 
+                  fr: Adresse de votre institution financière
+              - name: CP_succursale_Req-00
+                type: text
+                outerClasses: md
+                label: 
+                  fr: Code postal de votre succursale
+                validations: 
+                  max: 6,length
+              - name: Num_succursale_Req-00
+                type: text
+                label: 
+                  fr: Numéro de la succursale
+                outerClasses: lg                
+                validations: 
+                  max: 5,length
+              - name: Num_institution_Req-00
+                type: text
+                label: 
+                  fr: Numéro de l'institution financière
+                outerClasses: lg                                
+                validations: 
+                  max: 3,length
+              - name: Num_compte_Req-00
+                type: text
+                label: 
+                  fr: Numéro du compte et chiffre de contrôle
+                outerClasses: lg                                
+                validations: 
+                  max: 12,length
+      # Section  - Affirmation solenelle
+      - section: 
+          fr: Affirmation solenelle
+        id: affirmationSolennelle
+        v-if: form.TypeDemande
+        components:
+          - type: bandeau
+            components:
+  #            - name: AffirmationSolennelleReconnaisReq 
+  #              type: checkbox
+  #              label: 
+  #                fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
+              - type: dynamic
+                tag: p
+                v-if: form.TypeDemande === 'Afdr'              
+                text:
+                  fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
+              - type: dynamic
+                tag: p
+                text:
+                  fr: <b>J’affirme</b> solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
+              - type: dynamic
+                tag: p
+                text:
+                  fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, entre autres de mon retour au travail ou aux études ou encore de toute nouvelle source de revenus.
+          - type: inline
+            classes: no-wrap
+            components: 
+              - name: DateSignatureReq
+                type: date
+                label: 
+                  fr: Date
+              - name: SignatureReq
+                type: text
+                outerClasses: w-100
+                v-if: form.TypeDemande !== 'Afdr' || form['02-Conjoint'] !== 'true'
+                label: 
+                  fr: Signature
+              - name: SignatureReq
+                type: text
+                outerClasses: w-100
+                v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+                label: 
+                  fr: Signature du requérant
+          - type: inline
+            classes: no-wrap
+            components: 
+              - name: DateSignatureConjoint
+                type: date
+                v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+                label: 
+                  fr: Date
+              - name: SignatureConjoint
+                type: text
+                outerClasses: w-100
+                v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+                label: 
+                  fr: Signature du conjoint
 
 
-#          v-if: form.TypeDemande === 'Afdr'
-#TODO ajouter question pour emplois recherché (attente discussion avec Julie)
-    # Section 
-    - section: 
-        fr: Révision
-        en: (EN)Test
-      id: revision
-      components:
-        - type: dynamic
-          tag: h3
-          text: 
-            fr: Salut! ceci est une section bidon juste pour tester!
+  #          v-if: form.TypeDemande === 'Afdr'
+  #TODO ajouter question pour emplois recherché (attente discussion avec Julie)
+      # Section 
+      - section: 
+          fr: Révision
+          en: (EN)Test
+        id: revision
+        components:
+          - type: dynamic
+            tag: h3
+            text: 
+              fr: Salut! ceci est une section bidon juste pour tester!
 
 
