@@ -2,11 +2,9 @@
 form:
   sectionsGroup:
     - sectionGroup: 
-        fr: Groupe 1
-    - sectionGroup: 
         fr: Groupe 2
       #v-if: form.TypeDemande
-      prefixId: req
+      prefixId: req$
       sections:
         # Section 0
         - section: 

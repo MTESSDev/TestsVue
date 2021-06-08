@@ -37,8 +37,8 @@ form:
     input: |
       <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
               {{# type}} type="{{.}}" {{/ type}}
-              {{# name}} name="{{.}}" {{/ name}}
-              {{# name}} key="{{.}}" {{/ name}}
+              {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
+              {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
               {{GenerateDefaults type .}}
               {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
@@ -63,8 +63,8 @@ form:
     group: |
       <formulate-input class="group" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
               {{# type}} type="{{.}}" {{/ type}}
-              {{# name}} name="{{.}}" {{/ name}}
-              {{# name}} key="{{.}}" {{/ name}}
+              {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
+              {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
               {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
@@ -79,8 +79,8 @@ form:
     repeatableGroup: |
       <formulate-input class="repeatable-group" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
               {{# type}} type="group" {{/ type}}
-              {{# name}} name="{{.}}" {{/ name}}
-              {{# name}} key="{{.}}" {{/ name}}
+              {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
+              {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
               {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}

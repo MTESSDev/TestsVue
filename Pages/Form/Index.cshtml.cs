@@ -221,7 +221,6 @@ namespace ECSForm.Pages
                             Titre = section.TryGetValue("section", out var pageName) ? (pageName as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found" : "Title not found",
                             VIf = (section.TryGetValue("v-if", out object? pageVif) ? pageVif?.ToString() ?? string.Empty : string.Empty)
                         });
-
                     }
 
                 }
