@@ -78,11 +78,6 @@ form:
                   v-if: val('PrecisionsAdulte2.ViePasseeMaritaleMoinsUnAn') === 'true'
                   label: 
                     fr: Prénom de l'adulte
-            - name: Req-00-Enfants
-              type: radio
-              label: 
-                fr: Avez-vous des enfants à charge?
-              options: yesno
             - name: Req01-Travaille
               type: radio
               label: 
@@ -1084,24 +1079,6 @@ form:
               removeLabel:
                 fr: Supprimer ce véhicule
               components: *groupeVehicule
-    - sectionGroup: 
-        fr: Finalisation de la demande
-      #v-if: form.TypeDemande
-      sections:
-
-        - section: 
-            fr: Renseignements sur l'identite
-          id: renseignementsIdentite
-          components:
-            - name: nom1_Req-00
-              type: text
-              label: 
-                fr: Nom de famille
-              help: 
-                fr: Selon le certificat de naissance ou le document d'immigration.
-              validations: 
-                max: 36,length
-
     - sectionGroup: 
         fr: Finalisation de la demande
       #v-if: form.TypeDemande
