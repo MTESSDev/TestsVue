@@ -1141,15 +1141,16 @@ form:
                   v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
                   label: 
                     fr: Signature du conjoint
-      
-      
-#              v-if: form.TypeDemande === 'Afdr'
-#TODO ajouter question pour emplois recherché (attente discussion avec Julie)
+  
+  
+  #            v-if: form.TypeDemande === 'Afdr'
+  #TODO ajouter question pour emplois recherché (attente discussion avec Julie)
         # Section 
         - section: 
             fr: Révision
             en: (EN)Test
           id: revision
+          classes: dernier
           components:
             - type: dynamic
               tag: h3
