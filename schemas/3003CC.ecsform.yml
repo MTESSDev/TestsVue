@@ -24,9 +24,60 @@ form:
                 AideEmploi: Demande de service d'aide à l'emploi
             - name: 02-Conjoint
               type: radio
+              v-if: val('TypeDemande') === 'Afdr'
               label: 
-                fr: Avez-vous un conjoint?
+                fr: Habitez-vous avec un autre adulte?
               options: yesno
+            - name: PrecisionsAdulte2        
+              type: group
+              v-if: val('02-Conjoint') === 'true'
+              label:
+                fr: Précisions sur l'adulte habitant avec vous
+              components:
+                - name: MarieUniCivilementAdulte
+                  type: radio
+                  label: 
+                    fr: Êtes-vous marié avec cet adulte ou uni civilement à lui?
+                  options: yesno
+                - name: AutreParentEnfant
+                  type: radio
+                  v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false'
+                  label: 
+                    fr: Est-il l’autre parent d’au moins un de vos enfants?
+                  options: yesno
+                - name: VieMaritaleUnAn
+                  type: radio
+                  v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false'
+                  label: 
+                    fr: Vivez-vous maritalement avec cet adulte depuis au moins un an?
+                  options: yesno
+                - name: ViePasseeMaritaleUnAn
+                  type: radio
+                  v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false' && val('PrecisionsAdulte2.VieMaritaleUnAn') === 'false'
+                  label: 
+                    fr: Dans le passé, avez-vous vécu maritalement avec cet adulte pendant au moins un an?
+                  options: yesno
+                - name: ViePasseeMaritaleMoinsUnAn
+                  type: radio
+                  v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false' && val('PrecisionsAdulte2.VieMaritaleUnAn') === 'false' && val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'false'
+                  label: 
+                    fr: Vivez-vous maritalement avec un autre adulte depuis moins d’un an?
+                  options: yesno
+                - name: DateDebutCohabitation
+                  type: date
+                  v-if: val('PrecisionsAdulte2.ViePasseeMaritaleMoinsUnAn') === 'true'
+                  label: 
+                    fr: Date du début de la cohabitation
+                - name: NomAdulte2CohabitationMoinsUnAn
+                  type: text
+                  v-if: val('PrecisionsAdulte2.ViePasseeMaritaleMoinsUnAn') === 'true'
+                  label: 
+                    fr: Nom de famille de l'adulte
+                - name: PrenomAdulte2CohabitationMoinsUnAn
+                  type: text
+                  v-if: val('PrecisionsAdulte2.ViePasseeMaritaleMoinsUnAn') === 'true'
+                  label: 
+                    fr: Prénom de l'adulte
             - name: Req-00-Enfants
               type: radio
               label: 
@@ -1033,6 +1084,24 @@ form:
               removeLabel:
                 fr: Supprimer ce véhicule
               components: *groupeVehicule
+    - sectionGroup: 
+        fr: Finalisation de la demande
+      #v-if: form.TypeDemande
+      sections:
+
+        - section: 
+            fr: Renseignements sur l'identite
+          id: renseignementsIdentite
+          components:
+            - name: nom1_Req-00
+              type: text
+              label: 
+                fr: Nom de famille
+              help: 
+                fr: Selon le certificat de naissance ou le document d'immigration.
+              validations: 
+                max: 36,length
+
     - sectionGroup: 
         fr: Finalisation de la demande
       #v-if: form.TypeDemande

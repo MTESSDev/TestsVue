@@ -241,9 +241,23 @@
                     })
                 }
             },
+            //TODO éventuellement bonifier afin de supporter les valeurs dans des groupes répétables.
             val(idChamp) {
-                const valeur = this.form[`${idChamp}`]
-                return valeur || ''
+                const champs = idChamp.split('.')
+                let objetAValider = this.form
+
+                for (champ of champs) {
+
+                    //TODO à modifier éventuellement pour groupes répétables
+                    objetAValider = Array.isArray(objetAValider) ? objetAValider[0] : objetAValider
+
+                    if (!objetAValider[`${champ}`] && objetAValider[`${champ}`] !== false ) {
+                        return ''
+                    }
+                    objetAValider = objetAValider[`${champ}`]
+                }              
+
+                return objetAValider || ''
             },
             //TODO évaluer possibilité d'en faire une fonction commune
             donnerFocusPremierElementFocusable(conteneur) {
