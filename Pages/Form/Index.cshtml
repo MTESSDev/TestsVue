@@ -64,7 +64,7 @@
                     <span class="groupe" v-if="groupe.titre">{{ groupe.titre }}</span>
                     <ul>
 
-                        <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" v-bind:class="{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}">
+                        <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" :class="[{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}, page.classes ? page.classes : '' ]">
                             <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
                             <span class="puce">
                                 <span class="icone-svg sm" aria-hidden="true"></span>
@@ -377,11 +377,11 @@
                 if (this.pageCourante.id !== 'revision') {
                     const form = this.$formulate.registry.get("form")
 
-                    this.pages[this.pageCourante.no].dirty = form.formContext.hasValue
+                    this.pageCourante.dirty = form.formContext.hasValue
 
                     //La 2ème portion de validation sert à pallier un bug avec les groupes (prop hasErrors = true, suite à navigation à partir page révision, même si aucune erreur pour vrai)
-                    this.pages[this.pageCourante.no].contientErreurs = form.hasErrors && (form.invalidErrors.length === 0 || form.invalidErrors[0] !== false)
-                    this.pages[this.pageCourante.no].sansErreur = !this.pages[this.pageCourante.no].contientErreurs
+                    this.pageCourante.contientErreurs = form.hasErrors && (form.invalidErrors.length === 0 || form.invalidErrors[0] !== false)
+                    this.pageCourante.sansErreur = !this.pageCourante.contientErreurs
                 }
 
                 this.noPageCourante = noPage
