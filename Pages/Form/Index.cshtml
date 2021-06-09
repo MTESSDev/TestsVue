@@ -145,7 +145,27 @@
             repeatable: ['instanceLabel']
         },
         locale: '@Model.Language',
-        validationNameStrategy: ['validationName', 'label', 'name', 'type']
+        validationNameStrategy: ['validationName', 'label', 'name', 'type'],
+        rules: {
+            nas: ({ value }, validerValeur) => {
+                if (value) {
+                    if (validerValeur) {
+                        return estNAS(value)
+                    } else {
+                        const match = value.match(/\d{9}/gm)
+                         return match && match.length > 0
+                    }                    
+                }
+                return false
+            }
+        },
+        locales: {
+            fr: {
+                nas({ name }) {
+                    return `${name} n'a pas un format valide.`
+                }
+            }
+        }
     });
 
     const App = {
@@ -220,6 +240,10 @@
                         }
                     })
                 }
+            },
+            val(idChamp) {
+                const valeur = this.form[`${idChamp}`]
+                return valeur || ''
             },
             //TODO évaluer possibilité d'en faire une fonction commune
             donnerFocusPremierElementFocusable(conteneur) {
@@ -358,7 +382,7 @@
                 this.tooltipText = text || ''
                 $('#tooltipModal').modal()
             },
-            initialiserTooltip() {
+            initialiserTooltips() {
                 //Fermer le tooltip(modal) lorsque qu'il n'a plus le focus ou que le focus n'est plus à l'intérieur
                 const $tooltipModal = $("#tooltipModal")
                 $tooltipModal.on('focusout', function () {
@@ -484,7 +508,7 @@
         },
         mounted() {
             console.log('Application mounted.');
-            this.initialiserTooltip()
+            this.initialiserTooltips()
         }
     }
 
@@ -494,6 +518,9 @@
 
     function obtenirTexteEdite(id) {
         return '(Patch) Non défini.'
-    }
+        }
+
+    function estNas(n) { if (typeof n == 'number' && n >= 0 && n < 1000000000 && n % 1 == 0) n = ('0'.repeat(8) + String(n)).slice(-9); if (!/^[0-9]{3}[ -]?[0-9]{3}[ -]?[0-9]{3}$/.test(n = String(n))) return false; n = n.replace(/[^0-9]/g, ''); return [].map.call(n, function (v, k) { var m = (k % 2) + 1, v = parseInt(v) * m; if (v > 10) return 1 + (v % 10); return v; }).reduce(function (a, b) { return a + b; }, 0) % 10 == 0; }
+
     </script>
 }
