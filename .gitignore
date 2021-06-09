@@ -34,3 +34,4 @@ node_modules/
 
 # Visual Studio 2015
 .vs/
+wwwroot/js/base.min.js
