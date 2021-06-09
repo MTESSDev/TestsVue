@@ -90,9 +90,9 @@
             </template>
 
             <div class="zone-boutons bas-page">
-                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPagePrecedente)" :disabled="pageCourante.no === 0">Précédent</button>
+                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPagePrecedente)" :disabled="noPagePrecedente == null">Précédent</button>
                 <button class="btn btn-secondaire btn-enregistrer" v-on:click="enregistrer">Enregistrer</button>
-                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPageSuivante)" :disabled="pageCourante.no === pages.length - 1">Suivant</button>
+                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPageSuivante)" :disabled="noPageSuivante == null">Suivant</button>
             </div>
 
             <div id="tooltipModal" class="modal aide-contextuelle" tabindex="-1" role="dialog" aria-labelledby="modal-title" style="display: block;" aria-modal="true">
@@ -445,7 +445,7 @@
 
             },
             effectuerNavigationParId(idPage, nomControleFocus) {
-                const page = this.obtenirPage(idPage)
+                const page = this.obtenirPageParId(idPage)
                 this.effectuerNavigation(page.no, nomControleFocus)
             },
             repositionnerEcranLabelQuestion(idControle) {
@@ -453,9 +453,23 @@
                 var label = idControle.split('_');
                 $("label[for^='" + label[0] + "']")[0].scrollIntoView();
             },
-            obtenirPage(idPage) {
-                return this.pages.find(page => page.id === idPage)
+            obtenirPageParId(idPage) {
+                for (const groupe of this.pagesGroup) {
+                    const page = groupe.pages.find(page => page.id === idPage)
+                    if (page) {
+                        return page
+                    }
+                }
             },
+            obtenirPageParNo(noPage) {
+                for (const groupe of this.pagesGroup) {
+                    const page = groupe.pages.find(page => page.no === noPage)
+                    if (page) {
+                        return page
+                    }
+                }
+            },
+
             enregistrer() {
                 axios.post('@Url.PageLink("save", null, new { id = "3003CC" } )', this.form);
                 alert("Sauvegardé!");
@@ -463,45 +477,54 @@
         },
         computed: {
             pageCourante() {
-                return this.pages.find(page => page.no === this.noPageCourante)
+                return this.obtenirPageParNo(this.noPageCourante)
             },
+
             noPageSuivante() {
-                for (var i = this.noPageCourante + 1; i < this.pages.length; i++) {
-                    if (this.pages[i]['v-if']) {
-                        if (eval(this.pages[i]['v-if'].replace('form', 'this.form'))) {
-                            return i;
+                let noPageSuivante = this.noPageCourante + 1
+
+                let page = this.obtenirPageParNo(noPageSuivante)
+
+                while (page) {
+                    if (page['v-if']) {
+                        if (eval(page['v-if'].replace('form', 'this.form'))) {
+                            return page.no;
                         }
                     } else {
-                        return i;
+                        return page.no;
                     }
+
+                    noPageSuivante += 1
+
+                    page = this.obtenirPageParNo(noPageSuivante)
                 }
-                return this.pages.length - 1;
+
+                return null
             },
             noPagePrecedente() {
-                for (var i = this.noPageCourante - 1; i > 0; i--) {
-                    if (this.pages[i]['v-if']) {
-                        if (eval(this.pages[i]['v-if'].replace('form', 'this.form'))) {
-                            return i;
+                let noPagePrecedente = this.noPageCourante - 1
+
+                let page = this.obtenirPageParNo(noPagePrecedente)
+
+                while (page) {
+                    if (page['v-if']) {
+                        if (eval(page['v-if'].replace('form', 'this.form'))) {
+                            return page.no;
                         }
                     } else {
-                        return i;
+                        return page.no;
                     }
+
+                    noPagePrecedente -= 1
+
+                    page = this.obtenirPageParNo(noPagePrecedente)
                 }
-                return 0;
+
+                return null
             }
         },
         data: function () {
             let donnees = JSON.parse('@data')
-            let pagesFlat = []
-
-            for (groupe of donnees.pagesGroup) {
-                for (page of groupe.pages) {
-                    page['v-if-groupe'] = groupe['v-if']
-                    pagesFlat.push(page)
-                }
-            }
-
-            donnees['pages'] = pagesFlat
             donnees['tooltipTitle'] = ''
             donnees['tooltipText'] = ''
             return donnees;
