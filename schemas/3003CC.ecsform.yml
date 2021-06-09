@@ -231,6 +231,7 @@ form:
     - sectionGroup: 
         fr: Adulte 1
       #v-if: form.TypeDemande
+      prefixId: adulte1$
       sections:
         # Section 2
         - section: 
@@ -265,7 +266,7 @@ form:
               validations: 
                 nas: true
             - name: date2_Req-00
-              v-if: val('Req-00_nas1').startsWith('9')
+              v-if: val('prefixId$Req-00_nas1').startsWith('9')
               type: date
               label: 
                 fr: Date d'expiration

@@ -90,21 +90,12 @@ namespace ECSForm.Utils
             return html;
         }
 
-        public static string GenerateVif(object vif)
-        {
-
-            string result = System.Text.RegularExpressions.Regex.Replace(vif.ToString(), "comp\\((.*)\\)", "form[$1]");
-            //System.Text.RegularExpressions.Regex.Replace(vif, "hasValue(.*)");
-
-            return result;
-        }
-
         private static string GenerateVif(HelperContext context, object vif)
         {
-            return $" v-if=\"{GenerateVif(vif)}\"";
+            var prefixId = context.Lookup<object>("prefixId");
+
+            return $" v-if=\"{InternalGenerateVif(vif?.ToString(), prefixId?.ToString())}\"";
         }
-
-
 
         private static string InternalGenerateClassesFromObject(IDictionary<object, object> dictComponent, string yamlKey,
                                                                 string type, string attributeName, IDictionary<object, object>? form,
@@ -269,6 +260,11 @@ namespace ECSForm.Utils
         public static string I18n(HelperContext context, IDictionary<object, object>? dict)
         {
             return FormHelpersExtensions.GetLocalizedObject(dict)?.ToString() ?? string.Empty;
+        }
+
+        public static string? InternalGenerateVif(string? vif, string? prefixId)
+        {
+            return vif?.Replace("prefixId$", prefixId ?? string.Empty, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public static string RecursiveComponents(HelperContext context, IEnumerable<dynamic> components)
