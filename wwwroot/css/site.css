@@ -421,6 +421,7 @@ body p {
     /* On applique une largeur xl à tous les contrôles de type texte par défaut */
     input[type="text"].form-control {
         width: 528px;
+        max-width: 100%;
     }
 
     input[type="number"].form-control, input[type="date"].form-control {
@@ -471,6 +472,7 @@ body p {
     /* Largeur par défaut pour contrôles vue formulate */
     .inline .formulate-input, .formulate-input input.form-control {
         width: 528px;
+        max-width: 100%;
     }
 
         /* Largeur défaut type number */

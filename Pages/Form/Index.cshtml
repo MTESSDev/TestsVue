@@ -81,6 +81,7 @@
     <div v-cloak>
         <h1 tabindex="-1">{{pageCourante.titre}}</h1>
         <div id="form">
+            <div class="d-none">{{estConsidereConjoint}}</div>
             <div class="texte-explicatif-champs-obligatoires d-flex justify-content-end" aria-hidden="true">
                 <span class="icone-champ-requis" aria-hidden="true">&nbsp;*</span>
                 <span>indique une réponse obligatoire.</span>
@@ -455,9 +456,6 @@
                     }
                 })
             },
-            obtenirNoProchainePageVisible() {
-
-            },
             effectuerNavigationParId(idPage, nomControleFocus) {
                 const page = this.obtenirPageParId(idPage)
                 this.effectuerNavigation(page.no, nomControleFocus)
@@ -493,7 +491,6 @@
             pageCourante() {
                 return this.obtenirPageParNo(this.noPageCourante)
             },
-
             noPageSuivante() {
                 let noPageSuivante = this.noPageCourante + 1
 
@@ -535,7 +532,11 @@
                 }
 
                 return null
-            }
+            },
+            estConsidereConjoint() {
+                this.form.Conjoint = this.val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'true' || this.val('PrecisionsAdulte2.AutreParentEnfant') === 'true' || this.val('PrecisionsAdulte2.VieMaritaleUnAn') === 'true' || this.val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'true'
+                return this.form.Conjoint
+            },
         },
         data: function () {
             let donnees = JSON.parse('@data')

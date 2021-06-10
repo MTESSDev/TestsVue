@@ -5,7 +5,7 @@ form:
         fr: Demande
       #v-if: form.TypeDemande
       sections:
-        # Section 0
+        # Section 0 - Informations sur la demande (aiguillage initial)
         - section: 
             fr: Informations sur la demande
             en: Information on the application
@@ -22,7 +22,11 @@ form:
               options: 
                 Afdr: Demande d'aide financière de dernier recours
                 AideEmploi: Demande de service d'aide à l'emploi
-            - name: 02-Conjoint
+            - type: bandeau
+              v-if: val('TypeDemande') === 'Afdr'
+              text: 
+                fr: L’aide financière qui peut être accordée tient compte de votre situation familiale.             
+            - name: HabiteAvecAutreAdulte
               type: radio
               v-if: val('TypeDemande') === 'Afdr'
               label: 
@@ -30,7 +34,7 @@ form:
               options: yesno
             - name: PrecisionsAdulte2        
               type: group
-              v-if: val('02-Conjoint') === 'true'
+              v-if: val('HabiteAvecAutreAdulte') === 'true'
               label:
                 fr: Précisions sur l'adulte habitant avec vous
               components:
@@ -59,7 +63,7 @@ form:
                   options: yesno
                 - name: ViePasseeMaritaleMoinsUnAn
                   type: radio
-                  v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false' && val('PrecisionsAdulte2.VieMaritaleUnAn') === 'false' && val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'false'
+                  v-if: val('Conjoint') === 'false'
                   label: 
                     fr: Vivez-vous maritalement avec un autre adulte depuis moins d’un an?
                   options: yesno
@@ -78,6 +82,33 @@ form:
                   v-if: val('PrecisionsAdulte2.ViePasseeMaritaleMoinsUnAn') === 'true'
                   label: 
                     fr: Prénom de l'adulte
+                - type: dynamic
+                  v-if: val('Conjoint') === 'true'
+                  tag: div        
+                  components:                    
+                  - name: ConjointMemeAdresse
+                    type: radio
+                    label: 
+                      fr: Votre conjoint habite-t-il à la même adresse que vous?
+                    options: yesno
+                  - name: AdresseConjoint
+                    type: text                    
+                    v-if: val('PrecisionsAdulte2.ConjointMemeAdresse') === 'false'
+                    outerClasses: xxl
+                    label: 
+                      fr: Adresse du conjoint
+                  - name: RaisonConjointHabiteAilleurs
+                    type: text
+                    v-if: val('PrecisionsAdulte2.ConjointMemeAdresse') === 'false'
+                    outerClasses: xxl
+                    label: 
+                      fr: Raison pour laquelle le conjoint habite ailleurs
+            - name: Conjoint
+              type: hidden
+            - type: bandeau-notification
+              v-if: val('Conjoint') === 'true'
+              text: 
+                fr: Vous répondez à notre définition de conjoint. Votre conjoint doit fournir les renseignements le concernant sous « Adulte 2 » dans le présent formulaire.
             - name: Req01-Travaille
               type: radio
               label: 
@@ -993,11 +1024,10 @@ form:
         - section:
             fr: Biens
           id: biens
-          v-if: false && form['02-Conjoint']
+          v-if: val('TypeDemande') === 'Afdr'
           components:      
             - name: BiensVehicules
               type: radio
-              v-if: form['02-Conjoint'] === 'true'
               label:
                 fr: "Est-ce que vous ou votre conjoint(e) possédez des véhicules (y compris des véhicules remisés)?"
               help:
@@ -1005,7 +1035,6 @@ form:
               options: yesno
             - name: BiensVehicules
               type: radio
-              v-if: form['02-Conjoint'] === 'false'
               label:
                 fr: "Est-ce que vous possédez des véhicules (y compris des véhicules remisés)?"
               help:
@@ -1013,7 +1042,7 @@ form:
               options: yesno
             - name: BiensVehiculesAppartenance
               type: checkbox
-              v-if: form['02-Conjoint'] === 'true' && form.BiensVehicules == 'true'
+              v-if: val('Conjoint') === 'true' && form.BiensVehicules == 'true'
               label:
                 fr: "Indiquez la ou les situations qui s'appliquent"
               options: 
@@ -1056,7 +1085,7 @@ form:
             - name: BiensVehiculesPerso
               type: repeatableGroup
               repeatable: true
-              v-if: form['02-Conjoint'] === 'false' && form['BiensVehicules'] === 'true' ||  (val('BiensVehiculesAppartenance').includes('VehiculesPersonnel'))          
+              v-if: form['HabiteAvecAutreAdulte'] === 'false' && form['BiensVehicules'] === 'true' ||  (val('BiensVehiculesAppartenance').includes('VehiculesPersonnel'))          
               label:
                 fr: Véhicule(s) vous appartenant personnellement
               instanceLabel:
@@ -1172,13 +1201,13 @@ form:
                 - name: SignatureReq
                   type: text
                   outerClasses: w-100
-                  v-if: form.TypeDemande !== 'Afdr' || form['02-Conjoint'] !== 'true'
+                  v-if: form.TypeDemande !== 'Afdr' || form['HabiteAvecAutreAdulte'] !== 'true'
                   label: 
                     fr: Signature
                 - name: SignatureReq
                   type: text
                   outerClasses: w-100
-                  v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+                  v-if: form.TypeDemande === 'Afdr' && form['HabiteAvecAutreAdulte'] === 'true' 
                   label: 
                     fr: Signature du requérant
             - type: inline
@@ -1186,13 +1215,13 @@ form:
               components: 
                 - name: DateSignatureConjoint
                   type: date
-                  v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+                  v-if: form.TypeDemande === 'Afdr' && form['HabiteAvecAutreAdulte'] === 'true' 
                   label: 
                     fr: Date
                 - name: SignatureConjoint
                   type: text
                   outerClasses: w-100
-                  v-if: form.TypeDemande === 'Afdr' && form['02-Conjoint'] === 'true' 
+                  v-if: form.TypeDemande === 'Afdr' && form['HabiteAvecAutreAdulte'] === 'true' 
                   label: 
                     fr: Signature du conjoint
   
