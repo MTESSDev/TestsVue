@@ -258,20 +258,20 @@ body p {
 /*====================================================================================================*/
 /*  -Z10A- Radio button affichés sous forme de boutons inline (nombres, adultes 1, 2, 1 et 2, etc. voir fin de la sections pour particularités)
 /*====================================================================================================*/
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio] >
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio] >
     .formulate-input-wrapper > .formulate-input-element {
         display: flex;
         flex-wrap: wrap;
     }
 
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-wrapper {
         margin-top: 16px;
         margin-right: 16px;
         position: relative;
     }
 
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator {
         width: 40px;
         height: 40px;
@@ -280,19 +280,19 @@ body p {
         cursor: pointer;
     }
 
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box][data-type=radio] .formulate-input-label--after {
         cursor: pointer;
     }
 
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:before,
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator:after {
         content: none;
     }
 
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] label.formulate-input-label {
         text-align: center;
         margin-left: 0;
@@ -301,14 +301,14 @@ body p {
 
 
     /* Disabled */
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-element input[type=radio]:disabled {
         /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios...  */
         border: 1px solid #bfc4ce;
     }
 
     /* Focus */
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-element input[type=radio]:focus ~ .formulate-input-element-decorator {
         /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
         border: 2px solid #5b6476;
@@ -317,7 +317,7 @@ body p {
     }
 
     /* Hover */
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-wrapper:hover {
         /* TODO Ajouter variable dans ECS pour cette couleur et appliquer checkbox et radios... */
         background-color: var(--couleur-hover) !important;
@@ -325,12 +325,12 @@ body p {
 
 
     /* Active */
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-element input[type=radio]:checked ~ .formulate-input-element-decorator {
         background-color: #1479cc;
     }
 
-    .formulate-input[class*='boutons-inline'][data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box][data-type=radio][data-has-value=true] .formulate-input-label--after {
         color: #fff;
     }
@@ -339,7 +339,7 @@ body p {
     /* Largeur par défaut de 40px */
 
     /* Adulte 1, Adulte 2, Adultes 1 et 2 */
-    .formulate-input.boutons-inline-adultes[data-classification=group][data-type=radio]
+    .formulate-input.boutons-inline.md[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator {
         width: 120px;
     }

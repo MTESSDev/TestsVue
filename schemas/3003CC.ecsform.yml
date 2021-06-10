@@ -695,7 +695,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesPrimaire
                       type: radio
-                      outerClasses: boutons-inline-nombres
+                      outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5,6,7]
@@ -711,7 +711,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesSecGeneral
                       type: radio
-                      outerClasses: boutons-inline-nombres
+                      outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5]
@@ -734,7 +734,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesSecFormProf
                       type: radio
-                      outerClasses: boutons-inline-nombres
+                      outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [3,4,5]
@@ -763,7 +763,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesSecMetier
                       type: radio
-                      outerClasses: boutons-inline-nombres
+                      outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1]
@@ -783,7 +783,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesCollegial
                       type: radio
-                      outerClasses: boutons-inline-nombres
+                      outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3]
@@ -812,7 +812,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesUniversitaire
                       type: radio
-                      outerClasses: boutons-inline-nombres
+                      outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5,6,7]
@@ -1025,6 +1025,67 @@ form:
         fr: Adulte 1 et/ou 2
       v-if: val('TypeDemande') === 'Afdr'              
       sections:
+        # Section - Revenus
+        - section:
+            fr: Revenus
+          id: revenus
+          components:      
+            - type: bandeau
+              text: 
+                fr: Des revenus sont des sommes provenant d’un emploi, des prestations, des allocations ou des indemnités. Des exemptions sur les revenus peuvent être appliquées selon votre situation.             
+            - name: PossedeRevenusTravail
+              type: radio
+              label:
+                fr: "Avez-vous des revenus de travail?"
+              options: yesno
+            - name: PossedeRevenusEmploi
+              type: radio
+              v-if: val('PossedeRevenusTravail') === 'true'    
+              label:
+                fr: "Avez-vous des revenus d'emploi?"
+              options: yesno
+            - name: RevenusEmploi
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeRevenusEmploi') === 'true'    
+              label:
+                fr: Revenus d'emploi
+              instanceLabel:
+                fr: Revenus d'emploi
+              addLabel:
+                fr: Ajouter un revenu
+              removeLabel:
+                fr: Supprimer ce revenu
+              components: 
+                - name: ProprioVehicule
+                  type: radio
+                  label:
+                    fr: À qui s'applique le revenu d'emploi?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: vehiculeTypeMarqueAnnee
+                  type: text
+                  label:
+                    fr: À qui s
+                - name: emploiSalaireHebdo
+                  type: radio
+                  label:
+                    fr: Est-ce qu'il s'agit d'un véhicule adapté?
+                  options: yesno
+                - name: vehiculeProprioLocataire
+                  type: radio
+                  label:
+                    fr: "Êtes-vous propriétaire ou locataire du véhicule?"
+                  options: 
+                    VehiculeProprietaire: 'Propriétaire'
+                    VehiculeLocataire: 'Locataire'
+                - name: vehiculeValeurMarchande
+                  type: number
+                  label:
+                    fr: Valeur marchande
+
         # Section - Biens
         - section:
             fr: Biens
@@ -1057,7 +1118,7 @@ form:
                   type: radio
                   label:
                     fr: Propriétaire du véhicule
-                  outerClasses: boutons-inline-adultes
+                  outerClasses: boutons-inline md
                   options: 
                     A1: 'Adulte 1'
                     A2: 'Adulte 2'
@@ -1104,7 +1165,7 @@ form:
               components: 
                 - name: ProprioBienImmobilier
                   type: radio
-                  outerClasses: boutons-inline-adultes                  
+                  outerClasses: boutons-inline md
                   label:
                     fr: Propriétaire du bien immobilier
                   options: 
