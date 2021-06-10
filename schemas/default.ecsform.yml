@@ -16,26 +16,26 @@ form:
     submit: btn btn-primaire
   templates: 
     inline: |
-      <div class="inline {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
+      <div class="inline {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
           {{RecursiveComponents components}}
       </div>
     bandeau: |
-      <div class="bandeau {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
+      <div class="bandeau {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
           {{i18n text}}
           {{RecursiveComponents components}}
       </div>
     bandeau-notification: |
-      <div class="bandeau notification {{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
+      <div class="bandeau notification {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
           {{i18n text}}
           {{RecursiveComponents components}}
       </div>
     dynamic: |
-      <{{tag}} class="{{classes}}" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}>
+      <{{tag}} class="{{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
         {{i18n text}}
         {{RecursiveComponents components}}
       </{{tag}}>
     input: |
-      <formulate-input {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+      <formulate-input {{# v-if}} {{GenerateVif .}} {{/ v-if}}
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
               {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
@@ -63,7 +63,7 @@ form:
           {{RecursiveComponents components}}
       </formulate-input>
     group: |
-      <formulate-input class="group" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+      <formulate-input class="group" {{# v-if}} {{GenerateVif .}} {{/ v-if}}
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
               {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
@@ -79,7 +79,7 @@ form:
               {{RecursiveComponents components}}
       </formulate-input>
     repeatableGroup: |
-      <formulate-input class="repeatable-group" {{# v-if}} v-if="{{{.}}}" {{/ v-if}}
+      <formulate-input class="repeatable-group" {{# v-if}} {{GenerateVif .}} {{/ v-if}}
               {{# type}} type="group" {{/ type}}
               {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
               {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
