@@ -63,7 +63,7 @@ form:
                   options: yesno
                 - name: ViePasseeMaritaleMoinsUnAn
                   type: radio
-                  v-if: val('Conjoint') === 'false'
+                  v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false' && val('PrecisionsAdulte2.VieMaritaleUnAn') === 'false' && val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'false'
                   label: 
                     fr: Vivez-vous maritalement avec un autre adulte depuis moins d’un an?
                   options: yesno

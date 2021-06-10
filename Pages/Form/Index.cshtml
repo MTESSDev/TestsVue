@@ -534,7 +534,7 @@
                 return null
             },
             estConsidereConjoint() {
-                this.form.Conjoint = this.val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'true' || this.val('PrecisionsAdulte2.AutreParentEnfant') === 'true' || this.val('PrecisionsAdulte2.VieMaritaleUnAn') === 'true' || this.val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'true'
+                this.form.Conjoint = (this.val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'true' || this.val('PrecisionsAdulte2.AutreParentEnfant') === 'true' || this.val('PrecisionsAdulte2.VieMaritaleUnAn') === 'true' || this.val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'true').toString()
                 return this.form.Conjoint
             },
         },
