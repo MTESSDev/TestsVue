@@ -262,7 +262,7 @@ form:
     - sectionGroup: 
         fr: Adulte 1
       #v-if: form.TypeDemande
-      prefixId: adulte1$
+      #prefixId: adulte1$
       sections:
         # Section 2
         - section: 
@@ -695,7 +695,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesPrimaire
                       type: radio
-                      outerClasses: boutons-nombres
+                      outerClasses: boutons-inline-nombres
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5,6,7]
@@ -711,7 +711,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesSecGeneral
                       type: radio
-                      outerClasses: boutons-nombres
+                      outerClasses: boutons-inline-nombres
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5]
@@ -734,7 +734,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesSecFormProf
                       type: radio
-                      outerClasses: boutons-nombres
+                      outerClasses: boutons-inline-nombres
                       label:
                         fr: Nombre d'années réussies
                       options: [3,4,5]
@@ -763,7 +763,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesSecMetier
                       type: radio
-                      outerClasses: boutons-nombres
+                      outerClasses: boutons-inline-nombres
                       label:
                         fr: Nombre d'années réussies
                       options: [1]
@@ -783,7 +783,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesCollegial
                       type: radio
-                      outerClasses: boutons-nombres
+                      outerClasses: boutons-inline-nombres
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3]
@@ -812,7 +812,7 @@ form:
                   components:
                     - name: Req01-NbAnneesReussiesUniversitaire
                       type: radio
-                      outerClasses: boutons-nombres
+                      outerClasses: boutons-inline-nombres
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5,6,7]
@@ -1021,48 +1021,47 @@ form:
               outerClasses: xxl                           
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
+    - sectionGroup: 
+        fr: Adulte 1 et/ou 2
+      v-if: val('TypeDemande') === 'Afdr'              
+      sections:
         # Section - Biens
         - section:
             fr: Biens
           id: biens
-          v-if: val('TypeDemande') === 'Afdr'
           components:      
-            - name: BiensVehicules
+            - type: bandeau
+              text: 
+                fr: Vous devez tenir compte des biens mobiliers et immobiliers. Différentes exclusions sont applicables selon votre situation.             
+            - name: PossedeBiensVehicules
               type: radio
               label:
-                fr: "Est-ce que vous ou votre conjoint(e) possédez des véhicules (y compris des véhicules remisés)?"
+                fr: "Avez-vous des véhicules (y compris des véhicules remisés)"
               help:
-                fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
+                fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, VTT, etc."
               options: yesno
             - name: BiensVehicules
-              type: radio
-              label:
-                fr: "Est-ce que vous possédez des véhicules (y compris des véhicules remisés)?"
-              help:
-                fr: "ex. autos, motos, véhicules adaptés pour une personne handicapée, camions, motoneiges, etc."
-              options: yesno
-            - name: BiensVehiculesAppartenance
-              type: checkbox
-              v-if: val('Conjoint') === 'true' && form.BiensVehicules == 'true'
-              label:
-                fr: "Indiquez la ou les situations qui s'appliquent"
-              options: 
-                VehiculesCopropriete: 'Vous possédez au moins un véhicule (en copropriété) avec votre conjoint(e)'
-                VehiculesPersonnel: 'Vous possédez au moins un véhicule personnellement'
-                VehiculesConjoint: 'Votre conjoint(e) possède un véhicule'
-            - name: BiensVehiculesCopropriete
               type: repeatableGroup
               repeatable: true
-              v-if: val('BiensVehiculesAppartenance').includes('VehiculesCopropriete')          
+              v-if: val('PossedeBiensVehicules') === 'true'    
               label:
-                fr: Véhicule(s) en copropriété avec votre conjoint(e)
+                fr: Véhicules
               instanceLabel:
                 fr: Véhicule
               addLabel:
                 fr: Ajouter un véhicule
               removeLabel:
                 fr: Supprimer ce véhicule
-              components: &groupeVehicule
+              components: 
+                - name: ProprioVehicule
+                  type: radio
+                  label:
+                    fr: Propriétaire du véhicule
+                  outerClasses: boutons-inline-adultes
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
                 - name: vehiculeTypeMarqueAnnee
                   type: text
                   label:
@@ -1083,32 +1082,50 @@ form:
                   type: number
                   label:
                     fr: Valeur marchande
-            - name: BiensVehiculesPerso
+            - name: PossedeBiensImmobiliers
+              type: radio
+              label:
+                fr: "Avez-vous des biens immobiliers?"
+              help:
+                fr: "ex. maison, chalet, terrain, etc."
+              options: yesno
+            - name: BiensImmobiliers
               type: repeatableGroup
               repeatable: true
-              v-if: form['HabiteAvecAutreAdulte'] === 'false' && form['BiensVehicules'] === 'true' ||  (val('BiensVehiculesAppartenance').includes('VehiculesPersonnel'))          
+              v-if: val('PossedeBiensImmobiliers') === 'true'    
               label:
-                fr: Véhicule(s) vous appartenant personnellement
+                fr: Biens immobiliers
               instanceLabel:
-                fr: Véhicule
+                fr: Bien immobilier
               addLabel:
-                fr: Ajouter un véhicule
+                fr: Ajouter bien immobilier
               removeLabel:
-                fr: Supprimer ce véhicule
-              components: *groupeVehicule
-            - name: BiensVehiculesConjoint
-              type: repeatableGroup
-              repeatable: true
-              v-if: val('BiensVehiculesAppartenance').includes('VehiculesConjoint')          
-              label:
-                fr: Véhicule(s) appartenant(s) à votre conjoint(e)
-              instanceLabel:
-                fr: Véhicule
-              addLabel:
-                fr: Ajouter un véhicule
-              removeLabel:
-                fr: Supprimer ce véhicule
-              components: *groupeVehicule
+                fr: Supprimer ce bien immobilier
+              components: 
+                - name: ProprioBienImmobilier
+                  type: radio
+                  outerClasses: boutons-inline-adultes                  
+                  label:
+                    fr: Propriétaire du bien immobilier
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: BienImmobilierDescription
+                  type: text
+                  label:
+                    fr: Description
+                  outerClasses: xxl
+                - name: DetteEmpruntBienImmobilier
+                  type: number
+                  label:
+                    fr: Dette hypothécaire ou emprunt lié au bien
+                - name: ValeurBienImmobilier
+                  type: number
+                  label:
+                    fr: "Valeur uniformisée"
+                  help:
+                    fr: "Selon le dernier compte de taxe"
     - sectionGroup: 
         fr: Finalisation de la demande
       #v-if: form.TypeDemande
