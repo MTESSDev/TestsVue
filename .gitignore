@@ -35,3 +35,6 @@ node_modules/
 # Visual Studio 2015
 .vs/
 wwwroot/js/base.min.js
+src/temp/**
+wwwroot/css/additionnel.min.css
+wwwroot/css/base.min.css
