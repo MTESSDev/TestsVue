@@ -1038,26 +1038,29 @@ form:
               label:
                 fr: "Avez-vous des revenus de travail?"
               options: yesno
-            - name: PossedeRevenusEmploi
-              type: radio
+            - name: TypesRevenusEmploi
+              type: checkbox
               v-if: val('PossedeRevenusTravail') === 'true'    
               label:
-                fr: "Avez-vous des revenus d'emploi?"
-              options: yesno
+                fr: "Spécifiez le(s) type(s) de revenus qui s'appliquent"
+              options: 
+                    RevenusEmplois: Revenus d'emplois
+                    Pourboires: Pourboires
+                    TravailAutonome: Revenus provenant d’un travail autonome ou de votre entreprise
             - name: RevenusEmploi
               type: repeatableGroup
               repeatable: true
-              v-if: val('PossedeRevenusEmploi') === 'true'    
+              v-if: val('TypesRevenusEmploi').includes('RevenusEmplois')
               label:
                 fr: Revenus d'emploi
               instanceLabel:
-                fr: Revenus d'emploi
+                fr: Revenu d'emploi
               addLabel:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
               components: 
-                - name: ProprioVehicule
+                - name: RevenuEmploiProprio
                   type: radio
                   label:
                     fr: À qui s'applique le revenu d'emploi?
@@ -1065,26 +1068,59 @@ form:
                   options: 
                     A1: 'Adulte 1'
                     A2: 'Adulte 2'
-                - name: vehiculeTypeMarqueAnnee
+                - name: RevenuEmploiSourceNomEmployeur
                   type: text
                   label:
-                    fr: À qui s
-                - name: emploiSalaireHebdo
-                  type: radio
-                  label:
-                    fr: Est-ce qu'il s'agit d'un véhicule adapté?
-                  options: yesno
-                - name: vehiculeProprioLocataire
-                  type: radio
-                  label:
-                    fr: "Êtes-vous propriétaire ou locataire du véhicule?"
-                  options: 
-                    VehiculeProprietaire: 'Propriétaire'
-                    VehiculeLocataire: 'Locataire'
-                - name: vehiculeValeurMarchande
+                    fr: Source ou nom de l’employeur
+                - name: RevenuEmploiSalaireNet
                   type: number
                   label:
-                    fr: Valeur marchande
+                    fr: Salaire net
+                - name: RevenuEmploiSourceNomEmployeur
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: 'par semaine'
+                    bihebdo: 'aux 2 semaines'
+                    mensuel: 'par mois'
+            - name: RevenusPourboires
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusEmploi').includes('Pourboires')
+              label:
+                fr: Pourboires
+              instanceLabel:
+                fr: Pourboire
+              addLabel:
+                fr: Ajouter un pourboire
+              removeLabel:
+                fr: Supprimer ce pourboire
+              components: 
+                - name: RevenuPourboireProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit le pourboire?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenuPourboireSourceNomEmployeur
+                  type: text
+                  label:
+                    fr: Source ou nom de l’employeur
+                - name: RevenuPourboireMontantNet
+                  type: number
+                  label:
+                    fr: Montant net
+                - name: RevenuPourboireFrequence
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: 'par semaine'
+                    bihebdo: 'aux 2 semaines'
+                    mensuel: 'par mois'
 
         # Section - Biens
         - section:
