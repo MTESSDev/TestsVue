@@ -999,11 +999,11 @@ form .validation-summary-errors:focus {
 
 form .validation-summary-errors a {
     color: var(--couleur-erreur);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
     form .validation-summary-errors a:hover, form .validation-summary-errors a:focus {
-        text-decoration: none;
+        text-decoration: underline;
     }
 
 form .validation-summary-errors ul {
