@@ -184,13 +184,11 @@ body p {
         margin-bottom: 0;
     }
 
-        .formulate-input[data-classification=box] label.formulate-input-label {
-            line-height: 1;
-            margin-left: 8px;
-            font-family: 'OpenSans-Regular';
-            width: 100%; /*Important sinon texte écrase parfois les contrôles si texte trop long */
-        }
-
+    .formulate-input[data-classification=box] label.formulate-input-label {
+        line-height: 1;
+        margin-left: 8px;
+        font-family: 'OpenSans-Regular';
+    }
 
     /* --------------- Radio buttons --------------- */
 
@@ -258,6 +256,7 @@ body p {
 /*====================================================================================================*/
 /*  -Z10A- Radio button affichés sous forme de boutons inline (nombres, adultes 1, 2, 1 et 2, etc. voir fin de la sections pour particularités)
 /*====================================================================================================*/
+
     .formulate-input.boutons-inline[data-classification=group][data-type=radio] >
     .formulate-input-wrapper > .formulate-input-element {
         display: flex;
@@ -299,6 +298,10 @@ body p {
         position: absolute;
     }
 
+    .boutons-inline .formulate-input[data-classification=box] label.formulate-input-label {
+        width: 100%;
+    }
+
 
     /* Disabled */
     .formulate-input.boutons-inline[data-classification=group][data-type=radio]
@@ -338,7 +341,7 @@ body p {
     /* Nombres */
     /* Largeur par défaut de 40px */
 
-    /* Adulte 1, Adulte 2, Adultes 1 et 2 */
+    /* md */
     .formulate-input.boutons-inline.md[data-classification=group][data-type=radio]
     .formulate-input[data-classification=box] .formulate-input-element[data-type=radio] .formulate-input-element-decorator {
         width: 120px;

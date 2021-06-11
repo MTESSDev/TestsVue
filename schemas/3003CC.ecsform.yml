@@ -1076,7 +1076,7 @@ form:
                   type: number
                   label:
                     fr: Salaire net
-                - name: RevenuEmploiSourceNomEmployeur
+                - name: RevenuEmploiFrequence
                   type: radio
                   label:
                     fr: Fréquence
