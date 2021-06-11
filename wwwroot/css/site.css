@@ -1086,6 +1086,14 @@ form .input-validation-error, form .input-validation-error + .note-editor {
         transition: all .35s;
     }
 
+    /* Animations */
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
 
     /*====================================================================================================*/
     /*  -900- SPRITES

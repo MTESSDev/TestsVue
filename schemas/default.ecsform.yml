@@ -16,26 +16,35 @@ form:
     submit: btn btn-primaire
   templates: 
     inline: |
-      <div class="inline {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
-          {{RecursiveComponents components}}
-      </div>
+      <transition name="fade">
+        <div class="inline {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
+            {{RecursiveComponents components}}
+        </div>
+      </transition>              
     bandeau: |
-      <div class="bandeau {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
-          {{i18n text}}
-          {{RecursiveComponents components}}
-      </div>
+      <transition name="fade">
+        <div class="bandeau {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
+            {{i18n text}}
+            {{RecursiveComponents components}}
+        </div>
+      </transition>      
     bandeau-notification: |
-      <div class="bandeau notification {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
+      <transition name="fade">
+        <div class="bandeau notification {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
+            {{i18n text}}
+            {{RecursiveComponents components}}
+        </div>
+      </transition>
+    dynamic: |
+      <transition name="fade">
+        <{{tag}} class="{{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
           {{i18n text}}
           {{RecursiveComponents components}}
-      </div>
-    dynamic: |
-      <{{tag}} class="{{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
-        {{i18n text}}
-        {{RecursiveComponents components}}
-      </{{tag}}>
+        </{{tag}}>
+      </transition>
     input: |
-      <formulate-input {{# v-if}} {{GenerateVif .}} {{/ v-if}}
+      <transition name="fade">
+        <formulate-input {{# v-if}} {{GenerateVif .}} {{/ v-if}}
               {{# type}} type="{{.}}" {{/ type}}
               {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
               {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
@@ -61,48 +70,53 @@ form:
               {{/ repeatable}}
               {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
           {{RecursiveComponents components}}
-      </formulate-input>
+        </formulate-input>
+      </transition>
     group: |
-      <formulate-input class="group" {{# v-if}} {{GenerateVif .}} {{/ v-if}}
-              {{# type}} type="{{.}}" {{/ type}}
-              {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
-              {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
-              {{GenerateClasses type .}}
-              {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
-              {{# label}} label="{{i18n .}}" {{/ label}}
-              {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
-              {{# help}} help="{{i18n .}}" {{/ help}}
-              {{GenerateValidations .}}
-              error-behavior="value"
-              #default="{ name, index }"
-              {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
-              {{RecursiveComponents components}}
-      </formulate-input>
+      <transition name="fade">
+        <formulate-input class="group" {{# v-if}} {{GenerateVif .}} {{/ v-if}}
+                {{# type}} type="{{.}}" {{/ type}}
+                {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
+                {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
+                {{GenerateClasses type .}}
+                {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
+                {{# label}} label="{{i18n .}}" {{/ label}}
+                {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
+                {{# help}} help="{{i18n .}}" {{/ help}}
+                {{GenerateValidations .}}
+                error-behavior="value"
+                #default="{ name, index }"
+                {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
+                {{RecursiveComponents components}}
+        </formulate-input>
+      </transition>        
     repeatableGroup: |
-      <formulate-input class="repeatable-group" {{# v-if}} {{GenerateVif .}} {{/ v-if}}
-              {{# type}} type="group" {{/ type}}
-              {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
-              {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
-              {{GenerateClasses type .}}
-              {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
-              {{# label}} label="{{i18n .}}" {{/ label}}
-              {{# instanceLabel}} instance-label="{{i18n .}}" {{/ instanceLabel}}
-              {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
-              {{# help}} help="{{i18n .}}" {{/ help}}
-              {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
-              {{# removeLabel}} remove-label="{{i18n .}}" {{/ removeLabel}}
-              {{GenerateValidations .}}
-              {{# min}} min="{{.}}" {{/ min}}
-              {{# max}} max="{{.}}" {{/ max}}
-              {{# limit}} limit="{{.}}" {{/ limit}}
-              error-behavior="value"
-              @repeatable-added="repeatableAdded"
-              @repeatable-removed="repeatableRemoved"
-              {{# repeatable}}
-              remove-position="after"
-              :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
-              {{/ repeatable}}              
-              #default="{ name, index }"
-              {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
-              {{RecursiveComponents components}}
-      </formulate-input>      
+      <transition name="fade">
+        <formulate-input class="repeatable-group" {{# v-if}} {{GenerateVif .}} {{/ v-if}}
+                {{# type}} type="group" {{/ type}}
+                {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
+                {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
+                {{GenerateClasses type .}}
+                {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
+                {{# label}} label="{{i18n .}}" {{/ label}}
+                {{# instanceLabel}} instance-label="{{i18n .}}" {{/ instanceLabel}}
+                {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
+                {{# help}} help="{{i18n .}}" {{/ help}}
+                {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
+                {{# removeLabel}} remove-label="{{i18n .}}" {{/ removeLabel}}
+                {{GenerateValidations .}}
+                {{# min}} min="{{.}}" {{/ min}}
+                {{# max}} max="{{.}}" {{/ max}}
+                {{# limit}} limit="{{.}}" {{/ limit}}
+                error-behavior="value"
+                @repeatable-added="repeatableAdded"
+                @repeatable-removed="repeatableRemoved"
+                {{# repeatable}}
+                remove-position="after"
+                :repeatable="{{#.}}true{{/.}}{{^.}}false{{/.}}"
+                {{/ repeatable}}              
+                #default="{ name, index }"
+                {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
+                {{RecursiveComponents components}}
+        </formulate-input>  
+      </transition>            
