@@ -418,6 +418,7 @@
         },
         "Defaults": {
             "type": "object",
+            "additionalProperties": true,
             "title": "Defaults values"
         }
     }
