@@ -217,7 +217,7 @@ namespace ECSForm.Pages
                         pages.Add(new Section()
                         {
                             No = sectionNo++,
-                            Id = section.TryGetValue("id", out var pageId) ? pageId?.ToString() ?? string.Empty : string.Empty,
+                            Id = (pageGroupDict.TryGetValue("prefixId", out var prefixId) ? prefixId?.ToString() ?? string.Empty : string.Empty) + (section.TryGetValue("id", out var pageId) ? pageId?.ToString() ?? string.Empty : string.Empty),
                             Titre = section.TryGetValue("section", out var pageName) ? (pageName as Dictionary<object, object>).GetLocalizedObject() ?? "Title not found" : "Title not found",
                             VIf = (section.TryGetValue("v-if", out object? pageVif) ? pageVif?.ToString() ?? string.Empty : string.Empty),
                             Classes = (section.TryGetValue("classes", out object? pageClasses) ? pageClasses?.ToString() : null)

@@ -13,9 +13,9 @@
     <div class="sectionGroup" {{# v-if }} v-if="{{.}}" {{/ v-if}}>
         {{# sections}}
         <div {{# v-if}} v-if="{{.}}" {{/ v-if}}>
-            <div v-if="form.validAll === true || pageCourante.id == '{{id}}'">
-                <div class="section {{classes}}" data-id-page="{{id}}"
-                     v-show="pageCourante.id == '{{id}}' && form.validAll === false">
+            <div v-if="form.validAll === true || pageCourante.id == '{{prefixId}}{{id}}'">
+                <div class="section {{classes}}" data-id-page="{{prefixId}}{{id}}"
+                     v-show="pageCourante.id == '{{prefixId}}{{id}}' && form.validAll === false">
                     {{RecursiveComponents components}}
                 </div>
             </div>
