@@ -98,7 +98,7 @@
                     "description": "Conditionnal display on another property/form field."
                 },
                 "sectionGroup": {
-                    "type": "object",
+                    "type": ["object", "null"],
                     "$ref": "#/definitions/Translation"
                 }
             },

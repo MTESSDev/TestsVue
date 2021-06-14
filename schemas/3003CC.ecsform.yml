@@ -1025,7 +1025,9 @@ form:
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
     # Groupe Adulte 1 et/ou 2
-    - v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
+    - sectionGroup: 
+        fr: Adulte 1 et/ou 2
+      v-if: val('Conjoint') === 'true' && val('TypeDemande') === 'Afdr'
       classes: icone user              
       sections: &menage
         # Section - Revenus
@@ -1226,6 +1228,10 @@ form:
                     fr: "Valeur uniformisée"
                   help:
                     fr: "Selon le dernier compte de taxe."
+    - sectionGroup: null
+      v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
+      classes: icone user              
+      sections: *menage
     - sectionGroup: 
         fr: Finalisation de la demande
       #v-if: form.TypeDemande
