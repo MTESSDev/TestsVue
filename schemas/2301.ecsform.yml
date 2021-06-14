@@ -135,7 +135,7 @@ form:
             - name: TexteSignatureConjoint
               type: dynamic
               tag: p
-              v-if: val('TypeDemande') === 'ReqAfdr' && form['NomEtPrenomConjoint'].length
+              v-if: val('TypeDemande') === 'ReqAfdr' && val('NomEtPrenomConjoint')
               text:
                 fr: La signature de la conjointe ou du conjoint est requise uniquement si vous demandez le dépôt d'une aide financière de dernier recours (aide sociale ou solidarité sociale).
                 en: Your spouse's signature is required if you are applying for last-resort financial assistance (social assistance program or social solidarity program).
@@ -144,14 +144,14 @@ form:
               components:
                 - name: DateSignatureReq
                   type: date
-                  v-if: val('TypeDemande') === 'ReqAfdr' && form['NomEtPrenomConjoint'].length
+                  v-if: val('TypeDemande') === 'ReqAfdr' && val('NomEtPrenomConjoint')
                   label: 
                     fr: Date
                     en: Date
                 - name: SignatureReq
                   type: text
                   outerClasses: w-100
-                  v-if: val('TypeDemande') === 'ReqAfdr' && form['NomEtPrenomConjoint'].length
+                  v-if: val('TypeDemande') === 'ReqAfdr' && val('NomEtPrenomConjoint')
                   label: 
                     fr: Signature
                     en: Signature
