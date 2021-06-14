@@ -22,7 +22,7 @@
                 "sectionsGroup": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/SectionsGroup"
+                        "$ref": "#/definitions/SectionGroup"
                     }
                 },
                 "templates": {
@@ -77,20 +77,6 @@
                 "section"
             ],
             "title": "Section"
-        },
-        "SectionsGroup": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "sections": {
-                    "type": "array",
-                    "$ref": "#/definitions/SectionGroup"
-                }
-            },
-            "required": [
-                "sections"
-            ],
-            "title": "Section Group"
         },
         "SectionGroup": {
             "type": "object",
