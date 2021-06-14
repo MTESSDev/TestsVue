@@ -263,8 +263,8 @@ form:
         fr: Adulte 1
       classes: icone user                      
       #v-if: form.TypeDemande
-      #prefixId: adulte1$
-      sections:
+      prefixId: adulte1$
+      sections: &sectionsAdulte
         # Section 2
         - section: 
             fr: Renseignements sur l'identité
@@ -1024,6 +1024,13 @@ form:
               outerClasses: xxl                           
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
+    #Adulte 2
+    - sectionGroup: 
+        fr: Adulte 2
+      classes: icone user                      
+      v-if: val('Conjoint') === 'true'
+      prefixId: adulte2$
+      sections: *sectionsAdulte
     # Groupe Adulte 1 et/ou 2
     - sectionGroup: 
         fr: Adulte 1 et/ou 2
