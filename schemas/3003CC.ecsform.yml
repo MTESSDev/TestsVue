@@ -1033,7 +1033,7 @@ form:
       sections: *sectionsAdulte
     # Groupe Adulte 1 et/ou 2
     - sectionGroup: 
-        fr: Adulte 1 et/ou 2
+        fr: Adulte 1 et 2
       v-if: val('Conjoint') === 'true' && val('TypeDemande') === 'Afdr'
       classes: icone user              
       sections: &menage
