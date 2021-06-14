@@ -59,10 +59,10 @@
             <span aria-hidden="true" class="icone-svg md"></span>
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul>
+            <ul class="niv1">
                 <li v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])">
-                    <span class="groupe" v-if="groupe.titre">{{ groupe.titre }}</span>
-                    <ul>
+                    <span class="groupe" :class="groupe.classes" v-if="groupe.titre">{{ groupe.titre }}</span>
+                    <ul class="niv2">
 
                         <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" :class="[{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}, page.classes ? page.classes : '' ]">
                             <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>

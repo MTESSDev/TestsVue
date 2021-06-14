@@ -261,6 +261,7 @@ form:
                     fr: Précisez la raison de votre demande d'aide à l'emploi
     - sectionGroup: 
         fr: Adulte 1
+      classes: icone user                      
       #v-if: form.TypeDemande
       #prefixId: adulte1$
       sections:
@@ -1023,9 +1024,11 @@ form:
               outerClasses: xxl                           
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
+    # Groupe Adulte 1 et/ou 2
     - sectionGroup: 
         fr: Adulte 1 et/ou 2
-      v-if: val('TypeDemande') === 'Afdr'              
+      v-if: val('TypeDemande') === 'Afdr'
+      classes: icone user              
       sections:
         # Section - Revenus
         - section:
@@ -1224,7 +1227,7 @@ form:
                   label:
                     fr: "Valeur uniformisée"
                   help:
-                    fr: "Selon le dernier compte de taxe"
+                    fr: "Selon le dernier compte de taxe."
     - sectionGroup: 
         fr: Finalisation de la demande
       #v-if: form.TypeDemande

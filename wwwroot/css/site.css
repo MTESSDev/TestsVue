@@ -602,6 +602,11 @@ body p {
             nav.etapes-form ul {
                 padding: 0 0 0 16px;
             }
+
+            nav.etapes-form ul.niv1 {
+                margin-top: 16px;
+            }
+
         }
 
         @media (min-width: 992px) {
@@ -619,7 +624,8 @@ nav.etapes-form .groupe {
     font-family: 'OpenSans-Bold';
     padding: 16px 0;
     background-color: var(--couleur-fond-gris);
-    display: block;
+    display: flex;
+    align-items: center;
     margin-left: -16px;
     padding-left: 16px;
 }
@@ -1106,10 +1112,29 @@ form .input-validation-error, form .input-validation-error + .note-editor {
     }
 
     /*====================================================================================================*/
-    /*  -900- SPRITES
+    /*  -800- SPRITES
 /*====================================================================================================*/
     /* Ajouter les sprites crochet-bleu-texte, check-blanc, exlamation-blanc, question */
     /* Pour raison inconnue, dans ce projet il faut réajuster la taille des icônes. Il faudra revérifier une fois dans ECS. */
     .icone-svg.md.chevron-haut-texte {
         height: 12px;
     }
+
+
+
+/*====================================================================================================*/
+/*  -900- Spécifique au 3003
+/*====================================================================================================*/
+.groupe.icone.user:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-size: 100% auto;
+    min-width: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/sprite.svg#ico-user-bleu);
+    display: inline-block;
+    margin-right: 8px;
+    margin-left: -2px;
+}
