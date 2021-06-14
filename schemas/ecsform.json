@@ -416,7 +416,7 @@
             ],
             "title": "Translation"
         },
-        "defaults": {
+        "Defaults": {
             "type": "object",
             "title": "Defaults values"
         }
