@@ -59,8 +59,8 @@
             <span aria-hidden="true" class="icone-svg md"></span>
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="niv1">
-                <li v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])">
+            <ul class="niv1" >
+                <li v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])" >
                     <span class="groupe" :class="groupe.classes" v-if="groupe.titre">{{ groupe.titre }}</span>
                     <ul class="niv2">
 
