@@ -120,7 +120,9 @@ namespace ECSForm.Pages
                                     continue;
                                 }
                             }
+#pragma warning disable CS0168 // La variable est déclarée mais jamais utilisée
                             catch (Exception ex)
+#pragma warning restore CS0168 // La variable est déclarée mais jamais utilisée
                             {
                                 throw;
                             }

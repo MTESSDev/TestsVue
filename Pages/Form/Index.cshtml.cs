@@ -208,9 +208,15 @@ namespace ECSForm.Pages
                 var pageGroupDict = (sectionGroup as Dictionary<object, object>);
                 List<Section> pages = new List<Section>();
 
+                if (pageGroupDict is null) { continue; }
+
                 if (pageGroupDict.TryGetValue("sections", out var sections))
                 {
-                    foreach (Dictionary<object, object>? section in (sections as List<object>))
+                    var sectionsAsList = (sections as List<object>);
+
+                    if (sectionsAsList is null) { continue; }
+
+                    foreach (Dictionary<object, object>? section in sectionsAsList)
                     {
                         if (section is null) { continue; }
 
@@ -232,7 +238,7 @@ namespace ECSForm.Pages
                     Id = pageGroupDict.TryGetValue("prefixId", out var sectionId) ? sectionId?.ToString() ?? string.Empty : string.Empty,
                     Titre = pageGroupDict.TryGetValue("sectionGroup", out var sectionName) ? (sectionName as Dictionary<object, object>).GetLocalizedObject() : null,
                     VIf = (pageGroupDict.TryGetValue("v-if", out object? vif) ? vif?.ToString() ?? string.Empty : string.Empty),
-                    Classes = (pageGroupDict.TryGetValue("classes", out object? classes) ? classes?.ToString(): null),
+                    Classes = (pageGroupDict.TryGetValue("classes", out object? classes) ? classes?.ToString() : null),
                     Pages = pages
                 });
             }
