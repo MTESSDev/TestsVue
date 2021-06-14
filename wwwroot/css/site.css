@@ -435,6 +435,10 @@ body p {
     /*====================================================================================================*/
     /*  -Z20A- Forms (Champs textes largeurs)  
 /*====================================================================================================*/
+    h1:focus{
+        outline: 0!important;
+    }
+
     /*TODO les types ont été retirés aussi dans ECS [type="text"], on se fou du type en fait... on doit le retirer dans ECS, sauf pour largeur par défaut. */
     /* On applique une largeur xl à tous les contrôles de type texte par défaut */
     input[type="text"].form-control {
@@ -1091,10 +1095,10 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 
     /* Animations */
     .fade-enter-active {
-        transition: opacity .5s;
+        transition: opacity 0.5s linear;
     }
     .fade-leave-active {
-        transition: opacity 0.1s;
+        transition: opacity 0.2s linear;
     }
 
     .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {

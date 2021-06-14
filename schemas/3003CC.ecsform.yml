@@ -266,7 +266,7 @@ form:
       sections:
         # Section 2
         - section: 
-            fr: Renseignements sur l'identite
+            fr: Renseignements sur l'identité
           id: renseignementsIdentite
           components:
             - name: nom1_Req-00
@@ -433,7 +433,7 @@ form:
             - name: adresse4_Req-00
               type: text
               label: 
-                fr: Ville village ou municipalité
+                fr: Ville, village ou municipalité
               validations: 
                 max: 29,length
             - name: codePostal1_Req-00
@@ -842,6 +842,7 @@ form:
             - name: Req01-NbAnneesReussiesEtudesEtranger
               type: number
               v-if: form['Req01-EtudesEtranger'] === 'true'              
+              outerClasses: sm
               label:
                 fr: Nombre d'années d'études réussies
             - name: Req01-EtudesEvaluationComparative
@@ -948,8 +949,9 @@ form:
                     fr: Salaire par semaine
                 - name: emploiHeuresHebdo
                   type: number
+                  outerClasses: sm                  
                   label:
-                    fr: Heures par semaine
+                    fr: Heures par semaine                    
                 - name: emploiEmploiOccupe
                   type: text
                   label:
