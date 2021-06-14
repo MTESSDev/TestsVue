@@ -86,8 +86,12 @@
                     "type": "array",
                     "$ref": "#/definitions/Section"
                 },
-                "id": {
+                "prefixId": {
                     "type": "string"
+                },
+                "classes": {
+                    "type": "string",
+                    "description": ""
                 },
                 "sectionGroup": {
                     "type": "object",
