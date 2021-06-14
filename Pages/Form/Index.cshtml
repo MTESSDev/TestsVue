@@ -487,11 +487,12 @@
 
                 const groupe = groupeEtPage.groupe
                 const page = groupeEtPage.page
-
+                const form = this.form
+                const val = this.val
                 if (groupe['v-if']) {
-                    if (eval(groupe['v-if'].replace('form', 'this.form').replace('val', 'this.val'))) {
+                    if (eval(groupe['v-if'])) {
                         if (page['v-if']) {
-                            if (eval(page['v-if'].replace('form', 'this.form').replace('val', 'this.val'))) {
+                            if (eval(page['v-if'])) {
                                 return true
                             }
                         } else {
@@ -500,7 +501,7 @@
                     }
                 } else {
                     if (page['v-if']) {
-                        if (eval(page['v-if'].replace('form', 'this.form').replace('val', 'this.val'))) {
+                        if (eval(page['v-if'])) {
                             return true
                         }
                     } else {

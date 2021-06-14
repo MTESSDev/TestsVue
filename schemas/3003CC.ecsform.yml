@@ -1227,11 +1227,6 @@ form:
                   help:
                     fr: "Selon le dernier compte de taxe."
     - sectionGroup: 
-        fr: Adulte 1 et/ou 2
-      v-if: val('Conjoint') === 'true' && val('TypeDemande') === 'Afdr'
-      classes: icone user              
-      sections: *menage
-    - sectionGroup: 
         fr: Finalisation de la demande
       #v-if: form.TypeDemande
       sections:
