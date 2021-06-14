@@ -479,11 +479,36 @@
                 for (const groupe of this.pagesGroup) {
                     const page = groupe.pages.find(page => page.no === noPage)
                     if (page) {
-                        return page
+                        return { groupe: groupe, page: page }
                     }
                 }
             },
+            estPageAffichee(groupeEtPage) {
 
+                const groupe = groupeEtPage.groupe
+                const page = groupeEtPage.page
+
+                if (groupe['v-if']) {
+                    if (eval(groupe['v-if'].replace('form', 'this.form').replace('val', 'this.val'))) {
+                        if (page['v-if']) {
+                            if (eval(page['v-if'].replace('form', 'this.form').replace('val', 'this.val'))) {
+                                return true
+                            }
+                        } else {
+                            return true
+                        }
+                    }
+                } else {
+                    if (page['v-if']) {
+                        if (eval(page['v-if'].replace('form', 'this.form').replace('val', 'this.val'))) {
+                            return true
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+                return false
+            },
             enregistrer() {
                 axios.post('@Url.PageLink("save", null, new { id = "3003CC" } )', this.form);
                 alert("Sauvegardé!");
@@ -491,46 +516,36 @@
         },
         computed: {
             pageCourante() {
-                return this.obtenirPageParNo(this.noPageCourante)
+                return this.obtenirPageParNo(this.noPageCourante).page
             },
             noPageSuivante() {
                 let noPageSuivante = this.noPageCourante + 1
+                let groupeEtPage = this.obtenirPageParNo(noPageSuivante)
 
-                let page = this.obtenirPageParNo(noPageSuivante)
+                while (groupeEtPage) {                    
 
-                while (page) {
-                    if (page['v-if']) {
-                        if (eval(page['v-if'].replace('form', 'this.form'))) {
-                            return page.no;
-                        }
-                    } else {
-                        return page.no;
+                    if (this.estPageAffichee(groupeEtPage)) {
+                        return groupeEtPage.page.no
                     }
 
                     noPageSuivante += 1
-
-                    page = this.obtenirPageParNo(noPageSuivante)
+                    groupeEtPage = this.obtenirPageParNo(noPageSuivante)
                 }
 
                 return null
             },
             noPagePrecedente() {
                 let noPagePrecedente = this.noPageCourante - 1
+                let groupeEtPage = this.obtenirPageParNo(noPagePrecedente)
 
-                let page = this.obtenirPageParNo(noPagePrecedente)
+                while (groupeEtPage) {
 
-                while (page) {
-                    if (page['v-if']) {
-                        if (eval(page['v-if'].replace('form', 'this.form'))) {
-                            return page.no;
-                        }
-                    } else {
-                        return page.no;
+                    if (this.estPageAffichee(groupeEtPage)) {
+                        return groupeEtPage.page.no
                     }
 
                     noPagePrecedente -= 1
-
-                    page = this.obtenirPageParNo(noPagePrecedente)
+                    groupeEtPage = this.obtenirPageParNo(noPagePrecedente)
                 }
 
                 return null
