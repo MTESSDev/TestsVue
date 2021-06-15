@@ -4,15 +4,24 @@
     ViewData["Title"] = "ECSForm";
 }
 
+@section style{
+    <style>
+        .liste-forms > li{
+            margin-top: 16px;
+        }
+    </style>
+}
+
+
 <h2>Choisir un formulaire</h2>
-<ul>
+<ul class="liste-forms">
     <li><a href="~/Form/3003CC">3003 - Demande AFDR Aide à l'emploi</a></li>
     <li><a href="~/Form/2601">2601 - Déclaration de changement</a></li>
     <li><a href="~/Form/2301">2301 - Dépôt direct</a></li>
 </ul>
 
-<h2>Bac-à-sable</h2>
-<ul>
+<h2 class="mt-32">Bac-à-sable</h2>
+<ul class="liste-forms">
     <li><a href="~/bac-a-sable/?file=3003cc">Éditeur (3003)</a></li>
     <li><a href="~/bac-a-sable/?file=2601">Éditeur (2601)</a></li>
     <li><a href="~/bac-a-sable/?file=2301">Éditeur (2301)</a></li>
