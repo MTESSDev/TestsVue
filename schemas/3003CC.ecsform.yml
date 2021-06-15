@@ -263,7 +263,7 @@ form:
         fr: Adulte 1
       classes: icone user                      
       #v-if: form.TypeDemande
-      prefixId: adulte1$
+      prefixId: adulte1
       sections: &sectionsAdulte
         # Section 2
         - section: 
@@ -673,7 +673,7 @@ form:
                 fr: Avez-vous fait vos études à l'étranger?
               options: yesno
             - type: dynamic
-              v-if: form['Req01-EtudesEtranger'] === 'false'
+              v-if: val('prefixId$Req01-EtudesEtranger') === 'false'
               tag: div     
               components:
                 - name: Req01-OrdresEnseignementsApplicables
@@ -690,7 +690,7 @@ form:
       
                 - name: primaire        
                   type: group
-                  v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesPrimaire')
+                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesPrimaire')
                   label:
                     fr: Primaire
                   components:
@@ -706,7 +706,7 @@ form:
                         fr: Date de fin des études
                 - name: secondaireGen
                   type: group
-                  v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireGen')          
+                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireGen')          
                   label:
                     fr: Secondaire (général)
                   components:
@@ -729,7 +729,7 @@ form:
                         fr: Date de fin des études
                 - name: secondaireProf
                   type: group
-                  v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormProf')                    
+                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormProf')                    
                   label:
                     fr: Secondaire (Formation professionnelle)
                   components:
@@ -758,7 +758,7 @@ form:
                         fr: Date de fin des études
                 - name: secondaireMetier
                   type: group
-                  v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormMétier')                              
+                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormMétier')                              
                   label:
                     fr: Secondaire (Formation à un métier semi-spécialisé)
                   components:
@@ -778,7 +778,7 @@ form:
                         fr: Date de fin des études
                 - name: collegial
                   type: group
-                  v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesCollegial')                                        
+                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesCollegial')                                        
                   label:
                     fr: Collégial (Formation générale ou technique)
                   components:
@@ -807,7 +807,7 @@ form:
                         fr: Date de fin des études
                 - name: universitaire
                   type: group
-                  v-if: val('Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesUniversitaire')                                                  
+                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesUniversitaire')                                                  
                   label:
                     fr: Universitaire            
                   components:
@@ -837,24 +837,24 @@ form:
                         fr: Date de fin des études
             - name: Req01-SpecialiteEtudesEtranger
               type: text
-              v-if: form['Req01-EtudesEtranger'] === 'true'                            
+              v-if: form['prefixId$Req01-EtudesEtranger'] === 'true'                            
               label:
                 fr: Spécialité
             - name: Req01-NbAnneesReussiesEtudesEtranger
               type: number
-              v-if: form['Req01-EtudesEtranger'] === 'true'              
+              v-if: form['prefixId$Req01-EtudesEtranger'] === 'true'              
               outerClasses: sm
               label:
                 fr: Nombre d'années d'études réussies
             - name: Req01-EtudesEvaluationComparative
               type: radio
-              v-if: form['Req01-EtudesEtranger'] === 'true' 
+              v-if: form['prefixId$Req01-EtudesEtranger'] === 'true' 
               label: 
                 fr: Avez-vous obtenu, du ministère de l'Immigration, de la Francisation et de l'Intégration, une évaluation comparative des études faites hors du Québec?
               options: yesno
             - name: Req01-EtudesEvaluationComparativeDomaine
               type: text
-              v-if: form['Req01-EtudesEvaluationComparative'] === 'true'                            
+              v-if: form['prefixId$Req01-EtudesEvaluationComparative'] === 'true'                            
               label:
                 fr: Précisez le domaine de formation
             - name: Req01-PossedeCartesQualification
@@ -864,7 +864,7 @@ form:
               options: yesno
             - name: Req01-CartesQualification
               type: text
-              v-if: form['Req01-PossedeCartesQualification'] === 'true'                            
+              v-if: form['prefixId$Req01-PossedeCartesQualification'] === 'true'                            
               label:
                 fr: Précisez les cartes de qualification
             - name: Req01-EstMembreOrdreProfessionnel
@@ -874,7 +874,7 @@ form:
               options: yesno
             - name: Req01-OrdreProfessionnel
               type: text
-              v-if: form['Req01-EstMembreOrdreProfessionnel'] === 'true'                            
+              v-if: form['prefixId$Req01-EstMembreOrdreProfessionnel'] === 'true'                            
               label:
                 fr: Précisez l'ordre professionnel
             - name: PermisConduire_Req-00
@@ -1029,7 +1029,7 @@ form:
         fr: Adulte 2
       classes: icone user                      
       v-if: val('Conjoint') === 'true'
-      prefixId: adulte2$
+      prefixId: adulte2
       sections: *sectionsAdulte
     # Groupe Adulte 1 et/ou 2
     - sectionGroup: 
