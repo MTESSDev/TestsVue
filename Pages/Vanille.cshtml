@@ -32,23 +32,30 @@
             ></formulate-input>
 
             <formulate-input type="group"
-                            name="attendees"
-                            :repeatable="true"
-                            label="Who is going to attend?"
-                            add-label="+ Add Attendee"
-                            @@repeatable-added="testRepeatableAdded"
-                            @@repeatable-removed="testRepeatableRemoved"                            
-                            validation="required">
+                             name="attendees"
+                             :repeatable="true"
+                             label="Who is going to attend?"
+                             add-label="+ Add Attendee"
+                             @@repeatable-added="testRepeatableAdded"
+                             @@repeatable-removed="testRepeatableRemoved"
+                             validation="required">
 
                 <formulate-input name="name"
-                                validation="required"
-                                label="Attendee’s name">
-                    </formulate-input>
-                    <formulate-input type="email"
-                                    name="email"
-                                    validation="required|email"
-                                    label="Attendee’s email">
-                        </formulate-input>
+                                 validation="required"
+                                 label="Attendee’s name">
+                </formulate-input>
+                <formulate-input type="email"
+                                 name="email"
+                                 validation="required|email"
+                                 label="Attendee’s email">
+                </formulate-input>
+                <formulate-input type="radio"
+                                 name="position"
+                                 :options="{first: 'First', second: 'Second', third: 'Third', fourth: 'Fourth'}"
+                                 validation="required"
+                                 label="Position">
+                </formulate-input>
+
             </formulate-input>
 
                         <formulate-input type="submit"
