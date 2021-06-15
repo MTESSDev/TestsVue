@@ -60,7 +60,7 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="niv1" >
-                <li v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])" >
+                <li v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])" :class="{ 'sans-regroupement': !groupe.titre }" >
                     <span class="groupe" :class="groupe.classes" v-if="groupe.titre">{{ groupe.titre }}</span>
                     <ul class="niv2">
 
