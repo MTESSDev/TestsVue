@@ -129,10 +129,10 @@ form:
             fr: Raison de la demande
             en: (EN)Raison de la demande
           id: raisonDemande
-          v-if: form.TypeDemande
+          v-if: val('TypeDemande')
           components:
             - type: dynamic
-              v-if: form.TypeDemande === 'Afdr'
+              v-if: val('TypeDemande') === 'Afdr'
               tag: div        
               components:
                 - name: EvenementsDerniereAnnee
@@ -195,7 +195,7 @@ form:
                   label: 
                     fr: Précisez la raison de votre demande d'aide financière de dernier recours
                 - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
-                  v-if: form.PrecisionRaisonDemandeAfdr === 'RevenuInsuffisant'
+                  v-if: val('PrecisionRaisonDemandeAfdr') === 'RevenuInsuffisant'
                   type: radio
                   label: 
                     fr: Type de revenu insuffisant
@@ -205,17 +205,17 @@ form:
                     RevenuInsuffisantPrestations: Prestations gouvernementales (prestations d'assurance-emploi ou d'assurance parentale[RQAP], jugement, SAAQ, CNESST, etc.)
                     RevenuInsuffisantAutres: autre
                 - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
-                  v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantPrestations'
+                  v-if: val('PrecisionRaisonDemandeAfdrRevenuInsuffisant') === 'RevenuInsuffisantPrestations'
                   type: text
                   label: 
                     fr: Précisez le type de prestation insuffisante
                 - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
-                  v-if: form.PrecisionRaisonDemandeAfdrRevenuInsuffisant === 'RevenuInsuffisantAutres'
+                  v-if: val('PrecisionRaisonDemandeAfdrRevenuInsuffisant') === 'RevenuInsuffisantAutres'
                   type: text
                   label: 
                     fr: Précisez le type de revenu autre
                 - name: PrecisionRaisonDemandeAfdrSortieEtablissement
-                  v-if: form.PrecisionRaisonDemandeAfdr === 'SortieEtablissement'
+                  v-if: val('PrecisionRaisonDemandeAfdr') === 'SortieEtablissement'
                   type: radio
                   label: 
                     fr: Précisez le type d'établissement
@@ -223,7 +223,7 @@ form:
                     SortieEtablissementSante: de santé
                     SortieEtablissementDetention: de détention
                 - name: PrecisionRaisonDemandeAfdrPerteConjoint
-                  v-if: form.PrecisionRaisonDemandeAfdr === 'PerteConjoint'
+                  v-if: val('PrecisionRaisonDemandeAfdr') === 'PerteConjoint'
                   type: radio
                   label: 
                     fr: Précisez la raison de perte du conjoint
@@ -232,12 +232,12 @@ form:
                     PerteConjointSeparation: separation
                     PerteConjointDivorce: divorce
                 - name: PrecisionRaisonDemandeAfdrAutre
-                  v-if: form.PrecisionRaisonDemandeAfdr === 'PrecisionRaisonDemandeAfdrAutreRaison'
+                  v-if: val('PrecisionRaisonDemandeAfdr') === 'PrecisionRaisonDemandeAfdrAutreRaison'
                   type: text
                   label: 
                     fr: Précisez la raison autre
             - type: dynamic
-              v-if: form.TypeDemande === 'AideEmploi'
+              v-if: val('TypeDemande') === 'AideEmploi'
               tag: div        
               components:      
                 - name: PrecisionRaisonDemandeEmploi
@@ -250,12 +250,12 @@ form:
                     DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
                     PrecisionRaisonDemandeEmploiAutreRaison: Autre
                 - name: PrecisionRaisonDemandeEmploiAutre
-                  v-if: form.PrecisionRaisonDemandeEmploi === 'DirigeEmployeurOrganisme'
+                  v-if: val('PrecisionRaisonDemandeEmploi') === 'DirigeEmployeurOrganisme'
                   type: text
                   label: 
                     fr: Précisez l'employeur ou l'organisme
                 - name: PrecisionRaisonDemandeEmploiAutre
-                  v-if: form.PrecisionRaisonDemandeEmploi === 'PrecisionRaisonDemandeEmploiAutreRaison'
+                  v-if: val('PrecisionRaisonDemandeEmploi') === 'PrecisionRaisonDemandeEmploiAutreRaison'
                   type: text
                   label: 
                     fr: Précisez la raison de votre demande d'aide à l'emploi
@@ -297,6 +297,7 @@ form:
               pattern: '[0-9]*'
               validations: 
                 nas: true
+                optional: null
             - name: date2_Req-00
               v-if: val('prefixId$Req-00_nas1').startsWith('9')
               type: date
@@ -322,30 +323,30 @@ form:
                 fr: Êtes-vous né au Québec?
               options: yesno
             - name: nom3_Req-00
-              v-if: form['Req00-NeQC'] === 'true'
+              v-if: val('prefixId$Req00-NeQC') === 'true'
               type: text
               label: 
                 fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
               validations: 
                 max: 50,length
             - name: neCanada
-              v-if: form['Req00-NeQC'] === 'false'        
+              v-if: val('prefixId$Req00-NeQC') === 'false'        
               type: radio
               label: 
                 fr: Êtes-vous né au Canada ?
               options: yesno
             - name: pays1_Req-00
-              v-if: form['neCanada'] === 'false'
+              v-if: val('prefixId$neCanada') === 'false'
               type: text
               label: 
                 fr: Indiquez votre pays de naissance
             - name: date6_Req-00
-              v-if: form['neCanada'] === 'false'
+              v-if: val('prefixId$neCanada') === 'false'
               type: date
               label: 
                 fr: Date d'arrivée au Canada
             - type: dynamic
-              v-if: form['neCanada'] === 'false'
+              v-if: val('prefixId$neCanada') === 'false'
               tag: div        
               components:
                 - name: Req00-CitCanadienne
@@ -354,25 +355,25 @@ form:
                     fr: Avez-vous la citoyenneté canadienne?
                   options: yesno
                 - name: Oui3
-                  v-if: form['Req00-CitCanadienne'] === 'false'
+                  v-if: val('prefixId$Req00-CitCanadienne') === 'false'
                   type: radio
                   label: 
                     fr: Êtes-vous un résident permanent?
                   options: yesno
                 - name: Oui4
-                  v-if: form['Oui3'] === 'false'            
+                  v-if: val('prefixId$Oui3') === 'false'            
                   type: radio
                   label: 
                     fr: Êtes-vous un demandeur d'asile?
                   options: yesno
                 - name: Oui5
-                  v-if: form['Oui4'] === 'false'                        
+                  v-if: val('prefixId$Oui4') === 'false'                        
                   type: radio
                   label: 
                     fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
                   options: yesno              
                 - name: autre2_Req-00
-                  v-if: form['Oui5'] === 'false'                        
+                  v-if: val('prefixId$Oui5') === 'false'                        
                   type: text
                   label: 
                     fr: Autre statut, précisez
@@ -381,12 +382,12 @@ form:
                     fr: Comme vous êtes né hors du Canada, vous devrez fournir les documents confirmant votre statut.
             - name: Req-00-Autochtone
               type: radio
-              v-if: form['neCanada'] === 'true'
+              v-if: val('prefixId$neCanada') === 'true'
               label: 
                 fr: Vous considérez-vous comme un autochtone?
               options: yesno
             - name: Req-00-AutochtoneType        
-              v-if: form['neCanada'] === 'true' && form['Req-00-Autochtone'] === 'true'
+              v-if: val('prefixId$neCanada') === 'true' && val('prefixId$Req-00-Autochtone') === 'true'
               type: radio
               label: 
                 fr: Êtes-vous un membre d'une Première Nation ou un Inuit?
@@ -463,7 +464,7 @@ form:
                 fr: Êtes-vous en emploi?
               options: yesno
             - name: PrecisionStatutEmploi_Req-00
-              v-if: form['Req01-EnEmploi'] === 'true'
+              v-if: val('prefixId$Req01-EnEmploi') === 'true'
               type: checkbox
               label:
                 fr: Précisez le type d'emploi
@@ -481,13 +482,13 @@ form:
               type: checkbox
               label: 
                 fr: Précisez le type d'aide que vous recevez
-              v-if: form['AideGouvRecue_Req-00'] === 'true'
+              v-if: val('prefixId$AideGouvRecue_Req-00') === 'true'
               options: 
                 AssuranceEmploi: Prestations d'assurance-emploi
                 RQAP: Prestations d'assurance parentale (RQAP)
                 AutresAide: Autre type d'aide (indemnités versées par la SAAQ ou la CNESST, rente de retraite, prêts et bourses pour études, etc.)
             - name: AideRecueAutrePrecision
-              v-if: val('TypeAideRecue').includes('AutresAide')
+              v-if: val('prefixId$TypeAideRecue').includes('AutresAide')
               type: text
               label: 
                 fr: Précisez le type d'aide
@@ -497,14 +498,14 @@ form:
                 fr: Avez-vous des enfants à charge?
               options: yesno
             - name: NbrEnfants
-              v-if: form['EnfantsACharge_Req-00'] === 'true'
+              v-if: val('prefixId$EnfantsACharge_Req-00') === 'true'
               type: number
               min: 1
               outerClasses: sm
               label: 
                 fr: Combien d'enfants avez-vous à charge ?
             - name: ChefMonoparentale_Req-00
-              v-if: form['EnfantsACharge_Req-00'] === 'true'
+              v-if: val('prefixId$EnfantsACharge_Req-00') === 'true'
               type: radio
               label: 
                 fr: Êtes-vous chef de famille monoparentale ?
@@ -515,7 +516,7 @@ form:
                 fr: Afin de nous permettre de mieux répondre à vos besoins en matière d'emploi et d'établir des statistiques, désirez-vous répondre à quelques questions supplémentaires?
               options: yesno
             - type: dynamic
-              v-if: form['QuestionsFacultativesSituationActuelle_Req-00'] === 'true'
+              v-if: val('prefixId$QuestionsFacultativesSituationActuelle_Req-00') === 'true'
               tag: div           
               components:
                 - name: Handicap_Req-00
@@ -524,7 +525,7 @@ form:
                     fr: Avez-vous un handicap physique, intellectuel ou mental?
                   options: yesno
                 - name: TypeHandicap_Req-00
-                  v-if: form['Handicap_Req-00'] === 'true'
+                  v-if: val('prefixId$Handicap_Req-00') === 'true'
                   type: text
                   label: 
                     fr: Précisez le handicap
@@ -537,7 +538,7 @@ form:
                     Anglais: Anglais
                     AutresLanguesParlees: Autres
                 - name: PrecisionLanguesParlees
-                  v-if: val('LanguesParlees_Req-00').includes('AutresLanguesParlees')
+                  v-if: val('prefixId$LanguesParlees_Req-00').includes('AutresLanguesParlees')
                   type: text
                   label: 
                     fr: Précisez les autres langues parlées
@@ -550,7 +551,7 @@ form:
                     Anglais: Anglais
                     AutresLanguesEcrites: Autres
                 - name: PrecisionLanguesEcrites
-                  v-if: val('LanguesEcrites_Req-00').includes('AutresLanguesEcrites')
+                  v-if: val('prefixId$LanguesEcrites_Req-00').includes('AutresLanguesEcrites')
                   type: text
                   label: 
                     fr: Précisez les autres langues écrites
@@ -571,10 +572,10 @@ form:
         - section: 
             fr: Études en cours
           id: EtudesEnCours
-          v-if: form['Req-00-etudes']
+          v-if: val('Req-00-etudes')
           components:
             - type: dynamic
-              v-if: form['Req-00-etudes'] === 'true'
+              v-if: val('Req-00-etudes') === 'true'
               tag: div           
               components:
                 - name: PrecisionStatutEtudes_Req-00
@@ -600,13 +601,13 @@ form:
                     Universite2: Université 2e cycle
                     AutreNiveau: Autre
                 - name: NiveauEtudeAutrePrecision
-                  v-if: form['NiveauEtudes_Req-00'] === 'AutreNiveau'
+                  v-if: val('prefixId$NiveauEtudes_Req-00') === 'AutreNiveau'
                   type: text
                   label: 
                     fr: Précisez l'ordre d'enseignement
                 - name: DomaineEtudes_Req-00
                   type: text
-                  v-if: form['NiveauEtudes_Req-00'] && form['NiveauEtudes_Req-00'] !== 'SecondaireGeneral'             
+                  v-if: val('prefixId$NiveauEtudes_Req-00') && val('prefixId$NiveauEtudes_Req-00') !== 'SecondaireGeneral'             
                   label: 
                     fr: Domaine d'études
                 - name: NbrCoursSuivis_Req-00
@@ -623,20 +624,20 @@ form:
                     fr: Nombre d'heures par semaine
                 - name: NbrCreditsUnites_Req-00
                   type: number
-                  v-if: form['NiveauEtudes_Req-00'] === 'Collegial' || form['NiveauEtudes_Req-00'] === 'Universite1' || form['NiveauEtudes_Req-00'] === 'Universite2'
+                  v-if: val('prefixId$NiveauEtudes_Req-00') === 'Collegial' || val('prefixId$NiveauEtudes_Req-00') === 'Universite1' || val('prefixId$NiveauEtudes_Req-00') === 'Universite2'
                   outerClasses: sm              
                   min: 1
                   label: 
                     fr: Nombre de crédits ou d'unités
                 - name: NbrPeriodesSemaine_Req-00
                   type: number
-                  v-if: form['NiveauEtudes_Req-00'] === 'SecondaireGeneral' || form['NiveauEtudes_Req-00'] === 'SecondairePro'                           
+                  v-if: val('prefixId$NiveauEtudes_Req-00') === 'SecondaireGeneral' || val('prefixId$NiveauEtudes_Req-00') === 'SecondairePro'                           
                   outerClasses: sm              
                   min: 1
                   label: 
                     fr: Nombre de périodes par semaine
             - type: dynamic
-              v-if: form['Req-00-etudes'] === 'false'
+              v-if: val('Req-00-etudes') === 'false'
               tag: div     
               components:
                 - name: Inscription_Req-00
@@ -647,19 +648,19 @@ form:
                     yesno
                 - name: DateInscription_Req-00
                   type: date
-                  v-if: form['Inscription_Req-00'] === 'true'
+                  v-if: val('prefixId$Inscription_Req-00') === 'true'
                   label:
                     fr: Précisez la date de début
                 - name: InscriptionPrevue_Req-00
                   type: radio
-                  v-if: form['Inscription_Req-00'] === 'false'
+                  v-if: val('prefixId$Inscription_Req-00') === 'false'
                   label:
                     fr: Prévoyez-vous vous inscrire ?
                   options: 
                     yesno
                 - name: DateInscriptionPrevue_Req-00
                   type: date
-                  v-if: form['InscriptionPrevue_Req-00'] === 'true'
+                  v-if: val('prefixId$InscriptionPrevue_Req-00') === 'true'
                   label:
                     fr: Précisez la date de début
         # Section 6 - Formation
@@ -837,24 +838,24 @@ form:
                         fr: Date de fin des études
             - name: Req01-SpecialiteEtudesEtranger
               type: text
-              v-if: form['prefixId$Req01-EtudesEtranger'] === 'true'                            
+              v-if: val('prefixId$Req01-EtudesEtranger') === 'true'                            
               label:
                 fr: Spécialité
             - name: Req01-NbAnneesReussiesEtudesEtranger
               type: number
-              v-if: form['prefixId$Req01-EtudesEtranger'] === 'true'              
+              v-if: val('prefixId$Req01-EtudesEtranger') === 'true'              
               outerClasses: sm
               label:
                 fr: Nombre d'années d'études réussies
             - name: Req01-EtudesEvaluationComparative
               type: radio
-              v-if: form['prefixId$Req01-EtudesEtranger'] === 'true' 
+              v-if: val('prefixId$Req01-EtudesEtranger') === 'true' 
               label: 
                 fr: Avez-vous obtenu, du ministère de l'Immigration, de la Francisation et de l'Intégration, une évaluation comparative des études faites hors du Québec?
               options: yesno
             - name: Req01-EtudesEvaluationComparativeDomaine
               type: text
-              v-if: form['prefixId$Req01-EtudesEvaluationComparative'] === 'true'                            
+              v-if: val('prefixId$Req01-EtudesEvaluationComparative') === 'true'                            
               label:
                 fr: Précisez le domaine de formation
             - name: Req01-PossedeCartesQualification
@@ -864,7 +865,7 @@ form:
               options: yesno
             - name: Req01-CartesQualification
               type: text
-              v-if: form['prefixId$Req01-PossedeCartesQualification'] === 'true'                            
+              v-if: val('prefixId$Req01-PossedeCartesQualification') === 'true'                            
               label:
                 fr: Précisez les cartes de qualification
             - name: Req01-EstMembreOrdreProfessionnel
@@ -874,7 +875,7 @@ form:
               options: yesno
             - name: Req01-OrdreProfessionnel
               type: text
-              v-if: form['prefixId$Req01-EstMembreOrdreProfessionnel'] === 'true'                            
+              v-if: val('prefixId$Req01-EstMembreOrdreProfessionnel') === 'true'                            
               label:
                 fr: Précisez l'ordre professionnel
             - name: PermisConduire_Req-00
@@ -887,7 +888,7 @@ form:
               outerClasses: md
               label: 
                 fr: Précisez la/les classe(s)
-              v-if: form['PermisConduire_Req-00'] === 'true'
+              v-if: val('prefixId$PermisConduire_Req-00') === 'true'
 #              type: checkbox
 #              label: 
 #                fr: Précisez la/les classe(s)
@@ -911,12 +912,12 @@ form:
         - section:
             fr: Emplois
           id: emplois
-          v-if: form['Req01-Travaille']          
+          v-if: val('Req01-Travaille')
           components:
             - name: emplois
               type: repeatableGroup
               repeatable: true
-              v-if: form['Req01-Travaille'] === 'true'          
+              v-if: val('Req01-Travaille') === 'true'          
               label:
                 fr: Emplois
                 en: Jobs
@@ -974,7 +975,7 @@ form:
                     Congediement: Congédiement
                     AutreRaison: Autre
                 - name: emploiPrecisionAutre
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index].emploiRaisonFinEmploi === 'AutreRaison'
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$emploiRaisonFinEmploi'] === 'AutreRaison'
                   type: text
                   label: 
                     fr: Précisez la raison de fin d'emploi
@@ -985,7 +986,7 @@ form:
               options: yesno            
             - name: limitations_Req-01
               type: text
-              v-if: form['Req01-Limitations'] === 'true'          
+              v-if: val('prefixId$Req01-Limitations') === 'true'          
               label:
                 fr: "Précisez ces limitations"
             - name: Req01-DisponibleTravail
@@ -995,7 +996,7 @@ form:
               options: yesno            
             - name: Req01-DisponibilitesTravail
               type: checkbox
-              v-if: form['Req01-DisponibleTravail'] === 'true'                    
+              v-if: val('prefixId$Req01-DisponibleTravail') === 'true'                    
               label:
                 fr: "Précisez le type d'emploi recherché?"
               options: 
@@ -1006,7 +1007,7 @@ form:
                 ReqDispoTravailNuit: De nuit
             - name: Req01-LieuxDisponibiliteTravail
               type: checkbox
-              v-if: form['Req01-DisponibleTravail'] === 'true'                    
+              v-if: val('prefixId$Req01-DisponibleTravail') === 'true'                    
               label:
                 fr: "Où êtes-vous prêt à travailler?"
               options: 
@@ -1015,12 +1016,12 @@ form:
                 ReqLieuDispoTravailAutre: Autre
             - name: Req01-LieuxDisponibiliteTravailPrecision
               type: text
-              v-if: val('Req01-LieuxDisponibiliteTravail').includes('ReqLieuDispoTravailAutre')   
+              v-if: val('prefixId$Req01-LieuxDisponibiliteTravail').includes('ReqLieuDispoTravailAutre')   
               label:
                 fr: "Précisez où vous êtes prêt à travailler"
             - name: raisonNonDisponibiliteTravail_Req-01
               type: text
-              v-if: form['Req01-DisponibleTravail'] === 'false'   
+              v-if: val('prefixId$Req01-DisponibleTravail') === 'false'   
               outerClasses: xxl                           
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
@@ -1254,11 +1255,11 @@ form:
                 fr: Souhaitez-vous vous inscrire au dépôt direct?
               options: yesno            
             - type: dynamic
-              v-if: form['DepotDirect'] === 'true'
+              v-if: val('DepotDirect') === 'true'
               tag: div     
               components:
                 - type: bandeau
-                  v-if: form['DepotDirect'] === 'true'
+                  v-if: val('DepotDirect') === 'true'
                   text: 
                     fr: Veuillez fournir les renseignements demandés ci-dessous. Ils nous permettront de procéder au versement de vos prestations ou de vos allocations dans le cadre de tous les services qui vous seront offerts par le Ministère.             
                 - name: Nom_institution_financière_Req-00
@@ -1301,7 +1302,7 @@ form:
         - section: 
             fr: Affirmation solenelle
           id: affirmationSolennelle
-          v-if: form.TypeDemande
+          v-if: val('TypeDemande')
           components:
             - type: bandeau
               components:
@@ -1311,7 +1312,7 @@ form:
 #                    fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
                 - type: dynamic
                   tag: p
-                  v-if: form.TypeDemande === 'Afdr'              
+                  v-if: val('TypeDemande') === 'Afdr'              
                   text:
                     fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
                 - type: dynamic
@@ -1332,13 +1333,13 @@ form:
                 - name: SignatureReq
                   type: text
                   outerClasses: w-100
-                  v-if: form.TypeDemande !== 'Afdr' || form['HabiteAvecAutreAdulte'] !== 'true'
+                  v-if: val('TypeDemande') !== 'Afdr' || val('Conjoint') !== 'true'
                   label: 
                     fr: Signature
                 - name: SignatureReq
                   type: text
                   outerClasses: w-100
-                  v-if: form.TypeDemande === 'Afdr' && form['HabiteAvecAutreAdulte'] === 'true' 
+                  v-if: val('TypeDemande') === 'Afdr' && val('Conjoint') === 'true' 
                   label: 
                     fr: Signature du requérant
             - type: inline
@@ -1346,13 +1347,13 @@ form:
               components: 
                 - name: DateSignatureConjoint
                   type: date
-                  v-if: form.TypeDemande === 'Afdr' && form['HabiteAvecAutreAdulte'] === 'true' 
+                  v-if: val('TypeDemande') === 'Afdr' && val('Conjoint') === 'true' 
                   label: 
                     fr: Date
                 - name: SignatureConjoint
                   type: text
                   outerClasses: w-100
-                  v-if: form.TypeDemande === 'Afdr' && form['HabiteAvecAutreAdulte'] === 'true' 
+                  v-if: val('TypeDemande') === 'Afdr' && val('Conjoint') === 'true' 
                   label: 
                     fr: Signature du conjoint
   
