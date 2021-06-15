@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -59,7 +60,21 @@ namespace ECSForm.Pages
                     {
                         if (!string.IsNullOrEmpty(item.Name))
                         {
-                            data.TryGetValue(item.PrefixId + item.Name, out var val);
+                            object? val = null;
+
+                            if (item.GroupName != null && data[item.GroupName] is Array)
+                            {
+                                var arrayItem = (data[item.GroupName] as Array);
+                                if (arrayItem != null && arrayItem.Length == 1)
+                                {
+                                    (arrayItem.GetValue(0) as Dictionary<object, object>)?.TryGetValue(item.PrefixId + item.Name, out val);
+                                }
+                            }
+
+                            if (val is null)
+                            {
+                                data.TryGetValue(item.PrefixId + item.Name, out val);
+                            }
 
                             if (!validation.IsValid(val))
                             {
@@ -107,14 +122,46 @@ namespace ECSForm.Pages
                             //Run v-if
                             try
                             {
-                                var result = new Engine()
+                                var options = new Options();
+                                options.DebugMode();
+                                options.DebuggerStatementHandling(Jint.Runtime.Debugger.DebuggerStatementHandling.Clr);
+
+                                var result = new Engine(options)
+                                    .SetValue("log", new Action<object?>(DebugWriteLineCustom))
+                                    .SetValue("ArrayisArray", new Func<object?, bool>(ArrayIsArray))
                                     .SetValue("index", 0)
                                     .SetValue("name", groupName)
                                     .SetValue("form", data)
                                     //.Execute($"form.EvenementsDerniereAnnee")
-                                    .Execute($"({vif} ? true : false)")
+                                    .Execute(@"
+                                            function val(idChamp) { 
+                                                var debug = '';
+                                                const champs = idChamp.split('.')
+                                                let objetAValider = this.form
+
+                                                for (champ of champs) {
+
+                                                    //TODO à modifier éventuellement pour groupes répétables
+                                                    objetAValider = Array.isArray(objetAValider) ? objetAValider[0] : objetAValider
+
+                                                    if (!objetAValider[`${champ}`] && objetAValider[`${champ}`] !== false ) {
+                                                        return ''
+                                                    }
+                                                    objetAValider = objetAValider[`${champ}`]
+                                                }              
+
+                                                return objetAValider || ''
+                                            };"
+                                            + $" ({vif} ? true : false)")
                                     .GetCompletionValue()
                                     .AsBoolean();
+
+
+                                /*Jint.Runtime.Debugger..Step += (sender, info) =>
+                                {
+                                    Console.WriteLine("{0}: Line {1}, Char {2}", info.CurrentStatement.ToString(), info.Location.Start.Line, info.Location.Start.Char);
+                                };*/
+
                                 if (!result)
                                 {
                                     continue;
@@ -159,6 +206,20 @@ namespace ECSForm.Pages
             }
 
             return null;
+        }
+
+        private static bool ArrayIsArray(object? element)
+        {
+            if (element is Array)
+                return true;
+            //if (element is Dictionary<object,object>) return true;
+
+            return false;
+        }
+
+        private static void DebugWriteLineCustom(object? obj)
+        {
+            Debug.WriteLine(obj);
         }
     }
 }

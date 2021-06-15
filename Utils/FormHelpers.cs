@@ -412,7 +412,7 @@ namespace ECSForm.Utils
 
             if (reader.TokenType == JsonToken.StartArray)
             {
-                return serializer.Deserialize<string[]>(reader);
+                return serializer.Deserialize<object[]>(reader);
             }
 
             return serializer.Deserialize(reader);
