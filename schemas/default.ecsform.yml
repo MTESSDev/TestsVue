@@ -85,7 +85,7 @@ form:
                 {{# help}} help="{{i18n .}}" {{/ help}}
                 {{GenerateValidations .}}
                 error-behavior="value"
-                #default="{ name, index }"
+                #default="{ name }"
                 {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
                 {{RecursiveComponents components}}
         </formulate-input>
