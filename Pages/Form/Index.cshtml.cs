@@ -92,12 +92,12 @@ namespace ECSForm.Pages
                     {
                         currentLine++;
 
-                        if (line.StartsWith("      -"))
+                        if (line.StartsWith("        -"))
                         {
                             sectionId++;
                         }
 
-                        if (line.Contains("          - name:") || line.Contains("        name:"))
+                        if (line.Contains("            - name:") || line.Contains("              name:"))
                         {
                             nameBlock = line.Trim(' ', '-');
                         }

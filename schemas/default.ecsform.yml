@@ -46,14 +46,14 @@ form:
       <transition name="fade">
         <formulate-input {{# v-if}} {{GenerateVif .}} {{/ v-if}}
               {{# type}} type="{{.}}" {{/ type}}
-              {{# name}} name="{{prefixId}}{{.}}" {{/ name}}
-              {{# name}} key="{{prefixId}}{{.}}" {{/ name}}
+              {{# name}} :name="'{{prefixId}}{{.}}' + (typeof index !== 'undefined' ? '[' + index + ']':'')" {{/ name}}
+              {{# name}} :key="'{{prefixId}}{{.}}' + (typeof index !== 'undefined' ?  '[' + index + ']':'')" {{/ name}}
               {{GenerateDefaults type .}}
               {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
               {{# tooltipTitle}} tooltip-title="{{i18n .}}" {{/ tooltipTitle}}
-                {{# tooltipText}} tooltip-text="{{i18n .}}" {{/ tooltipText}}
+              {{# tooltipText}} tooltip-text="{{i18n .}}" {{/ tooltipText}}
               {{# help}} help="{{i18n .}}" {{/ help}}
               {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
               {{GenerateValidations .}}
