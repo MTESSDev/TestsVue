@@ -697,7 +697,11 @@ nav.etapes-form ul > li > ul > li {
                     background-image: none;
                 }
 
-            nav.etapes-form .collapse > ul > li:first-child > .puce:before {
+            nav.etapes-form ul li .texte {
+                margin-left: 8px;
+            }
+
+            nav.etapes-form .collapse ul.niv1 > li:first-of-type.sans-regroupement > ul.niv2:first-of-type > li:first-of-type > .puce:before {
                 position: absolute;
                 width: 20px;
                 height: calc(50% - 10px);
@@ -706,12 +710,13 @@ nav.etapes-form ul > li > ul > li {
                 content: '';
             }
 
-            nav.etapes-form ul li .texte {
-                margin-left: 8px;
-            }
-
-            nav.etapes-form .collapse  ul > li.dernier {
-                padding-bottom: 0
+            nav.etapes-form .collapse ul.niv1 > li:last-of-type > ul.niv2:last-of-type > li:last-of-type > .puce:before {
+                position: absolute;
+                width: 20px;
+                height: calc(50% - 10px);
+                background-color: #fff;
+                bottom: 0;
+                content: '';
             }
 
 
