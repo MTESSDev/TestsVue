@@ -260,6 +260,31 @@
 
                 return objetAValider || ''
             },
+            valGroupe(nomGroupe, idChamp, indexe) {
+                indexe = indexe || 0
+                const groupe = this.form[`${nomGroupe}`]
+
+                if (groupe) {
+                    if (idChamp) {
+                        const instance = groupe[indexe]
+
+                        if (instance) {
+                            const valeurChamp = instance[`${idChamp}[${indexe}]`]
+
+                            if (valeurChamp || valeurChamp === false) {
+                                //On retourne la valeur du champ à l'instance spécifiée ou 0 par défaut
+                                return valeurChamp
+                            }
+                        }
+                    } else {
+                        //On retourne le groupe (array)
+                        return groupe
+                    }
+                }
+                
+                return ''
+            },
+
             //TODO évaluer possibilité d'en faire une fonction commune
             donnerFocusPremierElementFocusable(conteneur) {
                 var elementsFocusables = obtenirElementsFocusables(conteneur);
