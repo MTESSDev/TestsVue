@@ -20,7 +20,7 @@ form:
                   fr: Type de demande
                 text: 
                   fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra. Vivamus arcu nibh, venenatis vel venenatis a, sagittis eget est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nisi magna, porttitor vel augue id, porttitor fringilla sapien. Maecenas sollicitudin, massa facilisis finibus tempor, nibh nunc pharetra ante, in elementum nibh purus a arcu. Nam massa tellus, vehicula nec ante in, tempus ornare urna. Sed eget commodo libero. Nulla tincidunt justo erat, ac volutpat eros maximus in. Nam at malesuada magna. Aenean in magna non lectus viverra consectetur. In porttitor, dolor ac varius lacinia, lacus mauris laoreet neque, vitae.
-                  en: 
+                  en:       
               options: 
                 Afdr: Demande d'aide financière de dernier recours
                 AideEmploi: Demande de service d'aide à l'emploi
@@ -119,7 +119,7 @@ form:
                 title:
                   fr: Définition d'un travail
                 text:
-                  fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.
+                  fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.      
               options: yesno
             - name: Req-00-etudes
               type: radio
@@ -1059,9 +1059,9 @@ form:
               label:
                 fr: "Spécifiez le(s) type(s) de revenus qui s'appliquent"
               options: 
-                    RevenusEmplois: Revenus d'emplois
-                    Pourboires: Pourboires
-                    TravailAutonome: Revenus provenant d’un travail autonome ou de votre entreprise
+                RevenusEmplois: Revenus d'emplois
+                Pourboires: Pourboires
+                TravailAutonome: Revenus provenant d’un travail autonome ou de votre entreprise
             - name: RevenusEmploi
               type: repeatableGroup
               repeatable: true
@@ -1136,7 +1136,492 @@ form:
                     hebdo: 'par semaine'
                     bihebdo: 'aux 2 semaines'
                     mensuel: 'par mois'
-
+            - name: RevenuAutonomeOuEntreprise
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusEmploi').includes('TravailAutonome')
+              label:
+                fr: Revenus provenant d’un travail autonome ou de votre entreprise
+              instanceLabel:
+                fr: Travail autonome ou entreprise
+              addLabel:
+                fr: Ajouter un travail autonome ou une entreprise
+              removeLabel:
+                fr: Supprimer ce revenu
+              components: 
+                - name: RevenuAutonomeProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit les revenus de ce travail autonome ou de cette entreprise?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: NatureRevenus
+                  type: text
+                  label:
+                    fr: Nature des revenus
+                - name: DateDebutRevenu
+                  type: date
+                  label:
+                    fr: Date de début de la perception des revenus
+                - name: RevenuAutonomeBrut
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Montant brut
+                - name: RevenuAutonomeFrequence
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: PossedeRevenusGouvernementaux
+              type: radio
+              label:
+                fr: Recevez-vous des sommes de ministères ou d’organismes gouvernementaux?
+              options: yesno   
+            - name: TypesRevenusGouvernementaux
+              type: checkbox
+              v-if: val('PossedeRevenusGouvernementaux') ==='true'
+              label:
+                fr: "Spécifiez la (les) sommes qui s'appliquent"
+              options:
+                provincial: Ministère ou organisme provincial (RQAP, SAAQ, CNESST, Retraite Québec, MES)
+                federal: Ministère ou organisme fédéral (assurance-emploi, Régime de pensions du Canada, Anciens Combattants, Sécurité de la vieillesse)
+                autre: Autre ministère ou organisme (provincial, territorial ou étranger)
+            - name: SommesProvincial
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusGouvernementaux').includes('provincial')
+              label:
+                fr: Sommes provenant de Ministères ou organismes provinciaux
+              instanceLabel:
+                fr: Somme d'un ministère ou organisme provincial
+              addLabel:
+                fr: Ajouter une somme
+              removeLabel:
+                fr: Supprimer cette somme
+              components: 
+                - name: SommeProvincialProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit les sommes de cet organisme ou ministère?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2' 
+                - name: SommeProvincialSource
+                  type: text
+                  label:
+                    fr: Nom de l'organisme ou ministère
+                - name: SommeProvincialMontantBrut
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Montant brut
+                - name: SommeProvincialFrequence
+                  type: radio
+                  label: 
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: AttendeDecisionProvincial
+              type: radio
+              label: 
+                fr: Êtes-vous en attente d'une décision d'un ministère ou organisme provincial?
+              options: yesno
+            - name: DateDemandeProvincial
+              v-if: val('AttendeDecisionProvincial') === 'true'
+              type: date
+              label:
+                fr: Date de la demande
+            - name: SommesFederal
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusGouvernementaux').includes('federal')
+              label:
+                fr: Sommes provenant de Ministères ou organismes fédéraux
+              instanceLabel:
+                fr: Somme d'un ministère ou organisme fédéral
+              addLabel:
+                fr: Ajouter une somme
+              removeLabel:
+                fr: Supprimer cette somme
+              components: 
+                - name: SommeFederalProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit les sommes de cet organisme ou ministère?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2' 
+                - name: SommeFederalSource
+                  type: text
+                  label:
+                    fr: Nom de l'organisme ou ministère
+                - name: SommeFederalMontantBrut
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Montant brut
+                - name: SommeFederalFrequence
+                  type: radio
+                  label: 
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: AttendeDecisionFederal
+              type: radio
+              label: 
+                fr: Êtes-vous en attente d'une décision d'un ministère ou organisme provincial?
+              options: yesno
+            - name: DateDemandeFederal
+              v-if: val('AttendeDecisionFederal') === 'true'
+              type: date
+              label:
+                fr: Date de la demande
+            - name: SommesOrganismeAutre
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusGouvernementaux').includes('autre')
+              label:
+                fr: Sommes provenant d'autres ministères ou organismes
+              instanceLabel:
+                fr: Somme d'un autre ministère ou organisme
+              addLabel:
+                fr: Ajouter une somme
+              removeLabel:
+                fr: Supprimer cette somme
+              components: 
+                - name: SommeOrganismeAutreProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit les sommes de cet organisme ou ministère?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2' 
+                - name: SommeOrganismeAutreSource
+                  type: text
+                  label:
+                    fr: Nom de l'organisme ou ministère
+                - name: SommeOrganismeAutreMontantBrut
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Montant brut
+                - name: SommeOrganismeAutreFrequence
+                  type: radio
+                  label: 
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: PossedeRevenuAutre
+              type: radio
+              label:
+                fr: Avez-vous d’autres types de revenus?
+              options: yesno
+            - name: typeRevenuAutre
+              type: checkbox
+              v-if: val('PossedeRevenuAutre') === 'true'
+              label:
+                fr: Spécifiez le(s) type(s) de revenus qui s'applique(nt)
+              options:
+                Chambre: Revenus de chambre ou de pension
+                Location: Revenus de location
+                Placement: Revenus de placement ou de fiducie, intérêts sur une obligation
+                FondPension: Prestations d’un fonds de pension (fonds personnel ou fonds d’un employeur)
+                PensionAlimentaire: Revenus de pension alimentaire (déterminés par un jugement ou une entente, perçus sous forme monétaire ou autre)
+                Autre: Autres revenus (assurance, rente, réduction du coût de loyer, somme reçue en héritage ou à la suite d’une décision de la cour, indemnité, don en argent, etc.)
+            - name: RevenusAutreChambre
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('Chambre') 
+              label:
+                fr: Revenus de chambre ou de pension
+              instanceLabel:
+                fr: Revenu de chambre ou de pension
+              addLabel:
+                fr: Ajouter un revenu de chambre ou de pension
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+                - name: RevenusAutresChambreProprio
+                  type: radio
+                  label:
+                    fr: Qui perçoit ces revenus?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: NomPrenomChambreur
+                  type: text
+                  label: 
+                    fr: Nom et prénom du chambreur ou pensionnaire
+                - name: MontantChambreur
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: FrequenceChambreur
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: RevenusAutreLocation
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('Location') 
+              label:
+                fr: Revenus de location
+              instanceLabel:
+                fr: Revenu de location
+              addLabel:
+                fr: Ajouter un revenu de location
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+                - name: RevenusAutresLocationProprio
+                  type: radio
+                  label:
+                    fr: Qui perçoit ces revenus?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenusAutresLocationSource
+                  type: text
+                  label: 
+                    fr: Source du revenu de location
+                - name: MontantLocation
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: FrequenceLocation
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: RevenusAutrePlacement
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('Placement') 
+              label:
+                fr: Revenus de placement ou de fiducie, intérêts sur une obligation
+              instanceLabel:
+                fr: Revenu de placement ou de fiducie, intérêts sur une obligation
+              addLabel:
+                fr: Ajouter un revenu 
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+                - name: RevenusAutresPlacementProprio
+                  type: radio
+                  label:
+                    fr: Qui perçoit ces revenus?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenusAutresPlacementSource
+                  type: text
+                  label: 
+                    fr: Source du revenu de placement ou de fiducie
+                - name: MontantPlacement
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: FrequenceRevenusAutresPlacement
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois        
+            - name: RevenusAutreFondPension
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('FondPension') 
+              label:
+                fr: Prestations d’un fonds de pension (fonds personnel ou fonds d’un employeur)
+              instanceLabel:
+                fr: Prestation d’un fonds de pension
+              addLabel:
+                fr: Ajouter un fonds de pension 
+              removeLabel:
+                fr: Supprimer ce fonds de pension
+              components:
+                - name: RevenusAutresFondPensionProprio
+                  type: radio
+                  label:
+                    fr: Qui perçoit ce fonds de pensions?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenusAutresFondPensionSource
+                  type: text
+                  label: 
+                    fr: Source du revenu de fonds de pension
+                - name: MontantFondsPension
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: FrequenceRevenusAutresFondPension
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois 
+            - name: RevenusAutrePensionAlimentaire
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('PensionAlimentaire') 
+              label:
+                fr: Revenus de pension alimentaire
+              instanceLabel:
+                fr: Revenu de pension alimentaire
+              addLabel:
+                fr: Ajouter une pension alimentaire 
+              removeLabel:
+                fr: Supprimer cette pensions alimentaire
+              components:
+                - name: PensionAlimentaireProprio
+                  type: radio
+                  label:
+                    fr: Qui est prestataire de cette pension alimentaire?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: PensionAlimentaireStatut
+                  type: radio
+                  label:
+                    fr: Le(la) prestataire
+                  options: 
+                    recoit: reçoit actuellement cette pension alimentaire
+                    attente: est actuellement en attente d'un jugement
+                    nonRecu: n'a pas reçu cette pension alimentaire
+                - name: PensionAlimentaireSource
+                  type: text
+                  label: 
+                    fr: Source de la pension alimentaire
+                - name: PensionAlimentaireMontant                
+                  type: text                  
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: PensionAlimentaireFrequence
+                  type: radio
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois 
+            - name: RevenusAutreDivers
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('Autre') 
+              label:
+                fr: Autres revenus
+              instanceLabel:
+                fr: Autre revenu
+              addLabel:
+                fr: Ajouter un revenu
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+                - name: RevenuDiversProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit ce revenu?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenuDiversSource
+                  type: text
+                  label: 
+                    fr: Source du revenu
+                - name: RevenuDiversMontant                
+                  type: text                  
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: RevenuDiversFrequence
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois 
+            - name: PossedeRevenuAttente
+              type: radio
+              label:
+                fr: Attendez-vous le début du versement de certains revenus?
+              options: yesno
+            - name: RevenusAttente
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeRevenuAttente') === 'true'
+              label:
+                fr: Revenus en attente
+              instanceLabel:
+                fr: Revenu en attente
+              addLabel:
+                fr: Ajouter un revenu en attente
+              removeLabel:
+                fr: Supprimer ce revenu en attente
+              components:
+                - name: RevenusAttenteProprio
+                  type: radio
+                  label:
+                    fr: Qui recevra ce revenu?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenusAttenteSource
+                  type: text
+                  label: 
+                    fr: Source du revenu
+                - name: RevenusAttenteMontant                
+                  type: text                  
+                  outerClasses: md
+                  label: 
+                    fr: Montant, si connu
+                  validations:
+                    optional: null
+                - name: RevenusAttenteExplication
+                  type: text
+                  label:
+                    fr: Explication liée au délai d’attente
         # Section - Biens
         - section:
             fr: Biens
