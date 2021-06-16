@@ -977,7 +977,7 @@ form:
                     Congediement: Congédiement
                     AutreRaison: Autre
                 - name: emploiPrecisionAutre
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$emploiRaisonFinEmploi'] === 'AutreRaison'
+                  v-if: form[name] && form[name][index] && form[name][index][`prefixId$emploiRaisonFinEmploi[${index}]`] === 'AutreRaison'
                   type: text
                   label: 
                     fr: Précisez la raison de fin d'emploi
@@ -1101,7 +1101,7 @@ form:
                     mensuel: 'par mois'
                 - name: RevenuEmploiSalaireNetHebdo
                   type: number
-                  v-if: valGroupe(name,'RevenuEmploiFrequence', index) === 'hebdo'                  
+                  v-if: val(`${name}.RevenuEmploiFrequence`, index) === 'hebdo'
                   label:
                     fr: Salaire net Hebdo
             - name: RevenusPourboires
