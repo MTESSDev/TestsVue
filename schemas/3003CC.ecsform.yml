@@ -2070,6 +2070,134 @@ form:
                   type: number
                   label:
                     fr: "Valeur marchande"
+            - name: PossedeBiensAssuranceVie
+              type: radio
+              label:
+                fr: "Avez-vous une assurance vie?"
+              options: yesno
+            - name: BiensAssuranceVie
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeBiensAssuranceVie') === 'true'    
+              label:
+                fr: Assurances vie
+              instanceLabel:
+                fr: Assurance vie
+              addLabel:
+                fr: Ajouter une assurance vie
+              removeLabel:
+                fr: Supprimer cette assurance
+              components: 
+                - name: BienAssuranceVieProprio
+                  type: radio
+                  outerClasses: boutons-inline md
+                  label:
+                    fr: Propriétaire de l'assurance
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: BienAssuranceVieCompagnie
+                  type: text
+                  label:
+                    fr: Nom de la compagnie d’assurance
+                  outerClasses: xxl
+                - name: BienAssuranceVieValeursAccumulees
+                  type: radio
+                  label:
+                    fr: "Comprend-t-elle des valeurs accumulées?"
+                  options:
+                    yes: Oui
+                    no: Non
+                    neSaitPas: Ne sais pas
+            - name: PossedeEntreprise
+              type: radio
+              label:
+                fr: "Avez-vous une entreprise?"
+              help:
+                fr: Propriétaire ou actionnaire
+              options: yesno
+            - name: BiensEntreprise
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeEntreprise') === 'true'    
+              label:
+                fr: Entreprises
+              instanceLabel:
+                fr: Entreprise
+              addLabel:
+                fr: Ajouter une entreprise
+              removeLabel:
+                fr: Supprimer cette entreprise
+              components: 
+                - name: BiensEntrepriseProprio
+                  type: radio
+                  outerClasses: boutons-inline md
+                  label:
+                    fr: Propriétaire de l'assurance
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: BiensEntrepriseNEQ
+                  type: text
+                  label:
+                    fr: Numéro d’entreprise du Québec (NEQ)
+                  outerClasses: xxl
+                - name: BiensEntrepriseStatut
+                  type: radio
+                  label:
+                    fr: "Quel est le statut de l'entreprise?"
+                  options:
+                    individuelle: Entreprise individuelle
+                    societe: Société en nom collectif
+                    compagnie: Compagnie
+                - name: BiensEntreprisePourcentage
+                  type: number
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$BiensEntrepriseStatut'] !== 'individuelle'
+                  label:
+                    fr: Pourcentage de participation
+            - name: PossedeBiensCedes
+              type: radio
+              label:
+                fr: "Avez-vous vendu ou cédé des biens ou des avoirs liquides ou renoncé à de tels biens et avoirs au cours des 24 derniers mois?"
+              help:
+                fr: maison, voiture, somme reçue en héritage, etc.
+              options: yesno
+            - name: BiensCedes
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeBiensCedes') === 'true'    
+              label:
+                fr: Biens ou avoirs liquides cédés ou auxquels vous avez renoncé
+              instanceLabel:
+                fr: Bien ou avoir liquide cédé ou auquel vous avez renoncé
+              addLabel:
+                fr: Ajouter un bien ou un avoir
+              removeLabel:
+                fr: Supprimer ce bien ou cet avoir
+              components: 
+                - name: BiensCedesProprio
+                  type: radio
+                  outerClasses: boutons-inline md
+                  label:
+                    fr: Propriétaire du bien cédé ou de l'avoir liquide auquel vous avez renoncé
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: BiensCedesDescription
+                  type: text
+                  label:
+                    fr: Description
+                  outerClasses: xxl
+                - name: BiensCedesDate
+                  type: date
+                  label:
+                    fr: "Date de vente, de cession ou, de renonciation"
+                - name: BiensCedesValeur
+                  type: number
+                  label:
+                    fr: Valeur
     - sectionGroup: null
       v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
       classes: icone user              
