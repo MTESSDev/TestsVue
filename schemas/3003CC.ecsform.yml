@@ -1536,7 +1536,7 @@ form:
                     fr: Montant
                 - name: PensionAlimentaireFrequence
                   type: radio
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'                  
                   label:
                     fr: Fréquence
                   options:
@@ -1622,6 +1622,106 @@ form:
                   type: text
                   label:
                     fr: Explication liée au délai d’attente
+        # Sectoins - Avoirs liquides
+        - section:
+            fr: Avoirs liquides
+          id: avoirs
+          components:
+            - type: bandeau-notification
+              text:
+                fr: Par <i>avoirs liquides</i>, on entend tout ce qu’une personne possède en espèces ou sous une forme équivalente.
+            - name: PossedeAvoirsComptes
+              type: radio
+              label:
+                fr: Avez-vous des comptes dans une caisse ou une banque (établissement financier)?
+              options: yesno
+            - name: AvoirsComptes
+              type: repeatableGroup
+              v-if: val('PossedeAvoirsComptes') === 'true'
+              repeatable: true
+              label:
+                fr: Comptes dans un établissement financier
+              instanceLabel:
+                fr: Compte dans un établissement financier
+              addLabel:
+                fr: Ajouter un compte
+              removeLabel:
+                fr: Supprimer ce compte
+              components:
+                - name: AvoirCompteProprio
+                  type: radio
+                  label:
+                    fr: Titulaire(s) du compte
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: AvoirCompteAdresse
+                  type: text
+                  label:
+                    fr: Nom et adresse de l'établissement
+                - name: AvoirCompteNumero
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Numéro de compte
+                - name: AvoirCompteStatut
+                  type: radio
+                  label:
+                    fr: Statut du compte
+                  options:
+                    actif: Actif
+                    inactif: Inactif
+                - name: AvoirCompteMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant (solde) 
+            - name: PossedeAvoirsEnMain
+              type: radio
+              label:
+                fr: Avez-vous de l’argent en main, des chèques non encaissés, des cartes de crédit prépayées?
+              options: yesno
+            - name: AvoirsEnMain
+              type: repeatableGroup
+              v-if: val('PossedeAvoirsEnMain') === 'true'
+              repeatable: true
+              label:
+                fr: Avoirs en main, chèques non encaissés, cartes de crédit prépayées
+              instanceLabel:
+                fr: Avoir en main, chèque non encaissé ou carte de crédit prépayée
+              addLabel:
+                fr: Ajouter un avoir
+              removeLabel:
+                fr: Supprimer cet avoir
+              components:
+                - name: AvoirEnMainProprio
+                  type: radio
+                  label:
+                    fr: Titulaire(s) du compte
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: AvoirEnMainType
+                  type: radio
+                  label:
+                    fr: Spécifiez le type d'avoir
+                  options:
+                    argent: Argent en main
+                    cheque: Cheque non encaissé
+                    carte: Carte de crédit prépayée
+                - name: AvoirEnMainDescription
+                  type: text
+                  label:
+                    fr: Description de l'avoir
+                - name: AvoirEnMainMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant (solde)      
         # Section - Biens
         - section:
             fr: Biens
