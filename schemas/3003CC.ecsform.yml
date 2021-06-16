@@ -1040,6 +1040,8 @@ form:
       v-if: val('Conjoint') === 'true' && val('TypeDemande') === 'Afdr'
       classes: icone user              
       sections: &menage
+        #Section - Domicile
+        
         # Section - Revenus
         - section:
             fr: Revenus
@@ -1722,6 +1724,116 @@ form:
                   outerClasses: md
                   label: 
                     fr: Montant (solde)      
+            - name: PossedeChequesEnCirculation
+              type: radio
+              label:
+                fr: Avez-vous des chèques en circulation ou des paiements qui ont été préautorisés pour les frais de logement?
+              help:
+                fr: (prêt sur une hypothèque, loyer, coût de l’électricité ou d’une autre forme d’énergie)
+              options: yesno
+            - name: ChequesEnCirculation
+              type: repeatableGroup
+              v-if: val('PossedeChequesEnCirculation') === 'true'
+              repeatable: true
+              label:
+                fr: Chèques en circulation ou paiements de logement préautorisés
+              instanceLabel:
+                fr: Chèque ou paiement préautorisé
+              addLabel:
+                fr: Ajouter un chèque ou un paiement préautorisé
+              removeLabel:
+                fr: Supprimer ce chèque ou paiement préautorisé
+              components:
+                - name: ChequesEnCirculationProprio
+                  type: radio
+                  label:
+                    fr: Qui a fait le chèque ou le paiement
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: ChequesEnCirculationDescription
+                  type: text
+                  label:
+                    fr: Description du chèque ou du paiement
+                - name: ChequesEnCirculationMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+            - name: PossedePlacements
+              type: radio
+              label:
+                fr: Avez-vous des placements (REER, REEE, CELI, dépôts à terme ou autre)?
+              options: yesno
+            - name: AvoirsPlacements
+              type: repeatableGroup
+              v-if: val('PossedePlacements') === 'true'
+              repeatable: true
+              label:
+                fr: Placements (REER, REEE, CELI, dépôts à terme ou autre)?
+              instanceLabel:
+                fr: Placement
+              addLabel:
+                fr: Ajouter un placement
+              removeLabel:
+                fr: Supprimer ce placement
+              components:
+                - name: AvoirPlacementProprio
+                  type: radio
+                  label:
+                    fr: À qui appartient le placement?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: AvoirPlacementDescription
+                  type: text
+                  label:
+                    fr: Description du placement
+                - name: AvoirPlacementMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+            - name: PossedeSommesDues
+              type: radio
+              label:
+                fr: Avez-vous des sommes qui vous sont dues?
+              options: yesno
+            - name: AvoirsSommesDues
+              type: repeatableGroup
+              v-if: val('PossedeSommesDues') === 'true'
+              repeatable: true
+              label:
+                fr: Sommes dues
+              instanceLabel:
+                fr: Somme due
+              addLabel:
+                fr: Ajouter une somme due
+              removeLabel:
+                fr: Supprimer cette somme due
+              components:
+                - name: AvoirSommeDueProprio
+                  type: radio
+                  label:
+                    fr: À qui est due cette somme?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: AvoirSommeDueDescription
+                  type: text
+                  label:
+                    fr: Description de la somme due
+                - name: AvoirSommeDueMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
         # Section - Biens
         - section:
             fr: Biens
@@ -1823,6 +1935,44 @@ form:
                     fr: "Valeur uniformisée"
                   help:
                     fr: "Selon le dernier compte de taxe."
+            - name: PossedeBiensMobiliers
+              type: radio
+              label:
+                fr: "Avez-vous d’autres biens mobiliers?"
+              help:
+                fr: "ex. bateaux, roulottes, collections, objets précieux, etc."
+              options: yesno
+            - name: BiensMobiliers
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeBiensMobiliers') === 'true'    
+              label:
+                fr: Biens mobiliers
+              instanceLabel:
+                fr: Bien mobilier
+              addLabel:
+                fr: Ajouter un bien mobilier
+              removeLabel:
+                fr: Supprimer ce bien mobilier
+              components: 
+                - name: BienMobilierProprio
+                  type: radio
+                  outerClasses: boutons-inline md
+                  label:
+                    fr: Propriétaire du bien mobilier
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: BienMobilierDescription
+                  type: text
+                  label:
+                    fr: Description
+                  outerClasses: xxl
+                - name: BienMobilierValeur
+                  type: number
+                  label:
+                    fr: "Valeur marchande"
     - sectionGroup: null
       v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
       classes: icone user              
