@@ -52,8 +52,8 @@ form:
               {{GenerateClasses type .}}
               {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
               {{# label}} label="{{i18n .}}" {{/ label}}
-              {{# tooltipTitle}} tooltip-title="{{i18n .}}" {{/ tooltipTitle}}
-              {{# tooltipText}} tooltip-text="{{i18n .}}" {{/ tooltipText}}
+              {{# tooltip}}{{# title}} tooltip-title="{{i18n .}}" {{/ title}}{{/ tooltip}}
+              {{# tooltip}}{{# text}} tooltip-text="{{i18n .}}" {{/ text}}{{/ tooltip}}
               {{# help}} help="{{i18n .}}" {{/ help}}
               {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
               {{GenerateValidations .}}
@@ -81,11 +81,11 @@ form:
                 {{GenerateClasses type .}}
                 {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
                 {{# label}} label="{{i18n .}}" {{/ label}}
-                {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
+                {{# tooltip}} tooltip="{{i18n text}}" {{/ tooltip}}
                 {{# help}} help="{{i18n .}}" {{/ help}}
                 {{GenerateValidations .}}
                 error-behavior="value"
-                #default="{ name, index }"
+                #default="{ name }"
                 {{#additionals.GetEnumerator}}{{key}}="{{{value}}}" {{/additionals.GetEnumerator}}>
                 {{RecursiveComponents components}}
         </formulate-input>
@@ -100,7 +100,7 @@ form:
                 {{# validation-name}} validation-name="{{i18n .}}" {{/ validation-name}}
                 {{# label}} label="{{i18n .}}" {{/ label}}
                 {{# instanceLabel}} instance-label="{{i18n .}}" {{/ instanceLabel}}
-                {{# tooltip}} tooltip="{{i18n .}}" {{/ tooltip}}
+                {{# tooltip}} tooltip="{{i18n text}}" {{/ tooltip}}
                 {{# help}} help="{{i18n .}}" {{/ help}}
                 {{# addLabel}} add-label="{{i18n .}}" {{/ addLabel}}
                 {{# removeLabel}} remove-label="{{i18n .}}" {{/ removeLabel}}
