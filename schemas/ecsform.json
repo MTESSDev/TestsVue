@@ -22,7 +22,7 @@
                 "sectionsGroup": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/SectionGroup"
+                        "$ref": "#/definitions/SectionsGroup"
                     }
                 },
                 "templates": {
@@ -78,13 +78,15 @@
             ],
             "title": "Section"
         },
-        "SectionGroup": {
+        "SectionsGroup": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
                 "sections": {
                     "type": "array",
-                    "$ref": "#/definitions/Section"
+                    "items": {
+                        "$ref": "#/definitions/Section"
+                    }
                 },
                 "prefixId": {
                     "type": "string"
@@ -99,12 +101,10 @@
                 },
                 "sectionGroup": {
                     "type": ["object", "null"],
-                    "$ref": "#/definitions/Translation"
+                    "$ref": "#/definitions/Translation",
+                    "description": "Name of the section group in the menu"
                 }
             },
-            "required": [
-                "sections"
-            ],
             "title": "Section Group"
         },
         "Display": {
@@ -163,7 +163,7 @@
                     "type": "string",
                     "default": "text",
                     "description": "Required. The type of input element. See the input library for a full range of options.",
-                    "enum": ["text", "button", "submit", "file", "image", "group", "radio", "checkbox", "select", "number", "range", "textarea", "color", "date", "datetime-local", "email", "hidden", "month", "password", "search", "tel", "time", "url", "week"]
+                    "enum": ["text", "button", "submit", "file", "image", "group", "repeatableGroup", "radio", "checkbox", "select", "number", "range", "textarea", "color", "date", "datetime-local", "email", "hidden", "month", "password", "search", "tel", "time", "url", "week"]
                 },
                 "limit":{
                     "type": ["number"]
@@ -186,6 +186,15 @@
                 "inputClasses": {
                     "type": "string",
                     "description": ""
+                },
+                "inputmode": {
+                    "type": "string",
+                    "enum": ["number"],
+                    "description": "Text field inputmode (html)"
+                },
+                "pattern": {
+                    "type": "string",
+                    "description": "Regex pattern (html)"
                 },
                 "outerClasses": {
                     "type": "string",
@@ -233,7 +242,7 @@
                 },
                 "tooltip": {
                     "type": "object",
-                    "$ref": "#/definitions/Translation"
+                    "$ref": "#/definitions/Tooltip"
                 },
                 "options": {
                     "type": ["object", "null", "string", "array"],
@@ -341,6 +350,10 @@
                         "url": {
                             "type": ["null"],
                             "description": "Checks if the input value appears to be a properly formatted URL including the protocol. This does not check if the URL actually resolves."
+                        },
+                        "nas": {
+                            "type": "boolean",
+                            "description": "Valider le NAS, si true valide vraiment que le NAS est valide, si false valide que c'est un nombre de 9 de long seulement."
                         }
                     },
                     "title": "Validation"
@@ -372,22 +385,22 @@
             "dependencies": {
                 "minimum": {
                     "properties": {
-                        "type": { "const": "group" }
+                        "type": { "enum": ["group", "repeatableGroup"] }
                     }
                 },
                 "limit": {
                     "properties": {
-                        "type": { "const": "group" }
+                        "type": { "enum": ["group", "repeatableGroup"] }
                     }
                 },
                 "addLabel": {
                     "properties": {
-                        "type": { "enum": ["group", "file"] }
+                        "type": { "enum": ["group", "file", "repeatableGroup"] }
                     }
                 },
                 "removeLabel": {
                     "properties": {
-                        "type": { "enum": ["group", "file"] }
+                        "type": { "enum": ["group", "file", "repeatableGroup"] }
                     }
                 }
             },
@@ -407,6 +420,25 @@
             },
             "required": [
                 "fr"
+            ],
+            "title": "Translation"
+        },
+        "Tooltip": {
+            "type": "object",
+            "additionalProperties": true,
+            "default": {"fr":"", "en": ""},
+            "properties": {
+                "title": {
+                    "type": ["object", "null"],
+                    "$ref": "#/definitions/Translation"
+                },
+                "text": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                }
+            },
+            "required": [
+                "text"
             ],
             "title": "Translation"
         },
