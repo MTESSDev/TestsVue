@@ -253,15 +253,19 @@
                     if (Array.isArray(objetAValider)) {
                         objetAValider = objetAValider[i] || objetAValider[0]
                     }
-                    
-                    if (!objetAValider[`${champ}`] && objetAValider[`${champ}`] !== false ) {
-                        return ''
-                    }
-                    objetAValider = objetAValider[`${champ}`]
 
-                    //Si un indexe est spécifié, nous sommes dans un repeatable. Si objetAValider est null, on ajoute l'indexe au nom du champ (format [index]) et on essaie d'obtenir la valeur
-                    if (!objetAValider && indexe) {
-                        objetAValider = objetAValider[`${champ}[${indexe}]`]
+                    if (!objetAValider[`${champ}`] && objetAValider[`${champ}`] !== false) {
+                        //Si un indexe est spécifié, nous sommes dans un repeatable. Si objetAValider est null, on ajoute l'indexe au nom du champ (format [index]) et on essaie d'obtenir la valeur
+                        if (indexe >= 0) {
+                            objetAValider = objetAValider[`${champ}[${indexe}]`]
+                            if (!objetAValider && objetAValider !== false) {
+                                return ''
+                            }
+                        } else {
+                            return ''
+                        }
+                    } else {
+                        objetAValider = objetAValider[`${champ}`]
                     }
                 }              
 

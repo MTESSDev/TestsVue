@@ -1099,11 +1099,6 @@ form:
                     hebdo: 'par semaine'
                     bihebdo: 'aux 2 semaines'
                     mensuel: 'par mois'
-                - name: RevenuEmploiSalaireNetHebdo
-                  type: number
-                  v-if: val(`${name}.RevenuEmploiFrequence`, index) === 'hebdo'
-                  label:
-                    fr: Salaire net Hebdo
             - name: RevenusPourboires
               type: repeatableGroup
               repeatable: true
