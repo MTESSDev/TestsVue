@@ -1041,7 +1041,104 @@ form:
       classes: icone user              
       sections: &menage
         #Section - Domicile
-        
+        - section:
+            fr: Informations sur le domicile
+          id: domicile
+          components:
+            - name: TypeDomicile
+              type: select
+              label:
+                fr: Où habitez-vous?
+              options:
+                propriete: Dans votre propriété
+                chambre: Dans une chambre ou en pension
+                logement: Dans un logement
+                subventionne: Dans un logement subventionné (par exemple dans un HLM ou une coopérative d’habitation)
+                familiale: Dans une ressource de type familiale, un centre hospitalier ou une ressource intermédiaire
+                autre: Ailleurs
+            - name: DomicileAilleursPrecision
+              type: text
+              v-if: val('TypeDomicile').includes('autre')
+              label:
+                fr: Précisez la nature de votre domicile
+            - name: ProprietaireInfos
+              type: group
+              v-if: val('TypeDomicile') !== 'propriete'
+              label:
+                fr: Inscrivez le nom de votre propriétaire ou locateur, s’il y a lieu.
+              components:
+                - name: Nom
+                  type: text
+                  label:
+                    fr: Nom de famille
+                - name: Prenom
+                  type: text
+                  label:
+                    fr: Prénom
+                - name: Telephone
+                  type: text
+                  label:
+                    fr: Téléphone
+            - name: DomicileDateDebut
+              type: date
+              label:
+                fr: Date de début d’occupation des lieux
+            - name: DomicileCoutMensuel
+              type: number
+              label:
+                fr: Coût mensuel
+            - name: DomicileChauffage
+              type: radio
+              label:
+                fr: Chauffage inclus
+              options: yesno
+            - name: DomicileElectricite
+              type: radio
+              label:
+                fr: Électricité incluse
+              options: yesno
+            - name: RecoitDomicileAllocation
+              type: radio
+              label:
+                fr: Recevez-vous de Revenu Québec une somme provenant du programme Allocation-logement?
+              options: yesno
+            - name: DomicileAllocationMontant
+              type: number
+              v-if: val('RecoitDomicileAllocation') === 'true'
+              label:
+                fr: Montant par mois
+            - name: DomicileAutresPersonnes
+              type: radio
+              options: yesno
+              label:
+                fr: Est-ce que d’autres personnes habitent avec vous?
+              help:
+                fr: autres que votre conjoint et vos enfants à charge, s’il y a lieu
+            - name: DomicileAutrespersonnesPrecision
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('DomicileAutresPersonnes') === 'true'
+              label:
+                fr: Autres personnes habitant avec vous
+              instanceLabel:
+                fr: Autre personne habitant avec vous
+              addLabel:
+                fr: Ajouter une personne
+              removeLabel:
+                fr: Supprimer cette personne
+              components:
+                - name: Nom
+                  type: text
+                  label:
+                    fr: Nom de famille
+                - name: Prenom
+                  type: text
+                  label:
+                    fr: Prénom
+                - name: Lien
+                  type: text
+                  label:
+                    fr: Précisez le lien avec vous
         # Section - Revenus
         - section:
             fr: Revenus
