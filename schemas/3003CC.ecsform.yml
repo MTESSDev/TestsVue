@@ -2198,6 +2198,33 @@ form:
                   type: number
                   label:
                     fr: Valeur
+        # Section - Destinataire correspondance
+        - section:
+            fr: Destinataire de la correspondance
+          id: destinataire
+          components:
+            - type: bandeau
+              components:
+                - type: dynamic
+                  tag: p
+                  text:
+                    fr: La correspondance est l’ensemble des documents que nous vous ferons parvenir (avis de décision, chèques ou avis de dépôt, etc.).                  
+                - type: radio
+                  v-if: val('Conjoint') === 'true'
+                  name: destinataireCouple
+                  label:
+                    fr: Pour un couple, le destinataire de la correspondance doit être précisé.
+                  options:
+                    A12: 'Couple'
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - type: textarea
+                  v-if: val('Conjoint') === 'false'
+                  name: destinataireAutrePersonne
+                  label:
+                    fr: La correspondance destinée à une personne seule lui sera directement transmise. Si elle doit plutôt être transmise à une autre personne, inscrivez la raison de ce choix.
+                  validations:
+                    optional: null
     - sectionGroup: null
       v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
       classes: icone user              
