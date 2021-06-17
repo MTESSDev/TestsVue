@@ -508,12 +508,19 @@
                             const elementPage = document.querySelector(`[data-id-page="${page.id}"]`)
                             if (elementPage) {
                                 const elementEnErreur = elementPage.querySelector('[data-is-showing-errors="true"]')
-                                page.contientErreurs = elementEnErreur ? true : false
-                                //page.sansErreur = !page.contientErreurs
+
+                                if (page.id === 'revision') {
+                                    const form = this.$formulate.registry.get("form")
+                                    page.contientErreurs = form.hasErrors
+                                } else {
+                                    page.contientErreurs = elementEnErreur ? true : false                                
+                                }
+                                page.sansErreur = !page.contientErreurs
                             }
                         }
                     }
                 }
+
                 //Forcer un rafraichissement de la vue avec les nouvelles données
                 this.$forceUpdate()
             },
