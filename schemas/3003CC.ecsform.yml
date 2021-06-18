@@ -1359,17 +1359,21 @@ form:
                   label: 
                     fr: Signature du conjoint
   
-  
-  #            v-if: form.TypeDemande === 'Afdr'
-  #TODO ajouter question pour emplois recherché (attente discussion avec Julie)
         # Section 
         - section: 
             fr: Révision
             en: (EN)Test
           id: revision
-          classes: dernier
           components:
             - type: dynamic
-              tag: h3
+              tag: div
+              v-if: val('EtatRevision') === 'initial'
+              classes: texte-revision
               text: 
-                fr: Salut! ceci est une section bidon juste pour tester!
+                fr: Ici un super texte qui explique de bien réfléchir avant de cliquer sur valider car tout peut exploser!
+            - type: dynamic
+              tag: div
+              v-if: val('EtatRevision') === 'sans-erreur'
+              classes: texte-revision
+              text: 
+                fr: Tout est beau mon champion. Tu es à un clic d'avoir ton chèque!

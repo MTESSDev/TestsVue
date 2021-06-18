@@ -53,7 +53,9 @@ function definirTraitementEnCoursSoumissionForm() {
             }
 
             setTimeout(function () {
-                elementSourceSoumission.addClass('disabled').attr('disabled', 'disabled');
+                if (elementSourceSoumission.find('.spinner').length) {
+                    elementSourceSoumission.addClass('disabled').attr('disabled', 'disabled');
+                }
             });
         }
     });

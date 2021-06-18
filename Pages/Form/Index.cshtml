@@ -82,7 +82,7 @@
         <h1 tabindex="-1">{{pageCourante.titre}}</h1>
         <div id="form">
             <div class="d-none">{{estConsidereConjoint}}</div>
-            <div class="texte-explicatif-champs-obligatoires d-flex justify-content-end" aria-hidden="true">
+            <div class="texte-explicatif-champs-obligatoires d-flex justify-content-end" aria-hidden="true" v-if="pageCourante.id !== 'revision'">
                 <span class="icone-champ-requis" aria-hidden="true">&nbsp;*</span>
                 <span>indique une réponse obligatoire.</span>
             </div>
@@ -90,7 +90,7 @@
                 @Html.Raw(Model.FormRaw)
             </template>
 
-            <div class="zone-boutons bas-page">
+            <div class="zone-boutons bas-page" v-if="form.EtatRevision !== ''">
                 <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPagePrecedente)" :disabled="noPagePrecedente == null">Précédent</button>
                 <button class="btn btn-secondaire btn-enregistrer" v-on:click="enregistrer">Enregistrer</button>
                 <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPageSuivante)" :disabled="noPageSuivante == null">Suivant</button>
@@ -98,7 +98,7 @@
 
             <div id="tooltipModal" class="modal aide-contextuelle" tabindex="-1" role="dialog" aria-labelledby="modal-title" style="display: block;" aria-modal="true">
                 <div class="modal-header container" id="modal-header">
-                    <h1 id="modal-title"><span class="sr-only">Aide à propos de</span><span id="dialog-title">{{tooltipTitle}}</span></h1>
+                    <h1 id="modal-title"><span class="sr-only">Aide à propos de</span><span id="dialog-title">{{TooltipTitle}}</span></h1>
                     <button type="button" class="close" data-dismiss="modal">
                         <span class="icone-svg x-fermer-bleu" aria-hidden="true"></span>
                     </button>
@@ -106,7 +106,7 @@
                 <div class="modal-content container">
                     <div class="modal-body">
                         <div id="dialog-description" class="dialog-content">
-                            {{tooltipText}}
+                            {{TooltipText}}
                         </div>
                     </div>
                 </div>
@@ -183,17 +183,7 @@
             submitRawHandler(data) {
                 // TODO ici trouver le moyen d'exécuter la méthode terminerTraitementEnCoursSoumissionForm lorsque notre code ECS qui disable le bouton est terminé... Sinon le bouton reste disabled.
                 // Le setTimeout est utilisé afin de s'assurer que le traitement de soumission de formulaire qui ajoute spinner et disable et bien terminé.
-                axios.post('/Privacy/3003cc', this.form)
-                    .then(response => {
-                        console.log(response)
-                    })
-                    .catch(error => {
-                        console.log(error.response.data);
-                    });
-
-                setTimeout(function () {
-                    terminerTraitementEnCoursSoumissionForm()
-                }, 800);
+                this.validerFormulaire(this)
             },
             submitHandler(data) {
                 axios.post('/Privacy', data)
@@ -242,7 +232,24 @@
                     })
                 }
             },
+            invalidMessage(fields) {
+                const listeErreurs = []
+                const nomChamps = Object.keys(fields)
 
+                nomChamps.forEach(nomChamp => {
+                    const champ = fields[nomChamp]
+                    //if (champ.hasVisibleErrors) {
+                    if (champ.hasErrors) {
+                        if (champ.context && champ.context.type !== 'group') {
+                            this.ajouterErreursChamp(champ, listeErreurs)
+                        } else {
+                            this.ajouterErreursGroupe(champ, listeErreurs, true)
+                        }
+                    }
+                })
+
+                return listeErreurs.length > 0 ? JSON.stringify(listeErreurs) : false
+            },
             // Obtient la valeur d'un champ. indexe est uniquement utilisé pour le type repeatable.
             val(idChamp, indexe) {                
                 const i = indexe || 0
@@ -281,24 +288,7 @@
                 }
                 return false
             },
-            invalidMessage(fields) {
-                const listeErreurs = []
-                const nomChamps = Object.keys(fields)
 
-                nomChamps.forEach(nomChamp => {
-                    const champ = fields[nomChamp]
-                    //if (champ.hasVisibleErrors) {
-                    if (champ.hasErrors) {
-                        if (champ.context && champ.context.type !== 'group') {
-                            this.ajouterErreursChamp(champ, listeErreurs)
-                        } else {
-                            this.ajouterErreursGroupe(champ, listeErreurs, true)
-                        }
-                    }
-                })
-
-                return listeErreurs.length > 0 ? JSON.stringify(listeErreurs) : false
-            },
 /*            initialiserToolTips() {
 
                 const template = `<div class="tooltip" role="tooltip">
@@ -405,8 +395,8 @@
                 return controle.parents('.section:first').attr('data-id-page')
             },
             showTooltip(title, text) {
-                this.tooltipTitle = title || ''
-                this.tooltipText = text || ''
+                this.TooltipTitle = title || ''
+                this.TooltipText = text || ''
                 $('#tooltipModal').modal()
             },
             initialiserTooltips() {
@@ -424,6 +414,75 @@
                 this.form.validAll = false
                 this.config.keepData = true
 
+                this.majStatutPageCourante()
+
+                const pageDemandee = this.obtenirPageParNo(noPage)
+                if (pageDemandee.page.id === 'revision' && this.form.EtatRevision !== 'initial') {
+                    this.form.EtatRevision = ''
+                }
+
+                this.noPageCourante = noPage
+
+                this.$nextTick(function () {
+                    this.config.keepData = false
+                    //TODO le pasFocus sert-il vraiment? voir avec Dany vs. le bac à sable
+                    if (!pasFocus && nomControleFocus) {
+                        this.donnerFocusControle(nomControleFocus)
+                    } else {
+                        //On traite une navigation sans contrôle spécifié à qui donner le focus (ex. page suivante/précédente ou clic sur une page dans menu gauche). On donne focus au H1.
+                        const h1 = document.getElementsByTagName('h1')[0]
+                        h1.focus()
+                        h1.scrollIntoView() /* Sous IOS le focus ne semble pas provoquer un scroll à tout coup... on le force */
+
+                        if (this.pageCourante.id === 'revision' && this.form.EtatRevision !== 'initial') {
+                            setTimeout(function (formulate) {
+                                formulate.validerFormulaire(formulate)
+                            }, 100, this)
+                        }
+                    }
+                })
+            },
+            validerFormulaire(formulate) {
+                formulate.form.validAll = true
+                formulate.$formulate.submit('form')
+
+                setTimeout(function (formulate) {
+                    const form = formulate.$formulate.registry.get("form")
+                    formulate.form.EtatRevision = form.hasErrors ? 'contient-erreurs' : 'sans-erreur'
+
+                    terminerTraitementEnCoursSoumissionForm()
+                    formulate.majStatutPagesVisibles()
+
+                    //TODO pour le moment post au serveur uniquement si mode debug
+                    if (new URLSearchParams(window.location.search).get('debug')) {
+                        axios.post('/Privacy/3003cc', this.form)
+                            .then(response => {
+                                console.log(response)
+                            })
+                            .catch(error => {
+                                console.log(error.response.data);
+                            });
+                    }                            
+                }, 0, formulate)
+            },
+            donnerFocusControle(nomControle) {
+                const controles = document.getElementsByName(nomControle)
+                if (controles.length) {
+                    controles[0].focus()
+                    this.repositionnerEcranLabelQuestion(controles[0].id)
+                } else {
+                    /* Ici on traite essentiellement les erreurs de haut niveau sur les groupes (ex. un groupe obligatoire sans occurence)
+                       setTimeout nécessaire afin que le rendering des erreurs soit fait. */
+                    setTimeout(function (formulate) {
+                        var controlesErreur = $("[data-has-errors]").find("input,textarea")
+                        if (controlesErreur.length) {
+                            controlesErreur[0].focus()
+                            formulate.repositionnerEcranLabelQuestion(controlesErreur[0].id)
+                        }
+                    }, 0, this)
+                }
+            },
+            majStatutPageCourante() {
                 //Obtenir la page courante et mettre à jour son indicateur d'erreurs (sauf page révision)
                 if (this.pageCourante.id !== 'revision') {
                     const form = this.$formulate.registry.get("form")
@@ -433,48 +492,30 @@
                     //La 2ème portion de validation sert à pallier un bug avec les groupes (prop hasErrors = true, suite à navigation à partir page révision, même si aucune erreur pour vrai)
                     this.pageCourante.contientErreurs = form.hasErrors && (form.invalidErrors.length === 0 || form.invalidErrors[0] !== false)
                     this.pageCourante.sansErreur = !this.pageCourante.contientErreurs
+                } 
+            },
+            majStatutPagesVisibles() {
+                for (const groupe of this.pagesGroup) {
+                    for (const page of groupe.pages) {
+                        if (this.estPageAffichee({ groupe: groupe, page: page })) {
+                            const elementPage = document.querySelector(`[data-id-page="${page.id}"]`)
+                            if (elementPage) {
+                                const elementEnErreur = elementPage.querySelector('[data-is-showing-errors="true"]')
+
+                                if (page.id === 'revision') {
+                                    const form = this.$formulate.registry.get("form")
+                                    page.contientErreurs = form.hasErrors
+                                } else {
+                                    page.contientErreurs = elementEnErreur ? true : false
+                                }
+                                page.sansErreur = !page.contientErreurs
+                            }
+                        }
+                    }
                 }
 
-                this.noPageCourante = noPage
-
-                this.$nextTick(function () {
-                    this.config.keepData = false
-                    if (this.pageCourante.id === 'revision') {
-                        this.form.validAll = true
-                        this.$formulate.submit('form')
-
-                        setTimeout(function (formulate) {
-                            formulate.majStatutPagesVisibles()
-                        }, 0, this)
-
-
-                    }
-
-                    if (nomControleFocus) {
-                        const controles = document.getElementsByName(nomControleFocus)
-                        if (controles.length) {
-                            if (!pasFocus) {
-                                controles[0].focus()
-                            }
-                            this.repositionnerEcranLabelQuestion(controles[0].id)
-                        } else {
-                            /* Ici on traite essentiellement les erreurs de haut niveau sur les groupes (ex. un groupe obligatoire sans occurence)
-                               setTimeout nécessaire afin que le rendering des erreurs soit fait. */
-                            setTimeout(function (formulate) {
-                                var controlesErreur = $("[data-has-errors]").find("input,textarea")
-                                if (controlesErreur.length) {
-                                    controlesErreur[0].focus()
-                                    formulate.repositionnerEcranLabelQuestion(controlesErreur[0].id)
-                                }
-                            }, 0, this)
-                        }
-                    } else {
-                        //On traite une navigation sans contrôle spécifié à qui donner le focus (ex. page suivante/précédente ou clic sur une page dans menu gauche). On donne focus au H1.
-                        const h1 = document.getElementsByTagName('h1')[0]
-                        h1.focus()
-                        h1.scrollIntoView() /* Sous IOS le focus ne semble pas provoquer un scroll à tout coup... on le force */
-                    }
-                })
+                //Forcer un rafraichissement de la vue avec les nouvelles données
+                this.$forceUpdate()
             },
             effectuerNavigationParId(idPage, nomControleFocus) {
                 const page = this.obtenirPageParId(idPage)
@@ -501,31 +542,7 @@
                     }
                 }
             },
-            majStatutPagesVisibles() {
-                for (const groupe of this.pagesGroup) {
-                    for (const page of groupe.pages) {                        
-                        if (this.estPageAffichee({ groupe: groupe, page: page })) {
-                            const elementPage = document.querySelector(`[data-id-page="${page.id}"]`)
-                            if (elementPage) {
-                                const elementEnErreur = elementPage.querySelector('[data-is-showing-errors="true"]')
-
-                                if (page.id === 'revision') {
-                                    const form = this.$formulate.registry.get("form")
-                                    page.contientErreurs = form.hasErrors
-                                } else {
-                                    page.contientErreurs = elementEnErreur ? true : false                                
-                                }
-                                page.sansErreur = !page.contientErreurs
-                            }
-                        }
-                    }
-                }
-
-                //Forcer un rafraichissement de la vue avec les nouvelles données
-                this.$forceUpdate()
-            },
             estPageAffichee(groupeEtPage) {
-
                 const groupe = groupeEtPage.groupe
                 const page = groupeEtPage.page
                 const form = this.form
@@ -599,13 +616,14 @@
         },
         data: function () {
             let donnees = JSON.parse('@data')
-            donnees['tooltipTitle'] = ''
-            donnees['tooltipText'] = ''
+            donnees['TooltipTitle'] = ''
+            donnees['TooltipText'] = ''
             return donnees;
         },
         mounted() {
             console.log('Application mounted.');
             this.initialiserTooltips()
+            this.form.EtatRevision = 'initial'
         }
     }
 
@@ -619,5 +637,27 @@
 
     function estNAS(n) { if (typeof n == 'number' && n >= 0 && n < 1000000000 && n % 1 == 0) n = ('0'.repeat(8) + String(n)).slice(-9); if (!/^[0-9]{3}[ -]?[0-9]{3}[ -]?[0-9]{3}$/.test(n = String(n))) return false; n = n.replace(/[^0-9]/g, ''); return [].map.call(n, function (v, k) { var m = (k % 2) + 1, v = parseInt(v) * m; if (v > 10) return 1 + (v % 10); return v; }).reduce(function (a, b) { return a + b; }, 0) % 10 == 0; }
 
+    function terminerTraitementEnCoursSoumissionForm() {
+
+        $("#zoneNotificationsLecteurEcran").text(obtenirTexteEdite('txtcacheCommunMajTerminee'));
+
+        var spinner = $("button[type=submit] > .spinner, input[type=submit] > .spinner");
+
+        if (spinner.length > 0) {
+            var bouton = spinner.parent();
+              
+            bouton.removeClass(["d-flex", "justify-content-center"]);
+            bouton.css("color", "");
+            bouton.removeAttr("disabled").removeClass("disabled");
+            spinner.remove();
+
+            //Retrait du overlay de soumission (qui bloque toute possibilité de clic pendant la soumisssion) si actif.
+            var formulaire = bouton.prop('form') || bouton.closest('form')[0];
+            if ($(formulaire).data("overlaysoumission")) {
+                bouton.css({ "z-index": bouton.data("zindex"), "position": bouton.data("position") });
+                $(".overlay-soumission-form").remove();
+            }
+        }
+    };
     </script>
 }

@@ -76,7 +76,8 @@
   {
     "outputFileName": "src/temp/base.min.js",
     "inputFiles": [
-      "src/interne/js/siteBase.js"
+      "src/interne/js/siteBase.js",
+      "src/interne/js/siteAdditionnel.js"
     ],
     "minify": {
       "enabled": true
@@ -106,8 +107,7 @@
       "src/externe/dataTables/datatables-bootstrap4.js",
       "src/interne/js/CAC.ValidationsClient.js",
       "src/externe/select2/select2.js",
-      "src/externe/select2/fr.js",
-      "src/interne/js/siteAdditionnel.js"
+      "src/externe/select2/fr.js"
     ],
     "minify": {
       "enabled": true

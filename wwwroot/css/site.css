@@ -415,7 +415,7 @@ body p {
     /*====================================================================================================*/
     /*  -Z20A- Forms (Boutons bas de page)  
 /*====================================================================================================*/
-    .zone-boutons.bas-page button {
+    .zone-boutons.bas-page button, .bouton-validation {
         width: 120px;
     }
 
@@ -1120,6 +1120,10 @@ form .input-validation-error, form .input-validation-error + .note-editor {
         opacity: 0;
     }
 
+    /* Pas d'animation dans la page révision */
+    [data-id-page="revision"] * {
+        transition: none!important;
+    }
     /*====================================================================================================*/
     /*  -800- SPRITES
 /*====================================================================================================*/
