@@ -1833,6 +1833,10 @@ form:
                   type: text
                   label:
                     fr: Description du chèque ou du paiement
+                - name: ChequesEnCirculationDate
+                  type: date
+                  label:
+                    fr: Date de paiement
                 - name: ChequesEnCirculationMontant
                   type: text
                   outerClasses: md
