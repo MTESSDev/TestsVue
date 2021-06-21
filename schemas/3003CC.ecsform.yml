@@ -2134,11 +2134,16 @@ form:
                     individuelle: Entreprise individuelle
                     societe: Société en nom collectif
                     compagnie: Compagnie
-                - name: BiensEntreprisePourcentage
+                - name: BiensEntrepriseSocietePourcentage
                   type: number
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$BiensEntrepriseStatut'] !== 'individuelle'
+                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$BiensEntrepriseStatut'] === 'societe'
                   label:
-                    fr: Pourcentage de participation
+                    fr: Pourcentage de participation dans la société
+                - name: BiensEntrepriseCompagniePourcentage
+                  type: number
+                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$BiensEntrepriseStatut'] === 'compagnie'
+                  label:
+                    fr: Pourcentage de participation dans la compagnie
             - name: PossedeBiensCedes
               type: radio
               label:
