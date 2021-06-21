@@ -977,7 +977,7 @@ form:
                     Congediement: Congédiement
                     AutreRaison: Autre
                 - name: emploiPrecisionAutre
-                  v-if: form[name] && form[name][index] && form[name][index][`prefixId$emploiRaisonFinEmploi[${index}]`] === 'AutreRaison'
+                  v-if: val(`${name}`.emploiRaisonFinEmploi) ==='AutreRaison'
                   type: text
                   label: 
                     fr: Précisez la raison de fin d'emploi
@@ -2116,7 +2116,7 @@ form:
                   type: radio
                   outerClasses: boutons-inline md
                   label:
-                    fr: Propriétaire de l'assurance
+                    fr: Propriétaire de l'entreprise
                   options: 
                     A1: 'Adulte 1'
                     A2: 'Adulte 2'
@@ -2136,12 +2136,12 @@ form:
                     compagnie: Compagnie
                 - name: BiensEntrepriseSocietePourcentage
                   type: number
-                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$BiensEntrepriseStatut'] === 'societe'
+                  v-if: val(`${name}.BiensEntrepriseStatut`, index) && val(`${name}.BiensEntrepriseStatut`, index) === 'societe'
                   label:
                     fr: Pourcentage de participation dans la société
                 - name: BiensEntrepriseCompagniePourcentage
-                  type: number
-                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$BiensEntrepriseStatut'] === 'compagnie'
+                  type: number                  
+                  v-if: val(`${name}.BiensEntrepriseStatut`, index) && val(`${name}.BiensEntrepriseStatut`, index) === 'compagnie'
                   label:
                     fr: Pourcentage de participation dans la compagnie
             - name: PossedeBiensCedes
@@ -2286,7 +2286,7 @@ form:
                     fr: Ce parent réside-t-il au Canada?
                 - name: PaysResidenceParent
                   type: text
-                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$ResideCanadaParent'] === 'false'
+                  v-if: val(`${name}.ResideCanadaParent`, index) && val(`${name}.ResideCanadaParent`, index) === 'false'
                   label:
                     fr: Pays de résidence
                 - name: NomParent2
@@ -2319,7 +2319,7 @@ form:
                     optional: null
                 - name: PaysResidenceParent2
                   type: text
-                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$ResideCanadaParent2'] === 'false'
+                  v-if: val(`${name}.ResideCanadaParent2`, index) && val(`${name}.ResideCanadaParent2`, index) === 'false'
                   label:
                     fr: Pays de résidence
                   validations:
