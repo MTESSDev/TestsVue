@@ -1115,30 +1115,10 @@ form:
               help:
                 fr: autres que votre conjoint et vos enfants à charge, s’il y a lieu
             - name: DomicileAutrespersonnesPrecision
-              type: repeatableGroup
-              repeatable: true
+              type: textarea
               v-if: val('DomicileAutresPersonnes') === 'true'
               label:
-                fr: Autres personnes habitant avec vous
-              instanceLabel:
-                fr: Autre personne habitant avec vous
-              addLabel:
-                fr: Ajouter une personne
-              removeLabel:
-                fr: Supprimer cette personne
-              components:
-                - name: Nom
-                  type: text
-                  label:
-                    fr: Nom de famille
-                - name: Prenom
-                  type: text
-                  label:
-                    fr: Prénom
-                - name: Lien
-                  type: text
-                  label:
-                    fr: Précisez le lien avec vous
+                fr: Inscrivez leurs nom de famille et prénom et leur lien avec vous.               
         # Section - Revenus
         - section:
             fr: Revenus
