@@ -112,12 +112,14 @@ form:
             en: Authorization and signature
           id: signature
           components:
-            - name: DeclarationAutorisation
-              type: dynamic
-              tag: p
-              text:
-                fr: Par la présente, j'autorise le ministère du Travail, de l'Emploi et de la Solidarité sociale à déposer dans mon compte le montant qu'il me verse.
-                en: I hereby authorize the Ministère du Travail, de l'Emploi et de la Solidarité sociale to deposit into my account the amounts it pays to me.        
+            - type: bandeau
+              components:
+              - name: DeclarationAutorisation
+                type: dynamic
+                tag: p
+                text:
+                  fr: Par la présente, j'autorise le ministère du Travail, de l'Emploi et de la Solidarité sociale à déposer dans mon compte le montant qu'il me verse.
+                  en: I hereby authorize the Ministère du Travail, de l'Emploi et de la Solidarité sociale to deposit into my account the amounts it pays to me.        
             - type: inline
               classes: no-wrap
               components: 
@@ -132,13 +134,15 @@ form:
                   label: 
                     fr: Signature
                     en: Signature
-            - name: TexteSignatureConjoint
-              type: dynamic
-              tag: p
+            - type: bandeau
               v-if: val('TypeDemande') === 'ReqAfdr' && val('NomEtPrenomConjoint')
-              text:
-                fr: La signature de la conjointe ou du conjoint est requise uniquement si vous demandez le dépôt d'une aide financière de dernier recours (aide sociale ou solidarité sociale).
-                en: Your spouse's signature is required if you are applying for last-resort financial assistance (social assistance program or social solidarity program).
+              components:
+                - name: TexteSignatureConjoint
+                  type: dynamic
+                  tag: p
+                  text:
+                    fr: La signature de la conjointe ou du conjoint est requise uniquement si vous demandez le dépôt d'une aide financière de dernier recours (aide sociale ou solidarité sociale).
+                    en: Your spouse's signature is required if you are applying for last-resort financial assistance (social assistance program or social solidarity program).
             - type: inline
               classes: no-wrap
               components:

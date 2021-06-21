@@ -20,7 +20,7 @@ form:
                   fr: Type de demande
                 text: 
                   fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra. Vivamus arcu nibh, venenatis vel venenatis a, sagittis eget est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nisi magna, porttitor vel augue id, porttitor fringilla sapien. Maecenas sollicitudin, massa facilisis finibus tempor, nibh nunc pharetra ante, in elementum nibh purus a arcu. Nam massa tellus, vehicula nec ante in, tempus ornare urna. Sed eget commodo libero. Nulla tincidunt justo erat, ac volutpat eros maximus in. Nam at malesuada magna. Aenean in magna non lectus viverra consectetur. In porttitor, dolor ac varius lacinia, lacus mauris laoreet neque, vitae.
-                  en: 
+                  en:       
               options: 
                 Afdr: Demande d'aide financière de dernier recours
                 AideEmploi: Demande de service d'aide à l'emploi
@@ -119,7 +119,7 @@ form:
                 title:
                   fr: Définition d'un travail
                 text:
-                  fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.
+                  fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.      
               options: yesno
             - name: Req-00-etudes
               type: radio
@@ -1027,7 +1027,7 @@ form:
               outerClasses: xxl                           
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
-    #Adulte 2
+    # Adulte 2
     - sectionGroup: 
         fr: Adulte 2
       classes: icone user                      
@@ -1040,6 +1040,105 @@ form:
       v-if: val('Conjoint') === 'true' && val('TypeDemande') === 'Afdr'
       classes: icone user              
       sections: &menage
+        #Section - Domicile
+        - section:
+            fr: Informations sur le domicile
+          id: domicile
+          components:
+            - name: TypeDomicile
+              type: select
+              label:
+                fr: Où habitez-vous?
+              options:
+                propriete: Dans votre propriété
+                chambre: Dans une chambre ou en pension
+                logement: Dans un logement
+                subventionne: Dans un logement subventionné (par exemple dans un HLM ou une coopérative d’habitation)
+                familiale: Dans une ressource de type familiale, un centre hospitalier ou une ressource intermédiaire
+                autre: Ailleurs
+            - name: DomicileAilleursPrecision
+              type: text
+              v-if: val('TypeDomicile').includes('autre')
+              label:
+                fr: Précisez la nature de votre domicile
+            - name: ProprietaireInfos
+              type: group
+              v-if: val('TypeDomicile') !== 'propriete'
+              label:
+                fr: Inscrivez le nom de votre propriétaire ou locateur, s’il y a lieu.
+              components:
+                - name: Nom
+                  type: text
+                  label:
+                    fr: Nom de famille
+                - name: Prenom
+                  type: text
+                  label:
+                    fr: Prénom
+                - name: Telephone
+                  type: text
+                  label:
+                    fr: Téléphone
+            - name: DomicileDateDebut
+              type: date
+              label:
+                fr: Date de début d’occupation des lieux
+            - name: DomicileCoutMensuel
+              type: number
+              label:
+                fr: Coût mensuel
+            - name: DomicileChauffage
+              type: radio
+              label:
+                fr: Chauffage inclus
+              options: yesno
+            - name: DomicileElectricite
+              type: radio
+              label:
+                fr: Électricité incluse
+              options: yesno
+            - name: RecoitDomicileAllocation
+              type: radio
+              label:
+                fr: Recevez-vous de Revenu Québec une somme provenant du programme Allocation-logement?
+              options: yesno
+            - name: DomicileAllocationMontant
+              type: number
+              v-if: val('RecoitDomicileAllocation') === 'true'
+              label:
+                fr: Montant par mois
+            - name: DomicileAutresPersonnes
+              type: radio
+              options: yesno
+              label:
+                fr: Est-ce que d’autres personnes habitent avec vous?
+              help:
+                fr: autres que votre conjoint et vos enfants à charge, s’il y a lieu
+            - name: DomicileAutrespersonnesPrecision
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('DomicileAutresPersonnes') === 'true'
+              label:
+                fr: Autres personnes habitant avec vous
+              instanceLabel:
+                fr: Autre personne habitant avec vous
+              addLabel:
+                fr: Ajouter une personne
+              removeLabel:
+                fr: Supprimer cette personne
+              components:
+                - name: Nom
+                  type: text
+                  label:
+                    fr: Nom de famille
+                - name: Prenom
+                  type: text
+                  label:
+                    fr: Prénom
+                - name: Lien
+                  type: text
+                  label:
+                    fr: Précisez le lien avec vous
         # Section - Revenus
         - section:
             fr: Revenus
@@ -1059,9 +1158,9 @@ form:
               label:
                 fr: "Spécifiez le(s) type(s) de revenus qui s'appliquent"
               options: 
-                    RevenusEmplois: Revenus d'emplois
-                    Pourboires: Pourboires
-                    TravailAutonome: Revenus provenant d’un travail autonome ou de votre entreprise
+                RevenusEmplois: Revenus d'emplois
+                Pourboires: Pourboires
+                TravailAutonome: Revenus provenant d’un travail autonome ou de votre entreprise
             - name: RevenusEmploi
               type: repeatableGroup
               repeatable: true
@@ -1136,7 +1235,702 @@ form:
                     hebdo: 'par semaine'
                     bihebdo: 'aux 2 semaines'
                     mensuel: 'par mois'
-
+            - name: RevenuAutonomeOuEntreprise
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusEmploi').includes('TravailAutonome')
+              label:
+                fr: Revenus provenant d’un travail autonome ou de votre entreprise
+              instanceLabel:
+                fr: Travail autonome ou entreprise
+              addLabel:
+                fr: Ajouter un travail autonome ou une entreprise
+              removeLabel:
+                fr: Supprimer ce revenu
+              components: 
+                - name: RevenuAutonomeProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit les revenus de ce travail autonome ou de cette entreprise?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: NatureRevenus
+                  type: text
+                  label:
+                    fr: Nature des revenus
+                - name: DateDebutRevenu
+                  type: date
+                  label:
+                    fr: Date de début de la perception des revenus
+                - name: RevenuAutonomeBrut
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Montant brut
+                - name: RevenuAutonomeFrequence
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: PossedeRevenusGouvernementaux
+              type: radio
+              label:
+                fr: Recevez-vous des sommes de ministères ou d’organismes gouvernementaux?
+              options: yesno   
+            - name: TypesRevenusGouvernementaux
+              type: checkbox
+              v-if: val('PossedeRevenusGouvernementaux') ==='true'
+              label:
+                fr: "Spécifiez la (les) sommes qui s'appliquent"
+              options:
+                provincial: Ministère ou organisme provincial (RQAP, SAAQ, CNESST, Retraite Québec, MES)
+                federal: Ministère ou organisme fédéral (assurance-emploi, Régime de pensions du Canada, Anciens Combattants, Sécurité de la vieillesse)
+                autre: Autre ministère ou organisme (provincial, territorial ou étranger)
+            - name: SommesProvincial
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusGouvernementaux').includes('provincial')
+              label:
+                fr: Sommes provenant de Ministères ou organismes provinciaux
+              instanceLabel:
+                fr: Somme d'un ministère ou organisme provincial
+              addLabel:
+                fr: Ajouter une somme
+              removeLabel:
+                fr: Supprimer cette somme
+              components: 
+                - name: SommeProvincialProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit les sommes de cet organisme ou ministère?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2' 
+                - name: SommeProvincialSource
+                  type: text
+                  label:
+                    fr: Nom de l'organisme ou ministère
+                - name: SommeProvincialMontantBrut
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Montant brut
+                - name: SommeProvincialFrequence
+                  type: radio
+                  label: 
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: AttendeDecisionProvincial
+              type: radio
+              label: 
+                fr: Êtes-vous en attente d'une décision d'un ministère ou organisme provincial?
+              options: yesno
+            - name: DateDemandeProvincial
+              v-if: val('AttendeDecisionProvincial') === 'true'
+              type: date
+              label:
+                fr: Date de la demande
+            - name: SommesFederal
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusGouvernementaux').includes('federal')
+              label:
+                fr: Sommes provenant de Ministères ou organismes fédéraux
+              instanceLabel:
+                fr: Somme d'un ministère ou organisme fédéral
+              addLabel:
+                fr: Ajouter une somme
+              removeLabel:
+                fr: Supprimer cette somme
+              components: 
+                - name: SommeFederalProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit les sommes de cet organisme ou ministère?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2' 
+                - name: SommeFederalSource
+                  type: text
+                  label:
+                    fr: Nom de l'organisme ou ministère
+                - name: SommeFederalMontantBrut
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Montant brut
+                - name: SommeFederalFrequence
+                  type: radio
+                  label: 
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: AttendeDecisionFederal
+              type: radio
+              label: 
+                fr: Êtes-vous en attente d'une décision d'un ministère ou organisme provincial?
+              options: yesno
+            - name: DateDemandeFederal
+              v-if: val('AttendeDecisionFederal') === 'true'
+              type: date
+              label:
+                fr: Date de la demande
+            - name: SommesOrganismeAutre
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('TypesRevenusGouvernementaux').includes('autre')
+              label:
+                fr: Sommes provenant d'autres ministères ou organismes
+              instanceLabel:
+                fr: Somme d'un autre ministère ou organisme
+              addLabel:
+                fr: Ajouter une somme
+              removeLabel:
+                fr: Supprimer cette somme
+              components: 
+                - name: SommeOrganismeAutreProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit les sommes de cet organisme ou ministère?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2' 
+                - name: SommeOrganismeAutreSource
+                  type: text
+                  label:
+                    fr: Nom de l'organisme ou ministère
+                - name: SommeOrganismeAutreMontantBrut
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Montant brut
+                - name: SommeOrganismeAutreFrequence
+                  type: radio
+                  label: 
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: PossedeRevenuAutre
+              type: radio
+              label:
+                fr: Avez-vous d’autres types de revenus?
+              options: yesno
+            - name: typeRevenuAutre
+              type: checkbox
+              v-if: val('PossedeRevenuAutre') === 'true'
+              label:
+                fr: Spécifiez le(s) type(s) de revenus qui s'applique(nt)
+              options:
+                Chambre: Revenus de chambre ou de pension
+                Location: Revenus de location
+                Placement: Revenus de placement ou de fiducie, intérêts sur une obligation
+                FondPension: Prestations d’un fonds de pension (fonds personnel ou fonds d’un employeur)
+                PensionAlimentaire: Revenus de pension alimentaire (déterminés par un jugement ou une entente, perçus sous forme monétaire ou autre)
+                Autre: Autres revenus (assurance, rente, réduction du coût de loyer, somme reçue en héritage ou à la suite d’une décision de la cour, indemnité, don en argent, etc.)
+            - name: RevenusAutreChambre
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('Chambre') 
+              label:
+                fr: Revenus de chambre ou de pension
+              instanceLabel:
+                fr: Revenu de chambre ou de pension
+              addLabel:
+                fr: Ajouter un revenu de chambre ou de pension
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+                - name: RevenusAutresChambreProprio
+                  type: radio
+                  label:
+                    fr: Qui perçoit ces revenus?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: NomPrenomChambreur
+                  type: text
+                  label: 
+                    fr: Nom et prénom du chambreur ou pensionnaire
+                - name: MontantChambreur
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: FrequenceChambreur
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: RevenusAutreLocation
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('Location') 
+              label:
+                fr: Revenus de location
+              instanceLabel:
+                fr: Revenu de location
+              addLabel:
+                fr: Ajouter un revenu de location
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+                - name: RevenusAutresLocationProprio
+                  type: radio
+                  label:
+                    fr: Qui perçoit ces revenus?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenusAutresLocationSource
+                  type: text
+                  label: 
+                    fr: Source du revenu de location
+                - name: MontantLocation
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: FrequenceLocation
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois
+            - name: RevenusAutrePlacement
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('Placement') 
+              label:
+                fr: Revenus de placement ou de fiducie, intérêts sur une obligation
+              instanceLabel:
+                fr: Revenu de placement ou de fiducie, intérêts sur une obligation
+              addLabel:
+                fr: Ajouter un revenu 
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+                - name: RevenusAutresPlacementProprio
+                  type: radio
+                  label:
+                    fr: Qui perçoit ces revenus?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenusAutresPlacementSource
+                  type: text
+                  label: 
+                    fr: Source du revenu de placement ou de fiducie
+                - name: MontantPlacement
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: FrequenceRevenusAutresPlacement
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois        
+            - name: RevenusAutreFondPension
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('FondPension') 
+              label:
+                fr: Prestations d’un fonds de pension (fonds personnel ou fonds d’un employeur)
+              instanceLabel:
+                fr: Prestation d’un fonds de pension
+              addLabel:
+                fr: Ajouter un fonds de pension 
+              removeLabel:
+                fr: Supprimer ce fonds de pension
+              components:
+                - name: RevenusAutresFondPensionProprio
+                  type: radio
+                  label:
+                    fr: Qui perçoit ce fonds de pensions?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenusAutresFondPensionSource
+                  type: text
+                  label: 
+                    fr: Source du revenu de fonds de pension
+                - name: MontantFondsPension
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: FrequenceRevenusAutresFondPension
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois 
+            - name: RevenusAutrePensionAlimentaire
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('PensionAlimentaire') 
+              label:
+                fr: Revenus de pension alimentaire
+              instanceLabel:
+                fr: Revenu de pension alimentaire
+              addLabel:
+                fr: Ajouter une pension alimentaire 
+              removeLabel:
+                fr: Supprimer cette pensions alimentaire
+              components:
+                - name: PensionAlimentaireProprio
+                  type: radio
+                  label:
+                    fr: Qui est prestataire de cette pension alimentaire?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: PensionAlimentaireStatut
+                  type: radio
+                  label:
+                    fr: Le(la) prestataire
+                  options: 
+                    recoit: reçoit actuellement cette pension alimentaire
+                    attente: est actuellement en attente d'un jugement
+                    nonRecu: n'a pas reçu cette pension alimentaire
+                - name: PensionAlimentaireSource
+                  type: text
+                  label: 
+                    fr: Source de la pension alimentaire
+                - name: PensionAlimentaireMontant                
+                  type: text                  
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: PensionAlimentaireFrequence
+                  type: radio
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'                  
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois 
+            - name: RevenusAutreDivers
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('typeRevenuAutre').includes('Autre') 
+              label:
+                fr: Autres revenus
+              instanceLabel:
+                fr: Autre revenu
+              addLabel:
+                fr: Ajouter un revenu
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+                - name: RevenuDiversProprio
+                  type: radio
+                  label:
+                    fr: Qui reçoit ce revenu?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenuDiversSource
+                  type: text
+                  label: 
+                    fr: Source du revenu
+                - name: RevenuDiversMontant                
+                  type: text                  
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+                - name: RevenuDiversFrequence
+                  type: radio
+                  label:
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    bihebdo: Aux deux semaines
+                    Mensuel: Par mois 
+            - name: PossedeRevenuAttente
+              type: radio
+              label:
+                fr: Attendez-vous le début du versement de certains revenus?
+              options: yesno
+            - name: RevenusAttente
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeRevenuAttente') === 'true'
+              label:
+                fr: Revenus en attente
+              instanceLabel:
+                fr: Revenu en attente
+              addLabel:
+                fr: Ajouter un revenu en attente
+              removeLabel:
+                fr: Supprimer ce revenu en attente
+              components:
+                - name: RevenusAttenteProprio
+                  type: radio
+                  label:
+                    fr: Qui recevra ce revenu?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: RevenusAttenteSource
+                  type: text
+                  label: 
+                    fr: Source du revenu
+                - name: RevenusAttenteMontant                
+                  type: text                  
+                  outerClasses: md
+                  label: 
+                    fr: Montant, si connu
+                  validations:
+                    optional: null
+                - name: RevenusAttenteExplication
+                  type: text
+                  label:
+                    fr: Explication liée au délai d’attente
+        # Section - Avoirs liquides
+        - section:
+            fr: Avoirs liquides
+          id: avoirs
+          components:
+            - type: bandeau-notification
+              text:
+                fr: Par <i>avoirs liquides</i>, on entend tout ce qu’une personne possède en espèces ou sous une forme équivalente.
+            - name: PossedeAvoirsComptes
+              type: radio
+              label:
+                fr: Avez-vous des comptes dans une caisse ou une banque (établissement financier)?
+              options: yesno
+            - name: AvoirsComptes
+              type: repeatableGroup
+              v-if: val('PossedeAvoirsComptes') === 'true'
+              repeatable: true
+              label:
+                fr: Comptes dans un établissement financier
+              instanceLabel:
+                fr: Compte dans un établissement financier
+              addLabel:
+                fr: Ajouter un compte
+              removeLabel:
+                fr: Supprimer ce compte
+              components:
+                - name: AvoirCompteProprio
+                  type: radio
+                  label:
+                    fr: Titulaire(s) du compte
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: AvoirCompteAdresse
+                  type: text
+                  label:
+                    fr: Nom et adresse de l'établissement
+                - name: AvoirCompteNumero
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Numéro de compte
+                - name: AvoirCompteStatut
+                  type: radio
+                  label:
+                    fr: Statut du compte
+                  options:
+                    actif: Actif
+                    inactif: Inactif
+                - name: AvoirCompteMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant (solde) 
+            - name: PossedeAvoirsEnMain
+              type: radio
+              label:
+                fr: Avez-vous de l’argent en main, des chèques non encaissés, des cartes de crédit prépayées?
+              options: yesno
+            - name: AvoirsEnMain
+              type: repeatableGroup
+              v-if: val('PossedeAvoirsEnMain') === 'true'
+              repeatable: true
+              label:
+                fr: Avoirs en main, chèques non encaissés, cartes de crédit prépayées
+              instanceLabel:
+                fr: Avoir en main, chèque non encaissé ou carte de crédit prépayée
+              addLabel:
+                fr: Ajouter un avoir
+              removeLabel:
+                fr: Supprimer cet avoir
+              components:
+                - name: AvoirEnMainProprio
+                  type: radio
+                  label:
+                    fr: Titulaire(s) du compte
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: AvoirEnMainType
+                  type: radio
+                  label:
+                    fr: Spécifiez le type d'avoir
+                  options:
+                    argent: Argent en main
+                    cheque: Cheque non encaissé
+                    carte: Carte de crédit prépayée
+                - name: AvoirEnMainDescription
+                  type: text
+                  label:
+                    fr: Description de l'avoir
+                - name: AvoirEnMainMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant (solde)      
+            - name: PossedeChequesEnCirculation
+              type: radio
+              label:
+                fr: Avez-vous des chèques en circulation ou des paiements qui ont été préautorisés pour les frais de logement?
+              help:
+                fr: (prêt sur une hypothèque, loyer, coût de l’électricité ou d’une autre forme d’énergie)
+              options: yesno
+            - name: ChequesEnCirculation
+              type: repeatableGroup
+              v-if: val('PossedeChequesEnCirculation') === 'true'
+              repeatable: true
+              label:
+                fr: Chèques en circulation ou paiements de logement préautorisés
+              instanceLabel:
+                fr: Chèque ou paiement préautorisé
+              addLabel:
+                fr: Ajouter un chèque ou un paiement préautorisé
+              removeLabel:
+                fr: Supprimer ce chèque ou paiement préautorisé
+              components:
+                - name: ChequesEnCirculationProprio
+                  type: radio
+                  label:
+                    fr: Qui a fait le chèque ou le paiement
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: ChequesEnCirculationDescription
+                  type: text
+                  label:
+                    fr: Description du chèque ou du paiement
+                - name: ChequesEnCirculationMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+            - name: PossedePlacements
+              type: radio
+              label:
+                fr: Avez-vous des placements (REER, REEE, CELI, dépôts à terme ou autre)?
+              options: yesno
+            - name: AvoirsPlacements
+              type: repeatableGroup
+              v-if: val('PossedePlacements') === 'true'
+              repeatable: true
+              label:
+                fr: Placements (REER, REEE, CELI, dépôts à terme ou autre)?
+              instanceLabel:
+                fr: Placement
+              addLabel:
+                fr: Ajouter un placement
+              removeLabel:
+                fr: Supprimer ce placement
+              components:
+                - name: AvoirPlacementProprio
+                  type: radio
+                  label:
+                    fr: À qui appartient le placement?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: AvoirPlacementDescription
+                  type: text
+                  label:
+                    fr: Description du placement
+                - name: AvoirPlacementMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
+            - name: PossedeSommesDues
+              type: radio
+              label:
+                fr: Avez-vous des sommes qui vous sont dues?
+              options: yesno
+            - name: AvoirsSommesDues
+              type: repeatableGroup
+              v-if: val('PossedeSommesDues') === 'true'
+              repeatable: true
+              label:
+                fr: Sommes dues
+              instanceLabel:
+                fr: Somme due
+              addLabel:
+                fr: Ajouter une somme due
+              removeLabel:
+                fr: Supprimer cette somme due
+              components:
+                - name: AvoirSommeDueProprio
+                  type: radio
+                  label:
+                    fr: À qui est due cette somme?
+                  outerClasses: boutons-inline md
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: AvoirSommeDueDescription
+                  type: text
+                  label:
+                    fr: Description de la somme due
+                - name: AvoirSommeDueMontant
+                  type: text
+                  outerClasses: md
+                  label: 
+                    fr: Montant
         # Section - Biens
         - section:
             fr: Biens
@@ -1238,6 +2032,452 @@ form:
                     fr: "Valeur uniformisée"
                   help:
                     fr: "Selon le dernier compte de taxe."
+            - name: PossedeBiensMobiliers
+              type: radio
+              label:
+                fr: "Avez-vous d’autres biens mobiliers?"
+              help:
+                fr: "ex. bateaux, roulottes, collections, objets précieux, etc."
+              options: yesno
+            - name: BiensMobiliers
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeBiensMobiliers') === 'true'    
+              label:
+                fr: Biens mobiliers
+              instanceLabel:
+                fr: Bien mobilier
+              addLabel:
+                fr: Ajouter un bien mobilier
+              removeLabel:
+                fr: Supprimer ce bien mobilier
+              components: 
+                - name: BienMobilierProprio
+                  type: radio
+                  outerClasses: boutons-inline md
+                  label:
+                    fr: Propriétaire du bien mobilier
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: BienMobilierDescription
+                  type: text
+                  label:
+                    fr: Description
+                  outerClasses: xxl
+                - name: BienMobilierValeur
+                  type: number
+                  label:
+                    fr: "Valeur marchande"
+            - name: PossedeBiensAssuranceVie
+              type: radio
+              label:
+                fr: "Avez-vous une assurance vie?"
+              options: yesno
+            - name: BiensAssuranceVie
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeBiensAssuranceVie') === 'true'    
+              label:
+                fr: Assurances vie
+              instanceLabel:
+                fr: Assurance vie
+              addLabel:
+                fr: Ajouter une assurance vie
+              removeLabel:
+                fr: Supprimer cette assurance
+              components: 
+                - name: BienAssuranceVieProprio
+                  type: radio
+                  outerClasses: boutons-inline md
+                  label:
+                    fr: Propriétaire de l'assurance
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - name: BienAssuranceVieCompagnie
+                  type: text
+                  label:
+                    fr: Nom de la compagnie d’assurance
+                  outerClasses: xxl
+                - name: BienAssuranceVieValeursAccumulees
+                  type: radio
+                  label:
+                    fr: "Comprend-t-elle des valeurs accumulées?"
+                  options:
+                    yes: Oui
+                    no: Non
+                    neSaitPas: Ne sais pas
+            - name: PossedeEntreprise
+              type: radio
+              label:
+                fr: "Avez-vous une entreprise?"
+              help:
+                fr: Propriétaire ou actionnaire
+              options: yesno
+            - name: BiensEntreprise
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeEntreprise') === 'true'    
+              label:
+                fr: Entreprises
+              instanceLabel:
+                fr: Entreprise
+              addLabel:
+                fr: Ajouter une entreprise
+              removeLabel:
+                fr: Supprimer cette entreprise
+              components: 
+                - name: BiensEntrepriseProprio
+                  type: radio
+                  outerClasses: boutons-inline md
+                  label:
+                    fr: Propriétaire de l'assurance
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: BiensEntrepriseNEQ
+                  type: text
+                  label:
+                    fr: Numéro d’entreprise du Québec (NEQ)
+                  outerClasses: xxl
+                - name: BiensEntrepriseStatut
+                  type: radio
+                  label:
+                    fr: "Quel est le statut de l'entreprise?"
+                  options:
+                    individuelle: Entreprise individuelle
+                    societe: Société en nom collectif
+                    compagnie: Compagnie
+                - name: BiensEntreprisePourcentage
+                  type: number
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$BiensEntrepriseStatut'] !== 'individuelle'
+                  label:
+                    fr: Pourcentage de participation
+            - name: PossedeBiensCedes
+              type: radio
+              label:
+                fr: "Avez-vous vendu ou cédé des biens ou des avoirs liquides ou renoncé à de tels biens et avoirs au cours des 24 derniers mois?"
+              help:
+                fr: maison, voiture, somme reçue en héritage, etc.
+              options: yesno
+            - name: BiensCedes
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('PossedeBiensCedes') === 'true'    
+              label:
+                fr: Biens ou avoirs liquides cédés ou auxquels vous avez renoncé
+              instanceLabel:
+                fr: Bien ou avoir liquide cédé ou auquel vous avez renoncé
+              addLabel:
+                fr: Ajouter un bien ou un avoir
+              removeLabel:
+                fr: Supprimer ce bien ou cet avoir
+              components: 
+                - name: BiensCedesProprio
+                  type: radio
+                  outerClasses: boutons-inline md
+                  label:
+                    fr: Propriétaire du bien cédé ou de l'avoir liquide auquel vous avez renoncé
+                  options: 
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                    A12: 'Adultes 1 et 2'
+                - name: BiensCedesDescription
+                  type: text
+                  label:
+                    fr: Description
+                  outerClasses: xxl
+                - name: BiensCedesDate
+                  type: date
+                  label:
+                    fr: "Date de vente, de cession ou, de renonciation"
+                - name: BiensCedesValeur
+                  type: number
+                  label:
+                    fr: Valeur
+        # Section - Enfants à charge
+        - section:
+            fr: Enfant(s) à charge
+          id: enfantsACharge
+          components:
+            - type: repeatableGroup
+              name: enfants
+              repeatable: true
+              label:
+                fr: Enfants à charge
+              instanceLabel: 
+                fr: Enfant à charge
+              addLabel:
+                fr: Ajouter un enfant à charge
+              removeLabel:
+                fr: Supprimer cet enfant à charge
+              components:
+                - name: cp12
+                  type: text
+                  label:
+                    fr: CP-12
+                - name: Nom
+                  type: text
+                  label:
+                    fr: Nom de famille
+                - name: Prenom
+                  type: text
+                  label:
+                    fr: Prénom
+                - name: DateDeNaissance
+                  type: date
+                  label:
+                    fr: Date de naissance
+                - name: Nas
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Numéro d’assurance maladie
+                - name: sexe
+                  type: radio
+                  label:
+                    fr: Sexe
+                  options:
+                    F: Féminin
+                    M: Masculin
+                - name: AuxEtudes
+                  type: radio
+                  label:
+                    fr: Est-il aux études?
+                  options: yesno
+                - name: NiveauEtudes
+                  type: select
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$AuxEtudes'] === 'true'
+                  label:
+                    fr: Niveau d'études
+                  options:
+                    Prematernelle: Prématernelle
+                    Maternelle: Maternelle
+                    Primaire: Primaire
+                    SecondaireGen: Secondaire général
+                    SecondaireProf: Secondaire Professionnel
+                    Collegial: Collégial
+                    Universitaire: Universitaire
+                    Autre: Autre
+                - name: PrecisionAutre
+                  type: text
+                  label:
+                    fr: Précisez
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$NiveauEtudes'] === 'Autre'
+                - name: handicape
+                  type: radio
+                  label:
+                    fr: Est-il une personne handicapée reconnu par Retraite Québec?
+                  options: yesno
+                - type: dynamic
+                  tag: p
+                  text: 
+                    fr: <b>Identité des parents</b> selon le certificat de naissance
+                - name: NomParent1
+                  type: text
+                  label:
+                    fr: Nom de famille du parent
+                - name: PrenomParent1
+                  type: text
+                  label:
+                    fr: Prénom du parent
+                - name: QualiteParent
+                  type: radio
+                  label:
+                    fr: Qualité du parent
+                  options:
+                    pere: Père
+                    mere: Mère
+                - name: NomParent2
+                  type: text
+                  label:
+                    fr: Nom de famille de l’autre parent
+                  validations:
+                    optional: null
+                - name: PrenomParent2
+                  type: text
+                  label:
+                    fr: Prénom de l’autre parent
+                  validations:
+                    optional: null
+                - name: QualiteParent2
+                  type: radio
+                  label:
+                    fr: Qualité de l’autre parent
+                  options:
+                    pere: Père
+                    mere: Mère
+                  validations:
+                    optional: null
+                - name: PartageLaGarde
+                  type: radio
+                  label:
+                    fr: Partagez-vous la garde de cet enfant?
+                  options: yesno            
+                - type: bandeau
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  components:
+                    - type: dynamic
+                      tag: h3
+                      text:
+                        fr: Garde partagée
+                    - type: dynamic
+                      tag: p
+                      text:
+                        fr: <i>L’enfant dont la garde est partagée en vertu d’un jugement ou d’une entente est à la charge de la personne adulte, si le temps de garde est d’au moins 40 %.</i>
+                - name: NombreJours
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  type: number
+                  outerClasses: sm
+                  label:
+                    fr: Indiquez le nombre de jours où vous avez la garde
+                - name: Frequence
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  type: radio
+                  label: 
+                    fr: Fréquence
+                  options:
+                    hebdo: Par semaine
+                    mensuel: Par mois
+                    annuel: Par année
+                - name: DocumentGarde
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  type: radio
+                  label:
+                    fr: Par quel document la garde vous est-elle confiée?
+                  options:
+                    Jugement: Jugement
+                    Amiable: Entente à l'amiable
+                    Mediation: Médiation
+                    Autre: Autre
+                - name: PrecisionDocumentGarde
+                  type: text
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$DocumentGarde'] === 'Autre'
+                  label:
+                    fr: Précisez
+                - name: EnfantHabiteMemeAdresse
+                  type: radio
+                  label:
+                    fr: Cet enfant habite-t-il avec vous?
+                  options: yesno
+                - name: PrecisionAdresse
+                  type: text
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$EnfantHabiteMemeAdresse'] === 'false'
+                  label:
+                    fr: Adresse de l'enfant à charge
+                - name: PrecisionRaison
+                  type: text
+                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$EnfantHabiteMemeAdresse'] === 'false'
+                  label:
+                    fr: Raison de la non-cohabitation
+                - name: RenseignementsAdditionnels
+                  type: textarea
+                  label:
+                    fr: Si vous avez besoin d’espace additionnelle pour certaines réponses, utilisez l’espace ci-dessous.
+        # Section - Revenus et biens des enfants
+        - section:
+            fr: Revenus et biens des enfants
+          id: revenusEnfants
+          components:
+            - name: EnfantsPossedentRevenus
+              type: radio
+              label:
+                fr: Vos enfants à charge ont-ils des revenus?
+              options: yesno
+            - name: DetailRevenuEnfant
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('EnfantsPossedentRevenus') === 'true'
+              label:
+                fr: Revenus des enfants à charge
+              instanceLabel:
+                fr: Revenu d'un enfant à charge
+              addLabel:
+                fr: Ajouter un revenu
+              removeLabel:
+                fr: Supprimer ce revenu
+              components:
+              - name: IdEnfant
+                type: text
+                label:
+                  fr: Nom et prénom de l'enfant
+              - name: SourceRevenu
+                type: text
+                label:
+                  fr: Source du revenu
+              - name: MontantRevenu
+                type: number
+                label:
+                  fr: Montant net
+              - name: FrequenceRevenu
+                type: radio
+                label:
+                  fr: Fréquence
+                options:
+                  hebdo: Par semaine
+                  bihebdo: Par deux semaines
+                  mensuel: Par mois
+            - name: EnfantsPossedentBiens
+              type: radio
+              label:
+                fr: Vos enfants à charge ont-ils des comptes dans des institutions financières, des véhicules ou d’autres biens?
+              options: yesno
+            - name: DetailBienEnfant
+              type: repeatableGroup
+              v-if: val('EnfantsPossedentBiens') === 'true'
+              label:
+                fr: Biens des enfants à charge
+              help:
+                fr: Comptes dans des institutions financières, véhicules ou autres biens
+              instanceLabel: 
+                fr: Bien d'un enfant à charge
+              addLabel:
+                fr: Ajouter un bien
+              removeLabel: 
+                fr: Supprimer ce bien    
+              components:
+                - name: IdEnfant
+                  type: text
+                  label:
+                    fr: Nom et prénom de l'enfant
+                - name: DescriptionBien
+                  type: text
+                  label:
+                    fr: Description du bien ou numéro de compte
+                - name: ValeurBien
+                  type: number
+                  label:
+                    fr: Montant ou valeur
+        # Section - Destinataire correspondance
+        - section:
+            fr: Destinataire de la correspondance
+          id: destinataire
+          components:
+            - type: bandeau
+              components:
+                - type: dynamic
+                  tag: p
+                  text:
+                    fr: La correspondance est l’ensemble des documents que nous vous ferons parvenir (avis de décision, chèques ou avis de dépôt, etc.).                  
+                - type: radio
+                  v-if: val('Conjoint') === 'true'
+                  name: destinataireCouple
+                  label:
+                    fr: Pour un couple, le destinataire de la correspondance doit être précisé.
+                  options:
+                    A12: 'Couple'
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - type: textarea
+                  v-if: val('Conjoint') === 'false'
+                  name: destinataireAutrePersonne
+                  label:
+                    fr: La correspondance destinée à une personne seule lui sera directement transmise. Si elle doit plutôt être transmise à une autre personne, inscrivez la raison de ce choix.
+                  validations:
+                    optional: null        
     - sectionGroup: null
       v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
       classes: icone user              

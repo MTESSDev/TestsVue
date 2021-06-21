@@ -3,7 +3,7 @@ form:
   sectionsGroup:
     - sectionGroup:
       sections:
-        #Section 1
+        #Section 1 - Identité
         - section:
             fr: Section 1 - Renseignements sur votre identité
             en: Section 1 - Identification
@@ -38,22 +38,18 @@ form:
                   text: 
                     fr: Veuillez remplir la section 1 et les sections qui concernent le ou les changements dans votre situation ou celle de votre famille, et veuillez apporter les précisions demandées, le cas échéant.
                     en: Complete Section 1 and the sections related to the change(s) in your situation or your family situation. Be sure to provide the information requested, if any.
-                  
-            - type: inline
-              classes: no-wrap
-              components:
-                - name: NomFamille
-                  type: text
-                  outerClasses: lg
-                  label: 
-                    fr: Nom de famille
-                    en: Last name
-                - name: Prenom
-                  type: text
-                  outerClasses: lg
-                  label: 
-                    fr: Prénom
-                    en: First Name
+            - name: NomFamille
+              type: text
+              outerClasses: lg
+              label: 
+                fr: Nom de famille
+                en: Last name
+            - name: Prenom
+              type: text
+              outerClasses: lg
+              label: 
+                fr: Prénom
+                en: First Name
             - name: NumeroDossier
               type: text
               outerClasses: md
@@ -61,28 +57,52 @@ form:
                 fr: Numéro de dossier
                 en: File number
 
-        #Section 2      
+        # Section 2 - Changements situation
         - section: 
-            fr: Section 2 - Changements relatifs à votre situation ou à celle de votre famille
-            en: Section 2 - Information on the application
+            fr: Changements relatifs à votre situation ou à celle de votre famille
+            en: Information on the application
           id: ChangementsSituation
           components:
-            - type: dynamic
-              tag: p
-              text: 
+            - name: Req01-ChoixChangements
+              type: checkbox
+              label: 
                 fr: Veuillez choisir parmi les options suivantes
                 en: Please choose among the following options
-            - type: checkbox
-              name: Req01-ArriveeConjoint
               options:
                 ReqArriveeConjoint:
                   fr: Arrivée d'un conjoint
                   en: Arrival of a spouse
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap              
-              v-if: val('Req01-ArriveeConjoint').includes('ReqArriveeConjoint')
+                ReqDepartConjoint:
+                  fr: Départ d'un conjoint
+                  en: Departure of a spouse
+                ReqAugmentationEnfants:
+                  fr: Augmentation du nombre d’enfants à charge
+                  en: Increase in number of dependent children
+                ReqDiminutionEnfants:
+                  fr: Diminution du nombre d’enfants à charge
+                  en: Decrease in number of dependent children
+                ReqEnfantEtudesDebut:
+                  fr: Un enfant à charge a entrepris des études
+                  en: A dependent child began attending school
+                ReqEnfantEtudesFin:
+                  fr: Un enfant à charge a terminé ses études ou les a abandonnées
+                  en: A dependent child completed their schooling or abandoned schooling
+                ReqFormationProfessionnelleDebut:
+                  fr: Début d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
+                  en: Start of vocational training in a secondary-level institution or training in a post-secondary level institution
+                ReqModificationHeuresCredits:
+                  fr: Modification du nombre d’heures de cours ou du nombre de crédits
+                  en: Change in the number of course hours or credits
+                ReqFormationProfessionnelleFin:
+                  fr: Fin d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
+                  en: End of vocational training in a secondary-level institution or training in a post-secondary level institution
+              
+            - name: DetailsArriveeConjoint
+              type: group            
+              v-if: val('Req01-ChoixChangements').includes('ReqArriveeConjoint')
+              label:                
+                fr: Arrivée d'un conjoint
+                en: Arrival of a spouse
               components: 
                 - name: DateArriveeConjoint
                   type: date
@@ -94,17 +114,12 @@ form:
                   label: 
                     fr: Nom de la personne
                     en: Person’s name
-            - type: checkbox
-              name: Req02-DepartConjoint
-              options:
-                ReqDepartConjoint:
-                  fr: Départ d'un conjoint
-                  en: Departure of a spouse
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req02-DepartConjoint').includes('ReqDepartConjoint')
+            - name: DetailsDepartConjoint
+              type: group
+              v-if: val('Req01-ChoixChangements').includes('ReqDepartConjoint')
+              label:                
+                fr: Départ d'un conjoint
+                en: Departure of a spouse
               components: 
                 - name: DateDepartConjoint
                   type: date
@@ -116,17 +131,12 @@ form:
                   label: 
                     fr: Nom de la personne
                     en: Person’s name
-            - type: checkbox
-              name: Req03-AugmentationEnfants
-              options:
-                ReqAugmentationEnfants:
-                  fr: Augmentation du nombre d’enfants à charge
-                  en: Increase in number of dependent children
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req03-AugmentationEnfants').includes('ReqAugmentationEnfants')
+            - name: DetailsAugmentationEnfants
+              type: group
+              v-if: val('Req01-ChoixChangements').includes('ReqAugmentationEnfants')
+              label:                
+                fr: Augmentation du nombre d’enfants à charge
+                en: Increase in number of dependent children
               components: 
                 - name: DateAugmentationEnfants
                   type: date
@@ -138,17 +148,12 @@ form:
                   label: 
                     fr: Nom de l’enfant
                     en: Child’s name
-            - type: checkbox
-              name: Req04-DiminutionEnfants
-              options:
-                ReqDiminutionEnfants:
-                  fr: Diminution du nombre d’enfants à charge
-                  en: Decrease in number of dependent children
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req04-DiminutionEnfants').includes('ReqDiminutionEnfants')
+            - name: DetailsDiminutionEnfants
+              type: group
+              v-if: val('Req01-ChoixChangements').includes('ReqDiminutionEnfants')              
+              label:
+                fr: Diminution du nombre d’enfants à charge
+                en: Decrease in number of dependent children
               components: 
                 - name: DateDiminutionEnfants
                   type: date
@@ -160,18 +165,13 @@ form:
                   label: 
                     fr: Nom de l’enfant
                     en: Child’s name
-            - type: checkbox
-              name: Req05-EnfantEtudesDebut
-              options:
-                ReqEnfantEtudesDebut:
-                  fr: Un enfant à charge a entrepris des études
-                  en: A dependent child began attending school
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req05-EnfantEtudesDebut').includes('ReqEnfantEtudesDebut')
-              components: 
+            - name: DetailsEnfantEtudesDebut
+              type: group
+              v-if: val('Req01-ChoixChangements').includes('ReqEnfantEtudesDebut')              
+              label:
+                fr: Un enfant à charge a entrepris des études
+                en: A dependent child began attending school
+              components:
                 - name: DateEnfantEtudesDebut
                   type: date
                   label: 
@@ -199,17 +199,12 @@ form:
                     universitaire:
                       fr: universitaire
                       en: University
-            - type: checkbox
-              name: Req06-EnfantEtudesFin
-              options:
-                ReqEnfantEtudesFin:
-                  fr: Un enfant à charge a terminé ses études ou les a abandonnées
-                  en: A dependent child completed their schooling or abandoned schooling
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req06-EnfantEtudesFin').includes('ReqEnfantEtudesFin')
+            - name: DetailsEnfantEtudesFin
+              type: group
+              v-if: val('Req01-ChoixChangements').includes('ReqEnfantEtudesFin')              
+              label:
+                fr: Un enfant à charge a terminé ses études ou les a abandonnées
+                en: A dependent child completed their schooling or abandoned schooling            
               components: 
                 - name: DateEnfantEtudesFin
                   type: date
@@ -221,26 +216,16 @@ form:
                   label: 
                     fr: Nom de l’enfant
                     en: Child’s name  
-            - type: checkbox
-              name: Req07-FormationProfessionnelleDebut
-              options:
-                ReqFormationProfessionnelleDebut:
-                  fr: Début d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
-                  en: Start of vocational training in a secondary-level institution or training in a post-secondary level institution
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req07-FormationProfessionnelleDebut').includes('ReqFormationProfessionnelleDebut')
-              components: 
-                - name: DateFormationProfessionnelleDebut
-                  type: date
-                  label: 
-                    fr: Date du début
-                    en: Start date   
+            - name: DetailsFormationProfessionnelleDebut
+              type: group
+              v-if: val('Req01-ChoixChangements').includes('ReqFormationProfessionnelleDebut')
+              label:                
+                fr: Début d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
+                en: Start of vocational training in a secondary-level institution or training in a post-secondary level institution              
+              components:  
                 - name: DestinataireFormationProfessionnelleDebut
-                  type: select
-                  outerClasses: lg
+                  type: radio
+                  outerClasses: boutons-inline md
                   label:
                     fr: Formation pour
                     en: Training for
@@ -251,9 +236,13 @@ form:
                     ReqConjoint:
                       fr: Mon conjoint
                       en: My spouse 
+                - name: DateFormationProfessionnelleDebut
+                  type: date
+                  label: 
+                    fr: Date du début
+                    en: Start date  
                 - name: StatutEtudiant
-                  type: select
-                  outerClasses: lg
+                  type: radio
                   label:
                     fr: Statut d'étudiant
                     en: Student status
@@ -263,36 +252,22 @@ form:
                       en: Full-time studies
                     ReqTempsPartiel:
                       fr: Études à temps partiel
-                      en: Part-time studies        
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req07-FormationProfessionnelleDebut').includes('ReqFormationProfessionnelleDebut')
-              components:
+                      en: Part-time studies                    
                 - name: TypeDiplome
                   type: text
                   label:
                     fr: Diplôme visé
                     en: Type of diploma to be earned
-            - type: checkbox
-              name: Req08-ModificationHeuresCredits          
-              options:
-                ReqModificationHeuresCredits:
-                  fr: Modification du nombre d’heures de cours ou du nombre de crédits
-                  en: Change in the number of course hours or credits
-              validations:
-                optional: null 
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req08-ModificationHeuresCredits').includes('ReqModificationHeuresCredits')
+            - name: DetailsModificationHeuresCredits          
+              type: group
+              label:
+                fr: Modification du nombre d’heures de cours ou du nombre de crédits
+                en: Change in the number of course hours or credits
+              v-if: val('Req01-ChoixChangements').includes('ReqModificationHeuresCredits')
               components:
-              - name: DateModificationHeuresCredits
-                type: date
-                label: 
-                  fr: Date de la modification
-                  en: Date of change
               - name: DestinataireModificationHeuresCredits
-                type: select
-                outerClasses: lg
+                type: radio
+                outerClasses: boutons-inline md
                 label:
                   fr: Modification pour
                   en: Change for
@@ -302,33 +277,27 @@ form:
                     en: Me
                   ReqConjoint:
                     fr: Mon conjoint
-                    en: My spouse        
-            - name: NombreHeures
-              type: number
-              v-if: val('Req08-ModificationHeuresCredits').includes('ReqModificationHeuresCredits')
+                    en: My spouse  
+              - name: DateModificationHeuresCredits
+                type: date
+                label: 
+                  fr: Date de la modification
+                  en: Date of change      
+              - name: NombreHeures
+                type: number
+                label:
+                  fr: Nombre d’heures ou de crédits après la modification
+                  en: Number of hours or credits after the change            
+            - name: DetailsFormationProfessionnelleFin
+              type: group
               label:
-                fr: Nombre d’heures ou de crédits après la modification
-                en: Number of hours or credits after the change            
-            - type: checkbox
-              name: Req09-FormationProfessionnelleFin
-              options:
-                ReqFormationProfessionnelleFin:
-                  fr: Fin d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
-                  en: End of vocational training in a secondary-level institution or training in a post-secondary level institution
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req09-FormationProfessionnelleFin').includes('ReqFormationProfessionnelleFin')
-              components: 
-                - name: DateFormationProfessionnelleFin
-                  type: date
-                  label: 
-                    fr: Date de la fin
-                    en: End date   
+                fr: Fin d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
+                en: End of vocational training in a secondary-level institution or training in a post-secondary level institution              
+              v-if: val('Req01-ChoixChangements').includes('ReqFormationProfessionnelleFin')
+              components:
                 - name: DestinataireFormationProfessionnelleFin
-                  type: select
-                  outerClasses: lg
+                  type: radio
+                  outerClasses: boutons-inline md
                   label:
                     fr: Fin de formation pour
                     en: End of training for
@@ -338,10 +307,17 @@ form:
                       en: Me
                     ReqConjoint:
                       fr: Mon conjoint
-                      en: My spouse   
+                      en: My spouse 
+                - name: DateFormationProfessionnelleFin
+                  type: date
+                  label: 
+                    fr: Date de la fin
+                    en: End date      
+        
+        # Section 3 - Changements revenus
         - section:
-            fr: Section 3 – Changements relatifs aux revenus d’emploi
-            en: Section 3 – Changes in work income
+            fr: Changements relatifs aux revenus d’emploi
+            en: Changes in work income
           id: RevenuEmploi
           components:
             - type: checkbox
@@ -473,9 +449,11 @@ form:
               label: 
                 fr: Si vous n’avez plus de revenus de travail, précisez la raison
                 en: If you no longer have work income, indicate the reason
+        
+        # Section 4 - Déménagement
         - section: 
-            fr: Section 4 - Déménagement
-            en: Section 4 - Move
+            fr: Déménagement
+            en: Move
           id: demenagement
           components:
             - type: checkbox
@@ -779,9 +757,11 @@ form:
                   label:
                     fr: Téléphone
                     en: Telephone
+        
+        # Section 5 - Changement résidence
         - section: 
-            fr: Section 5 - Changements relatifs à la résidence ou déclaration d’une absence du Québec
-            en: Section 5 – Change(s) related to your residence or Declaration of stay outside Québec
+            fr: Changements relatifs à la résidence ou déclaration d’une absence du Québec
+            en: Change(s) related to your residence or Declaration of stay outside Québec
           id: ChangementResidence
           components:
             - type: checkbox
@@ -880,6 +860,8 @@ form:
               label:
                 fr: Précisez le lieu
                 en: Specify the location
+        
+        # Section 6 - Autres changements
         - section:
             fr: Section 6 – Autres changements
             en: Section 6 – Other changes
@@ -903,9 +885,11 @@ form:
                 Note: If you are participating in the Aim for Employment Program, you do not have to declare your liquid assets or the purchase or sale of property.
             - name: TexteAutresChangements
               type: textarea    
+        
+        # Section 7 - Signatures
         - section:
-            fr: Section 7 – Signatures
-            en: Section 7 – Signature(s)
+            fr: Signatures
+            en: Signature(s)
           id: signatures
           components: 
             - type: inline
