@@ -2238,7 +2238,7 @@ form:
                   options: yesno
                 - name: NiveauEtudes
                   type: select
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$AuxEtudes'] === 'true'
+                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$AuxEtudes'] === 'true'
                   label:
                     fr: Niveau d'études
                   options:
@@ -2279,6 +2279,16 @@ form:
                   options:
                     pere: Père
                     mere: Mère
+                - name: ResideCanadaParent
+                  type: radio
+                  options: yesno
+                  label:
+                    fr: Ce parent réside-t-il au Canada?
+                - name: PaysResidenceParent
+                  type: text
+                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$ResideCanadaParent'] === 'false'
+                  label:
+                    fr: Pays de résidence
                 - name: NomParent2
                   type: text
                   label:
@@ -2298,6 +2308,20 @@ form:
                   options:
                     pere: Père
                     mere: Mère
+                  validations:
+                    optional: null
+                - name: ResideCanadaParent2
+                  type: radio
+                  options: yesno
+                  label:
+                    fr: Ce parent réside-t-il au Canada?
+                  validations:
+                    optional: null
+                - name: PaysResidenceParent2
+                  type: text
+                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$ResideCanadaParent2'] === 'false'
+                  label:
+                    fr: Pays de résidence
                   validations:
                     optional: null
                 - name: PartageLaGarde
