@@ -2238,7 +2238,7 @@ form:
                   options: yesno
                 - name: NiveauEtudes
                   type: select
-                  v-if: form[name] && form[name][index] && form[name][index]['prefixId$AuxEtudes'] === 'true'
+                  v-if: val(`${name}.AuxEtudes`, index) === 'true'
                   label:
                     fr: Niveau d'études
                   options:
@@ -2254,7 +2254,7 @@ form:
                   type: text
                   label:
                     fr: Précisez
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$NiveauEtudes'] === 'Autre'
+                  v-if: val(`${name}.NiveauEtudes`, index) === 'Autre'
                 - name: handicape
                   type: radio
                   label:
@@ -2330,7 +2330,7 @@ form:
                     fr: Partagez-vous la garde de cet enfant?
                   options: yesno            
                 - type: bandeau
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   components:
                     - type: dynamic
                       tag: h3
@@ -2341,13 +2341,13 @@ form:
                       text:
                         fr: <i>L’enfant dont la garde est partagée en vertu d’un jugement ou d’une entente est à la charge de la personne adulte, si le temps de garde est d’au moins 40 %.</i>
                 - name: NombreJours
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   type: number
                   outerClasses: sm
                   label:
                     fr: Indiquez le nombre de jours où vous avez la garde
                 - name: Frequence
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   type: radio
                   label: 
                     fr: Fréquence
@@ -2356,7 +2356,7 @@ form:
                     mensuel: Par mois
                     annuel: Par année
                 - name: DocumentGarde
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   type: radio
                   label:
                     fr: Par quel document la garde vous est-elle confiée?
@@ -2367,7 +2367,7 @@ form:
                     Autre: Autre
                 - name: PrecisionDocumentGarde
                   type: text
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$DocumentGarde'] === 'Autre'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   label:
                     fr: Précisez
                 - name: EnfantHabiteMemeAdresse
@@ -2377,12 +2377,12 @@ form:
                   options: yesno
                 - name: PrecisionAdresse
                   type: text
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$EnfantHabiteMemeAdresse'] === 'false'
+                  v-if: val(`${name}.EnfantHabiteMemeAdresse`) === 'false'
                   label:
                     fr: Adresse de l'enfant à charge
                 - name: PrecisionRaison
                   type: text
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$EnfantHabiteMemeAdresse'] === 'false'
+                  v-if: val(`${name}.EnfantHabiteMemeAdresse`) === 'false'
                   label:
                     fr: Raison de la non-cohabitation
                 - name: RenseignementsAdditionnels
@@ -2439,6 +2439,7 @@ form:
               options: yesno
             - name: DetailBienEnfant
               type: repeatableGroup
+              repeatable: true
               v-if: val('EnfantsPossedentBiens') === 'true'
               label:
                 fr: Biens des enfants à charge
