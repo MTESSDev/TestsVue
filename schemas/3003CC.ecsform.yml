@@ -1175,6 +1175,8 @@ form:
               components: 
                 - name: RevenuEmploiProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: À qui s'applique le revenu d'emploi?
                   outerClasses: boutons-inline md
@@ -1212,6 +1214,8 @@ form:
               components: 
                 - name: RevenuPourboireProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui reçoit le pourboire?
                   outerClasses: boutons-inline md
@@ -1243,12 +1247,14 @@ form:
               instanceLabel:
                 fr: Travail autonome ou entreprise
               addLabel:
-                fr: Ajouter un revenu detravail autonome ou d'entreprise
+                fr: Ajouter un revenu de travail autonome ou d'entreprise
               removeLabel:
                 fr: Supprimer ce revenu
               components: 
                 - name: RevenuAutonomeProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui reçoit les revenus de ce travail autonome ou de cette entreprise?
                   outerClasses: boutons-inline md
@@ -1305,6 +1311,8 @@ form:
               components: 
                 - name: SommeProvincialProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui reçoit les sommes de cet organisme ou ministère?
                   outerClasses: boutons-inline md
@@ -1353,6 +1361,8 @@ form:
               components: 
                 - name: SommeFederalProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui reçoit les sommes de cet organisme ou ministère?
                   outerClasses: boutons-inline md
@@ -1401,6 +1411,8 @@ form:
               components: 
                 - name: SommeOrganismeAutreProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui reçoit les sommes de cet organisme ou ministère?
                   outerClasses: boutons-inline md
@@ -1456,6 +1468,8 @@ form:
               components:
                 - name: RevenusAutresChambreProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui perçoit ces revenus?
                   outerClasses: boutons-inline md
@@ -1494,6 +1508,8 @@ form:
               components:
                 - name: RevenusAutresLocationProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui perçoit ces revenus?
                   outerClasses: boutons-inline md
@@ -1532,6 +1548,8 @@ form:
               components:
                 - name: RevenusAutresPlacementProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui perçoit ces revenus?
                   outerClasses: boutons-inline md
@@ -1570,6 +1588,8 @@ form:
               components:
                 - name: RevenusAutresFondPensionProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui perçoit ce fonds de pensions?
                   outerClasses: boutons-inline md
@@ -1608,6 +1628,8 @@ form:
               components:
                 - name: PensionAlimentaireProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui est prestataire de cette pension alimentaire?
                   outerClasses: boutons-inline md
@@ -1656,6 +1678,8 @@ form:
               components:
                 - name: RevenuDiversProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui reçoit ce revenu?
                   outerClasses: boutons-inline md
@@ -1699,6 +1723,8 @@ form:
               components:
                 - name: RevenusAttenteProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui recevra ce revenu?
                   outerClasses: boutons-inline md
@@ -1748,6 +1774,8 @@ form:
               components:
                 - name: AvoirCompteProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Titulaire(s) du compte
                   outerClasses: boutons-inline md
@@ -1796,6 +1824,8 @@ form:
               components:
                 - name: AvoirEnMainProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Titulaire(s) du compte
                   outerClasses: boutons-inline md
@@ -1842,6 +1872,8 @@ form:
               components:
                 - name: ChequesEnCirculationProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Qui a fait le chèque ou le paiement
                   outerClasses: boutons-inline md
@@ -1878,6 +1910,8 @@ form:
               components:
                 - name: AvoirPlacementProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: À qui appartient le placement?
                   outerClasses: boutons-inline md
@@ -1914,6 +1948,8 @@ form:
               components:
                 - name: AvoirSommeDueProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: À qui est due cette somme?
                   outerClasses: boutons-inline md
@@ -1960,6 +1996,8 @@ form:
               components: 
                 - name: ProprioVehicule
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   label:
                     fr: Propriétaire du véhicule
                   outerClasses: boutons-inline md
@@ -2009,6 +2047,8 @@ form:
               components: 
                 - name: ProprioBienImmobilier
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   outerClasses: boutons-inline md
                   label:
                     fr: Propriétaire du bien immobilier
@@ -2053,6 +2093,8 @@ form:
               components: 
                 - name: BienMobilierProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   outerClasses: boutons-inline md
                   label:
                     fr: Propriétaire du bien mobilier
@@ -2089,6 +2131,8 @@ form:
               components: 
                 - name: BienAssuranceVieProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   outerClasses: boutons-inline md
                   label:
                     fr: Propriétaire de l'assurance
@@ -2130,6 +2174,8 @@ form:
               components: 
                 - name: BiensEntrepriseProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   outerClasses: boutons-inline md
                   label:
                     fr: Propriétaire de l'assurance
@@ -2141,7 +2187,7 @@ form:
                   type: text
                   label:
                     fr: Numéro d’entreprise du Québec (NEQ)
-                  outerClasses: xxl
+                  outerClasses: xl
                 - name: BiensEntrepriseStatut
                   type: radio
                   label:
@@ -2177,6 +2223,8 @@ form:
               components: 
                 - name: BiensCedesProprio
                   type: radio
+                  v-if: val('Conjoint') === 'true'
+                  v-else-value: 'A1'
                   outerClasses: boutons-inline md
                   label:
                     fr: Propriétaire du bien cédé ou de l'avoir liquide auquel vous avez renoncé
