@@ -1443,10 +1443,15 @@ form:
                   options: 
                     A1: 'Adulte 1'
                     A2: 'Adulte 2'
+                - name: ChambreursNombre
+                  type: number
+                  label:
+                    fr: Nombre de chambreurs ou de pensionnaires
+                  outerClasses: sm
                 - name: NomPrenomChambreur
-                  type: text
+                  type: textarea
                   label: 
-                    fr: Nom et prénom du chambreur ou pensionnaire
+                    fr: Noms et prénoms des chambreurs ou pensionnaires
                 - name: MontantChambreur
                   type: text
                   outerClasses: md
@@ -1609,13 +1614,11 @@ form:
                     fr: Source de la pension alimentaire
                 - name: PensionAlimentaireMontant                
                   type: text                  
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'
                   outerClasses: md
                   label: 
                     fr: Montant
                 - name: PensionAlimentaireFrequence
                   type: radio
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'                  
                   label:
                     fr: Fréquence
                   options:
@@ -1652,14 +1655,10 @@ form:
                   outerClasses: md
                   label: 
                     fr: Montant
-                - name: RevenuDiversFrequence
-                  type: radio
+                - name: RevenuDiversDate
+                  type: date
                   label:
-                    fr: Fréquence
-                  options:
-                    hebdo: Par semaine
-                    bihebdo: Aux deux semaines
-                    Mensuel: Par mois 
+                    fr: Date de versement
             - name: PossedeRevenuAttente
               type: radio
               label:
