@@ -1114,30 +1114,10 @@ form:
               help:
                 fr: autres que votre conjoint et vos enfants à charge, s’il y a lieu
             - name: DomicileAutrespersonnesPrecision
-              type: repeatableGroup
-              repeatable: true
+              type: textarea
               v-if: val('DomicileAutresPersonnes') === 'true'
               label:
-                fr: Autres personnes habitant avec vous
-              instanceLabel:
-                fr: Autre personne habitant avec vous
-              addLabel:
-                fr: Ajouter une personne
-              removeLabel:
-                fr: Supprimer cette personne
-              components:
-                - name: Nom
-                  type: text
-                  label:
-                    fr: Nom de famille
-                - name: Prenom
-                  type: text
-                  label:
-                    fr: Prénom
-                - name: Lien
-                  type: text
-                  label:
-                    fr: Précisez le lien avec vous
+                fr: Inscrivez leurs nom de famille et prénom et leur lien avec vous.               
         # Section - Revenus
         - section:
             fr: Revenus
@@ -1476,10 +1456,15 @@ form:
                   options: 
                     A1: 'Adulte 1'
                     A2: 'Adulte 2'
+                - name: ChambreursNombre
+                  type: number
+                  label:
+                    fr: Nombre de chambreurs ou de pensionnaires
+                  outerClasses: sm
                 - name: NomPrenomChambreur
-                  type: text
+                  type: textarea
                   label: 
-                    fr: Nom et prénom du chambreur ou pensionnaire
+                    fr: Noms et prénoms des chambreurs ou pensionnaires
                 - name: MontantChambreur
                   type: text
                   outerClasses: md
@@ -1695,14 +1680,10 @@ form:
                   outerClasses: md
                   label: 
                     fr: Montant
-                - name: RevenuDiversFrequence
-                  type: radio
+                - name: RevenuDiversDate
+                  type: date
                   label:
-                    fr: Fréquence
-                  options:
-                    hebdo: Par semaine
-                    bihebdo: Aux deux semaines
-                    Mensuel: Par mois 
+                    fr: Date de versement
             - name: PossedeRevenuAttente
               type: radio
               label:
@@ -1885,6 +1866,10 @@ form:
                   type: text
                   label:
                     fr: Description du chèque ou du paiement
+                - name: ChequesEnCirculationDate
+                  type: date
+                  label:
+                    fr: Date de paiement
                 - name: ChequesEnCirculationMontant
                   type: text
                   outerClasses: md
@@ -2178,7 +2163,7 @@ form:
                   v-else-value: 'A1'
                   outerClasses: boutons-inline md
                   label:
-                    fr: Propriétaire de l'assurance
+                    fr: Propriétaire de l'entreprise
                   options: 
                     A1: 'Adulte 1'
                     A2: 'Adulte 2'
@@ -2196,11 +2181,16 @@ form:
                     individuelle: Entreprise individuelle
                     societe: Société en nom collectif
                     compagnie: Compagnie
-                - name: BiensEntreprisePourcentage
+                - name: BiensEntrepriseSocietePourcentage
                   type: number
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$BiensEntrepriseStatut'] !== 'individuelle'
+                  v-if: val(`${name}.BiensEntrepriseStatut`, index) && val(`${name}.BiensEntrepriseStatut`, index) === 'societe'
                   label:
-                    fr: Pourcentage de participation
+                    fr: Pourcentage de participation dans la société
+                - name: BiensEntrepriseCompagniePourcentage
+                  type: number                  
+                  v-if: val(`${name}.BiensEntrepriseStatut`, index) && val(`${name}.BiensEntrepriseStatut`, index) === 'compagnie'
+                  label:
+                    fr: Pourcentage de participation dans la compagnie
             - name: PossedeBiensCedes
               type: radio
               label:
@@ -2298,7 +2288,7 @@ form:
                   options: yesno
                 - name: NiveauEtudes
                   type: select
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$AuxEtudes'] === 'true'
+                  v-if: val(`${name}.AuxEtudes`, index) === 'true'
                   label:
                     fr: Niveau d'études
                   options:
@@ -2314,7 +2304,7 @@ form:
                   type: text
                   label:
                     fr: Précisez
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$NiveauEtudes'] === 'Autre'
+                  v-if: val(`${name}.NiveauEtudes`, index) === 'Autre'
                 - name: handicape
                   type: radio
                   label:
@@ -2339,6 +2329,16 @@ form:
                   options:
                     pere: Père
                     mere: Mère
+                - name: ResideCanadaParent
+                  type: radio
+                  options: yesno
+                  label:
+                    fr: Ce parent réside-t-il au Canada?
+                - name: PaysResidenceParent
+                  type: text
+                  v-if: val(`${name}.ResideCanadaParent`, index) && val(`${name}.ResideCanadaParent`, index) === 'false'
+                  label:
+                    fr: Pays de résidence
                 - name: NomParent2
                   type: text
                   label:
@@ -2360,13 +2360,27 @@ form:
                     mere: Mère
                   validations:
                     optional: null
+                - name: ResideCanadaParent2
+                  type: radio
+                  options: yesno
+                  label:
+                    fr: Ce parent réside-t-il au Canada?
+                  validations:
+                    optional: null
+                - name: PaysResidenceParent2
+                  type: text
+                  v-if: val(`${name}.ResideCanadaParent2`, index) && val(`${name}.ResideCanadaParent2`, index) === 'false'
+                  label:
+                    fr: Pays de résidence
+                  validations:
+                    optional: null
                 - name: PartageLaGarde
                   type: radio
                   label:
                     fr: Partagez-vous la garde de cet enfant?
                   options: yesno            
                 - type: bandeau
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   components:
                     - type: dynamic
                       tag: h3
@@ -2377,13 +2391,13 @@ form:
                       text:
                         fr: <i>L’enfant dont la garde est partagée en vertu d’un jugement ou d’une entente est à la charge de la personne adulte, si le temps de garde est d’au moins 40 %.</i>
                 - name: NombreJours
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   type: number
                   outerClasses: sm
                   label:
                     fr: Indiquez le nombre de jours où vous avez la garde
                 - name: Frequence
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   type: radio
                   label: 
                     fr: Fréquence
@@ -2392,7 +2406,7 @@ form:
                     mensuel: Par mois
                     annuel: Par année
                 - name: DocumentGarde
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PartageLaGarde'] === 'true'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   type: radio
                   label:
                     fr: Par quel document la garde vous est-elle confiée?
@@ -2403,7 +2417,7 @@ form:
                     Autre: Autre
                 - name: PrecisionDocumentGarde
                   type: text
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$DocumentGarde'] === 'Autre'
+                  v-if: val(`${name}.PartageLaGarde`) === 'true'
                   label:
                     fr: Précisez
                 - name: EnfantHabiteMemeAdresse
@@ -2413,12 +2427,12 @@ form:
                   options: yesno
                 - name: PrecisionAdresse
                   type: text
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$EnfantHabiteMemeAdresse'] === 'false'
+                  v-if: val(`${name}.EnfantHabiteMemeAdresse`) === 'false'
                   label:
                     fr: Adresse de l'enfant à charge
                 - name: PrecisionRaison
                   type: text
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$EnfantHabiteMemeAdresse'] === 'false'
+                  v-if: val(`${name}.EnfantHabiteMemeAdresse`) === 'false'
                   label:
                     fr: Raison de la non-cohabitation
                 - name: RenseignementsAdditionnels
@@ -2475,6 +2489,7 @@ form:
               options: yesno
             - name: DetailBienEnfant
               type: repeatableGroup
+              repeatable: true
               v-if: val('EnfantsPossedentBiens') === 'true'
               label:
                 fr: Biens des enfants à charge
