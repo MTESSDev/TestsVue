@@ -267,7 +267,7 @@ form:
       #v-if: form.TypeDemande
       prefixId: adulte1
       sections: &sectionsAdulte
-        # Section 2
+        # Section 2 - Renseignements sur l'identité
         - section: 
             fr: Renseignements sur l'identité
           id: renseignementsIdentite
@@ -977,7 +977,7 @@ form:
                     Congediement: Congédiement
                     AutreRaison: Autre
                 - name: emploiPrecisionAutre
-                  v-if: form[name] && form[name][index] && form[name][index][`prefixId$emploiRaisonFinEmploi[${index}]`] === 'AutreRaison'
+                  v-if: val(`${name}.prefixId$emploiRaisonFinEmploi`, index) === 'AutreRaison'
                   type: text
                   label: 
                     fr: Précisez la raison de fin d'emploi
@@ -1063,7 +1063,7 @@ form:
                 fr: Précisez la nature de votre domicile
             - name: ProprietaireInfos
               type: group
-              v-if: val('TypeDomicile') !== 'propriete'
+              v-if: val('TypeDomicile') && val('TypeDomicile') !== 'propriete'
               label:
                 fr: Inscrivez le nom de votre propriétaire ou locateur, s’il y a lieu.
               components:
@@ -1077,6 +1077,7 @@ form:
                     fr: Prénom
                 - name: Telephone
                   type: text
+                  outerClasses: lg
                   label:
                     fr: Téléphone
             - name: DomicileDateDebut
@@ -1244,7 +1245,7 @@ form:
               instanceLabel:
                 fr: Travail autonome ou entreprise
               addLabel:
-                fr: Ajouter un travail autonome ou une entreprise
+                fr: Ajouter un revenu detravail autonome ou d'entreprise
               removeLabel:
                 fr: Supprimer ce revenu
               components: 
@@ -1268,7 +1269,7 @@ form:
                   type: text
                   outerClasses: md
                   label:
-                    fr: Montant brut
+                    fr: Revenus nets
                 - name: RevenuAutonomeFrequence
                   type: radio
                   label:
@@ -1380,7 +1381,7 @@ form:
             - name: AttendeDecisionFederal
               type: radio
               label: 
-                fr: Êtes-vous en attente d'une décision d'un ministère ou organisme provincial?
+                fr: Êtes-vous en attente d'une décision d'un ministère ou organisme fédéral?
               options: yesno
             - name: DateDemandeFederal
               v-if: val('AttendeDecisionFederal') === 'true'
@@ -1565,9 +1566,9 @@ form:
               instanceLabel:
                 fr: Prestation d’un fonds de pension
               addLabel:
-                fr: Ajouter un fonds de pension 
+                fr: Ajouter un revenu de fonds de pension 
               removeLabel:
-                fr: Supprimer ce fonds de pension
+                fr: Supprimer un revenu de fonds de pension
               components:
                 - name: RevenusAutresFondPensionProprio
                   type: radio
@@ -1629,13 +1630,13 @@ form:
                     fr: Source de la pension alimentaire
                 - name: PensionAlimentaireMontant                
                   type: text                  
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'
+                  v-if: val(`${name}.PensionAlimentaireStatut`, index) && val(`${name}.PensionAlimentaireStatut`, index) !== 'attente'
                   outerClasses: md
                   label: 
                     fr: Montant
                 - name: PensionAlimentaireFrequence
                   type: radio
-                  v-if: index >= 0 && form[name] && form[name][index] && form[name][index]['prefixId$PensionAlimentaireStatut'] !== 'attente'                  
+                  v-if: val(`${name}.PensionAlimentaireStatut`, index) && val(`${name}.PensionAlimentaireStatut`, index) !== 'attente'
                   label:
                     fr: Fréquence
                   options:
@@ -1762,7 +1763,7 @@ form:
                     fr: Nom et adresse de l'établissement
                 - name: AvoirCompteNumero
                   type: text
-                  outerClasses: md
+                  outerClasses: xl
                   label: 
                     fr: Numéro de compte
                 - name: AvoirCompteStatut
@@ -1820,7 +1821,7 @@ form:
                   type: text
                   outerClasses: md
                   label: 
-                    fr: Montant (solde)      
+                    fr: Montant
             - name: PossedeChequesEnCirculation
               type: radio
               label:
@@ -1894,7 +1895,7 @@ form:
                   type: text
                   outerClasses: md
                   label: 
-                    fr: Montant
+                    fr: Valeur
             - name: PossedeSommesDues
               type: radio
               label:
@@ -1930,7 +1931,7 @@ form:
                   type: text
                   outerClasses: md
                   label: 
-                    fr: Montant
+                    fr: Montant total
         # Section - Biens
         - section:
             fr: Biens
