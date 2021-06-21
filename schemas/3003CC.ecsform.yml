@@ -111,21 +111,6 @@ form:
               v-if: val('Conjoint') === 'true'
               text: 
                 fr: Vous répondez à notre définition de conjoint. Votre conjoint doit fournir les renseignements le concernant sous « Adulte 2 » dans le présent formulaire.
-            - name: Req01-Travaille
-              type: radio
-              label: 
-                fr: Avez-vous déjà travaillé?
-              tooltip:
-                title:
-                  fr: Définition d'un travail
-                text:
-                  fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.      
-              options: yesno
-            - name: Req-00-etudes
-              type: radio
-              label: 
-                fr: Êtes-vous aux études?
-              options: yesno
         # Section 1 - Raison de la demande
         - section: 
             fr: Raison de la demande
@@ -570,14 +555,18 @@ form:
                   help: 
                     fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
                   options: yesno
-        # Section 5 - Études en cours
+        # Section 5 - Statut d'étudiant
         - section: 
-            fr: Études en cours
+            fr: Statut d'étudiant
           id: EtudesEnCours
-          v-if: val('Req-00-etudes')
           components:
+            - name: Req-00-etudes
+              type: radio
+              label: 
+                fr: Êtes-vous aux études?
+              options: yesno
             - type: dynamic
-              v-if: val('Req-00-etudes') === 'true'
+              v-if: val('prefixId$Req-00-etudes') === 'true'
               tag: div           
               components:
                 - name: PrecisionStatutEtudes_Req-00
@@ -639,7 +628,7 @@ form:
                   label: 
                     fr: Nombre de périodes par semaine
             - type: dynamic
-              v-if: val('Req-00-etudes') === 'false'
+              v-if: val('prefixId$Req-00-etudes') === 'false'
               tag: div     
               components:
                 - name: Inscription_Req-00
@@ -914,12 +903,21 @@ form:
         - section:
             fr: Emplois
           id: emplois
-          v-if: val('Req01-Travaille')
           components:
+            - name: Req01-Travaille
+              type: radio
+              label: 
+                fr: Avez-vous déjà travaillé?
+              tooltip:
+                title:
+                  fr: Définition d'un travail
+                text:
+                  fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.      
+              options: yesno
             - name: emplois
               type: repeatableGroup
               repeatable: true
-              v-if: val('Req01-Travaille') === 'true'          
+              v-if: val('prefixId$Req01-Travaille') === 'true'          
               label:
                 fr: Emplois
                 en: Jobs
