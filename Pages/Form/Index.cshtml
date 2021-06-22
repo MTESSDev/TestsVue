@@ -410,7 +410,7 @@
                 //Conserver le focus dans la modale de tooltip sur TAB, SHIFT-TAB
                 conserverFocusElement($tooltipModal.get(0))
             },
-            effectuerNavigation(noPage, nomControleFocus, pasFocus) {
+            effectuerNavigation(noPage, nomControleFocus, modeBacSable) {
                 this.form.validAll = false
                 this.config.keepData = true
 
@@ -425,9 +425,9 @@
 
                 this.$nextTick(function () {
                     this.config.keepData = false
-                    //TODO le pasFocus sert-il vraiment? voir avec Dany vs. le bac à sable
-                    if (!pasFocus && nomControleFocus) {
-                        this.donnerFocusControle(nomControleFocus)
+                    //TODO le modeBacSable sert-il vraiment? voir avec Dany vs. le bac à sable
+                    if (nomControleFocus) {
+                        this.donnerFocusControle(nomControleFocus, modeBacSable)
                     } else {
                         //On traite une navigation sans contrôle spécifié à qui donner le focus (ex. page suivante/précédente ou clic sur une page dans menu gauche). On donne focus au H1.
                         const h1 = document.getElementsByTagName('h1')[0]
@@ -467,19 +467,22 @@
             },
             estControleVisible(element) {
                 const rect = element.getBoundingClientRect();
+                //Le -32 nous permet d'exclure un contrôle qui serait à la limite du viewport. Ex. un radio bouton en tout au bas de la page. On voudra forcer un repositionnement de la page dans cette situation.
                 return (
                     rect.top >= 0 &&
                     rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) -32)
                 )
             },
-            donnerFocusControle(nomControle) {
+            donnerFocusControle(nomControle, modeBacSable) {
                 const controles = document.getElementsByName(nomControle)
                 if (controles.length) {
-                    if (!this.estControleVisible(controles[0])) {
+                    if (modeBacSable || !this.estControleVisible(controles[0])) {
                         this.repositionnerEcranLabelQuestion(controles[0].id)
                     }
 
-                    controles[0].focus()
+                    if (!modeBacSable) {
+                        controles[0].focus()
+                    }
                 } else {
                     /* Ici on traite essentiellement les erreurs de haut niveau sur les groupes (ex. un groupe obligatoire sans occurence)
                        setTimeout nécessaire afin que le rendering des erreurs soit fait. */
