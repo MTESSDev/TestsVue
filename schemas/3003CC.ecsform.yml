@@ -2256,6 +2256,7 @@ form:
                   type: text
                   label:
                     fr: CP-12
+                  outerClasses: lg                    
                 - name: Nom
                   type: text
                   label:
