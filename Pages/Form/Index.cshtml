@@ -460,16 +460,26 @@
                                 console.log(response)
                             })
                             .catch(error => {
-                                console.log(error.response.data);
+                                console.log(error);
                             });
                     }                            
                 }, 0, formulate)
             },
+            estControleVisible(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+                )
+            },
             donnerFocusControle(nomControle) {
                 const controles = document.getElementsByName(nomControle)
                 if (controles.length) {
+                    if (!this.estControleVisible(controles[0])) {
+                        this.repositionnerEcranLabelQuestion(controles[0].id)
+                    }
+
                     controles[0].focus()
-                    this.repositionnerEcranLabelQuestion(controles[0].id)
                 } else {
                     /* Ici on traite essentiellement les erreurs de haut niveau sur les groupes (ex. un groupe obligatoire sans occurence)
                        setTimeout nécessaire afin que le rendering des erreurs soit fait. */
