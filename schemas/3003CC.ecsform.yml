@@ -2380,7 +2380,7 @@ form:
                     fr: Partagez-vous la garde de cet enfant?
                   options: yesno            
                 - type: bandeau
-                  v-if: val(`${name}.PartageLaGarde`) === 'true'
+                  v-if: val(`${name}.PartageLaGarde`, index) === 'true'
                   components:
                     - type: dynamic
                       tag: h3
@@ -2391,13 +2391,13 @@ form:
                       text:
                         fr: <i>L’enfant dont la garde est partagée en vertu d’un jugement ou d’une entente est à la charge de la personne adulte, si le temps de garde est d’au moins 40 %.</i>
                 - name: NombreJours
-                  v-if: val(`${name}.PartageLaGarde`) === 'true'
+                  v-if: val(`${name}.PartageLaGarde`, index) === 'true'
                   type: number
                   outerClasses: sm
                   label:
                     fr: Indiquez le nombre de jours où vous avez la garde
                 - name: Frequence
-                  v-if: val(`${name}.PartageLaGarde`) === 'true'
+                  v-if: val(`${name}.PartageLaGarde`, index) === 'true'
                   type: radio
                   label: 
                     fr: Fréquence
@@ -2406,7 +2406,7 @@ form:
                     mensuel: Par mois
                     annuel: Par année
                 - name: DocumentGarde
-                  v-if: val(`${name}.PartageLaGarde`) === 'true'
+                  v-if: val(`${name}.PartageLaGarde`, index) === 'true'
                   type: radio
                   label:
                     fr: Par quel document la garde vous est-elle confiée?
@@ -2417,7 +2417,7 @@ form:
                     Autre: Autre
                 - name: PrecisionDocumentGarde
                   type: text
-                  v-if: val(`${name}.PartageLaGarde`) === 'true'
+                  v-if: val(`${name}.DocumentGarde`, index) === 'Autre'
                   label:
                     fr: Précisez
                 - name: EnfantHabiteMemeAdresse
@@ -2427,18 +2427,18 @@ form:
                   options: yesno
                 - name: PrecisionAdresse
                   type: text
-                  v-if: val(`${name}.EnfantHabiteMemeAdresse`) === 'false'
+                  v-if: val(`${name}.EnfantHabiteMemeAdresse`, index) === 'false'
                   label:
                     fr: Adresse de l'enfant à charge
                 - name: PrecisionRaison
                   type: text
-                  v-if: val(`${name}.EnfantHabiteMemeAdresse`) === 'false'
+                  v-if: val(`${name}.EnfantHabiteMemeAdresse`, index) === 'false'
                   label:
                     fr: Raison de la non-cohabitation
                 - name: RenseignementsAdditionnels
                   type: textarea
                   label:
-                    fr: Si vous avez besoin d’espace additionnelle pour certaines réponses, utilisez l’espace ci-dessous.
+                    fr: Si vous avez besoin d’espace additionnel pour certaines réponses, utilisez l’espace ci-dessous.
         # Section - Revenus et biens des enfants
         - section:
             fr: Revenus et biens des enfants
