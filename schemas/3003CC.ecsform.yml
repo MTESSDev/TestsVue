@@ -2239,6 +2239,7 @@ form:
         - section:
             fr: Enfant(s) à charge
           id: enfantsACharge
+          v-if: val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true'
           components:
             - type: repeatableGroup
               name: enfants
@@ -2443,6 +2444,7 @@ form:
         - section:
             fr: Revenus et biens des enfants
           id: revenusEnfants
+          v-if: val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true'
           components:
             - name: EnfantsPossedentRevenus
               type: radio
