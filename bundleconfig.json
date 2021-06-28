@@ -134,5 +134,33 @@
     "minify": {
       "enabled": false
     }
+  },
+  {
+    "outputFileName": "wwwroot/scripts/pdf/pdf_viewer.js",
+    "inputFiles": [
+      "src/externe/pdfjs/js/pdf.js",
+      "src/externe/pdfjs/js/pdf_viewer.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/scripts/pdf/pdf.worker.js",
+    "inputFiles": [
+      "src/externe/pdfjs/js/pdf.worker.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/pdf/pdf_viewer.css",
+    "inputFiles": [
+      "src/externe/pdfjs/css/pdf_viewer.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
   }
 ]

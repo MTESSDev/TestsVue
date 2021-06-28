@@ -1,0 +1,13 @@
+templates:
+- id: 1
+  name: 3003-01 - Adulte 1
+  pdf: 3003-01_ProjetDynDEV
+- id: 2
+  name: 3003-01 - Adulte 2
+  pdf: 3003-01_ProjetDynDEV
+bind:
+   1:
+    nom:
+      section: demande
+      field: typedemande
+      value: afdr

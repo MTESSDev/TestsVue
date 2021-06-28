@@ -30,7 +30,9 @@ namespace ECSForm.Pages
         {
             switch (type?.ToUpper())
             {
+                case "HIDDEN":
                 case "TEXT":
+                case "TEXTAREA":
                     Type = TypeInput.TEXT;
                     break;
                 case "DATE":
@@ -59,7 +61,7 @@ namespace ECSForm.Pages
 
         public List<ValidationAttribute> Validations { get; set; }
 
-        public void ParseAttributes(IDictionary<object, object>? attr)
+        public void ParseAttributes(IDictionary<object, object>? attr, bool parseValidations = true)
         {
             if (attr is null) return;
             Validations.Add(new RequiredAttribute() { });
@@ -75,6 +77,8 @@ namespace ECSForm.Pages
                         SetType(item.Value.ToString());
                         break;
                     case "VALIDATIONS":
+                        if (!parseValidations) { break; };
+
                         var validationsDict = item.Value as IDictionary<object, object>;
                         if (validationsDict is { } && validationsDict.ContainsKey("optional"))
                         {
@@ -85,7 +89,14 @@ namespace ECSForm.Pages
                         Validations.AddRange(ConvertRules(rules));
                         break;
                     case "OPTIONS":
-                        AcceptedValues = item.Value as IDictionary<object, object>;
+                        if (item.Value.ToString().Equals("yesno", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            AcceptedValues = new Dictionary<object, object>() { { "true", true }, { "false", false }, };
+                        }
+                        else
+                        {
+                            AcceptedValues = item.Value as IDictionary<object, object>;
+                        }
                         break;
                     default:
                         break;

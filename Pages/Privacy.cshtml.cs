@@ -93,7 +93,7 @@ namespace ECSForm.Pages
             group = 1
         }
 
-        public static IDictionary<object, object>? GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData, string? prefixId, string? groupName)
+        public static void GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData, string? prefixId, string? groupName)
         {
             //var obj = components as IDictionary<object, object>;
             var obj2 = components as IList<object>;
@@ -114,7 +114,7 @@ namespace ECSForm.Pages
                         if (dictItem.TryGetValue("sections", out var sections))
                         {
                             dictItem.TryGetValue("prefixId", out var currentPrefixId);
-                            return GetEffectiveComponents(data, sections, ref formData, currentPrefixId?.ToString(), null);
+                            GetEffectiveComponents(data, sections, ref formData, currentPrefixId?.ToString(), null);
                         }
 
                         if (dictItem.TryGetValue("v-if", out var vif))
@@ -186,11 +186,7 @@ namespace ECSForm.Pages
                                 }
                             }
 
-                            var returnComp = GetEffectiveComponents(data, innerComponents, ref formData, prefixId, groupName);
-                            if (returnComp != null)
-                            {
-                                return returnComp;
-                            }
+                            GetEffectiveComponents(data, innerComponents, ref formData, prefixId, groupName);
                         }
                     }
 
@@ -204,8 +200,6 @@ namespace ECSForm.Pages
                     }
                 }
             }
-
-            return null;
         }
 
         private static bool ArrayIsArray(object? element)

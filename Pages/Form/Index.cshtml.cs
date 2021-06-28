@@ -129,6 +129,76 @@ namespace ECSForm.Pages
             }
         }
 
+        public async Task<IActionResult> OnPostNew(string? id, string render, string breadcrumb, [FromQuery] Guid? uniqueID)
+        {
+            /* Layout = null;
+             string? readFile = null;
+             var cfg = Base64Decode(render);
+
+             if (uniqueID.HasValue)
+             {
+                 if (uniqueID.Value != Guid.Empty)
+                 {
+
+                     readFile = "snapshots/" + uniqueID.Value.ToString();
+                     System.IO.File.WriteAllText(@$"schemas/{readFile}.ecsform.yml", cfg);
+                 }
+             }
+
+             if (currentCursorLine != -1)
+             {
+                 var currentLine = -1;
+                 var nameBlock = "";
+                 var sectionId = -1;
+
+                 using (StringReader reader = new StringReader(cfg))
+                 {
+                     //if (reader is null) return NotFound();
+
+                     string? line;
+                     while ((line = reader.ReadLine()) != null)
+                     {
+                         currentLine++;
+
+                         if (line.StartsWith("        -"))
+                         {
+                             sectionId++;
+                         }
+
+                         if (line.Contains("            - name:") || line.Contains("              name:"))
+                         {
+                             nameBlock = line.Trim(' ', '-');
+                         }
+
+                         if (currentLine < currentCursorLine - 1)
+                         {
+                             continue;
+                         }
+                         else
+                         {
+                             break;
+                         }
+                     }
+                 }
+
+                 nameBlock = nameBlock.Replace("name", "");
+                 nameBlock = nameBlock.TrimStart(' ', ':');
+
+                 Created = @$"this.effectuerNavigation({sectionId}, '{nameBlock}', true); ";
+             }
+
+             if (readFile is null)
+             {
+                 return await RenderPage(id, cfg);
+             }
+             else
+             {
+                 return await RenderPage(readFile);
+             }*/
+
+            return NotFound();
+        }
+
         public async Task<IActionResult> OnGet(string? id)
         {
             return await RenderPage(id);

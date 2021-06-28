@@ -38,3 +38,6 @@ wwwroot/js/base.min.js
 src/temp/**
 wwwroot/css/additionnel.min.css
 wwwroot/css/base.min.css
+wwwroot/js/additionnel.min.js
+wwwroot/scripts/pdf/**
+wwwroot/css/pdf/**

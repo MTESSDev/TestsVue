@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="mapping\3003\3003-01_ProjetDynDEV.pdf" />
+    <None Remove="mapping\3003\ecsbind.yml" />
     <None Remove="schemas\2301.ecsform.yml" />
     <None Remove="schemas\2601.ecsform.yml" />
     <None Remove="schemas\2601CC.ecsform.yml" />
@@ -29,6 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="mapping\3003\3003-01_ProjetDynDEV.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mapping\3003\ecsbind.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="schemas\2301.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

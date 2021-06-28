@@ -1,0 +1,414 @@
+﻿@page
+@model BindingIndexModel
+@{
+    ViewData["Title"] = "ECS.PDFBinder";
+}
+
+@section style{
+    <link rel="stylesheet" href="~/css/additionnel.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/pdf/pdf_viewer.css">
+
+    <!-- template for the modal component -->
+    <script type="text/x-template" id="modal-template">
+        <transition name="modal">
+          <div class="modal-mask">
+            <div class="modal-wrapper">
+              <div class="modal-container" @@keydown.esc="$emit('close')">
+
+                <div class="modal-header">
+                  <slot name="header">
+                    default header
+                  </slot>
+                </div>
+
+                <div class="modal-body">
+                  <slot name="body">
+                    default body
+                  </slot>
+                </div>
+
+                <div class="modal-footer">
+
+                  <slot name="footer">
+                    &nbsp;
+                    <button class="modal-default-button btn btn-primaire" @@click="$emit('close')">
+                      Enregistrer
+                    </button>
+                  </slot>
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+    </script>
+
+    <script type="text/x-template" id="select2-template">
+        <select>
+          <slot></slot>
+        </select>
+    </script>
+
+    <style>
+        .modal-mask {
+            position: fixed;
+            z-index: 9998;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: table;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-wrapper {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .modal-container {
+            width: 500px;
+            margin: 0px auto;
+            padding: 20px 30px;
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+            transition: all 0.3s ease;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .modal-header h3 {
+            margin-top: 0;
+            color: #42b983;
+        }
+
+        .modal-body {
+            margin: 20px 0;
+        }
+
+        .modal-default-button {
+            float: right;
+        }
+
+        /*
+        * The following styles are auto-applied to elements with
+        * transition="modal" when their visibility is toggled
+        * by Vue.js.
+        *
+        * You can easily play with the modal transition by editing
+        * these styles.
+        */
+
+        .modal-enter {
+            opacity: 0;
+        }
+
+        .modal-leave-active {
+            opacity: 0;
+        }
+
+            .modal-enter .modal-container,
+            .modal-leave-active .modal-container {
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+        .required-field-icon {
+            display: none;
+        }
+
+        .select2-container--open {
+            z-index: 9999999
+        }
+
+        .select2-container {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .minsize {
+            min-width: 265px;
+        }
+    </style>
+}
+
+
+<!-- app -->
+<div id="app">
+
+    <!-- use the modal component, pass in the prop -->
+    <modal v-if="selectedField !=''" @@close="selectedField = ''">
+        <!--
+          you can use custom content here to overwrite
+          default content
+        -->
+        <h3 slot="header" ref="modalref" tabindex="0">{{selectedField.title}}</h3>
+        <div slot="body">
+            <p>
+                <label>Champ du PDF: <input readonly disabled :value="selectedField.pdfId" /></label>
+            </p>
+            <fieldset>
+                <legend>Assignation source</legend>
+                <div>
+                    <label for="select2groups">
+                        Section:
+                    </label>
+                </div>
+                <div>
+                    <select2groups id="select2groups" class="minsize" :options="optionsGroups" v-model="selectedGroup">
+                        <option value="0">Toutes</option>
+                    </select2groups>
+                </div>
+                <div>
+                    <label for="select2fields">
+                        Champ(s):
+                    </label>
+                </div>
+                <div>
+                    <select2fields id="select2fields" class="minsize" multiple :options="optionsFields" v-model="selectedFields">
+                        <option disabled value="0">Choisir</option>
+                    </select2fields>
+                </div>
+                <div>
+                    <label for="formule">
+                        Formule:
+                    </label>
+                </div>
+                <div>
+                    <input id="formule" class="minsize" type="text" />
+                </div>
+            </fieldset>
+        </div>
+    </modal>
+
+    <div style="padding: 5px; border: 1px dotted darkgrey; width: 100%">
+
+        <button class="btn btn-primaire" onclick="chargerPdf('/binding/getpdf/3003?pdf=3003-01_ProjetDynDEV')">3003-01 - Adulte 1</button>
+        <button class="btn btn-secondaire" onclick="chargerPdf('/binding/getpdf/3003?pdf=3003-01_ProjetDynDEV')">3003-01 - Adulte 2</button>
+
+        <pre style="display:none">{{selectedGroup}} {{selectedFields}}</pre>
+
+        <div style="width: 100%; text-align: center;">Les champs rouges n'ont pas encore été bindés.</div>
+        <center>
+            <div style="padding: 15px; background: lavender; border: 1px solid black; display: inline-block;">
+                <form id="form1" novalidate>
+                    <div style="border: 1px dashed darkviolet;" id="pdfTarget"></div>
+                </form>
+            </div>
+        </center>
+    </div>
+</div>
+
+
+@section scripts{
+
+
+    <script src="~/js/additionnel.min.js" asp-append-version="true"></script>
+    <script src="/scripts/pdf/pdf_viewer.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+
+    <script>
+
+        window.onload = function () {
+
+            pdfjsLib.GlobalWorkerOptions.workerSrc = '/scripts/pdf/pdf.worker.js';
+
+            //chargerPdf('pdfs/3003-01_ProjetDynDEV.pdf');
+        }
+
+        function chargerPdf(pdf) {
+
+            var DEFAULT_SCALE = 1.0;
+
+            var container = document.getElementById('pdfTarget');
+
+            container.innerHTML = "";
+
+            var values = {};
+
+            /*var bindingSet = {
+                "nom1_Req-00": '{nom}'
+            };*/
+
+            // Fetch the PDF document from the URL using promises.
+            var loadingTask = pdfjsLib.getDocument(pdf);
+
+            loadingTask.promise.then(function (doc) {
+
+                for (var i = 1; i <= doc.numPages; i++) {
+
+                    var promise = doc.getPage(i).then(function (pdfPage) {
+
+                        pdfjsViewer.FormFunctionality.setPostRenderHook(function () {
+
+
+                        });
+
+                        pdfjsViewer.FormFunctionality.setPostCreationTweak(function (fieldType, elementId, element) {
+
+                            /*switch (fieldType)
+                            {
+                                case "TEXT":
+                                    element.style.backgroundColor = "red";
+                                    break;
+                                case "TEXT":
+                                    element.style.backgroundColor = "red";
+                                    break;
+                            }*/
+                            element.style.backgroundColor = "red";
+
+                            element.readOnly = true;
+                            element.onclick = function (e) {
+                                app.sendInfo(e.target, fieldType);
+                                e.preventDefault();
+                            };
+                            //debugger;
+
+                            //element.title = elementId.alternativeText;
+                        });
+                        return pdfjsViewer.FormFunctionality.render(1094, null, pdfPage, container, values,
+                            {
+                                interactiveForms: true,
+                                hideForms: false
+                            });
+                    });
+
+                }
+            });
+        }
+
+    </script>
+
+    <script>
+        // register modal component
+        Vue.component("modal", {
+            template: "#modal-template"
+        });
+
+        Vue.component("select2groups", {
+            props: ["options", "value"],
+            template: "#select2-template",
+            mounted: function () {
+                var vm = this;
+                $(this.$el)
+                    // init select2
+                    .select2({ data: this.options, selectOnClose: true })
+                    .val(this.value)
+                    .trigger("change")
+                    // emit event on change.
+                    .on("change", function () {
+                        vm.$emit("input", this.value);
+                    });
+            },
+            watch: {
+                value: function (value) {
+                    // update value
+                    $(this.$el)
+                        .val(value)
+                        .trigger("change");
+                },
+                options: function (options) {
+                    // update options
+                    $(this.$el)
+                        .empty()
+                        .select2({ data: options, selectOnClose: true });
+                }
+            },
+            destroyed: function () {
+                $(this.$el)
+                    .off()
+                    .select2("destroy");
+            }
+        });
+
+        Vue.component("select2fields", {
+            props: ["options", "value"],
+            template: "#select2-template",
+            mounted: function () {
+                var vm = this;
+                $(this.$el)
+                    // init select2
+                    .select2({ data: this.options, selectOnClose: true })
+                    .val(this.value)
+                    .trigger("change")
+                    // emit event on change.
+                    .on("change", function () {
+                        vm.$emit("input", $(this).val());
+                    });
+            },
+            watch: {
+                value: function (value) {
+                    // update value
+                    debugger;
+                    $(this.$el).val(value);
+                    //.trigger("change");
+                },
+                options: function (options) {
+                    // update options
+                    $(this.$el)
+                        .empty()
+                        .select2({ data: options, selectOnClose: true });
+                }
+            },
+            destroyed: function () {
+                $(this.$el)
+                    .off()
+                    .select2("destroy");
+            }
+        });
+
+        // start app
+        var app = new Vue({
+            el: "#app",
+            data: {
+                selectedField: '',
+                selectedGroup: 0,
+                selectedFields: [],
+                optionsGroups: [{ id: 1, text: "Hello" }, { id: 2, text: "World" }],
+
+            },
+            computed: {
+                optionsFields: function () {
+                    return [{
+                        "text": "Group 1",
+                        "children": [
+                            {
+                                "id": 1,
+                                "text": "Option 1.1"
+                            },
+                            {
+                                "id": 2,
+                                "text": "Option 1.2"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Group 2",
+                        "children": [
+                            {
+                                "id": 3,
+                                "text": "Option 2.1"
+                            },
+                            {
+                                "id": 4,
+                                "text": "Option 2.2"
+                            }
+                        ]
+                    }
+                    ];
+                }
+            },
+            methods: {
+                sendInfo(pdfElement, fieldType) {
+                    //debugger;
+                    //$('#'+pdfId)[0].style.backgroundColor = "blue";
+                    this.selectedField = { "title": pdfElement.title, "pdfId": pdfElement.name };
+                    this.$nextTick(function () {
+                        //debugger;
+                        this.$refs.modalref.focus()
+                    });
+                }
+            }
+        });
+    </script>
+}
+
