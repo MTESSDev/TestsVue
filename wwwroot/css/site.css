@@ -34,7 +34,8 @@ body p {
 
     /* Reproduire tout ce qui est dans form-group */
     .formulate-input[data-classification=text], .formulate-input[data-classification=textarea],
-    .formulate-input[data-classification=select], .formulate-input[data-classification=group] {
+    .formulate-input[data-classification=select], .formulate-input[data-classification=group],
+    .formulate-input[data-classification=box][data-type=checkbox]:not(.formulate-input-group-item) {
         margin-bottom: 32px; /* On applique le même style que la classe form-group de BS */
     }
 
