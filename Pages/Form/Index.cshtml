@@ -554,7 +554,9 @@
                 for (const groupe of this.pagesGroup) {
                     const page = groupe.pages.find(page => page.id === idPage)
                     if (page) {
-                        return page
+                        if (this.estPageAffichee({ groupe: groupe, page: page })){
+                            return page
+                        }
                     }
                 }
             },
