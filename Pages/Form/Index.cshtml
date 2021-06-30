@@ -59,19 +59,30 @@
             <span aria-hidden="true" class="icone-svg md"></span>
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="niv1" >
-                <li v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])" :class="{ 'sans-regroupement': !groupe.titre }" >
-                    <span class="groupe" :class="groupe.classes" v-if="groupe.titre">{{ groupe.titre }}</span>
-                    <ul class="niv2">
-
-                        <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" :class="[{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}, page.classes ? page.classes : '' ]">
+            <ul class="niv1" aria-label="Menu principal">
+                <template v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])">
+                    <template v-if="groupe.titre">
+                        <li class="sous-menu">
+                            <span class="groupe" :class="groupe.classes">{{ groupe.titre }}</span>
+                            <ul class="niv2">
+                                <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" :class="[{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}, page.classes ? page.classes : '' ]">
+                                    <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
+                                    <span class="puce">
+                                        <span class="icone-svg sm" aria-hidden="true"></span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </li>
+                    </template>
+                    <template v-else>
+                        <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" class="sans-regroupement" :class="[{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}, page.classes ? page.classes : '' ]">
                             <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
                             <span class="puce">
                                 <span class="icone-svg sm" aria-hidden="true"></span>
                             </span>
                         </li>
-                    </ul>
-                </li>
+                    </template>
+                </template>
             </ul>
         </div>
     </nav>
