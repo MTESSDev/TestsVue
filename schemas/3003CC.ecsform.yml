@@ -162,7 +162,7 @@ form:
                   label: 
                     fr: Date de la fin d'études à temps plein
                 - name: PrecisionRaisonDemandeAfdr
-                  type: select
+                  type: checkbox
                   label: 
                     fr: Indiquez la raison de votre demande d'aide financière de dernier recours
                   options: 
@@ -177,12 +177,12 @@ form:
                     RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
                     PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
                 - name: PrecisionRaisonDemandeAfdrAttenteDecision
-                  v-if: val('PrecisionRaisonDemandeAfdr') === 'AttenteDecision'
+                  v-if: val('PrecisionRaisonDemandeAfdr').includes('AttenteDecision')
                   type: text
                   label: 
                     fr: Précisez la raison de votre demande d'aide financière de dernier recours
                 - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
-                  v-if: val('PrecisionRaisonDemandeAfdr') === 'RevenuInsuffisant'
+                  v-if: val('PrecisionRaisonDemandeAfdr').includes('RevenuInsuffisant')
                   type: radio
                   label: 
                     fr: Type de revenu insuffisant
@@ -202,7 +202,7 @@ form:
                   label: 
                     fr: Précisez le type de revenu autre
                 - name: PrecisionRaisonDemandeAfdrSortieEtablissement
-                  v-if: val('PrecisionRaisonDemandeAfdr') === 'SortieEtablissement'
+                  v-if: val('PrecisionRaisonDemandeAfdr').includes('SortieEtablissement')
                   type: radio
                   label: 
                     fr: Précisez le type d'établissement
@@ -210,7 +210,7 @@ form:
                     SortieEtablissementSante: de santé
                     SortieEtablissementDetention: de détention
                 - name: PrecisionRaisonDemandeAfdrPerteConjoint
-                  v-if: val('PrecisionRaisonDemandeAfdr') === 'PerteConjoint'
+                  v-if: val('PrecisionRaisonDemandeAfdr').includes('PerteConjoint')
                   type: radio
                   label: 
                     fr: Précisez la raison de perte du conjoint
@@ -219,7 +219,7 @@ form:
                     PerteConjointSeparation: separation
                     PerteConjointDivorce: divorce
                 - name: PrecisionRaisonDemandeAfdrAutre
-                  v-if: val('PrecisionRaisonDemandeAfdr') === 'PrecisionRaisonDemandeAfdrAutreRaison'
+                  v-if: val('PrecisionRaisonDemandeAfdr').includes('PrecisionRaisonDemandeAfdrAutreRaison')
                   type: text
                   label: 
                     fr: Précisez la raison autre
@@ -263,6 +263,8 @@ form:
               v-if: val('TypeDemande') === 'Afdr' 
               label:
                 fr: Numéro de dossier (CP-12)
+              validations:
+                optional: null
             - name: nom1_Req-00
               type: text
               label: 
@@ -296,6 +298,8 @@ form:
               type: date
               label: 
                 fr: Date d'expiration
+              validations:
+                optional: null
             - name: Req-00-Sexe
               type: radio
               label: 
@@ -434,6 +438,8 @@ form:
               type: tel
               label: 
                 fr: Téléphone
+              help:
+                fr: Pour un client sans numéro de téléphone, inscrivez un numéro de téléphone temporaire pour vous rejoindre
               validations: 
                 max: 10,length
             - name: adresse4_Req-00
@@ -624,6 +630,7 @@ form:
                   min: 1
                   label: 
                     fr: Nombre de cours
+                  #TODO Vérifier le besoin d'avoir un des 4 champs rempli
                 - name: NbrHeuresSemaine_Req-00
                   type: number
                   outerClasses: sm              
@@ -866,6 +873,34 @@ form:
               v-if: val('prefixId$Req01-EtudesEvaluationComparative') === 'true'                            
               label:
                 fr: Précisez le domaine de formation
+            - name: PossedeFormations
+              type: radio
+              label:
+                fr: Avez-vous complété une ou des formations pertinentes dans le cadre d'un emploi ou pertinentes dans l'occupation d'un emploi?
+              options: yesno
+            - name: FormationsEmploi
+              type: repeatableGroup
+              v-if: val('prefixId$PossedeFormations') === 'true'
+              repeatable: true
+              label:
+                fr: Formations complétées pertinentes dans le cadre d'un emploi
+              instanceLabel:
+                fr: Formation complétée
+              addLabel:
+                fr: Ajouter une formation complétée
+              removeLabel: 
+                fr: Supprimer cette formation
+              validations:
+                optional: null
+              components:
+                - name: TitreCours
+                  type: text
+                  label:
+                    fr: Titre du cours
+                - name: DateFinCours
+                  type: date
+                  label:
+                    fr: Date de fin du cours
             - name: Req01-PossedeCartesQualification
               type: radio
               label: 
@@ -936,7 +971,7 @@ form:
               repeatable: true
               v-if: val('prefixId$Req01-Travaille') === 'true'          
               label:
-                fr: Emplois
+                fr: Inscrivez les renseignements relatifs à vos deux dernières expériences de travail en commençant par la plus récente
                 en: Jobs
               instanceLabel:
                 fr: Emploi
@@ -946,6 +981,8 @@ form:
               removeLabel:
                 fr: Supprimer cet emploi
                 en: Delete this job
+              validations:
+                max: 2
               components:
                 - name: emploiNomEntreprise
                   type: text
@@ -1042,6 +1079,28 @@ form:
               outerClasses: xxl                           
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
+            - name: DisponibiliteEmploisRecherches
+              type: repeatableGroup
+              repeatable: true
+              v-if: val('prefixId$Req01-DisponibleTravail') === 'true' 
+              label:
+                fr: Noms des emplois recherchés
+              instanceLabel:
+                fr: Emploi recherché
+              addLabel:
+                fr: Ajouter un emploi recherché
+              removeLabel:
+                fr: Supprimer cet emploi
+              components:
+                - name: NomEmploi
+                  type: text
+                  label:
+                    fr: Nom de l'emploi recherché
+                - name: ExperienceEmploi
+                  type: radio
+                  label:
+                    fr: Avez-vous de l'expérience pour l'emploi?
+                  options: yesno
         #Section - Domicile
         - section:
             fr: Informations sur le domicile
