@@ -63,7 +63,7 @@
                 <template v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])">
                     <template v-if="groupe.titre">
                         <li class="sous-menu">
-                            <span class="groupe" :class="groupe.classes">{{ groupe.titre }}</span>
+                            <span class="groupe" :class="[groupe.classes, groupe.no === groupeCourant.no ? 'active' : '']">{{ groupe.titre }}</span>
                             <ul class="niv2">
                                 <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" :class="[{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}, page.classes ? page.classes : '' ]">
                                     <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
@@ -602,6 +602,10 @@
         computed: {
             pageCourante() {
                 return this.obtenirPageParNo(this.noPageCourante).page
+            },
+            groupeCourant() {
+                console.log('groupecourant')
+                 return this.obtenirPageParNo(this.pageCourante.no).groupe
             },
             noPageSuivante() {
                 let noPageSuivante = this.noPageCourante + 1
