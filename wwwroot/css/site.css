@@ -710,17 +710,18 @@ nav.etapes-form ul > li > ul > li, nav.etapes-form ul > li.sans-regroupement {
                 margin-left: 8px;
             }
 
-            nav.etapes-form .collapse ul.niv1 > li.sans-regroupement:first-of-type > .puce:before {
-                position: absolute;
-                width: 20px;
-                height: calc(50% - 10px);
-                background-color: #fff;
-                top: 0;
-                content: '';
-            }
+nav.etapes-form ul.niv1 > li.sans-regroupement:first-of-type > .puce:before,
+nav.etapes-form ul.niv2 > li:first-of-type > .puce:before {
+    position: absolute;
+    width: 20px;
+    height: calc(50% - 10px);
+    background-color: #fff;
+    top: 0;
+    content: '';
+}
 
-nav.etapes-form .collapse ul.niv1 > li.sans-regroupement:last-of-type > .puce:before,
-nav.etapes-form .collapse ul.niv1 > li:last-of-type > ul.niv2:last-of-type > li:last-of-type > .puce:before {
+nav.etapes-form ul.niv1 > li.sans-regroupement:last-of-type > .puce:after,
+nav.etapes-form ul.niv2:last-of-type > li:last-of-type > .puce:after {
     position: absolute;
     width: 20px;
     height: calc(50% - 10px);
