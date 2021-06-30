@@ -257,6 +257,11 @@ form:
             fr: Renseignements sur l'identité
           id: renseignementsIdentite
           components:
+            - name: cp12_Req-00
+              type: text
+              v-if: val('TypeDemande') === 'Afdr' 
+              label:
+                fr: Numéro de dossier (CP-12)
             - name: nom1_Req-00
               type: text
               label: 
@@ -304,6 +309,17 @@ form:
               options: 
                 Francais: Français 
                 Anglais: Anglais 
+            - name: curateur_Req-00
+              type: radio
+              v-if: val('TypeDemande') === 'Afdr'
+              label:
+                fr: Êtes-vous représenté par le Curateur public du Québec?
+              options: yesno
+            - name: dosCurateur_Req-00
+              type: text
+              v-if: val('TypeDemande') === 'Afdr' && val('prefixId$curateur_Req-00') === 'true'
+              label:
+                fr: Numéro de dossier
             - name: Req00-NeQC
               type: radio
               label: 
