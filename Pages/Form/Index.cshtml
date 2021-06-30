@@ -104,7 +104,7 @@
             <div class="zone-boutons bas-page" v-if="form.EtatRevision !== ''">
                 <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPagePrecedente)" :disabled="noPagePrecedente == null">Précédent</button>
                 <button class="btn btn-secondaire btn-enregistrer" v-on:click="enregistrer">Enregistrer</button>
-                <button class="btn btn-secondaire" v-on:click="effectuerNavigation(noPageSuivante)" :disabled="noPageSuivante == null">Suivant</button>
+                <button class="btn" :class="noPageSuivante != null ? 'btn-primaire' : 'btn-secondaire'" v-on:click="effectuerNavigation(noPageSuivante)" :disabled="noPageSuivante == null">Suivant</button>
             </div>
 
             <div id="tooltipModal" class="modal aide-contextuelle" tabindex="-1" role="dialog" aria-labelledby="modal-title" style="display: block;" aria-modal="true">
