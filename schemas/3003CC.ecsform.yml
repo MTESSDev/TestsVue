@@ -246,6 +246,7 @@ form:
                   type: text
                   label: 
                     fr: Précisez la raison de votre demande d'aide à l'emploi
+    #Regroupement Adulte 1
     - sectionGroup: 
         fr: Adulte 1
       classes: icone user                      
@@ -1025,24 +1026,12 @@ form:
               outerClasses: xxl                           
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
-    # Adulte 2
-    - sectionGroup: 
-        fr: Adulte 2
-      classes: icone user                      
-      v-if: val('Conjoint') === 'true'
-      prefixId: adulte2
-      sections: *sectionsAdulte
-    # Groupe Adulte 1 et/ou 2
-    - sectionGroup: 
-        fr: Adultes 1 et 2
-      v-if: val('Conjoint') === 'true' && val('TypeDemande') === 'Afdr'
-      classes: icone user              
-      sections: &menage
         #Section - Domicile
         - section:
             fr: Informations sur le domicile
           id: domicile
-          components:
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
+          components: &domicile
             - name: TypeDomicile
               type: select
               label:
@@ -1122,7 +1111,8 @@ form:
         - section:
             fr: Revenus
           id: revenus
-          components:      
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
+          components: &revenus     
             - type: bandeau
               text: 
                 fr: Des revenus sont des sommes provenant d’un emploi, des prestations, des allocations ou des indemnités. Des exemptions sur les revenus peuvent être appliquées selon votre situation.             
@@ -1731,7 +1721,8 @@ form:
         - section:
             fr: Avoirs liquides
           id: avoirs
-          components:
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'          
+          components: &avoirs
             - type: bandeau-notification
               text:
                 fr: Par <i>avoirs liquides</i>, on entend tout ce qu’une personne possède en espèces ou sous une forme équivalente.
@@ -1955,7 +1946,8 @@ form:
         - section:
             fr: Biens
           id: biens
-          components:      
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'          
+          components: &biens      
             - type: bandeau
               text: 
                 fr: Vous devez tenir compte des biens mobiliers et immobiliers. Différentes exclusions sont applicables selon votre situation.             
@@ -2239,8 +2231,8 @@ form:
         - section:
             fr: Enfant(s) à charge
           id: enfantsACharge
-          v-if: val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true'
-          components:
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr' && (val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true')
+          components: &enfants
             - type: repeatableGroup
               name: enfants
               repeatable: true
@@ -2444,8 +2436,8 @@ form:
         - section:
             fr: Revenus et biens des enfants
           id: revenusEnfants
-          v-if: val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true'
-          components:
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr' && (val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true')
+          components: &revenusEnfants
             - name: EnfantsPossedentRevenus
               type: radio
               label:
@@ -2520,7 +2512,8 @@ form:
         - section:
             fr: Destinataire de la correspondance
           id: destinataire
-          components:
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'                    
+          components: &correspondance
             - type: bandeau
               components:
                 - type: dynamic
@@ -2543,10 +2536,57 @@ form:
                     fr: La correspondance destinée à une personne seule lui sera directement transmise. Si elle doit plutôt être transmise à une autre personne, inscrivez la raison de ce choix.
                   validations:
                     optional: null        
-    - sectionGroup: null
-      v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
+
+    # Adulte 2
+    - sectionGroup: 
+        fr: Adulte 2
+      classes: icone user                      
+      v-if: val('Conjoint') === 'true'
+      prefixId: adulte2
+      sections: *sectionsAdulte
+    # Groupe Adulte 1 et/ou 2
+    - sectionGroup: 
+        fr: Adultes 1 et 2
+      v-if: val('Conjoint') === 'true' && val('TypeDemande') === 'Afdr'
       classes: icone user              
-      sections: *menage
+      sections: 
+        #Section - Domicile
+        - section:
+            fr: Informations sur le domicile
+          id: domicile2
+          components: *domicile
+        # Section - Revenus
+        - section:
+            fr: Revenus
+          id: revenus2
+          components: *revenus
+        # Section - Avoirs liquides
+        - section:
+            fr: Avoirs liquides
+          id: avoirs2
+          components: *avoirs
+        # Section - Biens
+        - section:
+            fr: Biens
+          id: biens2
+          components: *biens     
+        # Section - Enfants à charge
+        - section:
+            fr: Enfant(s) à charge
+          id: enfantsACharge2
+          v-if: val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true'
+          components: *enfants
+        # Section - Revenus et biens des enfants
+        - section:
+            fr: Revenus et biens des enfants
+          id: revenusEnfants2
+          v-if: val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true'
+          components: *revenusEnfants
+        # Section - Destinataire correspondance
+        - section:
+            fr: Destinataire de la correspondance
+          id: destinataire2
+          components: *correspondance
     - sectionGroup: 
         fr: Finalisation de la demande
       #v-if: form.TypeDemande
