@@ -416,6 +416,10 @@ body p {
     /*====================================================================================================*/
     /*  -Z20A- Forms (Boutons bas de page)  
 /*====================================================================================================*/
+    .zone-boutons.bas-page {
+        margin-top: 80px;
+    }
+
     .zone-boutons.bas-page button, .bouton-validation {
         width: 120px;
     }
@@ -630,6 +634,10 @@ nav.etapes-form .groupe {
     margin-left: -16px;
     padding-left: 16px;
 }
+
+    nav.etapes-form .groupe.active {
+        background-color: var(--couleur-bleu-pale);
+    }
 
 nav.etapes-form ul > li > ul > li, nav.etapes-form ul > li.sans-regroupement {
     padding: 16px 0;
