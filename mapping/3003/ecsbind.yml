@@ -134,6 +134,33 @@ bind:
     Autochtone_Oui:
       champs:
       - adulte1Req-00-Autochtone==true
+    anneereussisP1:
+      champs:
+      - adulte1primaire.0.adulte1Req01-NbAnneesReussiesPrimaire==1
+    anneereussisP2:
+      champs:
+      - adulte1primaire.0.adulte1Req01-NbAnneesReussiesPrimaire==2
+    anneereussisP3:
+      champs:
+      - adulte1primaire.0.adulte1Req01-NbAnneesReussiesPrimaire==3
+    anneereussisP4:
+      champs:
+      - adulte1primaire.0.adulte1Req01-NbAnneesReussiesPrimaire==4
+    anneereussisS1:
+      champs:
+      - adulte1secondaireGen.0.adulte1Req01-NbAnneesReussiesSecGeneral==1
+    anneereussisSp3:
+      champs:
+      - adulte1secondaireProf.0.adulte1Req01-NbAnneesReussiesSecFormProf==3
+    anneereussisSsp1:
+      champs:
+      - adulte1secondaireMetier.0.adulte1Req01-NbAnneesReussiesSecMetier==1
+    DiplomeDES:
+      champs:
+      - adulte1secondaireGen.0.adulte1Req01-DiplomeSecGeneral==Des
+    DiplomeAEP:
+      champs:
+      - adulte1secondaireProf.0.adulte1Req01-DiplomeSecFormProf==Aep
   2:
     DM_AFDR_FinEtudes:
       champs:
