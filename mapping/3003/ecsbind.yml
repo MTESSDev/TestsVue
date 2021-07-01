@@ -103,7 +103,13 @@ bind:
       - adulte1prénom1_Req-00
     nas:
       champs:
-      - adulte1Req-00_nas1
+      - adulte1nas
+    date_naissance:
+      champs:
+      - adulte1date_naissance
+    date_nas9:
+      champs:
+      - adulte1date_expiration_nas
   2:
     DM_AFDR_FinEtudes:
       champs:

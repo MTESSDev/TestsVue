@@ -293,7 +293,7 @@ form:
               validations: 
                 nas: true
                 optional: null
-            - name: date2_Req-00
+            - name: date_expiration_nas
               v-if: val('prefixId$nas').startsWith('9')
               type: date
               label: 
