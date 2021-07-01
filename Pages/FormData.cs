@@ -94,7 +94,14 @@ namespace ECSForm.Pages
                         }
                         else
                         {
-                            AcceptedValues = item.Value as IDictionary<object, object>;
+                            if (item.Value.GetType().Name.StartsWith("List"))
+                            {
+                                AcceptedValues = (item.Value as List<object>).ToDictionary(x => x, x => x);
+                            }
+                            else
+                            {
+                                AcceptedValues = item.Value as IDictionary<object, object>;
+                            }
                         }
                         break;
                     default:
@@ -220,7 +227,14 @@ namespace ECSForm.Pages
                         }
                         else
                         {
-                            AcceptedValues = item.Value as IDictionary<object, object>;
+                            if (item.Value.GetType().Name.StartsWith("List"))
+                            {
+                                AcceptedValues = (item.Value as List<object>).ToDictionary(x => x, x => x);
+                            }
+                            else
+                            {
+                                AcceptedValues = item.Value as IDictionary<object, object>;
+                            }
                         }
                         break;
                     default:
