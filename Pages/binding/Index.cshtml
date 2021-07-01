@@ -203,6 +203,9 @@
                     </select2fields>
                 </div>
                 <div>
+                    <label><input type="checkbox" v-model="showAll" /> Afficher même les valeurs assignées</label>
+                </div>
+                <div>
                     <label for="formule">
                         Formule (optionnel):
                     </label>
@@ -472,10 +475,15 @@
                 },
                 options: function (options) {
                     // update options
+                    var bckVal = this.value;
+                    //debugger;
                     $(this.$el)
                         .empty()
-                        .select2({ data: options, selectOnClose: true, maximumSelectionLength: -1});
-                }
+                        .select2({ data: options, selectOnClose: true, maximumSelectionLength: -1 })
+                        .val(bckVal)
+                        .trigger("change");
+                    
+                 }
             },
             destroyed: function () {
                 $(this.$el)
@@ -523,6 +531,11 @@
 
                         for (var i = 0; i < value.Champs.length; i++) {
                             if (!value.Champs[i].startsWith("<")) {
+
+                                cleanVal = value.Champs[i].split("==");
+                                if (cleanVal.length == 2 && !sall.includes(cleanVal[0])) {
+                                    sall.push(cleanVal[0]);
+                                }
                                 sall.push(value.Champs[i]);
                             }
                         }

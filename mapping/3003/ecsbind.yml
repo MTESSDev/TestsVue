@@ -116,9 +116,6 @@ bind:
     Sexe_Feminin:
       champs:
       - adulte1Req-00-Sexe==Feminin
-    Sexe_Masculin:
-      champs:
-      - adulte1Req-00-Sexe==Masculin
     Langue_Francais:
       champs:
       - adulte1Req-00-Langue==Francais
@@ -128,6 +125,15 @@ bind:
     NeQC_Oui:
       champs:
       - adulte1Req00-NeQC==true
+    NeQC_Non:
+      champs:
+      - adulte1Req00-NeQC==false
+    Sexe_Masculin:
+      champs:
+      - adulte1Req-00-Sexe==Masculin
+    Autochtone_Oui:
+      champs:
+      - adulte1Req-00-Autochtone==true
   2:
     DM_AFDR_FinEtudes:
       champs:
