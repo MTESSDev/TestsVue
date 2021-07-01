@@ -110,6 +110,9 @@ bind:
     date_nas9:
       champs:
       - adulte1date_expiration_nas
+    EQ_Raison1:
+      champs:
+      - PrecisionRaisonDemandeEmploi==AideRechercheEmploi
   2:
     DM_AFDR_FinEtudes:
       champs:
