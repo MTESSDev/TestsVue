@@ -14,9 +14,6 @@ bind:
     DM_AFDR_FinEtudes:
       champs:
       - EvenementsDerniereAnnee==ReqFinEtudesTempsPlein
-    cp12:
-      champs:
-      - <NULL>
     DM_AFDR_PerteRevenus:
       champs:
       - EvenementsDerniereAnnee==ReqFinDiminutionRevenus
@@ -29,6 +26,84 @@ bind:
     PerteRevenus3:
       champs:
       - ReqFinDiminutionRevenusType==FinRevenusPrestations
+    cp12:
+      champs:
+      - <NULL>
+    date_FinEtudes:
+      champs:
+      - ReqDateEvenementFinEtudesTempsPlein
+    date_Perterevenus:
+      champs:
+      - ReqDateEvenementFinDiminutionRevenus
+    AFDR_Raison1:
+      champs:
+      - PrecisionRaisonDemandeAfdr==AucunRevenu
+    AFDR_Raison5:
+      champs:
+      - PrecisionRaisonDemandeAfdr==PerteConjoint
+    AFDR_Raison5a:
+      champs:
+      - PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointDeces
+    AFDR_Raison5b:
+      champs:
+      - PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointSeparation
+    AFDR_Raison5c:
+      champs:
+      - PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointDivorce
+    AFDR_Raison2:
+      champs:
+      - PrecisionRaisonDemandeAfdr==AttenteDecision
+    AFDR_Raison3:
+      champs:
+      - PrecisionRaisonDemandeAfdr==SortieEtablissement
+    AFDR_Raison3a:
+      champs:
+      - PrecisionRaisonDemandeAfdrSortieEtablissement==SortieEtablissementSante
+    AFDR_Raison3b:
+      champs:
+      - PrecisionRaisonDemandeAfdrSortieEtablissement==SortieEtablissementDetention
+    AFDR_Raison4:
+      champs:
+      - PrecisionRaisonDemandeAfdr==RevenuInsuffisant
+    AFDR_Raison6:
+      champs:
+      - PrecisionRaisonDemandeAfdr==RemboursementFraisFuneraires
+    AFDR_Raison7:
+      champs:
+      - PrecisionRaisonDemandeAfdr==NaissanceEnfant
+    AFDR_Raison8:
+      champs:
+      - PrecisionRaisonDemandeAfdr==ArriveeConjoint
+    AFDR_Raison9:
+      champs:
+      - PrecisionRaisonDemandeAfdr==ProblemeSante
+    AFDR_Raison10:
+      champs:
+      - PrecisionRaisonDemandeAfdr==PrecisionRaisonDemandeAfdrAutreRaison
+    AFDR_Raison10_Autre:
+      champs:
+      - FinRevenusPrestationsPrecision
+    EQ_Raison4_Autre:
+      champs:
+      - PrecisionRaisonDemandeEmploiAutre
+    EQ_Raison3:
+      champs:
+      - PrecisionRaisonDemandeEmploi==DirigeEmployeurOrganisme
+    EQ_Raison4:
+      champs:
+      - PrecisionRaisonDemandeEmploi==PrecisionRaisonDemandeEmploiAutreRaison
+    EQ_Raison2:
+      champs:
+      - PrecisionRaisonDemandeEmploi==RetourEcole
+    nom:
+      champs:
+      - adulte1nom1_Req-00
+    prenom:
+      champs:
+      - adulte1prénom1_Req-00
+    nas:
+      champs:
+      - adulte1Req-00_nas1
   2:
     DM_AFDR_FinEtudes:
       champs:

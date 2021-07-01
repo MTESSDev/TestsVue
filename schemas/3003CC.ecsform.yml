@@ -279,11 +279,11 @@ form:
                 fr: Prénom
               validations: 
                 max: 22,length
-            - name: date_Req-00
+            - name: date_naissance
               type: date
               label: 
                 fr: Date de naissance
-            - name: Req-00_nas1
+            - name: nas
               type: text
               outerClasses: md          
               label: 
@@ -294,7 +294,7 @@ form:
                 nas: true
                 optional: null
             - name: date2_Req-00
-              v-if: val('prefixId$Req-00_nas1').startsWith('9')
+              v-if: val('prefixId$nas').startsWith('9')
               type: date
               label: 
                 fr: Date d'expiration
@@ -348,7 +348,7 @@ form:
               type: text
               label: 
                 fr: Indiquez votre pays de naissance
-            - name: date6_Req-00
+            - name: date_arrive_canada
               v-if: val('prefixId$neCanada') === 'false'
               type: date
               label: 

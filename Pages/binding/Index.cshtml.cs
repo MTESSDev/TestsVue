@@ -39,7 +39,7 @@ namespace ECSForm.Pages
         public List<string>? OptionsGroups { get; set; }
 
         [VueData("allOptionsFields")]
-        public Dictionary<string, List<string>>? AllOptionsFields { get; set; }
+        public Dictionary<string, HashSet<string>>? AllOptionsFields { get; set; }
 
         public BindingIndexModel(ILogger<BindingIndexModel> logger, IVueParser vueParser)
         {
@@ -53,7 +53,7 @@ namespace ECSForm.Pages
         public IActionResult OnGet(string id, string? gabarit = "1")
         {
             GabaritEnCours = gabarit;
-            var mappgingObj = ReadYamlCfg(@"C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\mapping\3003\ecsbind.yml");
+            var mappgingObj = ReadYamlCfg(@"mapping/3003/ecsbind.yml");
 
             Templates = mappgingObj.Templates;
             mappgingObj.Bind.TryGetValue(gabarit, out var bind);
@@ -62,26 +62,35 @@ namespace ECSForm.Pages
                 bind = new Dictionary<string, BindElement>();
             }
             Bind = bind;
-            var form = GenericModel.ReadYamlCfg(@"C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\schemas\3003CC.ecsform.yml");
+            var form = GenericModel.ReadYamlCfg(@"schemas/3003CC.ecsform.yml");
 
             var formData = new List<ComponentBinding>();
 
             GetComponents(form.Form?["sectionsGroup"], ref formData, null, null, null, null);
 
             OptionsGroups = new List<string>();
-            AllOptionsFields = new Dictionary<string, List<string>>();
+            AllOptionsFields = new Dictionary<string, HashSet<string>>();
 
             foreach (var component in formData)
             {
-                var list = new List<string>();
+                var list = new HashSet<string>();
                 foreach (var item in component.NameValues)
                 {
-                    list.Add(item);
+                    if (!list.Contains(item))
+                    {
+                        list.Add(item);
+                    }
                 }
 
                 if (AllOptionsFields.ContainsKey(component.SectionName))
                 {
-                    AllOptionsFields[component.SectionName].AddRange(list);
+                    foreach (var item in list)
+                    {
+                        if (!AllOptionsFields[component.SectionName].Contains(item))
+                        {
+                            AllOptionsFields[component.SectionName].Add(item);
+                        }
+                    }
                 }
                 else
                 {
@@ -91,7 +100,7 @@ namespace ECSForm.Pages
 
             }
 
-            AllOptionsFields.Add("Interne", new List<string>() { "<NULL>" });
+            AllOptionsFields.Add("Interne", new HashSet<string>() { "<NULL>" });
 
             foreach (var component in AllOptionsFields)
             {

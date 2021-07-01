@@ -343,9 +343,17 @@
             methods: {
                 save: function () {
                     //debugger;
-                    var data = { Champs: this.$parent.selectedFields };
 
-                    this.$parent.$set(this.$parent.bind, this.$parent.selectedField.pdfId, data)
+                    var data = null;
+
+                    if (this.$parent.selectedFields.length !== 0) {
+                        var data = { Champs: this.$parent.selectedFields };
+                        this.$parent.$set(this.$parent.bind, this.$parent.selectedField.pdfId, data)
+
+                    } else {
+                        this.$parent.$delete(this.$parent.bind, this.$parent.selectedField.pdfId)
+                    }
+
                     //this.$parent.bind['test'] = this.$parent.selectedFields;
                     axios
                         .post('/binding/save/3003/' + this.$parent.gabaritEnCours, this.$parent.bind)
@@ -437,12 +445,21 @@
                 var vm = this;
                 $(this.$el)
                     // init select2
-                    .select2({ data: this.options, selectOnClose: true, maximumSelectionLength: -1 })
+                    .select2({ data: this.options, selectOnClose: true, maximumSelectionLength: -1})
                     .val(this.value)
                     .trigger("change")
                     // emit event on change.
                     .on("change", function () {
                         vm.$emit("input", $(this).val());
+                    }).on('select2:unselecting', function () {
+                        debugger;
+                        $(this).data('unselecting', true);
+                    }).on('select2:opening', function (e) {
+                        debugger;
+                        if ($(this).data('unselecting')) {
+                            $(this).removeData('unselecting');
+                            e.preventDefault();
+                        }
                     });
             },
             watch: {
@@ -455,7 +472,7 @@
                     // update options
                     $(this.$el)
                         .empty()
-                        .select2({ data: options, selectOnClose: true, maximumSelectionLength: -1 });
+                        .select2({ data: options, selectOnClose: true, maximumSelectionLength: -1});
                 }
             },
             destroyed: function () {
@@ -540,10 +557,10 @@
                                         nbFound++;
                                     }
                                 }
-                               
+
                             }
 
-                            if (nbFound == this.bind[listeInput[i].name].Champs.length) {
+                            if (nbFound !== 0 && nbFound == this.bind[listeInput[i].name].Champs.length) {
                                 listeInput[i].style.backgroundColor = 'green';
                             } else {
                                 listeInput[i].style.backgroundColor = 'red';
