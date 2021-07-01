@@ -1,7 +1,32 @@
-﻿@page
+﻿@page "{id}/{gabarit?}"
 @model BindingIndexModel
 @{
     ViewData["Title"] = "ECS.PDFBinder";
+}
+
+
+@{
+    // here we do the serialization of our dictionary into JSON using Newtonsoft.Json package
+    // this object will be used in our Vue application
+
+    // over the years of web development, I've found out that the following
+    // serialization solves the problems I've encountered so far
+
+    // in a real app this would be created as a helper method somewhere
+    // if we want to exclude the c# code from our view
+    var serializationSettings = new Newtonsoft.Json.JsonSerializerSettings()
+    {
+        StringEscapeHandling = Newtonsoft.Json.StringEscapeHandling.EscapeHtml
+    };
+
+    var data =
+        Html.Raw(
+             System.Web.HttpUtility.JavaScriptStringEncode(
+                  Newtonsoft.Json.JsonConvert.SerializeObject(
+                    Model.VueData, Newtonsoft.Json.Formatting.None, serializationSettings
+                ),
+             false)
+        );
 }
 
 @section style{
@@ -31,7 +56,7 @@
 
                   <slot name="footer">
                     &nbsp;
-                    <button class="modal-default-button btn btn-primaire" @@click="$emit('close')">
+                    <button class="modal-default-button btn btn-primaire" @@click="save">
                       Enregistrer
                     </button>
                   </slot>
@@ -46,6 +71,11 @@
         <select>
           <slot></slot>
         </select>
+    </script>
+
+
+    <script type="text/x-template" id="pdfjs-template">
+        <input test></input>
     </script>
 
     <style>
@@ -67,7 +97,7 @@
         }
 
         .modal-container {
-            width: 500px;
+            width: 700px;
             margin: 0px auto;
             padding: 20px 30px;
             background-color: #fff;
@@ -150,7 +180,7 @@
                 <legend>Assignation source</legend>
                 <div>
                     <label for="select2groups">
-                        Section:
+                        Filtre section:
                     </label>
                 </div>
                 <div>
@@ -160,7 +190,7 @@
                 </div>
                 <div>
                     <label for="select2fields">
-                        Champ(s):
+                        Champ(s) et valeur(s):
                     </label>
                 </div>
                 <div>
@@ -170,11 +200,14 @@
                 </div>
                 <div>
                     <label for="formule">
-                        Formule:
+                        Formule (optionnel):
                     </label>
                 </div>
                 <div>
                     <input id="formule" class="minsize" type="text" />
+                </div>
+                <div>
+                    Voir la doc de Smart.Format.
                 </div>
             </fieldset>
         </div>
@@ -182,15 +215,29 @@
 
     <div style="padding: 5px; border: 1px dotted darkgrey; width: 100%">
 
-        <button class="btn btn-primaire" onclick="chargerPdf('/binding/getpdf/3003?pdf=3003-01_ProjetDynDEV')">3003-01 - Adulte 1</button>
-        <button class="btn btn-secondaire" onclick="chargerPdf('/binding/getpdf/3003?pdf=3003-01_ProjetDynDEV')">3003-01 - Adulte 2</button>
+
+        <!--
+            <button class="btn btn-primaire" onclick="chargerPdf('/binding/getpdf/3003?pdf=3003-01_ProjetDynDEV')">3003-01 - Adulte 1</button>
+            <button class="btn btn-secondaire" onclick="chargerPdf('/binding/getpdf/3003?pdf=3003-01_ProjetDynDEV')">3003-01 - Adulte 2</button>
+        -->
+        <div id="gabarits">
+            <ul>
+                <li is="todo-item"
+                    style="display: inline;"
+                    v-for="(template, index) in templates"
+                    v-bind:key="template.id"
+                    v-bind:id="template.id"
+                    v-bind:title="template.name"
+                    v-on:remove="templates.splice(index, 1)"></li>
+            </ul>
+        </div>
 
         <pre style="display:none">{{selectedGroup}} {{selectedFields}}</pre>
 
         <div style="width: 100%; text-align: center;">Les champs rouges n'ont pas encore été bindés.</div>
         <center>
             <div style="padding: 15px; background: lavender; border: 1px solid black; display: inline-block;">
-                <form id="form1" novalidate>
+                <form id="form1" novalidate ref="container">
                     <div style="border: 1px dashed darkviolet;" id="pdfTarget"></div>
                 </form>
             </div>
@@ -212,7 +259,7 @@
 
             pdfjsLib.GlobalWorkerOptions.workerSrc = '/scripts/pdf/pdf.worker.js';
 
-            //chargerPdf('pdfs/3003-01_ProjetDynDEV.pdf');
+            chargerPdf('/binding/getpdf/3003?pdf=3003-01_ProjetDynDEV');
         }
 
         function chargerPdf(pdf) {
@@ -239,8 +286,7 @@
                     var promise = doc.getPage(i).then(function (pdfPage) {
 
                         pdfjsViewer.FormFunctionality.setPostRenderHook(function () {
-
-
+                            app.MajChamps();
                         });
 
                         pdfjsViewer.FormFunctionality.setPostCreationTweak(function (fieldType, elementId, element) {
@@ -254,13 +300,24 @@
                                     element.style.backgroundColor = "red";
                                     break;
                             }*/
-                            element.style.backgroundColor = "red";
-
+                            //element.style.backgroundColor = "red";
+                            //element.setAttribute('style', "background-color: red");
                             element.readOnly = true;
+                            element.setAttribute('data-isPdf', true);
                             element.onclick = function (e) {
                                 app.sendInfo(e.target, fieldType);
                                 e.preventDefault();
                             };
+
+                            /*var ComponentClass = Vue.extend(customInput)
+                            var instance = new ComponentClass({
+                                parent: app,
+                                propsData: { value: 'text', style: "test"}
+                            })
+                            //instance.$slots.default = ['Click me!']
+                            instance.$mount() // pass nothing
+                            //         console.log(this.$refs)
+                            app.$refs.container.appendChild(instance.$el)*/
                             //debugger;
 
                             //element.title = elementId.alternativeText;
@@ -279,10 +336,63 @@
     </script>
 
     <script>
+
         // register modal component
-        Vue.component("modal", {
-            template: "#modal-template"
+        var test = Vue.component("modal", {
+            template: "#modal-template",
+            methods: {
+                save: function () {
+                    //debugger;
+                    var data = { Champs: this.$parent.selectedFields };
+
+                    this.$parent.$set(this.$parent.bind, this.$parent.selectedField.pdfId, data)
+                    //this.$parent.bind['test'] = this.$parent.selectedFields;
+                    axios
+                        .post('/binding/save/3003/' + this.$parent.gabaritEnCours, this.$parent.bind)
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+
+                    this.$emit('close')
+                }
+            }
         });
+
+        Vue.component('todo-item', {
+            parent: app,
+            template: '\
+                <li>\
+                  <button :class="getClass" v-on:click="redirectTo(id)">{{ title }}</button>\
+                </li>\
+              ',
+            computed: {
+                getClass: function () {
+                    if (this.id === this.$parent.$data.gabaritEnCours) {
+                        return "btn btn-primaire"
+                    } else {
+                        return "btn btn-secondaire"
+                    }
+                }
+            },
+            methods: {
+                redirectTo: function (id) {
+                    window.location.href = "/binding/3003/" + id;
+                },
+            },
+            props: ['title', 'id']
+        });
+
+        /*var customInput =  Vue.component('custom-input', {
+              props: ['value','style'],
+              template: `
+                  <input
+                    v-bind:value="value"
+                    :class="style"
+                    v-on:input="$emit('input', $event.target.value)"
+                  >
+                `
+          })*/
 
         Vue.component("select2groups", {
             props: ["options", "value"],
@@ -327,7 +437,7 @@
                 var vm = this;
                 $(this.$el)
                     // init select2
-                    .select2({ data: this.options, selectOnClose: true })
+                    .select2({ data: this.options, selectOnClose: true, maximumSelectionLength: -1 })
                     .val(this.value)
                     .trigger("change")
                     // emit event on change.
@@ -338,7 +448,6 @@
             watch: {
                 value: function (value) {
                     // update value
-                    debugger;
                     $(this.$el).val(value);
                     //.trigger("change");
                 },
@@ -346,7 +455,7 @@
                     // update options
                     $(this.$el)
                         .empty()
-                        .select2({ data: options, selectOnClose: true });
+                        .select2({ data: options, selectOnClose: true, maximumSelectionLength: -1 });
                 }
             },
             destroyed: function () {
@@ -359,49 +468,100 @@
         // start app
         var app = new Vue({
             el: "#app",
-            data: {
+            /*data: {
+                formKey: { test: 0 },
                 selectedField: '',
                 selectedGroup: 0,
                 selectedFields: [],
                 optionsGroups: [{ id: 1, text: "Hello" }, { id: 2, text: "World" }],
-
+            },*/
+            data: function () {
+                let donnees = JSON.parse('@data')
+                donnees.selectedField = '';
+                donnees.selectedFields = '';
+                donnees.selectedGroup = '';
+                return donnees;
             },
+
             computed: {
                 optionsFields: function () {
-                    return [{
-                        "text": "Group 1",
-                        "children": [
-                            {
-                                "id": 1,
-                                "text": "Option 1.1"
-                            },
-                            {
-                                "id": 2,
-                                "text": "Option 1.2"
+                    //debugger;
+                    if (this.selectedGroup == "0") {
+                        var all = [];
+                        for (var i = 0; i < this.optionsGroups.length; i++) {
+                            var group = this.allOptionsFields[this.optionsGroups[i]];
+                            for (var j = 0; j < group.length; j++) {
+                                all.push(group[j]);
                             }
-                        ]
-                    },
-                    {
-                        "text": "Group 2",
-                        "children": [
-                            {
-                                "id": 3,
-                                "text": "Option 2.1"
-                            },
-                            {
-                                "id": 4,
-                                "text": "Option 2.2"
-                            }
-                        ]
+                        }
+                        return all;
+                    } else {
+                        return this.allOptionsFields[this.selectedGroup];
                     }
-                    ];
+                    //return [{
+                    //            "id": 1,
+                    //            "text": "Option 1.1"
+                    //        },
+                    //        {
+                    //            "id": 2,
+                    //            "text": "Option 1." + Date.now()
+                    //        }
+                    //    ];
+                }
+            },
+            watch: {
+                bind: function (val, oldVal) {
+                    //debugger;
+                    this.MajChamps();
                 }
             },
             methods: {
+              MajChamps() {
+                    var listeInput = $("input[data-isPdf='true']");
+
+                    var all = [];
+                    for (var k = 0; k < this.optionsGroups.length; k++) {
+                        var group = this.allOptionsFields[this.optionsGroups[k]];
+                        for (var j = 0; j < group.length; j++) {
+                            all.push(group[j]);
+                        }
+                    }
+
+                    for (var i = 0; i < listeInput.length; i++) {
+                        if (typeof this.bind !== 'undefined'
+                            && typeof this.bind[listeInput[i].name] !== 'undefined') {
+
+                            var nbFound = 0;
+
+                            for (var j = 0; j < this.bind[listeInput[i].name].Champs.length; j++) {
+
+                                for (var k = 0; k < all.length; k++) {
+                                    if (all[k] == this.bind[listeInput[i].name].Champs[j]) {
+                                        nbFound++;
+                                    }
+                                }
+                               
+                            }
+
+                            if (nbFound == this.bind[listeInput[i].name].Champs.length) {
+                                listeInput[i].style.backgroundColor = 'green';
+                            } else {
+                                listeInput[i].style.backgroundColor = 'red';
+                            }
+
+                        } else {
+                            listeInput[i].style.backgroundColor = 'gold';
+                        }
+                    }
+                },
                 sendInfo(pdfElement, fieldType) {
                     //debugger;
                     //$('#'+pdfId)[0].style.backgroundColor = "blue";
                     this.selectedField = { "title": pdfElement.title, "pdfId": pdfElement.name };
+                    if (this.selectedGroup == '') {
+                        this.selectedGroup = '0';
+                    }
+                    this.selectedFields = (typeof this.bind[pdfElement.name] !== 'undefined') ? this.bind[pdfElement.name].Champs : [];
                     this.$nextTick(function () {
                         //debugger;
                         this.$refs.modalref.focus()

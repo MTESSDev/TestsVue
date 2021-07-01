@@ -1,13 +1,38 @@
 templates:
 - id: 1
+  ordre: 1
+  condition: 
   name: 3003-01 - Adulte 1
   pdf: 3003-01_ProjetDynDEV
 - id: 2
+  ordre: 2
+  condition: 
   name: 3003-01 - Adulte 2
   pdf: 3003-01_ProjetDynDEV
 bind:
-   1:
-    nom:
-      section: demande
-      field: typedemande
-      value: afdr
+  1:
+    DM_AFDR_FinEtudes:
+      champs:
+      - EvenementsDerniereAnnee==ReqFinEtudesTempsPlein
+    cp12:
+      champs:
+      - <NULL>
+    DM_AFDR_PerteRevenus:
+      champs:
+      - EvenementsDerniereAnnee==ReqFinDiminutionRevenus
+    PerteRevenus1:
+      champs:
+      - ReqFinDiminutionRevenusType==FinRevenusEmploiReq
+    PerteRevenus2:
+      champs:
+      - ReqFinDiminutionRevenusType==FinRevenusTravailAutonomeReq
+    PerteRevenus3:
+      champs:
+      - ReqFinDiminutionRevenusType==FinRevenusPrestations
+  2:
+    DM_AFDR_FinEtudes:
+      champs:
+      - EvenementsDerniereAnnee==ReqFinEtudesTempsPlein
+    cp12:
+      champs:
+      - <NULL>

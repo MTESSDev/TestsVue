@@ -10,11 +10,9 @@ namespace ECSForm.Pages
     {
         public FormData()
         {
-            Form = new Inputs();
             Inputs = new List<Inputs>();
         }
 
-        public Inputs Form { get; set; }
         public List<Inputs> Inputs { get; set; }
     }
 
@@ -56,6 +54,7 @@ namespace ECSForm.Pages
         public string? Name { get; set; }
         public string? PrefixId { get; set; }
         public string? GroupName { get; set; }
+        public bool? IsRepeatable { get; set; }
         public TypeInput Type { get; set; }
         public IDictionary<object, object>? AcceptedValues { get; set; }
 
@@ -153,6 +152,85 @@ namespace ECSForm.Pages
 
         public List<Attribute> Attributes { get; private set; }
     }
+
+    public class ComponentBinding
+    {
+        public ComponentBinding()
+        {
+        }
+
+        public string? Name { get; set; }
+        public List<string>? NameValues { get; set; }
+        public string? PrefixId { get; set; }
+        public string? GroupName { get; set; }
+        public string? SectionName { get; set; }
+        public int? MaxOccur { get; set; }
+        public bool? IsRepeatable { get; set; }
+        public TypeInput Type { get; set; }
+        public IDictionary<object, object>? AcceptedValues { get; set; }
+
+        public void SetType(string? type)
+        {
+            switch (type?.ToUpper())
+            {
+                case "HIDDEN":
+                case "TEXT":
+                case "TEXTAREA":
+                    Type = TypeInput.TEXT;
+                    break;
+                case "DATE":
+                    Type = TypeInput.DATE;
+                    break;
+                case "SELECT":
+                    Type = TypeInput.SELECT;
+                    break;
+                case "CHECKBOX":
+                    Type = TypeInput.CHECKBOX;
+                    break;
+                case "RADIO":
+                    Type = TypeInput.RADIO;
+                    break;
+                default:
+                    Type = TypeInput.SKIP;
+                    break;
+            }
+        }
+
+        public void ParseAttributes(IDictionary<object, object>? attr, bool parseValidations = true)
+        {
+            if (attr is null) return;
+
+            foreach (var item in attr)
+            {
+                switch (item.Key.ToString()?.ToUpper())
+                {
+                    case "NAME":
+                        Name = item.Value.ToString();
+                        break;
+                    case "LIMIT":
+                        MaxOccur = int.Parse(item.Value.ToString());
+                        break;
+                    case "TYPE":
+                        SetType(item.Value.ToString());
+                        break;
+                    case "OPTIONS":
+                        if (item.Value.ToString().Equals("yesno", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            AcceptedValues = new Dictionary<object, object>() { { "true", true }, { "false", false }, };
+                        }
+                        else
+                        {
+                            AcceptedValues = item.Value as IDictionary<object, object>;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+    }
+
 
     public class Rule
     {
