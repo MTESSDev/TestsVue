@@ -113,6 +113,21 @@ bind:
     EQ_Raison1:
       champs:
       - PrecisionRaisonDemandeEmploi==AideRechercheEmploi
+    Sexe_Feminin:
+      champs:
+      - adulte1Req-00-Sexe==Feminin
+    Sexe_Masculin:
+      champs:
+      - adulte1Req-00-Sexe==Masculin
+    Langue_Francais:
+      champs:
+      - adulte1Req-00-Langue==Francais
+    Langue_Anglais:
+      champs:
+      - adulte1Req-00-Langue==Anglais
+    NeQC_Oui:
+      champs:
+      - adulte1Req00-NeQC==true
   2:
     DM_AFDR_FinEtudes:
       champs:

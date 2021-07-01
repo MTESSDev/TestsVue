@@ -56,6 +56,10 @@
 
                   <slot name="footer">
                     &nbsp;
+                    <button class="modal-default-button btn btn-secondaire" @@click="$emit('close')">
+                      Annuler
+                    </button>
+                    &nbsp;
                     <button class="modal-default-button btn btn-primaire" @@click="save">
                       Enregistrer
                     </button>
@@ -190,11 +194,11 @@
                 </div>
                 <div>
                     <label for="select2fields">
-                        Champ(s) et valeur(s):
+                        Champ(s) et valeur(s): ({{optionsFields.length}})
                     </label>
                 </div>
                 <div>
-                    <select2fields id="select2fields" class="minsize" multiple :options="optionsFields" v-model="selectedFields">
+                    <select2fields id="select2fields" class="minsize" multiple :options="optionsFields" v-model="selectedFieldsTemp">
                         <option disabled value="0">Choisir</option>
                     </select2fields>
                 </div>
@@ -204,7 +208,7 @@
                     </label>
                 </div>
                 <div>
-                    <input id="formule" class="minsize" type="text" />
+                    <input id="formule" class="form-control" type="text" />
                 </div>
                 <div>
                     Voir la doc de Smart.Format.
@@ -231,8 +235,6 @@
                     v-on:remove="templates.splice(index, 1)"></li>
             </ul>
         </div>
-
-        <pre style="display:none">{{selectedGroup}} {{selectedFields}}</pre>
 
         <div style="width: 100%; text-align: center;">Les champs rouges n'ont pas encore été bindés.</div>
         <center>
@@ -346,13 +348,15 @@
 
                     var data = null;
 
-                    if (this.$parent.selectedFields.length !== 0) {
-                        var data = { Champs: this.$parent.selectedFields };
+                    if (this.$parent.selectedFieldsTemp.length !== 0) {
+                        var data = { Champs: this.$parent.selectedFieldsTemp };
                         this.$parent.$set(this.$parent.bind, this.$parent.selectedField.pdfId, data)
 
                     } else {
                         this.$parent.$delete(this.$parent.bind, this.$parent.selectedField.pdfId)
                     }
+
+                    this.$parent.selectedFields = this.$parent.selectedFieldsTemp;
 
                     //this.$parent.bind['test'] = this.$parent.selectedFields;
                     axios
@@ -452,10 +456,8 @@
                     .on("change", function () {
                         vm.$emit("input", $(this).val());
                     }).on('select2:unselecting', function () {
-                        debugger;
                         $(this).data('unselecting', true);
                     }).on('select2:opening', function (e) {
-                        debugger;
                         if ($(this).data('unselecting')) {
                             $(this).removeData('unselecting');
                             e.preventDefault();
@@ -496,25 +498,53 @@
                 let donnees = JSON.parse('@data')
                 donnees.selectedField = '';
                 donnees.selectedFields = '';
+                donnees.selectedFieldsTemp = '';
                 donnees.selectedGroup = '';
+                donnees.showAll = false;
                 return donnees;
             },
 
             computed: {
-                optionsFields: function () {
-                    //debugger;
-                    if (this.selectedGroup == "0") {
-                        var all = [];
-                        for (var i = 0; i < this.optionsGroups.length; i++) {
-                            var group = this.allOptionsFields[this.optionsGroups[i]];
-                            for (var j = 0; j < group.length; j++) {
-                                all.push(group[j]);
+                all: function () {
+                    var sall = [];
+                    for (var i = 0; i < this.optionsGroups.length; i++) {
+                        var group = this.allOptionsFields[this.optionsGroups[i]];
+                        for (var j = 0; j < group.length; j++) {
+                            sall.push(group[j]);
+                        }
+                    }
+                    return sall;
+                },
+                onlyBinded: function () {
+                    var sall = [];
+
+                    Object.entries(this.bind).forEach(entry => {
+                        const [key, value] = entry;
+
+                        for (var i = 0; i < value.Champs.length; i++) {
+                            if (!value.Champs[i].startsWith("<")) {
+                                sall.push(value.Champs[i]);
                             }
                         }
-                        return all;
+                    });
+                    return sall;
+                },
+                optionsFields: function () {
+                    var toReturn = [];
+
+                    if (this.selectedGroup == "0") {
+                        toReturn = this.all;
                     } else {
-                        return this.allOptionsFields[this.selectedGroup];
+                        toReturn = this.allOptionsFields[this.selectedGroup];
                     }
+                    if (!this.showAll) {
+                        toReturn = toReturn.filter(function (el) {
+                            return app.selectedFields.includes(el) || !app.onlyBinded.includes(el);
+                        });
+
+                    }
+
+                    return toReturn;
                     //return [{
                     //            "id": 1,
                     //            "text": "Option 1.1"
@@ -536,13 +566,7 @@
               MajChamps() {
                     var listeInput = $("input[data-isPdf='true']");
 
-                    var all = [];
-                    for (var k = 0; k < this.optionsGroups.length; k++) {
-                        var group = this.allOptionsFields[this.optionsGroups[k]];
-                        for (var j = 0; j < group.length; j++) {
-                            all.push(group[j]);
-                        }
-                    }
+                    var sall = this.all;
 
                     for (var i = 0; i < listeInput.length; i++) {
                         if (typeof this.bind !== 'undefined'
@@ -552,8 +576,8 @@
 
                             for (var j = 0; j < this.bind[listeInput[i].name].Champs.length; j++) {
 
-                                for (var k = 0; k < all.length; k++) {
-                                    if (all[k] == this.bind[listeInput[i].name].Champs[j]) {
+                                for (var k = 0; k < sall.length; k++) {
+                                    if (sall[k] == this.bind[listeInput[i].name].Champs[j]) {
                                         nbFound++;
                                     }
                                 }
@@ -578,7 +602,8 @@
                     if (this.selectedGroup == '') {
                         this.selectedGroup = '0';
                     }
-                    this.selectedFields = (typeof this.bind[pdfElement.name] !== 'undefined') ? this.bind[pdfElement.name].Champs : [];
+                    this.selectedFieldsTemp = (typeof this.bind[pdfElement.name] !== 'undefined') ? this.bind[pdfElement.name].Champs : [];
+                    this.selectedFields = this.selectedFieldsTemp;
                     this.$nextTick(function () {
                         //debugger;
                         this.$refs.modalref.focus()

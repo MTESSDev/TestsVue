@@ -305,7 +305,7 @@ form:
               label: 
                 fr: Sexe
               options: 
-                Feminim: Féminin 
+                Feminin: Féminin 
                 Masculin: Masculin 
             - name: Req-00-Langue
               type: radio
