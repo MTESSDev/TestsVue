@@ -228,7 +228,7 @@ form:
               tag: div        
               components:      
                 - name: PrecisionRaisonDemandeEmploi
-                  type: radio
+                  type: checkbox
                   label: 
                     fr: Précisez la raison de votre demande de services d'aide à l'emploi
                   options: 
@@ -237,12 +237,12 @@ form:
                     DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
                     PrecisionRaisonDemandeEmploiAutreRaison: Autre
                 - name: PrecisionRaisonDemandeEmploiAutre
-                  v-if: val('PrecisionRaisonDemandeEmploi') === 'DirigeEmployeurOrganisme'
+                  v-if: val('PrecisionRaisonDemandeEmploi').includes('DirigeEmployeurOrganisme')
                   type: text
                   label: 
                     fr: Précisez l'employeur ou l'organisme
                 - name: PrecisionRaisonDemandeEmploiAutre
-                  v-if: val('PrecisionRaisonDemandeEmploi') === 'PrecisionRaisonDemandeEmploiAutreRaison'
+                  v-if: val('PrecisionRaisonDemandeEmploi').includes('PrecisionRaisonDemandeEmploiAutreRaison')
                   type: text
                   label: 
                     fr: Précisez la raison de votre demande d'aide à l'emploi
