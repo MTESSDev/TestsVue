@@ -242,7 +242,7 @@
                     </label>
                 </div>
                 <div>
-                    <input id="formule" class="form-control" type="text" />
+                    <input id="formule" class="form-control" type="text" v-model="selectedFormula" />
                 </div>
                 <div>
                     Voir la doc de Smart.Format.
@@ -387,7 +387,11 @@
                     var data = null;
 
                     if (this.$parent.selectedFieldsTemp.length !== 0) {
-                        var data = { Champs: this.$parent.selectedFieldsTemp };
+                        if (this.$parent.selectedFormula === "") {
+                            this.$parent.selectedFormula = undefined;
+                        }
+
+                        var data = { Champs: this.$parent.selectedFieldsTemp, Formule: this.$parent.selectedFormula };
                         this.$parent.$set(this.$parent.bindActuel, this.$parent.selectedField.pdfId, data)
 
                     } else {
@@ -543,6 +547,7 @@
                 donnees.selectedFields = '';
                 donnees.selectedFieldsTemp = '';
                 donnees.selectedGroup = '';
+                donnees.selectedFormula = '';
                 donnees.showAll = false;
                 return donnees;
             },
@@ -582,7 +587,7 @@
                         });
                     });
 
-                 
+
                     return sall;
                 },
                 bindActuel: function () {
@@ -662,6 +667,8 @@
                         this.selectedGroup = '0';
                     }
                     this.selectedFieldsTemp = (typeof this.bindActuel[pdfElement.name] !== 'undefined') ? this.bindActuel[pdfElement.name].Champs : [];
+                    this.selectedFormula = (typeof this.bindActuel[pdfElement.name] !== 'undefined') ? this.bindActuel[pdfElement.name].Formule : undefined;
+
                     this.selectedFields = this.selectedFieldsTemp;
                     this.$nextTick(function () {
                         //debugger;
