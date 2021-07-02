@@ -168,3 +168,6 @@ bind:
     cp12:
       champs:
       - <NULL>
+    adresse_numero:
+      champs:
+      - adulte2adresse1_Req-00

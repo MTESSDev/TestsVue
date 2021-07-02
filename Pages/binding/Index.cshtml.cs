@@ -30,7 +30,7 @@ namespace ECSForm.Pages
         public List<Dictionary<string, string>>? Templates { get; set; }
 
         [VueData("bind")]
-        public Dictionary<string, BindElement>? Bind { get; set; }
+        public Dictionary<string, Dictionary<string, BindElement>>? Bind { get; set; }
 
         [VueData("gabaritEnCours")]
         public string? GabaritEnCours { get; set; }
@@ -56,12 +56,13 @@ namespace ECSForm.Pages
             var mappgingObj = ReadYamlCfg(@"mapping/3003/ecsbind.yml");
 
             Templates = mappgingObj.Templates;
-            mappgingObj.Bind.TryGetValue(gabarit, out var bind);
-            if(bind is null)
+            Bind = mappgingObj.Bind;
+
+            if(Bind is null)
             {
-                bind = new Dictionary<string, BindElement>();
+                Bind = new Dictionary<string,Dictionary<string, BindElement>>();
             }
-            Bind = bind;
+
             var form = GenericModel.ReadYamlCfg(@"schemas/3003CC.ecsform.yml");
 
             var formData = new List<ComponentBinding>();

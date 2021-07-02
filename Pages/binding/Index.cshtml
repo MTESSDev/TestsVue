@@ -102,7 +102,7 @@
         }
 
         .modal-container {
-            width: 700px;
+            width: 800px;
             margin: 0px auto;
             padding: 20px 30px;
             background-color: #fff;
@@ -384,23 +384,21 @@
             template: "#modal-template",
             methods: {
                 save: function () {
-                    //debugger;
-
                     var data = null;
 
                     if (this.$parent.selectedFieldsTemp.length !== 0) {
                         var data = { Champs: this.$parent.selectedFieldsTemp };
-                        this.$parent.$set(this.$parent.bind, this.$parent.selectedField.pdfId, data)
+                        this.$parent.$set(this.$parent.bindActuel, this.$parent.selectedField.pdfId, data)
 
                     } else {
-                        this.$parent.$delete(this.$parent.bind, this.$parent.selectedField.pdfId)
+                        this.$parent.$delete(this.$parent.bindActuel, this.$parent.selectedField.pdfId)
                     }
 
                     this.$parent.selectedFields = this.$parent.selectedFieldsTemp;
 
                     //this.$parent.bind['test'] = this.$parent.selectedFields;
                     axios
-                        .post('/binding/save/3003/' + this.$parent.gabaritEnCours, this.$parent.bind)
+                        .post('/binding/save/3003/' + this.$parent.gabaritEnCours, this.$parent.bindActuel)
                         .catch(function (error) {
                             // handle error
                             console.log(error);
@@ -563,21 +561,32 @@
                 onlyBinded: function () {
                     var sall = [];
 
-                    Object.entries(this.bind).forEach(entry => {
-                        const [key, value] = entry;
+                    //On boucle tous les gabarits
+                    Object.entries(app.bind).forEach(gabarit => {
+                        const [id, content] = gabarit;
 
-                        for (var i = 0; i < value.Champs.length; i++) {
-                            if (!value.Champs[i].startsWith("<")) {
+                        //Ensuite toutes les valeurs deja assignées une fois
+                        Object.entries(content).forEach(entry => {
+                            const [key, value] = entry;
 
-                                cleanVal = value.Champs[i].split("==");
-                                if (cleanVal.length == 2 && !sall.includes(cleanVal[0])) {
-                                    sall.push(cleanVal[0]);
+                            for (var i = 0; i < value.Champs.length; i++) {
+                                if (!value.Champs[i].startsWith("<")) {
+
+                                    cleanVal = value.Champs[i].split("==");
+                                    if (cleanVal.length == 2 && !sall.includes(cleanVal[0])) {
+                                        sall.push(cleanVal[0]);
+                                    }
+                                    sall.push(value.Champs[i]);
                                 }
-                                sall.push(value.Champs[i]);
                             }
-                        }
+                        });
                     });
+
+                 
                     return sall;
+                },
+                bindActuel: function () {
+                    return this.bind[this.gabaritEnCours];
                 },
                 optionsFields: function () {
                     var toReturn = [];
@@ -607,8 +616,7 @@
                 }
             },
             watch: {
-                bind: function (val, oldVal) {
-                    //debugger;
+                bindActuel: function (val, oldVal) {
                     this.MajChamps();
                 }
             },
@@ -620,21 +628,22 @@
 
                     for (var i = 0; i < listeInput.length; i++) {
                         if (typeof this.bind !== 'undefined'
-                            && typeof this.bind[listeInput[i].name] !== 'undefined') {
+                            && typeof this.bindActuel !== 'undefined'
+                            && typeof this.bindActuel[listeInput[i].name] !== 'undefined') {
 
                             var nbFound = 0;
 
-                            for (var j = 0; j < this.bind[listeInput[i].name].Champs.length; j++) {
+                            for (var j = 0; j < this.bindActuel[listeInput[i].name].Champs.length; j++) {
 
                                 for (var k = 0; k < sall.length; k++) {
-                                    if (sall[k] == this.bind[listeInput[i].name].Champs[j]) {
+                                    if (sall[k] == this.bindActuel[listeInput[i].name].Champs[j]) {
                                         nbFound++;
                                     }
                                 }
 
                             }
 
-                            if (nbFound !== 0 && nbFound == this.bind[listeInput[i].name].Champs.length) {
+                            if (nbFound !== 0 && nbFound == this.bindActuel[listeInput[i].name].Champs.length) {
                                 listeInput[i].style.backgroundColor = 'green';
                             } else {
                                 listeInput[i].style.backgroundColor = 'red';
@@ -652,7 +661,7 @@
                     if (this.selectedGroup == '') {
                         this.selectedGroup = '0';
                     }
-                    this.selectedFieldsTemp = (typeof this.bind[pdfElement.name] !== 'undefined') ? this.bind[pdfElement.name].Champs : [];
+                    this.selectedFieldsTemp = (typeof this.bindActuel[pdfElement.name] !== 'undefined') ? this.bindActuel[pdfElement.name].Champs : [];
                     this.selectedFields = this.selectedFieldsTemp;
                     this.$nextTick(function () {
                         //debugger;
