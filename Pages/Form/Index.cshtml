@@ -125,6 +125,7 @@
 
             <div v-if="new URLSearchParams(window.location.search).get('debug')" class="infos-developpeurs">
                 <pre>{{form}}</pre>
+                <button class="btn btn-secondaire btn-enregistrer" v-on:click="forcerSoumettre">Forcer soumission</button>
             </div>
         </div>
     </div>
@@ -197,7 +198,7 @@
                 this.validerFormulaire(this)
             },
             submitHandler(data) {
-                axios.post('/Privacy', data)
+                axios.post('/api/session/3003cc', data)
             },
             repeatableAdded(model) {
                 if (document.activeElement) {
@@ -466,7 +467,7 @@
 
                     //TODO pour le moment post au serveur uniquement si mode debug
                     if (new URLSearchParams(window.location.search).get('debug')) {
-                        axios.post('/Privacy/3003cc', this.form)
+                        axios.post('/api/session/3003cc', this.form)
                             .then(response => {
                                 console.log(response)
                             })
@@ -597,6 +598,16 @@
             enregistrer() {
                 axios.post('@Url.PageLink("save", null, new { id = "3003CC" } )', this.form);
                 alert("Sauvegardé!");
+            },
+            forcerSoumettre()
+            {
+                axios.post('/api/session/3003CC', this.form)
+                    .then(response => {
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        console.log(error.response.data);
+                    });
             }
         },
         computed: {

@@ -122,10 +122,13 @@ namespace ECSForm.Pages
                     case "max":
                         yield return new MaxLengthAttribute(int.Parse(item.Param ?? "0"));
                         break;
+                    case "nas":
+                        // Non géré côté serveur pour le moment
+                        break;
                     case "optional":
                         break;
                     default:
-                        throw new InvalidOperationException(item.Name + " unknown");
+                        throw new InvalidOperationException(item.Name + " validation type unknown");
                         //break;
                 }
             }
