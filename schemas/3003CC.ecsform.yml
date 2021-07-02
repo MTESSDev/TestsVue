@@ -1837,7 +1837,7 @@ form:
               options: yesno
             - name: AvoirsComptes
               type: repeatableGroup
-              v-if: val('PossedeAvoirsComptes') === 'true'
+              v-if: val('prefixId$PossedeAvoirsComptes') === 'true'
               repeatable: true
               label:
                 fr: Comptes dans un établissement financier
@@ -1847,6 +1847,8 @@ form:
                 fr: Ajouter un compte
               removeLabel:
                 fr: Supprimer ce compte
+              validations:
+                max: 5
               components:
                 - name: AvoirCompteProprio
                   type: radio
@@ -1887,7 +1889,7 @@ form:
               options: yesno
             - name: AvoirsEnMain
               type: repeatableGroup
-              v-if: val('PossedeAvoirsEnMain') === 'true'
+              v-if: val('prefixId$PossedeAvoirsEnMain') === 'true'
               repeatable: true
               label:
                 fr: Avoirs en main, chèques non encaissés, cartes de crédit prépayées
@@ -1897,6 +1899,8 @@ form:
                 fr: Ajouter un avoir
               removeLabel:
                 fr: Supprimer cet avoir
+              validations:
+                max: 4
               components:
                 - name: AvoirEnMainProprio
                   type: radio
@@ -1935,7 +1939,7 @@ form:
               options: yesno
             - name: ChequesEnCirculation
               type: repeatableGroup
-              v-if: val('PossedeChequesEnCirculation') === 'true'
+              v-if: val('prefixId$PossedeChequesEnCirculation') === 'true'
               repeatable: true
               label:
                 fr: Chèques en circulation ou paiements de logement préautorisés
@@ -1945,6 +1949,8 @@ form:
                 fr: Ajouter un chèque ou un paiement préautorisé
               removeLabel:
                 fr: Supprimer ce chèque ou paiement préautorisé
+              validations:
+                max: 6
               components:
                 - name: ChequesEnCirculationProprio
                   type: radio
@@ -1977,7 +1983,7 @@ form:
               options: yesno
             - name: AvoirsPlacements
               type: repeatableGroup
-              v-if: val('PossedePlacements') === 'true'
+              v-if: val('prefixId$PossedePlacements') === 'true'
               repeatable: true
               label:
                 fr: Placements (REER, REEE, CELI, dépôts à terme ou autre)?
@@ -1987,6 +1993,8 @@ form:
                 fr: Ajouter un placement
               removeLabel:
                 fr: Supprimer ce placement
+              validations:
+                max: 3
               components:
                 - name: AvoirPlacementProprio
                   type: radio
@@ -2015,7 +2023,7 @@ form:
               options: yesno
             - name: AvoirsSommesDues
               type: repeatableGroup
-              v-if: val('PossedeSommesDues') === 'true'
+              v-if: val('prefixId$PossedeSommesDues') === 'true'
               repeatable: true
               label:
                 fr: Sommes dues
@@ -2025,6 +2033,8 @@ form:
                 fr: Ajouter une somme due
               removeLabel:
                 fr: Supprimer cette somme due
+              validations:
+                max: 3
               components:
                 - name: AvoirSommeDueProprio
                   type: radio
