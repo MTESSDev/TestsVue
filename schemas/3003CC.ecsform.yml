@@ -701,7 +701,7 @@ form:
                     NiveauEtudesSecondaireGen: Secondaire (Général)
                     NiveauEtudesSecondaireFormProf: Secondaire (Formation professionnelle)
                     NiveauEtudesSecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
-                    NiveauEtudesCollegial: Collegial (Formation générale ou technique)
+                    NiveauEtudesCollegial: Collégial (Formation générale ou technique)
                     NiveauEtudesUniversitaire: Universitaire
       
                 - name: primaire        
