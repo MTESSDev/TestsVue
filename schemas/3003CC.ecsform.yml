@@ -2075,7 +2075,7 @@ form:
             - name: BiensVehicules
               type: repeatableGroup
               repeatable: true
-              v-if: val('PossedeBiensVehicules') === 'true'    
+              v-if: val('prefixId$PossedeBiensVehicules') === 'true'    
               label:
                 fr: Véhicules
               instanceLabel:
@@ -2084,6 +2084,8 @@ form:
                 fr: Ajouter un véhicule
               removeLabel:
                 fr: Supprimer ce véhicule
+              validations:
+                max: 6
               components: 
                 - name: ProprioVehicule
                   type: radio
@@ -2126,7 +2128,7 @@ form:
             - name: BiensImmobiliers
               type: repeatableGroup
               repeatable: true
-              v-if: val('PossedeBiensImmobiliers') === 'true'    
+              v-if: val('prefixId$PossedeBiensImmobiliers') === 'true'    
               label:
                 fr: Biens immobiliers
               instanceLabel:
@@ -2135,6 +2137,8 @@ form:
                 fr: Ajouter bien immobilier
               removeLabel:
                 fr: Supprimer ce bien immobilier
+              validations:
+                max: 3
               components: 
                 - name: ProprioBienImmobilier
                   type: radio
@@ -2172,7 +2176,7 @@ form:
             - name: BiensMobiliers
               type: repeatableGroup
               repeatable: true
-              v-if: val('PossedeBiensMobiliers') === 'true'    
+              v-if: val('prefixId$PossedeBiensMobiliers') === 'true'    
               label:
                 fr: Biens mobiliers
               instanceLabel:
@@ -2181,6 +2185,8 @@ form:
                 fr: Ajouter un bien mobilier
               removeLabel:
                 fr: Supprimer ce bien mobilier
+              validations:
+                max: 3
               components: 
                 - name: BienMobilierProprio
                   type: radio
@@ -2210,7 +2216,7 @@ form:
             - name: BiensAssuranceVie
               type: repeatableGroup
               repeatable: true
-              v-if: val('PossedeBiensAssuranceVie') === 'true'    
+              v-if: val('prefixId$PossedeBiensAssuranceVie') === 'true'    
               label:
                 fr: Assurances vie
               instanceLabel:
@@ -2219,6 +2225,8 @@ form:
                 fr: Ajouter une assurance vie
               removeLabel:
                 fr: Supprimer cette assurance
+              validations:
+                max: 2
               components: 
                 - name: BienAssuranceVieProprio
                   type: radio
@@ -2253,7 +2261,7 @@ form:
             - name: BiensEntreprise
               type: repeatableGroup
               repeatable: true
-              v-if: val('PossedeEntreprise') === 'true'    
+              v-if: val('prefixId$PossedeEntreprise') === 'true'    
               label:
                 fr: Entreprises
               instanceLabel:
@@ -2262,6 +2270,8 @@ form:
                 fr: Ajouter une entreprise
               removeLabel:
                 fr: Supprimer cette entreprise
+              validations:
+                max: 3
               components: 
                 - name: BiensEntrepriseProprio
                   type: radio
@@ -2289,12 +2299,12 @@ form:
                     compagnie: Compagnie
                 - name: BiensEntrepriseSocietePourcentage
                   type: number
-                  v-if: val(`${name}.BiensEntrepriseStatut`, index) && val(`${name}.BiensEntrepriseStatut`, index) === 'societe'
+                  v-if: val(`${name}.prefixId$BiensEntrepriseStatut`, index) && val(`${name}.prefixId$BiensEntrepriseStatut`, index) === 'societe'
                   label:
                     fr: Pourcentage de participation dans la société
                 - name: BiensEntrepriseCompagniePourcentage
                   type: number                  
-                  v-if: val(`${name}.BiensEntrepriseStatut`, index) && val(`${name}.BiensEntrepriseStatut`, index) === 'compagnie'
+                  v-if: val(`${name}.prefixId$BiensEntrepriseStatut`, index) && val(`${name}.prefixId$BiensEntrepriseStatut`, index) === 'compagnie'
                   label:
                     fr: Pourcentage de participation dans la compagnie
             - name: PossedeBiensCedes
@@ -2307,7 +2317,7 @@ form:
             - name: BiensCedes
               type: repeatableGroup
               repeatable: true
-              v-if: val('PossedeBiensCedes') === 'true'    
+              v-if: val('prefixId$PossedeBiensCedes') === 'true'    
               label:
                 fr: Biens ou avoirs liquides cédés ou auxquels vous avez renoncé
               instanceLabel:
@@ -2316,6 +2326,8 @@ form:
                 fr: Ajouter un bien ou un avoir
               removeLabel:
                 fr: Supprimer ce bien ou cet avoir
+              validations:
+                max: 3
               components: 
                 - name: BiensCedesProprio
                   type: radio
@@ -2358,6 +2370,8 @@ form:
                 fr: Ajouter un enfant à charge
               removeLabel:
                 fr: Supprimer cet enfant à charge
+              validations:
+                max: 3
               components:
                 - name: cp12
                   type: text
@@ -2395,7 +2409,7 @@ form:
                   options: yesno
                 - name: NiveauEtudes
                   type: select
-                  v-if: val(`${name}.AuxEtudes`, index) === 'true'
+                  v-if: val(`${name}.prefixId$AuxEtudes`, index) === 'true'
                   label:
                     fr: Niveau d'études
                   options:
@@ -2411,7 +2425,7 @@ form:
                   type: text
                   label:
                     fr: Précisez
-                  v-if: val(`${name}.NiveauEtudes`, index) === 'Autre'
+                  v-if: val(`${name}.prefixId$NiveauEtudes`, index) === 'Autre'
                 - name: handicape
                   type: radio
                   label:
@@ -2443,7 +2457,7 @@ form:
                     fr: Ce parent réside-t-il au Canada?
                 - name: PaysResidenceParent
                   type: text
-                  v-if: val(`${name}.ResideCanadaParent`, index) && val(`${name}.ResideCanadaParent`, index) === 'false'
+                  v-if: val(`${name}.prefixId$ResideCanadaParent`, index) === 'false'
                   label:
                     fr: Pays de résidence
                 - name: NomParent2
@@ -2476,7 +2490,7 @@ form:
                     optional: null
                 - name: PaysResidenceParent2
                   type: text
-                  v-if: val(`${name}.ResideCanadaParent2`, index) && val(`${name}.ResideCanadaParent2`, index) === 'false'
+                  v-if: val(`${name}.prefixId$ResideCanadaParent2`, index) === 'false'
                   label:
                     fr: Pays de résidence
                   validations:
@@ -2487,7 +2501,7 @@ form:
                     fr: Partagez-vous la garde de cet enfant?
                   options: yesno            
                 - type: bandeau
-                  v-if: val(`${name}.PartageLaGarde`, index) === 'true'
+                  v-if: val(`${name}.prefixId$PartageLaGarde`, index) === 'true'
                   components:
                     - type: dynamic
                       tag: h3
@@ -2498,13 +2512,13 @@ form:
                       text:
                         fr: <i>L’enfant dont la garde est partagée en vertu d’un jugement ou d’une entente est à la charge de la personne adulte, si le temps de garde est d’au moins 40 %.</i>
                 - name: NombreJours
-                  v-if: val(`${name}.PartageLaGarde`, index) === 'true'
+                  v-if: val(`${name}.prefixId$PartageLaGarde`, index) === 'true'
                   type: number
                   outerClasses: sm
                   label:
                     fr: Indiquez le nombre de jours où vous avez la garde
                 - name: Frequence
-                  v-if: val(`${name}.PartageLaGarde`, index) === 'true'
+                  v-if: val(`${name}.prefixId$PartageLaGarde`, index) === 'true'
                   type: radio
                   label: 
                     fr: Fréquence
@@ -2513,7 +2527,7 @@ form:
                     mensuel: Par mois
                     annuel: Par année
                 - name: DocumentGarde
-                  v-if: val(`${name}.PartageLaGarde`, index) === 'true'
+                  v-if: val(`${name}.prefixId$PartageLaGarde`, index) === 'true'
                   type: radio
                   label:
                     fr: Par quel document la garde vous est-elle confiée?
@@ -2524,7 +2538,7 @@ form:
                     Autre: Autre
                 - name: PrecisionDocumentGarde
                   type: text
-                  v-if: val(`${name}.DocumentGarde`, index) === 'Autre'
+                  v-if: val(`${name}.prefixId$DocumentGarde`, index) === 'Autre'
                   label:
                     fr: Précisez
                 - name: EnfantHabiteMemeAdresse
@@ -2534,12 +2548,12 @@ form:
                   options: yesno
                 - name: PrecisionAdresse
                   type: text
-                  v-if: val(`${name}.EnfantHabiteMemeAdresse`, index) === 'false'
+                  v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
                   label:
                     fr: Adresse de l'enfant à charge
                 - name: PrecisionRaison
                   type: text
-                  v-if: val(`${name}.EnfantHabiteMemeAdresse`, index) === 'false'
+                  v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
                   label:
                     fr: Raison de la non-cohabitation
                 - name: RenseignementsAdditionnels
@@ -2560,7 +2574,7 @@ form:
             - name: DetailRevenuEnfant
               type: repeatableGroup
               repeatable: true
-              v-if: val('EnfantsPossedentRevenus') === 'true'
+              v-if: val('prefixId$EnfantsPossedentRevenus') === 'true'
               label:
                 fr: Revenus des enfants à charge
               instanceLabel:
@@ -2569,6 +2583,8 @@ form:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
+              validations:
+                max: 2
               components:
               - name: IdEnfant
                 type: text
@@ -2598,7 +2614,7 @@ form:
             - name: DetailBienEnfant
               type: repeatableGroup
               repeatable: true
-              v-if: val('EnfantsPossedentBiens') === 'true'
+              v-if: val('prefixId$EnfantsPossedentBiens') === 'true'
               label:
                 fr: Biens des enfants à charge
               help:
@@ -2609,6 +2625,8 @@ form:
                 fr: Ajouter un bien
               removeLabel: 
                 fr: Supprimer ce bien    
+              validations:
+                max: 3
               components:
                 - name: IdEnfant
                   type: text
