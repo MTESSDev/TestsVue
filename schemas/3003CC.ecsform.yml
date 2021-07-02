@@ -1021,6 +1021,7 @@ form:
                   label: 
                     fr: Raison de la fin d'emploi
                   options: 
+                    Abandon: Abandon de l'emploi
                     ManqueTravail: Manque de travail
                     ProblemeSante: Problème de santé
                     ChangementEmploi: Changement d'emploi
