@@ -1020,7 +1020,7 @@ form:
                   type: select
                   label: 
                     fr: Raison de la fin d'emploi
-                  options: 
+                  options:
                     Abandon: Abandon de l'emploi
                     ManqueTravail: Manque de travail
                     ProblemeSante: Problème de santé
@@ -1102,6 +1102,8 @@ form:
                   label:
                     fr: Avez-vous de l'expérience pour l'emploi?
                   options: yesno
+              validations:
+                max: 2
         #Section - Domicile
         - section:
             fr: Informations sur le domicile
@@ -1121,12 +1123,12 @@ form:
                 autre: Ailleurs
             - name: DomicileAilleursPrecision
               type: text
-              v-if: val('TypeDomicile').includes('autre')
+              v-if: val('prefixId$TypeDomicile').includes('autre')
               label:
                 fr: Précisez la nature de votre domicile
             - name: ProprietaireInfos
               type: group
-              v-if: val('TypeDomicile') && val('TypeDomicile') !== 'propriete'
+              v-if: val('prefixId$TypeDomicile') && val('prefixId$TypeDomicile') !== 'propriete'
               label:
                 fr: Inscrivez le nom de votre propriétaire ou locateur, s’il y a lieu.
               components:
@@ -1168,7 +1170,7 @@ form:
               options: yesno
             - name: DomicileAllocationMontant
               type: number
-              v-if: val('RecoitDomicileAllocation') === 'true'
+              v-if: val('prefixId$RecoitDomicileAllocation') === 'true'
               label:
                 fr: Montant par mois
             - name: DomicileAutresPersonnes
@@ -1180,7 +1182,7 @@ form:
                 fr: autres que votre conjoint et vos enfants à charge, s’il y a lieu
             - name: DomicileAutrespersonnesPrecision
               type: textarea
-              v-if: val('DomicileAutresPersonnes') === 'true'
+              v-if: val('prefixId$DomicileAutresPersonnes') === 'true'
               label:
                 fr: Inscrivez leurs nom de famille et prénom et leur lien avec vous.               
         # Section - Revenus
@@ -1199,7 +1201,7 @@ form:
               options: yesno
             - name: TypesRevenusEmploi
               type: checkbox
-              v-if: val('PossedeRevenusTravail') === 'true'    
+              v-if: val('prefixid$PossedeRevenusTravail') === 'true'    
               label:
                 fr: "Spécifiez le(s) type(s) de revenus qui s'appliquent"
               options: 
@@ -1209,7 +1211,7 @@ form:
             - name: RevenusEmploi
               type: repeatableGroup
               repeatable: true
-              v-if: val('TypesRevenusEmploi').includes('RevenusEmplois')
+              v-if: val('prefixid$TypesRevenusEmploi').includes('RevenusEmplois')
               label:
                 fr: Revenus d'emploi
               instanceLabel:
@@ -1218,6 +1220,8 @@ form:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
+              validations:
+                max: 2
               components: 
                 - name: RevenuEmploiProprio
                   type: radio
@@ -1248,7 +1252,7 @@ form:
             - name: RevenusPourboires
               type: repeatableGroup
               repeatable: true
-              v-if: val('TypesRevenusEmploi').includes('Pourboires')
+              v-if: val('prefixid$TypesRevenusEmploi').includes('Pourboires')
               label:
                 fr: Pourboires
               instanceLabel:
@@ -1257,6 +1261,8 @@ form:
                 fr: Ajouter un pourboire
               removeLabel:
                 fr: Supprimer ce pourboire
+              validations:
+                max: 2
               components: 
                 - name: RevenuPourboireProprio
                   type: radio
@@ -1287,7 +1293,7 @@ form:
             - name: RevenuAutonomeOuEntreprise
               type: repeatableGroup
               repeatable: true
-              v-if: val('TypesRevenusEmploi').includes('TravailAutonome')
+              v-if: val('prefixid$TypesRevenusEmploi').includes('TravailAutonome')
               label:
                 fr: Revenus provenant d’un travail autonome ou de votre entreprise
               instanceLabel:
@@ -1296,6 +1302,8 @@ form:
                 fr: Ajouter un revenu de travail autonome ou d'entreprise
               removeLabel:
                 fr: Supprimer ce revenu
+              validations:
+                max: 2
               components: 
                 - name: RevenuAutonomeProprio
                   type: radio
@@ -1335,7 +1343,7 @@ form:
               options: yesno   
             - name: TypesRevenusGouvernementaux
               type: checkbox
-              v-if: val('PossedeRevenusGouvernementaux') ==='true'
+              v-if: val('prefixid$PossedeRevenusGouvernementaux') ==='true'
               label:
                 fr: "Spécifiez la (les) sommes qui s'appliquent"
               options:
@@ -1345,7 +1353,7 @@ form:
             - name: SommesProvincial
               type: repeatableGroup
               repeatable: true
-              v-if: val('TypesRevenusGouvernementaux').includes('provincial')
+              v-if: val('prefixid$TypesRevenusGouvernementaux').includes('provincial')
               label:
                 fr: Sommes provenant de Ministères ou organismes provinciaux
               instanceLabel:
@@ -1354,6 +1362,8 @@ form:
                 fr: Ajouter une somme
               removeLabel:
                 fr: Supprimer cette somme
+              validations:
+                max: 2
               components: 
                 - name: SommeProvincialProprio
                   type: radio
@@ -1388,14 +1398,14 @@ form:
                 fr: Êtes-vous en attente d'une décision d'un ministère ou organisme provincial?
               options: yesno
             - name: DateDemandeProvincial
-              v-if: val('AttendeDecisionProvincial') === 'true'
+              v-if: val('prefixid$AttendeDecisionProvincial') === 'true'
               type: date
               label:
                 fr: Date de la demande
             - name: SommesFederal
               type: repeatableGroup
               repeatable: true
-              v-if: val('TypesRevenusGouvernementaux').includes('federal')
+              v-if: val('prefixid$TypesRevenusGouvernementaux').includes('federal')
               label:
                 fr: Sommes provenant de Ministères ou organismes fédéraux
               instanceLabel:
@@ -1404,6 +1414,8 @@ form:
                 fr: Ajouter une somme
               removeLabel:
                 fr: Supprimer cette somme
+              validations:
+                max: 2
               components: 
                 - name: SommeFederalProprio
                   type: radio
@@ -1438,14 +1450,14 @@ form:
                 fr: Êtes-vous en attente d'une décision d'un ministère ou organisme fédéral?
               options: yesno
             - name: DateDemandeFederal
-              v-if: val('AttendeDecisionFederal') === 'true'
+              v-if: val('prefixid$AttendeDecisionFederal') === 'true'
               type: date
               label:
                 fr: Date de la demande
             - name: SommesOrganismeAutre
               type: repeatableGroup
               repeatable: true
-              v-if: val('TypesRevenusGouvernementaux').includes('autre')
+              v-if: val('prefixid$TypesRevenusGouvernementaux').includes('autre')
               label:
                 fr: Sommes provenant d'autres ministères ou organismes
               instanceLabel:
@@ -1454,6 +1466,8 @@ form:
                 fr: Ajouter une somme
               removeLabel:
                 fr: Supprimer cette somme
+              validations:
+                max: 2
               components: 
                 - name: SommeOrganismeAutreProprio
                   type: radio
@@ -1489,7 +1503,7 @@ form:
               options: yesno
             - name: typeRevenuAutre
               type: checkbox
-              v-if: val('PossedeRevenuAutre') === 'true'
+              v-if: val('prefixid$PossedeRevenuAutre') === 'true'
               label:
                 fr: Spécifiez le(s) type(s) de revenus qui s'applique(nt)
               options:
@@ -1502,7 +1516,7 @@ form:
             - name: RevenusAutreChambre
               type: repeatableGroup
               repeatable: true
-              v-if: val('typeRevenuAutre').includes('Chambre') 
+              v-if: val('prefixid$typeRevenuAutre').includes('Chambre') 
               label:
                 fr: Revenus de chambre ou de pension
               instanceLabel:
@@ -1511,6 +1525,8 @@ form:
                 fr: Ajouter un revenu de chambre ou de pension
               removeLabel:
                 fr: Supprimer ce revenu
+              validations:
+                max: 2
               components:
                 - name: RevenusAutresChambreProprio
                   type: radio
@@ -1547,7 +1563,7 @@ form:
             - name: RevenusAutreLocation
               type: repeatableGroup
               repeatable: true
-              v-if: val('typeRevenuAutre').includes('Location') 
+              v-if: val('prefixid$typeRevenuAutre').includes('Location') 
               label:
                 fr: Revenus de location
               instanceLabel:
@@ -1556,6 +1572,8 @@ form:
                 fr: Ajouter un revenu de location
               removeLabel:
                 fr: Supprimer ce revenu
+              validations:
+                max: 2
               components:
                 - name: RevenusAutresLocationProprio
                   type: radio
@@ -1587,7 +1605,7 @@ form:
             - name: RevenusAutrePlacement
               type: repeatableGroup
               repeatable: true
-              v-if: val('typeRevenuAutre').includes('Placement') 
+              v-if: val('prefixid$typeRevenuAutre').includes('Placement') 
               label:
                 fr: Revenus de placement ou de fiducie, intérêts sur une obligation
               instanceLabel:
@@ -1596,6 +1614,8 @@ form:
                 fr: Ajouter un revenu 
               removeLabel:
                 fr: Supprimer ce revenu
+              validations:
+                max: 2
               components:
                 - name: RevenusAutresPlacementProprio
                   type: radio
@@ -1627,7 +1647,7 @@ form:
             - name: RevenusAutreFondPension
               type: repeatableGroup
               repeatable: true
-              v-if: val('typeRevenuAutre').includes('FondPension') 
+              v-if: val('prefixid$typeRevenuAutre').includes('FondPension') 
               label:
                 fr: Prestations d’un fonds de pension (fonds personnel ou fonds d’un employeur)
               instanceLabel:
@@ -1636,6 +1656,8 @@ form:
                 fr: Ajouter un revenu de fonds de pension 
               removeLabel:
                 fr: Supprimer un revenu de fonds de pension
+              validations:
+                max: 2
               components:
                 - name: RevenusAutresFondPensionProprio
                   type: radio
@@ -1667,7 +1689,7 @@ form:
             - name: RevenusAutrePensionAlimentaire
               type: repeatableGroup
               repeatable: true
-              v-if: val('typeRevenuAutre').includes('PensionAlimentaire') 
+              v-if: val('prefixid$typeRevenuAutre').includes('PensionAlimentaire') 
               label:
                 fr: Revenus de pension alimentaire
               instanceLabel:
@@ -1676,6 +1698,8 @@ form:
                 fr: Ajouter une pension alimentaire 
               removeLabel:
                 fr: Supprimer cette pensions alimentaire
+              validations:
+                max: 2
               components:
                 - name: PensionAlimentaireProprio
                   type: radio
@@ -1717,7 +1741,7 @@ form:
             - name: RevenusAutreDivers
               type: repeatableGroup
               repeatable: true
-              v-if: val('typeRevenuAutre').includes('Autre') 
+              v-if: val('prefixId$typeRevenuAutre').includes('Autre') 
               label:
                 fr: Autres revenus
               instanceLabel:
@@ -1726,6 +1750,8 @@ form:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
+              validations:
+                max: 2
               components:
                 - name: RevenuDiversProprio
                   type: radio
@@ -1758,7 +1784,7 @@ form:
             - name: RevenusAttente
               type: repeatableGroup
               repeatable: true
-              v-if: val('PossedeRevenuAttente') === 'true'
+              v-if: val('prefixId$PossedeRevenuAttente') === 'true'
               label:
                 fr: Revenus en attente
               instanceLabel:
@@ -1767,6 +1793,8 @@ form:
                 fr: Ajouter un revenu en attente
               removeLabel:
                 fr: Supprimer ce revenu en attente
+              validations:
+                max: 2
               components:
                 - name: RevenusAttenteProprio
                   type: radio
@@ -1783,7 +1811,7 @@ form:
                   label: 
                     fr: Source du revenu
                 - name: RevenusAttenteMontant                
-                  type: text                  
+                  type: number                  
                   outerClasses: md
                   label: 
                     fr: Montant, si connu
