@@ -2853,10 +2853,16 @@ form:
                 - type: dynamic
                   tag: p
                   text:
-                    fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, entre autres de mon retour au travail ou aux études ou encore de toute nouvelle source de revenus.
+                    fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, entre autres de mon retour au travail ou aux études ou encore de toute nouvelle source de revenus. 
+            - name: procuration
+              type: checkbox
+              label:
+                fr: Je n'ai pas rempli moi-même ce formulaire.
+              validations:
+                optional: null
             - type: inline
               classes: no-wrap
-              components: 
+              components:
                 - name: DateSignatureReq
                   type: date
                   label: 
