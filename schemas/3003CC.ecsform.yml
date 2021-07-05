@@ -423,6 +423,34 @@ form:
                 AmerindienReserve: Membre d'une Première Nation vivant dans une collectivité
                 AmerindienHorsReserve: Membre d'une Première Nation vivant à l'extérieur d'une collectivité
                 Inuit: Inuit
+            - type: bandeau
+              v-if: val('TypeDemande') === 'Afdr'
+              text:
+                fr: >
+                  <b>Vous pourriez avoir droit à des montants supplémentaires selon votre situation. 
+                  Si vous répondez aux questions suivantes, nous pourrons évaluer votre droit à ces montants.</b>
+            - name: req-00-enceinte
+              type: radio
+              v-if: val('TypeDemande') === 'Afdr'
+              label:
+                fr: Êtes-vous enceinte?
+              options: yesno
+            - name: dateAccouchement
+              type: date
+              v-if: val('prefixId$req-00-enceinte') === 'true'
+              label:
+                fr: Date prévue de l'accouchement
+            - name: req-00-valide
+              type: radio
+              v-if: val('TypeDemande') === 'Afdr'
+              label:
+                fr: Est-ce que votre état de santé vous permet de travailler?
+              options: yesno
+            - name: precisionInvalidite
+              type: text
+              v-if: val('prefixId$req-00-valide') === 'false'
+              label:
+                fr: Précisez votre état de santé
         # Section 3 - Adresse
         - section: 
             fr: Adresse
