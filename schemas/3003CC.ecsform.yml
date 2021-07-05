@@ -388,14 +388,14 @@ form:
                   label: 
                     fr: Êtes-vous un résident permanent?
                   options: yesno
-                - name: Oui4
+                - name: EstDemandeurAsile
                   v-if: val('prefixId$Oui3') === 'false'            
                   type: radio
                   label: 
                     fr: Êtes-vous un demandeur d'asile?
                   options: yesno
                 - name: Oui5
-                  v-if: val('prefixId$Oui4') === 'false'                        
+                  v-if: val('prefixId$EstDemandeurAsile') === 'false'                        
                   type: radio
                   label: 
                     fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
@@ -2447,7 +2447,7 @@ form:
                   outerClasses: md
                   label:
                     fr: Numéro d’assurance maladie
-                  v-if: val('prefixId$Oui4') === 'false'
+                  v-if: val('prefixId$EstDemandeurAsile') === 'false'
                 - name: sexe
                   type: radio
                   label:
