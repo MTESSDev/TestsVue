@@ -246,6 +246,88 @@ form:
                   type: text
                   label: 
                     fr: Précisez la raison de votre demande d'aide à l'emploi
+        #Section - Domicile
+        - section:
+            fr: Informations sur le domicile
+          id: domicile
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
+          components: &domicile
+            - name: TypeDomicile
+              type: select
+              label:
+                fr: Où habitez-vous?
+              options:
+                propriete: Dans votre propriété
+                chambre: Dans une chambre ou en pension
+                logement: Dans un logement
+                subventionne: Dans un logement subventionné (par exemple dans un HLM ou une coopérative d’habitation)
+                familiale: Dans une ressource de type familiale, un centre hospitalier ou une ressource intermédiaire
+                autre: Ailleurs
+            - name: DomicileAilleursPrecision
+              type: text
+              v-if: val('prefixId$TypeDomicile').includes('autre')
+              label:
+                fr: Précisez la nature de votre domicile
+            - name: ProprietaireInfos
+              type: group
+              v-if: val('prefixId$TypeDomicile') && val('prefixId$TypeDomicile') !== 'propriete'
+              label:
+                fr: Inscrivez le nom de votre propriétaire ou locateur, s’il y a lieu.
+              components:
+                - name: Nom
+                  type: text
+                  label:
+                    fr: Nom de famille
+                - name: Prenom
+                  type: text
+                  label:
+                    fr: Prénom
+                - name: Telephone
+                  type: text
+                  outerClasses: lg
+                  label:
+                    fr: Téléphone
+            - name: DomicileDateDebut
+              type: date
+              label:
+                fr: Date de début d’occupation des lieux
+            - name: DomicileCoutMensuel
+              type: number
+              label:
+                fr: Coût mensuel
+            - name: DomicileChauffage
+              type: radio
+              label:
+                fr: Chauffage inclus
+              options: yesno
+            - name: DomicileElectricite
+              type: radio
+              label:
+                fr: Électricité incluse
+              options: yesno
+            - name: RecoitDomicileAllocation
+              type: radio
+              label:
+                fr: Recevez-vous de Revenu Québec une somme provenant du programme Allocation-logement?
+              options: yesno
+            - name: DomicileAllocationMontant
+              type: number
+              v-if: val('prefixId$RecoitDomicileAllocation') === 'true'
+              label:
+                fr: Montant par mois
+            - name: DomicileAutresPersonnes
+              type: radio
+              options: yesno
+              label:
+                fr: Est-ce que d’autres personnes habitent avec vous?
+              help:
+                fr: autres que votre conjoint et vos enfants à charge, s’il y a lieu
+            - name: DomicileAutrespersonnesPrecision
+              type: textarea
+              v-if: val('prefixId$DomicileAutresPersonnes') === 'true'
+              label:
+                fr: Inscrivez leurs nom de famille et prénom et leur lien avec vous.               
+    
     #Regroupement Adulte 1
     - sectionGroup: 
         fr: Adulte 1
@@ -1155,87 +1237,6 @@ form:
                   options: yesno
               limit: 2              
 
-        #Section - Domicile
-        - section:
-            fr: Informations sur le domicile
-          id: domicile
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
-          components: &domicile
-            - name: TypeDomicile
-              type: select
-              label:
-                fr: Où habitez-vous?
-              options:
-                propriete: Dans votre propriété
-                chambre: Dans une chambre ou en pension
-                logement: Dans un logement
-                subventionne: Dans un logement subventionné (par exemple dans un HLM ou une coopérative d’habitation)
-                familiale: Dans une ressource de type familiale, un centre hospitalier ou une ressource intermédiaire
-                autre: Ailleurs
-            - name: DomicileAilleursPrecision
-              type: text
-              v-if: val('prefixId$TypeDomicile').includes('autre')
-              label:
-                fr: Précisez la nature de votre domicile
-            - name: ProprietaireInfos
-              type: group
-              v-if: val('prefixId$TypeDomicile') && val('prefixId$TypeDomicile') !== 'propriete'
-              label:
-                fr: Inscrivez le nom de votre propriétaire ou locateur, s’il y a lieu.
-              components:
-                - name: Nom
-                  type: text
-                  label:
-                    fr: Nom de famille
-                - name: Prenom
-                  type: text
-                  label:
-                    fr: Prénom
-                - name: Telephone
-                  type: text
-                  outerClasses: lg
-                  label:
-                    fr: Téléphone
-            - name: DomicileDateDebut
-              type: date
-              label:
-                fr: Date de début d’occupation des lieux
-            - name: DomicileCoutMensuel
-              type: number
-              label:
-                fr: Coût mensuel
-            - name: DomicileChauffage
-              type: radio
-              label:
-                fr: Chauffage inclus
-              options: yesno
-            - name: DomicileElectricite
-              type: radio
-              label:
-                fr: Électricité incluse
-              options: yesno
-            - name: RecoitDomicileAllocation
-              type: radio
-              label:
-                fr: Recevez-vous de Revenu Québec une somme provenant du programme Allocation-logement?
-              options: yesno
-            - name: DomicileAllocationMontant
-              type: number
-              v-if: val('prefixId$RecoitDomicileAllocation') === 'true'
-              label:
-                fr: Montant par mois
-            - name: DomicileAutresPersonnes
-              type: radio
-              options: yesno
-              label:
-                fr: Est-ce que d’autres personnes habitent avec vous?
-              help:
-                fr: autres que votre conjoint et vos enfants à charge, s’il y a lieu
-            - name: DomicileAutrespersonnesPrecision
-              type: textarea
-              v-if: val('prefixId$DomicileAutresPersonnes') === 'true'
-              label:
-                fr: Inscrivez leurs nom de famille et prénom et leur lien avec vous.               
         # Section - Revenus
         - section:
             fr: Revenus
@@ -2380,34 +2381,6 @@ form:
                   type: number
                   label:
                     fr: Valeur
-        # Section - Destinataire correspondance
-        - section:
-            fr: Destinataire de la correspondance
-          id: destinataire
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'                    
-          components: &correspondance
-            - type: bandeau
-              components:
-                - type: dynamic
-                  tag: p
-                  text:
-                    fr: La correspondance est l’ensemble des documents que nous vous ferons parvenir (avis de décision, chèques ou avis de dépôt, etc.).                  
-                - type: radio
-                  v-if: val('Conjoint') === 'true'
-                  name: destinataireCouple
-                  label:
-                    fr: Pour un couple, le destinataire de la correspondance doit être précisé.
-                  options:
-                    A12: 'Couple'
-                    A1: 'Adulte 1'
-                    A2: 'Adulte 2'
-                - type: textarea
-                  v-if: val('Conjoint') === 'false'
-                  name: destinataireAutrePersonne
-                  label:
-                    fr: La correspondance destinée à une personne seule lui sera directement transmise. Si elle doit plutôt être transmise à une autre personne, inscrivez la raison de ce choix.
-                  validations:
-                    optional: null        
 
     # Adulte 2
     - sectionGroup: 
@@ -2705,53 +2678,39 @@ form:
                   type: number
                   label:
                     fr: Montant ou valeur
-    # Groupe Adulte 1 et/ou 2
-    - sectionGroup: 
-        fr: Adultes 1 et 2
-      v-if: val('Conjoint') === 'true' && val('TypeDemande') === 'Afdr'
-      classes: icone user              
-      sections: 
-        #Section - Domicile
-        - section:
-            fr: Informations sur le domicile
-          id: domicile2
-          components: *domicile
-        # Section - Revenus
-        - section:
-            fr: Revenus
-          id: revenus2
-          components: *revenus
-        # Section - Avoirs liquides
-        - section:
-            fr: Avoirs liquides
-          id: avoirs2
-          components: *avoirs
-        # Section - Biens
-        - section:
-            fr: Biens
-          id: biens2
-          components: *biens     
-        # Section - Enfants à charge
-        - section:
-            fr: Enfant(s) à charge
-          id: enfantsACharge2
-          v-if: val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true'
-          components: *enfants
-        # Section - Revenus et biens des enfants
-        - section:
-            fr: Revenus et biens des enfants
-          id: revenusEnfants2
-          v-if: val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true'
-          components: *revenusEnfants
-        # Section - Destinataire correspondance
-        - section:
-            fr: Destinataire de la correspondance
-          id: destinataire2
-          components: *correspondance
+    # Groupe Finalisation de la demande
     - sectionGroup: 
         fr: Finalisation de la demande
       #v-if: form.TypeDemande
       sections:
+        # Section - Destinataire correspondance
+        - section:
+            fr: Destinataire de la correspondance
+          id: destinataire
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'                    
+          components: &correspondance
+            - type: bandeau
+              components:
+                - type: dynamic
+                  tag: p
+                  text:
+                    fr: La correspondance est l’ensemble des documents que nous vous ferons parvenir (avis de décision, chèques ou avis de dépôt, etc.).                  
+                - type: radio
+                  v-if: val('Conjoint') === 'true'
+                  name: destinataireCouple
+                  label:
+                    fr: Pour un couple, le destinataire de la correspondance doit être précisé.
+                  options:
+                    A12: 'Couple'
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - type: textarea
+                  v-if: val('Conjoint') === 'false'
+                  name: destinataireAutrePersonne
+                  label:
+                    fr: La correspondance destinée à une personne seule lui sera directement transmise. Si elle doit plutôt être transmise à une autre personne, inscrivez la raison de ce choix.
+                  validations:
+                    optional: null        
         # Section - Dépôt direct
         - section: 
             fr: Dépôt direct
