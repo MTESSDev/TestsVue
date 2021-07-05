@@ -251,7 +251,7 @@ form:
             fr: Informations sur le domicile
           id: domicile
           v-if: val('TypeDemande') === 'Afdr'
-          components: &domicile
+          components:
             - name: TypeDomicile
               type: select
               label:
@@ -1252,7 +1252,7 @@ form:
         - section:
             fr: Revenus
           id: revenus
-          components: &revenus     
+          components: 
             - type: bandeau
               text: 
                 fr: Des revenus sont des sommes provenant d’un emploi, des prestations, des allocations ou des indemnités. Des exemptions sur les revenus peuvent être appliquées selon votre situation.             
@@ -1874,7 +1874,7 @@ form:
         - section:
             fr: Avoirs liquides
           id: avoirs
-          components: &avoirs
+          components: 
             - type: bandeau-notification
               text:
                 fr: Par <i>avoirs liquides</i>, on entend tout ce qu’une personne possède en espèces ou sous une forme équivalente.
@@ -2103,7 +2103,7 @@ form:
         - section:
             fr: Biens
           id: biens
-          components: &biens      
+          components: 
             - type: bandeau
               text: 
                 fr: Vous devez tenir compte des biens mobiliers et immobiliers. Différentes exclusions sont applicables selon votre situation.             
@@ -2398,7 +2398,7 @@ form:
         - section:
             fr: Enfant(s) à charge
           id: enfantsACharge
-          components: &enfants
+          components: 
             - type: repeatableGroup
               name: enfants
               repeatable: true
@@ -2600,7 +2600,7 @@ form:
         - section:
             fr: Revenus et biens des enfants
           id: revenusEnfants
-          components: &revenusEnfants
+          components: 
             - name: EnfantsPossedentRevenus
               type: radio
               label:
@@ -2683,7 +2683,7 @@ form:
             fr: Destinataire de la correspondance
           id: destinataire
           v-if: val('TypeDemande') === 'Afdr'                    
-          components: &correspondance
+          components: 
             - type: bandeau
               components:
                 - type: dynamic
