@@ -12,7 +12,7 @@ form:
           id: infos
           components:
             - name: TypeDemande
-              type: radio
+              type: checkbox
               label: 
                 fr: Quel type de demande voulez-vous effectuer?
               tooltip:
@@ -25,12 +25,12 @@ form:
                 Afdr: Demande d'aide financière de dernier recours
                 AideEmploi: Demande de service d'aide à l'emploi
             - type: bandeau
-              v-if: val('TypeDemande') === 'Afdr'
+              v-if: val('TypeDemande').includes('Afdr')
               text: 
                 fr: L’aide financière qui peut être accordée tient compte de votre situation familiale.             
             - name: HabiteAvecAutreAdulte
               type: radio
-              v-if: val('TypeDemande') === 'Afdr'
+              v-if: val('TypeDemande').includes('Afdr')
               label: 
                 fr: Habitez-vous avec un autre adulte?
               options: yesno
@@ -90,7 +90,7 @@ form:
                 fr: Vous répondez à notre définition de conjoint. Votre conjoint doit fournir les renseignements le concernant sous « Adulte 2 » dans le présent formulaire.
             - type: dynamic
               tag: div
-              v-if: val('TypeDemande') === 'Afdr'        
+              v-if: val('TypeDemande').includes('Afdr')
               components:                    
               - name: ConjointMemeAdresse
                 type: radio
@@ -116,10 +116,10 @@ form:
             fr: Raison de la demande
             en: (EN)Raison de la demande
           id: raisonDemande
-          v-if: val('TypeDemande')
+          v-if: val('TypeDemande').length > 0
           components:
             - type: dynamic
-              v-if: val('TypeDemande') === 'Afdr'
+              v-if: val('TypeDemande').includes('Afdr')
               tag: div        
               components:
                 - name: EvenementsDerniereAnnee
@@ -224,7 +224,7 @@ form:
                   label: 
                     fr: Précisez la raison autre
             - type: dynamic
-              v-if: val('TypeDemande') === 'AideEmploi'
+              v-if: val('TypeDemande').includes('AideEmploi')
               tag: div        
               components:      
                 - name: PrecisionRaisonDemandeEmploi
@@ -250,7 +250,7 @@ form:
         - section:
             fr: Informations sur le domicile
           id: domicile
-          v-if: val('TypeDemande') === 'Afdr'
+          v-if: val('TypeDemande').includes('Afdr')
           components:
             - name: TypeDomicile
               type: select
@@ -342,7 +342,7 @@ form:
           components:
             - name: cp12_Req-00
               type: text
-              v-if: val('TypeDemande') === 'Afdr' 
+              v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Numéro de dossier (CP-12)
               validations:
@@ -390,7 +390,7 @@ form:
                 Feminin: Féminin 
                 Masculin: Masculin
             - name: Req-00-EtatMatrinmonial
-              v-if: val('TypeDemande') === 'Afdr'
+              v-if: val('TypeDemande').includes('Afdr')
               type: select
               label:
                 fr: État matrimonial
@@ -418,13 +418,13 @@ form:
                 Anglais: Anglais 
             - name: curateur_Req-00
               type: radio
-              v-if: val('TypeDemande') === 'Afdr'
+              v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Êtes-vous représenté par le Curateur public du Québec?
               options: yesno
             - name: dosCurateur_Req-00
               type: text
-              v-if: val('TypeDemande') === 'Afdr' && val('prefixId$curateur_Req-00') === 'true'
+              v-if: val('TypeDemande').includes('Afdr') && val('prefixId$curateur_Req-00') === 'true'
               label:
                 fr: Numéro de dossier
             - name: Req00-NeQC
@@ -506,14 +506,14 @@ form:
                 AmerindienHorsReserve: Membre d'une Première Nation vivant à l'extérieur d'une collectivité
                 Inuit: Inuit
             - type: bandeau
-              v-if: val('TypeDemande') === 'Afdr'
+              v-if: val('TypeDemande').includes('Afdr')
               text:
                 fr: >
                   <b>Vous pourriez avoir droit à des montants supplémentaires selon votre situation. 
                   Si vous répondez aux questions suivantes, nous pourrons évaluer votre droit à ces montants.</b>
             - name: req-00-enceinte
               type: radio
-              v-if: val('TypeDemande') === 'Afdr'
+              v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Êtes-vous enceinte?
               options: yesno
@@ -526,7 +526,7 @@ form:
                 fr: Date prévue de l'accouchement
             - name: req-00-valide
               type: radio
-              v-if: val('TypeDemande') === 'Afdr'
+              v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Est-ce que votre état de santé vous permet de travailler?
               options: yesno
@@ -1015,8 +1015,11 @@ form:
               type: repeatableGroup
               v-if: val('prefixId$PossedeFormations') === 'true'
               repeatable: true
+              limit: 2
               label:
                 fr: Formations complétées pertinentes dans le cadre d'un emploi
+              help: 
+                fr: Maximum 2. Indiquez les formations les plus pertinentes.
               instanceLabel:
                 fr: Formation complétée
               addLabel:
@@ -1246,7 +1249,7 @@ form:
     # Groupe "Ressources" 
     - sectionGroup: 
         fr: Ressources
-      v-if: val('TypeDemande') === 'Afdr'
+      v-if: val('TypeDemande').includes('Afdr')
       sections: 
         # Section - Revenus
         - section:
@@ -2392,7 +2395,7 @@ form:
     # Groupe Enfants à charge
     - sectionGroup: 
         fr: Enfants à charge
-      v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr' && (val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true')
+      v-if: val('Conjoint') === 'false' && val('TypeDemande').includes('Afdr') && (val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true')
       sections: 
         # Section - Enfants à charge
         - section:
@@ -2682,7 +2685,7 @@ form:
         - section:
             fr: Destinataire de la correspondance
           id: destinataire
-          v-if: val('TypeDemande') === 'Afdr'                    
+          v-if: val('TypeDemande').includes('Afdr')
           components: 
             - type: bandeau
               components:
@@ -2764,7 +2767,7 @@ form:
         - section: 
             fr: Affirmation solenelle
           id: affirmationSolennelle
-          v-if: val('TypeDemande')
+          v-if: val('TypeDemande').length > 0
           components:
             - type: bandeau
               components:
@@ -2774,7 +2777,7 @@ form:
 #                    fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
                 - type: dynamic
                   tag: p
-                  v-if: val('TypeDemande') === 'Afdr'              
+                  v-if: val('TypeDemande').includes('Afdr')
                   text:
                     fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
                 - type: dynamic
@@ -2801,13 +2804,13 @@ form:
                 - name: SignatureReq
                   type: text
                   outerClasses: w-100
-                  v-if: val('TypeDemande') !== 'Afdr' || val('Conjoint') !== 'true'
+                  v-if: val('Conjoint') !== 'true'
                   label: 
                     fr: Signature
                 - name: SignatureReq
                   type: text
                   outerClasses: w-100
-                  v-if: val('TypeDemande') === 'Afdr' && val('Conjoint') === 'true' 
+                  v-if: val('Conjoint') === 'true' 
                   label: 
                     fr: Signature du requérant
             - type: inline
@@ -2815,13 +2818,13 @@ form:
               components: 
                 - name: DateSignatureConjoint
                   type: date
-                  v-if: val('TypeDemande') === 'Afdr' && val('Conjoint') === 'true' 
+                  v-if: val('Conjoint') === 'true' 
                   label: 
                     fr: Date
                 - name: SignatureConjoint
                   type: text
                   outerClasses: w-100
-                  v-if: val('TypeDemande') === 'Afdr' && val('Conjoint') === 'true' 
+                  v-if: val('Conjoint') === 'true' 
                   label: 
                     fr: Signature du conjoint
   
