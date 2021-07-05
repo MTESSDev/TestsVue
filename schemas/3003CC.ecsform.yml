@@ -2597,10 +2597,6 @@ form:
                   v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
                   label:
                     fr: Raison de la non-cohabitation
-                - name: RenseignementsAdditionnels
-                  type: textarea
-                  label:
-                    fr: Si vous avez besoin d’espace additionnel pour certaines réponses, utilisez l’espace ci-dessous.
         # Section - Revenus et biens des enfants
         - section:
             fr: Revenus et biens des enfants
