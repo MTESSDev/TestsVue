@@ -90,7 +90,7 @@ form:
                 fr: Vous répondez à notre définition de conjoint. Votre conjoint doit fournir les renseignements le concernant sous « Adulte 2 » dans le présent formulaire.
             - type: dynamic
               tag: div
-              v-if: val('TypeDemande') === 'Afdr'        
+              v-if: val('TypeDemande') === 'Afdr' && val('Conjoint') === 'true'       
               components:                    
               - name: ConjointMemeAdresse
                 type: radio
@@ -382,14 +382,14 @@ form:
                 fr: Date d'expiration
               validations:
                 optional: null
-            - name: Req-00-Sexe
+            - name: Sexe
               type: radio
               label: 
                 fr: Sexe
               options: 
                 Feminin: Féminin 
                 Masculin: Masculin
-            - name: Req-00-EtatMatrinmonial
+            - name: EtatMatrinmonial
               v-if: val('TypeDemande') === 'Afdr'
               type: select
               label:
@@ -406,10 +406,10 @@ form:
               label:
                 fr: Date de la fin de l'union ou du décès
               v-if: >
-                 val('prefixId$Req-00-EtatMatrinmonial') && 
-                 (val('prefixId$Req-00-EtatMatrinmonial') === 'divorce' || val('prefixId$Req-00-EtatMatrinmonial') === 'separeSansJugement'
-                 || val('prefixId$Req-00-EtatMatrinmonial') === 'separe' || val('prefixId$Req-00-EtatMatrinmonial') === 'veuf')
-            - name: Req-00-Langue
+                 val('prefixId$EtatMatrinmonial') && 
+                 (val('prefixId$EtatMatrinmonial') === 'divorce' || val('prefixId$EtatMatrinmonial') === 'separeSansJugement'
+                 || val('prefixId$EtatMatrinmonial') === 'separe' || val('prefixId$EtatMatrinmonial') === 'veuf')
+            - name: Langue
               type: radio
               label: 
                 fr: Langue de correspondance
@@ -459,13 +459,13 @@ form:
               v-if: val('prefixId$neCanada') === 'false'
               tag: div        
               components:
-                - name: Req00-CitCanadienne
+                - name: CitCanadienne
                   type: radio
                   label: 
                     fr: Avez-vous la citoyenneté canadienne?
                   options: yesno
                 - name: EstResidentPermanent
-                  v-if: val('prefixId$Req00-CitCanadienne') === 'false'
+                  v-if: val('prefixId$CitCanadienne') === 'false'
                   type: radio
                   label: 
                     fr: Êtes-vous un résident permanent?
@@ -490,14 +490,14 @@ form:
                 - type: bandeau-notification
                   text: 
                     fr: Comme vous êtes né hors du Canada, vous devrez fournir les documents confirmant votre statut.
-            - name: Req-00-Autochtone
+            - name: Autochtone
               type: radio
               v-if: val('prefixId$neCanada') === 'true'
               label: 
                 fr: Vous considérez-vous comme un autochtone?
               options: yesno
-            - name: Req-00-AutochtoneType        
-              v-if: val('prefixId$neCanada') === 'true' && val('prefixId$Req-00-Autochtone') === 'true'
+            - name: AutochtoneType        
+              v-if: val('prefixId$neCanada') === 'true' && val('prefixId$Autochtone') === 'true'
               type: radio
               label: 
                 fr: Êtes-vous un membre d'une Première Nation ou un Inuit?
@@ -511,7 +511,7 @@ form:
                 fr: >
                   <b>Vous pourriez avoir droit à des montants supplémentaires selon votre situation. 
                   Si vous répondez aux questions suivantes, nous pourrons évaluer votre droit à ces montants.</b>
-            - name: req-00-enceinte
+            - name: enceinte
               type: radio
               v-if: val('TypeDemande') === 'Afdr'
               label:
@@ -521,10 +521,10 @@ form:
                 optional: null
             - name: dateAccouchement
               type: date
-              v-if: val('prefixId$req-00-enceinte') === 'true'
+              v-if: val('prefixId$enceinte') === 'true'
               label:
                 fr: Date prévue de l'accouchement
-            - name: req-00-valide
+            - name: valide
               type: radio
               v-if: val('TypeDemande') === 'Afdr'
               label:
@@ -534,7 +534,7 @@ form:
                 optional: null
             - name: precisionInvalidite
               type: text
-              v-if: val('prefixId$req-00-valide') === 'false'
+              v-if: val('prefixId$valide') === 'false'
               label:
                 fr: Précisez votre état de santé
         # Section 3 - Adresse
@@ -542,7 +542,7 @@ form:
             fr: Adresse
           id: adresse
           components:
-            - name: addresse1Req
+            - name: addresse1
               type: inline
               components:       
                 - name: adresse1
@@ -602,13 +602,13 @@ form:
             fr: Situation actuelle
           id: SituationActuelle
           components:
-            - name: Req01-EnEmploi
+            - name: EnEmploi
               type: radio
               label: 
                 fr: Êtes-vous en emploi?
               options: yesno
             - name: PrecisionStatutEmploi
-              v-if: val('prefixId$Req01-EnEmploi') === 'true'
+              v-if: val('prefixId$EnEmploi') === 'true'
               type: checkbox
               label:
                 fr: Précisez le type d'emploi
@@ -716,13 +716,13 @@ form:
             fr: Statut d'étudiant
           id: EtudesEnCours
           components:
-            - name: Req-00-etudes
+            - name: etudes
               type: radio
               label: 
                 fr: Êtes-vous aux études?
               options: yesno
             - type: dynamic
-              v-if: val('prefixId$Req-00-etudes') === 'true'
+              v-if: val('prefixId$etudes') === 'true'
               tag: div           
               components:
                 - name: PrecisionStatutEtudes
@@ -785,7 +785,7 @@ form:
                   label: 
                     fr: Nombre de périodes par semaine
             - type: dynamic
-              v-if: val('prefixId$Req-00-etudes') === 'false'
+              v-if: val('prefixId$etudes') === 'false'
               tag: div     
               components:
                 - name: Inscription
@@ -816,16 +816,16 @@ form:
             fr: Formation
           id: formation
           components:
-            - name: Req01-EtudesEtranger
+            - name: EtudesEtranger
               type: radio
               label: 
                 fr: Avez-vous fait vos études à l'étranger?
               options: yesno
             - type: dynamic
-              v-if: val('prefixId$Req01-EtudesEtranger') === 'false'
+              v-if: val('prefixId$EtudesEtranger') === 'false'
               tag: div     
               components:
-                - name: Req01-OrdresEnseignementsApplicables
+                - name: OrdresEnseignementsApplicables
                   type: checkbox
                   label:
                     fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
@@ -839,60 +839,60 @@ form:
       
                 - name: primaire        
                   type: group
-                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesPrimaire')
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesPrimaire')
                   label:
                     fr: Primaire
                   components:
-                    - name: Req01-NbAnneesReussiesPrimaire
+                    - name: NbAnneesReussiesPrimaire
                       type: radio
                       outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5,6,7]
-                    - name: Req01-DateFinPrimaire
+                    - name: DateFinPrimaire
                       type: date
                       label:
                         fr: Date de fin des études
                 - name: secondaireGen
                   type: group
-                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireGen')          
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireGen')          
                   label:
                     fr: Secondaire (général)
                   components:
-                    - name: Req01-NbAnneesReussiesSecGeneral
+                    - name: NbAnneesReussiesSecGeneral
                       type: radio
                       outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5]
-                    - name: Req01-DiplomeSecGeneral
+                    - name: DiplomeSecGeneral
                       type: select
                       label: 
                         fr: Diplôme obtenu
                       options: 
                         Aucun: Aucun
                         Des: Diplôme d'études secondaires (DES)
-                    - name: Req01-DateFinSecGeneral
+                    - name: DateFinSecGeneral
                       type: date
                       label:
                         fr: Date de fin des études
                 - name: secondaireProf
                   type: group
-                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormProf')                    
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormProf')                    
                   label:
                     fr: Secondaire (Formation professionnelle)
                   components:
-                    - name: Req01-NbAnneesReussiesSecFormProf
+                    - name: NbAnneesReussiesSecFormProf
                       type: radio
                       outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [3,4,5]
-                    - name: Req01-DisciplineSecFormProf
+                    - name: DisciplineSecFormProf
                       type: text
                       label:
                         fr: Discipline/Programme de formation
-                    - name: Req01-DiplomeSecFormProf
+                    - name: DiplomeSecFormProf
                       type: select
                       label: 
                         fr: Diplôme obtenu
@@ -901,47 +901,47 @@ form:
                         Aep: AEP
                         Dep: DEP
                         Asp: ASP
-                    - name: Req01-DateFinSecFormProf
+                    - name: DateFinSecFormProf
                       type: date
                       label:
                         fr: Date de fin des études
                 - name: secondaireMetier
                   type: group
-                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormMétier')                              
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormMétier')                              
                   label:
                     fr: Secondaire (Formation à un métier semi-spécialisé)
                   components:
-                    - name: Req01-NbAnneesReussiesSecMetier
+                    - name: NbAnneesReussiesSecMetier
                       type: radio
                       outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1]
-                    - name: Req01-DisciplineSecMetier
+                    - name: DisciplineSecMetier
                       type: text
                       label:
                         fr: Discipline/Programme de formation
-                    - name: Req01-DateFinSecMetier
+                    - name: DateFinSecMetier
                       type: date
                       label:
                         fr: Date de fin des études
                 - name: collegial
                   type: group
-                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesCollegial')                                        
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesCollegial')                                        
                   label:
                     fr: Collégial (Formation générale ou technique)
                   components:
-                    - name: Req01-NbAnneesReussiesCollegial
+                    - name: NbAnneesReussiesCollegial
                       type: radio
                       outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3]
-                    - name: Req01-DisciplineCollegial
+                    - name: DisciplineCollegial
                       type: text
                       label:
                         fr: Discipline/Programme de formation
-                    - name: Req01-DiplomeCollegial
+                    - name: DiplomeCollegial
                       type: select
                       label: 
                         fr: Diplôme obtenu
@@ -950,27 +950,27 @@ form:
                         Dec: Diplôme d'études collégiales (DEC)
                         Aec: Attestation d'études collégiales (AEC)
                         Cec: Certificat d'études collégiales (CEC)
-                    - name: Req01-DateFinCollegial
+                    - name: DateFinCollegial
                       type: date
                       label:
                         fr: Date de fin des études
                 - name: universitaire
                   type: group
-                  v-if: val('prefixId$Req01-OrdresEnseignementsApplicables').includes('NiveauEtudesUniversitaire')                                                  
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesUniversitaire')                                                  
                   label:
                     fr: Universitaire            
                   components:
-                    - name: Req01-NbAnneesReussiesUniversitaire
+                    - name: NbAnneesReussiesUniversitaire
                       type: radio
                       outerClasses: boutons-inline
                       label:
                         fr: Nombre d'années réussies
                       options: [1,2,3,4,5,6,7]
-                    - name: Req01-DisciplineUniversitaire
+                    - name: DisciplineUniversitaire
                       type: text
                       label:
                         fr: Discipline/Programme de formation
-                    - name: Req01-DiplomeUniversitaire
+                    - name: DiplomeUniversitaire
                       type: select
                       label: 
                         fr: Diplôme obtenu
@@ -980,30 +980,30 @@ form:
                         Bac: Baccalauréat
                         Ma: Maîtrise
                         Doc: Doctorat
-                    - name: Req01-DateFinUniversitaire
+                    - name: DateFinUniversitaire
                       type: date
                       label:
                         fr: Date de fin des études
-            - name: Req01-SpecialiteEtudesEtranger
+            - name: SpecialiteEtudesEtranger
               type: text
-              v-if: val('prefixId$Req01-EtudesEtranger') === 'true'                            
+              v-if: val('prefixId$EtudesEtranger') === 'true'                            
               label:
                 fr: Spécialité
-            - name: Req01-NbAnneesReussiesEtudesEtranger
+            - name: NbAnneesReussiesEtudesEtranger
               type: number
-              v-if: val('prefixId$Req01-EtudesEtranger') === 'true'              
+              v-if: val('prefixId$EtudesEtranger') === 'true'              
               outerClasses: sm
               label:
                 fr: Nombre d'années d'études réussies
-            - name: Req01-EtudesEvaluationComparative
+            - name: EtudesEvaluationComparative
               type: radio
-              v-if: val('prefixId$Req01-EtudesEtranger') === 'true' 
+              v-if: val('prefixId$EtudesEtranger') === 'true' 
               label: 
                 fr: Avez-vous obtenu, du ministère de l'Immigration, de la Francisation et de l'Intégration, une évaluation comparative des études faites hors du Québec?
               options: yesno
-            - name: Req01-EtudesEvaluationComparativeDomaine
+            - name: EtudesEvaluationComparativeDomaine
               type: text
-              v-if: val('prefixId$Req01-EtudesEvaluationComparative') === 'true'                            
+              v-if: val('prefixId$EtudesEvaluationComparative') === 'true'                            
               label:
                 fr: Précisez le domaine de formation
             - name: PossedeFormations
@@ -1034,24 +1034,24 @@ form:
                   type: date
                   label:
                     fr: Date de fin du cours
-            - name: Req01-PossedeCartesQualification
+            - name: PossedeCartesQualification
               type: radio
               label: 
                 fr: Possédez-vous une ou plusieurs cartes de qualification?
               options: yesno
-            - name: Req01-CartesQualification
+            - name: CartesQualification
               type: text
-              v-if: val('prefixId$Req01-PossedeCartesQualification') === 'true'                            
+              v-if: val('prefixId$PossedeCartesQualification') === 'true'                            
               label:
                 fr: Précisez les cartes de qualification
-            - name: Req01-EstMembreOrdreProfessionnel
+            - name: EstMembreOrdreProfessionnel
               type: radio
               label: 
                 fr: Êtes-vous membre d'un ordre professionnel?
               options: yesno
-            - name: Req01-OrdreProfessionnel
+            - name: OrdreProfessionnel
               type: text
-              v-if: val('prefixId$Req01-EstMembreOrdreProfessionnel') === 'true'                            
+              v-if: val('prefixId$EstMembreOrdreProfessionnel') === 'true'                            
               label:
                 fr: Précisez l'ordre professionnel
             - name: PermisConduire
@@ -1059,7 +1059,7 @@ form:
               label: 
                 fr: Possédez-vous un permis de conduire ?
               options: yesno
-            - name: ClassePermisConduire-Req-00
+            - name: ClassePermisConduire
               type: text
               outerClasses: md
               label: 
@@ -1089,7 +1089,7 @@ form:
             fr: Emplois
           id: emplois
           components:
-            - name: Req01-Travaille
+            - name: Travaille
               type: radio
               label: 
                 fr: Avez-vous déjà travaillé?
@@ -1102,7 +1102,7 @@ form:
             - name: emplois
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixId$Req01-Travaille') === 'true'          
+              v-if: val('prefixId$Travaille') === 'true'          
               label:
                 fr: Inscrivez les renseignements relatifs à vos deux dernières expériences de travail en commençant par la plus récente
                 en: Jobs
@@ -1166,56 +1166,56 @@ form:
                   type: text
                   label: 
                     fr: Précisez la raison de fin d'emploi
-            - name: Req01-Limitations
+            - name: Limitations
               type: radio
               label:
                 fr: "Avez-vous des limitations fonctionnelles faisant suite à des lésions professionnelles causées, par exemple, par un accident de travail?"
               options: yesno            
-            - name: limitations_Req-01
+            - name: limitations
               type: text
-              v-if: val('prefixId$Req01-Limitations') === 'true'          
+              v-if: val('prefixId$Limitations') === 'true'          
               label:
                 fr: "Précisez ces limitations"
-            - name: Req01-DisponibleTravail
+            - name: DisponibleTravail
               type: radio
               label:
                 fr: "Êtes-vous disponible pour travailler?"
               options: yesno            
-            - name: Req01-DisponibilitesTravail
+            - name: DisponibilitesTravail
               type: checkbox
-              v-if: val('prefixId$Req01-DisponibleTravail') === 'true'                    
+              v-if: val('prefixId$DisponibleTravail') === 'true'                    
               label:
                 fr: "Précisez le type d'emploi recherché?"
               options: 
-                ReqDispoTravailTempsPlein: À temps plein
-                ReqDispoTravailTempsPartiel: À temps partiel
-                ReqDispoTravailJour: De jour
-                ReqDispoTravailSoir: De soir
-                ReqDispoTravailNuit: De nuit
-            - name: Req01-LieuxDisponibiliteTravail
+                DispoTravailTempsPlein: À temps plein
+                DispoTravailTempsPartiel: À temps partiel
+                DispoTravailJour: De jour
+                DispoTravailSoir: De soir
+                DispoTravailNuit: De nuit
+            - name: LieuxDisponibiliteTravail
               type: checkbox
-              v-if: val('prefixId$Req01-DisponibleTravail') === 'true'                    
+              v-if: val('prefixId$DisponibleTravail') === 'true'                    
               label:
                 fr: "Où êtes-vous prêt à travailler?"
               options: 
-                ReqLieuDispoTravailLocalite: Dans votre localité
-                ReqLieuDispoTravailRegion: Dans votre région
-                ReqLieuDispoTravailAutre: Autre
-            - name: Req01-LieuxDisponibiliteTravailPrecision
+                LieuDispoTravailLocalite: Dans votre localité
+                LieuDispoTravailRegion: Dans votre région
+                LieuDispoTravailAutre: Autre
+            - name: LieuxDisponibiliteTravailPrecision
               type: text
-              v-if: val('prefixId$Req01-LieuxDisponibiliteTravail').includes('ReqLieuDispoTravailAutre')   
+              v-if: val('prefixId$LieuxDisponibiliteTravail').includes('LieuDispoTravailAutre')   
               label:
                 fr: "Précisez où vous êtes prêt à travailler"
-            - name: raisonNonDisponibiliteTravail_Req-01
+            - name: raisonNonDisponibiliteTravail
               type: text
-              v-if: val('prefixId$Req01-DisponibleTravail') === 'false'   
+              v-if: val('prefixId$DisponibleTravail') === 'false'   
               outerClasses: xxl                           
               label:
                 fr: "Inscrivez la raison de votre indisponibilité à travailler"
             - name: DisponibiliteEmploisRecherches
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixId$Req01-DisponibleTravail') === 'true' 
+              v-if: val('prefixId$DisponibleTravail') === 'true' 
               label:
                 fr: Noms des emplois recherchés
               instanceLabel:
@@ -2768,7 +2768,7 @@ form:
           components:
             - type: bandeau
               components:
-#                - name: AffirmationSolennelleReconnaisReq 
+#                - name: AffirmationSolennelleReconnais
 #                  type: checkbox
 #                  label: 
 #                    fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
@@ -2794,17 +2794,17 @@ form:
             - type: inline
               classes: no-wrap
               components:
-                - name: DateSignatureReq
+                - name: DateSignature
                   type: date
                   label: 
                     fr: Date
-                - name: SignatureReq
+                - name: Signature
                   type: text
                   outerClasses: w-100
                   v-if: val('TypeDemande') !== 'Afdr' || val('Conjoint') !== 'true'
                   label: 
                     fr: Signature
-                - name: SignatureReq
+                - name: SignatureConjoint
                   type: text
                   outerClasses: w-100
                   v-if: val('TypeDemande') === 'Afdr' && val('Conjoint') === 'true' 
