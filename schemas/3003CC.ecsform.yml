@@ -382,14 +382,14 @@ form:
                   label: 
                     fr: Avez-vous la citoyenneté canadienne?
                   options: yesno
-                - name: Oui3
+                - name: EstResidentPermanent
                   v-if: val('prefixId$Req00-CitCanadienne') === 'false'
                   type: radio
                   label: 
                     fr: Êtes-vous un résident permanent?
                   options: yesno
                 - name: EstDemandeurAsile
-                  v-if: val('prefixId$Oui3') === 'false'            
+                  v-if: val('prefixId$EstResidentPermanent') === 'false'            
                   type: radio
                   label: 
                     fr: Êtes-vous un demandeur d'asile?
