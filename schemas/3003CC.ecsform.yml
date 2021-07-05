@@ -654,13 +654,12 @@ form:
               label: 
                 fr: Êtes-vous chef de famille monoparentale ?
               options: yesno
-            - name: QuestionsFacultativesSituationActuelle_Req-00
-              type: radio
-              label: 
-                fr: Afin de nous permettre de mieux répondre à vos besoins en matière d'emploi et d'établir des statistiques, désirez-vous répondre à quelques questions supplémentaires?
-              options: yesno
-            - type: dynamic
-              v-if: val('prefixId$QuestionsFacultativesSituationActuelle_Req-00') === 'true'
+            - name: questionsStatistiques
+              type: dynamic
+              tag: p
+              text: 
+                fr: <b>Afin de nous permettre de mieux répondre à vos besoins en matière d'emploi, nous vous invitons à répondre aux questions suivantes:</b>
+            - type: dynamic              
               tag: div           
               components:
                 - name: Handicap_Req-00
