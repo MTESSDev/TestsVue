@@ -127,37 +127,37 @@ form:
                   label: 
                     fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
                   options: 
-                    ReqFinDiminutionRevenus: Perte ou diminution de revenus
-                    ReqFinEtudesTempsPlein: Fin d'études à temps plein  
+                    FinDiminutionRevenus: Perte ou diminution de revenus
+                    FinEtudesTempsPlein: Fin d'études à temps plein  
                   validations: 
                     optional: null
-                - name: ReqFinDiminutionRevenusType
-                  v-if: val('EvenementsDerniereAnnee').includes('ReqFinDiminutionRevenus')
+                - name: FinDiminutionRevenusType
+                  v-if: val('EvenementsDerniereAnnee').includes('FinDiminutionRevenus')
                   type: checkbox
                   label: 
                     fr: Type de revenu
                   options: 
-                    FinRevenusEmploiReq: d'emploi
-                    FinRevenusTravailAutonomeReq: de travail autonome
+                    FinRevenusEmploi: d'emploi
+                    FinRevenusTravailAutonome: de travail autonome
                     FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
                     FinRevenusAutres: autre
                 - name: FinRevenusPrestationsPrecision
-                  v-if: val('ReqFinDiminutionRevenusType').includes('FinRevenusPrestations')
+                  v-if: val('FinDiminutionRevenusType').includes('FinRevenusPrestations')
                   type: text
                   label: 
                     fr: Précisez le type de prestations gouvernementales
                 - name: FinRevenusAutresPrecision
-                  v-if: val('ReqFinDiminutionRevenusType').includes('FinRevenusAutres')
+                  v-if: val('FinDiminutionRevenusType').includes('FinRevenusAutres')
                   type: text
                   label: 
                     fr: Précisez le type de revenu
-                - name: ReqDateEvenementFinDiminutionRevenus
-                  v-if: val('EvenementsDerniereAnnee').includes('ReqFinDiminutionRevenus')
+                - name: DateEvenementFinDiminutionRevenus
+                  v-if: val('EvenementsDerniereAnnee').includes('FinDiminutionRevenus')
                   type: date
                   label: 
                     fr: Date de la fin ou diminution de revenus
-                - name: ReqDateEvenementFinEtudesTempsPlein
-                  v-if: val('EvenementsDerniereAnnee').includes('ReqFinEtudesTempsPlein')
+                - name: DateEvenementFinEtudesTempsPlein
+                  v-if: val('EvenementsDerniereAnnee').includes('FinEtudesTempsPlein')
                   type: date
                   label: 
                     fr: Date de la fin d'études à temps plein
@@ -340,14 +340,14 @@ form:
             fr: Renseignements sur l'identité
           id: renseignementsIdentite
           components:
-            - name: cp12_Req-00
+            - name: cp12
               type: text
               v-if: val('TypeDemande') === 'Afdr' 
               label:
                 fr: Numéro de dossier (CP-12)
               validations:
                 optional: null
-            - name: nom1_Req-00
+            - name: nom1
               type: text
               label: 
                 fr: Nom de famille
@@ -355,7 +355,7 @@ form:
                 fr: Selon le certificat de naissance ou le document d'immigration.
               validations: 
                 max: 36,length
-            - name: prénom1_Req-00
+            - name: prénom1
               type: text
               label: 
                 fr: Prénom
@@ -416,36 +416,36 @@ form:
               options: 
                 Francais: Français 
                 Anglais: Anglais 
-            - name: curateur_Req-00
+            - name: curateur
               type: radio
               v-if: val('TypeDemande') === 'Afdr'
               label:
                 fr: Êtes-vous représenté par le Curateur public du Québec?
               options: yesno
-            - name: dosCurateur_Req-00
+            - name: dosCurateur
               type: text
-              v-if: val('TypeDemande') === 'Afdr' && val('prefixId$curateur_Req-00') === 'true'
+              v-if: val('TypeDemande') === 'Afdr' && val('prefixId$curateur') === 'true'
               label:
                 fr: Numéro de dossier
-            - name: Req00-NeQC
+            - name: NeQC
               type: radio
               label: 
                 fr: Êtes-vous né au Québec?
               options: yesno
-            - name: nom3_Req-00
-              v-if: val('prefixId$Req00-NeQC') === 'true'
+            - name: nom3
+              v-if: val('prefixId$NeQC') === 'true'
               type: text
               label: 
                 fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
               validations: 
                 max: 50,length
             - name: neCanada
-              v-if: val('prefixId$Req00-NeQC') === 'false'        
+              v-if: val('prefixId$NeQC') === 'false'        
               type: radio
               label: 
                 fr: Êtes-vous né au Canada ?
               options: yesno
-            - name: pays1_Req-00
+            - name: pays1
               v-if: val('prefixId$neCanada') === 'false'
               type: text
               label: 
@@ -482,7 +482,7 @@ form:
                   label: 
                     fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
                   options: yesno              
-                - name: autre2_Req-00
+                - name: autre2
                   v-if: val('prefixId$EstRefugieOuProtege') === 'false'                        
                   type: text
                   label: 
@@ -545,21 +545,21 @@ form:
             - name: addresse1Req
               type: inline
               components:       
-                - name: adresse1_Req-00
+                - name: adresse1
                   type: text
                   outerClasses: md
                   label: 
                     fr: Numéro
                   validations: 
                     max: 6,length
-                - name: adresse3_Req-00
+                - name: adresse3
                   type: text
                   outerClasses: lg
                   label: 
                     fr: Rue
                   validations: 
                     max: 24,length
-                - name: adresse2_Req-00
+                - name: adresse2
                   type: text
                   outerClasses: sm
                   label: 
@@ -567,7 +567,7 @@ form:
                   validations: 
                     optional: null
                     max: 5,length
-            - name: telephone1_Req-00
+            - name: telephone1
               outerClasses: md
               type: tel
               label: 
@@ -576,20 +576,20 @@ form:
                 fr: Pour un client sans numéro de téléphone, inscrivez un numéro de téléphone temporaire pour vous rejoindre
               validations: 
                 max: 10,length
-            - name: adresse4_Req-00
+            - name: adresse4
               type: text
               label: 
                 fr: Ville, village ou municipalité
               validations: 
                 max: 29,length
-            - name: codePostal1_Req-00
+            - name: codePostal1
               type: text
               outerClasses: md          
               label: 
                 fr: Code postal
               validations: 
                 max: 6,length
-            - name: telephone2_Req-00
+            - name: telephone2
               outerClasses: md
               type: tel
               label: 
@@ -607,7 +607,7 @@ form:
               label: 
                 fr: Êtes-vous en emploi?
               options: yesno
-            - name: PrecisionStatutEmploi_Req-00
+            - name: PrecisionStatutEmploi
               v-if: val('prefixId$Req01-EnEmploi') === 'true'
               type: checkbox
               label:
@@ -617,7 +617,7 @@ form:
                 TempsPartiel: Temps partiel
                 SurAppel: Sur appel
                 TravailleurAutonome: Travailleur autonome
-            - name: AideGouvRecue_Req-00
+            - name: AideGouvRecue
               type: radio
               label: 
                 fr: Recevez-vous une aide financière gouvernementale (prestations, indemnités, etc.)?
@@ -626,7 +626,7 @@ form:
               type: checkbox
               label: 
                 fr: Précisez le type d'aide que vous recevez
-              v-if: val('prefixId$AideGouvRecue_Req-00') === 'true'
+              v-if: val('prefixId$AideGouvRecue') === 'true'
               options: 
                 AssuranceEmploi: Prestations d'assurance-emploi
                 RQAP: Prestations d'assurance parentale (RQAP)
@@ -636,20 +636,20 @@ form:
               type: text
               label: 
                 fr: Précisez le type d'aide
-            - name: EnfantsACharge_Req-00
+            - name: EnfantsACharge
               type: radio      
               label: 
                 fr: Avez-vous des enfants à charge?
               options: yesno
             - name: NbrEnfants
-              v-if: val('prefixId$EnfantsACharge_Req-00') === 'true'
+              v-if: val('prefixId$EnfantsACharge') === 'true'
               type: number
               min: 1
               outerClasses: sm
               label: 
                 fr: Combien d'enfants avez-vous à charge ?
-            - name: ChefMonoparentale_Req-00
-              v-if: val('prefixId$EnfantsACharge_Req-00') === 'true'
+            - name: ChefMonoparentale
+              v-if: val('prefixId$EnfantsACharge') === 'true'
               type: radio
               label: 
                 fr: Êtes-vous chef de famille monoparentale ?
@@ -662,17 +662,17 @@ form:
             - type: dynamic              
               tag: div           
               components:
-                - name: Handicap_Req-00
+                - name: Handicap
                   type: radio
                   label: 
                     fr: Avez-vous un handicap physique, intellectuel ou mental?
                   options: yesno
-                - name: TypeHandicap_Req-00
-                  v-if: val('prefixId$Handicap_Req-00') === 'true'
+                - name: TypeHandicap
+                  v-if: val('prefixId$Handicap') === 'true'
                   type: text
                   label: 
                     fr: Précisez le handicap
-                - name: LanguesParlees_Req-00
+                - name: LanguesParlees
                   type: checkbox
                   label: 
                     fr: Langues parlées
@@ -681,11 +681,11 @@ form:
                     Anglais: Anglais
                     AutresLanguesParlees: Autres
                 - name: PrecisionLanguesParlees
-                  v-if: val('prefixId$LanguesParlees_Req-00').includes('AutresLanguesParlees')
+                  v-if: val('prefixId$LanguesParlees').includes('AutresLanguesParlees')
                   type: text
                   label: 
                     fr: Précisez les autres langues parlées
-                - name: LanguesEcrites_Req-00
+                - name: LanguesEcrites
                   type: checkbox
                   label: 
                     fr: Langues écrites
@@ -694,16 +694,16 @@ form:
                     Anglais: Anglais
                     AutresLanguesEcrites: Autres
                 - name: PrecisionLanguesEcrites
-                  v-if: val('prefixId$LanguesEcrites_Req-00').includes('AutresLanguesEcrites')
+                  v-if: val('prefixId$LanguesEcrites').includes('AutresLanguesEcrites')
                   type: text
                   label: 
                     fr: Précisez les autres langues écrites
-                - name: CasierJudiciaire_Req-00
+                - name: CasierJudiciaire
                   type: radio
                   label: 
                     fr: Avez-vous un casier judiciaire ?
                   options: yesno
-                - name: MinoriteVisible_Req-00
+                - name: MinoriteVisible
                 #Ajouter une infobulle ici
                   type: radio
                   label: 
@@ -725,18 +725,18 @@ form:
               v-if: val('prefixId$Req-00-etudes') === 'true'
               tag: div           
               components:
-                - name: PrecisionStatutEtudes_Req-00
+                - name: PrecisionStatutEtudes
                   type: radio
                   label:
                     fr: Précisez votre statut d'étudiant
                   options: 
                     TempsPlein: Temps plein
                     TempsPartiel: Temps partiel
-                - name: DiplomeVise_Req-00
+                - name: DiplomeVise
                   type: text
                   label: 
                     fr: Diplôme visé ?
-                - name: NiveauEtudes_Req-00
+                - name: NiveauEtudes
                   type: select
                   label: 
                     fr: Indiquez l'ordre d'enseignement
@@ -748,38 +748,38 @@ form:
                     Universite2: Université 2e cycle
                     AutreNiveau: Autre
                 - name: NiveauEtudeAutrePrecision
-                  v-if: val('prefixId$NiveauEtudes_Req-00') === 'AutreNiveau'
+                  v-if: val('prefixId$NiveauEtudes') === 'AutreNiveau'
                   type: text
                   label: 
                     fr: Précisez l'ordre d'enseignement
-                - name: DomaineEtudes_Req-00
+                - name: DomaineEtudes
                   type: text
-                  v-if: val('prefixId$NiveauEtudes_Req-00') && val('prefixId$NiveauEtudes_Req-00') !== 'SecondaireGeneral'             
+                  v-if: val('prefixId$NiveauEtudes') && val('prefixId$NiveauEtudes') !== 'SecondaireGeneral'             
                   label: 
                     fr: Domaine d'études
-                - name: NbrCoursSuivis_Req-00
+                - name: NbrCoursSuivis
                   type: number
                   outerClasses: sm              
                   min: 1
                   label: 
                     fr: Nombre de cours
                   #TODO Vérifier le besoin d'avoir un des 4 champs rempli
-                - name: NbrHeuresSemaine_Req-00
+                - name: NbrHeuresSemaine
                   type: number
                   outerClasses: sm              
                   min: 1
                   label: 
                     fr: Nombre d'heures par semaine
-                - name: NbrCreditsUnites_Req-00
+                - name: NbrCreditsUnites
                   type: number
-                  v-if: val('prefixId$NiveauEtudes_Req-00') === 'Collegial' || val('prefixId$NiveauEtudes_Req-00') === 'Universite1' || val('prefixId$NiveauEtudes_Req-00') === 'Universite2'
+                  v-if: val('prefixId$NiveauEtudes') === 'Collegial' || val('prefixId$NiveauEtudes') === 'Universite1' || val('prefixId$NiveauEtudes') === 'Universite2'
                   outerClasses: sm              
                   min: 1
                   label: 
                     fr: Nombre de crédits ou d'unités
-                - name: NbrPeriodesSemaine_Req-00
+                - name: NbrPeriodesSemaine
                   type: number
-                  v-if: val('prefixId$NiveauEtudes_Req-00') === 'SecondaireGeneral' || val('prefixId$NiveauEtudes_Req-00') === 'SecondairePro'                           
+                  v-if: val('prefixId$NiveauEtudes') === 'SecondaireGeneral' || val('prefixId$NiveauEtudes') === 'SecondairePro'                           
                   outerClasses: sm              
                   min: 1
                   label: 
@@ -788,27 +788,27 @@ form:
               v-if: val('prefixId$Req-00-etudes') === 'false'
               tag: div     
               components:
-                - name: Inscription_Req-00
+                - name: Inscription
                   type: radio
                   label:
                     fr: Êtes-vous inscrit à un établissement d'enseignement?
                   options: 
                     yesno
-                - name: DateInscription_Req-00
+                - name: DateInscription
                   type: date
-                  v-if: val('prefixId$Inscription_Req-00') === 'true'
+                  v-if: val('prefixId$Inscription') === 'true'
                   label:
                     fr: Précisez la date de début
-                - name: InscriptionPrevue_Req-00
+                - name: InscriptionPrevue
                   type: radio
-                  v-if: val('prefixId$Inscription_Req-00') === 'false'
+                  v-if: val('prefixId$Inscription') === 'false'
                   label:
                     fr: Prévoyez-vous vous inscrire ?
                   options: 
                     yesno
-                - name: DateInscriptionPrevue_Req-00
+                - name: DateInscriptionPrevue
                   type: date
-                  v-if: val('prefixId$InscriptionPrevue_Req-00') === 'true'
+                  v-if: val('prefixId$InscriptionPrevue') === 'true'
                   label:
                     fr: Précisez la date de début
         # Section 6 - Formation
@@ -1054,7 +1054,7 @@ form:
               v-if: val('prefixId$Req01-EstMembreOrdreProfessionnel') === 'true'                            
               label:
                 fr: Précisez l'ordre professionnel
-            - name: PermisConduire_Req-00
+            - name: PermisConduire
               type: radio
               label: 
                 fr: Possédez-vous un permis de conduire ?
@@ -1064,11 +1064,11 @@ form:
               outerClasses: md
               label: 
                 fr: Précisez la/les classe(s)
-              v-if: val('prefixId$PermisConduire_Req-00') === 'true'
+              v-if: val('prefixId$PermisConduire') === 'true'
 #              type: checkbox
 #              label: 
 #                fr: Précisez la/les classe(s)
-#              v-if: form['PermisConduire_Req-00'] && form['PermisConduire_Req-00'] === 'true'
+#              v-if: form['PermisConduire'] && form['PermisConduire'] === 'true'
 #              options: 
 #                C1: '1'
 #                C2: '2'
@@ -2392,7 +2392,7 @@ form:
     # Groupe Enfants à charge
     - sectionGroup: 
         fr: Enfants à charge
-      v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr' && (val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true')
+      v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr' && (val('adulte1EnfantsACharge') === 'true' || val('adulte2EnfantsACharge') === 'true')
       sections: 
         # Section - Enfants à charge
         - section:
@@ -2724,36 +2724,36 @@ form:
                   v-if: val('DepotDirect') === 'true'
                   text: 
                     fr: Veuillez fournir les renseignements demandés ci-dessous. Ils nous permettront de procéder au versement de vos prestations ou de vos allocations dans le cadre de tous les services qui vous seront offerts par le Ministère.             
-                - name: Nom_institution_financière_Req-00
+                - name: Nom_institution_financière
                   type: text
                   label: 
                     fr: Nom de votre institution financière
-                - name: Adresse_succursale_Req-00
+                - name: Adresse_succursale
                   type: text
                   label: 
                     fr: Adresse de votre institution financière
-                - name: CP_succursale_Req-00
+                - name: CP_succursale
                   type: text
                   outerClasses: md
                   label: 
                     fr: Code postal de votre succursale
                   validations: 
                     max: 6,length
-                - name: Num_succursale_Req-00
+                - name: Num_succursale
                   type: text
                   label: 
                     fr: Numéro de la succursale
                   outerClasses: lg                
                   validations: 
                     max: 5,length
-                - name: Num_institution_Req-00
+                - name: Num_institution
                   type: text
                   label: 
                     fr: Numéro de l'institution financière
                   outerClasses: lg                                
                   validations: 
                     max: 3,length
-                - name: Num_compte_Req-00
+                - name: Num_compte
                   type: text
                   label: 
                     fr: Numéro du compte et chiffre de contrôle
