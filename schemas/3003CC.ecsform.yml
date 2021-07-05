@@ -306,7 +306,27 @@ form:
                 fr: Sexe
               options: 
                 Feminin: Féminin 
-                Masculin: Masculin 
+                Masculin: Masculin
+            - name: Req-00-EtatMatrinmonial
+              v-if: val('TypeDemande') === 'Afdr'
+              type: select
+              label:
+                fr: État matrimonial
+              options:
+                celibataire: Célibataire
+                marieUnionCivile: Marié ou uni civilement
+                veuf: Veuf
+                separe: Séparé légalement
+                separeSansJugement: Séparé sans jugement
+                divorce: Divorcé
+            - name: dateFinUnion
+              type: date
+              label:
+                fr: Date de la fin de l'union ou du décès
+              v-if: >
+                 val('prefixId$Req-00-EtatMatrinmonial') && 
+                 (val('prefixId$Req-00-EtatMatrinmonial') === 'divorce' || val('prefixId$Req-00-EtatMatrinmonial') === 'separeSansJugement'
+                 || val('prefixId$Req-00-EtatMatrinmonial') === 'separe' || val('prefixId$Req-00-EtatMatrinmonial') === 'veuf')
             - name: Req-00-Langue
               type: radio
               label: 
