@@ -84,33 +84,33 @@ form:
                   v-if: val('PrecisionsAdulte2.ViePasseeMaritaleMoinsUnAn') === 'true'
                   label: 
                     fr: Prénom de l'adulte
-                - type: dynamic
-                  v-if: val('Conjoint') === 'true'
-                  tag: div        
-                  components:                    
-                  - name: ConjointMemeAdresse
-                    type: radio
-                    label: 
-                      fr: Votre conjoint habite-t-il à la même adresse que vous?
-                    options: yesno
-                  - name: AdresseConjoint
-                    type: text                    
-                    v-if: val('PrecisionsAdulte2.ConjointMemeAdresse') === 'false'
-                    outerClasses: xxl
-                    label: 
-                      fr: Adresse du conjoint
-                  - name: RaisonConjointHabiteAilleurs
-                    type: text
-                    v-if: val('PrecisionsAdulte2.ConjointMemeAdresse') === 'false'
-                    outerClasses: xxl
-                    label: 
-                      fr: Raison pour laquelle le conjoint habite ailleurs
-            - name: Conjoint
-              type: hidden
             - type: bandeau-notification
               v-if: val('Conjoint') === 'true'
               text: 
                 fr: Vous répondez à notre définition de conjoint. Votre conjoint doit fournir les renseignements le concernant sous « Adulte 2 » dans le présent formulaire.
+            - type: dynamic
+              tag: div
+              v-if: val('TypeDemande') === 'Afdr'        
+              components:                    
+              - name: ConjointMemeAdresse
+                type: radio
+                label: 
+                  fr: Votre conjoint habite-t-il à la même adresse que vous?
+                options: yesno
+              - name: AdresseConjoint
+                type: text                    
+                v-if: val('ConjointMemeAdresse') === 'false'
+                outerClasses: xxl
+                label: 
+                  fr: Adresse du conjoint
+              - name: RaisonConjointHabiteAilleurs
+                type: text
+                v-if: val('ConjointMemeAdresse') === 'false'
+                outerClasses: xxl
+                label: 
+                  fr: Raison pour laquelle le conjoint habite ailleurs
+            - name: Conjoint
+              type: hidden
         # Section 1 - Raison de la demande
         - section: 
             fr: Raison de la demande
