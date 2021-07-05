@@ -2380,11 +2380,52 @@ form:
                   type: number
                   label:
                     fr: Valeur
+        # Section - Destinataire correspondance
+        - section:
+            fr: Destinataire de la correspondance
+          id: destinataire
+          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'                    
+          components: &correspondance
+            - type: bandeau
+              components:
+                - type: dynamic
+                  tag: p
+                  text:
+                    fr: La correspondance est l’ensemble des documents que nous vous ferons parvenir (avis de décision, chèques ou avis de dépôt, etc.).                  
+                - type: radio
+                  v-if: val('Conjoint') === 'true'
+                  name: destinataireCouple
+                  label:
+                    fr: Pour un couple, le destinataire de la correspondance doit être précisé.
+                  options:
+                    A12: 'Couple'
+                    A1: 'Adulte 1'
+                    A2: 'Adulte 2'
+                - type: textarea
+                  v-if: val('Conjoint') === 'false'
+                  name: destinataireAutrePersonne
+                  label:
+                    fr: La correspondance destinée à une personne seule lui sera directement transmise. Si elle doit plutôt être transmise à une autre personne, inscrivez la raison de ce choix.
+                  validations:
+                    optional: null        
+
+    # Adulte 2
+    - sectionGroup: 
+        fr: Adulte 2
+      classes: icone user                      
+      v-if: val('Conjoint') === 'true'
+      prefixId: adulte2
+      sections: *sectionsAdulte
+
+    # Groupe Enfants à charge
+    - sectionGroup: 
+        fr: Enfants à charge
+      v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr' && (val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true')
+      sections: 
         # Section - Enfants à charge
         - section:
             fr: Enfant(s) à charge
           id: enfantsACharge
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr' && (val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true')
           components: &enfants
             - type: repeatableGroup
               name: enfants
@@ -2591,7 +2632,6 @@ form:
         - section:
             fr: Revenus et biens des enfants
           id: revenusEnfants
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr' && (val('adulte1EnfantsACharge_Req-00') === 'true' || val('adulte2EnfantsACharge_Req-00') === 'true')
           components: &revenusEnfants
             - name: EnfantsPossedentRevenus
               type: radio
@@ -2665,42 +2705,6 @@ form:
                   type: number
                   label:
                     fr: Montant ou valeur
-        # Section - Destinataire correspondance
-        - section:
-            fr: Destinataire de la correspondance
-          id: destinataire
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'                    
-          components: &correspondance
-            - type: bandeau
-              components:
-                - type: dynamic
-                  tag: p
-                  text:
-                    fr: La correspondance est l’ensemble des documents que nous vous ferons parvenir (avis de décision, chèques ou avis de dépôt, etc.).                  
-                - type: radio
-                  v-if: val('Conjoint') === 'true'
-                  name: destinataireCouple
-                  label:
-                    fr: Pour un couple, le destinataire de la correspondance doit être précisé.
-                  options:
-                    A12: 'Couple'
-                    A1: 'Adulte 1'
-                    A2: 'Adulte 2'
-                - type: textarea
-                  v-if: val('Conjoint') === 'false'
-                  name: destinataireAutrePersonne
-                  label:
-                    fr: La correspondance destinée à une personne seule lui sera directement transmise. Si elle doit plutôt être transmise à une autre personne, inscrivez la raison de ce choix.
-                  validations:
-                    optional: null        
-
-    # Adulte 2
-    - sectionGroup: 
-        fr: Adulte 2
-      classes: icone user                      
-      v-if: val('Conjoint') === 'true'
-      prefixId: adulte2
-      sections: *sectionsAdulte
     # Groupe Adulte 1 et/ou 2
     - sectionGroup: 
         fr: Adultes 1 et 2
