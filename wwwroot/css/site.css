@@ -243,6 +243,12 @@ body p {
         margin-bottom: 16px;
     }
 
+    /* Précision de groupe */
+    .formulate-input[data-type="group"] > .formulate-input-wrapper > .precision {
+        margin-bottom: 16px;
+        margin-top: -12px;
+    }
+
     .formulate-input.group > .formulate-input-wrapper > label {
         display: none; /* Ne pas afficher le label d'un groupe non répétable */
     }
