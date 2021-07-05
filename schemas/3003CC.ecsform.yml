@@ -435,6 +435,8 @@ form:
               label:
                 fr: Êtes-vous enceinte?
               options: yesno
+              validations:
+                optional: null
             - name: dateAccouchement
               type: date
               v-if: val('prefixId$req-00-enceinte') === 'true'
@@ -446,6 +448,8 @@ form:
               label:
                 fr: Est-ce que votre état de santé vous permet de travailler?
               options: yesno
+              validations:
+                optional: null
             - name: precisionInvalidite
               type: text
               v-if: val('prefixId$req-00-valide') === 'false'
