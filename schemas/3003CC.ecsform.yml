@@ -250,7 +250,7 @@ form:
         - section:
             fr: Informations sur le domicile
           id: domicile
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
+          v-if: val('TypeDemande') === 'Afdr'
           components: &domicile
             - name: TypeDomicile
               type: select
@@ -1237,11 +1237,22 @@ form:
                   options: yesno
               limit: 2              
 
+    # Groupe "Adulte 2"
+    - sectionGroup: 
+        fr: Adulte 2
+      classes: icone user                      
+      v-if: val('Conjoint') === 'true'
+      prefixId: adulte2
+      sections: *sectionsAdulte
+    # Groupe "Ressources" 
+    - sectionGroup: 
+        fr: Ressources
+      v-if: val('TypeDemande') === 'Afdr'
+      sections: 
         # Section - Revenus
         - section:
             fr: Revenus
           id: revenus
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'
           components: &revenus     
             - type: bandeau
               text: 
@@ -1864,7 +1875,6 @@ form:
         - section:
             fr: Avoirs liquides
           id: avoirs
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'          
           components: &avoirs
             - type: bandeau-notification
               text:
@@ -2094,7 +2104,6 @@ form:
         - section:
             fr: Biens
           id: biens
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'          
           components: &biens      
             - type: bandeau
               text: 
@@ -2381,15 +2390,6 @@ form:
                   type: number
                   label:
                     fr: Valeur
-
-    # Adulte 2
-    - sectionGroup: 
-        fr: Adulte 2
-      classes: icone user                      
-      v-if: val('Conjoint') === 'true'
-      prefixId: adulte2
-      sections: *sectionsAdulte
-
     # Groupe Enfants à charge
     - sectionGroup: 
         fr: Enfants à charge
@@ -2687,7 +2687,7 @@ form:
         - section:
             fr: Destinataire de la correspondance
           id: destinataire
-          v-if: val('Conjoint') === 'false' && val('TypeDemande') === 'Afdr'                    
+          v-if: val('TypeDemande') === 'Afdr'                    
           components: &correspondance
             - type: bandeau
               components:
