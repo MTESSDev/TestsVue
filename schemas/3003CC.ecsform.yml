@@ -2447,6 +2447,7 @@ form:
                   outerClasses: md
                   label:
                     fr: Numéro d’assurance maladie
+                  v-if: val('prefixId$Oui4') === 'false'
                 - name: sexe
                   type: radio
                   label:
