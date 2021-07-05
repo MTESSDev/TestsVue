@@ -1033,8 +1033,7 @@ form:
               removeLabel:
                 fr: Supprimer cet emploi
                 en: Delete this job
-              validations:
-                max: 2
+              limit: 2
               components:
                 - name: emploiNomEntreprise
                   type: text
@@ -1154,8 +1153,8 @@ form:
                   label:
                     fr: Avez-vous de l'expérience pour l'emploi?
                   options: yesno
-              validations:
-                max: 2
+              limit: 2              
+
         #Section - Domicile
         - section:
             fr: Informations sur le domicile
@@ -1272,8 +1271,7 @@ form:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
-              validations:
-                max: 2
+              limit: 2
               components: 
                 - name: RevenuEmploiProprio
                   type: radio
@@ -1313,8 +1311,7 @@ form:
                 fr: Ajouter un pourboire
               removeLabel:
                 fr: Supprimer ce pourboire
-              validations:
-                max: 2
+              limit: 2                
               components: 
                 - name: RevenuPourboireProprio
                   type: radio
@@ -1354,8 +1351,7 @@ form:
                 fr: Ajouter un revenu de travail autonome ou d'entreprise
               removeLabel:
                 fr: Supprimer ce revenu
-              validations:
-                max: 2
+              limit: 2                
               components: 
                 - name: RevenuAutonomeProprio
                   type: radio
@@ -1414,8 +1410,7 @@ form:
                 fr: Ajouter une somme
               removeLabel:
                 fr: Supprimer cette somme
-              validations:
-                max: 2
+              limit: 2                
               components: 
                 - name: SommeProvincialProprio
                   type: radio
@@ -1466,8 +1461,7 @@ form:
                 fr: Ajouter une somme
               removeLabel:
                 fr: Supprimer cette somme
-              validations:
-                max: 2
+              limit: 2                
               components: 
                 - name: SommeFederalProprio
                   type: radio
@@ -1518,8 +1512,7 @@ form:
                 fr: Ajouter une somme
               removeLabel:
                 fr: Supprimer cette somme
-              validations:
-                max: 2
+              limit: 2                
               components: 
                 - name: SommeOrganismeAutreProprio
                   type: radio
@@ -1577,8 +1570,7 @@ form:
                 fr: Ajouter un revenu de chambre ou de pension
               removeLabel:
                 fr: Supprimer ce revenu
-              validations:
-                max: 2
+              limit: 2                
               components:
                 - name: RevenusAutresChambreProprio
                   type: radio
@@ -1624,8 +1616,7 @@ form:
                 fr: Ajouter un revenu de location
               removeLabel:
                 fr: Supprimer ce revenu
-              validations:
-                max: 2
+              limit: 2                
               components:
                 - name: RevenusAutresLocationProprio
                   type: radio
@@ -1666,8 +1657,7 @@ form:
                 fr: Ajouter un revenu 
               removeLabel:
                 fr: Supprimer ce revenu
-              validations:
-                max: 2
+              limit: 2                
               components:
                 - name: RevenusAutresPlacementProprio
                   type: radio
@@ -1708,8 +1698,7 @@ form:
                 fr: Ajouter un revenu de fonds de pension 
               removeLabel:
                 fr: Supprimer un revenu de fonds de pension
-              validations:
-                max: 2
+              limit: 2                
               components:
                 - name: RevenusAutresFondPensionProprio
                   type: radio
@@ -1750,8 +1739,7 @@ form:
                 fr: Ajouter une pension alimentaire 
               removeLabel:
                 fr: Supprimer cette pensions alimentaire
-              validations:
-                max: 2
+              limit: 2                
               components:
                 - name: PensionAlimentaireProprio
                   type: radio
@@ -1802,8 +1790,7 @@ form:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
-              validations:
-                max: 2
+              limit: 2                
               components:
                 - name: RevenuDiversProprio
                   type: radio
@@ -1845,8 +1832,7 @@ form:
                 fr: Ajouter un revenu en attente
               removeLabel:
                 fr: Supprimer ce revenu en attente
-              validations:
-                max: 2
+              limit: 2                
               components:
                 - name: RevenusAttenteProprio
                   type: radio
@@ -1899,8 +1885,7 @@ form:
                 fr: Ajouter un compte
               removeLabel:
                 fr: Supprimer ce compte
-              validations:
-                max: 5
+              limit: 5                
               components:
                 - name: AvoirCompteProprio
                   type: radio
@@ -1951,8 +1936,7 @@ form:
                 fr: Ajouter un avoir
               removeLabel:
                 fr: Supprimer cet avoir
-              validations:
-                max: 4
+              limit: 4
               components:
                 - name: AvoirEnMainProprio
                   type: radio
@@ -2001,8 +1985,7 @@ form:
                 fr: Ajouter un chèque ou un paiement préautorisé
               removeLabel:
                 fr: Supprimer ce chèque ou paiement préautorisé
-              validations:
-                max: 6
+              limit: 6                
               components:
                 - name: ChequesEnCirculationProprio
                   type: radio
@@ -2045,8 +2028,7 @@ form:
                 fr: Ajouter un placement
               removeLabel:
                 fr: Supprimer ce placement
-              validations:
-                max: 3
+              limit: 3                
               components:
                 - name: AvoirPlacementProprio
                   type: radio
@@ -2085,8 +2067,7 @@ form:
                 fr: Ajouter une somme due
               removeLabel:
                 fr: Supprimer cette somme due
-              validations:
-                max: 3
+              limit: 3                
               components:
                 - name: AvoirSommeDueProprio
                   type: radio
@@ -2136,8 +2117,7 @@ form:
                 fr: Ajouter un véhicule
               removeLabel:
                 fr: Supprimer ce véhicule
-              validations:
-                max: 6
+              limit: 6                
               components: 
                 - name: ProprioVehicule
                   type: radio
@@ -2189,8 +2169,7 @@ form:
                 fr: Ajouter bien immobilier
               removeLabel:
                 fr: Supprimer ce bien immobilier
-              validations:
-                max: 3
+              limit: 3                
               components: 
                 - name: ProprioBienImmobilier
                   type: radio
@@ -2237,8 +2216,7 @@ form:
                 fr: Ajouter un bien mobilier
               removeLabel:
                 fr: Supprimer ce bien mobilier
-              validations:
-                max: 3
+              limit: 3                
               components: 
                 - name: BienMobilierProprio
                   type: radio
@@ -2277,8 +2255,7 @@ form:
                 fr: Ajouter une assurance vie
               removeLabel:
                 fr: Supprimer cette assurance
-              validations:
-                max: 2
+              limit: 2                
               components: 
                 - name: BienAssuranceVieProprio
                   type: radio
@@ -2322,8 +2299,7 @@ form:
                 fr: Ajouter une entreprise
               removeLabel:
                 fr: Supprimer cette entreprise
-              validations:
-                max: 3
+              limit: 3                
               components: 
                 - name: BiensEntrepriseProprio
                   type: radio
@@ -2378,8 +2354,7 @@ form:
                 fr: Ajouter un bien ou un avoir
               removeLabel:
                 fr: Supprimer ce bien ou cet avoir
-              validations:
-                max: 3
+              limit: 3                
               components: 
                 - name: BiensCedesProprio
                   type: radio
@@ -2422,8 +2397,7 @@ form:
                 fr: Ajouter un enfant à charge
               removeLabel:
                 fr: Supprimer cet enfant à charge
-              validations:
-                max: 3
+              limit: 3                
               components:
                 - name: cp12
                   type: text
@@ -2636,8 +2610,7 @@ form:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
-              validations:
-                max: 2
+              limit: 2                
               components:
               - name: IdEnfant
                 type: text
@@ -2678,8 +2651,7 @@ form:
                 fr: Ajouter un bien
               removeLabel: 
                 fr: Supprimer ce bien    
-              validations:
-                max: 3
+              limit: 3                
               components:
                 - name: IdEnfant
                   type: text
