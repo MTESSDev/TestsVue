@@ -111,141 +111,6 @@ form:
                   fr: Raison pour laquelle le conjoint habite ailleurs
             - name: Conjoint
               type: hidden
-        # Section 1 - Raison de la demande
-        - section: 
-            fr: Raison de la demande
-            en: (EN)Raison de la demande
-          id: raisonDemande
-          v-if: val('TypeDemande').length > 0
-          components:
-            - type: dynamic
-              v-if: val('TypeDemande').includes('Afdr')
-              tag: div        
-              components:
-                - name: EvenementsDerniereAnnee
-                  type: checkbox
-                  label: 
-                    fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
-                  options: 
-                    FinDiminutionRevenus: Perte ou diminution de revenus
-                    FinEtudesTempsPlein: Fin d'études à temps plein  
-                  validations: 
-                    optional: null
-                - name: FinDiminutionRevenusType
-                  v-if: val('EvenementsDerniereAnnee').includes('FinDiminutionRevenus')
-                  type: checkbox
-                  label: 
-                    fr: Type de revenu
-                  options: 
-                    FinRevenusEmploi: d'emploi
-                    FinRevenusTravailAutonome: de travail autonome
-                    FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
-                    FinRevenusAutres: autre
-                - name: FinRevenusPrestationsPrecision
-                  v-if: val('FinDiminutionRevenusType').includes('FinRevenusPrestations')
-                  type: text
-                  label: 
-                    fr: Précisez le type de prestations gouvernementales
-                - name: FinRevenusAutresPrecision
-                  v-if: val('FinDiminutionRevenusType').includes('FinRevenusAutres')
-                  type: text
-                  label: 
-                    fr: Précisez le type de revenu
-                - name: DateEvenementFinDiminutionRevenus
-                  v-if: val('EvenementsDerniereAnnee').includes('FinDiminutionRevenus')
-                  type: date
-                  label: 
-                    fr: Date de la fin ou diminution de revenus
-                - name: DateEvenementFinEtudesTempsPlein
-                  v-if: val('EvenementsDerniereAnnee').includes('FinEtudesTempsPlein')
-                  type: date
-                  label: 
-                    fr: Date de la fin d'études à temps plein
-                - name: PrecisionRaisonDemandeAfdr
-                  type: checkbox
-                  label: 
-                    fr: Indiquez la raison de votre demande d'aide financière de dernier recours
-                  options: 
-                    AttenteDecision: Vous attendez la réponse à une autre demande (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
-                    AucunRevenu: Vous n'avez aucun revenu
-                    RevenuInsuffisant: Votre revenu est insuffisant
-                    NaissanceEnfant: Vous avez eu ou pris en charge un enfant
-                    SortieEtablissement: Vous venez de sortir d'un établissement
-                    ArriveeConjoint: Vous vivez maintenant avec un conjoint
-                    PerteConjoint: Vous n'avez plus de conjoint
-                    ProblemeSante: Vous avez un problème de santé
-                    RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
-                    PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
-                - name: PrecisionRaisonDemandeAfdrAttenteDecision
-                  v-if: val('PrecisionRaisonDemandeAfdr').includes('AttenteDecision')
-                  type: text
-                  label: 
-                    fr: Précisez la raison de votre demande d'aide financière de dernier recours
-                - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
-                  v-if: val('PrecisionRaisonDemandeAfdr').includes('RevenuInsuffisant')
-                  type: radio
-                  label: 
-                    fr: Type de revenu insuffisant
-                  options: 
-                    RevenuInsuffisantRevenusEmploi: Revenus d'emploi
-                    RevenuInsuffisantTravailAutonome: Revenus de travail autonome
-                    RevenuInsuffisantPrestations: Prestations gouvernementales (prestations d'assurance-emploi ou d'assurance parentale[RQAP], jugement, SAAQ, CNESST, etc.)
-                    RevenuInsuffisantAutres: autre
-                - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
-                  v-if: val('PrecisionRaisonDemandeAfdrRevenuInsuffisant') === 'RevenuInsuffisantPrestations'
-                  type: text
-                  label: 
-                    fr: Précisez le type de prestation insuffisante
-                - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
-                  v-if: val('PrecisionRaisonDemandeAfdrRevenuInsuffisant') === 'RevenuInsuffisantAutres'
-                  type: text
-                  label: 
-                    fr: Précisez le type de revenu autre
-                - name: PrecisionRaisonDemandeAfdrSortieEtablissement
-                  v-if: val('PrecisionRaisonDemandeAfdr').includes('SortieEtablissement')
-                  type: radio
-                  label: 
-                    fr: Précisez le type d'établissement
-                  options: 
-                    SortieEtablissementSante: de santé
-                    SortieEtablissementDetention: de détention
-                - name: PrecisionRaisonDemandeAfdrPerteConjoint
-                  v-if: val('PrecisionRaisonDemandeAfdr').includes('PerteConjoint')
-                  type: radio
-                  label: 
-                    fr: Précisez la raison de perte du conjoint
-                  options: 
-                    PerteConjointDeces: décès
-                    PerteConjointSeparation: separation
-                    PerteConjointDivorce: divorce
-                - name: PrecisionRaisonDemandeAfdrAutre
-                  v-if: val('PrecisionRaisonDemandeAfdr').includes('PrecisionRaisonDemandeAfdrAutreRaison')
-                  type: text
-                  label: 
-                    fr: Précisez la raison autre
-            - type: dynamic
-              v-if: val('TypeDemande').includes('AideEmploi')
-              tag: div        
-              components:      
-                - name: PrecisionRaisonDemandeEmploi
-                  type: checkbox
-                  label: 
-                    fr: Précisez la raison de votre demande de services d'aide à l'emploi
-                  options: 
-                    AideRechercheEmploi: Aide à la recherche d'emploi
-                    RetourEcole: Retour aux études ou en formation
-                    DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
-                    PrecisionRaisonDemandeEmploiAutreRaison: Autre
-                - name: PrecisionRaisonDemandeEmploiAutre
-                  v-if: val('PrecisionRaisonDemandeEmploi').includes('DirigeEmployeurOrganisme')
-                  type: text
-                  label: 
-                    fr: Précisez l'employeur ou l'organisme
-                - name: PrecisionRaisonDemandeEmploiAutre
-                  v-if: val('PrecisionRaisonDemandeEmploi').includes('PrecisionRaisonDemandeEmploiAutreRaison')
-                  type: text
-                  label: 
-                    fr: Précisez la raison de votre demande d'aide à l'emploi
         #Section - Domicile
         - section:
             fr: Informations sur le domicile
@@ -335,6 +200,141 @@ form:
       #v-if: form.TypeDemande
       prefixId: adulte1
       sections: &sectionsAdulte
+        # Section 1 - Raison de la demande
+        - section: 
+            fr: Raison de la demande
+            en: (EN)Raison de la demande
+          id: raisonDemande
+          v-if: val('TypeDemande').length > 0
+          components:
+            - type: dynamic
+              v-if: val('TypeDemande').includes('Afdr')
+              tag: div        
+              components:
+                - name: EvenementsDerniereAnnee
+                  type: checkbox
+                  label: 
+                    fr: Indiquez s'il y a lieu, les évènements vécus depuis les 12 derniers mois
+                  options: 
+                    FinDiminutionRevenus: Perte ou diminution de revenus
+                    FinEtudesTempsPlein: Fin d'études à temps plein  
+                  validations: 
+                    optional: null
+                - name: FinDiminutionRevenusType
+                  v-if: val('prefixId$EvenementsDerniereAnnee').includes('FinDiminutionRevenus')
+                  type: checkbox
+                  label: 
+                    fr: Type de revenu
+                  options: 
+                    FinRevenusEmploi: d'emploi
+                    FinRevenusTravailAutonome: de travail autonome
+                    FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
+                    FinRevenusAutres: autre
+                - name: FinRevenusPrestationsPrecision
+                  v-if: val('prefixId$FinDiminutionRevenusType').includes('FinRevenusPrestations')
+                  type: text
+                  label: 
+                    fr: Précisez le type de prestations gouvernementales
+                - name: FinRevenusAutresPrecision
+                  v-if: val('prefixId$FinDiminutionRevenusType').includes('FinRevenusAutres')
+                  type: text
+                  label: 
+                    fr: Précisez le type de revenu
+                - name: DateEvenementFinDiminutionRevenus
+                  v-if: val('prefixId$EvenementsDerniereAnnee').includes('FinDiminutionRevenus')
+                  type: date
+                  label: 
+                    fr: Date de la fin ou diminution de revenus
+                - name: DateEvenementFinEtudesTempsPlein
+                  v-if: val('prefixId$EvenementsDerniereAnnee').includes('FinEtudesTempsPlein')
+                  type: date
+                  label: 
+                    fr: Date de la fin d'études à temps plein
+                - name: PrecisionRaisonDemandeAfdr
+                  type: checkbox
+                  label: 
+                    fr: Indiquez la raison de votre demande d'aide financière de dernier recours
+                  options: 
+                    AttenteDecision: Vous attendez la réponse à une autre demande (Assurance-emploi, RQAP, jugement, SAAQ, CNESST, etc.)
+                    AucunRevenu: Vous n'avez aucun revenu
+                    RevenuInsuffisant: Votre revenu est insuffisant
+                    NaissanceEnfant: Vous avez eu ou pris en charge un enfant
+                    SortieEtablissement: Vous venez de sortir d'un établissement
+                    ArriveeConjoint: Vous vivez maintenant avec un conjoint
+                    PerteConjoint: Vous n'avez plus de conjoint
+                    ProblemeSante: Vous avez un problème de santé
+                    RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
+                    PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
+                - name: PrecisionRaisonDemandeAfdrAttenteDecision
+                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('AttenteDecision')
+                  type: text
+                  label: 
+                    fr: Précisez la raison de votre demande d'aide financière de dernier recours
+                - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
+                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('RevenuInsuffisant')
+                  type: radio
+                  label: 
+                    fr: Type de revenu insuffisant
+                  options: 
+                    RevenuInsuffisantRevenusEmploi: Revenus d'emploi
+                    RevenuInsuffisantTravailAutonome: Revenus de travail autonome
+                    RevenuInsuffisantPrestations: Prestations gouvernementales (prestations d'assurance-emploi ou d'assurance parentale[RQAP], jugement, SAAQ, CNESST, etc.)
+                    RevenuInsuffisantAutres: autre
+                - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
+                  v-if: val('prefixId$PrecisionRaisonDemandeAfdrRevenuInsuffisant') === 'RevenuInsuffisantPrestations'
+                  type: text
+                  label: 
+                    fr: Précisez le type de prestation insuffisante
+                - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
+                  v-if: val('prefixId$PrecisionRaisonDemandeAfdrRevenuInsuffisant') === 'RevenuInsuffisantAutres'
+                  type: text
+                  label: 
+                    fr: Précisez le type de revenu autre
+                - name: PrecisionRaisonDemandeAfdrSortieEtablissement
+                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('SortieEtablissement')
+                  type: radio
+                  label: 
+                    fr: Précisez le type d'établissement
+                  options: 
+                    SortieEtablissementSante: de santé
+                    SortieEtablissementDetention: de détention
+                - name: PrecisionRaisonDemandeAfdrPerteConjoint
+                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('PerteConjoint')
+                  type: radio
+                  label: 
+                    fr: Précisez la raison de perte du conjoint
+                  options: 
+                    PerteConjointDeces: décès
+                    PerteConjointSeparation: separation
+                    PerteConjointDivorce: divorce
+                - name: PrecisionRaisonDemandeAfdrAutre
+                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('PrecisionRaisonDemandeAfdrAutreRaison')
+                  type: text
+                  label: 
+                    fr: Précisez la raison autre
+            - type: dynamic
+              v-if: val('TypeDemande').includes('AideEmploi')
+              tag: div        
+              components:      
+                - name: PrecisionRaisonDemandeEmploi
+                  type: checkbox
+                  label: 
+                    fr: Précisez la raison de votre demande de services d'aide à l'emploi
+                  options: 
+                    AideRechercheEmploi: Aide à la recherche d'emploi
+                    RetourEcole: Retour aux études ou en formation
+                    DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
+                    PrecisionRaisonDemandeEmploiAutreRaison: Autre
+                - name: PrecisionRaisonDemandeEmploiAutre
+                  v-if: val('prefixId$PrecisionRaisonDemandeEmploi').includes('DirigeEmployeurOrganisme')
+                  type: text
+                  label: 
+                    fr: Précisez l'employeur ou l'organisme
+                - name: PrecisionRaisonDemandeEmploiAutre
+                  v-if: val('prefixId$PrecisionRaisonDemandeEmploi').includes('PrecisionRaisonDemandeEmploiAutreRaison')
+                  type: text
+                  label: 
+                    fr: Précisez la raison de votre demande d'aide à l'emploi
         # Section 2 - Renseignements sur l'identité
         - section: 
             fr: Renseignements sur l'identité
