@@ -42,6 +42,9 @@ namespace ECSForm.Pages
         [VueData("noPageCourante")]
         public int NoPageCourante { get; set; } = 0;
 
+        [VueData("title")]
+        public string? Title { get; set; }
+
         [VueData("pagesGroup")]
         public List<Section>? Sections { get; set; } = new List<Section>();
 
@@ -262,12 +265,13 @@ namespace ECSForm.Pages
                 }
             }
 
+            Title =  (dynamicForm.Form["title"] as Dictionary<object,object>).GetLocalizedObject();
+
             using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
             {
                 var content = await streamReader.ReadToEndAsync();
                 FormRaw = await FormHelpers.Stubble.RenderAsync(content, dynamicForm);
             }
-
 
             //if (dynamicForm?.Form?["sections"] is null) { return NotFound(); }
 

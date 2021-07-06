@@ -11,6 +11,7 @@
     var couleurFondEnteteIdentiqueContenu1 = ViewData["classe-fond-section-entete"] == ViewData["classe-fond-section-contenu1"];
     var h1HorsEcran = ((bool?)ViewData["H1HorsEcran"]).GetValueOrDefault();
     var h1NonRendu = ((bool?)ViewData["H1NonRendu"]).GetValueOrDefault();
+    var masquerFilAriane = ((bool?)ViewData["MasquerFilAriane"]).GetValueOrDefault();
 
     // Masquer le premier espaceur de la zone contenu1 si la zone d'entête n'est pas vide et que sa couleur de fond est identique à celle de la section de contenu 1.
     var zoneEnteteVide = h1NonRendu;
@@ -172,7 +173,16 @@
 
 
         <main id="main">
-
+            @if (!masquerFilAriane)
+            {
+                <div v-cloak class="container fil-ariane">
+                    <span class="nom-formulaire">Demande d'aide financière de dernier recours ou d'aide à l'emploi</span>
+                    <span v-if="groupeCourant.titre">
+                        <span> - </span>
+                        <span class="groupe-courant">{{groupeCourant.titre}}</span>
+                    </span>
+                </div>
+            }
             <div class="conteneur-entete @ViewData["classe-fond-section-entete"] @(h1HorsEcran ? "h1-hors-ecran" : "") @(h1NonRendu ? "h1-non-rendu" : "")">
                 <div class="container">
                     <div class="espaceur-conteneurs"></div>

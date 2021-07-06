@@ -22,6 +22,7 @@ body p {
     line-height: 1.5;
 }
 
+
 /*====================================================================================================*/
 /*  -Z01- Base contrôles
 /*====================================================================================================*/
@@ -575,6 +576,7 @@ body p {
 
         nav.etapes-form.navbar {
             padding: 0;
+            margin-left: 16px;
         }
 
         nav.etapes-form .navbar-toggler {
@@ -605,9 +607,10 @@ body p {
     }
 
         @media (max-width: 991px) {
-            nav.etapes-form {
+            nav.etapes-form.navbar {
                 border-top: 1px solid var(--couleur-filet-secondaire);
                 border-bottom: 1px solid var(--couleur-filet-secondaire);
+                margin-left: 0;
             }
 
             nav.etapes-form ul {
@@ -633,12 +636,11 @@ nav.etapes-form li.active a {
 
 nav.etapes-form .groupe {
     font-family: 'OpenSans-Bold';
-    padding: 16px 0;
+    padding: 16px;
     background-color: var(--couleur-fond-gris);
     display: flex;
     align-items: center;
     margin-left: -16px;
-    padding-left: 16px;
 }
 
     nav.etapes-form .groupe.active {
@@ -1026,6 +1028,12 @@ form .input-validation-error, form .input-validation-error + .note-editor {
     /*====================================================================================================*/
     /*  -100- À positionner
 /*====================================================================================================*/
+
+.fil-ariane {
+    margin-top: 16px;
+    font-size: 0.8125rem;
+}
+
 .modal.aide-contextuelle {
     display: block !important;
     opacity: 0;

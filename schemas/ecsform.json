@@ -28,6 +28,10 @@
                 "templates": {
                     "type": "object"
                 },
+                "title": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
                 "inputDefaultClasses": {
                     "type": "object"
                 },
@@ -214,6 +218,10 @@
                 "v-if": {
                     "type": "string",
                     "description": "Conditionnal display on another property/form field."
+                },
+                "v-else-value": {
+                    "type": "string",
+                    "description": "Valeur de remplacement lorsque le le v-if n'affiche pas le champ. Supporté CÔTÉ SERVEUR UNIQUEMENT."
                 },
                 "helpPosition": {
                   "type": "string",
