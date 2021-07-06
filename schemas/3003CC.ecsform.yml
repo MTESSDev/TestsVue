@@ -90,7 +90,7 @@ form:
                 fr: Vous répondez à notre définition de conjoint. Votre conjoint doit fournir les renseignements le concernant sous « Adulte 2 » dans le présent formulaire.
             - type: dynamic
               tag: div
-              v-if: val('TypeDemande').includes('Afdr') && val('Conjoint') === 'true'       
+              v-if: val('TypeDemande').includes('Afdr')       
               components:                    
               - name: ConjointMemeAdresse
                 type: radio
