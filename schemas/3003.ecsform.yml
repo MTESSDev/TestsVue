@@ -407,8 +407,8 @@ form:
                 fr: Date de la fin de l'union ou du décès
               v-if: >
                  val('prefixId$EtatMatrimonial') && 
-                 (val('prefixId$EtatMatrimonial') === 'divorce' || val('prefixId$EtatMatrimonial') === 'separeSansJugement'
-                 || val('prefixId$EtatMatrimonial') === 'separe' || val('prefixId$EtatMatrimonial') === 'veuf')
+                 (val('prefixId$EtatMatrimonial') === 'divorce' || val('prefixId$EtatMatrimonial') === 'separeSansJugement' ||
+                 val('prefixId$EtatMatrimonial') === 'separe' || val('prefixId$EtatMatrimonial') === 'veuf')
             - name: Langue
               type: radio
               label: 
