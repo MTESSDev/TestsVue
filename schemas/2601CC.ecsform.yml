@@ -69,37 +69,37 @@ form:
                 fr: Veuillez choisir parmi les options suivantes
                 en: Please choose among the following options
               options:
-                ReqArriveeConjoint:
+                ArriveeConjoint:
                   fr: Arrivée d'un conjoint
                   en: Arrival of a spouse
-                ReqDepartConjoint:
+                DepartConjoint:
                   fr: Départ d'un conjoint
                   en: Departure of a spouse
-                ReqAugmentationEnfants:
+                AugmentationEnfants:
                   fr: Augmentation du nombre d’enfants à charge
                   en: Increase in number of dependent children
-                ReqDiminutionEnfants:
+                DiminutionEnfants:
                   fr: Diminution du nombre d’enfants à charge
                   en: Decrease in number of dependent children
-                ReqEnfantEtudesDebut:
+                EnfantEtudesDebut:
                   fr: Un enfant à charge a entrepris des études
                   en: A dependent child began attending school
-                ReqEnfantEtudesFin:
+                EnfantEtudesFin:
                   fr: Un enfant à charge a terminé ses études ou les a abandonnées
                   en: A dependent child completed their schooling or abandoned schooling
-                ReqFormationProfessionnelleDebut:
+                FormationProfessionnelleDebut:
                   fr: Début d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
                   en: Start of vocational training in a secondary-level institution or training in a post-secondary level institution
-                ReqModificationHeuresCredits:
+                ModificationHeuresCredits:
                   fr: Modification du nombre d’heures de cours ou du nombre de crédits
                   en: Change in the number of course hours or credits
-                ReqFormationProfessionnelleFin:
+                FormationProfessionnelleFin:
                   fr: Fin d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
                   en: End of vocational training in a secondary-level institution or training in a post-secondary level institution
               
             - name: DetailsArriveeConjoint
               type: group            
-              v-if: val('ChoixChangements').includes('ReqArriveeConjoint')
+              v-if: val('ChoixChangements').includes('ArriveeConjoint')
               label:                
                 fr: Arrivée d'un conjoint
                 en: Arrival of a spouse
@@ -116,7 +116,7 @@ form:
                     en: Person’s name
             - name: DetailsDepartConjoint
               type: group
-              v-if: val('ChoixChangements').includes('ReqDepartConjoint')
+              v-if: val('ChoixChangements').includes('DepartConjoint')
               label:                
                 fr: Départ d'un conjoint
                 en: Departure of a spouse
@@ -133,7 +133,7 @@ form:
                     en: Person’s name
             - name: DetailsAugmentationEnfants
               type: group
-              v-if: val('ChoixChangements').includes('ReqAugmentationEnfants')
+              v-if: val('ChoixChangements').includes('AugmentationEnfants')
               label:                
                 fr: Augmentation du nombre d’enfants à charge
                 en: Increase in number of dependent children
@@ -150,7 +150,7 @@ form:
                     en: Child’s name
             - name: DetailsDiminutionEnfants
               type: group
-              v-if: val('ChoixChangements').includes('ReqDiminutionEnfants')              
+              v-if: val('ChoixChangements').includes('DiminutionEnfants')              
               label:
                 fr: Diminution du nombre d’enfants à charge
                 en: Decrease in number of dependent children
@@ -167,7 +167,7 @@ form:
                     en: Child’s name
             - name: DetailsEnfantEtudesDebut
               type: group
-              v-if: val('ChoixChangements').includes('ReqEnfantEtudesDebut')              
+              v-if: val('ChoixChangements').includes('EnfantEtudesDebut')              
               label:
                 fr: Un enfant à charge a entrepris des études
                 en: A dependent child began attending school
@@ -201,7 +201,7 @@ form:
                       en: University
             - name: DetailsEnfantEtudesFin
               type: group
-              v-if: val('ChoixChangements').includes('ReqEnfantEtudesFin')              
+              v-if: val('ChoixChangements').includes('EnfantEtudesFin')              
               label:
                 fr: Un enfant à charge a terminé ses études ou les a abandonnées
                 en: A dependent child completed their schooling or abandoned schooling            
@@ -218,7 +218,7 @@ form:
                     en: Child’s name  
             - name: DetailsFormationProfessionnelleDebut
               type: group
-              v-if: val('ChoixChangements').includes('ReqFormationProfessionnelleDebut')
+              v-if: val('ChoixChangements').includes('FormationProfessionnelleDebut')
               label:                
                 fr: Début d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
                 en: Start of vocational training in a secondary-level institution or training in a post-secondary level institution              
@@ -230,10 +230,10 @@ form:
                     fr: Formation pour
                     en: Training for
                   options:
-                    ReqMoi: 
+                    Moi: 
                       fr: Moi
                       en: Me
-                    ReqConjoint:
+                    Conjoint:
                       fr: Mon conjoint
                       en: My spouse 
                 - name: DateFormationProfessionnelleDebut
@@ -247,10 +247,10 @@ form:
                     fr: Statut d'étudiant
                     en: Student status
                   options:
-                    ReqTempsPlein:
+                    TempsPlein:
                       fr: Études à temps plein
                       en: Full-time studies
-                    ReqTempsPartiel:
+                    TempsPartiel:
                       fr: Études à temps partiel
                       en: Part-time studies                    
                 - name: TypeDiplome
@@ -263,7 +263,7 @@ form:
               label:
                 fr: Modification du nombre d’heures de cours ou du nombre de crédits
                 en: Change in the number of course hours or credits
-              v-if: val('ChoixChangements').includes('ReqModificationHeuresCredits')
+              v-if: val('ChoixChangements').includes('ModificationHeuresCredits')
               components:
               - name: DestinataireModificationHeuresCredits
                 type: radio
@@ -272,10 +272,10 @@ form:
                   fr: Modification pour
                   en: Change for
                 options:
-                  ReqMoi: 
+                  Moi: 
                     fr: Moi
                     en: Me
-                  ReqConjoint:
+                  Conjoint:
                     fr: Mon conjoint
                     en: My spouse  
               - name: DateModificationHeuresCredits
@@ -293,7 +293,7 @@ form:
               label:
                 fr: Fin d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
                 en: End of vocational training in a secondary-level institution or training in a post-secondary level institution              
-              v-if: val('ChoixChangements').includes('ReqFormationProfessionnelleFin')
+              v-if: val('ChoixChangements').includes('FormationProfessionnelleFin')
               components:
                 - name: DestinataireFormationProfessionnelleFin
                   type: radio
@@ -302,10 +302,10 @@ form:
                     fr: Fin de formation pour
                     en: End of training for
                   options:
-                    ReqMoi: 
+                    Moi: 
                       fr: Moi
                       en: Me
-                    ReqConjoint:
+                    Conjoint:
                       fr: Mon conjoint
                       en: My spouse 
                 - name: DateFormationProfessionnelleFin
@@ -326,116 +326,116 @@ form:
                 en: Please choose among the following options
               type: checkbox
               options:
-                ReqEmploiDebut:
+                EmploiDebut:
                   fr: Début de l'emploi
                   en: Start of a job
-                ReqRevenuAugmentation:
+                RevenuAugmentation:
                   fr: Augmentation des revenus d’emploi
                   en: Increase in work income
-                ReqRevenuDiminution:
+                RevenuDiminution:
                   fr: Diminution des revenus d’emploi
                   en: Decrease in work income
               validations:
                 optional: null
             - name: DateEmploiDebut
               type: date
-              v-if: val('NaturechangementEmploi').includes('ReqEmploiDebut')
+              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
               label:
                 fr: Date du début de l'emploi
                 en: Job start date
             - name: PersonneEmployee
               type: radio
               outerClasses: boutons-inline md
-              v-if: val('NaturechangementEmploi').includes('ReqEmploiDebut')
+              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
               label:
                 fr: Nouvel emploi pour
                 en: New job for
               options:
-                ReqMoi: 
+                Moi: 
                   fr: Moi
                   en: Me
-                ReqConjoint:
+                Conjoint:
                   fr: Mon conjoint
                   en: My spouse
-                ReqEnfant:
+                Enfant:
                   fr: Un enfant à charge
                   en: Depdendent child
             - name: RevenuBrutHebdomadaire
               type: number
-              v-if: val('NaturechangementEmploi').includes('ReqEmploiDebut')
+              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
               outerClasses: md
               label:
                 fr: Estimation des revenus bruts par semaine
                 en: Estimated gross weekly income
             - name: InfosEmployeur
               type: textarea
-              v-if: val('Req10-EmploiDebut').includes('ReqEmploiDebut')
+              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
               label: 
                 fr: Nom et adresse de l’employeur
                 en: Employer’s name and address                          
             - name: DateRevenuAugmentation
               type: date
-              v-if: val('NaturechangementEmploi').includes('ReqRevenuAugmentation')
+              v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
               label:
                 fr: Date de l'augmentation
                 en: Date of increase
             - name: PersonneEmployee
               type: radio
-              v-if: val('NaturechangementEmploi').includes('ReqRevenuAugmentation')
+              v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
               label: 
                 fr: Changement pour
                 en: Change for
               outerClasses: boutons-inline md
               options:
-                ReqMoi: 
+                Moi: 
                   fr: Moi
                   en: Me
-                ReqConjoint:
+                Conjoint:
                   fr: Mon conjoint
                   en: My spouse
-                ReqEnfant:
+                Enfant:
                   fr: Un enfant à charge
                   en: Depdendent child
             - name: RevenuBrutHebdomadaire
               type: number
-              v-if: val('NaturechangementEmploi').includes('ReqRevenuAugmentation')
+              v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
               outerClasses: md
               label:
                 fr: Estimation des revenus bruts par semaine
                 en: Estimated gross weekly income
             - name: DateRevenuDiminution
               type: date
-              v-if: val('NaturechangementEmploi').includes('ReqRevenuDiminution')
+              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
               label:
                 fr: Date de la diminution
                 en: Date of decrease
             - name: PersonneEmployee
               type: radio
-              v-if: val('NaturechangementEmploi').includes('ReqRevenuDiminution')
+              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
               label:
                 fr: Changement pour
                 en: Change for
               outerClasses: boutons-inline md
               options:
-                ReqMoi: 
+                Moi: 
                   fr: Pour moi
                   en: Me
-                ReqConjoint:
+                Conjoint:
                   fr: Pour mon conjoint
                   en: My spouse
-                ReqEnfant:
+                Enfant:
                   fr: Pour un enfant à charge
                   en: Depdendent child
             - name: RevenuBrutHebdomadaire
               type: number
-              v-if: val('NaturechangementEmploi').includes('ReqRevenuDiminution')
+              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
               outerClasses: md
               label:
                 fr: Estimation des revenus bruts par semaine
                 en: Estimated gross weekly income
             - name: RaisonPerteRevenu
               type: textarea
-              v-if: val('NaturechangementEmploi').includes('ReqRevenuDiminution')
+              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
               label: 
                 fr: Si vous n’avez plus de revenus de travail, précisez la raison
                 en: If you no longer have work income, indicate the reason
@@ -505,26 +505,26 @@ form:
                 fr: À cette nouvelle adresse, vous êtes
                 en: At the new address you will be
               options:
-                ReqProprietaire: 
+                Proprietaire: 
                   fr: Propriétaire
                   en: The owner
-                ReqLocataire:
+                Locataire:
                   fr: Locataire
                   en: A tenant
-                ReqChambre:
+                Chambre:
                   fr: En chambre
                   en: Rent a room
-                ReqPension:
+                Pension:
                   fr: En pension
                   en: Rent room and board
-                ReqLocataireSubventionne:
+                LocataireSubventionne:
                   fr: Locataire d’un logement subventionné (y compris HLM ou une coopérative d’habitation)
                   en: A tenant in a subsidized dwelling (including low-rental housing and coops)
-                ReqAutre:
+                Autre:
                   fr: Autre
                   en: Other
             - name: PrecisionRoleNouvelleAdresse
-              v-if: val('RoleNouvelleAdresse').includes('ReqAutre')
+              v-if: val('RoleNouvelleAdresse').includes('Autre')
               type: textarea
               label:
                 fr: Veuillez préciser
@@ -540,7 +540,7 @@ form:
             - type: radio
               name: LienParente
               #si chambre ou pension et pas objectif emploi
-              v-if: val('ObjectifEmploi') && val('ObjectifEmploi') === 'false' && (val('RoleNouvelleAdresse').includes('ReqChambre') || val('RoleNouvelleAdresse').includes('ReqPension'))
+              v-if: val('ObjectifEmploi') && val('ObjectifEmploi') === 'false' && (val('RoleNouvelleAdresse').includes('Chambre') || val('RoleNouvelleAdresse').includes('Pension'))
               outerClasses: md
               label:
                 fr: Avez-vous un lien de parenté avec le locateur?
@@ -589,10 +589,10 @@ form:
               v-if: val('DemenagementEffectif') === 'true'
               outerClasses: md
               options:
-                ReqMensuel: 
+                FreqMensuelle: 
                   fr: par mois
                   en: per month
-                ReqHebdomadaire:
+                FreqHebdomadaire:
                   fr: par semaine
                   en: per week
             - name: ElectriciteInclus
@@ -704,7 +704,7 @@ form:
                       en: a month
             - type: inline
               classes: no-wrap
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
+              v-if: val('DemenagementEffectif') === 'true'
               components:
                 - name: NomPrenomProprietaireLocateur
                   type: text
@@ -730,21 +730,21 @@ form:
                 fr: Veuillez choisir parmi les options suivantes
                 en: Please choose among the following options 
               options:
-                ReqNouveauTelephone:
+                NouveauTelephone:
                   fr: J'ai un nouveau numéro de téléphone
                   en: I have a new telephone number
-                ReqAdulteDepart:
+                AdulteDepart:
                   fr: Départ de ma résidence d’un adulte autre que mon conjoint
                   en: An adult other than my spouse has left my home
-                ReqAdulteArrivee:
+                AdulteArrivee:
                   fr: Arrivée à ma résidence d’un adulte autre que mon conjoint
                   en: An adult other than my spouse has arrived in my home
-                ReqSejourExterieur:
+                SejourExterieur:
                   fr: Séjour à l’extérieur du Québec pour une période de plus de 7 jours consécutifs ou pour un total de plus de 15 jours au cours d’un mois civil
                   en: Stay outside Québec lasting more than 7 consecutive days or for more than 15 days in a calendar month
             - name: NouveauTelephone
               type: group
-              v-if: val('NatureChangementResidence').includes('ReqNouveauTelephone')
+              v-if: val('NatureChangementResidence').includes('NouveauTelephone')
               label:
                 fr: Nouveau numéro de téléphone
                 en: New phone number
@@ -764,7 +764,7 @@ form:
               label:
                 fr: Départ d'un adulte autre que mon conjoint
                 en: Adult other than my spouse leaving my home
-              v-if: val('NatureChangementResidence').includes('ReqAdulteDepart')
+              v-if: val('NatureChangementResidence').includes('AdulteDepart')
               components:
                 - name: DateAdulteDepart
                   type: date
@@ -781,7 +781,7 @@ form:
               label: 
                 fr: Arrivée d’un adulte autre que mon conjoint
                 en: Adult other than my spouse arriving in my home             
-              v-if: val('NatureChangementResidence').includes('ReqAdulteArrivee')
+              v-if: val('NatureChangementResidence').includes('AdulteArrivee')
               components:
                 - name: DateAdulteArrivee
                   type: date
@@ -798,7 +798,7 @@ form:
               label:
                 fr: Séjour à l’extérieur du Québec
                 en: Stay outside Québec
-              v-if: val('NatureChangementResidence').includes('ReqSejourExterieur')
+              v-if: val('NatureChangementResidence').includes('SejourExterieur')
               components:
                 - name: PersonneSejourExterieur
                   type: radio
@@ -823,12 +823,12 @@ form:
                   label:
                     fr: Date du retour
                     en: Date of return
-            - name: SejourExterieurLieu
-              type: text
-              v-if: val('Req23-SejourExterieur').includes('ReqSejourExterieur')
-              label:
-                fr: Précisez le lieu
-                en: Specify the location
+                - name: SejourExterieurLieu
+                  type: text
+                  v-if: val('NatureChangementResidence').includes('SejourExterieur')
+                  label:
+                    fr: Précisez le lieu
+                    en: Specify the location
         
         # Section 6 - Autres changements
         - section:
