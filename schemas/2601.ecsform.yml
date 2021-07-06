@@ -337,108 +337,112 @@ form:
                   en: Decrease in work income
               validations:
                 optional: null
-            - name: DateEmploiDebut
-              type: date
+            - name: DetailsEmploiDebut
+              type: dynamic
+              tag: div
               v-if: val('NaturechangementEmploi').includes('EmploiDebut')
-              label:
-                fr: Date du début de l'emploi
-                en: Job start date
-            - name: PersonneEmployee
-              type: radio
-              outerClasses: boutons-inline md
-              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
-              label:
-                fr: Nouvel emploi pour
-                en: New job for
-              options:
-                Moi: 
-                  fr: Moi
-                  en: Me
-                Conjoint:
-                  fr: Mon conjoint
-                  en: My spouse
-                Enfant:
-                  fr: Un enfant à charge
-                  en: Depdendent child
-            - name: RevenuBrutHebdomadaire
-              type: number
-              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
-              outerClasses: md
-              label:
-                fr: Estimation des revenus bruts par semaine
-                en: Estimated gross weekly income
-            - name: InfosEmployeur
-              type: textarea
-              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
-              label: 
-                fr: Nom et adresse de l’employeur
-                en: Employer’s name and address                          
-            - name: DateRevenuAugmentation
-              type: date
+              components:
+              - name: DateEmploiDebut
+                type: date
+                label:
+                  fr: Date du début de l'emploi
+                  en: Job start date
+              - name: PersonneEmployee
+                type: radio
+                outerClasses: boutons-inline md
+                label:
+                  fr: Nouvel emploi pour
+                  en: New job for
+                options:
+                  Moi: 
+                    fr: Moi
+                    en: Me
+                  Conjoint:
+                    fr: Mon conjoint
+                    en: My spouse
+                  Enfant:
+                    fr: Un enfant à charge
+                    en: Depdendent child
+              - name: RevenuBrutHebdomadaire
+                type: number
+                outerClasses: md
+                label:
+                  fr: Estimation des revenus bruts par semaine
+                  en: Estimated gross weekly income
+              - name: InfosEmployeur
+                type: textarea
+                label: 
+                  fr: Nom et adresse de l’employeur
+                  en: Employer’s name and address
+            - name: DetailsRevenuAugmentation
+              type: dynamic
+              tag: div
               v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
-              label:
-                fr: Date de l'augmentation
-                en: Date of increase
-            - name: PersonneEmployee
-              type: radio
-              v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
-              label: 
-                fr: Changement pour
-                en: Change for
-              outerClasses: boutons-inline md
-              options:
-                Moi: 
-                  fr: Moi
-                  en: Me
-                Conjoint:
-                  fr: Mon conjoint
-                  en: My spouse
-                Enfant:
-                  fr: Un enfant à charge
-                  en: Depdendent child
-            - name: RevenuBrutHebdomadaire
-              type: number
-              v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
-              outerClasses: md
-              label:
-                fr: Estimation des revenus bruts par semaine
-                en: Estimated gross weekly income
-            - name: DateRevenuDiminution
-              type: date
+              components:
+              - name: DateRevenuAugmentation
+                type: date
+                label:
+                  fr: Date de l'augmentation
+                  en: Date of increase
+              - name: PersonneEmployee
+                type: radio
+                label: 
+                  fr: Changement pour
+                  en: Change for
+                outerClasses: boutons-inline md
+                options:
+                  Moi: 
+                    fr: Moi
+                    en: Me
+                  Conjoint:
+                    fr: Mon conjoint
+                    en: My spouse
+                  Enfant:
+                    fr: Un enfant à charge
+                    en: Depdendent child
+              - name: RevenuBrutHebdomadaire
+                type: number
+                outerClasses: md
+                label:
+                  fr: Estimation des revenus bruts par semaine
+                  en: Estimated gross weekly income
+            - name: DetailsRevenuDiminution
+              type: dynamic
+              tag: div
               v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
-              label:
-                fr: Date de la diminution
-                en: Date of decrease
-            - name: PersonneEmployee
-              type: radio
-              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
-              label:
-                fr: Changement pour
-                en: Change for
-              outerClasses: boutons-inline md
-              options:
-                Moi: 
-                  fr: Pour moi
-                  en: Me
-                Conjoint:
-                  fr: Pour mon conjoint
-                  en: My spouse
-                Enfant:
-                  fr: Pour un enfant à charge
-                  en: Depdendent child
-            - name: RevenuBrutHebdomadaire
-              type: number
-              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
-              outerClasses: md
-              label:
-                fr: Estimation des revenus bruts par semaine
-                en: Estimated gross weekly income
-            - name: RaisonPerteRevenu
-              type: textarea
-              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
-              label: 
-                fr: Si vous n’avez plus de revenus de travail, précisez la raison
-                en: If you no longer have work income, indicate the reason
+              components:
+              - name: DateRevenuDiminution
+                type: date
+                label:
+                  fr: Date de la diminution
+                  en: Date of decrease
+              - name: PersonneEmployee
+                type: radio
+                label:
+                  fr: Changement pour
+                  en: Change for
+                outerClasses: boutons-inline md
+                options:
+                  Moi: 
+                    fr: Pour moi
+                    en: Me
+                  Conjoint:
+                    fr: Pour mon conjoint
+                    en: My spouse
+                  Enfant:
+                    fr: Pour un enfant à charge
+                    en: Depdendent child
+              - name: RevenuBrutHebdomadaire
+                type: number
+                outerClasses: md
+                label:
+                  fr: Estimation des revenus bruts par semaine
+                  en: Estimated gross weekly income
+              - name: RaisonPerteRevenu
+                type: textarea
+                label: 
+                  fr: Si vous n’avez plus de revenus de travail, précisez la raison
+                  en: If you no longer have work income, indicate the reason
         
         # Section 4 - Déménagement
         - section: 
@@ -452,271 +456,268 @@ form:
               label:
                 fr: Avez-vous déménagé ou le ferez-vous prochainement?
                 en: Have you moved or will you move shortly?
-            - type: dynamic
-              tag: h3        
+            - name: DetailsDemenagement
+              type: dynamic
+              tag: div   
               v-if: val('DemenagementEffectif') === 'true'
-              text:
-                fr: Nouvelle adresse
-                en: New address
-            - type: inline        
-              v-if: val('DemenagementEffectif') === 'true'
-              classes: no-wrap
-              components:            
-                - name: Numero
-                  type: text
-                  outerClasses: sm
-                  label:
-                    fr: Numéro
-                    en: Number
-                - name: Rue
-                  type: text
-                  outerClasses: md
-                  label:
-                    fr: Rue
-                    en: Street
-                - name: Appartement
-                  type: text
-                  outerClasses: sm
-                  label:
-                    fr: Appartement
-                    en: Apartment
-            - type: inline
-              v-if: val('DemenagementEffectif') === 'true'
-              classes: no-wrap
-              components:
-                - name: Ville
-                  type: text
-                  label:
-                    fr: Ville
-                    en: City
-                - name: CodePostal
-                  type: text
-                  outerClasses: md
-                  label:
-                    fr: Code postal
-                    en: Postal code
-                  validations: 
-                    max: 6, length
-            - name: RoleNouvelleAdresse
-              type: select
-              v-if: val('DemenagementEffectif') === 'true'
-              outerClasses: lg
-              label:
-                fr: À cette nouvelle adresse, vous êtes
-                en: At the new address you will be
-              options:
-                Proprietaire: 
-                  fr: Propriétaire
-                  en: The owner
-                Locataire:
-                  fr: Locataire
-                  en: A tenant
-                Chambre:
-                  fr: En chambre
-                  en: Rent a room
-                Pension:
-                  fr: En pension
-                  en: Rent room and board
-                LocataireSubventionne:
-                  fr: Locataire d’un logement subventionné (y compris HLM ou une coopérative d’habitation)
-                  en: A tenant in a subsidized dwelling (including low-rental housing and coops)
-                Autre:
-                  fr: Autre
-                  en: Other
-            - name: PrecisionRoleNouvelleAdresse
-              v-if: val('RoleNouvelleAdresse') === ('Autre')
-              type: textarea
-              label:
-                fr: Veuillez préciser
-                en: please specify   
-            - type: radio
-              name: ObjectifEmploi
-              v-if: val('DemenagementEffectif') === 'true'
-              outerClasses: md
-              label: 
-                fr: Participez-vous au Programme objectif emploi?
-                en: Are you participating in the Aim for Employment Program?
-              options: yesno
-            - type: radio
-              name: LienParente
-              #si chambre ou pension et pas objectif emploi
-              v-if: val('ObjectifEmploi') && val('ObjectifEmploi') === 'false' && (val('RoleNouvelleAdresse').includes('Chambre') || val('RoleNouvelleAdresse').includes('Pension'))
-              outerClasses: md
-              label:
-                fr: Avez-vous un lien de parenté avec le locateur?
-                en: Are you related to the person who is renting you the room/room and board?
-              options: yesno
-            - name: PrecisionLienParente
-              type: text                
-              v-if: val('LienParente') && val('LienParente') === 'true'         
-              outerClasses: lg
-              label:
-                fr: Précisez le lien
-                en: Indicate the relation to you
-            - name: HabiteConjoint
-              type: radio
-              v-if: val('DemenagementEffectif') === 'true'
-              label: 
-                fr: Vivez-vous avec un conjoint?
-                en: Are you living with your spouse?
-              outerClasses: md
-              options: yesno
-            - name: DateHabiteConjoint
-              v-if: val('HabiteConjoint') === 'true'
-              type: date
-              label:
-                fr: Date du début de la cohabitation
-                en: Date you began living together
-            - name: NomPrenomConjoint
-              v-if: val('HabiteConjoint') === 'true'
-              type: text
-              outerClasses: lg
-              label: 
-                fr: Nom de famille et prénom du conjoint
-                en: Spouse's first and last name                 
-            - name: CoutLocation
-              type: number
-              v-if: val('DemenagementEffectif') === 'true'
-              outerClasses: md
-              label:
-                fr: Coût de la location
-                en: Cost of rent
-            - name: FrequenceLoyer
-              label:
-                fr: Fréquence
-                en: Frequency
-              type: radio
-              v-if: val('DemenagementEffectif') === 'true'
-              outerClasses: md
-              options:
-                FreqMensuelle: 
-                  fr: par mois
-                  en: per month
-                FreqHebdomadaire:
-                  fr: par semaine
-                  en: per week
-            - name: ElectriciteInclus
-              type: radio
-              v-if: val('DemenagementEffectif') === 'true'
-              outerClasses: md
-              label: 
-                fr: Coût de l'électricité inclus
-                en: Includes electricity              
-              options: yesno
-            - name: ChauffageInclus
-              type: radio
-              v-if: val('DemenagementEffectif') === 'true'
-              outerClasses: md
-              label:
-                fr: Coût du chauffage inclus
-                en: Includes heating
-              options: yesno   
-            - name: RecoitAllocationLogement
-              type: radio
-              v-if: val('DemenagementEffectif') === 'true'
-              label:
-                fr: Recevez-vous une somme de Revenu Québec chaque mois dans le cadre du programme Allocation-logement?
-                en: Are you receiving a monthly amount from Revenu Québec under the Shelter Allowance Program?
-              options: yesno
-            - name: MontantAllocationLogement
-              type: number
-              outerClasses: md
-              v-if: val('RecoitAllocationLogement') === 'true'
-              label: 
-                fr: Indiquez le montant
-                en: Enter the amount   
-            - name: AutresPersonnesHabitent
-              v-if: val('DemenagementEffectif') === 'true'
-              type: radio
-              outerClasses: sm
-              options: yesno
-              label:
-                fr: À cette nouvelle adresse, est-ce que d’autres personnes habitent avec vous (sauf un conjoint ou un enfant à charge)?
-                en: Does anyone else live with you at this new address? (Other than your spouse or a dependent children)?
-            - name: AutresPersonnesDetails
-              type: repeatableGroup
-              repeatable: true
-              v-if: val('AutresPersonnesHabitent') === 'true'
-              label:
-                fr: Autre(s) personne(s) habitant avec vous
-                en: Other person(s) living with you
-              instanceLabel:
-                fr: Personne
-                en: Person
-              addLabel:
-                fr: Ajouter une personne
-                en: Add a person
-              removeLabel:
-                fr: Supprimer cette personne
-                en: Remove this person
-              components: 
-                - name: NomPrenomAutrePersonne
-                  type: text
-                  outerClasses: lg
-                  label:
-                    fr: Nom et prénom de la personne
-                    en: Person's Last and first name
-                - name: StatutAutrePersonne
+              components:  
+                - type: dynamic
+                  tag: h3
+                  text:
+                    fr: Nouvelle adresse
+                    en: New address
+                - type: inline
+                  classes: no-wrap
+                  components:            
+                    - name: Numero
+                      type: text
+                      outerClasses: sm
+                      label:
+                        fr: Numéro
+                        en: Number
+                    - name: Rue
+                      type: text
+                      outerClasses: md
+                      label:
+                        fr: Rue
+                        en: Street
+                    - name: Appartement
+                      type: text
+                      outerClasses: sm
+                      label:
+                        fr: Appartement
+                        en: Apartment
+                - type: inline
+                  classes: no-wrap
+                  components:
+                    - name: Ville
+                      type: text
+                      label:
+                        fr: Ville
+                        en: City
+                    - name: CodePostal
+                      type: text
+                      outerClasses: md
+                      label:
+                        fr: Code postal
+                        en: Postal code
+                      validations: 
+                        max: 6, length
+                - name: RoleNouvelleAdresse
                   type: select
-                  label:
-                    fr: À cette adresse, cette personne est
-                    en: At this new address, this person will be
-                  options: 
-                    PersonneCoproprietaire:
-                      fr: copropriétaire
-                      en: a co-owner
-                    PersonneColocataire:
-                      fr: colocataire
-                      en: a co-tenant
-                    PersonneCochambreuse:
-                      fr: cochambreuse
-                      en: a co-roomer
-                    PersonnePension:
-                      fr: en pension ou en chambre
-                      en: a co-room/boarder
-                - name: LienParenteAutrePersonne
-                  type: text
                   outerClasses: lg
-                  v-if: val('ObjectifEmploi') === 'false'
                   label:
-                    fr: Indiquez le lien de parenté avec vous
-                    en: Relation to you
-                  options: yesno
-                - name: MontantLoyerCharge
-                  type: text
-                  outerClasses: lg
-                  v-if: val(`${name}.StatutAutrePersonne`, index) && val(`${name}.StatutAutrePersonne`, index) !== 'PersonneCoproprietaire'
+                    fr: À cette nouvelle adresse, vous êtes
+                    en: At the new address you will be
+                  options:
+                    Proprietaire: 
+                      fr: Propriétaire
+                      en: The owner
+                    Locataire:
+                      fr: Locataire
+                      en: A tenant
+                    Chambre:
+                      fr: En chambre
+                      en: Rent a room
+                    Pension:
+                      fr: En pension
+                      en: Rent room and board
+                    LocataireSubventionne:
+                      fr: Locataire d’un logement subventionné (y compris HLM ou une coopérative d’habitation)
+                      en: A tenant in a subsidized dwelling (including low-rental housing and coops)
+                    Autre:
+                      fr: Autre
+                      en: Other
+                - name: PrecisionRoleNouvelleAdresse
+                  v-if: val('RoleNouvelleAdresse') === ('Autre')
+                  type: textarea
+                  label:
+                    fr: Veuillez préciser
+                    en: please specify   
+                - type: radio
+                  name: ObjectifEmploi
+                  outerClasses: md
                   label: 
-                    fr: Précisez les sommes demandées par semaine ou par mois
-                    en: Specify the amount charged per week or month
-                - name: FrequenceLoyer
+                    fr: Participez-vous au Programme objectif emploi?
+                    en: Are you participating in the Aim for Employment Program?
+                  options: yesno
+                - type: radio
+                  name: LienParente
+                  #si chambre ou pension et pas objectif emploi
+                  v-if: val('ObjectifEmploi') && val('ObjectifEmploi') === 'false' && (val('RoleNouvelleAdresse').includes('Chambre') || val('RoleNouvelleAdresse').includes('Pension'))
+                  outerClasses: md
+                  label:
+                    fr: Avez-vous un lien de parenté avec le locateur?
+                    en: Are you related to the person who is renting you the room/room and board?
+                  options: yesno
+                - name: PrecisionLienParente
+                  type: text                
+                  v-if: val('LienParente') && val('LienParente') === 'true'         
+                  outerClasses: lg
+                  label:
+                    fr: Précisez le lien
+                    en: Indicate the relation to you
+                - name: HabiteConjoint
                   type: radio
-                  v-if: val(`${name}.StatutAutrePersonne`, index) && val(`${name}.StatutAutrePersonne`, index) !== 'PersonneCoproprietaire'
+                  label: 
+                    fr: Vivez-vous avec un conjoint?
+                    en: Are you living with your spouse?
+                  outerClasses: md
+                  options: yesno
+                - name: DetailsHabiteConjoint
+                  type: dynamic
+                  v-if: val('HabiteConjoint') === 'true'
+                  components:
+                  - name: DateHabiteConjoint
+                    type: date
+                    label:
+                      fr: Date du début de la cohabitation
+                      en: Date you began living together
+                  - name: NomPrenomConjoint
+                    type: text
+                    outerClasses: lg
+                    label: 
+                      fr: Nom de famille et prénom du conjoint
+                      en: Spouse's first and last name                 
+                - name: CoutLocation
+                  type: number
+                  outerClasses: md
+                  label:
+                    fr: Coût de la location
+                    en: Cost of rent
+                - name: FrequenceLoyer
                   label:
                     fr: Fréquence
                     en: Frequency
+                  type: radio
+                  outerClasses: md
                   options:
+                    FreqMensuelle: 
+                      fr: par mois
+                      en: per month
                     FreqHebdomadaire:
                       fr: par semaine
-                      en: a week
-                    FreqMensuelle:
-                      fr: par mois
-                      en: a month
-            - type: inline
-              classes: no-wrap
-              v-if: val('DemenagementEffectif') === 'true'
-              components:
-                - name: NomPrenomProprietaireLocateur
-                  type: text
-                  label:  
-                    fr: Nom de famille et prénom du propriétaire ou du locateur  (personne qui loue la chambre ou le logement)
-                    en: First and last name of the owner or person  who is renting you the room or dwelling
-                - name: TelephoneProprietaireLocateur
-                  type: text
+                      en: per week
+                - name: ElectriciteInclus
+                  type: radio
+                  outerClasses: md
+                  label: 
+                    fr: Coût de l'électricité inclus
+                    en: Includes electricity              
+                  options: yesno
+                - name: ChauffageInclus
+                  type: radio
                   outerClasses: md
                   label:
-                    fr: Téléphone
-                    en: Telephone
+                    fr: Coût du chauffage inclus
+                    en: Includes heating
+                  options: yesno   
+                - name: RecoitAllocationLogement
+                  type: radio
+                  label:
+                    fr: Recevez-vous une somme de Revenu Québec chaque mois dans le cadre du programme Allocation-logement?
+                    en: Are you receiving a monthly amount from Revenu Québec under the Shelter Allowance Program?
+                  options: yesno
+                - name: MontantAllocationLogement
+                  type: number
+                  outerClasses: md
+                  v-if: val('RecoitAllocationLogement') === 'true'
+                  label: 
+                    fr: Indiquez le montant
+                    en: Enter the amount   
+                - name: AutresPersonnesHabitent
+                  type: radio
+                  outerClasses: sm
+                  options: yesno
+                  label:
+                    fr: À cette nouvelle adresse, est-ce que d’autres personnes habitent avec vous (sauf un conjoint ou un enfant à charge)?
+                    en: Does anyone else live with you at this new address? (Other than your spouse or a dependent children)?
+                - name: AutresPersonnesDetails
+                  type: repeatableGroup
+                  repeatable: true
+                  v-if: val('AutresPersonnesHabitent') === 'true'
+                  label:
+                    fr: Autre(s) personne(s) habitant avec vous
+                    en: Other person(s) living with you
+                  instanceLabel:
+                    fr: Personne
+                    en: Person
+                  addLabel:
+                    fr: Ajouter une personne
+                    en: Add a person
+                  removeLabel:
+                    fr: Supprimer cette personne
+                    en: Remove this person
+                  components: 
+                    - name: NomPrenomAutrePersonne
+                      type: text
+                      outerClasses: lg
+                      label:
+                        fr: Nom et prénom de la personne
+                        en: Person's Last and first name
+                    - name: StatutAutrePersonne
+                      type: select
+                      label:
+                        fr: À cette adresse, cette personne est
+                        en: At this new address, this person will be
+                      options: 
+                        PersonneCoproprietaire:
+                          fr: copropriétaire
+                          en: a co-owner
+                        PersonneColocataire:
+                          fr: colocataire
+                          en: a co-tenant
+                        PersonneCochambreuse:
+                          fr: cochambreuse
+                          en: a co-roomer
+                        PersonnePension:
+                          fr: en pension ou en chambre
+                          en: a co-room/boarder
+                    - name: LienParenteAutrePersonne
+                      type: text
+                      outerClasses: lg
+                      v-if: val('ObjectifEmploi') === 'false'
+                      label:
+                        fr: Indiquez le lien de parenté avec vous
+                        en: Relation to you
+                      options: yesno
+                    - name: DetailsLoyer
+                      type: dynamic
+                      tag: div
+                      v-if: val(`${name}.StatutAutrePersonne`, index) && val(`${name}.StatutAutrePersonne`, index) !== 'PersonneCoproprietaire'
+                      components:                    
+                      - name: MontantLoyerCharge
+                        type: text
+                        outerClasses: lg
+                        label: 
+                          fr: Précisez les sommes demandées par semaine ou par mois
+                          en: Specify the amount charged per week or month
+                      - name: FrequenceLoyer
+                        type: radio
+                        label:
+                          fr: Fréquence
+                          en: Frequency
+                        options:
+                          FreqHebdomadaire:
+                            fr: par semaine
+                            en: a week
+                          FreqMensuelle:
+                            fr: par mois
+                            en: a month
+                - type: inline
+                  classes: no-wrap
+                  components:
+                    - name: NomPrenomProprietaireLocateur
+                      type: text
+                      label:  
+                        fr: Nom de famille et prénom du propriétaire ou du locateur  (personne qui loue la chambre ou le logement)
+                        en: First and last name of the owner or person  who is renting you the room or dwelling
+                    - name: TelephoneProprietaireLocateur
+                      type: text
+                      outerClasses: md
+                      label:
+                        fr: Téléphone
+                        en: Telephone
         
         # Section 5 - Changement résidence
         - section: 
@@ -825,7 +826,6 @@ form:
                     en: Date of return
                 - name: SejourExterieurLieu
                   type: text
-                  v-if: val('NatureChangementResidence').includes('SejourExterieur')
                   label:
                     fr: Précisez le lieu
                     en: Specify the location
