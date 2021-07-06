@@ -44,11 +44,11 @@ namespace ECS.PR.Formulaires.Controllers
 
             var context = new ValidationContext(data, serviceProvider: null, items: null);
 
-            FormData formData = new FormData();
+            var inputs = new List<Input>();
 
-            GetEffectiveComponents(data, dynamicForm.Form?["sectionsGroup"], ref formData, null, null);
+            GetEffectiveComponents(data, dynamicForm.Form?["sectionsGroup"], ref inputs, null, null);
 
-            foreach (var item in formData.Inputs)
+            foreach (var item in inputs)
             {
                 if (item is { } && item.Validations != null)
                 {
@@ -89,7 +89,7 @@ namespace ECS.PR.Formulaires.Controllers
             group = 1
         }
 
-        public static void GetEffectiveComponents(IDictionary<object, object> data, object components, ref FormData formData, string? prefixId, string? groupName)
+        public static void GetEffectiveComponents(IDictionary<object, object> data, object components, ref List<Input> inputs, string? prefixId, string? groupName)
         {
             //var obj = components as IDictionary<object, object>;
             var obj2 = components as IList<object>;
@@ -110,7 +110,7 @@ namespace ECS.PR.Formulaires.Controllers
                         if (dictItem.TryGetValue("sections", out var sections))
                         {
                             dictItem.TryGetValue("prefixId", out var currentPrefixId);
-                            GetEffectiveComponents(data, sections, ref formData, currentPrefixId?.ToString(), null);
+                            GetEffectiveComponents(data, sections, ref inputs, currentPrefixId?.ToString(), null);
                         }
 
                         if (dictItem.TryGetValue("v-if", out var vif))
@@ -182,17 +182,17 @@ namespace ECS.PR.Formulaires.Controllers
                                 }
                             }
 
-                            GetEffectiveComponents(data, innerComponents, ref formData, prefixId, groupName);
+                            GetEffectiveComponents(data, innerComponents, ref inputs, prefixId, groupName);
                         }
                     }
 
-                    var inputV = new Inputs();
+                    var inputV = new Input();
                     inputV.ParseAttributes(dictItem);
                     inputV.GroupName = groupName;
                     inputV.PrefixId = prefixId;
                     if (inputV.Type != TypeInput.SKIP)
                     {
-                        formData.Inputs.Add(inputV);
+                        inputs.Add(inputV);
                     }
                 }
             }
