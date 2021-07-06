@@ -340,14 +340,14 @@ form:
             fr: Renseignements sur l'identité
           id: renseignementsIdentite
           components:
-            - name: cp12
+            - name: Cp12
               type: text
               v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Numéro de dossier (CP-12)
               validations:
                 optional: null
-            - name: nom1
+            - name: Nom1
               type: text
               label: 
                 fr: Nom de famille
@@ -355,17 +355,17 @@ form:
                 fr: Selon le certificat de naissance ou le document d'immigration.
               validations: 
                 max: 36,length
-            - name: prénom1
+            - name: Prénom1
               type: text
               label: 
                 fr: Prénom
               validations: 
                 max: 22,length
-            - name: date_naissance
+            - name: DateNaissance
               type: date
               label: 
                 fr: Date de naissance
-            - name: nas
+            - name: Nas
               type: text
               outerClasses: md          
               label: 
@@ -375,7 +375,7 @@ form:
               validations: 
                 nas: true
                 optional: null
-            - name: date_expiration_nas
+            - name: DateExpirationNas
               v-if: val('prefixId$nas').startsWith('9')
               type: date
               label: 
@@ -401,7 +401,7 @@ form:
                 separe: Séparé légalement
                 separeSansJugement: Séparé sans jugement
                 divorce: Divorcé
-            - name: dateFinUnion
+            - name: DateFinUnion
               type: date
               label:
                 fr: Date de la fin de l'union ou du décès
@@ -416,15 +416,15 @@ form:
               options: 
                 Francais: Français 
                 Anglais: Anglais 
-            - name: curateur
+            - name: Curateur
               type: radio
               v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Êtes-vous représenté par le Curateur public du Québec?
               options: yesno
-            - name: dosCurateur
+            - name: DosCurateur
               type: text
-              v-if: val('TypeDemande').includes('Afdr') && val('prefixId$curateur') === 'true'
+              v-if: val('TypeDemande').includes('Afdr') && val('prefixId$Curateur') === 'true'
               label:
                 fr: Numéro de dossier
             - name: NeQC
@@ -432,31 +432,31 @@ form:
               label: 
                 fr: Êtes-vous né au Québec?
               options: yesno
-            - name: nom3
+            - name: Nom3
               v-if: val('prefixId$NeQC') === 'true'
               type: text
               label: 
                 fr: Inscrivez le nom de famille et le prénom de l'un de vos parent
               validations: 
                 max: 50,length
-            - name: neCanada
+            - name: NeCanada
               v-if: val('prefixId$NeQC') === 'false'        
               type: radio
               label: 
                 fr: Êtes-vous né au Canada ?
               options: yesno
-            - name: pays1
-              v-if: val('prefixId$neCanada') === 'false'
+            - name: Pays1
+              v-if: val('prefixId$NeCanada') === 'false'
               type: text
               label: 
                 fr: Indiquez votre pays de naissance
-            - name: date_arrive_canada
-              v-if: val('prefixId$neCanada') === 'false'
+            - name: DateArriveeCanada
+              v-if: val('prefixId$NeCanada') === 'false'
               type: date
               label: 
                 fr: Date d'arrivée au Canada
             - type: dynamic
-              v-if: val('prefixId$neCanada') === 'false'
+              v-if: val('prefixId$NeCanada') === 'false'
               tag: div        
               components:
                 - name: CitCanadienne
@@ -482,7 +482,7 @@ form:
                   label: 
                     fr: Avez-vous obtenu le statut de réfugié ou de personne protégée ou à protéger?
                   options: yesno              
-                - name: autre2
+                - name: PrecisionAutreStatut
                   v-if: val('prefixId$EstRefugieOuProtege') === 'false'                        
                   type: text
                   label: 
@@ -492,12 +492,12 @@ form:
                     fr: Comme vous êtes né hors du Canada, vous devrez fournir les documents confirmant votre statut.
             - name: Autochtone
               type: radio
-              v-if: val('prefixId$neCanada') === 'true'
+              v-if: val('prefixId$NeCanada') === 'true'
               label: 
                 fr: Vous considérez-vous comme un autochtone?
               options: yesno
             - name: AutochtoneType        
-              v-if: val('prefixId$neCanada') === 'true' && val('prefixId$Autochtone') === 'true'
+              v-if: val('prefixId$NeCanada') === 'true' && val('prefixId$Autochtone') === 'true'
               type: radio
               label: 
                 fr: Êtes-vous un membre d'une Première Nation ou un Inuit?
@@ -511,7 +511,7 @@ form:
                 fr: >
                   <b>Vous pourriez avoir droit à des montants supplémentaires selon votre situation. 
                   Si vous répondez aux questions suivantes, nous pourrons évaluer votre droit à ces montants.</b>
-            - name: enceinte
+            - name: EstEnceinte
               type: radio
               v-if: val('TypeDemande').includes('Afdr')
               label:
@@ -519,12 +519,12 @@ form:
               options: yesno
               validations:
                 optional: null
-            - name: dateAccouchement
+            - name: DateAccouchement
               type: date
-              v-if: val('prefixId$enceinte') === 'true'
+              v-if: val('prefixId$EstEnceinte') === 'true'
               label:
                 fr: Date prévue de l'accouchement
-            - name: valide
+            - name: EstValidePourTravailler
               type: radio
               v-if: val('TypeDemande').includes('Afdr')
               label:
@@ -532,9 +532,9 @@ form:
               options: yesno
               validations:
                 optional: null
-            - name: precisionInvalidite
+            - name: PrecisionInvalidite
               type: text
-              v-if: val('prefixId$valide') === 'false'
+              v-if: val('prefixId$EstValidePourTravailler') === 'false'
               label:
                 fr: Précisez votre état de santé
         # Section 3 - Adresse
@@ -542,24 +542,24 @@ form:
             fr: Adresse
           id: adresse
           components:
-            - name: addresse1
+            - name: Adresse
               type: inline
               components:       
-                - name: adresse1
+                - name: Numero
                   type: text
                   outerClasses: md
                   label: 
                     fr: Numéro
                   validations: 
                     max: 6,length
-                - name: adresse3
+                - name: Rue
                   type: text
                   outerClasses: lg
                   label: 
                     fr: Rue
                   validations: 
                     max: 24,length
-                - name: adresse2
+                - name: Appartement
                   type: text
                   outerClasses: sm
                   label: 
@@ -567,7 +567,7 @@ form:
                   validations: 
                     optional: null
                     max: 5,length
-            - name: telephone1
+            - name: Telephone1
               outerClasses: md
               type: tel
               label: 
@@ -576,20 +576,20 @@ form:
                 fr: Pour un client sans numéro de téléphone, inscrivez un numéro de téléphone temporaire pour vous rejoindre
               validations: 
                 max: 10,length
-            - name: adresse4
+            - name: Ville
               type: text
               label: 
                 fr: Ville, village ou municipalité
               validations: 
                 max: 29,length
-            - name: codePostal1
+            - name: CodePostal
               type: text
               outerClasses: md          
               label: 
                 fr: Code postal
               validations: 
                 max: 6,length
-            - name: telephone2
+            - name: Telephone2
               outerClasses: md
               type: tel
               label: 
@@ -654,7 +654,7 @@ form:
               label: 
                 fr: Êtes-vous chef de famille monoparentale ?
               options: yesno
-            - name: questionsStatistiques
+            - name: QuestionsStatistiques
               type: dynamic
               tag: p
               text: 
@@ -830,16 +830,16 @@ form:
                   label:
                     fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
                   options: 
-                    NiveauEtudesPrimaire: Primaire
-                    NiveauEtudesSecondaireGen: Secondaire (Général)
-                    NiveauEtudesSecondaireFormProf: Secondaire (Formation professionnelle)
-                    NiveauEtudesSecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
-                    NiveauEtudesCollegial: Collégial (Formation générale ou technique)
-                    NiveauEtudesUniversitaire: Universitaire
+                    Primaire: Primaire
+                    SecondaireGen: Secondaire (Général)
+                    SecondaireFormProf: Secondaire (Formation professionnelle)
+                    SecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
+                    Collegial: Collégial (Formation générale ou technique)
+                    Universitaire: Universitaire
       
-                - name: primaire        
+                - name: Primaire        
                   type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesPrimaire')
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Primaire')
                   label:
                     fr: Primaire
                   components:
@@ -853,9 +853,9 @@ form:
                       type: date
                       label:
                         fr: Date de fin des études
-                - name: secondaireGen
+                - name: SecondaireGen
                   type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireGen')          
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireGen')          
                   label:
                     fr: Secondaire (général)
                   components:
@@ -876,9 +876,9 @@ form:
                       type: date
                       label:
                         fr: Date de fin des études
-                - name: secondaireProf
+                - name: SecondaireProf
                   type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormProf')                    
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormProf')                    
                   label:
                     fr: Secondaire (Formation professionnelle)
                   components:
@@ -905,9 +905,9 @@ form:
                       type: date
                       label:
                         fr: Date de fin des études
-                - name: secondaireMetier
+                - name: SecondaireMetier
                   type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesSecondaireFormMétier')                              
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormMétier')                              
                   label:
                     fr: Secondaire (Formation à un métier semi-spécialisé)
                   components:
@@ -925,9 +925,9 @@ form:
                       type: date
                       label:
                         fr: Date de fin des études
-                - name: collegial
+                - name: Collegial
                   type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesCollegial')                                        
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Collegial')                                        
                   label:
                     fr: Collégial (Formation générale ou technique)
                   components:
@@ -954,9 +954,9 @@ form:
                       type: date
                       label:
                         fr: Date de fin des études
-                - name: universitaire
+                - name: Universitaire
                   type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('NiveauEtudesUniversitaire')                                                  
+                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Universitaire')                                                  
                   label:
                     fr: Universitaire            
                   components:
@@ -1102,7 +1102,7 @@ form:
                 text:
                   fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra.      
               options: yesno
-            - name: emplois
+            - name: Emplois
               type: repeatableGroup
               repeatable: true
               v-if: val('prefixId$Travaille') === 'true'          
@@ -1119,39 +1119,39 @@ form:
                 en: Delete this job
               limit: 2
               components:
-                - name: emploiNomEntreprise
+                - name: NomEntreprise
                   type: text
                   label:
                     fr: Nom de l'entreprise
-                - name: emploiPeriodeDuAu
+                - name: PeriodeDuAu
                   type: inline
                   components: 
-                  - name: emploiPeriodeDu
+                  - name: PeriodeDu
                     type: date
                     label:
                       fr: Période du
-                  - name: emploiPeriodeAu
+                  - name: PeriodeAu
                     type: date
                     label:
                       fr: Période au
-                - name: emploiSalaireHebdo
+                - name: SalaireHebdo
                   type: number
                   label:
                     fr: Salaire par semaine
-                - name: emploiHeuresHebdo
+                - name: HeuresHebdo
                   type: number
                   outerClasses: sm                  
                   label:
                     fr: Heures par semaine                    
-                - name: emploiEmploiOccupe
+                - name: TitreEmploiOccupe
                   type: text
                   label:
                     fr: Emploi occupé
-                - name: emploiPrincipalesTachesAccomplies
+                - name: PrincipalesTachesAccomplies
                   type: textarea
                   label:
                     fr: Principales tâches accomplies
-                - name: emploiRaisonFinEmploi
+                - name: RaisonFinEmploi
                   type: select
                   label: 
                     fr: Raison de la fin d'emploi
@@ -1164,8 +1164,8 @@ form:
                     NaissancePriseChargeEnfant: Naissance ou prise en charge d'un enfant
                     Congediement: Congédiement
                     AutreRaison: Autre
-                - name: emploiPrecisionAutre
-                  v-if: val(`${name}.prefixId$emploiRaisonFinEmploi`, index) === 'AutreRaison'
+                - name: PrecisionAutre
+                  v-if: val(`${name}.prefixId$RaisonFinEmploi`, index) === 'AutreRaison'
                   type: text
                   label: 
                     fr: Précisez la raison de fin d'emploi
@@ -1174,7 +1174,7 @@ form:
               label:
                 fr: "Avez-vous des limitations fonctionnelles faisant suite à des lésions professionnelles causées, par exemple, par un accident de travail?"
               options: yesno            
-            - name: limitations
+            - name: PrecisionLimitations
               type: text
               v-if: val('prefixId$Limitations') === 'true'          
               label:
@@ -1209,7 +1209,7 @@ form:
               v-if: val('prefixId$LieuxDisponibiliteTravail').includes('LieuDispoTravailAutre')   
               label:
                 fr: "Précisez où vous êtes prêt à travailler"
-            - name: raisonNonDisponibiliteTravail
+            - name: RaisonNonDisponibiliteTravail
               type: text
               v-if: val('prefixId$DisponibleTravail') === 'false'   
               outerClasses: xxl                           
@@ -1560,7 +1560,7 @@ form:
               label:
                 fr: Avez-vous d’autres types de revenus?
               options: yesno
-            - name: typeRevenuAutre
+            - name: TypeRevenuAutre
               type: checkbox
               v-if: val('prefixid$PossedeRevenuAutre') === 'true'
               label:
@@ -1575,7 +1575,7 @@ form:
             - name: RevenusAutreChambre
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixid$typeRevenuAutre').includes('Chambre') 
+              v-if: val('prefixid$TypeRevenuAutre').includes('Chambre') 
               label:
                 fr: Revenus de chambre ou de pension
               instanceLabel:
@@ -1621,7 +1621,7 @@ form:
             - name: RevenusAutreLocation
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixid$typeRevenuAutre').includes('Location') 
+              v-if: val('prefixid$TypeRevenuAutre').includes('Location') 
               label:
                 fr: Revenus de location
               instanceLabel:
@@ -1662,7 +1662,7 @@ form:
             - name: RevenusAutrePlacement
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixid$typeRevenuAutre').includes('Placement') 
+              v-if: val('prefixid$TypeRevenuAutre').includes('Placement') 
               label:
                 fr: Revenus de placement ou de fiducie, intérêts sur une obligation
               instanceLabel:
@@ -1703,7 +1703,7 @@ form:
             - name: RevenusAutreFondPension
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixid$typeRevenuAutre').includes('FondPension') 
+              v-if: val('prefixid$TypeRevenuAutre').includes('FondPension') 
               label:
                 fr: Prestations d’un fonds de pension (fonds personnel ou fonds d’un employeur)
               instanceLabel:
@@ -1744,7 +1744,7 @@ form:
             - name: RevenusAutrePensionAlimentaire
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixid$typeRevenuAutre').includes('PensionAlimentaire') 
+              v-if: val('prefixid$TypeRevenuAutre').includes('PensionAlimentaire') 
               label:
                 fr: Revenus de pension alimentaire
               instanceLabel:
@@ -1795,7 +1795,7 @@ form:
             - name: RevenusAutreDivers
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixId$typeRevenuAutre').includes('Autre') 
+              v-if: val('prefixId$TypeRevenuAutre').includes('Autre') 
               label:
                 fr: Autres revenus
               instanceLabel:
@@ -2142,23 +2142,23 @@ form:
                     A1: 'Adulte 1'
                     A2: 'Adulte 2'
                     A12: 'Adultes 1 et 2'
-                - name: vehiculeTypeMarqueAnnee
+                - name: VehiculeTypeMarqueAnnee
                   type: text
                   label:
                     fr: Type de véhicule, marque, année
-                - name: emploiSalaireHebdo
+                - name: SalaireHebdo
                   type: radio
                   label:
                     fr: Est-ce qu'il s'agit d'un véhicule adapté?
                   options: yesno
-                - name: vehiculeProprioLocataire
+                - name: VehiculeProprioLocataire
                   type: radio
                   label:
                     fr: "Êtes-vous propriétaire ou locataire du véhicule?"
                   options: 
                     VehiculeProprietaire: 'Propriétaire'
                     VehiculeLocataire: 'Locataire'
-                - name: vehiculeValeurMarchande
+                - name: VehiculeValeurMarchande
                   type: number
                   label:
                     fr: Valeur marchande
@@ -2403,7 +2403,7 @@ form:
           id: enfantsACharge
           components: 
             - type: repeatableGroup
-              name: enfants
+              name: Enfants
               repeatable: true
               label:
                 fr: Enfants à charge
@@ -2415,7 +2415,7 @@ form:
                 fr: Supprimer cet enfant à charge
               limit: 3                
               components:
-                - name: cp12
+                - name: Cp12
                   type: text
                   label:
                     fr: CP-12
@@ -2438,7 +2438,7 @@ form:
                   label:
                     fr: Numéro d’assurance maladie
                   v-if: val('prefixId$EstDemandeurAsile') === 'false'
-                - name: sexe
+                - name: Sexe
                   type: radio
                   label:
                     fr: Sexe
@@ -2469,7 +2469,7 @@ form:
                   label:
                     fr: Précisez
                   v-if: val(`${name}.prefixId$NiveauEtudes`, index) === 'Autre'
-                - name: handicape
+                - name: Handicape
                   type: radio
                   label:
                     fr: Est-il une personne handicapée reconnu par Retraite Québec?
@@ -2695,7 +2695,7 @@ form:
                     fr: La correspondance est l’ensemble des documents que nous vous ferons parvenir (avis de décision, chèques ou avis de dépôt, etc.).                  
                 - type: radio
                   v-if: val('Conjoint') === 'true'
-                  name: destinataireCouple
+                  name: DestinataireCouple
                   label:
                     fr: Pour un couple, le destinataire de la correspondance doit être précisé.
                   options:
@@ -2704,7 +2704,7 @@ form:
                     A2: 'Adulte 2'
                 - type: textarea
                   v-if: val('Conjoint') === 'false'
-                  name: destinataireAutrePersonne
+                  name: DestinataireAutrePersonne
                   label:
                     fr: La correspondance destinée à une personne seule lui sera directement transmise. Si elle doit plutôt être transmise à une autre personne, inscrivez la raison de ce choix.
                   validations:
@@ -2793,7 +2793,7 @@ form:
                   tag: p
                   text:
                     fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, entre autres de mon retour au travail ou aux études ou encore de toute nouvelle source de revenus. 
-            - name: procuration
+            - name: Procuration
               type: checkbox
               label:
                 fr: Je n'ai pas rempli moi-même ce formulaire.

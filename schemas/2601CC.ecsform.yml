@@ -524,7 +524,7 @@ form:
                   fr: Autre
                   en: Other
             - name: PrecisionRoleNouvelleAdresse
-              v-if: val('RoleNouvelleAdresse').includes('Autre')
+              v-if: val('RoleNouvelleAdresse') === ('Autre')
               type: textarea
               label:
                 fr: Veuillez préciser
