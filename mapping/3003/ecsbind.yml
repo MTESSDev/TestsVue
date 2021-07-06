@@ -13,10 +13,10 @@ bind:
   1:
     DM_AFDR_FinEtudes:
       champs:
-      - EvenementsDerniereAnnee==FinEtudesTempsPlein
+      - adulte1EvenementsDerniereAnnee==FinEtudesTempsPlein
     DM_AFDR_PerteRevenus:
       champs:
-      - EvenementsDerniereAnnee==FinDiminutionRevenus
+      - adulte1EvenementsDerniereAnnee==FinDiminutionRevenus
     PerteRevenus1:
       champs:
       - FinDiminutionRevenusType==FinRevenusEmploi
@@ -31,10 +31,10 @@ bind:
       - <NULL>
     date_FinEtudes:
       champs:
-      - DateEvenementFinEtudesTempsPlein
+      - adulte1DateEvenementFinEtudesTempsPlein
     date_Perterevenus:
       champs:
-      - DateEvenementFinDiminutionRevenus
+      - adulte1DateEvenementFinDiminutionRevenus
     AFDR_Raison1:
       champs:
       - PrecisionRaisonDemandeAfdr==AucunRevenu
