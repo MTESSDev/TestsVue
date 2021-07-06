@@ -2727,6 +2727,11 @@ form:
                   v-if: val('DepotDirect') === 'true'
                   text: 
                     fr: Veuillez fournir les renseignements demandés ci-dessous. Ils nous permettront de procéder au versement de vos prestations ou de vos allocations dans le cadre de tous les services qui vous seront offerts par le Ministère.             
+                - type: dynamic
+                  tag: p
+                  name: SpecimenCheque
+                  text: 
+                    fr: <img id="specimenChequeTemp" alt="Exemple de spécimen de chèque" src="~/images/specimenCheque.png">                    
                 - name: Nom_institution_financière
                   type: text
                   label: 
