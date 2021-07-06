@@ -398,7 +398,10 @@
                         this.$parent.$delete(this.$parent.bindActuel, this.$parent.selectedField.pdfId)
                     }
 
-                    this.$parent.selectedFields = this.$parent.selectedFieldsTemp;
+                    if (this.$parent.selectedFields != this.$parent.selectedFieldsTemp) {
+                        this.$parent.selectedFields = this.$parent.selectedFieldsTemp;
+                        this.$parent.MajChamps();
+                    }
 
                     //this.$parent.bind['test'] = this.$parent.selectedFields;
                     axios
@@ -621,9 +624,9 @@
                 }
             },
             watch: {
-                bindActuel: function (val, oldVal) {
+                /*bindActuel: function (val, oldVal) {
                     this.MajChamps();
-                }
+                }*/
             },
             methods: {
               MajChamps() {

@@ -13,28 +13,28 @@ bind:
   1:
     DM_AFDR_FinEtudes:
       champs:
-      - EvenementsDerniereAnnee==ReqFinEtudesTempsPlein
+      - EvenementsDerniereAnnee==FinEtudesTempsPlein
     DM_AFDR_PerteRevenus:
       champs:
-      - EvenementsDerniereAnnee==ReqFinDiminutionRevenus
+      - EvenementsDerniereAnnee==FinDiminutionRevenus
     PerteRevenus1:
       champs:
-      - ReqFinDiminutionRevenusType==FinRevenusEmploiReq
+      - FinDiminutionRevenusType==FinRevenusEmploi
     PerteRevenus2:
       champs:
-      - ReqFinDiminutionRevenusType==FinRevenusTravailAutonomeReq
+      - FinDiminutionRevenusType==FinRevenusTravailAutonome
     PerteRevenus3:
       champs:
-      - ReqFinDiminutionRevenusType==FinRevenusPrestations
+      - FinDiminutionRevenusType==FinRevenusPrestations
     cp12:
       champs:
       - <NULL>
     date_FinEtudes:
       champs:
-      - ReqDateEvenementFinEtudesTempsPlein
+      - DateEvenementFinEtudesTempsPlein
     date_Perterevenus:
       champs:
-      - ReqDateEvenementFinDiminutionRevenus
+      - DateEvenementFinDiminutionRevenus
     AFDR_Raison1:
       champs:
       - PrecisionRaisonDemandeAfdr==AucunRevenu
