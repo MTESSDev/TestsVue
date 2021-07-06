@@ -436,7 +436,10 @@
                 this.noPageCourante = noPage
 
                 if (!navigationFureteur) {
+                    //Petite passe passe pour retirer le hash de l'url mais en le conservant dans l'historique
+                    history.replaceState(null, null, document.location.pathname + '#' + `p=${noPage}`);
                     history.pushState(null, null, document.location.pathname + '#' + `p=${noPage}`);
+                    history.replaceState(null, null, document.location.pathname);
                 }
             
                 this.$nextTick(function () {
