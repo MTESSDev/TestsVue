@@ -14,12 +14,9 @@
     <None Remove="mapping\3003\3003-01_ProjetDynDEV.pdf" />
     <None Remove="mapping\3003\ecsbind.yml" />
     <None Remove="schemas\2301.ecsform.yml" />
-    <None Remove="schemas\2301CC.ecsform.yml" />
     <None Remove="schemas\2601.ecsform.yml" />
-    <None Remove="schemas\2601CC.ecsform.yml" />
     <None Remove="schemas\3003.ecsform.yml" />
     <None Remove="schemas\3003BaseFull.yml" />
-    <None Remove="schemas\3003CC.ecsform.yml" />
     <None Remove="schemas\attendees.ecsform.yml" />
     <None Remove="schemas\dany.ecsform.yml" />
     <None Remove="schemas\default.ecsform.yml" />
@@ -38,22 +35,13 @@
     <Content Include="mapping\3003\ecsbind.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="schemas\2301CC.ecsform.yml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="schemas\2301.ecsform.yml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="schemas\2601CC.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="schemas\2601.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="schemas\3003BaseFull.yml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="schemas\3003CC.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="schemas\3003.ecsform.yml">
