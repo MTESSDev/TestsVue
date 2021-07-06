@@ -1,5 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
+  title:
+    fr: Dépôt direct
+    en: (EN) Dépôt direct
   sectionsGroup:
     - sectionGroup:
       sections:

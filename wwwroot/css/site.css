@@ -576,6 +576,10 @@ body p {
 
         nav.etapes-form.navbar {
             padding: 0;
+        }
+
+        nav.etapes-form.navbar.contient-groupe {
+            padding: 0;
             margin-left: 16px;
         }
 
@@ -610,6 +614,9 @@ body p {
             nav.etapes-form.navbar {
                 border-top: 1px solid var(--couleur-filet-secondaire);
                 border-bottom: 1px solid var(--couleur-filet-secondaire);
+            }
+
+            nav.etapes-form.navbar.contient-groupe {
                 margin-left: 0;
             }
 
