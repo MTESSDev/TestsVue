@@ -444,7 +444,7 @@
                         //On traite une navigation sans contrôle spécifié à qui donner le focus (ex. page suivante/précédente ou clic sur une page dans menu gauche). On donne focus au H1.
                         const h1 = document.getElementsByTagName('h1')[0]
                         h1.focus()
-                        h1.scrollIntoView() /* Sous IOS le focus ne semble pas provoquer un scroll à tout coup... on le force */
+                        window.scrollTo(0, 0) /* On veut remettre le scroll en haut de page */
 
                         if (this.pageCourante.id === 'revision' && this.form.EtatRevision !== 'initial') {
                             setTimeout(function (formulate) {
