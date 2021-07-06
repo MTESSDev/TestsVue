@@ -691,7 +691,7 @@
             console.log('Application mounted.');
             this.initialiserTooltips()
             this.form.EtatRevision = 'initial'
-            window.location.hash = ''
+            history.replaceState(null, null, document.location.pathname);
 
             this.gererChangementSectionViaNavigationFureteur()
         }
