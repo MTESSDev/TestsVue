@@ -63,43 +63,43 @@ form:
             en: Information on the application
           id: ChangementsSituation
           components:
-            - name: Req01-ChoixChangements
+            - name: ChoixChangements
               type: checkbox
               label: 
                 fr: Veuillez choisir parmi les options suivantes
                 en: Please choose among the following options
               options:
-                ReqArriveeConjoint:
+                ArriveeConjoint:
                   fr: Arrivée d'un conjoint
                   en: Arrival of a spouse
-                ReqDepartConjoint:
+                DepartConjoint:
                   fr: Départ d'un conjoint
                   en: Departure of a spouse
-                ReqAugmentationEnfants:
+                AugmentationEnfants:
                   fr: Augmentation du nombre d’enfants à charge
                   en: Increase in number of dependent children
-                ReqDiminutionEnfants:
+                DiminutionEnfants:
                   fr: Diminution du nombre d’enfants à charge
                   en: Decrease in number of dependent children
-                ReqEnfantEtudesDebut:
+                EnfantEtudesDebut:
                   fr: Un enfant à charge a entrepris des études
                   en: A dependent child began attending school
-                ReqEnfantEtudesFin:
+                EnfantEtudesFin:
                   fr: Un enfant à charge a terminé ses études ou les a abandonnées
                   en: A dependent child completed their schooling or abandoned schooling
-                ReqFormationProfessionnelleDebut:
+                FormationProfessionnelleDebut:
                   fr: Début d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
                   en: Start of vocational training in a secondary-level institution or training in a post-secondary level institution
-                ReqModificationHeuresCredits:
+                ModificationHeuresCredits:
                   fr: Modification du nombre d’heures de cours ou du nombre de crédits
                   en: Change in the number of course hours or credits
-                ReqFormationProfessionnelleFin:
+                FormationProfessionnelleFin:
                   fr: Fin d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
                   en: End of vocational training in a secondary-level institution or training in a post-secondary level institution
               
             - name: DetailsArriveeConjoint
               type: group            
-              v-if: val('Req01-ChoixChangements').includes('ReqArriveeConjoint')
+              v-if: val('ChoixChangements').includes('ArriveeConjoint')
               label:                
                 fr: Arrivée d'un conjoint
                 en: Arrival of a spouse
@@ -116,7 +116,7 @@ form:
                     en: Person’s name
             - name: DetailsDepartConjoint
               type: group
-              v-if: val('Req01-ChoixChangements').includes('ReqDepartConjoint')
+              v-if: val('ChoixChangements').includes('DepartConjoint')
               label:                
                 fr: Départ d'un conjoint
                 en: Departure of a spouse
@@ -133,7 +133,7 @@ form:
                     en: Person’s name
             - name: DetailsAugmentationEnfants
               type: group
-              v-if: val('Req01-ChoixChangements').includes('ReqAugmentationEnfants')
+              v-if: val('ChoixChangements').includes('AugmentationEnfants')
               label:                
                 fr: Augmentation du nombre d’enfants à charge
                 en: Increase in number of dependent children
@@ -150,7 +150,7 @@ form:
                     en: Child’s name
             - name: DetailsDiminutionEnfants
               type: group
-              v-if: val('Req01-ChoixChangements').includes('ReqDiminutionEnfants')              
+              v-if: val('ChoixChangements').includes('DiminutionEnfants')              
               label:
                 fr: Diminution du nombre d’enfants à charge
                 en: Decrease in number of dependent children
@@ -167,7 +167,7 @@ form:
                     en: Child’s name
             - name: DetailsEnfantEtudesDebut
               type: group
-              v-if: val('Req01-ChoixChangements').includes('ReqEnfantEtudesDebut')              
+              v-if: val('ChoixChangements').includes('EnfantEtudesDebut')              
               label:
                 fr: Un enfant à charge a entrepris des études
                 en: A dependent child began attending school
@@ -201,7 +201,7 @@ form:
                       en: University
             - name: DetailsEnfantEtudesFin
               type: group
-              v-if: val('Req01-ChoixChangements').includes('ReqEnfantEtudesFin')              
+              v-if: val('ChoixChangements').includes('EnfantEtudesFin')              
               label:
                 fr: Un enfant à charge a terminé ses études ou les a abandonnées
                 en: A dependent child completed their schooling or abandoned schooling            
@@ -218,7 +218,7 @@ form:
                     en: Child’s name  
             - name: DetailsFormationProfessionnelleDebut
               type: group
-              v-if: val('Req01-ChoixChangements').includes('ReqFormationProfessionnelleDebut')
+              v-if: val('ChoixChangements').includes('FormationProfessionnelleDebut')
               label:                
                 fr: Début d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
                 en: Start of vocational training in a secondary-level institution or training in a post-secondary level institution              
@@ -230,10 +230,10 @@ form:
                     fr: Formation pour
                     en: Training for
                   options:
-                    ReqMoi: 
+                    Moi: 
                       fr: Moi
                       en: Me
-                    ReqConjoint:
+                    Conjoint:
                       fr: Mon conjoint
                       en: My spouse 
                 - name: DateFormationProfessionnelleDebut
@@ -247,10 +247,10 @@ form:
                     fr: Statut d'étudiant
                     en: Student status
                   options:
-                    ReqTempsPlein:
+                    TempsPlein:
                       fr: Études à temps plein
                       en: Full-time studies
-                    ReqTempsPartiel:
+                    TempsPartiel:
                       fr: Études à temps partiel
                       en: Part-time studies                    
                 - name: TypeDiplome
@@ -263,7 +263,7 @@ form:
               label:
                 fr: Modification du nombre d’heures de cours ou du nombre de crédits
                 en: Change in the number of course hours or credits
-              v-if: val('Req01-ChoixChangements').includes('ReqModificationHeuresCredits')
+              v-if: val('ChoixChangements').includes('ModificationHeuresCredits')
               components:
               - name: DestinataireModificationHeuresCredits
                 type: radio
@@ -272,10 +272,10 @@ form:
                   fr: Modification pour
                   en: Change for
                 options:
-                  ReqMoi: 
+                  Moi: 
                     fr: Moi
                     en: Me
-                  ReqConjoint:
+                  Conjoint:
                     fr: Mon conjoint
                     en: My spouse  
               - name: DateModificationHeuresCredits
@@ -293,7 +293,7 @@ form:
               label:
                 fr: Fin d’une formation professionnelle dans un établissement d’enseignement secondaire ou d’une formation dans un établissement d’enseignement postsecondaire
                 en: End of vocational training in a secondary-level institution or training in a post-secondary level institution              
-              v-if: val('Req01-ChoixChangements').includes('ReqFormationProfessionnelleFin')
+              v-if: val('ChoixChangements').includes('FormationProfessionnelleFin')
               components:
                 - name: DestinataireFormationProfessionnelleFin
                   type: radio
@@ -302,10 +302,10 @@ form:
                     fr: Fin de formation pour
                     en: End of training for
                   options:
-                    ReqMoi: 
+                    Moi: 
                       fr: Moi
                       en: Me
-                    ReqConjoint:
+                    Conjoint:
                       fr: Mon conjoint
                       en: My spouse 
                 - name: DateFormationProfessionnelleFin
@@ -320,132 +320,122 @@ form:
             en: Changes in work income
           id: RevenuEmploi
           components:
-            - type: checkbox
-              name: Req10-EmploiDebut
+            - name: NaturechangementEmploi
+              label:
+                fr: Veuillez choisir parmi les options suivantes
+                en: Please choose among the following options
+              type: checkbox
               options:
-                ReqEmploiDebut:
+                EmploiDebut:
                   fr: Début de l'emploi
                   en: Start of a job
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req10-EmploiDebut').includes('ReqEmploiDebut')
-              components:
-                - name: DateEmploiDebut
-                  type: date
-                  label:
-                    fr: Date du début de l'emploi
-                    en: Job start date
-                - name: PersonneEmployee
-                  type: select
-                  label:
-                    fr: Nouvel emploi pour
-                    en: New job for
-                  outerClasses: md
-                  options:
-                    ReqMoi: 
-                      fr: Moi
-                      en: Me
-                    ReqConjoint:
-                      fr: Mon conjoint
-                      en: My spouse
-                    ReqEnfant:
-                      fr: Un enfant à charge
-                      en: Depdendent child
-                - name: RevenuBrutHebdomadaire
-                  type: text
-                  outerClasses: md
-                  label:
-                    fr: Estimation des revenus bruts par semaine
-                    en: Estimated gross weekly income
-            - name: InfosEmployeur
-              type: textarea
-              v-if: val('Req10-EmploiDebut').includes('ReqEmploiDebut')
-              label: 
-                fr: Nom et adresse de l’employeur
-                en: Employer’s name and address
-            - type: checkbox
-              name: Req11-RevenuAugmentation
-              options:
-                ReqRevenuAugmentation:
+                RevenuAugmentation:
                   fr: Augmentation des revenus d’emploi
                   en: Increase in work income
-              validations:
-                optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req11-RevenuAugmentation').includes('ReqRevenuAugmentation')
-              components:
-                - name: DateRevenuAugmentation
-                  type: date
-                  label:
-                    fr: Date de l'augmentation
-                    en: Date of increase
-                - name: PersonneEmployee
-                  type: select
-                  label: 
-                    fr: Changement pour
-                    en: Change for
-                  outerClasses: md
-                  options:
-                    ReqMoi: 
-                      fr: Moi
-                      en: Me
-                    ReqConjoint:
-                      fr: Mon conjoint
-                      en: My spouse
-                    ReqEnfant:
-                      fr: Un enfant à charge
-                      en: Depdendent child
-                - name: RevenuBrutHebdomadaire
-                  type: text
-                  outerClasses: md
-                  label:
-                    fr: Estimation des revenus bruts par semaine
-                    en: Estimated gross weekly income
-            - type: checkbox
-              name: Req12-RevenuDiminution
-              options:
-                ReqRevenuDiminution:
+                RevenuDiminution:
                   fr: Diminution des revenus d’emploi
                   en: Decrease in work income
               validations:
                 optional: null
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req12-RevenuDiminution').includes('ReqRevenuDiminution')
-              components:
-                - name: DateRevenuDiminution
-                  type: date
-                  label:
-                    fr: Date de la diminution
-                    en: Date of decrease
-                - name: PersonneEmployee
-                  type: select
-                  label:
-                    fr: Changement pour
-                    en: Change for
-                  outerClasses: md
-                  options:
-                    ReqMoi: 
-                      fr: Pour moi
-                      en: Me
-                    ReqConjoint:
-                      fr: Pour mon conjoint
-                      en: My spouse
-                    ReqEnfant:
-                      fr: Pour un enfant à charge
-                      en: Depdendent child
-                - name: RevenuBrutHebdomadaire
-                  type: text
-                  outerClasses: md
-                  label:
-                    fr: Estimation des revenus bruts par semaine
-                    en: Estimated gross weekly income
+            - name: DateEmploiDebut
+              type: date
+              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
+              label:
+                fr: Date du début de l'emploi
+                en: Job start date
+            - name: PersonneEmployee
+              type: radio
+              outerClasses: boutons-inline md
+              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
+              label:
+                fr: Nouvel emploi pour
+                en: New job for
+              options:
+                Moi: 
+                  fr: Moi
+                  en: Me
+                Conjoint:
+                  fr: Mon conjoint
+                  en: My spouse
+                Enfant:
+                  fr: Un enfant à charge
+                  en: Depdendent child
+            - name: RevenuBrutHebdomadaire
+              type: number
+              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
+              outerClasses: md
+              label:
+                fr: Estimation des revenus bruts par semaine
+                en: Estimated gross weekly income
+            - name: InfosEmployeur
+              type: textarea
+              v-if: val('NaturechangementEmploi').includes('EmploiDebut')
+              label: 
+                fr: Nom et adresse de l’employeur
+                en: Employer’s name and address                          
+            - name: DateRevenuAugmentation
+              type: date
+              v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
+              label:
+                fr: Date de l'augmentation
+                en: Date of increase
+            - name: PersonneEmployee
+              type: radio
+              v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
+              label: 
+                fr: Changement pour
+                en: Change for
+              outerClasses: boutons-inline md
+              options:
+                Moi: 
+                  fr: Moi
+                  en: Me
+                Conjoint:
+                  fr: Mon conjoint
+                  en: My spouse
+                Enfant:
+                  fr: Un enfant à charge
+                  en: Depdendent child
+            - name: RevenuBrutHebdomadaire
+              type: number
+              v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
+              outerClasses: md
+              label:
+                fr: Estimation des revenus bruts par semaine
+                en: Estimated gross weekly income
+            - name: DateRevenuDiminution
+              type: date
+              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
+              label:
+                fr: Date de la diminution
+                en: Date of decrease
+            - name: PersonneEmployee
+              type: radio
+              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
+              label:
+                fr: Changement pour
+                en: Change for
+              outerClasses: boutons-inline md
+              options:
+                Moi: 
+                  fr: Pour moi
+                  en: Me
+                Conjoint:
+                  fr: Pour mon conjoint
+                  en: My spouse
+                Enfant:
+                  fr: Pour un enfant à charge
+                  en: Depdendent child
+            - name: RevenuBrutHebdomadaire
+              type: number
+              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
+              outerClasses: md
+              label:
+                fr: Estimation des revenus bruts par semaine
+                en: Estimated gross weekly income
             - name: RaisonPerteRevenu
               type: textarea
-              v-if: val('Req12-RevenuDiminution').includes('ReqRevenuDiminution')
+              v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
               label: 
                 fr: Si vous n’avez plus de revenus de travail, précisez la raison
                 en: If you no longer have work income, indicate the reason
@@ -456,22 +446,20 @@ form:
             en: Move
           id: demenagement
           components:
-            - type: checkbox
-              name: Req13-Demenagement    
-              options:
-                ReqDemenagement:
-                  fr: J'ai déménagé ou je le ferai prochainement
-                  en: I moved or will move shortly
-              validations:
-                optional: null
+            - name: DemenagementEffectif 
+              type: radio   
+              options: yesno
+              label:
+                fr: Avez-vous déménagé ou le ferez-vous prochainement?
+                en: Have you moved or will you move shortly?
             - type: dynamic
               tag: h3        
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
+              v-if: val('DemenagementEffectif') === 'true'
               text:
                 fr: Nouvelle adresse
                 en: New address
             - type: inline        
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
+              v-if: val('DemenagementEffectif') === 'true'
               classes: no-wrap
               components:            
                 - name: Numero
@@ -482,7 +470,7 @@ form:
                     en: Number
                 - name: Rue
                   type: text
-                  outerClasse: md
+                  outerClasses: md
                   label:
                     fr: Rue
                     en: Street
@@ -493,7 +481,7 @@ form:
                     fr: Appartement
                     en: Apartment
             - type: inline
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
+              v-if: val('DemenagementEffectif') === 'true'
               classes: no-wrap
               components:
                 - name: Ville
@@ -509,164 +497,146 @@ form:
                     en: Postal code
                   validations: 
                     max: 6, length
-            - type: inline
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
-              classes: no-wrap
-              components:
-              - name: Req14-RoleNouvelleAdresse
-                type: select
-                outerClasses: lg
-                label:
-                  fr: À cette nouvelle adresse, vous êtes
-                  en: At the new address you will be
-                options:
-                  ReqProprietaire: 
-                    fr: Propriétaire
-                    en: The owner
-                  ReqLocataire:
-                    fr: Locataire
-                    en: A tenant
-                  ReqChambre:
-                    fr: En chambre
-                    en: Rent a room
-                  ReqPension:
-                    fr: En pension
-                    en: Rent room and board
-                  ReqLocataireSubventionne:
-                    fr: Locataire d’un logement subventionné (y compris HLM ou une coopérative d’habitation)
-                    en: A tenant in a subsidized dwelling (including low-rental housing and coops)
-                  ReqAutre:
-                    fr: Autre
-                    en: Other
-              - name: PrecisionRoleNouvelleAdresse
-                v-if: val('Req14-RoleNouvelleAdresse').includes('ReqAutre')
-                type: textarea
-                label:
-                  fr: Veuillez préciser
-                  en: please specify
-            - type: inline        
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
-              classes: no-wrap
-              components:
-              - type: radio
-                name: Req15-ObjectifEmploi
-                outerClasses: md
-                label: 
-                  fr: Participez-vous au Programme objectif emploi?
-                  en: Are you participating in the Aim for Employment Program?
-                options: yesno
-              - type: radio
-                name: Req16-LienParente
-                #si chambre ou pension et pas objectif emploi
-                v-if: val('Req15-ObjectifEmploi') === 'false' && (val('Req14-RoleNouvelleAdresse').includes('ReqChambre') || val('Req14-RoleNouvelleAdresse').includes('ReqPension'))
-                outerClasses: md
-                label:
-                  fr: Avez-vous un lien de parenté avec le locateur?
-                  en: Are you related to the person who is renting you the room/room and board?
-                options: yesno
-              - type: text
-                v-if: val('Req16-LienParente') === 'true'         
-                outerClasses: lg
-                label:
-                  fr: Précisez le lien
-                  en: Indicate the relation to you
-            - type: inline
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
-              classes: no-wrap
-              components:
-                - name: Req14-HabiteConjoint
-                  type: radio
-                  label: 
-                    fr: Vivez-vous avec un conjoint?
-                    en: Are you living with your spouse?
-                  outerClasses: md
-                  options: yesno
-                - name: DateHabiteConjoint
-                  v-if: val('Req14-HabiteConjoint') === 'true'
-                  type: date
-                  label:
-                    fr: Date du début de la cohabitation
-                    en: Date you began living together
-                - name: NomPrenomConjoint
-                  v-if: val('Req14-HabiteConjoint') === 'true'
-                  type: text
-                  outerClasses: lg
-                  label: 
-                    fr: Nom de famille et prénom du conjoint
-                    en: Spouse's first and last name
-            - type: inline
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
-              classes: no-wrap
-              components:      
-                - name: CoutLocation
-                  type: text
-                  outerClasses: md
-                  label:
-                    fr: Coût de la location
-                    en: Cost of rent
-                - name: FrequenceLoyer
-                  type: radio
-                  outerClasses: md
-                  options:
-                    ReqMensuel: 
-                      fr: par mois
-                      en: per month
-                    ReqHebdomadaire:
-                      fr: par semaine
-                      en: per week
-                - name: ElectriciteInclus
-                  type: radio
-                  outerClasses: md
-                  label: 
-                    fr: Coût de l'électricité inclus
-                    en: Includes electricity              
-                  options: yesno
-                - name: ChauffageInclus
-                  type: radio
-                  outerClasses: md
-                  label:
-                    fr: Coût du chauffage inclus
-                    en: Includes heating
-                  options: yesno  
-            - type: inline
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
-              classes: no-wrap
-              components:  
-                - type: dynamic
-                  tag: p
-                  outerClasses: lg
-                  text :
-                    fr: <b>Recevez-vous une somme de Revenu Québec chaque mois dans le cadre du programme Allocation-logement?</b>
-                    en: <b>Are you receiving a monthly amount from Revenu Québec under the Shelter Allowance Program?</b>
-                - name: Req17-AllocationLogement
-                  type: radio
-                  outerClasses: sm
-                  options: yesno
-                - name: MontantAllocationLogement
-                  type: text
-                  outerClasses: md
-                  v-if: val('Req17-AllocationLogement') === 'true'
-                  label: 
-                    fr: Indiquez le montant
-                    en: Enter the amount              
-            - type: inline
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
-              classes: no-wrap
-              components:  
-                - type: dynamic
-                  tag: p
-                  outerClasses: lg
-                  text :
-                    fr: <b>À cette nouvelle adresse, est-ce que d’autres personnes habitent avec vous (sauf un conjoint ou un enfant à charge)?</b>
-                    en: <b>Does anyone else live with you at this new address? (Other than your spouse or a dependent children)?</b>
-                - name: Req18-AutresPersonnes
-                  type: radio
-                  outerClasses: sm
-                  options: yesno
+            - name: RoleNouvelleAdresse
+              type: select
+              v-if: val('DemenagementEffectif') === 'true'
+              outerClasses: lg
+              label:
+                fr: À cette nouvelle adresse, vous êtes
+                en: At the new address you will be
+              options:
+                Proprietaire: 
+                  fr: Propriétaire
+                  en: The owner
+                Locataire:
+                  fr: Locataire
+                  en: A tenant
+                Chambre:
+                  fr: En chambre
+                  en: Rent a room
+                Pension:
+                  fr: En pension
+                  en: Rent room and board
+                LocataireSubventionne:
+                  fr: Locataire d’un logement subventionné (y compris HLM ou une coopérative d’habitation)
+                  en: A tenant in a subsidized dwelling (including low-rental housing and coops)
+                Autre:
+                  fr: Autre
+                  en: Other
+            - name: PrecisionRoleNouvelleAdresse
+              v-if: val('RoleNouvelleAdresse') === ('Autre')
+              type: textarea
+              label:
+                fr: Veuillez préciser
+                en: please specify   
+            - type: radio
+              name: ObjectifEmploi
+              v-if: val('DemenagementEffectif') === 'true'
+              outerClasses: md
+              label: 
+                fr: Participez-vous au Programme objectif emploi?
+                en: Are you participating in the Aim for Employment Program?
+              options: yesno
+            - type: radio
+              name: LienParente
+              #si chambre ou pension et pas objectif emploi
+              v-if: val('ObjectifEmploi') && val('ObjectifEmploi') === 'false' && (val('RoleNouvelleAdresse').includes('Chambre') || val('RoleNouvelleAdresse').includes('Pension'))
+              outerClasses: md
+              label:
+                fr: Avez-vous un lien de parenté avec le locateur?
+                en: Are you related to the person who is renting you the room/room and board?
+              options: yesno
+            - name: PrecisionLienParente
+              type: text                
+              v-if: val('LienParente') && val('LienParente') === 'true'         
+              outerClasses: lg
+              label:
+                fr: Précisez le lien
+                en: Indicate the relation to you
+            - name: HabiteConjoint
+              type: radio
+              v-if: val('DemenagementEffectif') === 'true'
+              label: 
+                fr: Vivez-vous avec un conjoint?
+                en: Are you living with your spouse?
+              outerClasses: md
+              options: yesno
+            - name: DateHabiteConjoint
+              v-if: val('HabiteConjoint') === 'true'
+              type: date
+              label:
+                fr: Date du début de la cohabitation
+                en: Date you began living together
+            - name: NomPrenomConjoint
+              v-if: val('HabiteConjoint') === 'true'
+              type: text
+              outerClasses: lg
+              label: 
+                fr: Nom de famille et prénom du conjoint
+                en: Spouse's first and last name                 
+            - name: CoutLocation
+              type: number
+              v-if: val('DemenagementEffectif') === 'true'
+              outerClasses: md
+              label:
+                fr: Coût de la location
+                en: Cost of rent
+            - name: FrequenceLoyer
+              label:
+                fr: Fréquence
+                en: Frequency
+              type: radio
+              v-if: val('DemenagementEffectif') === 'true'
+              outerClasses: md
+              options:
+                FreqMensuelle: 
+                  fr: par mois
+                  en: per month
+                FreqHebdomadaire:
+                  fr: par semaine
+                  en: per week
+            - name: ElectriciteInclus
+              type: radio
+              v-if: val('DemenagementEffectif') === 'true'
+              outerClasses: md
+              label: 
+                fr: Coût de l'électricité inclus
+                en: Includes electricity              
+              options: yesno
+            - name: ChauffageInclus
+              type: radio
+              v-if: val('DemenagementEffectif') === 'true'
+              outerClasses: md
+              label:
+                fr: Coût du chauffage inclus
+                en: Includes heating
+              options: yesno   
+            - name: RecoitAllocationLogement
+              type: radio
+              v-if: val('DemenagementEffectif') === 'true'
+              label:
+                fr: Recevez-vous une somme de Revenu Québec chaque mois dans le cadre du programme Allocation-logement?
+                en: Are you receiving a monthly amount from Revenu Québec under the Shelter Allowance Program?
+              options: yesno
+            - name: MontantAllocationLogement
+              type: number
+              outerClasses: md
+              v-if: val('RecoitAllocationLogement') === 'true'
+              label: 
+                fr: Indiquez le montant
+                en: Enter the amount   
+            - name: AutresPersonnesHabitent
+              v-if: val('DemenagementEffectif') === 'true'
+              type: radio
+              outerClasses: sm
+              options: yesno
+              label:
+                fr: À cette nouvelle adresse, est-ce que d’autres personnes habitent avec vous (sauf un conjoint ou un enfant à charge)?
+                en: Does anyone else live with you at this new address? (Other than your spouse or a dependent children)?
             - name: AutresPersonnesDetails
               type: repeatableGroup
               repeatable: true
-              v-if: val('Req18-AutresPersonnes') === 'true'
+              v-if: val('AutresPersonnesHabitent') === 'true'
               label:
                 fr: Autre(s) personne(s) habitant avec vous
                 en: Other person(s) living with you
@@ -679,72 +649,62 @@ form:
               removeLabel:
                 fr: Supprimer cette personne
                 en: Remove this person
-              components: &groupePersonne
-                - type: inline
-                  classes: no-wrap
-                  components:
-                  - name: NomPrenomAutrePersonne
-                    type: text
-                    outerClasses: lg
-                    label:
-                      fr: Nom et prénom de la personne
-                      en: Person's Last and first name
-                  - name: Req19-StatutAutrePersonne
-                    type: select
-                    label:
-                      fr: À cette adresse, cette personne est
-                      en: At this new address, this person will be
-                    options: 
-                      PersonneCoproprietaire:
-                        fr: copropriétaire
-                        en: a co-owner
-                      PersonneColocataire:
-                        fr: colocataire
-                        en: a co-tenant
-                      PersonneCochambreuse:
-                        fr: cochambreuse
-                        en: a co-roomer
-                      PersonnePension:
-                        fr: en pension ou en chambre
-                        en: a co-room/boarder
+              components: 
+                - name: NomPrenomAutrePersonne
+                  type: text
+                  outerClasses: lg
+                  label:
+                    fr: Nom et prénom de la personne
+                    en: Person's Last and first name
+                - name: StatutAutrePersonne
+                  type: select
+                  label:
+                    fr: À cette adresse, cette personne est
+                    en: At this new address, this person will be
+                  options: 
+                    PersonneCoproprietaire:
+                      fr: copropriétaire
+                      en: a co-owner
+                    PersonneColocataire:
+                      fr: colocataire
+                      en: a co-tenant
+                    PersonneCochambreuse:
+                      fr: cochambreuse
+                      en: a co-roomer
+                    PersonnePension:
+                      fr: en pension ou en chambre
+                      en: a co-room/boarder
                 - name: LienParenteAutrePersonne
                   type: text
                   outerClasses: lg
-                  v-if: val('Req15-ObjectifEmploi') === 'false'
+                  v-if: val('ObjectifEmploi') === 'false'
                   label:
                     fr: Indiquez le lien de parenté avec vous
                     en: Relation to you
                   options: yesno
-                - type: inline
-                  classes: no-wrap
-                  #Todo trouver la bonne condition pour afficher le champ
-                  #v-if: val('Req19-StatutAutrePersonne') !== 'PersonneCoproprietaire'
-                  components:
-                  - name: MontantLoyerCharge
-                    type: text
-                    outerClasses: lg
-                    label: 
-                      fr: Précisez les sommes demandées par semaine ou par mois
-                      en: Specify the amount charged per week or month
-                  - name: FrequenceLoyer
-                    type: radio
-                    options:
-                      FreqHebdomadaire:
-                        fr: par semaine
-                        en: a week
-                      FreqMensuelle:
-                        fr: par mois
-                        en: a month
-                - type: bandeau-notification
-                  components: 
-                    - type: dynamic
-                      tag: p
-                      text:
-                        fr: Groupe à retravailler pour mettre l'affichage de la somme demandée conditionnel
-                        en: Groupe à retravailler (ENG)
+                - name: MontantLoyerCharge
+                  type: text
+                  outerClasses: lg
+                  v-if: val(`${name}.StatutAutrePersonne`, index) && val(`${name}.StatutAutrePersonne`, index) !== 'PersonneCoproprietaire'
+                  label: 
+                    fr: Précisez les sommes demandées par semaine ou par mois
+                    en: Specify the amount charged per week or month
+                - name: FrequenceLoyer
+                  type: radio
+                  v-if: val(`${name}.StatutAutrePersonne`, index) && val(`${name}.StatutAutrePersonne`, index) !== 'PersonneCoproprietaire'
+                  label:
+                    fr: Fréquence
+                    en: Frequency
+                  options:
+                    FreqHebdomadaire:
+                      fr: par semaine
+                      en: a week
+                    FreqMensuelle:
+                      fr: par mois
+                      en: a month
             - type: inline
               classes: no-wrap
-              v-if: val('Req13-Demenagement').includes('ReqDemenagement')
+              v-if: val('DemenagementEffectif') === 'true'
               components:
                 - name: NomPrenomProprietaireLocateur
                   type: text
@@ -764,35 +724,47 @@ form:
             en: Change(s) related to your residence or Declaration of stay outside Québec
           id: ChangementResidence
           components:
-            - type: checkbox
-              name: Req20-NouveauTelephone
+            - name: NatureChangementResidence
+              type: checkbox
+              label:
+                fr: Veuillez choisir parmi les options suivantes
+                en: Please choose among the following options 
               options:
-                ReqNouveauTelephone:
+                NouveauTelephone:
                   fr: J'ai un nouveau numéro de téléphone
                   en: I have a new telephone number
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req20-NouveauTelephone').includes('ReqNouveauTelephone')
-              components:
-                - name: DateNouveauTelephone
-                  type: date
-                  label:
-                    fr: Date du changement
-                    en: Date of change
-                - name: NouveauNumeroTelephone
-                  type: text
-                  label:
-                    fr: Nouveau numéro de téléphone
-                    en: New number
-            - type: checkbox
-              name: Req21-AdulteDepart
-              options:
-                ReqAdulteDepart:
+                AdulteDepart:
                   fr: Départ de ma résidence d’un adulte autre que mon conjoint
                   en: An adult other than my spouse has left my home
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req21-AdulteDepart').includes('ReqAdulteDepart')
+                AdulteArrivee:
+                  fr: Arrivée à ma résidence d’un adulte autre que mon conjoint
+                  en: An adult other than my spouse has arrived in my home
+                SejourExterieur:
+                  fr: Séjour à l’extérieur du Québec pour une période de plus de 7 jours consécutifs ou pour un total de plus de 15 jours au cours d’un mois civil
+                  en: Stay outside Québec lasting more than 7 consecutive days or for more than 15 days in a calendar month
+            - name: NouveauTelephone
+              type: group
+              v-if: val('NatureChangementResidence').includes('NouveauTelephone')
+              label:
+                fr: Nouveau numéro de téléphone
+                en: New phone number
+              components:
+              - name: DateNouveauTelephone
+                type: date
+                label:
+                  fr: Date du changement
+                  en: Date of change
+              - name: NouveauNumeroTelephone
+                type: text
+                label:
+                  fr: Nouveau numéro de téléphone
+                  en: New phone number
+            - name: DepartAdulte
+              type: group
+              label:
+                fr: Départ d'un adulte autre que mon conjoint
+                en: Adult other than my spouse leaving my home
+              v-if: val('NatureChangementResidence').includes('AdulteDepart')
               components:
                 - name: DateAdulteDepart
                   type: date
@@ -804,15 +776,12 @@ form:
                   label:
                     fr: Nom de la personne
                     en: Person’s name
-            - type: checkbox
-              name: Req22-AdulteArrivee
-              options:
-                ReqAdulteArrivee:
-                  fr: Arrivée à ma résidence d’un adulte autre que mon conjoint
-                  en: An adult other than my spouse has arrived in my home
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req22-AdulteArrivee').includes('ReqAdulteArrivee')
+            - name: ArriveeAdulte
+              type: group
+              label: 
+                fr: Arrivée d’un adulte autre que mon conjoint
+                en: Adult other than my spouse arriving in my home             
+              v-if: val('NatureChangementResidence').includes('AdulteArrivee')
               components:
                 - name: DateAdulteArrivee
                   type: date
@@ -823,26 +792,26 @@ form:
                   type: text
                   label:
                     fr: Nom de la personne
-                    en: Person’s name
-            - type: checkbox
-              name: Req23-SejourExterieur
-              options:
-                ReqSejourExterieur:
-                  fr: Séjour à l’extérieur du Québec pour une période de plus de 7 jours consécutifs ou pour un total de plus de 15 jours au cours d’un mois civil
-                  en: Stay outside Québec lasting more than 7 consecutive days or for more than 15 days in a calendar month
-            - type: inline
-              classes: no-wrap
-              v-if: val('Req23-SejourExterieur').includes('ReqSejourExterieur')
+                    en: Person’s name                    
+            - name: SejourExterieur
+              type: group
+              label:
+                fr: Séjour à l’extérieur du Québec
+                en: Stay outside Québec
+              v-if: val('NatureChangementResidence').includes('SejourExterieur')
               components:
                 - name: PersonneSejourExterieur
                   type: radio
+                  label:
+                    fr: Séjour pour
+                    en: Stay for
                   outerClasses: md
                   options:
                     PersonneMoi:
-                      fr: Pour moi
+                      fr: Moi
                       en: Me
                     PersonneConjoint:
-                      fr: Pour mon conjoint
+                      fr: Mon conjoint
                       en: My spouse
                 - name: SejourExterieurDateDepart
                   type: date
@@ -854,12 +823,12 @@ form:
                   label:
                     fr: Date du retour
                     en: Date of return
-            - name: SejourExterieurLieu
-              type: text
-              v-if: val('Req23-SejourExterieur').includes('ReqSejourExterieur')
-              label:
-                fr: Précisez le lieu
-                en: Specify the location
+                - name: SejourExterieurLieu
+                  type: text
+                  v-if: val('NatureChangementResidence').includes('SejourExterieur')
+                  label:
+                    fr: Précisez le lieu
+                    en: Specify the location
         
         # Section 6 - Autres changements
         - section:
@@ -895,19 +864,19 @@ form:
             - type: inline
               classes: no-wrap
               components:
-                - name: dateSignature
+                - name: DateSignature
                   type: date
                   label:
                     fr: Date
                     en: Date
-                - name: signaturePrincipale
+                - name: SignaturePrincipale
                   type: text
                   outerClasses: lg
                   label:
                     fr: Signature du déclarant
                     en: Signature of person declaring the change(s)
                 #Todo mettre conditionnel?
-                - name: signatureConjoint
+                - name: SignatureConjoint
                   type: text
                   outerClasses: lg
                   label:

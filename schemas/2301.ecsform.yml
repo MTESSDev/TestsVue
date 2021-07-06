@@ -15,14 +15,14 @@ form:
                 fr: Quel type de demande voulez-vous effectuer?
                 en: What type of application are you applying for?
               options: 
-                ReqAfdr: 
+                Afdr: 
                   fr: Demande d'aide financière de dernier recours
                   en: Last-resort financial assistance application
-                ReqAutreProgramme: 
+                AutreProgramme: 
                   fr: Demande pour un autre programme
                   en: Application for annother Program
-            - name: Req-00-PrecisionAutreProgramme
-              v-if: val('TypeDemande') === 'ReqAutreProgramme'
+            - name: PrecisionAutreProgramme
+              v-if: val('TypeDemande') === 'AutreProgramme'
               type: text
               label:
                 fr: Veuillez préciser le programme
@@ -123,19 +123,19 @@ form:
             - type: inline
               classes: no-wrap
               components: 
-                - name: DateSignatureReq
+                - name: DateSignature
                   type: date
                   label: 
                     fr: Date
                     en: Date
-                - name: SignatureReq
+                - name: Signature
                   type: text
                   outerClasses: w-100
                   label: 
                     fr: Signature
                     en: Signature
             - type: bandeau
-              v-if: val('TypeDemande') === 'ReqAfdr' && val('NomEtPrenomConjoint')
+              v-if: val('TypeDemande') === 'Afdr' && val('NomEtPrenomConjoint')
               components:
                 - name: TexteSignatureConjoint
                   type: dynamic
@@ -146,16 +146,16 @@ form:
             - type: inline
               classes: no-wrap
               components:
-                - name: DateSignatureReq
+                - name: DateSignature
                   type: date
-                  v-if: val('TypeDemande') === 'ReqAfdr' && val('NomEtPrenomConjoint')
+                  v-if: val('TypeDemande') === 'Afdr' && val('NomEtPrenomConjoint')
                   label: 
                     fr: Date
                     en: Date
-                - name: SignatureReq
+                - name: Signature
                   type: text
                   outerClasses: w-100
-                  v-if: val('TypeDemande') === 'ReqAfdr' && val('NomEtPrenomConjoint')
+                  v-if: val('TypeDemande') === 'Afdr' && val('NomEtPrenomConjoint')
                   label: 
                     fr: Signature
                     en: Signature
