@@ -1,0 +1,168 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
+form:
+  sectionsGroup:
+    - sectionGroup: 
+      sections:
+        # Section 0
+        - section: 
+            fr: Informations sur la demande
+            en: Information on the application
+          id: infos
+          components:
+            - name: TypeDemande
+              type: radio
+              label: 
+                fr: Quel type de demande voulez-vous effectuer?
+                en: What type of application are you applying for?
+              options: 
+                Afdr: 
+                  fr: Demande d'aide financière de dernier recours
+                  en: Last-resort financial assistance application
+                AutreProgramme: 
+                  fr: Demande pour un autre programme
+                  en: Application for annother Program
+            - name: PrecisionAutreProgramme
+              v-if: val('TypeDemande') === 'AutreProgramme'
+              type: text
+              label:
+                fr: Veuillez préciser le programme
+                en: Please specify program
+            - name: TypeAdhesion
+              type: radio
+              label:
+                fr: S'agit-il d'une nouvelle adhésion au dépôt direct ou d'un changement au compte?
+                en: Do you want to enter a new registration for direct deposit or to change your account?
+              options:
+                Adhesion:
+                  fr: Adhésion
+                  en: Registration
+                Changement:
+                  fr: Changement de compte
+                  en: Change of account
+        - section:
+            fr: Renseignements sur l'identité
+            en: Identification
+          id: identite
+          components:  
+            - name: NumeroDossier
+              type: text
+              label: 
+                fr: Numéro de dossier
+                en: File number  
+              outerClasses: md          
+            - name: NomEtPrenom
+              type: text
+              label: 
+                fr: Nom de famille et prénom
+                en: Last and first name     
+            - name: NomEtPrenomConjoint
+              type: text
+              validations:
+                optional: null
+              label: 
+                fr: Nom de famille et prénom de la conjointe ou du conjoint (S'il y a lieu)
+                en: Spouse's last and first name (if applicable)   
+            - name: Adresse
+              type: text
+              label: 
+                fr: Adresse du domicile
+                en: Home address 
+              outerClasses: xl  
+            - name: CodePostal
+              type: text
+              label: 
+                fr: Code postal
+                en: Postal code
+              outerClasses: sm  
+              validations:
+                max: 6,length
+        
+        - section:
+            fr: Renseignements sur l'institution financière
+            en: Identification of financial institution
+          id: institution
+          components:
+            - name: NomInstitution
+              type: text
+              label:
+                fr: Nom
+                en: Name
+            - name: AdresseInstitution
+              type: text
+              label: 
+                fr: Adresse
+                en: Address
+              outerClasses: xl  
+            - name: CodePostalInstitution
+              type: text
+              label: 
+                fr: Code postal
+                en: Postal Code
+              outerClasses: md  
+              validations:
+                max: 6,length
+            - name: NumeroCompte
+              type: text
+              label: 
+                fr: Numéro de compte à votre institution financière
+                en: Account number at financial institution
+
+        - section:
+            fr: Autorisation et signature
+            en: Authorization and signature
+          id: signature
+          components:
+            - type: bandeau
+              components:
+              - name: DeclarationAutorisation
+                type: dynamic
+                tag: p
+                text:
+                  fr: Par la présente, j'autorise le ministère du Travail, de l'Emploi et de la Solidarité sociale à déposer dans mon compte le montant qu'il me verse.
+                  en: I hereby authorize the Ministère du Travail, de l'Emploi et de la Solidarité sociale to deposit into my account the amounts it pays to me.        
+            - type: inline
+              classes: no-wrap
+              components: 
+                - name: DateSignature
+                  type: date
+                  label: 
+                    fr: Date
+                    en: Date
+                - name: Signature
+                  type: text
+                  outerClasses: w-100
+                  label: 
+                    fr: Signature
+                    en: Signature
+            - type: bandeau
+              v-if: val('TypeDemande') === 'Afdr' && val('NomEtPrenomConjoint')
+              components:
+                - name: TexteSignatureConjoint
+                  type: dynamic
+                  tag: p
+                  text:
+                    fr: La signature de la conjointe ou du conjoint est requise uniquement si vous demandez le dépôt d'une aide financière de dernier recours (aide sociale ou solidarité sociale).
+                    en: Your spouse's signature is required if you are applying for last-resort financial assistance (social assistance program or social solidarity program).
+            - type: inline
+              classes: no-wrap
+              components:
+                - name: DateSignature
+                  type: date
+                  v-if: val('TypeDemande') === 'Afdr' && val('NomEtPrenomConjoint')
+                  label: 
+                    fr: Date
+                    en: Date
+                - name: Signature
+                  type: text
+                  outerClasses: w-100
+                  v-if: val('TypeDemande') === 'Afdr' && val('NomEtPrenomConjoint')
+                  label: 
+                    fr: Signature
+                    en: Signature
+                
+        - section: 
+            fr: Révision
+            en: (EN)Test
+          id: revision
+
+
