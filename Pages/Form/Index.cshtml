@@ -198,7 +198,7 @@
                 this.validerFormulaire(this)
             },
             submitHandler(data) {
-                axios.post('/api/session/3003cc', data)
+                axios.post('/api/session/3003', data)
             },
             repeatableAdded(model) {
                 if (document.activeElement) {
@@ -476,7 +476,7 @@
 
                     //TODO pour le moment post au serveur uniquement si mode debug
                     if (new URLSearchParams(window.location.search).get('debug')) {
-                        axios.post('/api/session/3003cc', this.form)
+                        axios.post('/api/session/3003', this.form)
                             .then(response => {
                                 console.log(response)
                             })
@@ -605,12 +605,12 @@
                 return false
             },
             enregistrer() {
-                axios.post('@Url.PageLink("save", null, new { id = "3003CC" } )', this.form);
+                axios.post('@Url.PageLink("save", null, new { id = "3003" } )', this.form);
                 alert("Sauvegardé!");
             },
             forcerSoumettre()
             {
-                axios.post('/api/session/3003CC', this.form)
+                axios.post('/api/session/3003', this.form)
                     .then(response => {
                         console.log(response)
                     })

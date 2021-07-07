@@ -516,7 +516,7 @@ form:
                   Si vous répondez aux questions suivantes, nous pourrons évaluer votre droit à ces montants.</b>
             - name: EstEnceinte
               type: radio
-              v-if: val('TypeDemande').includes('Afdr')
+              v-if: val('TypeDemande').includes('Afdr') && val('prefixId$Sexe') === 'Feminin'
               label:
                 fr: Êtes-vous enceinte?
               options: yesno
