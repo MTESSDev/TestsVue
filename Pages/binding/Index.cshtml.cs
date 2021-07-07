@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Html.Parser;
 using ECSForm.Utils;
+using FRW.PR.Model.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -63,7 +64,7 @@ namespace ECSForm.Pages
                 Bind = new Dictionary<string,Dictionary<string, BindElement>>();
             }
 
-            var form = GenericModel.ReadYamlCfg(@"schemas/3003CC.ecsform.yml");
+            var form = GenericModel.ReadYamlCfg(@"schemas/3003.ecsform.yml");
 
             var formData = new List<ComponentBinding>();
 
@@ -165,7 +166,7 @@ namespace ECSForm.Pages
                     }
 
                     var inputV = new ComponentBinding();
-                    inputV.ParseAttributes(dictItem, false);
+                    inputV.ParseAttributes(dictItem);
                     inputV.GroupName = groupName;
                     inputV.SectionName = sectionName;
                     inputV.PrefixId = prefixId;
