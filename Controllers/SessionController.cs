@@ -1,5 +1,6 @@
 ﻿using ECSForm.Pages;
 using ECSForm.Utils;
+using FRW.PR.Model.Components;
 using Jint;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,7 @@ namespace ECS.PR.Formulaires.Controllers
 
             var context = new ValidationContext(data, serviceProvider: null, items: null);
 
-            var inputs = new List<Input>();
+            var inputs = new List<ComponentValidation>();
 
             GetEffectiveComponents(data, dynamicForm.Form?["sectionsGroup"], ref inputs, null, null);
 
@@ -89,7 +90,7 @@ namespace ECS.PR.Formulaires.Controllers
             group = 1
         }
 
-        public static void GetEffectiveComponents(IDictionary<object, object> data, object components, ref List<Input> inputs, string? prefixId, string? groupName)
+        public static void GetEffectiveComponents(IDictionary<object, object> data, object components, ref List<ComponentValidation> inputs, string? prefixId, string? groupName)
         {
             //var obj = components as IDictionary<object, object>;
             var obj2 = components as IList<object>;
@@ -186,7 +187,7 @@ namespace ECS.PR.Formulaires.Controllers
                         }
                     }
 
-                    var inputV = new Input();
+                    var inputV = new ComponentValidation();
                     inputV.ParseAttributes(dictItem);
                     inputV.GroupName = groupName;
                     inputV.PrefixId = prefixId;

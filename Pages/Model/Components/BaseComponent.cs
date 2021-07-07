@@ -4,14 +4,26 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace ECSForm.Pages
+namespace FRW.PR.Model.Components
 {
-    public class Input
+    public class BaseComponent
     {
-        public Input()
+        private readonly bool _isParseValidationsEnabled;
+
+        public BaseComponent(bool IsParseValidationsEnabled)
         {
+            _isParseValidationsEnabled = IsParseValidationsEnabled;
             Validations = new List<ValidationAttribute>();
         }
+
+        public string? Name { get; set; }
+        public string? PrefixId { get; set; }
+        public string? GroupName { get; set; }
+        public bool? IsRepeatable { get; set; }
+        public TypeInput Type { get; set; }
+        public IDictionary<object, object>? AcceptedValues { get; set; }
+
+        public List<ValidationAttribute> Validations { get; set; }
 
         public void SetType(string? type)
         {
@@ -40,21 +52,12 @@ namespace ECSForm.Pages
             }
         }
 
-        public string? Name { get; set; }
-        public string? PrefixId { get; set; }
-        public string? GroupName { get; set; }
-        public bool? IsRepeatable { get; set; }
-        public TypeInput Type { get; set; }
-        public IDictionary<object, object>? AcceptedValues { get; set; }
-
-        public List<ValidationAttribute> Validations { get; set; }
-
         /// <summary>
         /// Extraire les attributs du fichier de config VueFormulate
         /// </summary>
         /// <param name="attrDict">Dictionnaire d'attributs VueFormulate</param>
         /// <param name="parseValidations">Si on parse ou non les validations</param>
-        public void ParseAttributes(IDictionary<object, object>? attrDict, bool parseValidations = true)
+        public void ParseAttributes(IDictionary<object, object>? attrDict)
         {
             if (attrDict is null) return;
             Validations.Add(new RequiredAttribute() { });
@@ -70,7 +73,7 @@ namespace ECSForm.Pages
                         SetType(item.Value.ToString());
                         break;
                     case "VALIDATIONS":
-                        if (!parseValidations) { break; };
+                        if (!_isParseValidationsEnabled) { break; };
 
                         var validationsDict = item.Value as IDictionary<object, object>;
                         if (validationsDict is { } && validationsDict.ContainsKey("optional"))
@@ -166,107 +169,6 @@ namespace ECSForm.Pages
 
     }
 
-    public class ComponentBinding
-    {
-        public ComponentBinding()
-        {
-        }
 
-        public string? Name { get; set; }
-        public List<string>? NameValues { get; set; }
-        public string? PrefixId { get; set; }
-        public string? GroupName { get; set; }
-        public string? SectionName { get; set; }
-        public int? MaxOccur { get; set; }
-        public bool? IsRepeatable { get; set; }
-        public TypeInput Type { get; set; }
-        public IDictionary<object, object>? AcceptedValues { get; set; }
-
-        public void SetType(string? type)
-        {
-            switch (type?.ToUpper())
-            {
-                case "HIDDEN":
-                case "TEXT":
-                case "TEXTAREA":
-                    Type = TypeInput.TEXT;
-                    break;
-                case "DATE":
-                    Type = TypeInput.DATE;
-                    break;
-                case "SELECT":
-                    Type = TypeInput.SELECT;
-                    break;
-                case "CHECKBOX":
-                    Type = TypeInput.CHECKBOX;
-                    break;
-                case "RADIO":
-                    Type = TypeInput.RADIO;
-                    break;
-                default:
-                    Type = TypeInput.SKIP;
-                    break;
-            }
-        }
-
-        public void ParseAttributes(IDictionary<object, object>? attr, bool parseValidations = true)
-        {
-            if (attr is null) return;
-
-            foreach (var item in attr)
-            {
-                switch (item.Key.ToString()?.ToUpper())
-                {
-                    case "NAME":
-                        Name = item.Value.ToString();
-                        break;
-                    case "LIMIT":
-                        MaxOccur = int.Parse(item.Value.ToString());
-                        break;
-                    case "TYPE":
-                        SetType(item.Value.ToString());
-                        break;
-                    case "OPTIONS":
-                        if (item.Value.ToString().Equals("yesno", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            AcceptedValues = new Dictionary<object, object>() { { "true", true }, { "false", false }, };
-                        }
-                        else
-                        {
-                            if (item.Value.GetType().Name.StartsWith("List"))
-                            {
-                                AcceptedValues = (item.Value as List<object>).ToDictionary(x => x, x => x);
-                            }
-                            else
-                            {
-                                AcceptedValues = item.Value as IDictionary<object, object>;
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-    }
-
-
-    public class Rule
-    {
-        public string? Name { get; set; }
-        public string? Param { get; set; }
-        public string? Option { get; set; }
-    }
 }
 
-
-public enum TypeInput
-{
-    SKIP,
-    SELECT,
-    CHECKBOX,
-    RADIO,
-    TEXT,
-    DATE
-}
