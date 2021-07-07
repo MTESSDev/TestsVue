@@ -1036,9 +1036,21 @@ form .input-validation-error, form .input-validation-error + .note-editor {
     /*  -100- À positionner
 /*====================================================================================================*/
 
-.fil-ariane {
+.surtitre {
     margin-top: 16px;
-    font-size: 0.8125rem;
+    font-size: 14px;
+}
+
+.surtitre .groupe-courant{
+    font-weight: 600;
+}
+
+.image-form{
+    margin-bottom: 32px;
+}
+
+.image-form img {
+    max-width: 100%;
 }
 
 .modal.aide-contextuelle {
