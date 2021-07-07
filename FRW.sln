@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRW.PR.Extra", "FRW.PR.Extra.csproj", "{A48D7030-3850-4EC1-A59A-3964C4BEE289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRW.PR.Extra", "FRW.PR.Extra\FRW.PR.Extra.csproj", "{A48D7030-3850-4EC1-A59A-3964C4BEE289}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRW.SV.GestionFormulaires", "FRW.SV.GestionFormulaires\FRW.SV.GestionFormulaires.csproj", "{9C2A9C04-8E3F-49B7-853A-B97B0AA58F40}"
 EndProject
