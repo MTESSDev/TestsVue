@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/FRW.PR.EXTRA/schemas/ecsform.json
 form:
   defaults:
     select:
