@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FRW.SV.GestionFormulaires\**" />
+    <Content Remove="FRW.SV.GestionFormulaires\**" />
+    <EmbeddedResource Remove="FRW.SV.GestionFormulaires\**" />
+    <None Remove="FRW.SV.GestionFormulaires\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\js\mtess-vueformulate.min.js" />
   </ItemGroup>
 
@@ -101,10 +108,6 @@
     <Content Include="schemas\default.ecsform.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SV.GestionFormulaires\SV.GestionFormulaires.csproj" />
   </ItemGroup>
 
 </Project>
