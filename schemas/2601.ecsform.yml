@@ -8,8 +8,8 @@ form:
       sections:
         #Section 1 - Identité
         - section:
-            fr: Section 1 - Renseignements sur votre identité
-            en: Section 1 - Identification
+            fr: Renseignements sur votre identité
+            en: Identification
           id: Identification
           components:
             - type: bandeau
@@ -341,8 +341,10 @@ form:
               validations:
                 optional: null
             - name: DetailsEmploiDebut
-              type: dynamic
-              tag: div
+              type: group
+              label: 
+                fr: Début de l'emploi
+                en: Start of a job
               v-if: val('NaturechangementEmploi').includes('EmploiDebut')
               components:
               - name: DateEmploiDebut
@@ -378,8 +380,10 @@ form:
                   fr: Nom et adresse de l’employeur
                   en: Employer’s name and address
             - name: DetailsRevenuAugmentation
-              type: dynamic
-              tag: div
+              type: group
+              label: 
+                fr: Augmentation des revenus d’emploi
+                en: Increase in work income
               v-if: val('NaturechangementEmploi').includes('RevenuAugmentation')
               components:
               - name: DateRevenuAugmentation
@@ -410,8 +414,10 @@ form:
                   fr: Estimation des revenus bruts par semaine
                   en: Estimated gross weekly income
             - name: DetailsRevenuDiminution
-              type: dynamic
-              tag: div
+              type: group
+              label: 
+                fr: Diminution des revenus d'emploi
+                en: Decrease in work income
               v-if: val('NaturechangementEmploi').includes('RevenuDiminution')
               components:
               - name: DateRevenuDiminution
@@ -464,48 +470,50 @@ form:
               tag: div   
               v-if: val('DemenagementEffectif') === 'true'
               components:  
-                - type: dynamic
-                  tag: h3
-                  text:
+                - name: NouvelleAdresse
+                  type: group
+                  label:
                     fr: Nouvelle adresse
                     en: New address
-                - type: inline
-                  classes: no-wrap
-                  components:            
-                    - name: Numero
-                      type: text
-                      outerClasses: sm
-                      label:
-                        fr: Numéro
-                        en: Number
-                    - name: Rue
-                      type: text
-                      outerClasses: md
-                      label:
-                        fr: Rue
-                        en: Street
-                    - name: Appartement
-                      type: text
-                      outerClasses: sm
-                      label:
-                        fr: Appartement
-                        en: Apartment
-                - type: inline
-                  classes: no-wrap
                   components:
-                    - name: Ville
-                      type: text
-                      label:
-                        fr: Ville
-                        en: City
-                    - name: CodePostal
-                      type: text
-                      outerClasses: md
-                      label:
-                        fr: Code postal
-                        en: Postal code
-                      validations: 
-                        max: 6, length
+                  - type: inline
+                    classes: no-wrap
+                    components:            
+                      - name: Numero
+                        type: text
+                        outerClasses: sm
+                        label:
+                          fr: Numéro
+                          en: Number
+                      - name: Rue
+                        type: text
+                        outerClasses: md
+                        label:
+                          fr: Rue
+                          en: Street
+                      - name: Appartement
+                        type: text
+                        outerClasses: sm
+                        label:
+                          fr: Appartement
+                          en: Apartment
+                  - type: inline
+                    classes: no-wrap
+                    components:
+                      - name: Ville
+                        type: text
+                        outerClasses: lg
+                        label:
+                          fr: Ville
+                          en: City
+                      - name: CodePostal
+                        type: text
+                        outerClasses: md
+                        label:
+                          fr: Code postal
+                          en: Postal code
+                        validations: 
+                          max: 6, length
                 - name: RoleNouvelleAdresse
                   type: select
                   outerClasses: lg
@@ -835,8 +843,8 @@ form:
         
         # Section 6 - Autres changements
         - section:
-            fr: Section 6 – Autres changements
-            en: Section 6 – Other changes
+            fr: Autres changements
+            en: Other changes
           id: AutresChangements
           components:
             - type: dynamic
