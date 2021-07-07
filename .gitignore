@@ -34,10 +34,10 @@ node_modules/
 
 # Visual Studio 2015
 .vs/
-wwwroot/js/base.min.js
-src/temp/**
-wwwroot/css/additionnel.min.css
-wwwroot/css/base.min.css
-wwwroot/js/additionnel.min.js
-wwwroot/scripts/pdf/**
-wwwroot/css/pdf/**
+FRW.PR.EXTRA/wwwroot/js/base.min.js
+FRW.PR.EXTRA/src/temp/**
+FRW.PR.EXTRA/wwwroot/css/additionnel.min.css
+FRW.PR.EXTRA/wwwroot/css/base.min.css
+FRW.PR.EXTRA/wwwroot/js/additionnel.min.js
+FRW.PR.EXTRA/wwwroot/scripts/pdf/**
+FRW.PR.EXTRA/wwwroot/css/pdf/**
