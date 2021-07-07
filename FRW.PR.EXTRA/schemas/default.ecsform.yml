@@ -15,6 +15,15 @@ form:
     button: btn btn-secondaire
     submit: btn btn-primaire
   templates: 
+    image: |
+      <transition name="fade">
+        <div class="image-form {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>
+            <img alt="{{i18n alt}}" 
+              {{# base64}}src="data:image/jpg;base64, {{.}}"{{/ base64}}
+              {{# src}}src="{{.}}"{{/ src}}
+            >
+        </div>
+      </transition>                 
     inline: |
       <transition name="fade">
         <div class="inline {{classes}}" {{# v-if}} {{GenerateVif .}} {{/ v-if}}>

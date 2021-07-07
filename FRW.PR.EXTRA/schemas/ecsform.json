@@ -131,7 +131,17 @@
                 "tag": {
                     "type": "string"
                 },
+                "src": {
+                    "type": "string"
+                },
+                "base64": {
+                    "type": "string"
+                },
                 "text": {
+                    "type": "object",
+                    "$ref": "#/definitions/Translation"
+                },
+                "alt": {
                     "type": "object",
                     "$ref": "#/definitions/Translation"
                 },
