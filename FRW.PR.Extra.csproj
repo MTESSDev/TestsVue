@@ -103,4 +103,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SV.GestionFormulaires\SV.GestionFormulaires.csproj" />
+  </ItemGroup>
+
 </Project>
