@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace ECSForm.Utils
+namespace FRW.PR.Extra.Utils
 {
     public class FormHelpers
     {
@@ -387,7 +387,7 @@ namespace ECSForm.Utils
         }
     }
 
-    class MyConverter : CustomCreationConverter<IDictionary<object, object>>
+    class ConvertisseurFRW : CustomCreationConverter<IDictionary<object, object>>
     {
         public override IDictionary<object, object> Create(Type objectType)
         {

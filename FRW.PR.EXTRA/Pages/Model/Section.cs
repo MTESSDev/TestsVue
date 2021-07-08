@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace ECSForm.Model
+namespace FRW.PR.Extra.Model
 {
     public class Section
     {

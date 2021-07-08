@@ -10,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using ECSForm.Utils;
-using ECSForm.Model;
 using System.Globalization;
+using FRW.PR.Extra.Utils;
+using FRW.PR.Extra.Model;
 
-namespace ECSForm.Pages
+namespace FRW.PR.Extra.Pages
 {
     public class GenericModel : PageModel
     {
@@ -322,7 +322,7 @@ namespace ECSForm.Pages
             }
 
             // Restore last state
-            HttpContext.Request.Cookies.TryGetValue($"ECSForm{configName}", out var form);
+            HttpContext.Request.Cookies.TryGetValue($"FRW{configName}", out var form);
 
             if (string.IsNullOrEmpty(form))
                 Form = new { validAll = false };

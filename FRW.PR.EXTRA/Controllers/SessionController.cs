@@ -1,5 +1,5 @@
-﻿using ECSForm.Pages;
-using ECSForm.Utils;
+﻿using FRW.PR.Extra.Pages;
+using FRW.PR.Extra.Utils;
 using FRW.PR.Model.Components;
 using Jint;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +15,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECS.PR.Formulaires.Controllers
+namespace FRW.PR.Extra.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -36,7 +36,7 @@ namespace ECS.PR.Formulaires.Controllers
             var data = JsonConvert.DeserializeObject<IDictionary<object, object>>(
                                     jsonDataFromUser,
                                         new JsonConverter[] {
-                                                new MyConverter() }
+                                                new ConvertisseurFRW() }
                                     );
 
             if (data is null) { throw new Exception("No data received."); }

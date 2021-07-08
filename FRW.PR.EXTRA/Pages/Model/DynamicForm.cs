@@ -1,4 +1,4 @@
-﻿namespace ECSForm.Model
+﻿namespace FRW.PR.Extra.Model
 {
     public class DynamicForm
     {

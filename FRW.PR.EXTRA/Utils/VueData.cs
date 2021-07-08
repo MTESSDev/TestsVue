@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ECSForm.Utils
+namespace FRW.PR.Extra.Utils
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class VueData : Attribute

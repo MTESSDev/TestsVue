@@ -1,24 +1,15 @@
-﻿using AngleSharp.Html.Parser;
-using ECSForm.Utils;
+﻿using FRW.PR.Extra.Utils;
 using FRW.PR.Model.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace ECSForm.Pages
+namespace FRW.PR.Extra.Pages
 {
     public class BindingIndexModel : PageModel
     {
