@@ -28,34 +28,40 @@ namespace FRW.PR.Extra.Services
             _dorsale = dorsale;
         }
 
-        public async Task<AppelSortant<string>> ObtenirConfigurationFormulaire()
+        public async Task<AppelSortant<string>> ObtenirConfigurationFormulaire(string nomForm)
         {
+            //todo Vérifier si ça a besoin d'être exposé
+            throw new NotImplementedException();
+        }
+        public async Task<AppelSortant<string>> ObtenirBindingFormulaire(string nomForm)
+        {
+            //todo Vérifier si ça a besoin d'être exposé
             throw new NotImplementedException();
         }
 
-        public async Task CreerCookie()
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task CreerCookie()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task CreerFormulaire()
         {
             throw new NotImplementedException();
         }
 
-        public async Task VerifierCookie()
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task VerifierCookie()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task MajFormulaire()
         {
             throw new NotImplementedException();
         }
 
-        public async Task EnvoyerCouriel()
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task EnvoyerCouriel()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

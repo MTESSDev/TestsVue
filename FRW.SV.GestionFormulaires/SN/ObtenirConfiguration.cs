@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SV.GestionFormulaires.SN
 {
@@ -14,14 +15,14 @@ namespace SV.GestionFormulaires.SN
         public ObtenirConfiguration() { }
                 
         //TODO Obtenir chemin répertoires
-        public string ObtenirFichierConfig(string typeFormulaire)
+        public async Task<string> ObtenirFichierConfig(string typeFormulaire)
         {
             //TODO
             throw new NotImplementedException();
         }
 
         //TODO Obtenir chemin répertoires
-        public string  ObtenirFichierBinding(string typeFormulaire)
+        public async Task<string> ObtenirFichierBinding(string typeFormulaire)
         {
             //TODO
             throw new NotImplementedException();
