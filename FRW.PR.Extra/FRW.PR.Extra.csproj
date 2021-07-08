@@ -110,4 +110,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FRW.TR.Contrats\FRW.TR.Contrats.csproj" />
+  </ItemGroup>
+
 </Project>
