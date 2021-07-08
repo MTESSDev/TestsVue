@@ -578,11 +578,6 @@ body p {
             padding: 0;
         }
 
-        nav.etapes-form.navbar.contient-groupe {
-            padding: 0;
-            margin-left: 16px;
-        }
-
         nav.etapes-form .navbar-toggler {
             display: flex;
             justify-content: space-between;
@@ -616,18 +611,17 @@ body p {
                 border-bottom: 1px solid var(--couleur-filet-secondaire);
             }
 
-            nav.etapes-form.navbar.contient-groupe {
-                margin-left: 0;
-            }
-
-            nav.etapes-form ul {
-                padding: 0 0 0 16px;
-            }
-
             nav.etapes-form ul.niv1 {
                 margin-top: 16px;
             }
 
+            nav.etapes-form ul.niv1 > li.sans-regroupement {
+                margin-left: 16px;
+            }
+
+            nav.etapes-form .sous-menu > a:after {
+                margin-left: 24px!important;
+            }
         }
 
         @media (min-width: 992px) {
@@ -641,27 +635,36 @@ nav.etapes-form li.active a {
     font-family: 'OpenSans-Bold';
 }
 
+nav.etapes-form .sous-menu > a {
+    color: inherit!important;
+}
+
+
 nav.etapes-form .groupe {
     font-family: 'OpenSans-Bold';
     padding: 16px;
     background-color: var(--couleur-fond-gris);
     display: flex;
     align-items: center;
-    margin-left: -16px;
+    justify-content: space-between;
 }
 
-    nav.etapes-form .groupe.active {
-        background-color: var(--couleur-bleu-pale);
-    }
+nav.etapes-form .groupe.active {
+    background-color: var(--couleur-bleu-pale);
+}
 
 nav.etapes-form ul > li > ul > li, nav.etapes-form ul > li.sans-regroupement {
-    padding: 16px 0;
+    padding: 16px 8px 16px 0;
     position: relative;
     display: flex;
     align-items: center;
-    margin-left: 8px;
-    border-left: 1px solid var(--couleur-piv);
+    margin-left: 14px;
+    /*    border-left: 1px solid var(--couleur-piv);*/
 }
+
+    nav.etapes-form ul > li.sans-regroupement{
+        margin-left: 0;
+    }
 
     /* Petite twist qui nous permet d'inverser la puce et le texte afin de pouvoir utiliser le selector de sibling et modifier couleur de fond de la puce sur hover/focus du lien */
     nav.etapes-form ul > li > ul > li *:last-child, nav.etapes-form ul > li.sans-regroupement *:last-child {
@@ -676,7 +679,6 @@ nav.etapes-form ul > li > ul > li, nav.etapes-form ul > li.sans-regroupement {
                 border-radius: 50%;
                 background-color: #fff;
                 border: 3px solid #1479CC;
-                margin-left: -11px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -686,6 +688,10 @@ nav.etapes-form ul > li > ul > li, nav.etapes-form ul > li.sans-regroupement {
                 background-color: var(--couleur-bleu-pale);
                 border-color: #1479CC;
             }
+            nav.etapes-form ul li .puce .icone-svg {
+                margin-left: 0;
+            }
+
 
             nav.etapes-form ul li.contient-erreur .texte:hover + .puce, nav.etapes-form ul li.sans-erreur .texte:hover + .puce {
                 background-color: #1479CC;
@@ -725,24 +731,61 @@ nav.etapes-form ul > li > ul > li, nav.etapes-form ul > li.sans-regroupement {
                 margin-left: 8px;
             }
 
-nav.etapes-form ul.niv1 > li.sans-regroupement:first-of-type > .puce:before,
-nav.etapes-form ul.niv2 > li:first-of-type > .puce:before {
+nav.etapes-form li > .puce:before {
     position: absolute;
-    width: 20px;
+    width: 1px;
     height: calc(50% - 10px);
     background-color: #fff;
     top: 0;
     content: '';
+    border-left: 1px solid var(--couleur-piv);
 }
 
-nav.etapes-form ul.niv1 > li.sans-regroupement:last-of-type > .puce:after,
-nav.etapes-form ul.niv2:last-of-type > li:last-of-type > .puce:after {
+
+nav.etapes-form .sous-menu > a:after {
+    position: relative;
+    width: 1px;
+    height: 0;
+    background-color: #fff;
+    top: 0;
+    content: '';
+    border-left: 1px solid var(--couleur-piv);
+    margin-left: 23px;
+    display: block;
+    transition: height .35s ease-out;
+}
+
+nav.etapes-form .sous-menu > a.collapsed:after {
+    height: 16px;
+}
+
+
+nav.etapes-form .sous-menu:last-of-type > a:after {
+    content: none;
+}
+
+nav.etapes-form li > .puce:after
+ {
     position: absolute;
-    width: 20px;
+    width: 1px;
     height: calc(50% - 10px);
     background-color: #fff;
     bottom: 0;
     content: '';
+    border-left: 1px solid var(--couleur-piv);
+}
+
+
+/*nav.etapes-form ul.niv2 > li:first-of-type > .puce:before*/
+nav.etapes-form ul.niv1 > li.sans-regroupement:first-of-type > .puce:before
+ {
+    border-left: 0;
+}
+
+/**/
+nav.etapes-form ul.niv1 > li.sans-regroupement:last-of-type > .puce:after,
+nav.etapes-form ul.niv1 > li:last-of-type ul.niv2 > li:last-of-type > .puce:after {
+    border-left: 0;
 }
 
 

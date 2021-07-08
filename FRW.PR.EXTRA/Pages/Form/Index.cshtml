@@ -51,7 +51,7 @@
 }
 
 @section colonneGauche{
-    <nav v-cloak class="etapes-form navbar navbar-expand-lg" :class="{'contient-groupe' : menuContientGroupe}">
+    <nav v-cloak class="etapes-form navbar navbar-expand-lg">
         <a role="button" class="navbar-toggler collapsed" data-toggle="collapse"  aria-controls="navbarSupportedContent" aria-expanded="false"  href="#navbarSupportedContent" >
             <span class="libelle">
                 Étapes du formulaire
@@ -62,9 +62,14 @@
             <ul class="niv1" aria-label="Menu principal">
                 <template v-for="groupe in pagesGroup" :key="groupe.no" v-if="groupe['v-if'] === '' || eval(groupe['v-if'])">
                     <template v-if="groupe.titre">
-                        <li class="sous-menu">
-                            <span class="groupe" :class="[groupe.classes, groupe.no === groupeCourant.no ? 'active' : '']">{{ groupe.titre }}</span>
-                            <ul class="niv2">
+                        <li class="sous-menu contenu-extensible">
+                            <a class="collapsed" data-toggle="collapse" :href="'#groupe' + groupe.no" role="button" aria-expanded="false" :aria-controls="'groupe' + groupe.no">
+                                <span class="groupe" :class="{active : groupe.no === groupeCourant.no}">
+                                    <span :class="[groupe.classes]">{{ groupe.titre }}</span>
+                                    <span aria-hidden="true" class="icone-svg md chevron-haut-texte"> </span>
+                                </span>
+                            </a>
+                            <ul class="niv2 collapse" :id="'groupe' + groupe.no" >
                                 <li v-for="page in groupe.pages" :key="page.no" v-if="page['v-if'] === '' || eval(page['v-if'])" :class="[{active : page.no === noPageCourante, 'contient-erreur' : page.contientErreurs, 'sans-erreur' : page.sansErreur}, page.classes ? page.classes : '' ]">
                                     <span class="texte"><a href="#" v-on:click.stop.prevent="effectuerNavigation(page.no)">{{ page.titre }}</a></span>
                                     <span class="puce">
@@ -433,15 +438,14 @@
                     this.form.EtatRevision = ''
                 }
 
+                //Développer le contenu de la section à laquelle la page appartient
+                $(`#groupe${pageDemandee.groupe.no}`).collapse('show')
+
                 if (!navigationFureteur) {
-                    //Petite passe passe pour retirer le hash de l'url mais en le conservant dans l'historique
-                    history.replaceState(null, null, document.location.pathname + '#' + `p=${this.noPageCourante}`);
-                    history.pushState(null, null, document.location.pathname + '#' + `p=${this.noPageCourante}`);
-                    history.replaceState(null, null, document.location.pathname);
+                    history.pushState(null, null, document.location.pathname + '#' + `p=${noPage}`);
                 }
 
                 this.noPageCourante = noPage
-
             
                 this.$nextTick(function () {
                     this.config.keepData = false
@@ -673,9 +677,6 @@
 
                 return null
             },
-            menuContientGroupe() {               
-                return this.pagesGroup.some(g => g.titre)
-            },
             estConsidereConjoint() {
                 this.form.Conjoint = (this.val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'true' || this.val('PrecisionsAdulte2.AutreParentEnfant') === 'true' || this.val('PrecisionsAdulte2.VieMaritaleUnAn') === 'true' || this.val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'true').toString()
                 return this.form.Conjoint
@@ -688,10 +689,11 @@
             return donnees;
         },
         mounted() {
-            console.log('Application mounted.');
             this.initialiserTooltips()
             this.form.EtatRevision = 'initial'
-            history.replaceState(null, null, document.location.pathname);
+
+            //Développer le contenu du regroupement courant s'il y a lieu
+            $(`#groupe${this.groupeCourant.no}`).collapse('show')
 
             this.gererChangementSectionViaNavigationFureteur()
         }
