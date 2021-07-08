@@ -9,9 +9,9 @@ namespace SV.GestionFormulaires.SN
     /// <summary>
     /// SN - Créer suivi état formulaire
     /// </summary>
-    public class CreerSuiviEtat
+    public static class SuiviEtat
     {
-        public async Task Traitement(string numeroForm, string etat)
+        public static async Task Creer(string numeroForm, string etat)
         {
             //TODO Mettre la date dans l'enregistrement.
             switch (etat)

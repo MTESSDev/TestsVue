@@ -7,15 +7,13 @@ namespace SV.GestionFormulaires.SN
     /// <summary>
     /// SN - Mettre à jour un formulaire
     /// </summary>
-    public class MettreAJour
+    public class MajFormulaire
     {
-        private readonly CreerSuiviEtat _creerSuiviEtat;
         private readonly DalFormulaires _dal;
 
         //DalFormulaires dans startup
-        public MettreAJour(CreerSuiviEtat creerSuiviEtat, DalFormulaires dalFormulaires)
+        public MajFormulaire(DalFormulaires dalFormulaires)
         {
-            _creerSuiviEtat = creerSuiviEtat;
             _dal = dalFormulaires;
         }
 
@@ -27,8 +25,9 @@ namespace SV.GestionFormulaires.SN
         /// <returns>Un numéro de confirmation</returns>
         public async Task<string> Traitement(string noSeqForm, string contenuForm)
         {
-            return await _dal.MettreAJour(noSeqForm, contenuForm);
-            await _creerSuiviEtat.Traitement(noSeqForm, Constantes.EtatMettreAJour);
+            var confirmation = await _dal.MettreAJour(noSeqForm, contenuForm);
+            await SuiviEtat.Creer(noSeqForm, Constantes.EtatMettreAJour);
+            return confirmation;
         }
     }
 }

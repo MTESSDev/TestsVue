@@ -8,18 +8,16 @@ namespace SV.GestionFormulaires.SN
     /// <summary>
     /// SN - Créer formulaire
     /// </summary>
-    public class Creer
+    public class CreerFormulaire
     {
-        private readonly CreerSuiviEtat _creerSuiviEtat;
         private readonly DalFormulaires _dal;
 
         /// <summary>
         /// Todo configurer les dépendances dans startup
         /// </summary>
         /// <param name="creerSuiviEtat"></param>
-        public Creer(CreerSuiviEtat creerSuiviEtat, DalFormulaires dalFormulaires)
+        public CreerFormulaire(DalFormulaires dalFormulaires)
         {
-            _creerSuiviEtat = creerSuiviEtat;
             _dal = dalFormulaires;
         }
 
@@ -33,7 +31,7 @@ namespace SV.GestionFormulaires.SN
         {
             var numeroForm = GenererNumeroFormulaire();
             var numeroConf = await Enregistrer(typeFormulaire, idSysAppelant, numeroForm, contenuFormulaire);
-            await _creerSuiviEtat.Traitement(numeroForm, Constantes.EtatCreer);
+            await SuiviEtat.Creer(numeroForm, Constantes.EtatCreer);
         }
 
         /// <summary>

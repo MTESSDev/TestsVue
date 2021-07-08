@@ -16,27 +16,15 @@ namespace SV.GestionFormulaires.SN
         //TODO Obtenir chemin répertoires
         public string ObtenirFichierConfig(string typeFormulaire)
         {
-            switch (typeFormulaire)
-            {
-                case Constantes.DemandeAide:
-                case Constantes.DepotDirect:
-                case Constantes.ChangementSituation:
-                default:
-                    throw new NotImplementedException();
-            }
+            //TODO
+            throw new NotImplementedException();
         }
 
         //TODO Obtenir chemin répertoires
         public string  ObtenirFichierBinding(string typeFormulaire)
         {
-            switch(typeFormulaire)
-            {
-                case Constantes.DemandeAide:
-                case Constantes.DepotDirect:
-                case Constantes.ChangementSituation:
-                default:
-                    throw new NotImplementedException();
-            }
+            //TODO
+            throw new NotImplementedException();
         }
     }
 }
