@@ -11,7 +11,7 @@
 
     <div v-if="form.EtatRevision === ''">
         <div class="traitement-en-cours md text-center" tabindex="0" role="status">
-            <svg class="spinner" viewBox="0 0 50 50" aria-hidden="true"><circle class="path" cx="25" cy="25" r="20" fill="none"></circle></svg>            
+            <svg class="spinner" viewBox="0 0 50 50" aria-hidden="true"><circle class="path" cx="25" cy="25" r="20" fill="none"></circle></svg>
         </div>
     </div>
 

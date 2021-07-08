@@ -93,8 +93,14 @@ namespace ECSForm.Utils
         private static string GenerateVif(HelperContext context, object vif)
         {
             var prefixId = context.Lookup<object>("prefixId");
+            var enableVif = context.Lookup<object>("Form.enableVif");
 
-            return $" v-if=\"{InternalGenerateVif(vif?.ToString(), prefixId?.ToString())}\"";
+            if (bool.Parse(enableVif.ToString() ?? "true"))
+            {
+                return $" v-if=\"{InternalGenerateVif(vif?.ToString(), prefixId?.ToString())}\"";
+            }
+
+            return string.Empty;
         }
 
         private static string InternalGenerateClassesFromObject(IDictionary<object, object> dictComponent, string yamlKey,

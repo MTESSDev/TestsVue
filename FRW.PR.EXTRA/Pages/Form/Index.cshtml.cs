@@ -27,6 +27,9 @@ namespace ECSForm.Pages
         public string? FormRaw { get; set; }
         public Dictionary<string, object?> VueData { get; set; } = new Dictionary<string, object?>();
 
+        [FromQuery]
+        public bool ShowAll { get; set; }
+
         [VueData("formErrors")]
         public object[] FormErrors { get; set; }
 
@@ -265,7 +268,8 @@ namespace ECSForm.Pages
                 }
             }
 
-            Title =  (dynamicForm.Form["title"] as Dictionary<object,object>).GetLocalizedObject();
+            Title =  (dynamicForm.Form["title"] as Dictionary<object,object>?)?.GetLocalizedObject();
+            dynamicForm.Form["enableVif"] = !ShowAll; 
 
             using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
             {
