@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ECSForm.Utils
+namespace FRW.PR.Extra.Utils
 {
     public interface IVueParser
     {

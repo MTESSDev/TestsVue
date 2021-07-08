@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace ECSForm.Pages
+namespace FRW.PR.Extra.Pages
 {
     public class TestsModel : PageModel
     {

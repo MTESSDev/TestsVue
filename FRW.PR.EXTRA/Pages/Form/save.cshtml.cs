@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECSForm.Pages
+namespace FRW.PR.Extra.Pages
 {
     public class SaveModel : PageModel
     {
@@ -31,7 +31,7 @@ namespace ECSForm.Pages
                 jsonData = await reader.ReadToEndAsync();
             }
 
-            HttpContext.Response.Cookies.Append("ECSForm" + id, jsonData);
+            HttpContext.Response.Cookies.Append("FRW" + id, jsonData);
 
             return new OkResult();
         }

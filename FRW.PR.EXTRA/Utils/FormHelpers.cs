@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace ECSForm.Utils
+namespace FRW.PR.Extra.Utils
 {
     public class FormHelpers
     {
@@ -93,8 +93,14 @@ namespace ECSForm.Utils
         private static string GenerateVif(HelperContext context, object vif)
         {
             var prefixId = context.Lookup<object>("prefixId");
+            var enableVif = context.Lookup<object>("Form.enableVif");
 
-            return $" v-if=\"{InternalGenerateVif(vif?.ToString(), prefixId?.ToString())}\"";
+            if (bool.Parse(enableVif.ToString() ?? "true"))
+            {
+                return $" v-if=\"{InternalGenerateVif(vif?.ToString(), prefixId?.ToString())}\"";
+            }
+
+            return string.Empty;
         }
 
         private static string InternalGenerateClassesFromObject(IDictionary<object, object> dictComponent, string yamlKey,
@@ -381,7 +387,7 @@ namespace ECSForm.Utils
         }
     }
 
-    class MyConverter : CustomCreationConverter<IDictionary<object, object>>
+    class ConvertisseurFRW : CustomCreationConverter<IDictionary<object, object>>
     {
         public override IDictionary<object, object> Create(Type objectType)
         {

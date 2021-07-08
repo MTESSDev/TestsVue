@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FRW.TR.Commun\FRW.TR.Commun.csproj" />
+    <ProjectReference Include="..\FRW.TR.Contrats\FRW.TR.Contrats.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RepertoiresTest\Configuration\" />
+    <Folder Include="RepertoiresTest\Binding\" />
   </ItemGroup>
 
 </Project>

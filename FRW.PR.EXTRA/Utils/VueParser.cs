@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ECSForm.Utils
+namespace FRW.PR.Extra.Utils
 {
     public class VueParser : IVueParser
     {

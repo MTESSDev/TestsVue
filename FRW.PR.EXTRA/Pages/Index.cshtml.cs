@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECSForm.Pages
+namespace FRW.PR.Extra.Pages
 {
     public class IndexModel : PageModel
     {
