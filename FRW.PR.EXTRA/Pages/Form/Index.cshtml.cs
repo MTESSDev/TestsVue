@@ -268,7 +268,7 @@ namespace ECSForm.Pages
                 }
             }
 
-            Title =  (dynamicForm.Form["title"] as Dictionary<object,object>?)?.GetLocalizedObject();
+            Title =  (dynamicForm.Form["title"] as Dictionary<object,object>)?.GetLocalizedObject();
             dynamicForm.Form["enableVif"] = !ShowAll; 
 
             using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
