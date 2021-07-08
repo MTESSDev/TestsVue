@@ -13,4 +13,9 @@
     <ProjectReference Include="..\FRW.TR.Contrats\FRW.TR.Contrats.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RepertoiresTest\Configuration\" />
+    <Folder Include="RepertoiresTest\Binding\" />
+  </ItemGroup>
+
 </Project>
