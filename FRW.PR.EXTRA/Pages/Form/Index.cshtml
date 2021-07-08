@@ -438,6 +438,11 @@
                     this.form.EtatRevision = ''
                 }
 
+                //Réduire le contenu de la section courante si aucune erreur
+                if (pageDemandee.groupe.no !== this.groupeCourant.no && !this.groupeCourantContientErreur) {
+                    $(`#groupe${this.groupeCourant.no}`).collapse('hide')
+                }
+
                 //Développer le contenu de la section à laquelle la page appartient
                 $(`#groupe${pageDemandee.groupe.no}`).collapse('show')
 
@@ -644,6 +649,9 @@
             },
             groupeCourant() {
                  return this.obtenirPageParNo(this.pageCourante.no).groupe
+            },
+            groupeCourantContientErreur() {
+                return this.groupeCourant.pages.some(page => page.contientErreurs)                
             },
             noPageSuivante() {
                 let noPageSuivante = this.noPageCourante + 1
