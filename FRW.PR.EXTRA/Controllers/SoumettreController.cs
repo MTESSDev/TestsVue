@@ -17,15 +17,21 @@ using System.Threading.Tasks;
 
 namespace FRW.PR.Extra.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class SessionController : ControllerBase
+    public class SoumettreController : ControllerBase
     {
-        [HttpPost("{id}")]
+        /// <summary>
+        /// FRW311 - Gérer la soumission d'un formulaire dynamique
+        /// </summary>
+        /// <param name="typeFormulaire">Type/identifiant de configuration/formulaire</param>
+        /// <returns></returns>
+        [HttpPost("{typeFormulaire}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post(string id)
+        public async Task<IActionResult> Post(string typeFormulaire)
         {
             string jsonDataFromUser;
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
@@ -41,7 +47,8 @@ namespace FRW.PR.Extra.Controllers
 
             if (data is null) { throw new Exception("No data received."); }
 
-            var dynamicForm = GenericModel.ReadYamlCfg(@$"schemas/{id}.ecsform.yml");
+            //TODO: appeler le backend pour obtenir le fichier
+            var dynamicForm = GenericModel.ReadYamlCfg(@$"schemas/{typeFormulaire}.ecsform.yml");
 
             var context = new ValidationContext(data, serviceProvider: null, items: null);
 

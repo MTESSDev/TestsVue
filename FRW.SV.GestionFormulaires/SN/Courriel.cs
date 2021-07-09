@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace FRW.SV.GestionFormulaires.SN
 {
-    public class Courriel
+    /// <summary>
+    /// FRW313 - Préparer la production du PDF associé à un formulaire dynamique
+    /// </summary>
+    public class ModeleVersPdf
     {
         public async Task Envoyer()
         {

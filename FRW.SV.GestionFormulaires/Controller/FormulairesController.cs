@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FRW.SV.GestionFormulaires.SN;
 using System.Threading.Tasks;
+using FRW.SV.GestionFormulaires.SN.ConversionDonnees;
 
 namespace FRW.SV.GestionFormulaires.Controller
 {
@@ -12,12 +13,17 @@ namespace FRW.SV.GestionFormulaires.Controller
         private readonly CreerFormulaireAF _creerFormulaire;
         private readonly MajFormulaireAF _majFormulaire;
         private readonly ObtenirConfiguration _obtenirConfig;
+        private readonly ProduirePdf _produireDonneesPdfAF;
 
-        public FormulairesController(CreerFormulaireAF creer, MajFormulaireAF maj, ObtenirConfiguration obtenirConfiguration)
+        public FormulairesController(CreerFormulaireAF creer, 
+                                     MajFormulaireAF maj, 
+                                     ObtenirConfiguration obtenirConfiguration,
+                                     ProduirePdf produireDonneesPdfAF)
         {
             _creerFormulaire = creer;
             _majFormulaire = maj;
             _obtenirConfig = obtenirConfiguration;
+            _produireDonneesPdfAF = produireDonneesPdfAF;
         }
 
         [HttpGet]
@@ -47,8 +53,15 @@ namespace FRW.SV.GestionFormulaires.Controller
         {
             //TODO vérifier le cookie pour déterminer si on envoie le courriel
             bool envoyerCourriel = true;
-            var a = await (_majFormulaire.Traitement(noSeqForm, null, envoyerCourriel));
+            var a = await _majFormulaire.Traitement(noSeqForm, null, envoyerCourriel);
             return Ok(a);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ProduireDonneesPDF(string noSeqForm)
+        {
+            _produireDonneesPdfAF.Convertir();
+            return Ok();
         }
 
     }

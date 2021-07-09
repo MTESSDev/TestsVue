@@ -11,7 +11,7 @@ namespace FRW.SV.GestionFormulaires.SN
     public class MajFormulaireAF
     {
         private readonly DalFormulaires _dal;
-        private readonly Courriel _courriel;
+        private readonly ModeleVersPdf _courriel;
 
         //DalFormulaires dans startup
         public MajFormulaireAF(DalFormulaires dalFormulaires)
