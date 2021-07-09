@@ -1,9 +1,6 @@
 ﻿using ECS.TR.Contrats;
 using Microsoft.AspNetCore.Mvc;
-using SV.GestionFormulaires.SN;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using FRW.SV.GestionFormulaires.SN;
 using System.Threading.Tasks;
 
 namespace FRW.SV.GestionFormulaires.Controller
@@ -16,10 +13,11 @@ namespace FRW.SV.GestionFormulaires.Controller
         private readonly MajFormulaireAF _majFormulaire;
         private readonly ObtenirConfiguration _obtenirConfig;
 
-        public FormulairesController(CreerFormulaireAF creer, MajFormulaireAF maj)
+        public FormulairesController(CreerFormulaireAF creer, MajFormulaireAF maj, ObtenirConfiguration obtenirConfiguration)
         {
             _creerFormulaire = creer;
             _majFormulaire = maj;
+            _obtenirConfig = obtenirConfiguration;
         }
 
         [HttpGet]

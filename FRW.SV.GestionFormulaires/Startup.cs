@@ -1,4 +1,6 @@
 ﻿using System.Configuration;
+using System.Threading.Tasks;
+using FRW.SV.GestionFormulaires.SN;
 //using CAC.AccesDonnees.Dapper;
 //using CAC.AccesProfil.Client;
 //using ECS.AF.Session;
@@ -19,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SV.GestionFormulaires.DAL;
 
 namespace FRW.SV.GestionFormulaires
 {
@@ -39,6 +42,10 @@ namespace FRW.SV.GestionFormulaires
 
             services.AddHttpContextAccessor();
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
+            services.AddScoped<ObtenirConfiguration>();
+            services.AddScoped<DalFormulaires>();
+            services.AddScoped<CreerFormulaireAF>();
+            services.AddScoped<MajFormulaireAF>();
             //services.AddScoped<ICodeNT, CodeNTAccesseur>();
             //services.AddScoped<IDALGeneriqueCAC, DalECS1>();
             //services.AddProfil(Configuration);
@@ -95,10 +102,10 @@ namespace FRW.SV.GestionFormulaires
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "ECS.SV.Session",
+                    Title = "FRW.SV.GestionFormulaires",
                     Version = "v1",
-                    Description = "Service web pour la gestion de la session d'un utilisateur Espace client.",
-                    Contact = new OpenApiContact() { Name = "Équipe STN" }
+                    Description = "Service web pour la gestion des formulaires.",
+                    Contact = new OpenApiContact() { Name = "Équipe DTN" }
                 });
             });
         }
@@ -124,6 +131,7 @@ namespace FRW.SV.GestionFormulaires
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ECS.SV.Session");
+                c.RoutePrefix = string.Empty; // Set Swagger UI at apps root
             });
 
             app.UseCors("AllowCors");
@@ -132,6 +140,11 @@ namespace FRW.SV.GestionFormulaires
             {
                 endpoints.MapControllers();
             });
+
+            /*app.Run(context => {
+                context.Response.Redirect("swagger/");
+                return Task.CompletedTask;
+            });*/
         }
     }
 }
