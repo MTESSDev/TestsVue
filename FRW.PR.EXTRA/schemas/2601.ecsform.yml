@@ -577,6 +577,7 @@ form:
                   options: yesno
                 - name: DetailsHabiteConjoint
                   type: dynamic
+                  tag: div
                   v-if: val('HabiteConjoint') === 'true'
                   components:
                   - name: DateHabiteConjoint
