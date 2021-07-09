@@ -710,7 +710,7 @@ form:
                 #Ajouter une infobulle ici
                   type: radio
                   label: 
-                    fr: Vous considérez-vous comme un membre d'une monorité visible ?
+                    fr: Vous considérez-vous comme un membre d'une minorité visible ?
                   help: 
                     fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
                   options: yesno
