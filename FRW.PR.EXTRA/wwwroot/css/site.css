@@ -649,8 +649,14 @@ nav.etapes-form .groupe {
     justify-content: space-between;
 }
 
+
 nav.etapes-form .groupe.active {
     background-color: var(--couleur-bleu-pale);
+}
+
+nav.etapes-form .groupe > .icone {
+    display: flex;
+    align-items: center;
 }
 
 nav.etapes-form ul > li > ul > li, nav.etapes-form ul > li.sans-regroupement {
@@ -1225,7 +1231,8 @@ form .input-validation-error, form .input-validation-error + .note-editor {
 /*====================================================================================================*/
 /*  -900- Spécifique au 3003
 /*====================================================================================================*/
-.groupe.icone.user:before {
+
+.groupe > .icone.user:before {
     content: "";
     width: 20px;
     height: 20px;
