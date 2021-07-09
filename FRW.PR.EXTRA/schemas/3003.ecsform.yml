@@ -618,21 +618,6 @@ form:
             fr: Situation actuelle
           id: SituationActuelle
           components:
-            - name: EnEmploi
-              type: radio
-              label: 
-                fr: Êtes-vous en emploi?
-              options: yesno
-            - name: PrecisionStatutEmploi
-              v-if: val('prefixId$EnEmploi') === 'true'
-              type: checkbox
-              label:
-                fr: Précisez le type d'emploi
-              options: 
-                TempsPlein: Temps plein
-                TempsPartiel: Temps partiel
-                SurAppel: Sur appel
-                TravailleurAutonome: Travailleur autonome
             - name: AideGouvRecue
               type: radio
               label: 
@@ -669,7 +654,18 @@ form:
               type: radio
               label: 
                 fr: Êtes-vous chef de famille monoparentale ?
+              options: yesno            
+            - name: PermisConduire
+              type: radio
+              label: 
+                fr: Possédez-vous un permis de conduire ?
               options: yesno
+            - name: ClassePermisConduire
+              type: text
+              outerClasses: md
+              label: 
+                fr: Précisez la/les classe(s)
+              v-if: val('prefixId$PermisConduire') === 'true'  
             - name: QuestionsStatistiques
               type: dynamic
               tag: p
@@ -725,17 +721,17 @@ form:
                   label: 
                     fr: Vous considérez-vous comme un membre d'une minorité visible ?
                   help: 
-                    fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
+                    fr: Un membre d’une minorité visible est une personne, autre qu’un Autochtone, facilement reconnaissable par sa différence ethnique ou la couleur de sa peau.
                   options: yesno
         # Section 5 - Statut d'étudiant
         - section: 
-            fr: Statut d'étudiant
+            fr: Études en cours
           id: EtudesEnCours
           components:
             - name: etudes
               type: radio
               label: 
-                fr: Êtes-vous aux études?
+                fr: Êtes-vous aux études présentement?
               options: yesno
             - type: dynamic
               v-if: val('prefixId$etudes') === 'true'
@@ -744,7 +740,7 @@ form:
                 - name: PrecisionStatutEtudes
                   type: radio
                   label:
-                    fr: Précisez votre statut d'étudiant
+                    fr: Donnez des précisions
                   options: 
                     TempsPlein: Temps plein
                     TempsPartiel: Temps partiel
@@ -755,7 +751,7 @@ form:
                 - name: NiveauEtudes
                   type: select
                   label: 
-                    fr: Indiquez l'ordre d'enseignement
+                    fr: Indiquez l'ordre d'enseignement et le domaine d'études
                   options: 
                     SecondaireGeneral: Secondaire général
                     SecondairePro: Secondaire professionnel
@@ -851,8 +847,7 @@ form:
                     SecondaireFormProf: Secondaire (Formation professionnelle)
                     SecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
                     Collegial: Collégial (Formation générale ou technique)
-                    Universitaire: Universitaire
-      
+                    Universitaire: Universitaire      
                 - name: Primaire        
                   type: group
                   v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Primaire')
@@ -1073,17 +1068,6 @@ form:
               v-if: val('prefixId$EstMembreOrdreProfessionnel') === 'true'                            
               label:
                 fr: Précisez l'ordre professionnel
-            - name: PermisConduire
-              type: radio
-              label: 
-                fr: Possédez-vous un permis de conduire ?
-              options: yesno
-            - name: ClassePermisConduire
-              type: text
-              outerClasses: md
-              label: 
-                fr: Précisez la/les classe(s)
-              v-if: val('prefixId$PermisConduire') === 'true'
 #              type: checkbox
 #              label: 
 #                fr: Précisez la/les classe(s)
@@ -1107,7 +1091,22 @@ form:
         - section:
             fr: Emplois
           id: emplois
-          components:
+          components:            
+            - name: EnEmploi
+              type: radio
+              label: 
+                fr: Êtes-vous en emploi?
+              options: yesno
+            - name: PrecisionStatutEmploi
+              v-if: val('prefixId$EnEmploi') === 'true'
+              type: checkbox
+              label:
+                fr: Précisez le type d'emploi
+              options: 
+                TempsPlein: Temps plein
+                TempsPartiel: Temps partiel
+                SurAppel: Sur appel
+                TravailleurAutonome: Travailleur autonome
             - name: Travaille
               type: radio
               label: 
@@ -1121,9 +1120,9 @@ form:
             - name: Emplois
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixId$Travaille') === 'true'          
+              v-if: val('prefixId$Travaille') === 'true' || val('prefixId$EnEmploi') === 'true'         
               label:
-                fr: Inscrivez les renseignements relatifs à vos deux dernières expériences de travail en commençant par la plus récente
+                fr: Inscrivez les renseignements relatifs à vos 2 derniers emplois en commençant par votre emploi actuel ou le plus récent.
                 en: Jobs
               instanceLabel:
                 fr: Emploi
