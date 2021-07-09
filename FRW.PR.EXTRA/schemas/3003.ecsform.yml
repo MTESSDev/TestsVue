@@ -2398,7 +2398,7 @@ form:
     # Groupe Enfants à charge
     - sectionGroup: 
         fr: Enfants à charge
-      v-if: val('Conjoint') === 'false' && val('TypeDemande').includes('Afdr') && (val('adulte1EnfantsACharge') === 'true' || val('adulte2EnfantsACharge') === 'true')
+      v-if: val('TypeDemande').includes('Afdr') && (val('adulte1EnfantsACharge') === 'true' || val('adulte2EnfantsACharge') === 'true')
       sections: 
         # Section - Enfants à charge
         - section:
@@ -2545,63 +2545,64 @@ form:
                   type: radio
                   label:
                     fr: Partagez-vous la garde de cet enfant?
-                  options: yesno            
-                - type: bandeau
+                  options: yesno    
+                - name: DetailsGardePartagee
                   v-if: val(`${name}.prefixId$PartageLaGarde`, index) === 'true'
+                  type: dynamic
+                  tag: div
                   components:
-                    - type: dynamic
-                      tag: h3
-                      text:
-                        fr: Garde partagée
-                    - type: dynamic
-                      tag: p
-                      text:
-                        fr: <i>L’enfant dont la garde est partagée en vertu d’un jugement ou d’une entente est à la charge de la personne adulte, si le temps de garde est d’au moins 40 %.</i>
-                - name: NombreJours
-                  v-if: val(`${name}.prefixId$PartageLaGarde`, index) === 'true'
-                  type: number
-                  outerClasses: sm
-                  label:
-                    fr: Indiquez le nombre de jours où vous avez la garde
-                - name: Frequence
-                  v-if: val(`${name}.prefixId$PartageLaGarde`, index) === 'true'
-                  type: radio
-                  label: 
-                    fr: Fréquence
-                  options:
-                    hebdo: Par semaine
-                    mensuel: Par mois
-                    annuel: Par année
-                - name: DocumentGarde
-                  v-if: val(`${name}.prefixId$PartageLaGarde`, index) === 'true'
-                  type: radio
-                  label:
-                    fr: Par quel document la garde vous est-elle confiée?
-                  options:
-                    Jugement: Jugement
-                    Amiable: Entente à l'amiable
-                    Mediation: Médiation
-                    Autre: Autre
-                - name: PrecisionDocumentGarde
-                  type: text
-                  v-if: val(`${name}.prefixId$DocumentGarde`, index) === 'Autre'
-                  label:
-                    fr: Précisez
-                - name: EnfantHabiteMemeAdresse
-                  type: radio
-                  label:
-                    fr: Cet enfant habite-t-il avec vous?
-                  options: yesno
-                - name: PrecisionAdresse
-                  type: text
-                  v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
-                  label:
-                    fr: Adresse de l'enfant à charge
-                - name: PrecisionRaison
-                  type: text
-                  v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
-                  label:
-                    fr: Raison de la non-cohabitation
+                  - type: bandeau
+                    components:
+                      - type: dynamic
+                        tag: h3
+                        text:
+                          fr: Garde partagée
+                      - type: dynamic
+                        tag: p
+                        text:
+                          fr: <i>L’enfant dont la garde est partagée en vertu d’un jugement ou d’une entente est à la charge de la personne adulte, si le temps de garde est d’au moins 40 %.</i>
+                  - name: NombreJours
+                    type: number
+                    outerClasses: sm
+                    label:
+                      fr: Indiquez le nombre de jours où vous avez la garde
+                  - name: Frequence
+                    type: radio
+                    label: 
+                      fr: Fréquence
+                    options:
+                      hebdo: Par semaine
+                      mensuel: Par mois
+                      annuel: Par année
+                  - name: DocumentGarde
+                    type: radio
+                    label:
+                      fr: Par quel document la garde vous est-elle confiée?
+                    options:
+                      Jugement: Jugement
+                      Amiable: Entente à l'amiable
+                      Mediation: Médiation
+                      Autre: Autre
+                  - name: PrecisionDocumentGarde
+                    type: text
+                    v-if: val(`${name}.prefixId$DocumentGarde`, index) === 'Autre'
+                    label:
+                      fr: Précisez
+                  - name: EnfantHabiteMemeAdresse
+                    type: radio
+                    label:
+                      fr: Cet enfant habite-t-il avec vous?
+                    options: yesno
+                  - name: PrecisionAdresse
+                    type: text
+                    v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
+                    label:
+                      fr: Adresse de l'enfant à charge
+                  - name: PrecisionRaison
+                    type: text
+                    v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
+                    label:
+                      fr: Raison de la non-cohabitation
         # Section - Revenus et biens des enfants
         - section:
             fr: Revenus et biens des enfants
