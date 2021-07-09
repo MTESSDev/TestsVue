@@ -14,26 +14,36 @@ form:
             en: Information on the application
           id: infos
           components:
-            - name: TypeDemande
-              type: checkbox
-              label: 
-                fr: Quel type de demande voulez-vous effectuer?
-              tooltip:
-                title:
-                  fr: Type de demande
-                text: 
-                  fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra. Vivamus arcu nibh, venenatis vel venenatis a, sagittis eget est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nisi magna, porttitor vel augue id, porttitor fringilla sapien. Maecenas sollicitudin, massa facilisis finibus tempor, nibh nunc pharetra ante, in elementum nibh purus a arcu. Nam massa tellus, vehicula nec ante in, tempus ornare urna. Sed eget commodo libero. Nulla tincidunt justo erat, ac volutpat eros maximus in. Nam at malesuada magna. Aenean in magna non lectus viverra consectetur. In porttitor, dolor ac varius lacinia, lacus mauris laoreet neque, vitae.
-                  en:       
-              options: 
-                Afdr: Demande d'aide financière de dernier recours
-                AideEmploi: Demande de service d'aide à l'emploi
+            - name: DemandeAE
+              type: radio
+              label:
+                fr: Demandez-vous des services d’aide à l’emploi ? 
+              options: yesno
+            - name: DemandeAfdr
+              type: radio
+              label:
+                fr: Demandez-vous une aide financière de dernier recours ?
+              options: yesno
+            # - name: TypeDemande
+            #   type: checkbox
+            #   label: 
+            #     fr: Quel type de demande voulez-vous effectuer?
+            #   tooltip:
+            #     title:
+            #       fr: Type de demande
+            #     text: 
+            #       fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra. Vivamus arcu nibh, venenatis vel venenatis a, sagittis eget est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nisi magna, porttitor vel augue id, porttitor fringilla sapien. Maecenas sollicitudin, massa facilisis finibus tempor, nibh nunc pharetra ante, in elementum nibh purus a arcu. Nam massa tellus, vehicula nec ante in, tempus ornare urna. Sed eget commodo libero. Nulla tincidunt justo erat, ac volutpat eros maximus in. Nam at malesuada magna. Aenean in magna non lectus viverra consectetur. In porttitor, dolor ac varius lacinia, lacus mauris laoreet neque, vitae.
+            #       en:       
+            #   options: 
+            #     Afdr: Demande d'aide financière de dernier recours
+            #     AideEmploi: Demande de service d'aide à l'emploi
             - type: bandeau
-              v-if: val('TypeDemande').includes('Afdr')
+              v-if: val('DemandeAfdr') === 'true'
               text: 
                 fr: L’aide financière qui peut être accordée tient compte de votre situation familiale.             
             - name: HabiteAvecAutreAdulte
               type: radio
-              v-if: val('TypeDemande').includes('Afdr')
+              v-if: val('DemandeAfdr') === 'true'
               label: 
                 fr: Habitez-vous avec un autre adulte?
               options: yesno
@@ -93,7 +103,7 @@ form:
                 fr: Vous répondez à notre définition de conjoint. Votre conjoint doit fournir les renseignements le concernant sous « Adulte 2 » dans le présent formulaire.
             - type: dynamic
               tag: div
-              v-if: val('TypeDemande').includes('Afdr')       
+              v-if: val('DemandeAfdr') === 'true'       
               components:                    
               - name: ConjointMemeAdresse
                 type: radio
@@ -118,7 +128,7 @@ form:
         - section:
             fr: Informations sur le domicile
           id: domicile
-          v-if: val('TypeDemande').includes('Afdr')
+          v-if: val('DemandeAfdr') === 'true'
           components:
             - name: TypeDomicile
               type: select
@@ -208,11 +218,12 @@ form:
             fr: Raison de la demande
             en: (EN)Raison de la demande
           id: raisonDemande
-          v-if: val('TypeDemande').length > 0
           components:
-            - type: dynamic
-              v-if: val('TypeDemande').includes('Afdr')
-              tag: div        
+            - name: RaisonAfdr
+              type: group
+              v-if: val('DemandeAfdr') === 'true'  
+              label:
+                fr: Demande d'aide financière de dernier recours
               components:
                 - name: EvenementsDerniereAnnee
                   type: checkbox
@@ -224,7 +235,7 @@ form:
                   validations: 
                     optional: null
                 - name: FinDiminutionRevenusType
-                  v-if: val('prefixId$EvenementsDerniereAnnee').includes('FinDiminutionRevenus')
+                  v-if: val(`${name}.prefixId$EvenementsDerniereAnnee`).includes('FinDiminutionRevenus')
                   type: checkbox
                   label: 
                     fr: Type de revenu
@@ -234,22 +245,22 @@ form:
                     FinRevenusPrestations: de prestations gouvernementales (Assurance-emploi, RQAP, SAAQ, CNESST, etc.)
                     FinRevenusAutres: autre
                 - name: FinRevenusPrestationsPrecision
-                  v-if: val('prefixId$FinDiminutionRevenusType').includes('FinRevenusPrestations')
+                  v-if: val(`${name}.prefixId$FinDiminutionRevenusType`).includes('FinRevenusPrestations')
                   type: text
                   label: 
                     fr: Précisez le type de prestations gouvernementales
                 - name: FinRevenusAutresPrecision
-                  v-if: val('prefixId$FinDiminutionRevenusType').includes('FinRevenusAutres')
+                  v-if: val(`${name}.prefixId$FinDiminutionRevenusType`).includes('FinRevenusAutres')
                   type: text
                   label: 
                     fr: Précisez le type de revenu
                 - name: DateEvenementFinDiminutionRevenus
-                  v-if: val('prefixId$EvenementsDerniereAnnee').includes('FinDiminutionRevenus')
+                  v-if: val(`${name}.prefixId$EvenementsDerniereAnnee`).includes('FinDiminutionRevenus')
                   type: date
                   label: 
                     fr: Date de la fin ou diminution de revenus
                 - name: DateEvenementFinEtudesTempsPlein
-                  v-if: val('prefixId$EvenementsDerniereAnnee').includes('FinEtudesTempsPlein')
+                  v-if: val(`${name}.prefixId$EvenementsDerniereAnnee`).includes('FinEtudesTempsPlein')
                   type: date
                   label: 
                     fr: Date de la fin d'études à temps plein
@@ -269,12 +280,12 @@ form:
                     RemboursementFraisFuneraires: Vous demandez le remboursement de frais funéraires
                     PrecisionRaisonDemandeAfdrAutreRaison: Autre raison
                 - name: PrecisionRaisonDemandeAfdrAttenteDecision
-                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('AttenteDecision')
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeAfdr`).includes('AttenteDecision')
                   type: text
                   label: 
                     fr: Précisez la raison de votre demande d'aide financière de dernier recours
                 - name: PrecisionRaisonDemandeAfdrRevenuInsuffisant
-                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('RevenuInsuffisant')
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeAfdr`).includes('RevenuInsuffisant')
                   type: radio
                   label: 
                     fr: Type de revenu insuffisant
@@ -284,17 +295,17 @@ form:
                     RevenuInsuffisantPrestations: Prestations gouvernementales (prestations d'assurance-emploi ou d'assurance parentale[RQAP], jugement, SAAQ, CNESST, etc.)
                     RevenuInsuffisantAutres: autre
                 - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantPrestation
-                  v-if: val('prefixId$PrecisionRaisonDemandeAfdrRevenuInsuffisant') === 'RevenuInsuffisantPrestations'
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeAfdrRevenuInsuffisant`) === 'RevenuInsuffisantPrestations'
                   type: text
                   label: 
                     fr: Précisez le type de prestation insuffisante
                 - name: PrecisionRaisonDemandeAfdrRevenuInsuffisantAutre
-                  v-if: val('prefixId$PrecisionRaisonDemandeAfdrRevenuInsuffisant') === 'RevenuInsuffisantAutres'
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeAfdrRevenuInsuffisant`) === 'RevenuInsuffisantAutres'
                   type: text
                   label: 
                     fr: Précisez le type de revenu autre
                 - name: PrecisionRaisonDemandeAfdrSortieEtablissement
-                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('SortieEtablissement')
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeAfdr`).includes('SortieEtablissement')
                   type: radio
                   label: 
                     fr: Précisez le type d'établissement
@@ -302,7 +313,7 @@ form:
                     SortieEtablissementSante: de santé
                     SortieEtablissementDetention: de détention
                 - name: PrecisionRaisonDemandeAfdrPerteConjoint
-                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('PerteConjoint')
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeAfdr`).includes('PerteConjoint')
                   type: radio
                   label: 
                     fr: Précisez la raison de perte du conjoint
@@ -311,13 +322,15 @@ form:
                     PerteConjointSeparation: separation
                     PerteConjointDivorce: divorce
                 - name: PrecisionRaisonDemandeAfdrAutre
-                  v-if: val('prefixId$PrecisionRaisonDemandeAfdr').includes('PrecisionRaisonDemandeAfdrAutreRaison')
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeAfdr`).includes('PrecisionRaisonDemandeAfdrAutreRaison')
                   type: text
                   label: 
                     fr: Précisez la raison autre
-            - type: dynamic
-              v-if: val('TypeDemande').includes('AideEmploi')
-              tag: div        
+            - name: RaisonAE
+              type: group
+              v-if: val('DemandeAE') === 'true'
+              label: 
+                fr: Demande de services d'aide à l'emploi      
               components:      
                 - name: PrecisionRaisonDemandeEmploi
                   type: checkbox
@@ -329,12 +342,12 @@ form:
                     DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
                     PrecisionRaisonDemandeEmploiAutreRaison: Autre
                 - name: PrecisionRaisonDemandeEmploiAutre
-                  v-if: val('prefixId$PrecisionRaisonDemandeEmploi').includes('DirigeEmployeurOrganisme')
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('DirigeEmployeurOrganisme')
                   type: text
                   label: 
                     fr: Précisez l'employeur ou l'organisme
                 - name: PrecisionRaisonDemandeEmploiAutre
-                  v-if: val('prefixId$PrecisionRaisonDemandeEmploi').includes('PrecisionRaisonDemandeEmploiAutreRaison')
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('PrecisionRaisonDemandeEmploiAutreRaison')
                   type: text
                   label: 
                     fr: Précisez la raison de votre demande d'aide à l'emploi
@@ -345,7 +358,7 @@ form:
           components:
             - name: Cp12
               type: text
-              v-if: val('TypeDemande').includes('Afdr')
+              v-if: val('DemandeAfdr') === 'true'
               label:
                 fr: Numéro de dossier (CP-12)
               validations:
@@ -393,7 +406,7 @@ form:
                 Feminin: Féminin 
                 Masculin: Masculin
             - name: EtatMatrimonial
-              v-if: val('TypeDemande').includes('Afdr')
+              v-if: val('DemandeAfdr') === 'true'
               type: select
               label:
                 fr: État matrimonial
@@ -421,13 +434,13 @@ form:
                 Anglais: Anglais 
             - name: Curateur
               type: radio
-              v-if: val('TypeDemande').includes('Afdr')
+              v-if: val('DemandeAfdr') === 'true'
               label:
                 fr: Êtes-vous représenté par le Curateur public du Québec?
               options: yesno
             - name: DosCurateur
               type: text
-              v-if: val('TypeDemande').includes('Afdr') && val('prefixId$Curateur') === 'true'
+              v-if: val('DemandeAfdr') === 'true' && val('prefixId$Curateur') === 'true'
               label:
                 fr: Numéro de dossier
             - name: NeQC
@@ -509,14 +522,14 @@ form:
                 AmerindienHorsReserve: Membre d'une Première Nation vivant à l'extérieur d'une collectivité
                 Inuit: Inuit
             - type: bandeau
-              v-if: val('TypeDemande').includes('Afdr')
+              v-if: val('DemandeAfdr') === 'true'
               text:
                 fr: >
                   <b>Vous pourriez avoir droit à des montants supplémentaires selon votre situation. 
                   Si vous répondez aux questions suivantes, nous pourrons évaluer votre droit à ces montants.</b>
             - name: EstEnceinte
               type: radio
-              v-if: val('TypeDemande').includes('Afdr') && val('prefixId$Sexe') === 'Feminin'
+              v-if: val('DemandeAfdr') === 'true' && val('prefixId$Sexe') === 'Feminin'
               label:
                 fr: Êtes-vous enceinte?
               options: yesno
@@ -529,7 +542,7 @@ form:
                 fr: Date prévue de l'accouchement
             - name: EstValidePourTravailler
               type: radio
-              v-if: val('TypeDemande').includes('Afdr')
+              v-if: val('DemandeAfdr') === 'true'
               label:
                 fr: Est-ce que votre état de santé vous permet de travailler?
               options: yesno
@@ -1252,7 +1265,7 @@ form:
     # Groupe "Ressources" 
     - sectionGroup: 
         fr: Ressources
-      v-if: val('TypeDemande').includes('Afdr')
+      v-if: val('DemandeAfdr') === 'true'
       sections: 
         # Section - Revenus
         - section:
@@ -2398,7 +2411,7 @@ form:
     # Groupe Enfants à charge
     - sectionGroup: 
         fr: Enfants à charge
-      v-if: val('TypeDemande').includes('Afdr') && (val('adulte1EnfantsACharge') === 'true' || val('adulte2EnfantsACharge') === 'true')
+      v-if: val('DemandeAfdr') === 'true' && (val('adulte1EnfantsACharge') === 'true' || val('adulte2EnfantsACharge') === 'true')
       sections: 
         # Section - Enfants à charge
         - section:
@@ -2689,7 +2702,7 @@ form:
         - section:
             fr: Destinataire de la correspondance
           id: destinataire
-          v-if: val('TypeDemande').includes('Afdr')
+          v-if: val('DemandeAfdr') === 'true'
           components: 
             - type: bandeau
               components:
@@ -2776,7 +2789,7 @@ form:
         - section: 
             fr: Affirmation solenelle
           id: affirmationSolennelle
-          v-if: val('TypeDemande').length > 0
+          v-if: val('DemandeAfdr') === 'true' || val ('DemandeAE') === 'true'
           components:
             - type: bandeau
               components:
@@ -2786,7 +2799,7 @@ form:
 #                    fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
                 - type: dynamic
                   tag: p
-                  v-if: val('TypeDemande').includes('Afdr')
+                  v-if: val('DemandeAfdr') === 'true'
                   text:
                     fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
                 - type: dynamic
