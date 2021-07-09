@@ -1,10 +1,10 @@
-﻿using ECS.TR.Contrats;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using FRW.SV.GestionFormulaires.SN;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using FRW.TR.Contrats;
 
 namespace FRW.SV.GestionFormulaires.Controller
 {

@@ -1,5 +1,4 @@
-﻿using ECS.TR.Contrats;
-using FRW.TR.Contrats;
+﻿using FRW.TR.Contrats;
 using System;
 using System.Collections.Generic;
 using System.Linq;

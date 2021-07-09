@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace ECS.TR.Contrats
+namespace FRW.TR.Contrats
 {
     /// <summary>
     /// Classe générique d'appel sortant

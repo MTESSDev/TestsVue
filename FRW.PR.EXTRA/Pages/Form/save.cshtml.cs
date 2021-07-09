@@ -19,10 +19,10 @@ namespace FRW.PR.Extra.Pages
 
         public async Task<IActionResult> OnPost(string id)
         {
-            //HttpContext.Request.Cookies.TryGetValue("ECSForm" + id, out var cookie);
+            //HttpContext.Request.Cookies.TryGetValue("FRW" + id, out var cookie);
             /*if (cookie is null)
             {
-                HttpContext.Response.Cookies.Append("ECSForm" + id, Guid.NewGuid().ToString());
+                HttpContext.Response.Cookies.Append("FRW" + id, Guid.NewGuid().ToString());
             }
             */
             string jsonData;

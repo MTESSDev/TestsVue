@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace ECS.TR.Contrats
+namespace FRW.TR.Contrats
 {
     [DataContract]
     public class Erreur 
