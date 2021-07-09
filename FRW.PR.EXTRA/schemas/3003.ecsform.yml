@@ -379,7 +379,7 @@ form:
                 nas: true
                 optional: null
             - name: DateExpirationNas
-              v-if: val('prefixId$nas').startsWith('9')
+              v-if: val('prefixId$Nas').startsWith('9')
               type: date
               label: 
                 fr: Date d'expiration
