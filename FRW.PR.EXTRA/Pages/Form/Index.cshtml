@@ -640,9 +640,7 @@
                 window.addEventListener("hashchange", function (event) {
                     const noPage = obtenirValeurHash('p')
                     const no = parseInt(noPage) || 0
-                    if (!isNaN(no)) {
-                        formulate.effectuerNavigation(no, null, null, true)
-                    }
+                    formulate.effectuerNavigation(no, null, null, true)
                 })
             }
         },
