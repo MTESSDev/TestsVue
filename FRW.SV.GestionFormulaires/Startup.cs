@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Threading.Tasks;
 using FRW.SV.GestionFormulaires.SN;
+using FRW.SV.GestionFormulaires.SN.ConversionDonnees;
 //using CAC.AccesDonnees.Dapper;
 //using CAC.AccesProfil.Client;
 //using ECS.AF.Session;
@@ -46,6 +47,7 @@ namespace FRW.SV.GestionFormulaires
             services.AddScoped<DalFormulaires>();
             services.AddScoped<CreerFormulaireAF>();
             services.AddScoped<MajFormulaireAF>();
+            services.AddScoped<ProduireDonneesPdfAF>();
             //services.AddScoped<ICodeNT, CodeNTAccesseur>();
             //services.AddScoped<IDALGeneriqueCAC, DalECS1>();
             //services.AddProfil(Configuration);

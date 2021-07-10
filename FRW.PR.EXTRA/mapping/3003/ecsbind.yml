@@ -13,10 +13,10 @@ bind:
   1:
     DM_AFDR_FinEtudes:
       champs:
-      - adulte1EvenementsDerniereAnnee==FinEtudesTempsPlein
+      - adulte1RaisonAfdr.0.adulte1EvenementsDerniereAnnee==FinEtudesTempsPlein
     DM_AFDR_PerteRevenus:
       champs:
-      - adulte1EvenementsDerniereAnnee==FinDiminutionRevenus
+      - adulte1RaisonAfdr.0.adulte1EvenementsDerniereAnnee==FinDiminutionRevenus
     PerteRevenus1:
       champs:
       - FinDiminutionRevenusType==FinRevenusEmploi

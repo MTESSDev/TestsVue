@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FRW.TR.Commun;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
@@ -29,7 +30,7 @@ namespace FRW.PR.Extra.Pages
                 return NotFound();
             }
 
-            var bind = BindingIndexModel.ReadYamlCfg(@$"mapping/{cleanId}/ecsbind.yml");
+            var bind = OutilsYaml.ReadYamlCfg<Binder>(@$"mapping/{cleanId}/ecsbind.yml");
 
             if (bind.Bind.ContainsKey(gabarit))
             {
@@ -40,7 +41,7 @@ namespace FRW.PR.Extra.Pages
                 bind.Bind.Add(gabarit, data);
             }
 
-            BindingIndexModel.SaveYamlCfg(bind, @$"mapping/{cleanId}/ecsbind.yml");
+            OutilsYaml.SaveYamlCfg(bind, @$"mapping/{cleanId}/ecsbind.yml");
         
             return Page();
         }

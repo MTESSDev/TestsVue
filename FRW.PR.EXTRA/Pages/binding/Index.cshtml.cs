@@ -1,5 +1,7 @@
-﻿using FRW.PR.Extra.Utils;
+﻿using FRW.PR.Extra.Model;
+using FRW.PR.Extra.Utils;
 using FRW.PR.Model.Components;
+using FRW.TR.Commun;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -45,7 +47,7 @@ namespace FRW.PR.Extra.Pages
         public IActionResult OnGet(string id, string? gabarit = "1")
         {
             GabaritEnCours = gabarit;
-            var mappgingObj = ReadYamlCfg(@"mapping/3003/ecsbind.yml");
+            var mappgingObj = OutilsYaml.ReadYamlCfg<Binder>(@"mapping/3003/ecsbind.yml");
 
             Templates = mappgingObj.Templates;
             Bind = mappgingObj.Bind;
@@ -55,7 +57,7 @@ namespace FRW.PR.Extra.Pages
                 Bind = new Dictionary<string,Dictionary<string, BindElement>>();
             }
 
-            var form = GenericModel.ReadYamlCfg(@"schemas/3003.ecsform.yml");
+            var form = OutilsYaml.ReadYamlCfg<DynamicForm>(@"schemas/3003.ecsform.yml");
 
             var formData = new List<ComponentBinding>();
 
@@ -205,33 +207,7 @@ namespace FRW.PR.Extra.Pages
             }
         }
 
-        public static IDeserializer deserializer = new DeserializerBuilder()
-                     .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                     .IgnoreUnmatchedProperties()
-                     .Build();
 
-        public static ISerializer serializer = new SerializerBuilder()
-                     .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                     .ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull)
-                     .Build();
-
-        public static Binder ReadYamlCfg(string filename)
-        {
-            dynamic cfg;
-            using (var configFile = new StreamReader(filename))
-            {
-                cfg = deserializer.Deserialize<Binder>(configFile);
-            }
-            return cfg;
-        }
-
-        public static void SaveYamlCfg(Binder value, string filename)
-        {
-            using (var configFile = new StreamWriter(filename))
-            {
-                serializer.Serialize(configFile, graph: value);
-            }
-        }
 
     }
 

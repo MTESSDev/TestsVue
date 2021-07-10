@@ -1,6 +1,8 @@
-﻿using FRW.PR.Extra.Pages;
+﻿using FRW.PR.Extra.Model;
+using FRW.PR.Extra.Pages;
 using FRW.PR.Extra.Utils;
 using FRW.PR.Model.Components;
+using FRW.TR.Commun;
 using Jint;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +50,7 @@ namespace FRW.PR.Extra.Controllers
             if (data is null) { throw new Exception("No data received."); }
 
             //TODO: appeler le backend pour obtenir le fichier
-            var dynamicForm = GenericModel.ReadYamlCfg(@$"schemas/{typeFormulaire}.ecsform.yml");
+            var dynamicForm = OutilsYaml.ReadYamlCfg<DynamicForm>(@$"schemas/{typeFormulaire}.ecsform.yml");
 
             var context = new ValidationContext(data, serviceProvider: null, items: null);
 

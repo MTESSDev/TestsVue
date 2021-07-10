@@ -13,12 +13,12 @@ namespace FRW.SV.GestionFormulaires.Controller
         private readonly CreerFormulaireAF _creerFormulaire;
         private readonly MajFormulaireAF _majFormulaire;
         private readonly ObtenirConfiguration _obtenirConfig;
-        private readonly Pdf _produireDonneesPdfAF;
+        private readonly ProduireDonneesPdfAF _produireDonneesPdfAF;
 
         public FormulairesController(CreerFormulaireAF creer, 
                                      MajFormulaireAF maj, 
                                      ObtenirConfiguration obtenirConfiguration,
-                                     Pdf produireDonneesPdfAF)
+                                     ProduireDonneesPdfAF produireDonneesPdfAF)
         {
             _creerFormulaire = creer;
             _majFormulaire = maj;
@@ -58,9 +58,9 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult> ProduireDonneesPDF(string noSeqForm)
+        public async Task<ActionResult> ProduireDonneesPDF(string typeFormulaire)
         {
-            _produireDonneesPdfAF.Production();
+            _produireDonneesPdfAF.Convertir(typeFormulaire);
             return Ok();
         }
 
