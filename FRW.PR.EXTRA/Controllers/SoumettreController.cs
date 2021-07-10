@@ -50,7 +50,7 @@ namespace FRW.PR.Extra.Controllers
             if (data is null) { throw new Exception("No data received."); }
 
             //TODO: appeler le backend pour obtenir le fichier
-            var dynamicForm = OutilsYaml.ReadYamlCfg<DynamicForm>(@$"schemas/{typeFormulaire}.ecsform.yml");
+            var dynamicForm = OutilsYaml.LireFicher<DynamicForm>(@$"schemas/{typeFormulaire}.ecsform.yml");
 
             var context = new ValidationContext(data, serviceProvider: null, items: null);
 

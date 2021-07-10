@@ -20,7 +20,7 @@ namespace FRW.TR.Commun
                      .ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull)
                      .Build();
 
-        public static T ReadYamlCfg<T>(string filename)
+        public static T LireFicher<T>(string filename)
         {
             T cfg;
             using (var configFile = new StreamReader(filename))
@@ -30,7 +30,12 @@ namespace FRW.TR.Commun
             return cfg;
         }
 
-        public static void SaveYamlCfg<T>(T value, string filename)
+        public static T DeserializerString<T>(string configFile)
+        {
+            return deserializer.Deserialize<T>(configFile);
+        }
+
+        public static void EcrireFichier<T>(T value, string filename)
         {
             using (var configFile = new StreamWriter(filename))
             {

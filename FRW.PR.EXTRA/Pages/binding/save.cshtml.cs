@@ -30,7 +30,7 @@ namespace FRW.PR.Extra.Pages
                 return NotFound();
             }
 
-            var bind = OutilsYaml.ReadYamlCfg<Binder>(@$"mapping/{cleanId}/ecsbind.yml");
+            var bind = OutilsYaml.LireFicher<Binder>(@$"mapping/{cleanId}/ecsbind.yml");
 
             if (bind.Bind.ContainsKey(gabarit))
             {
@@ -41,7 +41,7 @@ namespace FRW.PR.Extra.Pages
                 bind.Bind.Add(gabarit, data);
             }
 
-            OutilsYaml.SaveYamlCfg(bind, @$"mapping/{cleanId}/ecsbind.yml");
+            OutilsYaml.EcrireFichier(bind, @$"mapping/{cleanId}/ecsbind.yml");
         
             return Page();
         }

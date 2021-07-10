@@ -222,7 +222,7 @@ namespace FRW.PR.Extra.Pages
 
             if (System.IO.File.Exists(@$"schemas/default.ecsform.yml"))
             {
-                defaultCfg = OutilsYaml.ReadYamlCfg<DynamicForm>(@$"schemas/default.ecsform.yml");
+                defaultCfg = OutilsYaml.LireFicher<DynamicForm>(@$"schemas/default.ecsform.yml");
             }
 
             if (id == "render" && render != null)
@@ -236,7 +236,7 @@ namespace FRW.PR.Extra.Pages
                     return NotFound();
                 }
 
-                dynamicForm = OutilsYaml.ReadYamlCfg<DynamicForm>(@$"schemas/{configName}.ecsform.yml");
+                dynamicForm = OutilsYaml.LireFicher<DynamicForm>(@$"schemas/{configName}.ecsform.yml");
             }
 
             if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?["sectionsGroup"] is null) { return NotFound(); }

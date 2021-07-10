@@ -47,7 +47,7 @@ namespace FRW.PR.Extra.Pages
         public IActionResult OnGet(string id, string? gabarit = "1")
         {
             GabaritEnCours = gabarit;
-            var mappgingObj = OutilsYaml.ReadYamlCfg<Binder>(@"mapping/3003/ecsbind.yml");
+            var mappgingObj = OutilsYaml.LireFicher<Binder>(@"mapping/3003/ecsbind.yml");
 
             Templates = mappgingObj.Templates;
             Bind = mappgingObj.Bind;
@@ -57,7 +57,7 @@ namespace FRW.PR.Extra.Pages
                 Bind = new Dictionary<string,Dictionary<string, BindElement>>();
             }
 
-            var form = OutilsYaml.ReadYamlCfg<DynamicForm>(@"schemas/3003.ecsform.yml");
+            var form = OutilsYaml.LireFicher<DynamicForm>(@"schemas/3003.ecsform.yml");
 
             var formData = new List<ComponentBinding>();
 
