@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Services", "2-Services", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9-Communs", "9-Communs", "{E494A9CC-EFD1-44CE-8584-4E6AA7CC6F68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRW.SV.GestionFormulaires.Tests", "FRW.SV.GestionFormulaires.Tests\FRW.SV.GestionFormulaires.Tests.csproj", "{C33E57DC-D666-41B9-9045-4B22662A464F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{916FBD4A-948D-44FB-9945-CFF5C5049978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{916FBD4A-948D-44FB-9945-CFF5C5049978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{916FBD4A-948D-44FB-9945-CFF5C5049978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C33E57DC-D666-41B9-9045-4B22662A464F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C33E57DC-D666-41B9-9045-4B22662A464F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C33E57DC-D666-41B9-9045-4B22662A464F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C33E57DC-D666-41B9-9045-4B22662A464F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
