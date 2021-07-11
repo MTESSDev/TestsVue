@@ -13,6 +13,8 @@ using YamlDotNet.Serialization.NamingConventions;
 using System.Globalization;
 using FRW.PR.Extra.Utils;
 using FRW.PR.Extra.Model;
+using FRW.TR.Commun;
+using FRW.TR.Commun.Utils;
 
 namespace FRW.PR.Extra.Pages
 {
@@ -221,7 +223,7 @@ namespace FRW.PR.Extra.Pages
 
             if (System.IO.File.Exists(@$"schemas/default.ecsform.yml"))
             {
-                defaultCfg = ReadYamlCfg(@$"schemas/default.ecsform.yml");
+                defaultCfg = OutilsYaml.LireFicher<DynamicForm>(@$"schemas/default.ecsform.yml");
             }
 
             if (id == "render" && render != null)
@@ -235,7 +237,7 @@ namespace FRW.PR.Extra.Pages
                     return NotFound();
                 }
 
-                dynamicForm = ReadYamlCfg(@$"schemas/{configName}.ecsform.yml");
+                dynamicForm = OutilsYaml.LireFicher<DynamicForm>(@$"schemas/{configName}.ecsform.yml");
             }
 
             if (dynamicForm is null || dynamicForm.Form is null || dynamicForm?.Form?["sectionsGroup"] is null) { return NotFound(); }
@@ -333,16 +335,6 @@ namespace FRW.PR.Extra.Pages
             VueData = _vueParser.ParseData(this);
 
             return Page();
-        }
-
-        public static DynamicForm ReadYamlCfg(string filename)
-        {
-            DynamicForm cfg;
-            using (var configFile = new StreamReader(filename))
-            {
-                cfg = deserializer.Deserialize<DynamicForm>(configFile);
-            }
-            return cfg;
         }
 
         private static bool TryValidate(object value, ValidationContext validationContext, ValidationAttribute attribute, out ValidationError validationError)

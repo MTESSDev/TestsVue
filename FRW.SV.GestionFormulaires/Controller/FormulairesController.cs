@@ -8,17 +8,17 @@ namespace FRW.SV.GestionFormulaires.Controller
 {
     [Route("/api/v1/[controller]/[action]")]
     [ApiController]
-    public class FormulairesController: ControllerBase
+    public class FormulairesController : ControllerBase
     {
         private readonly CreerFormulaireAF _creerFormulaire;
         private readonly MajFormulaireAF _majFormulaire;
         private readonly ObtenirConfiguration _obtenirConfig;
-        private readonly Pdf _produireDonneesPdfAF;
+        private readonly ProduireDonneesPdfAF _produireDonneesPdfAF;
 
-        public FormulairesController(CreerFormulaireAF creer, 
-                                     MajFormulaireAF maj, 
+        public FormulairesController(CreerFormulaireAF creer,
+                                     MajFormulaireAF maj,
                                      ObtenirConfiguration obtenirConfiguration,
-                                     Pdf produireDonneesPdfAF)
+                                     ProduireDonneesPdfAF produireDonneesPdfAF)
         {
             _creerFormulaire = creer;
             _majFormulaire = maj;
@@ -58,11 +58,10 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult> ProduireDonneesPDF(string noSeqForm)
+        public async Task<ActionResult> ProduireDonneesPDF(string typeFormulaire, string jsonData)
         {
-            _produireDonneesPdfAF.Production();
+            _produireDonneesPdfAF.Convertir(typeFormulaire, jsonData);
             return Ok();
         }
-
     }
 }

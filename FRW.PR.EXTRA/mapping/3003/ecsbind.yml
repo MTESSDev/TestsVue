@@ -13,19 +13,20 @@ bind:
   1:
     DM_AFDR_FinEtudes:
       champs:
-      - adulte1EvenementsDerniereAnnee==FinEtudesTempsPlein
+      - adulte1RaisonAfdr.0.adulte1EvenementsDerniereAnnee
+      formule: "{adulte1EvenementsDerniereAnnee:substr(0,2)}"
     DM_AFDR_PerteRevenus:
       champs:
-      - adulte1EvenementsDerniereAnnee==FinDiminutionRevenus
+      - adulte1RaisonAfdr.0.adulte1EvenementsDerniereAnnee==FinDiminutionRevenus
     PerteRevenus1:
       champs:
-      - FinDiminutionRevenusType==FinRevenusEmploi
+      - adulte1RaisonAfdr.0.adulte1FinDiminutionRevenusType==FinRevenusEmploi
     PerteRevenus2:
       champs:
-      - FinDiminutionRevenusType==FinRevenusTravailAutonome
+      - adulte1RaisonAfdr.0.adulte1FinDiminutionRevenusType==FinRevenusTravailAutonome
     PerteRevenus3:
       champs:
-      - FinDiminutionRevenusType==FinRevenusPrestations
+      - adulte1RaisonAfdr.0.adulte1FinDiminutionRevenusType==FinRevenusPrestations
     cp12:
       champs:
       - <NULL>
