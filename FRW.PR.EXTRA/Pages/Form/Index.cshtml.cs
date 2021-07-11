@@ -14,6 +14,7 @@ using System.Globalization;
 using FRW.PR.Extra.Utils;
 using FRW.PR.Extra.Model;
 using FRW.TR.Commun;
+using FRW.TR.Commun.Utils;
 
 namespace FRW.PR.Extra.Pages
 {

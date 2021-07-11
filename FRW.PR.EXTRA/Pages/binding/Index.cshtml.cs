@@ -2,6 +2,7 @@
 using FRW.PR.Extra.Utils;
 using FRW.PR.Model.Components;
 using FRW.TR.Commun;
+using FRW.TR.Contrats.Assignateur;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -212,17 +213,7 @@ namespace FRW.PR.Extra.Pages
     }
 
 
-    public class Binder
-    {
-        public List<Dictionary<string, string>> Templates { get; set; }
-        public Dictionary<string, Dictionary<string, BindElement>> Bind { get; set; }
-    }
 
-    public class BindElement
-    {
-        public IEnumerable<string>? Champs { get; set; }
-        public string? Formule { get; set; }
-    }
 
 
 }

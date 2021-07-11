@@ -1,4 +1,5 @@
 ﻿using FRW.TR.Commun;
+using FRW.TR.Contrats.Assignateur;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;

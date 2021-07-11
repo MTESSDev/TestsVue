@@ -11,6 +11,7 @@
     <PackageReference Include="MessagePack.AspNetCoreMvcFormatter" Version="2.2.85" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="SmartFormat.NET" Version="2.7.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
