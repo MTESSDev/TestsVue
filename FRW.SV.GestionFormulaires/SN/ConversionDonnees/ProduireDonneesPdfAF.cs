@@ -55,11 +55,9 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                         string? valeur = null;
 
                         // Mode formule, ici on lit avec SmartFormat
-                        if (bind.Value.Formule is { })
+                        if (bind.Value.Formule is { } && bind.Value.Champs is { })
                         {
-                            //Todo trouver un moyen de mettre dans des objets
-                            var val = TrouverValeurs(modeleDonnees, bind.Value.Champs);
-                            valeur = Smart.Format(bind.Value.Formule, val);
+                            valeur = ExecuterFormule(modeleDonnees, bind.Value.Champs, bind.Value.Formule);
                         }
                         else // Sinon on va simplement évaluer la value
                         {
@@ -104,10 +102,24 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
             return eo;
         }
 
-        private static Dictionary<string, StringValues> TrouverValeurs(IDictionary<object, object>? source,
+        public static string ExecuterFormule(IDictionary<object, object>? source,
+                                              IEnumerable<string> champsSource,
+                                              string formule)
+        {
+            var val = TrouverValeurs(source, champsSource);
+            return Smart.Format(formule, val);
+        }
+
+        public static string ExecuterFormule(IDictionary<object, object>? source,
+                                      string formule)
+        {
+            return Smart.Format(formule, source);
+        }
+
+        private static Dictionary<string, object> TrouverValeurs(IDictionary<object, object>? source,
                                                                     IEnumerable<string> champsSource)
         {
-            var array = new Dictionary<string, StringValues>();
+            var array = new Dictionary<string, object>();
             int pos = 0;
             foreach (var champ in champsSource)
             {
@@ -119,12 +131,12 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
             return array;
         }
 
-        private static StringValues ChargerValeur(IDictionary<object, object>? source, string[] elements)
+        private static object ChargerValeur(IDictionary<object, object>? source, string[] elements)
         {
             return KeyFinder(source, elements, 0);
         }
 
-        private static StringValues KeyFinder(IDictionary<object, object>? source,
+        private static object KeyFinder(IDictionary<object, object>? source,
                                             string[] elements,
                                             int position)
         {
@@ -175,8 +187,8 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                     // si on est arrivé au bout de l'objet
                     if (elements.Length - 1 == position)
                     {
-                        var strList = Array.ConvertAll(array, x => x.ToString());
-                        return new StringValues(strList);
+                        //var strList = Array.ConvertAll(array, x => x.ToString());
+                        return array;
                     }
                     else
                     {
