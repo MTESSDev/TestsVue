@@ -638,9 +638,19 @@
                 history.scrollRestoration = "manual"
 
                 window.addEventListener("hashchange", function (event) {
-                    const noPage = obtenirValeurHash('p')
-                    const no = parseInt(noPage) || 0
-                    formulate.effectuerNavigation(no, null, null, true)
+
+                    if (!window.location.href.indexOf('#')) {
+                        //L'url ne contient pas de hash, on est sur la première page
+                        formulate.effectuerNavigation(0, null, null, true)
+                    }
+                    else {
+                        //L'url contient un hash. On s'assure qu'il n'est pas vide avant de tenter une navigation. (Les liens d'erreurs dans le error summary on un href="#", dans cette situation on ne doit rien faire car une navigation vers l'erreur aura lieu.)
+                        if (window.location.hash) {
+                            const noPage = obtenirValeurHash('p')
+                            const no = parseInt(noPage) || 0
+                            formulate.effectuerNavigation(no, null, null, true)
+                        }                           
+                    }                    
                 })
             }
         },
