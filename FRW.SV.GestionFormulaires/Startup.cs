@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using FRW.SV.GestionFormulaires.SN;
 using FRW.SV.GestionFormulaires.SN.ConversionDonnees;
+using FRW.TR.Commun.Utils;
 //using CAC.AccesDonnees.Dapper;
 //using CAC.AccesProfil.Client;
 //using ECS.AF.Session;
@@ -22,6 +23,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SmartFormat;
 using SV.GestionFormulaires.DAL;
 
 namespace FRW.SV.GestionFormulaires
@@ -38,6 +40,7 @@ namespace FRW.SV.GestionFormulaires
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Smart.Default.AddExtensions(new SmartFormatInclude());
             //services.AddDataProtection(options => options.ApplicationDiscriminator = "ECS")
             //  .AddKeyManagementOptions(options => options.XmlRepository = new ApiXmlRepository(Configuration));
 

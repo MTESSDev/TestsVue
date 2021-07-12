@@ -57,11 +57,26 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                         // Mode formule, ici on lit avec SmartFormat
                         if (bind.Value.Formule is { } && bind.Value.Champs is { })
                         {
-                            valeur = ExecuterFormule(modeleDonnees, bind.Value.Champs, bind.Value.Formule);
+                            valeur = ExecuterFormule(modeleDonnees, bind.Value.Formule);
                         }
                         else // Sinon on va simplement évaluer la value
                         {
-                            valeur = string.Join(" ", TrouverValeur(modeleDonnees, bind.Value.Champs));
+                            var formule = string.Empty;
+
+                            foreach (var champ in bind.Value.Champs)
+                            {
+                                if (champ.Contains("=="))
+                                {
+                                    var keyVal = champ.Split("==");
+                                    formule += "{" + keyVal[0] + ":include("+ keyVal[1] + "):true}";
+                                }
+                                else
+                                {
+                                    formule += "{" + champ + "}";
+                                }
+                            }
+
+                            valeur = ExecuterFormule(modeleDonnees, formule);
                         }
 
                         if (!string.IsNullOrWhiteSpace(valeur))
@@ -79,18 +94,18 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
             // retourner le tableau d'objet de mappage (une map par gabarit pdf)
         }
 
-        private static StringValues? TrouverValeur(IDictionary<object, object>? source,
-                                                    IEnumerable<string> champsSource)
-        {
-            var array = new StringValues();
-            foreach (var champ in champsSource)
-            {
-                var elements = champ.Split('.');
-                array += ChargerValeur(source, elements);
-            }
+        //private static StringValues? TrouverValeur(IDictionary<object, object>? source,
+        //                                            IEnumerable<string> champsSource)
+        //{
+        //    var array = new StringValues();
+        //    foreach (var champ in champsSource)
+        //    {
+        //        var elements = champ.Split('.');
+        //        array += ChargerValeur(source, elements);
+        //    }
 
-            return array;
-        }
+        //    return array;
+        //}
 
         private static dynamic DictionaryToObject(Dictionary<string, object> dict)
         {
@@ -102,13 +117,13 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
             return eo;
         }
 
-        public static string ExecuterFormule(IDictionary<object, object>? source,
-                                              IEnumerable<string> champsSource,
-                                              string formule)
-        {
-            var val = TrouverValeurs(source, champsSource);
-            return Smart.Format(formule, val);
-        }
+        //public static string ExecuterFormule(IDictionary<object, object>? source,
+        //                                      IEnumerable<string> champsSource,
+        //                                      string formule)
+        //{
+        //    var val = TrouverValeurs(source, champsSource);
+        //    return Smart.Format(formule, val);
+        //}
 
         public static string ExecuterFormule(IDictionary<object, object>? source,
                                       string formule)
@@ -116,89 +131,89 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
             return Smart.Format(formule, source);
         }
 
-        private static Dictionary<string, object> TrouverValeurs(IDictionary<object, object>? source,
-                                                                    IEnumerable<string> champsSource)
-        {
-            var array = new Dictionary<string, object>();
-            int pos = 0;
-            foreach (var champ in champsSource)
-            {
-                var elements = champ.Split('.');
+        //private static Dictionary<string, object> TrouverValeurs(IDictionary<object, object>? source,
+        //                                                            IEnumerable<string> champsSource)
+        //{
+        //    var array = new Dictionary<string, object>();
+        //    int pos = 0;
+        //    foreach (var champ in champsSource)
+        //    {
+        //        var elements = champ.Split('.');
 
-                array.Add(elements.Last(), ChargerValeur(source, elements));
-            }
+        //        array.Add(elements.Last(), ChargerValeur(source, elements));
+        //    }
 
-            return array;
-        }
+        //    return array;
+        //}
 
-        private static object ChargerValeur(IDictionary<object, object>? source, string[] elements)
-        {
-            return KeyFinder(source, elements, 0);
-        }
+        //private static object ChargerValeur(IDictionary<object, object>? source, string[] elements)
+        //{
+        //    return KeyFinder(source, elements, 0);
+        //}
 
-        private static object KeyFinder(IDictionary<object, object>? source,
-                                            string[] elements,
-                                            int position)
-        {
+        //private static object KeyFinder(IDictionary<object, object>? source,
+        //                                    string[] elements,
+        //                                    int position)
+        //{
 
-            var currentElements = elements[position].Split("==");
-            var currentElement = currentElements[0];
-            object? currentValue = null;
+        //    var currentElements = elements[position].Split("==");
+        //    var currentElement = currentElements[0];
+        //    object? currentValue = null;
 
-            if (currentElements.Length == 2)
-            {
-                currentValue = currentElements[1];
-            }
+        //    if (currentElements.Length == 2)
+        //    {
+        //        currentValue = currentElements[1];
+        //    }
 
-            source.TryGetValue(currentElement, out var finded);
+        //    source.TryGetValue(currentElement, out var finded);
 
-            /*  if (elements.Length - 1 == position && currentValue is null)
-              {
-                  return finded as StringValues?;
-              }*/
+        //    /*  if (elements.Length - 1 == position && currentValue is null)
+        //      {
+        //          return finded as StringValues?;
+        //      }*/
 
-            if (finded is Dictionary<object, object> dictionary)
-            {
-                throw new NotSupportedException();
-                return KeyFinder(dictionary, elements, position + 1);
-            }
-            else if (finded is object[] array)
-            {
-                if (currentValue is { })
-                {
-                    if (array.Length == 1)
-                    {
-                        if (currentValue.Equals(array[0]))
-                        {
-                            return "true";
-                        }
-                        else
-                        {
-                            return StringValues.Empty;
-                        }
-                    }
-                    else
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                else
-                {
-                    // si on est arrivé au bout de l'objet
-                    if (elements.Length - 1 == position)
-                    {
-                        //var strList = Array.ConvertAll(array, x => x.ToString());
-                        return array;
-                    }
-                    else
-                    {
-                        var test = array[int.Parse(elements[position + 1])];
-                        return KeyFinder(test as Dictionary<object, object>, elements, position + 2);
-                    }
-                }
-            }
+        //    if (finded is Dictionary<object, object> dictionary)
+        //    {
+        //        throw new NotSupportedException();
+        //        return KeyFinder(dictionary, elements, position + 1);
+        //    }
+        //    else if (finded is object[] array)
+        //    {
+        //        if (currentValue is { })
+        //        {
+        //            if (array.Length == 1)
+        //            {
+        //                if (currentValue.Equals(array[0]))
+        //                {
+        //                    return "true";
+        //                }
+        //                else
+        //                {
+        //                    return StringValues.Empty;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                throw new NotImplementedException();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            // si on est arrivé au bout de l'objet
+        //            if (elements.Length - 1 == position)
+        //            {
+        //                //var strList = Array.ConvertAll(array, x => x.ToString());
+        //                return array;
+        //            }
+        //            else
+        //            {
+        //                var test = array[int.Parse(elements[position + 1])];
+        //                return KeyFinder(test as Dictionary<object, object>, elements, position + 2);
+        //            }
+        //        }
+        //    }
 
-            return StringValues.Empty;
-        }
+        //    return StringValues.Empty;
+        //}
     }
 }
