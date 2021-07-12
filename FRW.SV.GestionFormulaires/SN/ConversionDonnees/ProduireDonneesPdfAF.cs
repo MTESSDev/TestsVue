@@ -45,9 +45,11 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                                                 new ConvertisseurFRW() }
                                    );
 
-            var sortie = new SortieFusion();
-            sortie.Config = cfg.Config;
-            sortie.Gabarits = new List<Template>();
+            var sortie = new SortieFusion
+            {
+                Config = cfg.Config,
+                Gabarits = new List<Template>()
+            };
 
             if (cfg.Templates is { })
             {
