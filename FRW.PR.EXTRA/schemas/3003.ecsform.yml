@@ -68,19 +68,19 @@ form:
                   type: radio
                   v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false'
                   label: 
-                    fr: Vivez-vous maritalement avec cet adulte depuis au moins un an?
+                    fr: Vivez-vous en couple avec cet adulte depuis au moins un an?
                   options: yesno
                 - name: ViePasseeMaritaleUnAn
                   type: radio
                   v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false' && val('PrecisionsAdulte2.VieMaritaleUnAn') === 'false'
                   label: 
-                    fr: Dans le passé, avez-vous vécu maritalement avec cet adulte pendant au moins un an?
+                    fr: Dans le passé, avez-vous vécu en couple avec cet adulte pendant au moins un an?
                   options: yesno
                 - name: ViePasseeMaritaleMoinsUnAn
                   type: radio
                   v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false' && val('PrecisionsAdulte2.VieMaritaleUnAn') === 'false' && val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'false'
                   label: 
-                    fr: Vivez-vous maritalement avec un autre adulte depuis moins d’un an?
+                    fr: Vivez-vous en couple avec un autre adulte depuis moins d’un an?
                   options: yesno
                 - name: DateDebutCohabitation
                   type: date
@@ -356,13 +356,14 @@ form:
             fr: Renseignements sur l'identité
           id: renseignementsIdentite
           components:
-            - name: Cp12
-              type: text
-              v-if: val('DemandeAfdr') === 'true'
-              label:
-                fr: Numéro de dossier (CP-12)
-              validations:
-                optional: null
+            # TODO réactiver ce champ grisé et auto-rempli
+            # - name: Cp12
+            #   type: text
+            #   v-if: val('DemandeAfdr') === 'true'
+            #   label:
+            #     fr: Numéro de dossier (CP-12) si connu
+            #   validations:
+            #     optional: null
             - name: Nom1
               type: text
               label: 
@@ -413,6 +414,7 @@ form:
               options:
                 celibataire: Célibataire
                 marieUnionCivile: Marié ou uni civilement
+                conjoint: Conjoint de fait
                 veuf: Veuf
                 separe: Séparé légalement
                 separeSansJugement: Séparé sans jugement
@@ -1288,6 +1290,10 @@ form:
                 RevenusEmplois: Revenus d'emplois
                 Pourboires: Pourboires
                 TravailAutonome: Revenus provenant d’un travail autonome ou de votre entreprise
+            - type: bandeau
+              v-if: val('TypesRevenusEmploi').includes('RevenusEmplois') || val('TypesRevenusEmploi').includes('Pourboires') || val('TypesRevenusEmploi').includes('TravailAutonome')
+              text:
+                fr: "Le montant net du salaire est obtenu en déduisant du salaire brut l’impôt sur le revenu (provincial et fédéral), les cotisations à l’assurance-emploi, au Régime québécois d’assurance parentale et au Régime de rentes du Québec ou à un régime de retraite obligatoire ainsi que la cotisation syndicale."  
             - name: RevenusEmploi
               type: repeatableGroup
               repeatable: true
@@ -1300,7 +1306,7 @@ form:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
-              limit: 2
+              limit: 4
               components: 
                 - name: RevenuEmploiProprio
                   type: radio
@@ -1847,7 +1853,9 @@ form:
             - name: PossedeRevenuAttente
               type: radio
               label:
-                fr: Attendez-vous le début du versement de certains revenus?
+                fr: "Attendez-vous le début du versement de certains revenus?"
+              help: 
+                fr: "(par exemple, suite au dépôt d’une demande auprès d’un ministère ou d’un organisme gouvernemental)"
               options: yesno
             - name: RevenusAttente
               type: repeatableGroup
@@ -2042,7 +2050,7 @@ form:
             - name: PossedePlacements
               type: radio
               label:
-                fr: Avez-vous des placements (REER, REEE, CELI, dépôts à terme ou autre)?
+                fr: Avez-vous des placements (REER, REEE, CELI, dépôts à terme, cryptomonnaies ou autre)?
               options: yesno
             - name: AvoirsPlacements
               type: repeatableGroup
@@ -2407,6 +2415,16 @@ form:
                   type: number
                   label:
                     fr: Valeur
+        # section: Renseignements additionnels
+        - section:
+            fr: "Renseignements additionnels"
+          v-if: val('DemandeAfdr') === 'true'
+          id: renseignements
+          components:
+            - name: renseignementsAdditionnels
+              type: textarea
+              label:
+                fr: "Veuillez utiliser cette section pour fournir tout renseignement additionnel concernant votre demande."    
     # Groupe Enfants à charge
     - sectionGroup: 
         fr: Enfants à charge
@@ -2430,11 +2448,12 @@ form:
                 fr: Supprimer cet enfant à charge
               limit: 3                
               components:
-                - name: Cp12
-                  type: text
-                  label:
-                    fr: CP-12
-                  outerClasses: lg                    
+                #TODO réactiver ce component auto-rempli
+                # - name: Cp12
+                #   type: text
+                #   label:
+                #     fr: CP-12
+                #   outerClasses: lg                    
                 - name: Nom
                   type: text
                   label:
@@ -2600,21 +2619,32 @@ form:
                     v-if: val(`${name}.prefixId$DocumentGarde`, index) === 'Autre'
                     label:
                       fr: Précisez
-                  - name: EnfantHabiteMemeAdresse
-                    type: radio
-                    label:
-                      fr: Cet enfant habite-t-il avec vous?
-                    options: yesno
-                  - name: PrecisionAdresse
-                    type: text
-                    v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
-                    label:
-                      fr: Adresse de l'enfant à charge
-                  - name: PrecisionRaison
-                    type: text
-                    v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
-                    label:
-                      fr: Raison de la non-cohabitation
+                  
+                  # - name: EnfantHabiteMemeAdresse
+                  #   type: radio
+                  #   label:
+                  #     fr: Cet enfant habite-t-il avec vous?
+                  #   options: yesno
+                  # - name: PrecisionAdresse
+                  #   type: text
+                  #   v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
+                  #   label:
+                  #     fr: Adresse de l'enfant à charge
+                  # - name: PrecisionRaison
+                  #   type: text
+                  #   v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
+                  #   label:
+                  #     fr: Raison de la non-cohabitation
+            - name: EnfantsHabitentMemeAdresse
+              type: radio
+              label:
+                fr: "Est-ce que tous les enfants qui sont à votre charge habitent à la même adresse que vous?"
+              options: yesno
+            - name: PrecisionEnfantsAutreAdresse
+              type: textarea
+              v-if: val('EnfantsHabitentMemeAdresse') === 'false'
+              label:
+                fr: "Inscrivez les prénoms des enfants ainsi que la raison de cette situation."
         # Section - Revenus et biens des enfants
         - section:
             fr: Revenus et biens des enfants
@@ -2639,10 +2669,10 @@ form:
                 fr: Supprimer ce revenu
               limit: 2                
               components:
-              - name: IdEnfant
+              - name: PrenomEnfant
                 type: text
                 label:
-                  fr: Nom et prénom de l'enfant
+                  fr: Prénom de l'enfant
               - name: SourceRevenu
                 type: text
                 label:
@@ -2683,11 +2713,11 @@ form:
                 - name: IdEnfant
                   type: text
                   label:
-                    fr: Nom et prénom de l'enfant
+                    fr: Prénom de l'enfant
                 - name: DescriptionBien
                   type: text
                   label:
-                    fr: Description du bien ou numéro de compte
+                    fr: Numéro de compte ou description du bien
                 - name: ValeurBien
                   type: number
                   label:

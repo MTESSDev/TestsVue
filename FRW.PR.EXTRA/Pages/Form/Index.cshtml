@@ -448,7 +448,16 @@
                 $(`#groupe${pageDemandee.groupe.no}`).collapse('show')
 
                 if (!navigationFureteur) {
-                    history.pushState(null, null, document.location.pathname + document.location.search + '#' + `p=${noPage}`);
+
+                    const urlDestination = `${document.location.pathname}${document.location.search}#p=${noPage}`
+
+                    //Si l'url ne contient pas de hash ou si le hash n'est pas vide, on ajoute une entrée dans l'historique, sinon on remplace l'entrée existante (afin de ne pas avoir les entrées des erreurs qui ne contiennent qu'un #)
+                    if (window.location.href.indexOf('#') < 0 || window.location.hash) {                            
+                        history.pushState(null, null, urlDestination)
+                    }
+                    else {
+                        history.replaceState(null, null, urlDestination)
+                    }
                 }
 
                 this.noPageCourante = noPage
@@ -639,7 +648,7 @@
 
                 window.addEventListener("hashchange", function (event) {
 
-                    if (!window.location.href.indexOf('#')) {
+                    if (window.location.href.indexOf('#') < 0) {
                         //L'url ne contient pas de hash, on est sur la première page
                         formulate.effectuerNavigation(0, null, null, true)
                     }
