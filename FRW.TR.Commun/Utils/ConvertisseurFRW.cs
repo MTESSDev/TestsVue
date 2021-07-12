@@ -7,12 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace FRW.TR.Commun.Utils
 {
 
     public class ConvertisseurFRW : CustomCreationConverter<IDictionary<object, object>>
     {
+        private readonly Regex _isDateReg = new Regex(@"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$");
+
         public override IDictionary<object, object> Create(Type objectType)
         {
             return new Dictionary<object, object>();
@@ -45,6 +48,13 @@ namespace FRW.TR.Commun.Utils
                 return serializer.Deserialize<object[]>(reader);
             }
 
+            if (reader.TokenType == JsonToken.String)
+            {
+                if (reader.Path.Contains("date", StringComparison.InvariantCultureIgnoreCase) && _isDateReg.Match(reader.Value?.ToString()).Success)
+                {
+                    return serializer.Deserialize<DateTime>(reader);
+                }
+            }
             return serializer.Deserialize(reader);
         }
     }

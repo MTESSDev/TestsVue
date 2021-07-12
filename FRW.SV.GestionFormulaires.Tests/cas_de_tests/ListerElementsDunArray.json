@@ -1,0 +1,15 @@
+﻿{
+  "inscription": [
+    {
+      "cours": [
+        "Yoga",
+        "Tennis",
+        "Soccer"
+      ]
+    }
+  ],
+  //Les champs dates sous le format ISO internet, sont automatiquement mis en 
+  //DateTime par le convertisseurFRW, mais seulement si le champ contient le 
+  //mot "date" dans son nom ex: "dateDebut", "adulte1DateFin" etc..
+  "date": "2012-04-23"
+}

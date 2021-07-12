@@ -1,20 +1,21 @@
+config:
+  pdf:
+    pourcentRapetissement: 20
+    modeFusionDepassement: rapetissementEtAnnexe
 templates:
-- id: 1
-  ordre: 1
+- id: 01_a1
   condition: 
   name: 3003-01 - Adulte 1
   pdf: 3003-01_ProjetDynDEV
-- id: 2
-  ordre: 2
+- id: 01_a2
   condition: 
   name: 3003-01 - Adulte 2
   pdf: 3003-01_ProjetDynDEV
 bind:
-  1:
+  01_a1:
     DM_AFDR_FinEtudes:
       champs:
-      - adulte1RaisonAfdr.0.adulte1EvenementsDerniereAnnee
-      formule: "{adulte1EvenementsDerniereAnnee:substr(0,2)}"
+      - adulte1RaisonAfdr.0.adulte1EvenementsDerniereAnnee==FinEtudesTempsPlein
     DM_AFDR_PerteRevenus:
       champs:
       - adulte1RaisonAfdr.0.adulte1EvenementsDerniereAnnee==FinDiminutionRevenus
@@ -32,25 +33,25 @@ bind:
       - <NULL>
     date_FinEtudes:
       champs:
-      - adulte1DateEvenementFinEtudesTempsPlein
+      - adulte1RaisonAfdr.0.adulte1DateEvenementFinEtudesTempsPlein
     date_Perterevenus:
       champs:
-      - adulte1DateEvenementFinDiminutionRevenus
+      - adulte1RaisonAfdr.0.adulte1DateEvenementFinDiminutionRevenus
     AFDR_Raison1:
       champs:
       - PrecisionRaisonDemandeAfdr==AucunRevenu
     AFDR_Raison5:
       champs:
-      - PrecisionRaisonDemandeAfdr==PerteConjoint
+      - adulte1RaisonAfdr.0.adulte1PrecisionRaisonDemandeAfdr==PerteConjoint
     AFDR_Raison5a:
       champs:
-      - PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointDeces
+      - adulte1RaisonAfdr.0.adulte1PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointDeces
     AFDR_Raison5b:
       champs:
-      - PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointSeparation
+      - adulte1RaisonAfdr.0.adulte1PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointSeparation
     AFDR_Raison5c:
       champs:
-      - PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointDivorce
+      - adulte1RaisonAfdr.0.adulte1PrecisionRaisonDemandeAfdrPerteConjoint==PerteConjointDivorce
     AFDR_Raison2:
       champs:
       - PrecisionRaisonDemandeAfdr==AttenteDecision
@@ -162,7 +163,7 @@ bind:
     DiplomeAEP:
       champs:
       - adulte1secondaireProf.0.adulte1Req01-DiplomeSecFormProf==Aep
-  2:
+  01_a2:
     DM_AFDR_FinEtudes:
       champs:
       - EvenementsDerniereAnnee==ReqFinEtudesTempsPlein
