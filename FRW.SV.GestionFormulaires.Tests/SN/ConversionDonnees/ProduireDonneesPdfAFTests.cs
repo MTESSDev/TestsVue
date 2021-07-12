@@ -21,7 +21,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
 
             // Executer la formule
             var result = ProduireDonneesPdfAF.ExecuterFormule(data,
-                                                              "{cours:list|, | et }");
+                             "{inscription.0.cours:list|, | et }");
 
             //Vérifier le résultat
             Assert.AreEqual("Yoga, Tennis et Soccer", result);
@@ -35,7 +35,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
 
             // Executer la formule
             var result = ProduireDonneesPdfAF.ExecuterFormule(data,
-                                                              "{inscription.0.cours.1}");
+                                    "{inscription.0.cours.1}");
 
             //Vérifier le résultat
             Assert.AreEqual("Tennis", result);
@@ -49,7 +49,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
 
             // Executer la formule
             var result = ProduireDonneesPdfAF.ExecuterFormule(data,
-                                                              "{inscription.0.cours.1}");
+                                  "{inscription.0.cours.1}");
 
             //Vérifier le résultat
             Assert.AreEqual("Tennis", result);
