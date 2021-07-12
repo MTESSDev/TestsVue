@@ -27,21 +27,21 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         [HttpGet]
-        public async Task<ActionResult<AppelSortant<string>>> ObtenirConfigurationFormulaire(string nomForm)
+        public async Task<ActionResult<AppelSortant<string>>> ObtenirConfiguration(string nomForm)
         {
             var a = await _obtenirConfig.ObtenirFichierConfig(nomForm);
             return Ok(a);
         }
 
         [HttpGet]
-        public async Task<ActionResult<AppelSortant<string>>> ObtenirBindingFormulaire(string nomForm)
+        public async Task<ActionResult<AppelSortant<string>>> ObtenirBinding(string nomForm)
         {
             var a = await _obtenirConfig.ObtenirFichierBinding(nomForm);
             return Ok(a);
         }
 
         [HttpPost]
-        public async Task<ActionResult<AppelSortant<string>>> CreerFormulaire(string nomForm)
+        public async Task<ActionResult<AppelSortant<string>>> Creer(string nomForm)
         {
             // Todo obtenir le idSys dans l'url de la requête ou le fichier de config
             var a = await _creerFormulaire.Traitement(nomForm, "IdSys", null);
@@ -49,7 +49,7 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<AppelSortant<string>>> MajFormulaire(string noSeqForm)
+        public async Task<ActionResult<AppelSortant<string>>> Maj(string noSeqForm)
         {
             //TODO vérifier le cookie pour déterminer si on envoie le courriel
             bool envoyerCourriel = true;
