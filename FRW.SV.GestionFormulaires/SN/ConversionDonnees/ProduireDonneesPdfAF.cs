@@ -10,9 +10,9 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
 {
     public class ConvertirDonneesAF
     {
-        private readonly ObtenirConfiguration _obtenirConfiguration;
+        private readonly FormConfig _obtenirConfiguration;
 
-        public ConvertirDonneesAF(ObtenirConfiguration obtenirConfiguration)
+        public ConvertirDonneesAF(FormConfig obtenirConfiguration)
         {
             _obtenirConfiguration = obtenirConfiguration;
         }

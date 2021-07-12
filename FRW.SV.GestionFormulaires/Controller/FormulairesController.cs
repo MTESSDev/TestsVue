@@ -11,33 +11,33 @@ namespace FRW.SV.GestionFormulaires.Controller
     [ApiController]
     public class FormulairesController : ControllerBase
     {
-        private readonly CreerFormulaireAF _creerFormulaire;
-        private readonly MajFormulaireAF _majFormulaire;
-        private readonly ObtenirConfiguration _obtenirConfig;
+        private readonly CreerFormulaire _creerFormulaire;
+        private readonly MajFormulaire _majFormulaire;
+        private readonly FormConfig _Config;
         private readonly ConvertirDonneesAF _produireDonneesPdfAF;
 
-        public FormulairesController(CreerFormulaireAF creer,
-                                     MajFormulaireAF maj,
-                                     ObtenirConfiguration obtenirConfiguration,
+        public FormulairesController(CreerFormulaire creer,
+                                     MajFormulaire maj,
+                                     FormConfig formConfig,
                                      ConvertirDonneesAF produireDonneesPdfAF)
         {
             _creerFormulaire = creer;
             _majFormulaire = maj;
-            _obtenirConfig = obtenirConfiguration;
+            _Config = formConfig;
             _produireDonneesPdfAF = produireDonneesPdfAF;
         }
 
         [HttpGet]
         public async Task<ActionResult<AppelSortant<string>>> ObtenirConfiguration(string nomForm)
         {
-            var a = await _obtenirConfig.ObtenirFichierConfig(nomForm);
+            var a = await _Config.ObtenirConfig(nomForm);
             return Ok(a);
         }
 
         [HttpGet]
         public async Task<ActionResult<AppelSortant<string>>> ObtenirBinding(string nomForm)
         {
-            var a = await _obtenirConfig.ObtenirFichierBinding(nomForm);
+            var a = await _Config.ObtenirBinding(nomForm);
             return Ok(a);
         }
 

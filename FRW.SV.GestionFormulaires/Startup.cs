@@ -52,10 +52,10 @@ namespace FRW.SV.GestionFormulaires
 
             services.AddHttpContextAccessor();
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
-            services.AddScoped<ObtenirConfiguration>();
+            services.AddScoped<SN.FormConfig>();
             services.AddScoped<DalFormulaires>();
-            services.AddScoped<CreerFormulaireAF>();
-            services.AddScoped<MajFormulaireAF>();
+            services.AddScoped<CreerFormulaire>();
+            services.AddScoped<MajFormulaire>();
             services.AddScoped<ConvertirDonneesAF>();
             services.AddScoped<GestionPdf>();
             //services.AddScoped<ICodeNT, CodeNTAccesseur>();

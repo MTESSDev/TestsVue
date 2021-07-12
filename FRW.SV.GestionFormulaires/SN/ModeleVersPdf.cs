@@ -12,7 +12,11 @@ namespace FRW.SV.GestionFormulaires.SN
     /// </summary>
     public class ModeleVersPdf
     {
-        public async Task Envoyer()
+        /// <summary>
+        /// Envoyer un courriel de récupération du formulaire
+        /// </summary>
+        /// <returns></returns>
+        public async Task EnvoyerCourriel()
         {
             //TODO Envoyer le courriel
 

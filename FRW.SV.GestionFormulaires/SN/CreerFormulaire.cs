@@ -8,7 +8,7 @@ namespace FRW.SV.GestionFormulaires.SN
     /// <summary>
     /// SN - Créer formulaire
     /// </summary>
-    public class CreerFormulaireAF
+    public class CreerFormulaire
     {
         private readonly DalFormulaires _dal;
 
@@ -16,7 +16,7 @@ namespace FRW.SV.GestionFormulaires.SN
         /// Todo configurer les dépendances dans startup
         /// </summary>
         /// <param name="creerSuiviEtat"></param>
-        public CreerFormulaireAF(DalFormulaires dalFormulaires)
+        public CreerFormulaire(DalFormulaires dalFormulaires)
         {
             _dal = dalFormulaires;
         }
