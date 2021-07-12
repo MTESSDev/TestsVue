@@ -52,7 +52,7 @@ namespace FRW.SV.GestionFormulaires
             services.AddScoped<DalFormulaires>();
             services.AddScoped<CreerFormulaireAF>();
             services.AddScoped<MajFormulaireAF>();
-            services.AddScoped<ProduireDonneesPdfAF>();
+            services.AddScoped<ConvertirDonneesAF>();
             //services.AddScoped<ICodeNT, CodeNTAccesseur>();
             //services.AddScoped<IDALGeneriqueCAC, DalECS1>();
             //services.AddProfil(Configuration);

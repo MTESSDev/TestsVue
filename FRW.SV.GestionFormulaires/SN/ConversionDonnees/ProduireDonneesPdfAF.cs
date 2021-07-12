@@ -7,11 +7,11 @@ using SmartFormat;
 
 namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
 {
-    public class ProduireDonneesPdfAF
+    public class ConvertirDonneesAF
     {
         private readonly ObtenirConfiguration _obtenirConfiguration;
 
-        public ProduireDonneesPdfAF(ObtenirConfiguration obtenirConfiguration)
+        public ConvertirDonneesAF(ObtenirConfiguration obtenirConfiguration)
         {
             _obtenirConfiguration = obtenirConfiguration;
         }

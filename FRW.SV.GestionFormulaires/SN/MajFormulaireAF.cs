@@ -25,7 +25,7 @@ namespace FRW.SV.GestionFormulaires.SN
         /// <param name="noSeqForm">Numéro séquentiel du formulaire</param>
         /// <param name="contenuForm">Contenu du formulaire</param>
         /// <returns>Un numéro de confirmation</returns>
-        public async Task<string> Traitement(string noSeqForm, string contenuForm, bool envoyerCourriel)
+        public async Task<string> Traitement(string noSeqForm, string? contenuForm, bool envoyerCourriel)
         {
             //TODO si le courriel n'est pas encore envoyé, le faire
             var confirmation = await _dal.MettreAJour(noSeqForm, contenuForm);

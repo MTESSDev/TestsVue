@@ -20,7 +20,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
             var data = LireJson("..\\..\\..\\cas_de_tests\\ListerElementsDunArray.json");
 
             // Executer la formule
-            var result = ProduireDonneesPdfAF.ExecuterFormule(data,
+            var result = ConvertirDonneesAF.ExecuterFormule(data,
                              "{inscription.0.cours:list|, | et }");
 
             //Vérifier le résultat
@@ -34,7 +34,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
             var data = LireJson("..\\..\\..\\cas_de_tests\\ListerElementsDunArray.json");
 
             // Executer la formule
-            var result = ProduireDonneesPdfAF.ExecuterFormule(data,
+            var result = ConvertirDonneesAF.ExecuterFormule(data,
                                     "{inscription.0.cours.1}");
 
             //Vérifier le résultat
@@ -48,7 +48,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
             var data = LireJson("..\\..\\..\\cas_de_tests\\ListerElementsDunArray.json");
 
             // Executer la formule
-            var result = ProduireDonneesPdfAF.ExecuterFormule(data,
+            var result = ConvertirDonneesAF.ExecuterFormule(data,
                                   "{inscription.0.cours.1}");
 
             //Vérifier le résultat
@@ -62,7 +62,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
             var data = LireJson("..\\..\\..\\cas_de_tests\\ListerElementsDunArray.json");
 
             // Executer la formule
-            var result = ProduireDonneesPdfAF.ExecuterFormule(data,
+            var result = ConvertirDonneesAF.ExecuterFormule(data,
                                                               "{date:MMMM d}");
 
             //Vérifier le résultat
