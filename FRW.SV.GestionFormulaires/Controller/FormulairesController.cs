@@ -3,6 +3,7 @@ using FRW.SV.GestionFormulaires.SN;
 using System.Threading.Tasks;
 using FRW.SV.GestionFormulaires.SN.ConversionDonnees;
 using FRW.TR.Contrats;
+using FRW.TR.Contrats.ConversionDonnees;
 
 namespace FRW.SV.GestionFormulaires.Controller
 {
@@ -58,10 +59,10 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         [HttpPost]
-        public IActionResult ConvertirDonnees(string typeFormulaire, string jsonData)
+        public ActionResult<DonneesChargement> ConvertirDonnees(string typeFormulaire, string jsonData)
         {
-            _produireDonneesPdfAF.Convertir(typeFormulaire, jsonData);
-            return Ok();
+            var donneesChargement = _produireDonneesPdfAF.Convertir(typeFormulaire, jsonData);
+            return Ok(donneesChargement);
         }
     }
 }

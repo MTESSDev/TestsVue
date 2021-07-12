@@ -31,7 +31,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
         /// -retourner le tableau d'objet de mappage (une map par gabarit pdf)
         /// </remarks>
         /// <returns></returns>
-        public void Convertir(string typeFormulaire, string jsonData)
+        public DonneesChargement Convertir(string typeFormulaire, string jsonData)
         {
             // Lire le fichier de binding
             //var config = await _obtenirConfiguration.ObtenirFichierConfig(typeFormulaire);
@@ -45,7 +45,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                                                 new ConvertisseurFRW() }
                                    );
 
-            var sortie = new SortieFusion
+            var sortie = new DonneesChargement
             {
                 Config = cfg.Config,
                 Gabarits = new List<Template>()
@@ -121,6 +121,8 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                     });
                 }
             }
+
+            return sortie;
         }
 
         public static string ExecuterFormule(IDictionary<object, object>? source,
