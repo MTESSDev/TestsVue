@@ -18,12 +18,12 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         /// <summary>
-        /// Copie de GCO
+        /// "Copie" de GCO
         /// </summary>
-        /// <param name="nomForm"></param>
+        /// <param name="typeFormulaire"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<AppelSortant<string>> ProduirePdf(string nomForm)
+        public ActionResult<AppelSortant<string>> ProduirePdf(string typeFormulaire)
         {
             return NotFound();
         }

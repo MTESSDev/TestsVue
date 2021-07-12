@@ -4,6 +4,7 @@ using FRW.TR.Contrats.Assignateur;
 using Newtonsoft.Json;
 using FRW.TR.Commun.Utils;
 using SmartFormat;
+using FRW.TR.Contrats.ConversionDonnees;
 
 namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
 {
