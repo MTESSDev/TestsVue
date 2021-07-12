@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Services", "2-Services", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "9-Communs", "9-Communs", "{E494A9CC-EFD1-44CE-8584-4E6AA7CC6F68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRW.SV.GestionFormulaires.Tests", "FRW.SV.GestionFormulaires.Tests\FRW.SV.GestionFormulaires.Tests.csproj", "{C33E57DC-D666-41B9-9045-4B22662A464F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRW.SV.GestionFormulaires.Tests", "FRW.SV.GestionFormulaires.Tests\FRW.SV.GestionFormulaires.Tests.csproj", "{C33E57DC-D666-41B9-9045-4B22662A464F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +61,7 @@ Global
 		{FA97702B-1CB6-4C53-B1EE-8A400E709998} = {95C6D159-0C99-4C20-B3B6-F1CA896D1C3A}
 		{3E355621-99BB-455A-B9F2-F60AFA86299A} = {E494A9CC-EFD1-44CE-8584-4E6AA7CC6F68}
 		{916FBD4A-948D-44FB-9945-CFF5C5049978} = {E494A9CC-EFD1-44CE-8584-4E6AA7CC6F68}
+		{C33E57DC-D666-41B9-9045-4B22662A464F} = {95C6D159-0C99-4C20-B3B6-F1CA896D1C3A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {53B2C633-D684-4104-8280-D7159CFAFE7C}
