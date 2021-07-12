@@ -1,7 +1,11 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using FRW.SV.GestionFormulaires.SN;
 using FRW.SV.GestionFormulaires.SN.ConversionDonnees;
+using FRW.SV.GestionFormulaires.SN.Pdf;
 using FRW.TR.Commun.Utils;
 //using CAC.AccesDonnees.Dapper;
 //using CAC.AccesProfil.Client;
@@ -53,6 +57,7 @@ namespace FRW.SV.GestionFormulaires
             services.AddScoped<CreerFormulaireAF>();
             services.AddScoped<MajFormulaireAF>();
             services.AddScoped<ConvertirDonneesAF>();
+            services.AddScoped<GestionPdf>();
             //services.AddScoped<ICodeNT, CodeNTAccesseur>();
             //services.AddScoped<IDALGeneriqueCAC, DalECS1>();
             //services.AddProfil(Configuration);
@@ -114,6 +119,11 @@ namespace FRW.SV.GestionFormulaires
                     Description = "Service web pour la gestion des formulaires.",
                     Contact = new OpenApiContact() { Name = "Équipe DTN" }
                 });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
