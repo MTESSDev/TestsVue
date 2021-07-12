@@ -45,17 +45,17 @@ namespace FRW.PR.Extra.Pages
             //SaveYamlCfg(val, @"C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\mapping\3003\ecsbind.yml");
         }
 
-        public IActionResult OnGet(string id, string? gabarit = "1")
+        public IActionResult OnGet(string id, string? gabarit)
         {
-            GabaritEnCours = gabarit;
             var mappgingObj = OutilsYaml.LireFicher<Binder>(@"mapping/3003/ecsbind.yml");
 
+            GabaritEnCours = gabarit ?? mappgingObj.Templates?[0]["id"];
             Templates = mappgingObj.Templates;
             Bind = mappgingObj.Bind;
 
-            if(Bind is null)
+            if (Bind is null)
             {
-                Bind = new Dictionary<string,Dictionary<string, BindElement>>();
+                Bind = new Dictionary<string, Dictionary<string, BindElement>>();
             }
 
             var form = OutilsYaml.LireFicher<DynamicForm>(@"schemas/3003.ecsform.yml");

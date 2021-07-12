@@ -19,11 +19,8 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
             // Data du formulaire client
             var data = LireJson("..\\..\\..\\cas_de_tests\\ListerElementsDunArray.json");
 
-            // Passer 1 champ à la formule
-            var champs = new string[] { "inscription.0.cours" };
-
             // Executer la formule
-            var result = ProduireDonneesPdfAF.ExecuterFormule(data, champs,
+            var result = ProduireDonneesPdfAF.ExecuterFormule(data,
                                                               "{cours:list|, | et }");
 
             //Vérifier le résultat
@@ -36,11 +33,8 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees.Tests
             // Data du formulaire client
             var data = LireJson("..\\..\\..\\cas_de_tests\\ListerElementsDunArray.json");
 
-            // Passer 1 champ à la formule
-            var champs = new string[] { "inscription" };
-
             // Executer la formule
-            var result = ProduireDonneesPdfAF.ExecuterFormule(data, champs,
+            var result = ProduireDonneesPdfAF.ExecuterFormule(data,
                                                               "{inscription.0.cours.1}");
 
             //Vérifier le résultat

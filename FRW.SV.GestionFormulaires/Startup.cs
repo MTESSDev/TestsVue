@@ -41,6 +41,8 @@ namespace FRW.SV.GestionFormulaires
         public void ConfigureServices(IServiceCollection services)
         {
             Smart.Default.AddExtensions(new SmartFormatInclude());
+            Smart.Default.Settings.FormatErrorAction = SmartFormat.Core.Settings.ErrorAction.Ignore;
+            Smart.Default.Settings.ParseErrorAction = SmartFormat.Core.Settings.ErrorAction.Ignore;
             //services.AddDataProtection(options => options.ApplicationDiscriminator = "ECS")
             //  .AddKeyManagementOptions(options => options.XmlRepository = new ApiXmlRepository(Configuration));
 

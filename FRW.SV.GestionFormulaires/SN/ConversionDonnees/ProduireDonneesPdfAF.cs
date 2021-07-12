@@ -1,16 +1,9 @@
 ﻿using FRW.TR.Commun;
-using FRW.SV.GestionFormulaires.SN;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using FRW.TR.Contrats.Assignateur;
 using Newtonsoft.Json;
 using FRW.TR.Commun.Utils;
 using SmartFormat;
-using System.Linq;
-using Microsoft.Extensions.Primitives;
-using System.Dynamic;
 
 namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
 {
@@ -23,7 +16,21 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
             _obtenirConfiguration = obtenirConfiguration;
         }
 
-        public async Task Convertir(string typeFormulaire, string jsonData)
+        /// <summary>
+        /// Traiter la conversion d'un modèle VueFormulate vers une cible externe, soit un autre format.
+        /// </summary>
+        /// <param name="typeFormulaire">Ex: 3003</param>
+        /// <param name="jsonData">Données du formulaire.</param>
+        /// <remarks>
+        /// -Lire le fichier de binding
+        /// -Pour chaque gabarit
+        /// -pour chaque champ dans la config
+        /// -lire la source définie
+        /// -ajouter les infos dans un objet "gabaritX" qui contient tous les champs ayant une valeur à mapper dans le pdf
+        /// -retourner le tableau d'objet de mappage (une map par gabarit pdf)
+        /// </remarks>
+        /// <returns></returns>
+        public void Convertir(string typeFormulaire, string jsonData)
         {
             // Lire le fichier de binding
             //var config = await _obtenirConfiguration.ObtenirFichierConfig(typeFormulaire);
@@ -37,7 +44,9 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                                                 new ConvertisseurFRW() }
                                    );
 
-            var sortie = new List<Dictionary<string, string>>();
+            var sortie = new SortieFusion();
+            sortie.Config = cfg.Config;
+            sortie.Gabarits = new List<Template>();
 
             if (cfg.Templates is { })
             {
@@ -46,13 +55,17 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                 {
                     if (!string.IsNullOrWhiteSpace(template["condition"]))
                     {
-                        //TODO: plugger SmartFormat ici
+                        var result = ExecuterFormule(modeleDonnees, template["condition"]);
+                        if (!result.Equals("true"))
+                        {
+                            continue;
+                        }
                     }
 
                     var gabarit = new Dictionary<string, string>();
                     foreach (var bind in cfg.Bind![template["id"]])
                     {
-                        string? valeur = null;
+                        string? valeur;
 
                         // Mode formule, ici on lit avec SmartFormat
                         if (bind.Value.Formule is { } && bind.Value.Champs is { })
@@ -63,20 +76,33 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                         {
                             var formule = string.Empty;
 
-                            foreach (var champ in bind.Value.Champs)
+                            if (bind.Value.Champs is { })
                             {
-                                if (champ.Contains("=="))
+                                foreach (var champ in bind.Value.Champs)
                                 {
-                                    var keyVal = champ.Split("==");
-                                    formule += "{" + keyVal[0] + ":include("+ keyVal[1] + "):true}";
-                                }
-                                else
-                                {
-                                    formule += "{" + champ + "}";
+                                    if (champ.Contains("=="))
+                                    {
+                                        var keyVal = champ.Split("==");
+                                        formule += "{" + keyVal[0] + ":include(" + keyVal[1] + "):true}";
+                                    }
+                                    else
+                                    {
+                                        if (!champ.StartsWith('<') && !champ.EndsWith('>'))
+                                        {
+                                            formule += "{" + champ + "}";
+                                        }
+                                    }
                                 }
                             }
 
-                            valeur = ExecuterFormule(modeleDonnees, formule);
+                            if (string.IsNullOrWhiteSpace(formule))
+                            {
+                                valeur = string.Empty;
+                            }
+                            else
+                            {
+                                valeur = ExecuterFormule(modeleDonnees, formule);
+                            }
                         }
 
                         if (!string.IsNullOrWhiteSpace(valeur))
@@ -84,136 +110,22 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                             gabarit.Add(bind.Key, valeur);
                         }
                     }
-                    sortie.Add(gabarit);
+
+                    sortie.Gabarits.Add(new Template()
+                    {
+                        Proprietes = template,
+                        Champs = gabarit
+                    });
                 }
             }
-
-            // pour chaque champ dans la config
-            // lire la source définie
-            // ajouter les infos dans un objet "gabaritX" qui contient tous les champs ayant une valeur à mapper dans le pdf
-            // retourner le tableau d'objet de mappage (une map par gabarit pdf)
         }
-
-        //private static StringValues? TrouverValeur(IDictionary<object, object>? source,
-        //                                            IEnumerable<string> champsSource)
-        //{
-        //    var array = new StringValues();
-        //    foreach (var champ in champsSource)
-        //    {
-        //        var elements = champ.Split('.');
-        //        array += ChargerValeur(source, elements);
-        //    }
-
-        //    return array;
-        //}
-
-        private static dynamic DictionaryToObject(Dictionary<string, object> dict)
-        {
-            IDictionary<string, object> eo = (IDictionary<string, object>)new ExpandoObject();
-            foreach (KeyValuePair<string, object> kvp in dict)
-            {
-                eo.Add(kvp);
-            }
-            return eo;
-        }
-
-        //public static string ExecuterFormule(IDictionary<object, object>? source,
-        //                                      IEnumerable<string> champsSource,
-        //                                      string formule)
-        //{
-        //    var val = TrouverValeurs(source, champsSource);
-        //    return Smart.Format(formule, val);
-        //}
 
         public static string ExecuterFormule(IDictionary<object, object>? source,
                                       string formule)
         {
+            if (source is null) return string.Empty;
+
             return Smart.Format(formule, source);
         }
-
-        //private static Dictionary<string, object> TrouverValeurs(IDictionary<object, object>? source,
-        //                                                            IEnumerable<string> champsSource)
-        //{
-        //    var array = new Dictionary<string, object>();
-        //    int pos = 0;
-        //    foreach (var champ in champsSource)
-        //    {
-        //        var elements = champ.Split('.');
-
-        //        array.Add(elements.Last(), ChargerValeur(source, elements));
-        //    }
-
-        //    return array;
-        //}
-
-        //private static object ChargerValeur(IDictionary<object, object>? source, string[] elements)
-        //{
-        //    return KeyFinder(source, elements, 0);
-        //}
-
-        //private static object KeyFinder(IDictionary<object, object>? source,
-        //                                    string[] elements,
-        //                                    int position)
-        //{
-
-        //    var currentElements = elements[position].Split("==");
-        //    var currentElement = currentElements[0];
-        //    object? currentValue = null;
-
-        //    if (currentElements.Length == 2)
-        //    {
-        //        currentValue = currentElements[1];
-        //    }
-
-        //    source.TryGetValue(currentElement, out var finded);
-
-        //    /*  if (elements.Length - 1 == position && currentValue is null)
-        //      {
-        //          return finded as StringValues?;
-        //      }*/
-
-        //    if (finded is Dictionary<object, object> dictionary)
-        //    {
-        //        throw new NotSupportedException();
-        //        return KeyFinder(dictionary, elements, position + 1);
-        //    }
-        //    else if (finded is object[] array)
-        //    {
-        //        if (currentValue is { })
-        //        {
-        //            if (array.Length == 1)
-        //            {
-        //                if (currentValue.Equals(array[0]))
-        //                {
-        //                    return "true";
-        //                }
-        //                else
-        //                {
-        //                    return StringValues.Empty;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                throw new NotImplementedException();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            // si on est arrivé au bout de l'objet
-        //            if (elements.Length - 1 == position)
-        //            {
-        //                //var strList = Array.ConvertAll(array, x => x.ToString());
-        //                return array;
-        //            }
-        //            else
-        //            {
-        //                var test = array[int.Parse(elements[position + 1])];
-        //                return KeyFinder(test as Dictionary<object, object>, elements, position + 2);
-        //            }
-        //        }
-        //    }
-
-        //    return StringValues.Empty;
-        //}
     }
 }
