@@ -142,15 +142,15 @@ form:
               label:
                 fr: Inscrivez le nom de votre propriétaire ou locateur, s’il y a lieu.
               components:
-                - name: Nom
+                - name: NomProprio
                   type: text
                   label:
                     fr: Nom de famille
-                - name: Prenom
+                - name: PrenomProprio
                   type: text
                   label:
                     fr: Prénom
-                - name: Telephone
+                - name: TelephoneProprio
                   type: text
                   outerClasses: lg
                   label:
@@ -354,7 +354,7 @@ form:
                 fr: Numéro de dossier (CP-12)
               validations:
                 optional: null
-            - name: Nom1
+            - name: NomFamille
               type: text
               label: 
                 fr: Nom de famille
@@ -362,7 +362,7 @@ form:
                 fr: Selon le certificat de naissance ou le document d'immigration.
               validations: 
                 max: 36,length
-            - name: Prénom1
+            - name: Prenom
               type: text
               label: 
                 fr: Prénom
@@ -439,7 +439,7 @@ form:
               label: 
                 fr: Êtes-vous né au Québec?
               options: yesno
-            - name: Nom3
+            - name: NomDuParent
               v-if: val('prefixId$NeQC') === 'true'
               type: text
               label: 
@@ -823,174 +823,169 @@ form:
             fr: Formation
           id: formation
           components:
+            - name: OrdresEnseignementsApplicables
+              type: checkbox
+              label:
+                fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
+              options: 
+                Primaire: Primaire
+                SecondaireGen: Secondaire (Général)
+                SecondaireFormProf: Secondaire (Formation professionnelle)
+                SecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
+                Collegial: Collégial (Formation générale ou technique)
+                Universitaire: Universitaire
+            - name: Primaire        
+              type: group
+              v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Primaire')
+              label:
+                fr: Primaire
+              components:
+                - name: NbAnneesReussiesPrimaire
+                  type: radio
+                  outerClasses: boutons-inline
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1,2,3,4,5,6,7]
+                - name: DateFinPrimaire
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: SecondaireGen
+              type: group
+              v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireGen')          
+              label:
+                fr: Secondaire (général)
+              components:
+                - name: NbAnneesReussiesSecGeneral
+                  type: radio
+                  outerClasses: boutons-inline
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1,2,3,4,5]
+                - name: DiplomeSecGeneral
+                  type: select
+                  label: 
+                    fr: Diplôme obtenu
+                  options: 
+                    Aucun: Aucun
+                    Des: Diplôme d'études secondaires (DES)
+                - name: DateFinSecGeneral
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: SecondaireProf
+              type: group
+              v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormProf')                    
+              label:
+                fr: Secondaire (Formation professionnelle)
+              components:
+                - name: NbAnneesReussiesSecFormProf
+                  type: radio
+                  outerClasses: boutons-inline
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [3,4,5]
+                - name: DisciplineSecFormProf
+                  type: text
+                  label:
+                    fr: Discipline/Programme de formation
+                - name: DiplomeSecFormProf
+                  type: select
+                  label: 
+                    fr: Diplôme obtenu
+                  options: 
+                    Aucun: Aucun
+                    Aep: AEP
+                    Dep: DEP
+                    Asp: ASP
+                - name: DateFinSecFormProf
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: SecondaireMetier
+              type: group
+              v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormMétier')                              
+              label:
+                fr: Secondaire (Formation à un métier semi-spécialisé)
+              components:
+                - name: NbAnneesReussiesSecMetier
+                  type: radio
+                  outerClasses: boutons-inline
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1]
+                - name: DisciplineSecMetier
+                  type: text
+                  label:
+                    fr: Discipline/Programme de formation
+                - name: DateFinSecMetier
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: Collegial
+              type: group
+              v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Collegial')                                        
+              label:
+                fr: Collégial (Formation générale ou technique)
+              components:
+                - name: NbAnneesReussiesCollegial
+                  type: radio
+                  outerClasses: boutons-inline
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1,2,3]
+                - name: DisciplineCollegial
+                  type: text
+                  label:
+                    fr: Discipline/Programme de formation
+                - name: DiplomeCollegial
+                  type: select
+                  label: 
+                    fr: Diplôme obtenu
+                  options: 
+                    Aucun: Aucun
+                    Dec: Diplôme d'études collégiales (DEC)
+                    Aec: Attestation d'études collégiales (AEC)
+                    Cec: Certificat d'études collégiales (CEC)
+                - name: DateFinCollegial
+                  type: date
+                  label:
+                    fr: Date de fin des études
+            - name: Universitaire
+              type: group
+              v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Universitaire')                                                  
+              label:
+                fr: Universitaire            
+              components:
+                - name: NbAnneesReussiesUniversitaire
+                  type: radio
+                  outerClasses: boutons-inline
+                  label:
+                    fr: Nombre d'années réussies
+                  options: [1,2,3,4,5,6,7]
+                - name: DisciplineUniversitaire
+                  type: text
+                  label:
+                    fr: Discipline/Programme de formation
+                - name: DiplomeUniversitaire
+                  type: select
+                  label: 
+                    fr: Diplôme obtenu
+                  options: 
+                    Aucun: Aucun
+                    Cert: Certificat
+                    Bac: Baccalauréat
+                    Ma: Maîtrise
+                    Doc: Doctorat
+                - name: DateFinUniversitaire
+                  type: date
+                  label:
+                    fr: Date de fin des études
             - name: EtudesEtranger
               type: radio
               label: 
                 fr: Avez-vous fait vos études à l'étranger?
               options: yesno
-            - type: dynamic
-              v-if: val('prefixId$EtudesEtranger') === 'false'
-              tag: div     
-              components:
-                - name: OrdresEnseignementsApplicables
-                  type: checkbox
-                  label:
-                    fr: "Veuillez indiquer les ordres d'enseignements pour lesquels vous avez réussi au moins une année"
-                  options: 
-                    Primaire: Primaire
-                    SecondaireGen: Secondaire (Général)
-                    SecondaireFormProf: Secondaire (Formation professionnelle)
-                    SecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
-                    Collegial: Collégial (Formation générale ou technique)
-                    Universitaire: Universitaire
-      
-                - name: Primaire        
-                  type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Primaire')
-                  label:
-                    fr: Primaire
-                  components:
-                    - name: NbAnneesReussiesPrimaire
-                      type: radio
-                      outerClasses: boutons-inline
-                      label:
-                        fr: Nombre d'années réussies
-                      options: [1,2,3,4,5,6,7]
-                    - name: DateFinPrimaire
-                      type: date
-                      label:
-                        fr: Date de fin des études
-                - name: SecondaireGen
-                  type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireGen')          
-                  label:
-                    fr: Secondaire (général)
-                  components:
-                    - name: NbAnneesReussiesSecGeneral
-                      type: radio
-                      outerClasses: boutons-inline
-                      label:
-                        fr: Nombre d'années réussies
-                      options: [1,2,3,4,5]
-                    - name: DiplomeSecGeneral
-                      type: select
-                      label: 
-                        fr: Diplôme obtenu
-                      options: 
-                        Aucun: Aucun
-                        Des: Diplôme d'études secondaires (DES)
-                    - name: DateFinSecGeneral
-                      type: date
-                      label:
-                        fr: Date de fin des études
-                - name: SecondaireProf
-                  type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormProf')                    
-                  label:
-                    fr: Secondaire (Formation professionnelle)
-                  components:
-                    - name: NbAnneesReussiesSecFormProf
-                      type: radio
-                      outerClasses: boutons-inline
-                      label:
-                        fr: Nombre d'années réussies
-                      options: [3,4,5]
-                    - name: DisciplineSecFormProf
-                      type: text
-                      label:
-                        fr: Discipline/Programme de formation
-                    - name: DiplomeSecFormProf
-                      type: select
-                      label: 
-                        fr: Diplôme obtenu
-                      options: 
-                        Aucun: Aucun
-                        Aep: AEP
-                        Dep: DEP
-                        Asp: ASP
-                    - name: DateFinSecFormProf
-                      type: date
-                      label:
-                        fr: Date de fin des études
-                - name: SecondaireMetier
-                  type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormMétier')                              
-                  label:
-                    fr: Secondaire (Formation à un métier semi-spécialisé)
-                  components:
-                    - name: NbAnneesReussiesSecMetier
-                      type: radio
-                      outerClasses: boutons-inline
-                      label:
-                        fr: Nombre d'années réussies
-                      options: [1]
-                    - name: DisciplineSecMetier
-                      type: text
-                      label:
-                        fr: Discipline/Programme de formation
-                    - name: DateFinSecMetier
-                      type: date
-                      label:
-                        fr: Date de fin des études
-                - name: Collegial
-                  type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Collegial')                                        
-                  label:
-                    fr: Collégial (Formation générale ou technique)
-                  components:
-                    - name: NbAnneesReussiesCollegial
-                      type: radio
-                      outerClasses: boutons-inline
-                      label:
-                        fr: Nombre d'années réussies
-                      options: [1,2,3]
-                    - name: DisciplineCollegial
-                      type: text
-                      label:
-                        fr: Discipline/Programme de formation
-                    - name: DiplomeCollegial
-                      type: select
-                      label: 
-                        fr: Diplôme obtenu
-                      options: 
-                        Aucun: Aucun
-                        Dec: Diplôme d'études collégiales (DEC)
-                        Aec: Attestation d'études collégiales (AEC)
-                        Cec: Certificat d'études collégiales (CEC)
-                    - name: DateFinCollegial
-                      type: date
-                      label:
-                        fr: Date de fin des études
-                - name: Universitaire
-                  type: group
-                  v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Universitaire')                                                  
-                  label:
-                    fr: Universitaire            
-                  components:
-                    - name: NbAnneesReussiesUniversitaire
-                      type: radio
-                      outerClasses: boutons-inline
-                      label:
-                        fr: Nombre d'années réussies
-                      options: [1,2,3,4,5,6,7]
-                    - name: DisciplineUniversitaire
-                      type: text
-                      label:
-                        fr: Discipline/Programme de formation
-                    - name: DiplomeUniversitaire
-                      type: select
-                      label: 
-                        fr: Diplôme obtenu
-                      options: 
-                        Aucun: Aucun
-                        Cert: Certificat
-                        Bac: Baccalauréat
-                        Ma: Maîtrise
-                        Doc: Doctorat
-                    - name: DateFinUniversitaire
-                      type: date
-                      label:
-                        fr: Date de fin des études
             - name: SpecialiteEtudesEtranger
               type: text
               v-if: val('prefixId$EtudesEtranger') === 'true'                            
