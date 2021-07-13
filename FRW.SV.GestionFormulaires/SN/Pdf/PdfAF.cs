@@ -90,33 +90,29 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
                                                         .GetWidthPointKerned(champ.Value, texteTest.CalculatedSize);
 
                         var fieldPosition = pdfFormFields.GetFieldPositions(champ.Key);
-                        //Calculer la largeur
-                        var fieldWidth = fieldPosition[3] - fieldPosition[1];
+                        var pourcentageDepassement = ObtenirPourcentageDebordement(fieldPosition, currentTextSize, textField.BorderWidth);
 
-                        var pourcentageDepassement = (Math.Ceiling(currentTextSize) * 100 / (fieldWidth - (textField.BorderWidth * 2))) - 100;
+                        var valeurChamp = champ.Value;
 
-                        if (pourcentageDepassement < 0)
+                        if (pourcentageDepassement > 0)
                         {
-                            // Ça fit!
-                            pdfFormFields.SetField(champ.Key, champ.Value);
-                        }
-                        else if (pourcentageDepassement <= (configPdf.TryGetValue("pourcentRapetissement", out var pourcentRapetissement)
-                                                            ? int.Parse(pourcentRapetissement) : 20))
-                        {
-                            //Set auto size
+                            //Changer la police pour une police compatible "autosize"
                             pdfFormFields.SetFieldProperty(champ.Key, "textfont", bf, null);
+                            //Appliquer la taille "autosize" (valeur 0)
                             pdfFormFields.SetFieldProperty(champ.Key, "textsize", 0f, null);
-                            pdfFormFields.SetField(champ.Key, champ.Value);
-                        }
-                        else
-                        {
-                            refDict.Add($"REF{refId}", champ.Value);
-                            pdfFormFields.SetFieldProperty(champ.Key, "textfont", bf, null);
-                            pdfFormFields.SetFieldProperty(champ.Key, "textsize", 0f, null);
-                            pdfFormFields.SetField(champ.Key, $"REF{refId}");
 
-                            refId++;
+                            if (pourcentageDepassement > (configPdf.TryGetValue("pourcentRapetissement", out var pourcentRapetissement)
+                                      ? int.Parse(pourcentRapetissement) : 20))
+                            {
+                                //On va rediriger l'info dans une page annexe, on
+                                //ajoute un code de référence dans le champ texte
+                                valeurChamp = $"REF{refId++}";
+                                refDict.Add(valeurChamp, champ.Value);
+                            }
                         }
+
+                        pdfFormFields.SetField(champ.Key, valeurChamp);
+
                     }
                 }
                 // flatten the form to remove editting options, set it to false  
@@ -138,6 +134,14 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
 
             //Retourner le document complet, en byte array
             return final;
+        }
+
+        private double ObtenirPourcentageDebordement(float[] fieldPosition, float currentTextSize, float borderWidth)
+        {
+            //Calculer la largeur
+            var fieldWidth = fieldPosition[3] - fieldPosition[1];
+            var pourcentageDepassement = (Math.Ceiling(currentTextSize) * 100 / (fieldWidth - (borderWidth * 2))) - 100;
+            return pourcentageDepassement;
         }
 
         private byte[] GenererPageAnnexe(Dictionary<string, string> refDict)
