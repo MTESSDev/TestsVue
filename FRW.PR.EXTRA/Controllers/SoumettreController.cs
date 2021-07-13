@@ -1,5 +1,6 @@
 ﻿using FRW.PR.Extra.Model;
 using FRW.PR.Extra.Pages;
+using FRW.PR.Extra.Services;
 using FRW.PR.Extra.Utils;
 using FRW.PR.Model.Components;
 using FRW.TR.Commun;
@@ -25,6 +26,13 @@ namespace FRW.PR.Extra.Controllers
     [ApiController]
     public class SoumettreController : ControllerBase
     {
+        private readonly FormulairesService _formulairesService;
+
+        public SoumettreController(FormulairesService formService)
+        {
+            _formulairesService = formService;
+        }
+
         /// <summary>
         /// FRW311 - Gérer la soumission d'un formulaire dynamique
         /// </summary>
@@ -90,6 +98,38 @@ namespace FRW.PR.Extra.Controllers
                     }
                 }
             }
+            return Ok();
+        }
+
+        /// <summary>
+        /// FRW311 - Gérer la sauvegarde d'un formulaire dynamique sans validation
+        /// </summary>
+        /// <param name="typeFormulaire">Type/identifiant de configuration/formulaire</param>
+        /// <returns></returns>
+        [HttpPost("{typeFormulaire}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PostSauvegarde(string typeFormulaire)
+        {
+            string jsonDataFromUser;
+            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                jsonDataFromUser = await reader.ReadToEndAsync();
+            }
+
+            var data = JsonConvert.DeserializeObject<IDictionary<object, object>>(
+                                    jsonDataFromUser,
+                                        new JsonConverter[] {
+                                                new ConvertisseurFRW() }
+                                    );
+
+            if (data is null) { throw new Exception("No data received."); }
+
+            //TODO: appeler le backend pour obtenir le fichier
+            var dynamicForm = OutilsYaml.LireFicher<DynamicForm>(@$"schemas/{typeFormulaire}.ecsform.yml");
+
+            var confirmation = _formulairesService.Creer(typeFormulaire);
             return Ok();
         }
 
