@@ -2799,8 +2799,14 @@ form:
                     fr: <b>J’affirme</b> solennellement que les renseignements qui figurent dans cette demande sont exacts et complets.
                 - type: dynamic
                   tag: p
+                  v-if: val('TypeDemande').includes('Afdr')
                   text:
-                    fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, entre autres de mon retour au travail ou aux études ou encore de toute nouvelle source de revenus. 
+                    fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, entre autres de mon retour au travail ou aux études ou encore de toute nouvelle source de revenus.
+                - type: dynamic
+                  tag: p
+                  v-if: "!val('TypeDemande').includes('Afdr')"
+                  text:
+                    fr: <b>Je m’engage</b> à informer sans délai le Ministère de tout changement à ma situation, à l’informer entre autres de la date de mon retour au travail ou aux études.
             - name: Procuration
               type: checkbox
               label:
