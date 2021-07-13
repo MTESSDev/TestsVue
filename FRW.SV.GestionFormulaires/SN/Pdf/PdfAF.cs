@@ -29,6 +29,11 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
         public byte[]? FusionnerDonnees(DonneesChargement donneesChargement)
         {
             if (donneesChargement.Gabarits is null) { return null; }
+            if (donneesChargement.Config is null) { return null; }
+
+            _ = donneesChargement.Config.TryGetValue("pdf", out var configPdf);
+
+            if (configPdf is null) { configPdf = new Dictionary<string, string>(); }
 
             var refDict = new Dictionary<string, string>();
             var refId = 1;
@@ -48,6 +53,9 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
                 PdfReader pdfReader = new PdfReader($@"C:\Users\Dany\Documents\Visual Studio 2012\Projects\TestsVue\FRW.PR.EXTRA\bin\Debug\netcoreapp3.1\mapping\3003\{pdfName}.pdf");
                 PdfStamper pdfStamper = new PdfStamper(pdfReader, currentMemoryStream);
                 AcroFields pdfFormFields = pdfStamper.AcroFields;
+
+                var bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
+                pdfFormFields.AddSubstitutionFont(bf);
 
                 foreach (var champ in gabarit.Champs)
                 {
@@ -92,53 +100,20 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
                             // Ça fit!
                             pdfFormFields.SetField(champ.Key, champ.Value);
                         }
-                        else if (pourcentageDepassement <= int.Parse(donneesChargement.Config["pdf"]["pourcentRapetissement"]))
+                        else if (pourcentageDepassement <= (configPdf.TryGetValue("pourcentRapetissement", out var pourcentRapetissement)
+                                                            ? int.Parse(pourcentRapetissement) : 20))
                         {
-                            var bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
-
-                            //int totalfonts = FontFactory.RegisterDirectory("C:\\WINDOWS\\Fonts");
-                            //Font arial = FontFactory.GetFont("Arial", 8);
-
-                            //pdfFormFields.SetFieldProperty("nom", "fflags", 8388608, null);
-                            pdfFormFields.AddSubstitutionFont(bf);
-
-                            //var tField = new TextField(pdfStamper.Writer, new Rectangle(fieldPosition[1], fieldPosition[2], fieldPosition[3], fieldPosition[4]), "nom2");
-
-                            //       tField.Text = champ.Value;
-
-                            // if (ssIsMultiline)
-                            //   tField.Options = TextField.MULTILINE;
-                            //textField.Font
-                            //tField.Font = FontFactory.GetFont("Arial").BaseFont;
-                            //tField.Font = BaseFont.CreateFont("Arial", BaseFont.WINANSI, BaseFont.EMBEDDED);
-                            //tField.FontSize =0;
-
-                            //tField.FieldName = "nom2";
-                            //tField.Options = textField.Options;
-                            //tField.Box = new Rectangle(textField.);
-                            //pdfStamper.AddAnnotation(tField.GetTextField(), (int)fieldPosition[0]);
-                            //pdfFormFields.RemoveField("nom");
-
                             //Set auto size
                             pdfFormFields.SetFieldProperty(champ.Key, "textfont", bf, null);
                             pdfFormFields.SetFieldProperty(champ.Key, "textsize", 0f, null);
-
-                            //pdfFormFields.RegenerateField("nom");
                             pdfFormFields.SetField(champ.Key, champ.Value);
                         }
                         else
                         {
-                            pdfFormFields.SetFieldProperty("nom", "Ff", 8388608, null);
-                            //pdfFormFields.SetFieldProperty(champ.Key, "textsize", 0f, null);
                             refDict.Add($"REF{refId}", champ.Value);
+                            pdfFormFields.SetFieldProperty(champ.Key, "textfont", bf, null);
+                            pdfFormFields.SetFieldProperty(champ.Key, "textsize", 0f, null);
                             pdfFormFields.SetField(champ.Key, $"REF{refId}");
-
-                            //PushbuttonField buttonField = new PushbuttonField(pdfStamper.Writer, new Rectangle(fieldPosition[1], fieldPosition[2], fieldPosition[3], fieldPosition[4]), $"REF{refId}");
-                            //buttonField.Field.SetAdditionalActions(PdfName.Javascript, new PdfAction(PdfAction.LASTPAGE));
-
-                            //pdfStamper.AddAnnotation(buttonField.Field, int.Parse(fieldPosition[0].ToString()));
-
-                            //pdfFormFields.GetFieldItem($"REF{refId}").GetWidget(0).acti;
 
                             refId++;
                         }
@@ -146,7 +121,8 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
                 }
                 // flatten the form to remove editting options, set it to false  
                 // to leave the form open to subsequent manual edits  
-                pdfStamper.FormFlattening = true;
+                pdfStamper.FormFlattening = configPdf.TryGetValue("verrouillerChampsPdf", out var verrouillerPdf)
+                                                ? bool.Parse(verrouillerPdf) : true;
                 // close the pdf  
                 pdfStamper.Close();
 

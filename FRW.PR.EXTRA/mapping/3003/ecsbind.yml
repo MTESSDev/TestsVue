@@ -2,6 +2,7 @@ config:
   pdf:
     pourcentRapetissement: 20
     modeFusionDepassement: rapetissementEtAnnexe
+    verrouillerChampsPdf: false
 templates:
 - id: 01_a1
   condition: 
