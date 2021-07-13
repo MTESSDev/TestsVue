@@ -39,7 +39,7 @@ bind:
       - adulte1RaisonAfdr.0.adulte1DateEvenementFinDiminutionRevenus
     AFDR_Raison1:
       champs:
-      - PrecisionRaisonDemandeAfdr==AucunRevenu
+      - adulte1RaisonAfdr.0.adulte1PrecisionRaisonDemandeAfdr==AucunRevenu
     AFDR_Raison5:
       champs:
       - adulte1RaisonAfdr.0.adulte1PrecisionRaisonDemandeAfdr==PerteConjoint
@@ -99,16 +99,16 @@ bind:
       - PrecisionRaisonDemandeEmploi==RetourEcole
     nom:
       champs:
-      - adulte1Nom1
+      - adulte1NomFamille
     prenom:
       champs:
-      - adulte1Prénom1
+      - adulte1Prenom
     nas:
       champs:
-      - adulte1nas
+      - adulte1Nas
     date_naissance:
       champs:
-      - adulte1date_naissance
+      - adulte1DateNaissance
     date_nas9:
       champs:
       - adulte1date_expiration_nas
@@ -117,13 +117,13 @@ bind:
       - PrecisionRaisonDemandeEmploi==AideRechercheEmploi
     Sexe_Feminin:
       champs:
-      - adulte1Req-00-Sexe==Feminin
+      - adulte1Sexe==Feminin
     Langue_Francais:
       champs:
-      - adulte1Req-00-Langue==Francais
+      - adulte1Langue==Francais
     Langue_Anglais:
       champs:
-      - adulte1Req-00-Langue==Anglais
+      - adulte1Langue==Anglais
     NeQC_Oui:
       champs:
       - adulte1Req00-NeQC==true
@@ -132,7 +132,7 @@ bind:
       - adulte1Req00-NeQC==false
     Sexe_Masculin:
       champs:
-      - adulte1Req-00-Sexe==Masculin
+      - adulte1Sexe==Masculin
     Autochtone_Oui:
       champs:
       - adulte1Req-00-Autochtone==true
