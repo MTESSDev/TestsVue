@@ -136,7 +136,7 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
             return final;
         }
 
-        private double ObtenirPourcentageDebordement(float[] fieldPosition, float currentTextSize, float borderWidth)
+        private static double ObtenirPourcentageDebordement(float[] fieldPosition, float currentTextSize, float borderWidth)
         {
             //Calculer la largeur
             var fieldWidth = fieldPosition[3] - fieldPosition[1];
