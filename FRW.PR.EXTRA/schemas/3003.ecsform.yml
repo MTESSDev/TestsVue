@@ -142,15 +142,15 @@ form:
               label:
                 fr: Inscrivez le nom de votre propriétaire ou locateur, s’il y a lieu.
               components:
-                - name: Nom
+                - name: NomProprio
                   type: text
                   label:
                     fr: Nom de famille
-                - name: Prenom
+                - name: PrenomProprio
                   type: text
                   label:
                     fr: Prénom
-                - name: Telephone
+                - name: TelephoneProprio
                   type: text
                   outerClasses: lg
                   label:
@@ -354,7 +354,7 @@ form:
                 fr: Numéro de dossier (CP-12)
               validations:
                 optional: null
-            - name: Nom1
+            - name: NomFamille
               type: text
               label: 
                 fr: Nom de famille
@@ -362,7 +362,7 @@ form:
                 fr: Selon le certificat de naissance ou le document d'immigration.
               validations: 
                 max: 36,length
-            - name: Prénom1
+            - name: Prenom
               type: text
               label: 
                 fr: Prénom
@@ -439,7 +439,7 @@ form:
               label: 
                 fr: Êtes-vous né au Québec?
               options: yesno
-            - name: Nom3
+            - name: NomDuParent
               v-if: val('prefixId$NeQC') === 'true'
               type: text
               label: 
