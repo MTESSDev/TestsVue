@@ -208,7 +208,7 @@ form:
             fr: Raison de la demande
             en: (EN)Raison de la demande
           id: raisonDemande
-          v-if: val('TypeDemande').length > 0											 
+          v-if: val('TypeDemande').length > 0
           components:
             - name: RaisonAfdr
               type: group
@@ -452,20 +452,18 @@ form:
               label: 
                 fr: Êtes-vous né au Canada ?
               options: yesno
-            - name: Pays1
-              v-if: val('prefixId$NeCanada') === 'false'
-              type: text
-              label: 
-                fr: Indiquez votre pays de naissance
-            - name: DateArriveeCanada
-              v-if: val('prefixId$NeCanada') === 'false'
-              type: date
-              label: 
-                fr: Date d'arrivée au Canada
             - type: dynamic
               v-if: val('prefixId$NeCanada') === 'false'
               tag: div        
               components:
+                - name: Pays1
+                  type: text
+                  label: 
+                    fr: Indiquez votre pays de naissance
+                - name: DateArriveeCanada
+                  type: date
+                  label: 
+                    fr: Date d'arrivée au Canada
                 - name: CitCanadienne
                   type: radio
                   label: 
@@ -499,12 +497,11 @@ form:
                     fr: Comme vous êtes né hors du Canada, vous devrez fournir les documents confirmant votre statut.
             - name: Autochtone
               type: radio
-              v-if: val('prefixId$NeCanada') === 'true'
               label: 
                 fr: Vous considérez-vous comme un autochtone?
               options: yesno
             - name: AutochtoneType        
-              v-if: val('prefixId$NeCanada') === 'true' && val('prefixId$Autochtone') === 'true'
+              v-if: val('prefixId$Autochtone') === 'true'
               type: radio
               label: 
                 fr: Êtes-vous un membre d'une Première Nation ou un Inuit?
