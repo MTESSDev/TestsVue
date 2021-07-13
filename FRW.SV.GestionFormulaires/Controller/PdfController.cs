@@ -31,8 +31,10 @@ namespace FRW.SV.GestionFormulaires.Controller
         ///     {
         ///       "config": {
         ///         "pdf": {
-        ///           "pourcentRapetissement": "20",
-        ///           "modeFusionDepassement": "rapetissementEtAnnexe"
+        ///           "rapetisserTexteTropLong": "true",
+        ///           "redirigerAnnexeTexteTroplong": "true",
+        ///           "pourcentageDepassementAnnexe": "20",
+        ///           "verrouillerChampsPdf": "true"
         ///         }
         ///       },
         ///       "gabarits": [

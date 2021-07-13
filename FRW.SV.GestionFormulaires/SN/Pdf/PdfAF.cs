@@ -13,10 +13,13 @@ using FRW.SV.GestionFormulaires.Utils;
 
 namespace FRW.SV.GestionFormulaires.SN.Pdf
 {
+    /// <summary>
+    /// Classe de production de PDF avec gestion des données trop longues.
+    /// </summary>
     public class GestionPdf
     {
         /// <summary>
-        /// 
+        /// Fusionner données au(x) Pdf(s)
         /// </summary>
         /// <inheritdoc>
         ///   -Pour chaque gabarit à remplir
@@ -31,13 +34,11 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
             if (donneesChargement.Gabarits is null) { return null; }
             if (donneesChargement.Config is null) { return null; }
 
-            _ = donneesChargement.Config.TryGetValue("pdf", out var configPdf);
-
+            donneesChargement.Config.TryGetValue("pdf", out var configPdf);
             if (configPdf is null) { configPdf = new Dictionary<string, string>(); }
 
-            var refDict = new Dictionary<string, string>();
             var refId = 1;
-
+            var refDict = new Dictionary<string, string>();
             var gabaritsPdf = new List<(string, byte[])>();
 
             // Pour chaque gabarit à remplir
@@ -54,55 +55,48 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
                 PdfStamper pdfStamper = new PdfStamper(pdfReader, currentMemoryStream);
                 AcroFields pdfFormFields = pdfStamper.AcroFields;
 
+                // Police de remplacement
                 var bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.EMBEDDED);
                 pdfFormFields.AddSubstitutionFont(bf);
 
                 foreach (var champ in gabarit.Champs)
                 {
-                    var textField = new TextField(null, null, null);
-                    var valueName = pdfFormFields.GetFieldItem(champ.Key);
-                    var fieldType = pdfFormFields.GetFieldType(champ.Key);
+                    var champPdfType = pdfFormFields.GetFieldType(champ.Key);
 
-                    if (fieldType == AcroFields.FIELD_TYPE_CHECKBOX ||
-                        fieldType == AcroFields.FIELD_TYPE_RADIOBUTTON)
+                    if (champPdfType == AcroFields.FIELD_TYPE_CHECKBOX ||
+                        champPdfType == AcroFields.FIELD_TYPE_RADIOBUTTON)
                     {
-                        // Si la valeur prévue est vraie, on récupère la valeur vrai du champ courrant (pourrait être "On", "Oui" ou autres)
+                        // Si la valeur prévue est vraie, on récupère la valeur vraie du
+                        // champ courant (pourrait être "On", "Oui" ou autres)
                         if (bool.TryParse(champ.Value, out var setValue))
                         {
-                            var trueValue = string.Empty;
-                            foreach (var checkval in pdfFormFields.GetAppearanceStates(champ.Key))
-                            {
-                                if (checkval != "Off")
-                                {
-                                    trueValue = checkval;
-                                    break;
-                                }
-                            }
+                            var trueValue = pdfFormFields.ObtenirValeurVraieChamp(champ.Key);
                             pdfFormFields.SetField(champ.Key, trueValue);
                         }
                     }
                     else
                     {
-                        pdfFormFields.DecodeGenericDictionary(valueName.GetMerged(0), textField);
-
-                        var texteTest = new Font(textField.Font, textField.FontSize);
-                        var currentTextSize = texteTest.GetCalculatedBaseFont(true)
-                                                        .GetWidthPointKerned(champ.Value, texteTest.CalculatedSize);
-
-                        var fieldPosition = pdfFormFields.GetFieldPositions(champ.Key);
-                        var pourcentageDepassement = ObtenirPourcentageDebordement(fieldPosition, currentTextSize, textField.BorderWidth);
+                        var pourcentageDepassement = pdfFormFields.ObtenirPourcentageDebordement(champ.Key, champ.Value);
+                        var rapetisserTexteTropLong = !configPdf.TryGetValue("rapetisserTexteTropLong", out var cfgRapetisserTexteTropLong)
+                                                            || bool.Parse(cfgRapetisserTexteTropLong);
 
                         var valeurChamp = champ.Value;
 
                         if (pourcentageDepassement > 0)
                         {
-                            //Changer la police pour une police compatible "autosize"
-                            pdfFormFields.SetFieldProperty(champ.Key, "textfont", bf, null);
-                            //Appliquer la taille "autosize" (valeur 0)
-                            pdfFormFields.SetFieldProperty(champ.Key, "textsize", 0f, null);
+                            if (rapetisserTexteTropLong)
+                            {
+                                //Changer la police pour une police compatible "autosize"
+                                pdfFormFields.SetFieldProperty(champ.Key, "textfont", bf, null);
+                                //Appliquer la taille "autosize" (valeur 0)
+                                pdfFormFields.SetFieldProperty(champ.Key, "textsize", 0f, null);
+                            }
 
-                            if (pourcentageDepassement > (configPdf.TryGetValue("pourcentRapetissement", out var pourcentRapetissement)
-                                      ? int.Parse(pourcentRapetissement) : 20))
+                            var pourcentRapetissement = (configPdf.TryGetValue("pourcentageDepassementAnnexe", out var cfgPourcentRapetissement)
+                                                            ? int.Parse(cfgPourcentRapetissement) : 20);
+
+                            if (!rapetisserTexteTropLong 
+                                || pourcentageDepassement > pourcentRapetissement)
                             {
                                 //On va rediriger l'info dans une page annexe, on
                                 //ajoute un code de référence dans le champ texte
@@ -112,19 +106,20 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
                         }
 
                         pdfFormFields.SetField(champ.Key, valeurChamp);
-
                     }
                 }
                 // flatten the form to remove editting options, set it to false  
                 // to leave the form open to subsequent manual edits  
-                pdfStamper.FormFlattening = configPdf.TryGetValue("verrouillerChampsPdf", out var verrouillerPdf)
-                                                ? bool.Parse(verrouillerPdf) : true;
-                // close the pdf  
+                pdfStamper.FormFlattening = !configPdf.TryGetValue("verrouillerChampsPdf", out var verrouillerPdf)
+                                                || bool.Parse(verrouillerPdf);
+
                 pdfStamper.Close();
 
                 gabaritsPdf.Add(("application/pdf", currentMemoryStream.ToArray()));
             }
 
+            // Si nous avons des références à mettre en annexe
+            // on va produire l'annexe
             if (refDict.Count > 0)
             {
                 gabaritsPdf.Add(("application/pdf", GenererPageAnnexe(refDict)));
@@ -136,55 +131,42 @@ namespace FRW.SV.GestionFormulaires.SN.Pdf
             return final;
         }
 
-        private static double ObtenirPourcentageDebordement(float[] fieldPosition, float currentTextSize, float borderWidth)
-        {
-            //Calculer la largeur
-            var fieldWidth = fieldPosition[3] - fieldPosition[1];
-            var pourcentageDepassement = (Math.Ceiling(currentTextSize) * 100 / (fieldWidth - (borderWidth * 2))) - 100;
-            return pourcentageDepassement;
-        }
-
+        /// <summary>
+        /// Produire l'annexe
+        /// </summary>
         private byte[] GenererPageAnnexe(Dictionary<string, string> refDict)
         {
-            //Create a byte array that will eventually hold our final PDF
-            Byte[] bytes;
-
-            //Boilerplate iTextSharp setup here
-            //Create a stream that we can write to, in this case a MemoryStream
+            byte[] bytes;
             using (var ms = new MemoryStream())
             {
-
-                //Create an iTextSharp Document which is an abstraction of a PDF but **NOT** a PDF
                 var doc = new Document(PageSize.Letter);
-                //{
-
-                //Create a writer that's bound to our PDF abstraction and our stream
                 var writer = PdfWriter.GetInstance(doc, ms);
-                //{
-                //Open the document for writing
                 doc.Open();
-                var roll = string.Empty;
-                /*for (int i = 0; i < 100; i++)
-                 {*/
+                var tr = string.Empty;
+
                 foreach (var item in refDict)
                 {
-                    roll += $"<tr> <td scope=\"row\">{item.Key}</td> <td colspan=\"5\">{item.Value}</td> </tr>";
+                    tr += $"<tr> " +
+                          $" <td scope=\"row\">{item.Key}</td> " +
+                          $" <td colspan=\"5\">{item.Value}</td> " +
+                          $"</tr>";
                 }
-                /*}*/
 
-                //Our sample HTML and CSS
-                var example_html = $"<h1>Annexe des valeurs trop longues</h1><br>" +
+                var html = $"<h1>Annexe des valeurs trop longues</h1><br>" +
                     $"<table style=\"repeat-header:yes; \" width=\"100%\">" +
-                    $"<tr> <th scope=\"col\" style=\"color: white; vertical-align: middle;\" bgcolor=\"#3f87a6\">Référence</th> <th scope=\"col\" style=\"color: white;\" bgcolor=\"#3f87a6\" colspan=\"5\">Valeur</th> </tr> " +
-                    $"{roll} " +
+                    $"<tr> " +
+                    $" <th scope=\"col\" style=\"color: white; vertical-align: middle;\" bgcolor=\"#3f87a6\">Référence</th> " +
+                    $" <th scope=\"col\" style=\"color: white;\" bgcolor=\"#3f87a6\" colspan=\"5\">Valeur</th> " +
+                    $"</tr> " +
+                    $"{tr} " +
                     $"</table> ";
 
-                StringReader sr = new StringReader(example_html);
+                StringReader sr = new StringReader(html);
                 StyleSheet styles = new StyleSheet();
 
                 var objects = HtmlWorker.ParseToList(sr, styles);
 
-                foreach (IElement element in objects)
+                foreach (IElement? element in objects)
                 {
                     doc.Add(element);
                 }
