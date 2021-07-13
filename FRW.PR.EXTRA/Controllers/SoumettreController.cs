@@ -69,9 +69,8 @@ namespace FRW.PR.Extra.Controllers
                         {
                             object? val = null;
 
-                            if (item.GroupName != null && data[item.GroupName] is Array)
+                            if (item.GroupName != null && data[item.PrefixId + item.GroupName] is Array arrayItem)
                             {
-                                var arrayItem = (data[item.GroupName] as Array);
                                 if (arrayItem != null && arrayItem.Length == 1)
                                 {
                                     (arrayItem.GetValue(0) as Dictionary<object, object>)?.TryGetValue(item.PrefixId + item.Name, out val);
