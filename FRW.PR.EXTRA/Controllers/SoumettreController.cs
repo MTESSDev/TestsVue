@@ -84,7 +84,7 @@ namespace FRW.PR.Extra.Controllers
 
                             if (!validation.IsValid(val))
                             {
-                                return BadRequest($"{validation.FormatErrorMessage(item.Name)}");
+                                return ValidationProblem($"{validation.FormatErrorMessage(item.Name)}");
                             }
                         }
                     }
