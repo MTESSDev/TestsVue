@@ -14,36 +14,26 @@ form:
             en: Information on the application
           id: infos
           components:
-            - name: DemandeAE
-              type: radio
-              label:
-                fr: Demandez-vous des services d’aide à l’emploi ? 
-              options: yesno
-            - name: DemandeAfdr
-              type: radio
-              label:
-                fr: Demandez-vous une aide financière de dernier recours ?
-              options: yesno
-            # - name: TypeDemande
-            #   type: checkbox
-            #   label: 
-            #     fr: Quel type de demande voulez-vous effectuer?
-            #   tooltip:
-            #     title:
-            #       fr: Type de demande
-            #     text: 
-            #       fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra. Vivamus arcu nibh, venenatis vel venenatis a, sagittis eget est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nisi magna, porttitor vel augue id, porttitor fringilla sapien. Maecenas sollicitudin, massa facilisis finibus tempor, nibh nunc pharetra ante, in elementum nibh purus a arcu. Nam massa tellus, vehicula nec ante in, tempus ornare urna. Sed eget commodo libero. Nulla tincidunt justo erat, ac volutpat eros maximus in. Nam at malesuada magna. Aenean in magna non lectus viverra consectetur. In porttitor, dolor ac varius lacinia, lacus mauris laoreet neque, vitae.
-            #       en:       
-            #   options: 
-            #     Afdr: Demande d'aide financière de dernier recours
-            #     AideEmploi: Demande de service d'aide à l'emploi
+            - name: TypeDemande
+              type: checkbox
+              label: 
+                fr: Quel type de demande voulez-vous effectuer?
+              tooltip:
+                title:
+                  fr: Type de demande
+                text: 
+                  fr: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris maximus, nisl sed consequat sodales, dolor felis condimentum felis, sed facilisis dolor nibh quis risus. Suspendisse congue velit in vehicula congue. Vivamus sed ullamcorper dolor, quis pellentesque elit. Aenean urna mi, fringilla sed purus vel, hendrerit laoreet felis. Donec efficitur dolor vel pretium euismod. In non ipsum vitae massa commodo viverra. Vivamus arcu nibh, venenatis vel venenatis a, sagittis eget est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nisi magna, porttitor vel augue id, porttitor fringilla sapien. Maecenas sollicitudin, massa facilisis finibus tempor, nibh nunc pharetra ante, in elementum nibh purus a arcu. Nam massa tellus, vehicula nec ante in, tempus ornare urna. Sed eget commodo libero. Nulla tincidunt justo erat, ac volutpat eros maximus in. Nam at malesuada magna. Aenean in magna non lectus viverra consectetur. In porttitor, dolor ac varius lacinia, lacus mauris laoreet neque, vitae.
+                  en:       
+              options: 
+                Afdr: Demande d'aide financière de dernier recours
+                AideEmploi: Demande de service d'aide à l'emploi
             - type: bandeau
-              v-if: val('DemandeAfdr') === 'true'
+              v-if: val('TypeDemande').includes('Afdr')
               text: 
                 fr: L’aide financière qui peut être accordée tient compte de votre situation familiale.             
             - name: HabiteAvecAutreAdulte
               type: radio
-              v-if: val('DemandeAfdr') === 'true'
+              v-if: val('TypeDemande').includes('Afdr')
               label: 
                 fr: Habitez-vous avec un autre adulte?
               options: yesno
@@ -68,19 +58,19 @@ form:
                   type: radio
                   v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false'
                   label: 
-                    fr: Vivez-vous en couple avec cet adulte depuis au moins un an?
+                    fr: Vivez-vous maritalement avec cet adulte depuis au moins un an?
                   options: yesno
                 - name: ViePasseeMaritaleUnAn
                   type: radio
                   v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false' && val('PrecisionsAdulte2.VieMaritaleUnAn') === 'false'
                   label: 
-                    fr: Dans le passé, avez-vous vécu en couple avec cet adulte pendant au moins un an?
+                    fr: Dans le passé, avez-vous vécu maritalement avec cet adulte pendant au moins un an?
                   options: yesno
                 - name: ViePasseeMaritaleMoinsUnAn
                   type: radio
                   v-if: val('PrecisionsAdulte2.MarieUniCivilementAdulte') === 'false' && val('PrecisionsAdulte2.AutreParentEnfant') === 'false' && val('PrecisionsAdulte2.VieMaritaleUnAn') === 'false' && val('PrecisionsAdulte2.ViePasseeMaritaleUnAn') === 'false'
                   label: 
-                    fr: Vivez-vous en couple avec un autre adulte depuis moins d’un an?
+                    fr: Vivez-vous maritalement avec un autre adulte depuis moins d’un an?
                   options: yesno
                 - name: DateDebutCohabitation
                   type: date
@@ -103,7 +93,7 @@ form:
                 fr: Vous répondez à notre définition de conjoint. Votre conjoint doit fournir les renseignements le concernant sous « Adulte 2 » dans le présent formulaire.
             - type: dynamic
               tag: div
-              v-if: val('DemandeAfdr') === 'true'       
+              v-if: val('TypeDemande').includes('Afdr')       
               components:                    
               - name: ConjointMemeAdresse
                 type: radio
@@ -128,7 +118,7 @@ form:
         - section:
             fr: Informations sur le domicile
           id: domicile
-          v-if: val('DemandeAfdr') === 'true'
+          v-if: val('TypeDemande').includes('Afdr')
           components:
             - name: TypeDomicile
               type: select
@@ -218,10 +208,11 @@ form:
             fr: Raison de la demande
             en: (EN)Raison de la demande
           id: raisonDemande
+          v-if: val('TypeDemande').length > 0											 
           components:
             - name: RaisonAfdr
               type: group
-              v-if: val('DemandeAfdr') === 'true'  
+              v-if: val('TypeDemande').includes('Afdr')  
               label:
                 fr: Demande d'aide financière de dernier recours
               components:
@@ -328,7 +319,7 @@ form:
                     fr: Précisez la raison autre
             - name: RaisonAE
               type: group
-              v-if: val('DemandeAE') === 'true'
+              v-if: val('TypeDemande').includes('AideEmploi')
               label: 
                 fr: Demande de services d'aide à l'emploi      
               components:      
@@ -356,14 +347,13 @@ form:
             fr: Renseignements sur l'identité
           id: renseignementsIdentite
           components:
-            # TODO réactiver ce champ grisé et auto-rempli
-            # - name: Cp12
-            #   type: text
-            #   v-if: val('DemandeAfdr') === 'true'
-            #   label:
-            #     fr: Numéro de dossier (CP-12) si connu
-            #   validations:
-            #     optional: null
+            - name: Cp12
+              type: text
+              v-if: val('TypeDemande').includes('Afdr')
+              label:
+                fr: Numéro de dossier (CP-12)
+              validations:
+                optional: null
             - name: Nom1
               type: text
               label: 
@@ -407,14 +397,13 @@ form:
                 Feminin: Féminin 
                 Masculin: Masculin
             - name: EtatMatrimonial
-              v-if: val('DemandeAfdr') === 'true'
+              v-if: val('TypeDemande').includes('Afdr')
               type: select
               label:
                 fr: État matrimonial
               options:
                 celibataire: Célibataire
                 marieUnionCivile: Marié ou uni civilement
-                conjoint: Conjoint de fait
                 veuf: Veuf
                 separe: Séparé légalement
                 separeSansJugement: Séparé sans jugement
@@ -436,13 +425,13 @@ form:
                 Anglais: Anglais 
             - name: Curateur
               type: radio
-              v-if: val('DemandeAfdr') === 'true'
+              v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Êtes-vous représenté par le Curateur public du Québec?
               options: yesno
             - name: DosCurateur
               type: text
-              v-if: val('DemandeAfdr') === 'true' && val('prefixId$Curateur') === 'true'
+              v-if: val('TypeDemande').includes('Afdr') && val('prefixId$Curateur') === 'true'
               label:
                 fr: Numéro de dossier
             - name: NeQC
@@ -524,14 +513,14 @@ form:
                 AmerindienHorsReserve: Membre d'une Première Nation vivant à l'extérieur d'une collectivité
                 Inuit: Inuit
             - type: bandeau
-              v-if: val('DemandeAfdr') === 'true'
+              v-if: val('TypeDemande').includes('Afdr')
               text:
                 fr: >
                   <b>Vous pourriez avoir droit à des montants supplémentaires selon votre situation. 
                   Si vous répondez aux questions suivantes, nous pourrons évaluer votre droit à ces montants.</b>
             - name: EstEnceinte
               type: radio
-              v-if: val('DemandeAfdr') === 'true' && val('prefixId$Sexe') === 'Feminin'
+              v-if: val('TypeDemande').includes('Afdr') && val('prefixId$Sexe') === 'Feminin'
               label:
                 fr: Êtes-vous enceinte?
               options: yesno
@@ -544,7 +533,7 @@ form:
                 fr: Date prévue de l'accouchement
             - name: EstValidePourTravailler
               type: radio
-              v-if: val('DemandeAfdr') === 'true'
+              v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Est-ce que votre état de santé vous permet de travailler?
               options: yesno
@@ -620,6 +609,21 @@ form:
             fr: Situation actuelle
           id: SituationActuelle
           components:
+            - name: EnEmploi
+              type: radio
+              label: 
+                fr: Êtes-vous en emploi?
+              options: yesno
+            - name: PrecisionStatutEmploi
+              v-if: val('prefixId$EnEmploi') === 'true'
+              type: checkbox
+              label:
+                fr: Précisez le type d'emploi
+              options: 
+                TempsPlein: Temps plein
+                TempsPartiel: Temps partiel
+                SurAppel: Sur appel
+                TravailleurAutonome: Travailleur autonome
             - name: AideGouvRecue
               type: radio
               label: 
@@ -656,18 +660,7 @@ form:
               type: radio
               label: 
                 fr: Êtes-vous chef de famille monoparentale ?
-              options: yesno            
-            - name: PermisConduire
-              type: radio
-              label: 
-                fr: Possédez-vous un permis de conduire ?
               options: yesno
-            - name: ClassePermisConduire
-              type: text
-              outerClasses: md
-              label: 
-                fr: Précisez la/les classe(s)
-              v-if: val('prefixId$PermisConduire') === 'true'  
             - name: QuestionsStatistiques
               type: dynamic
               tag: p
@@ -723,17 +716,17 @@ form:
                   label: 
                     fr: Vous considérez-vous comme un membre d'une minorité visible ?
                   help: 
-                    fr: Un membre d’une minorité visible est une personne, autre qu’un Autochtone, facilement reconnaissable par sa différence ethnique ou la couleur de sa peau.
+                    fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
                   options: yesno
         # Section 5 - Statut d'étudiant
         - section: 
-            fr: Études en cours
+            fr: Statut d'étudiant
           id: EtudesEnCours
           components:
             - name: etudes
               type: radio
               label: 
-                fr: Êtes-vous aux études présentement?
+                fr: Êtes-vous aux études?
               options: yesno
             - type: dynamic
               v-if: val('prefixId$etudes') === 'true'
@@ -742,7 +735,7 @@ form:
                 - name: PrecisionStatutEtudes
                   type: radio
                   label:
-                    fr: Donnez des précisions
+                    fr: Précisez votre statut d'étudiant
                   options: 
                     TempsPlein: Temps plein
                     TempsPartiel: Temps partiel
@@ -753,7 +746,7 @@ form:
                 - name: NiveauEtudes
                   type: select
                   label: 
-                    fr: Indiquez l'ordre d'enseignement et le domaine d'études
+                    fr: Indiquez l'ordre d'enseignement
                   options: 
                     SecondaireGeneral: Secondaire général
                     SecondairePro: Secondaire professionnel
@@ -849,7 +842,8 @@ form:
                     SecondaireFormProf: Secondaire (Formation professionnelle)
                     SecondaireFormMétier: Secondaire (Formation à un métier semi-spécialisé)
                     Collegial: Collégial (Formation générale ou technique)
-                    Universitaire: Universitaire      
+                    Universitaire: Universitaire
+      
                 - name: Primaire        
                   type: group
                   v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Primaire')
@@ -1070,6 +1064,17 @@ form:
               v-if: val('prefixId$EstMembreOrdreProfessionnel') === 'true'                            
               label:
                 fr: Précisez l'ordre professionnel
+            - name: PermisConduire
+              type: radio
+              label: 
+                fr: Possédez-vous un permis de conduire ?
+              options: yesno
+            - name: ClassePermisConduire
+              type: text
+              outerClasses: md
+              label: 
+                fr: Précisez la/les classe(s)
+              v-if: val('prefixId$PermisConduire') === 'true'
 #              type: checkbox
 #              label: 
 #                fr: Précisez la/les classe(s)
@@ -1093,22 +1098,7 @@ form:
         - section:
             fr: Emplois
           id: emplois
-          components:            
-            - name: EnEmploi
-              type: radio
-              label: 
-                fr: Êtes-vous en emploi?
-              options: yesno
-            - name: PrecisionStatutEmploi
-              v-if: val('prefixId$EnEmploi') === 'true'
-              type: checkbox
-              label:
-                fr: Précisez le type d'emploi
-              options: 
-                TempsPlein: Temps plein
-                TempsPartiel: Temps partiel
-                SurAppel: Sur appel
-                TravailleurAutonome: Travailleur autonome
+          components:
             - name: Travaille
               type: radio
               label: 
@@ -1122,9 +1112,9 @@ form:
             - name: Emplois
               type: repeatableGroup
               repeatable: true
-              v-if: val('prefixId$Travaille') === 'true' || val('prefixId$EnEmploi') === 'true'         
+              v-if: val('prefixId$Travaille') === 'true'          
               label:
-                fr: Inscrivez les renseignements relatifs à vos 2 derniers emplois en commençant par votre emploi actuel ou le plus récent.
+                fr: Inscrivez les renseignements relatifs à vos deux dernières expériences de travail en commençant par la plus récente
                 en: Jobs
               instanceLabel:
                 fr: Emploi
@@ -1266,7 +1256,7 @@ form:
     # Groupe "Ressources" 
     - sectionGroup: 
         fr: Ressources
-      v-if: val('DemandeAfdr') === 'true'
+      v-if: val('TypeDemande').includes('Afdr')
       sections: 
         # Section - Revenus
         - section:
@@ -1290,10 +1280,6 @@ form:
                 RevenusEmplois: Revenus d'emplois
                 Pourboires: Pourboires
                 TravailAutonome: Revenus provenant d’un travail autonome ou de votre entreprise
-            - type: bandeau
-              v-if: val('TypesRevenusEmploi').includes('RevenusEmplois') || val('TypesRevenusEmploi').includes('Pourboires') || val('TypesRevenusEmploi').includes('TravailAutonome')
-              text:
-                fr: "Le montant net du salaire est obtenu en déduisant du salaire brut l’impôt sur le revenu (provincial et fédéral), les cotisations à l’assurance-emploi, au Régime québécois d’assurance parentale et au Régime de rentes du Québec ou à un régime de retraite obligatoire ainsi que la cotisation syndicale."  
             - name: RevenusEmploi
               type: repeatableGroup
               repeatable: true
@@ -1306,7 +1292,7 @@ form:
                 fr: Ajouter un revenu
               removeLabel:
                 fr: Supprimer ce revenu
-              limit: 4
+              limit: 2
               components: 
                 - name: RevenuEmploiProprio
                   type: radio
@@ -1853,9 +1839,7 @@ form:
             - name: PossedeRevenuAttente
               type: radio
               label:
-                fr: "Attendez-vous le début du versement de certains revenus?"
-              help: 
-                fr: "(par exemple, suite au dépôt d’une demande auprès d’un ministère ou d’un organisme gouvernemental)"
+                fr: Attendez-vous le début du versement de certains revenus?
               options: yesno
             - name: RevenusAttente
               type: repeatableGroup
@@ -2050,7 +2034,7 @@ form:
             - name: PossedePlacements
               type: radio
               label:
-                fr: Avez-vous des placements (REER, REEE, CELI, dépôts à terme, cryptomonnaies ou autre)?
+                fr: Avez-vous des placements (REER, REEE, CELI, dépôts à terme ou autre)?
               options: yesno
             - name: AvoirsPlacements
               type: repeatableGroup
@@ -2415,20 +2399,10 @@ form:
                   type: number
                   label:
                     fr: Valeur
-        # section: Renseignements additionnels
-        - section:
-            fr: "Renseignements additionnels"
-          v-if: val('DemandeAfdr') === 'true'
-          id: renseignements
-          components:
-            - name: renseignementsAdditionnels
-              type: textarea
-              label:
-                fr: "Veuillez utiliser cette section pour fournir tout renseignement additionnel concernant votre demande."    
     # Groupe Enfants à charge
     - sectionGroup: 
         fr: Enfants à charge
-      v-if: val('DemandeAfdr') === 'true' && (val('adulte1EnfantsACharge') === 'true' || val('adulte2EnfantsACharge') === 'true')
+      v-if: val('TypeDemande').includes('Afdr') && (val('adulte1EnfantsACharge') === 'true' || val('adulte2EnfantsACharge') === 'true')
       sections: 
         # Section - Enfants à charge
         - section:
@@ -2448,12 +2422,11 @@ form:
                 fr: Supprimer cet enfant à charge
               limit: 3                
               components:
-                #TODO réactiver ce component auto-rempli
-                # - name: Cp12
-                #   type: text
-                #   label:
-                #     fr: CP-12
-                #   outerClasses: lg                    
+                - name: Cp12
+                  type: text
+                  label:
+                    fr: CP-12
+                  outerClasses: lg                    
                 - name: Nom
                   type: text
                   label:
@@ -2619,32 +2592,21 @@ form:
                     v-if: val(`${name}.prefixId$DocumentGarde`, index) === 'Autre'
                     label:
                       fr: Précisez
-                  
-                  # - name: EnfantHabiteMemeAdresse
-                  #   type: radio
-                  #   label:
-                  #     fr: Cet enfant habite-t-il avec vous?
-                  #   options: yesno
-                  # - name: PrecisionAdresse
-                  #   type: text
-                  #   v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
-                  #   label:
-                  #     fr: Adresse de l'enfant à charge
-                  # - name: PrecisionRaison
-                  #   type: text
-                  #   v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
-                  #   label:
-                  #     fr: Raison de la non-cohabitation
-            - name: EnfantsHabitentMemeAdresse
-              type: radio
-              label:
-                fr: "Est-ce que tous les enfants qui sont à votre charge habitent à la même adresse que vous?"
-              options: yesno
-            - name: PrecisionEnfantsAutreAdresse
-              type: textarea
-              v-if: val('EnfantsHabitentMemeAdresse') === 'false'
-              label:
-                fr: "Inscrivez les prénoms des enfants ainsi que la raison de cette situation."
+                  - name: EnfantHabiteMemeAdresse
+                    type: radio
+                    label:
+                      fr: Cet enfant habite-t-il avec vous?
+                    options: yesno
+                  - name: PrecisionAdresse
+                    type: text
+                    v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
+                    label:
+                      fr: Adresse de l'enfant à charge
+                  - name: PrecisionRaison
+                    type: text
+                    v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
+                    label:
+                      fr: Raison de la non-cohabitation
         # Section - Revenus et biens des enfants
         - section:
             fr: Revenus et biens des enfants
@@ -2669,10 +2631,10 @@ form:
                 fr: Supprimer ce revenu
               limit: 2                
               components:
-              - name: PrenomEnfant
+              - name: IdEnfant
                 type: text
                 label:
-                  fr: Prénom de l'enfant
+                  fr: Nom et prénom de l'enfant
               - name: SourceRevenu
                 type: text
                 label:
@@ -2713,11 +2675,11 @@ form:
                 - name: IdEnfant
                   type: text
                   label:
-                    fr: Prénom de l'enfant
+                    fr: Nom et prénom de l'enfant
                 - name: DescriptionBien
                   type: text
                   label:
-                    fr: Numéro de compte ou description du bien
+                    fr: Description du bien ou numéro de compte
                 - name: ValeurBien
                   type: number
                   label:
@@ -2731,7 +2693,7 @@ form:
         - section:
             fr: Destinataire de la correspondance
           id: destinataire
-          v-if: val('DemandeAfdr') === 'true'
+          v-if: val('TypeDemande').includes('Afdr')
           components: 
             - type: bandeau
               components:
@@ -2818,7 +2780,7 @@ form:
         - section: 
             fr: Affirmation solenelle
           id: affirmationSolennelle
-          v-if: val('DemandeAfdr') === 'true' || val ('DemandeAE') === 'true'
+          v-if: val('TypeDemande').length > 0
           components:
             - type: bandeau
               components:
@@ -2828,7 +2790,7 @@ form:
 #                    fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
                 - type: dynamic
                   tag: p
-                  v-if: val('DemandeAfdr') === 'true'
+                  v-if: val('TypeDemande').includes('Afdr')
                   text:
                     fr: <b>Je reconnais</b> que le ministère du Travail, de l’Emploi et de la Solidarité sociale m’a dûment informé qu’il se réserve le droit de me demander tout document ou renseignement qu’il juge nécessaire pour la vérification de mon admissibilité ainsi que celle de ma famille à un programme d’aide financière de dernier recours et pour l’établissement du montant de l’aide accordée. Des vérifications me concernant peuvent être faites à ces fins, sans mon consentement, auprès de divers organismes publics ou privés ainsi qu’auprès de personnes.  
                 - type: dynamic
