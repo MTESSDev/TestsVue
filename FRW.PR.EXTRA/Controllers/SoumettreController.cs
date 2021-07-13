@@ -69,7 +69,9 @@ namespace FRW.PR.Extra.Controllers
                         {
                             object? val = null;
 
-                            if (item.GroupName != null && data.TryGetValue(item.PrefixId + item.GroupName, out var groupData)  && groupData is Array arrayItem)
+                            if (item.GroupName != null 
+                                && data.TryGetValue(item.PrefixId + item.GroupName, out var groupData) 
+                                && groupData is Array arrayItem)
                             {
                                 if (arrayItem != null && arrayItem.Length == 1)
                                 {
