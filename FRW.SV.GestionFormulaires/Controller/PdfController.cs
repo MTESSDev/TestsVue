@@ -2,10 +2,12 @@
 using FRW.TR.Contrats;
 using FRW.SV.GestionFormulaires.SN.Pdf;
 using FRW.TR.Contrats.ConversionDonnees;
-using Swashbuckle.Examples;
 
 namespace FRW.SV.GestionFormulaires.Controller
 {
+    /// <summary>
+    /// Gestion Pdf
+    /// </summary>
     [Route("/api/v1/[controller]/[action]")]
     [ApiController]
     [Produces("application/json")]
@@ -43,7 +45,8 @@ namespace FRW.SV.GestionFormulaires.Controller
         ///           },
         ///           "champs": {
         ///             "DM_AFDR_PerteRevenus": "true",
-        ///             "PerteRevenus1": "true"
+        ///             "PerteRevenus1": "true",
+        ///             "nom": "Ti-cass dans le bas de la côte la juste après le dépanneur"
         ///           }
         ///         },
         ///         {
@@ -62,11 +65,15 @@ namespace FRW.SV.GestionFormulaires.Controller
         /// <param name="donneesChargement">Données à charger dans les gabarits de PDF.</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult<AppelSortant<byte[]>> ProduirePdf(DonneesChargement donneesChargement)
+        [Produces("application/pdf")]
+        public ActionResult ProduirePdf(DonneesChargement donneesChargement)
         {
             var retourGestionPdf = _gestionPdf.FusionnerDonnees(donneesChargement);
 
-            return new AppelSortant<byte[]>() { Sortie = retourGestionPdf };
+            HttpContext.Response.Headers.Add("Content-Type", "application/pdf");
+            HttpContext.Response.Headers.Add("Content-Disposition", "attachment; filename=labels.pdf");
+
+            return new FileContentResult(retourGestionPdf, "application/pdf");
         }
     }
 }
