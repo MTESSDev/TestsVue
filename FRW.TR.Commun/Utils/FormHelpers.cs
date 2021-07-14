@@ -95,7 +95,7 @@ namespace FRW.TR.Commun.Utils
             var prefixId = context.Lookup<object>("prefixId");
             var enableVif = context.Lookup<object>("Form.enableVif");
 
-            if (bool.Parse(enableVif.ToString() ?? "true"))
+            if (bool.Parse(enableVif?.ToString() ?? "true"))
             {
                 return $" v-if=\"{InternalGenerateVif(vif?.ToString(), prefixId?.ToString())}\"";
             }
