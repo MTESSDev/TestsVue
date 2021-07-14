@@ -1,0 +1,9 @@
+﻿http_client:
+  default_options:
+    max_redirects: 7
+  backend.client:
+    scope: 'https://api\.infologique\.net' #regex de l'url
+    #network: web # web ou RITM
+    #base_uri: 'https://api.infologique.net'
+    headers:
+      Accept: 'application/json'

@@ -83,6 +83,15 @@ form:
           {{RecursiveComponents components}}
         </formulate-input>
       </transition>
+      {{^Form.enableVif}}
+        {{# tooltip}}
+        <div class="mb-32">
+          <h4>Contenu de la bulle d'aide</h4>
+          <h5>{{i18n title}}</h5>
+          {{i18n text}}
+        </div>
+        {{/ tooltip}}
+      {{/Form.enableVif}}
     group: |
       <transition name="fade">
         <formulate-input class="group" {{# v-if}} {{GenerateVif .}} {{/ v-if}}

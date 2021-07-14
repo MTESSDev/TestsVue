@@ -49,8 +49,8 @@ namespace FRW.SV.GestionFormulaires
             Smart.Default.Settings.ParseErrorAction = SmartFormat.Core.Settings.ErrorAction.Ignore;
             //services.AddDataProtection(options => options.ApplicationDiscriminator = "ECS")
             //  .AddKeyManagementOptions(options => options.XmlRepository = new ApiXmlRepository(Configuration));
-
             services.AddHttpContextAccessor();
+            services.AddHttpClient();
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             services.AddScoped<SN.FormConfig>();
             services.AddScoped<DalFormulaires>();
