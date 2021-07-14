@@ -1,6 +1,8 @@
 ﻿using FRW.TR.Commun;
+using FRW.TR.Contrats;
 using SV.GestionFormulaires.DAL;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FRW.SV.GestionFormulaires.SN
@@ -15,7 +17,7 @@ namespace FRW.SV.GestionFormulaires.SN
         /// <summary>
         /// Todo configurer les dépendances dans startup
         /// </summary>
-        /// <param name="creerSuiviEtat"></param>
+        /// <param name="dalFormulaires">Accès aux données</param>
         public CreerFormulaire(DalFormulaires dalFormulaires)
         {
             _dal = dalFormulaires;
@@ -23,28 +25,23 @@ namespace FRW.SV.GestionFormulaires.SN
 
         /// <summary>
         /// Traiter la création d'un formulaire
+        /// <param name="entrant">EntrantCreerFormulaire</param>param>
         /// </summary>
-        /// <param name="typeFormulaire">Type de formulaire</param>
-        /// <param name="idSysAppelant">Identifiant du système appelant</param>
-        /// <param name="contenuFormulaire">Contenu à sauvegarder</param>
-        public async Task<string> Traitement(string typeFormulaire, string idSysAppelant, string? contenuFormulaire = null)
+        public async Task<string> Traitement(EntrantCreerFormulaire entrant)
         {
-            var numeroForm = GenererNumeroFormulaire();
-            var numeroConf = await Enregistrer(typeFormulaire, idSysAppelant, numeroForm, contenuFormulaire);
-            await SuiviEtat.Creer(numeroForm, Constantes.EtatCreer);
+            entrant.NoFormPublic = GenererNumeroFormulaire();
+            var numeroConf = await Enregistrer(entrant);
+            await SuiviEtat.Creer(entrant.NoFormPublic, Constantes.EtatCreer);
             return numeroConf;
         }
 
         /// <summary>
         /// Créer enregistrement dans la table formulaire
         /// </summary>
-        /// <param name="typeFormulaire">Type de formulaire</param>
-        /// <param name="idSysAppelant">Identifiant du système appelant</param>
-        /// <param name="numeroForm">Numéro public du formulaire</param>
-        /// <param name="contenuFormulaire">Contenu à sauvegarder</param>
-        private async Task<string> Enregistrer(string typeFormulaire, string idSysAppelant, string numeroForm, string contenuFormulaire)
+        /// <param name="entrant">Informations cénessaires à la création du formulaire</param>
+        private async Task<string> Enregistrer(EntrantCreerFormulaire entrant)
         {
-            return await _dal.Creer(typeFormulaire, idSysAppelant, numeroForm, contenuFormulaire);
+            return await _dal.Creer(entrant);
         }
 
         /// <summary>
