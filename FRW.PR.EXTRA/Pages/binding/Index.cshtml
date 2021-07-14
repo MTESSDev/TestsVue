@@ -103,6 +103,13 @@
             transition: opacity 0.3s ease;
         }
 
+        /* Espacement checkbox inline */
+        .custom-checkbox.lg.d-inline-block .custom-control-label::before, .custom-radio.lg .custom-control-label::before {
+            left: -1.75rem
+        }
+        .custom-checkbox.lg.d-inline-block .custom-control-label::after, .custom-radio.lg .custom-control-label::after {
+            left: -1.75rem
+        }
 
         /*
             * The following styles are auto-applied to elements with
@@ -112,7 +119,6 @@
             * You can easily play with the modal transition by editing
             * these styles.
             */
-
         .modal-enter {
             opacity: 0;
         }
@@ -196,14 +202,15 @@
                     <label for="select2fields">
                         Champ(s) et valeur(s) ({{optionsFields.length}})
                     </label>
+                    <div class="custom-control custom-checkbox lg d-inline-block ml-4">
+                        <input id="afficherValeursAssignees" type="checkbox" v-model="showAll" class="custom-control-input" />
+                        <label class="custom-control-label" for="afficherValeursAssignees">Afficher même les valeurs assignées</label>
+                    </div>
+
                     <select2fields id="select2fields" class="form-control form-group" multiple :options="optionsFields" v-model="selectedFieldsTemp">
                         <option disabled value="0">Choisir</option>
                     </select2fields>
 
-                    <div class="form-group custom-control custom-checkbox lg">
-                        <input id="afficherValeursAssignees" type="checkbox" v-model="showAll" class="custom-control-input" />
-                        <label class="custom-control-label" for="afficherValeursAssignees">Afficher même les valeurs assignées</label>
-                    </div>
 
                     <label for="formule">Formule (optionnel)</label>
                     <span class="precision">Voir la doc de Smart.Format.</span>
