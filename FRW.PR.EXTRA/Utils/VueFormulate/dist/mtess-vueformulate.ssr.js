@@ -68,7 +68,6 @@ function _nonIterableRest() {
 //
 //
 //
-//
 //Note Importante! Il ne doit y avoir aucun espace entre le <label> et le <span> d'indicateur de champ obligatoire (seul moyen mettre sur m�me ligne comme c'est fait actuellement) Idem avec le span .conteneur-tooltip
 //aussi les &nbsp et &#xfeff;(espace ins�cable zero width) dans icone-champ-requis et conteneur-tooltip sont essentiels dans la strat�gie css permettant de ne pas afficher un * et/ou un tooltip seuls sur une ligne.
 var script$3 = {
@@ -105,10 +104,12 @@ var script$3 = {
 
     if (this.context.help) {
       this.$nextTick(function () {
+        console.log(this);
         var help = this.$parent.$el.querySelector(".formulate-input-help");
 
         if (help) {
-          help.setAttribute('aria-hidden', 'true');
+          //help.setAttribute('aria-hidden', 'true')
+          this.$el.setAttribute('aria-describedby', help.id);
         }
       });
     }
@@ -203,7 +204,7 @@ var __vue_render__$3 = function __vue_render__() {
       "id": _vm.context.id + "_label",
       "for": _vm.context.id
     }
-  }, [_vm._ssrNode("<span>" + _vm._ssrEscape(_vm._s(_vm.context.label)) + "</span>" + (_vm.isRequired ? "<span aria-hidden=\"true\" class=\"icone-champ-requis\">" + _vm._ssrEscape(" " + _vm._s(_vm.requiredFieldIndicator)) + "</span>" : "<!---->") + (_vm.tooltipText ? "<span class=\"conteneur-tooltip\">﻿\n    <button type=\"button\" data-toggle=\"modal\" class=\"tooltip-toggle\"><span class=\"conteneur-puce\"><span aria-hidden=\"true\" class=\"puce\"><span aria-hidden=\"true\" class=\"icone-svg question\"></span></span></span></button></span>" : "<!---->") + " " + (_vm.isRequired ? "<span class=\"sr-only\">. Obligatoire.</span>" : "<!---->") + " " + (_vm.context.help ? "<span class=\"sr-only\">" + (!_vm.isRequired ? "<span>.</span>" : "<!---->") + _vm._ssrEscape(" " + _vm._s(_vm.context.help)) + "</span>" : "<!---->") + " " + (_vm.hasValidationRules && _vm.messagesErreur ? "<span aria-live=\"polite\" class=\"sr-only\">" + _vm._ssrEscape(" " + _vm._s(_vm.messagesErreur)) + "</span>" : "<!---->"))]);
+  }, [_vm._ssrNode("<span>" + _vm._ssrEscape(_vm._s(_vm.context.label)) + "</span>" + (_vm.isRequired ? "<span aria-hidden=\"true\" class=\"icone-champ-requis\">" + _vm._ssrEscape(" " + _vm._s(_vm.requiredFieldIndicator)) + "</span>" : "<!---->") + (_vm.tooltipText ? "<span class=\"conteneur-tooltip\">﻿\n    <button type=\"button\" data-toggle=\"modal\" class=\"tooltip-toggle\"><span class=\"conteneur-puce\"><span aria-hidden=\"true\" class=\"puce\"><span aria-hidden=\"true\" class=\"icone-svg question\"></span></span></span></button></span>" : "<!---->") + " " + (_vm.isRequired ? "<span class=\"sr-only\">. Obligatoire.</span>" : "<!---->") + " " + (_vm.hasValidationRules && _vm.messagesErreur ? "<span aria-live=\"polite\" class=\"sr-only\">" + _vm._ssrEscape(" " + _vm._s(_vm.messagesErreur)) + "</span>" : "<!---->"))]);
 };
 
 var __vue_staticRenderFns__$3 = [];
@@ -215,7 +216,7 @@ var __vue_inject_styles__$3 = undefined;
 var __vue_scope_id__$3 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$3 = "data-v-445a78b1";
+var __vue_module_identifier__$3 = "data-v-ee95dec6";
 /* functional template */
 
 var __vue_is_functional_template__$3 = false;

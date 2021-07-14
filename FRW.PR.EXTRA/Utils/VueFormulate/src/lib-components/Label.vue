@@ -9,8 +9,7 @@
         </span>
     </button>
 </span>
-        <span v-if="isRequired" class="sr-only">.&nbsp;Obligatoire.</span>
-        <span v-if="context.help" class="sr-only"><span v-if="!isRequired">.</span>&nbsp;{{context.help}}</span>
+        <span v-if="isRequired" class="sr-only">.&nbsp;Obligatoire.</span>        
         <span v-if="hasValidationRules && messagesErreur" class="sr-only" aria-live="polite"> {{messagesErreur}}</span>
     </label>
 </template>
@@ -51,9 +50,13 @@
             // Ne pas lire la précision au lecteur écran car nous l'avons ajoutée dans le label.
             if (this.context.help) {
                 this.$nextTick(function () {
+                    console.log(this)
+
                     const help = this.$parent.$el.querySelector(".formulate-input-help")
+
                     if (help) {
-                        help.setAttribute('aria-hidden', 'true')
+                        //help.setAttribute('aria-hidden', 'true')
+                        this.$el.setAttribute('aria-describedby', help.id)
                     }
                 })
             }
