@@ -38,7 +38,7 @@
     <script type="text/x-template" id="modal-template">
         <transition name="modal">
             <div class="modal-mask">
-                <div class="fenetre-message modal show" ref="modalFocusable" data-backdrop="static" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display:block" @@keydown.esc="$emit('close')">
+                <div class="fenetre-message modal show" ref="modalFocusable" data-backdrop="static" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display:block; overflow-y: auto" @@keydown.esc="$emit('close')">
                     <!--<div class="modal-wrapper">-->
                     <div class="modal-dialog modal-lg">
 
