@@ -112,7 +112,7 @@ namespace FRW.PR.Extra.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PostSauvegarde(string typeFormulaire)
+        public async Task<IActionResult> Sauvegarde(string typeFormulaire)
         {
             string jsonDataFromUser;
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))

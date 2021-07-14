@@ -626,8 +626,8 @@
             },
             enregistrer() {
                 //TODO UrlRoute au lieu de l'url codée dur
-                //axios.post('/api/Soumettre/PostSauvegarde/3003', this.form);
-                axios.post('@Url.ActionLink("PostSauvegarde","Soumettre")', this.form);
+                //axios.post('/api/Soumettre/Sauvegarde/3003', this.form);
+                axios.post('@Url.ActionLink("Sauvegarde","Soumettre")', this.form);
                 alert("Sauvegardé!");
             },
             forcerSoumettre()
