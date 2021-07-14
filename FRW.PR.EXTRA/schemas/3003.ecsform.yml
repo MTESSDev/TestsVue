@@ -837,7 +837,8 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
-                  help: Au meilleur de votre connaissance.
+                  help: 
+                    fr: Au meilleur de votre connaissance.
             - name: SecondaireGen
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireGen')          
@@ -861,7 +862,8 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
-                  help: Au meilleur de votre connaissance.
+                  help: 
+                    fr: Au meilleur de votre connaissance.
             - name: SecondaireProf
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormProf')                    
@@ -891,7 +893,8 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
-                  help: Au meilleur de votre connaissance.
+                  help: 
+                    fr: Au meilleur de votre connaissance.
             - name: SecondaireMetier
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormMétier')                              
@@ -912,7 +915,8 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
-                  help: Au meilleur de votre connaissance.
+                  help: 
+                    fr: Au meilleur de votre connaissance.
             - name: Collegial
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Collegial')                                        
@@ -942,7 +946,8 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
-                  help: Au meilleur de votre connaissance.
+                  help: 
+                    fr: Au meilleur de votre connaissance.
             - name: Universitaire
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Universitaire')                                                  
@@ -973,7 +978,8 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
-                  help: Au meilleur de votre connaissance.
+                  help: 
+                    fr: Au meilleur de votre connaissance.
             - name: EtudesEtranger
               type: radio
               label: 
