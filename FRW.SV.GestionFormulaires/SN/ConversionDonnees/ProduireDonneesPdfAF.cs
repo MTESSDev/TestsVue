@@ -8,6 +8,9 @@ using FRW.TR.Contrats.ConversionDonnees;
 
 namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
 {
+    /// <summary>
+    /// Convertir Données formulaire vers autre structure.
+    /// </summary>
     public class ConvertirDonneesAF
     {
         private readonly FormConfig _obtenirConfiguration;
@@ -59,8 +62,11 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                     if (!string.IsNullOrWhiteSpace(template["condition"]))
                     {
                         var result = ExecuterFormule(modeleDonnees, template["condition"]);
-                        if (!result.Equals("true"))
+                        // Si la formule retourne un true dans le texte on continue.
+                        // Ex: plusieurs formules pourraient produire : truefalsefalse comme retour.
+                        if (!result.Contains("true"))
                         {
+                            // Ne pas continuer l'exécution du module
                             continue;
                         }
                     }
@@ -68,7 +74,7 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
                     var gabarit = new Dictionary<string, string>();
                     foreach (var bind in cfg.Bind![template["id"]])
                     {
-                        string? valeur;
+                        string? valeur = null;
 
                         // Mode formule, ici on lit avec SmartFormat
                         if (bind.Value.Formule is { } && bind.Value.Champs is { })
@@ -100,10 +106,6 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
 
                             if (string.IsNullOrWhiteSpace(formule))
                             {
-                                valeur = string.Empty;
-                            }
-                            else
-                            {
                                 valeur = ExecuterFormule(modeleDonnees, formule);
                             }
                         }
@@ -125,8 +127,14 @@ namespace FRW.SV.GestionFormulaires.SN.ConversionDonnees
             return sortie;
         }
 
+        /// <summary>
+        /// Executer Smart.Format si la source est non null.
+        /// </summary>
+        /// <param name="source">Dictionnaire de données</param>
+        /// <param name="formule">Formule Smart.Format à exécuter</param>
+        /// <returns></returns>
         public static string ExecuterFormule(IDictionary<object, object>? source,
-                                      string formule)
+                                             string formule)
         {
             if (source is null) return string.Empty;
 
