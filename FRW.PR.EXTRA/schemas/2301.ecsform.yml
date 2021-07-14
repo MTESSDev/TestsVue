@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
   title:
-    fr: Changement de situation
-    en: (EN) Changement de situation
+    fr: Dépôt direct
+    en: (EN) Dépôt direct
   sectionsGroup:
     - sectionGroup: 
       sections:
@@ -76,7 +76,7 @@ form:
               label: 
                 fr: Code postal
                 en: Postal code
-              outerClasses: sm  
+              outerClasses: md  
               validations:
                 max: 6,length
         

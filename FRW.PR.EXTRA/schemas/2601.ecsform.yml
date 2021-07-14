@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/TrucsPES/TestsVue/main/schemas/ecsform.json
 form:
   title:
-    fr: Dépôt direct
-    en: (EN) Dépôt direct
+    fr: Changement de situation
+    en: (EN) Changement de situation
   sectionsGroup:
     - sectionGroup:
       sections:
@@ -43,13 +43,13 @@ form:
                     en: Complete Section 1 and the sections related to the change(s) in your situation or your family situation. Be sure to provide the information requested, if any.
             - name: NomFamille
               type: text
-              outerClasses: lg
+              outerClasses: xl
               label: 
                 fr: Nom de famille
                 en: Last name
             - name: Prenom
               type: text
-              outerClasses: lg
+              outerClasses: xl
               label: 
                 fr: Prénom
                 en: First Name
@@ -185,7 +185,6 @@ form:
                   label: 
                     fr: Nom de l’enfant
                     en: Child’s name
-                  outerClasses: lg
                 - name: OrdreEnseignement
                   type: select
                   outerClasses: lg
@@ -642,8 +641,11 @@ form:
                   outerClasses: sm
                   options: yesno
                   label:
-                    fr: À cette nouvelle adresse, est-ce que d’autres personnes habitent avec vous (sauf un conjoint ou un enfant à charge)?
-                    en: Does anyone else live with you at this new address? (Other than your spouse or a dependent children)?
+                    fr: À cette nouvelle adresse, est-ce que d’autres personnes habitent avec vous?
+                    en: Does anyone else live with you at this new address?
+                  help: 
+                    fr: Sauf un conjoint ou un enfant à charge.
+                    en: Other than your spouse or a dependent children.
                 - name: AutresPersonnesDetails
                   type: repeatableGroup
                   repeatable: true
@@ -663,7 +665,6 @@ form:
                   components: 
                     - name: NomPrenomAutrePersonne
                       type: text
-                      outerClasses: lg
                       label:
                         fr: Nom et prénom de la personne
                         en: Person's Last and first name
@@ -716,20 +717,20 @@ form:
                           FreqMensuelle:
                             fr: par mois
                             en: a month
-                - type: inline
-                  classes: no-wrap
-                  components:
-                    - name: NomPrenomProprietaireLocateur
-                      type: text
-                      label:  
-                        fr: Nom de famille et prénom du propriétaire ou du locateur  (personne qui loue la chambre ou le logement)
-                        en: First and last name of the owner or person  who is renting you the room or dwelling
-                    - name: TelephoneProprietaireLocateur
-                      type: text
-                      outerClasses: md
-                      label:
-                        fr: Téléphone
-                        en: Telephone
+                - name: NomPrenomProprietaireLocateur
+                  type: text
+                  label:  
+                    fr: Nom de famille et prénom du propriétaire ou du locateur
+                    en: First and last name of the owner or person who is renting you the room or dwelling
+                  help: 
+                    fr: Personne qui loue la chambre ou le logement.
+                    en: 
+                - name: TelephoneProprietaireLocateur
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Téléphone
+                    en: Telephone
         
         # Section 5 - Changement résidence
         - section: 
@@ -865,7 +866,10 @@ form:
                 en: >
                 Note: If you are participating in the Aim for Employment Program, you do not have to declare your liquid assets or the purchase or sale of property.
             - name: TexteAutresChangements
-              type: textarea    
+              type: textarea
+              label:
+                fr: Description des changements
+              
         
         # Section 7 - Signatures
         - section:
