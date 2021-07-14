@@ -45,10 +45,6 @@ body p {
         margin-bottom: 0 !important; /* pas de margin bottom sur dernier contrôle d'un groupe non répétable */
     }
 
-    .form-control, .select2-container--bootstrap4 .select2-selection {
-        border: 1px solid #858b93;
-    }
-
     /*====================================================================================================*/
     /*  -Z03- Boutons
 /*====================================================================================================*/
@@ -1069,8 +1065,6 @@ form .input-validation-error, form .input-validation-error + .note-editor {
     /*  -99- À positionner
 /*====================================================================================================*/
 
-
-
     .card.section-secondaire .card-title {
         background-color: var(--couleur-fond-gris);
     }
@@ -1079,6 +1073,9 @@ form .input-validation-error, form .input-validation-error + .note-editor {
         border: 1px solid var(--couleur-filet-secondaire);
     }
 
+    .card-title h1, .card-title h2, .card-title h3, .card-title h4, .card-title h5, .card-title h6 { /* TODO à modifier dans ECS */
+        margin: 0;
+    }
 
 
     /*====================================================================================================*/

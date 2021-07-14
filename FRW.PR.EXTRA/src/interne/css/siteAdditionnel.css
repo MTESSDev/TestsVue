@@ -217,6 +217,13 @@ ul.pagination a.page-link:focus {
     width: auto !important;
 }
 
+/* form-group pour select2 */
+.select2-hidden-accessible.form-group + .select2-container.select2-container--bootstrap4 {
+    margin-bottom: 32px;
+}
+
+
+
 .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__rendered {
     padding: 0 8px 4px 8px;
 }
@@ -235,6 +242,7 @@ ul.pagination a.page-link:focus {
     height: auto;
     line-height: 1.4;
     margin-top: 8px;
+    word-break: break-word; /* TODO changer dans ECS */
 }
 
     .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice:hover,

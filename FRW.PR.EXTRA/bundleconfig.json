@@ -36,7 +36,6 @@
     "inputFiles": [
       "src/externe/dataTables/datatables.min.css",
       "src/externe/select2/select2.min.css",
-      "src/externe/select2/select2-bootstrap4.min.css",
       "src/temp/additionnel.min.css"
     ],
     "minify": {
