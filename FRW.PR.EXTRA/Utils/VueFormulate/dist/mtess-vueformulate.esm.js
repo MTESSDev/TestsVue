@@ -14,7 +14,6 @@
 //
 //
 //
-//
 //Note Importante! Il ne doit y avoir aucun espace entre le <label> et le <span> d'indicateur de champ obligatoire (seul moyen mettre sur m�me ligne comme c'est fait actuellement) Idem avec le span .conteneur-tooltip
 //aussi les &nbsp et &#xfeff;(espace ins�cable zero width) dans icone-champ-requis et conteneur-tooltip sont essentiels dans la strat�gie css permettant de ne pas afficher un * et/ou un tooltip seuls sur une ligne.
 var script$3 = {
@@ -52,10 +51,12 @@ var script$3 = {
 
     if (this.context.help) {
       this.$nextTick(function () {
+        console.log(this);
         const help = this.$parent.$el.querySelector(".formulate-input-help");
 
         if (help) {
-          help.setAttribute('aria-hidden', 'true');
+          //help.setAttribute('aria-hidden', 'true')
+          this.$el.setAttribute('aria-describedby', help.id);
         }
       });
     }
@@ -175,9 +176,7 @@ var __vue_render__$3 = function () {
     }
   }, [_vm._m(0)])]) : _vm._e(), _vm._v(" "), _vm.isRequired ? _c('span', {
     staticClass: "sr-only"
-  }, [_vm._v(". Obligatoire.")]) : _vm._e(), _vm._v(" "), _vm.context.help ? _c('span', {
-    staticClass: "sr-only"
-  }, [!_vm.isRequired ? _c('span', [_vm._v(".")]) : _vm._e(), _vm._v(" " + _vm._s(_vm.context.help))]) : _vm._e(), _vm._v(" "), _vm.hasValidationRules && _vm.messagesErreur ? _c('span', {
+  }, [_vm._v(". Obligatoire.")]) : _vm._e(), _vm._v(" "), _vm.hasValidationRules && _vm.messagesErreur ? _c('span', {
     staticClass: "sr-only",
     attrs: {
       "aria-live": "polite"
