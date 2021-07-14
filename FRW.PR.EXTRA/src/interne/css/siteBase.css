@@ -1338,8 +1338,11 @@ a .icone-svg.telechargement {
     /*====================================================================================================*/
     /*  -60- Redéfinitions Bootstrap
 /*====================================================================================================*/
-    @media (max-width: 425px) {
-        .container {
+/*====================================================================================================*/
+/*  -60- Redéfinitions Bootstrap
+/*====================================================================================================*/
+@media (max-width: 425px) {
+    .container {
         max-width: 100%;
     }
 }
@@ -1384,9 +1387,9 @@ h1 {
     margin-bottom: 2rem;
 }
 
-h1 img {
-    margin-right: 5px;
-}
+    h1 img {
+        margin-right: 5px;
+    }
 
 h2 {
     font-family: 'Roboto-Medium', sans-serif;
@@ -1435,8 +1438,13 @@ a {
     padding: 24px 16px;
 }
 
+.sans-bordure .card-body {
+    border: 0;
+    padding: var(--tc-24-16-val) var(--tc-16-8-val) 0 var(--tc-16-8-val);
+}
+
 .btn, .card, .form-control, .custom-select, .select2-container--bootstrap4 .select2-selection {
-    border-radius: 0; /* pas de bouton, de champs et de cards avec coins arrondis dans ECS... */
+    border-radius: 0!important; /* pas de bouton, de champs et de cards avec coins arrondis dans ECS... */
 }
 
 .btn {
@@ -1463,15 +1471,11 @@ button.btn-link {
     min-width: 0;
 }
 
-.radio-bouton-avec-padding-top {
-    padding-top: 20px;
-}
-
 .form-group, .mb-32 {
     margin-bottom: 32px;
 }
 
-.mt-32{
+.mt-32 {
     margin-top: 32px;
 }
 
@@ -1480,8 +1484,8 @@ label {
     font-family: OpenSans-SemiBold;
 }
 
-label, .libelle-groupe-radio {
-    margin-bottom: .2rem;
+label, .libelle-groupe-radio, .libelle-groupe-checkbox {
+    margin-bottom: 4px;
 }
 
 .precision {
@@ -1497,7 +1501,7 @@ label, .libelle-groupe-radio {
 
 /* Bordure de contrôles */
 .form-control, .select2-container--bootstrap4 .select2-selection {
-    border: 1px solid #858b93;
+    border: 1px solid #858b93!important;
 }
 
 .text-danger {
@@ -1523,14 +1527,14 @@ label, .libelle-groupe-radio {
 }
 
 
-.custom-switch.lg .custom-control-label::before {
-    cursor: pointer;
-    left: -4rem;
-    width: 56px;
-    height: 32px;
-    border-radius: 1rem;
-    top: calc(50% - 17px);
-}
+    .custom-switch.lg .custom-control-label::before {
+        cursor: pointer;
+        left: -4rem;
+        width: 56px;
+        height: 32px;
+        border-radius: 1rem;
+        top: calc(50% - 17px);
+    }
 
     .custom-switch.lg .custom-control-label::after {
         cursor: pointer;
@@ -1549,34 +1553,95 @@ label, .libelle-groupe-radio {
     background-color: #c5cad2;
 }
 
-.custom-control .custom-control-input:checked ~ .custom-control-label::before {
+
+.custom-control.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
     border-color: #1479cc;
-    background-color: #1479cc;
+    background-color: #1479CC;
 }
+
 
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
     transform: translateX(1.4rem);
     -webkit-transform: translateX(1.4rem)
 }
 
+/* Personnalisations des contrôles custom en général */
+.custom-control-label::before {
+    border: 1px solid #808a9d;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #808a9d;
+    background-color: #1479cc;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    border-color: #5b6476;
+    border-width: 2px;
+}
+
+
+/* Custom radio button */
+.custom-radio .custom-control-input:checked ~ .custom-control-label::before {
+    background: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%231479cc'/%3e%3c/svg%3e");
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    background-image: none;
+}
+
+
+/* Custom checkbox */
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0;
+}
+
+
 /* Contrôles checkbox et radio large (N'existe pas dans BS) */
 .custom-checkbox.lg, .custom-radio.lg {
-    padding-left: 1.75rem;
+    padding-left: 2.25rem;
 }
 
     .custom-checkbox.lg .custom-control-label::before, .custom-radio.lg .custom-control-label::before {
         width: 1.25rem;
         height: 1.25rem;
-        left: -1.75rem;
+        left: -2.25rem;
         top: -0.1rem;
     }
 
     .custom-checkbox.lg .custom-control-label::after, .custom-radio.lg .custom-control-label::after {
         top: -0.1rem;
-        left: -1.75rem;
+        left: -2.25rem;
         width: 1.25rem;
         height: 1.25rem;
     }
+
+/* Groupes de boutons radios et checkbox */
+.groupe-radio > legend, .groupe-checkbox > legend {
+    font-size: 1rem;
+}
+
+.groupe-radio > .custom-radio, .groupe-checkbox > .custom-checkbox {
+    margin-top: 1rem;
+}
+    /* Font normal pour libellés qui sont à l'intérieur d'un groupe de radio boutons ou de checkbox */
+    .groupe-radio > .custom-radio > label, .groupe-checkbox > .custom-checkbox > label {
+        font-family: inherit;
+    }
+    /* Liste sous une case à cocher */
+    .groupe-checkbox > .custom-checkbox ~ .liste-case-cocher {
+        margin: 16px 0 32px 36px
+    }
+
+        .groupe-checkbox > .custom-checkbox ~ .liste-case-cocher label {
+            font-family: inherit;
+        }
+
+.libelle-groupe-radio, .libelle-groupe-checkbox {
+    display: block;
+    font-family: OpenSans-SemiBold;
+}
 
 /*====================================================================================================*/
 /*  -80- TABLES
@@ -1786,6 +1851,15 @@ table.row-clickable > tbody > tr {
     border-top: 0;
 }
 
+.fenetre-message.modal .modal-footer > button { /* TODO modifier dans ECS */
+    margin: 0;
+    margin-right: 32px;
+}
+
+.fenetre-message.modal .modal-footer > button:last-child { /* TODO modifier dans ECS */
+    margin-right: 0;
+}
+
 /*====================================================================================================*/
 /*  -89- Contenu extensible
 /*====================================================================================================*/
@@ -1941,11 +2015,15 @@ a.collapsed .developper, a:not(.collapsed) .reduire {
 /*
 /*  Sections de base (Entête fond bleu foncé, texte blanc, bordure bleue foncée et fond contenu gris pâle)
 /*====================================================================================================*/
-.card.section-base {
-    border-radius: 0;
-    margin-bottom: var(--tc-48-40-val);
-    border: 0;
-}
+    .card .card-title header { /* TODO à modifier dans ECS */
+        margin: 0;
+    }
+
+    .card.section-base {
+        border-radius: 0;
+        margin-bottom: var(--tc-48-40-val);
+        border: 0;
+    }
 
     .card.section-base .card-title, .card.section-secondaire .card-title, .card.tertiaire .card-title {
         padding: 8px 16px;
