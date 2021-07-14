@@ -131,7 +131,7 @@ namespace FRW.PR.Extra.Controllers
             //TODO: appeler le backend pour obtenir le fichier
             var dynamicForm = OutilsYaml.LireFicher<DynamicForm>(@$"schemas/{typeFormulaire}.ecsform.yml");
 
-            var confirmation = _formulairesService.Creer(typeFormulaire);
+            var confirmation = _formulairesService.Creer(typeFormulaire, data);
             return Ok();
         }
 

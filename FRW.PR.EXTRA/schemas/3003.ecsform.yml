@@ -2593,7 +2593,7 @@ form:
                       fr: Par quel document la garde vous est-elle confiée?
                     options:
                       Jugement: Jugement
-                      Amiable: Entente à l'amiable
+                      Amiable: Document d'entente conclue à l'amiable
                       Mediation: Médiation
                       Autre: Autre
                   - name: PrecisionDocumentGarde
@@ -2606,11 +2606,6 @@ form:
                     label:
                       fr: Cet enfant habite-t-il avec vous?
                     options: yesno
-                  - name: PrecisionAdresse
-                    type: text
-                    v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
-                    label:
-                      fr: Adresse de l'enfant à charge
                   - name: PrecisionRaison
                     type: text
                     v-if: val(`${name}.prefixId$EnfantHabiteMemeAdresse`, index) === 'false'
@@ -2643,7 +2638,7 @@ form:
               - name: IdEnfant
                 type: text
                 label:
-                  fr: Nom et prénom de l'enfant
+                  fr: Prénom de l'enfant
               - name: SourceRevenu
                 type: text
                 label:
@@ -2663,7 +2658,7 @@ form:
             - name: EnfantsPossedentBiens
               type: radio
               label:
-                fr: Vos enfants à charge ont-ils des comptes dans des institutions financières, des véhicules ou d’autres biens?
+                fr: Vos enfants à charge ont-ils des comptes dans des établissements financiers, des véhicules ou d’autres biens?
               options: yesno
             - name: DetailBienEnfant
               type: repeatableGroup
@@ -2672,7 +2667,7 @@ form:
               label:
                 fr: Biens des enfants à charge
               help:
-                fr: Comptes dans des institutions financières, véhicules ou autres biens
+                fr: Comptes dans des établissements financiers, véhicules ou autres biens
               instanceLabel: 
                 fr: Bien d'un enfant à charge
               addLabel:
@@ -2684,11 +2679,11 @@ form:
                 - name: IdEnfant
                   type: text
                   label:
-                    fr: Nom et prénom de l'enfant
+                    fr: Prénom de l'enfant
                 - name: DescriptionBien
                   type: text
                   label:
-                    fr: Description du bien ou numéro de compte
+                    fr: Numéro de compte ou description du bien
                 - name: ValeurBien
                   type: number
                   label:

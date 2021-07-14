@@ -31,9 +31,16 @@ namespace FRW.PR.Extra.Services
             return a?.Sortie ?? string.Empty;
         }
 
-        public async Task<string> Creer(string nomForm)
+        public async Task<string> Creer(string nomForm, IDictionary<object, object> data)
         {
-            var a = await _dorsale.EnvoyerRecevoir<string, string>(nomForm, _serviceFormulaires, $"{_apiPath}/Creer");
+            //TODO créer un EntrantCreerFormulaire avec TypeFormulaire et data
+            var a = await _dorsale.EnvoyerRecevoir<EntrantCreerFormulaire, string>(
+                new EntrantCreerFormulaire
+                {
+                    TypeFormulaire = nomForm,
+                    Data = data
+                },
+                _serviceFormulaires, $"{_apiPath}/Creer");
 
             return a?.Sortie ?? string.Empty;
         }

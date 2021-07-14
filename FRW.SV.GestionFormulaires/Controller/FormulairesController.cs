@@ -7,6 +7,9 @@ using FRW.TR.Contrats.ConversionDonnees;
 
 namespace FRW.SV.GestionFormulaires.Controller
 {
+    /// <summary>
+    /// Contrôleur pour les formulaires
+    /// </summary>
     [Route("/api/v1/[controller]/[action]")]
     [ApiController]
     public class FormulairesController : ControllerBase
@@ -16,6 +19,13 @@ namespace FRW.SV.GestionFormulaires.Controller
         private readonly FormConfig _Config;
         private readonly ConvertirDonneesAF _produireDonneesPdfAF;
 
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="creer"></param>
+        /// <param name="maj"></param>
+        /// <param name="formConfig"></param>
+        /// <param name="produireDonneesPdfAF"></param>
         public FormulairesController(CreerFormulaire creer,
                                      MajFormulaire maj,
                                      FormConfig formConfig,
@@ -42,10 +52,11 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<AppelSortant<string>>> Creer(string nomForm)
+        public async Task<ActionResult<AppelSortant<string>>> Creer(EntrantCreerFormulaire entrant)
         {
+            entrant.IdSysAppelant = "idSys";
             // Todo obtenir le idSys dans l'url de la requête ou le fichier de config
-            var a = await _creerFormulaire.Traitement(nomForm, "IdSys", null);
+            var a = await _creerFormulaire.Traitement(entrant);
             return Ok(a);
         }
 
