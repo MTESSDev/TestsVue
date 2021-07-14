@@ -1,4 +1,7 @@
+using ECS.PR.Extra.Services;
+using FRW.PR.Extra.Services;
 using FRW.PR.Extra.Utils;
+using FRW.TR.Contrats;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -41,6 +44,10 @@ namespace FRW.PR.Extra
             {
                 options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
             });
+
+            services.AddHttpClient<IDorsale, Dorsale>();
+            services.AddHttpContextAccessor();
+            services.AddScoped<FormulairesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
