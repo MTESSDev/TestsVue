@@ -135,6 +135,34 @@ namespace FRW.PR.Extra.Controllers
             return Ok();
         }
 
+        [HttpPost("{typeFormulaire}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> MiseAJour(string typeFormulaire)
+        {
+            var confirmation = await _formulairesService.Maj(new TR.Contrats.EntrantMajFormulaire
+            {
+                NsFormulaire = "testNumero",
+                Data = LireFormulaire(),
+                EnvoyerCourriel = LireCookieCourrielEnvoye()
+            });
+
+            throw new NotImplementedException();
+        }
+
+        private bool LireCookieCourrielEnvoye()
+        {
+            //Vérifier dans le cookie de l'utilisateur si le courriel a été envoyé
+            throw new NotImplementedException();
+        }
+
+        private IDictionary<object, object> LireFormulaire()
+        {
+            //Lire le contenu du formulaire et le retourner sous forme de dictionnaire
+            throw new NotImplementedException();
+        }
+
         public enum ComponentType
         {
             None = 0,

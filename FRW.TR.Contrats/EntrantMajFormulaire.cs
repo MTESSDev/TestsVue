@@ -6,8 +6,10 @@ namespace FRW.TR.Contrats
 {
     public class EntrantMajFormulaire
     {
-        public string nsFormulaire { get; set; } = string.Empty;
+        public string NsFormulaire { get; set; } = string.Empty;
 
-        public bool envoyerFormulaire { get; set; }
+        public IDictionary<object, object> Data = new Dictionary<object, object>();
+
+        public bool EnvoyerCourriel { get; set; }
     }
 }

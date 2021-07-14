@@ -1,5 +1,6 @@
 ﻿using FRW.SV.GestionFormulaires.SN;
 using FRW.TR.Commun;
+using FRW.TR.Contrats;
 using SV.GestionFormulaires.DAL;
 using System.Threading.Tasks;
 
@@ -26,12 +27,12 @@ namespace FRW.SV.GestionFormulaires.SN
         /// <param name="contenuForm">Contenu du formulaire</param>
         /// <param name="envoyerCourriel">True si pas encore envoyé</param>
         /// <returns>Un numéro de confirmation</returns>
-        public async Task<string> Traitement(string noSeqForm, string? contenuForm, bool envoyerCourriel)
+        public async Task<string> Traitement(EntrantMajFormulaire entrant)
         {
             //TODO si le courriel n'est pas encore envoyé, le faire
-            var confirmation = await _dal.MettreAJour(noSeqForm, contenuForm ?? string.Empty);
-            await SuiviEtat.Creer(noSeqForm, Constantes.EtatMettreAJour);
-            if (envoyerCourriel)
+            var confirmation = await _dal.MettreAJour(entrant.NsFormulaire, entrant.Data);
+            await SuiviEtat.Creer(entrant.NsFormulaire, Constantes.EtatMettreAJour);
+            if (entrant.EnvoyerCourriel)
             {
                 await _modeleVersPdf.EnvoyerCourriel();
             }
