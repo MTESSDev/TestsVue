@@ -270,8 +270,12 @@ namespace FRW.PR.Extra.Pages
                 }
             }
 
-            Title =  (dynamicForm.Form["title"] as Dictionary<object,object>)?.GetLocalizedObject();
-            dynamicForm.Form["enableVif"] = !ShowAll; 
+            Title = (dynamicForm.Form["title"] as Dictionary<object, object>)?.GetLocalizedObject();
+
+            if (!ShowAll)
+            {
+                dynamicForm.Form["enableVif"] = true;
+            }
 
             using (StreamReader streamReader = new StreamReader(@"schemas/formTemplate.vue", Encoding.UTF8))
             {

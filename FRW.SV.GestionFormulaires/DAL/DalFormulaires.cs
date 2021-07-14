@@ -27,9 +27,8 @@ namespace SV.GestionFormulaires.DAL
         /// <param name="noSeqForm"></param>
         /// <param name="contenuForm"></param>
         /// <returns>Un numéro de confirmation</returns>
-        public async Task<string> MettreAJour(string noSeqForm, string contenuForm)
+        public async Task<string> MettreAJour(string noSeqForm, IDictionary<object, object> contenuForm)
         {
-            //TODO faire un EntrantMettreAJour
             throw new NotImplementedException();
         }
 

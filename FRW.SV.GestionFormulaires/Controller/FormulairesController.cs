@@ -61,11 +61,9 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<AppelSortant<string>>> Maj(string noSeqForm)
+        public async Task<ActionResult<AppelSortant<string>>> Maj(EntrantMajFormulaire entrant)
         {
-            //TODO vérifier le cookie pour déterminer si on envoie le courriel
-            bool envoyerCourriel = true;
-            var a = await _majFormulaire.Traitement(noSeqForm, null, envoyerCourriel);
+            var a = await _majFormulaire.Traitement(entrant);
             return Ok(a);
         }
 
