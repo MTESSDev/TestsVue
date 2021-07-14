@@ -352,6 +352,8 @@ form:
               v-if: val('TypeDemande').includes('Afdr')
               label:
                 fr: Numéro de dossier (CP-12)
+              help:
+                fr: Si connu
               validations:
                 optional: null
             - name: NomFamille
@@ -2421,7 +2423,11 @@ form:
                   type: text
                   label:
                     fr: CP-12
-                  outerClasses: lg                    
+                  help:
+                    fr: Si connu
+                  outerClasses: lg
+                  validations:
+                    optional: null                
                 - name: Nom
                   type: text
                   label:
