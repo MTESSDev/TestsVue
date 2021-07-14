@@ -108,7 +108,7 @@ namespace FRW.PR.Extra.Controllers
         /// </summary>
         /// <param name="typeFormulaire">Type/identifiant de configuration/formulaire</param>
         /// <returns></returns>
-        [HttpPost("Sauvegarde/{typeFormulaire}")]
+        [HttpPost("{typeFormulaire}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
