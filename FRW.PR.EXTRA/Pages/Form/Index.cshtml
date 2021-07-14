@@ -626,13 +626,11 @@
             },
             enregistrer() {
                 //TODO UrlRoute au lieu de l'url codée dur
-                //axios.post('/api/Soumettre/Sauvegarde/3003', this.form)
-                axios.post('@Url.ActionLink("Sauvegarde","Soumettre")', this.form)
+                axios.post('/api/soumettre/sauvegarde/3003', this.form)
                     .then(response => {
                         console.log(response)
                     })
                     .catch(error => {
-                        //Erreur 404 avec le chemin actuel
                         console.log(error.response.data)
                     });
                 alert("Sauvegardé!");

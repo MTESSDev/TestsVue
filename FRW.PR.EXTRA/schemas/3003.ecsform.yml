@@ -2445,7 +2445,15 @@ form:
                   outerClasses: md
                   label:
                     fr: Numéro d’assurance maladie
-                  v-if: val('prefixId$EstDemandeurAsile') === 'false'
+                  v-if: val('adulte1EstDemandeurAsile') !== 'true' && val('adulte2EstDemandeurAsile') !== 'true'
+                - name: Nas
+                  type: text
+                  outerClasses: md
+                  label:
+                    fr: Numéro d’assurance maladie
+                  v-if: val('adulte1EstDemandeurAsile') === 'true' || val('adulte2EstDemandeurAsile') === 'true'
+                  validations:
+                    optional: null
                 - name: Sexe
                   type: radio
                   label:
