@@ -22,7 +22,7 @@ namespace FRW.SV.GestionFormulaires.Controller
         }
 
         /// <summary>
-        /// "Copie" de GCO
+        /// FRWxxx - Produire un PDF avec gestion des données trop longues. - "Copie" de GCO
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -65,7 +65,7 @@ namespace FRW.SV.GestionFormulaires.Controller
         ///
         /// </remarks>
         /// <param name="donneesChargement">Données à charger dans les gabarits de PDF.</param>
-        /// <returns></returns>
+        /// <returns>Fichier PDF</returns>
         [HttpPost]
         [Produces("application/pdf")]
         public ActionResult ProduirePdf(DonneesChargement donneesChargement)

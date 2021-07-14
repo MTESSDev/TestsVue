@@ -58,6 +58,12 @@ namespace FRW.SV.GestionFormulaires.Controller
             return Ok(a);
         }
 
+        /// <summary>
+        /// FRW313 - Préparer les données associées à un formulaire dynamique pour chargement.
+        /// </summary>
+        /// <param name="typeFormulaire">Type de formulaire ex: 3003</param>
+        /// <param name="jsonData">Json d'un formulaire web.</param>
+        /// <returns>DonneesChargement</returns>
         [HttpPost]
         public ActionResult<DonneesChargement> ConvertirDonnees(string typeFormulaire, string jsonData)
         {
