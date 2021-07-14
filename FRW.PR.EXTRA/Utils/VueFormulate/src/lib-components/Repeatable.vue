@@ -1,7 +1,7 @@
 <template>
   <div :class="[context.classes.groupRepeatable]">
-    <div class="contenu-extensible instance-groupe card section-secondaire sans-bordure">
-        <div class="card-title ">
+    <div class="contenu-extensible instance-groupe card section-secondaire">
+        <div class="card-title">
             <a role="button" data-toggle="collapse" aria-expanded="true" v-bind:href="'#' + context.name +'-' + index" v-bind:aria-controls="context.name + '-' + index">
                 <span class="libelle" v-bind:id="'label' + context.name +'-' + index">
                     <span class="libelle-instance">{{instanceLabel || this.context.label}}&nbsp;</span>

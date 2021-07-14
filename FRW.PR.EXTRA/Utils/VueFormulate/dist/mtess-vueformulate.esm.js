@@ -592,9 +592,9 @@ var __vue_render__ = function () {
   return _c('div', {
     class: [_vm.context.classes.groupRepeatable]
   }, [_c('div', {
-    staticClass: "contenu-extensible instance-groupe card section-secondaire sans-bordure"
+    staticClass: "contenu-extensible instance-groupe card section-secondaire"
   }, [_c('div', {
-    staticClass: "card-title "
+    staticClass: "card-title"
   }, [_c('a', {
     attrs: {
       "role": "button",
