@@ -608,21 +608,6 @@ form:
             fr: Situation actuelle
           id: SituationActuelle
           components:
-            - name: EnEmploi
-              type: radio
-              label: 
-                fr: Êtes-vous en emploi?
-              options: yesno
-            - name: PrecisionStatutEmploi
-              v-if: val('prefixId$EnEmploi') === 'true'
-              type: checkbox
-              label:
-                fr: Précisez le type d'emploi
-              options: 
-                TempsPlein: Temps plein
-                TempsPartiel: Temps partiel
-                SurAppel: Sur appel
-                TravailleurAutonome: Travailleur autonome
             - name: AideGouvRecue
               type: radio
               label: 
@@ -718,7 +703,7 @@ form:
                     title:
                       fr: Minorité visible
                     text: 
-                      fr: Selon la Loi sur l'équité en matière d'emploi, les minorités visibles sont constituées des personnes, autres que des Autochtones, qui ne sont pas de race blanche ou qui n'ont pas la peau blanche.
+                      fr: Un membre d’une minorité visible est une personne, autre qu’un Autochtone, facilement reconnaissable par sa différence ethnique ou la couleur de sa peau.
                   options: yesno
         # Section 5 - Statut d'étudiant
         - section: 
@@ -852,6 +837,7 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
+                  help: Au meilleur de votre connaissance.
             - name: SecondaireGen
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireGen')          
@@ -875,6 +861,7 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
+                  help: Au meilleur de votre connaissance.
             - name: SecondaireProf
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormProf')                    
@@ -904,6 +891,7 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
+                  help: Au meilleur de votre connaissance.
             - name: SecondaireMetier
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('SecondaireFormMétier')                              
@@ -924,6 +912,7 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
+                  help: Au meilleur de votre connaissance.
             - name: Collegial
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Collegial')                                        
@@ -953,6 +942,7 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
+                  help: Au meilleur de votre connaissance.
             - name: Universitaire
               type: group
               v-if: val('prefixId$OrdresEnseignementsApplicables').includes('Universitaire')                                                  
@@ -983,6 +973,7 @@ form:
                   type: date
                   label:
                     fr: Date de fin des études
+                  help: Au meilleur de votre connaissance.
             - name: EtudesEtranger
               type: radio
               label: 
@@ -1096,6 +1087,21 @@ form:
             fr: Emplois
           id: emplois
           components:
+            - name: EnEmploi
+              type: radio
+              label: 
+                fr: Êtes-vous en emploi?
+              options: yesno
+            - name: PrecisionStatutEmploi
+              v-if: val('prefixId$EnEmploi') === 'true'
+              type: checkbox
+              label:
+                fr: Précisez le type d'emploi
+              options: 
+                TempsPlein: Temps plein
+                TempsPartiel: Temps partiel
+                SurAppel: Sur appel
+                TravailleurAutonome: Travailleur autonome
             - name: Travaille
               type: radio
               label: 
@@ -2868,3 +2874,26 @@ form:
               classes: texte-revision
               text: 
                 fr: Tout est beau mon champion. Tu es à un clic d'avoir ton chèque!
+
+#jobs:
+#  valider:
+#  convertirDonnees:
+#  fabriquerPdf:
+#  envoyerApi: https://api.infologique.net/ECS25A
+#
+#
+#http_client:
+#  default_options:
+#    max_redirects: 7
+#  backend.client:
+#      scope: 'https://api\.infologique\.net' #regex de l'url
+#      network: web # web ou RITM
+#      #base_uri: 'https://api.infologique.net'
+#      headers:
+#          Accept: 'application/json'
+#      # HTTP Basic authentication
+#      #auth_basic: 'the-username:the-password'
+#      # HTTP Bearer authentication (also called token authentication)
+#      #auth_bearer: the-bearer-token
+#      # Microsoft NTLM authentication
+#      #auth_ntlm: 'the-username:the-password'
