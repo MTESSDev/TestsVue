@@ -77,8 +77,8 @@ namespace FRW.PR.Extra.Controllers
                         {
                             object? val = null;
 
-                            if (item.GroupName != null 
-                                && data.TryGetValue(item.PrefixId + item.GroupName, out var groupData) 
+                            if (item.GroupName != null
+                                && data.TryGetValue(item.PrefixId + item.GroupName, out var groupData)
                                 && groupData is Array arrayItem)
                             {
                                 if (arrayItem != null && arrayItem.Length == 1)
@@ -203,34 +203,45 @@ namespace FRW.PR.Extra.Controllers
                                 options.DebuggerStatementHandling(Jint.Runtime.Debugger.DebuggerStatementHandling.Clr);
 
                                 var result = new Engine(options)
-                                    .SetValue("log", new Action<object?>(DebugWriteLineCustom))
-                                    .SetValue("ArrayisArray", new Func<object?, bool>(ArrayIsArray))
-                                    .SetValue("index", 0)
-                                    .SetValue("name", groupName)
-                                    .SetValue("form", data)
-                                    //.Execute($"form.EvenementsDerniereAnnee")
-                                    .Execute(@"
-                                            function val(idChamp) { 
-                                                var debug = '';
+                                     .SetValue("log", new Action<object?>(DebugWriteLineCustom))
+                                     .SetValue("ArrayisArray", new Func<object?, bool>(ArrayIsArray))
+                                     .SetValue("index", 0)
+                                     .SetValue("name", prefixId + groupName)
+                                     .SetValue("form", data)
+                                     .Execute(@"function val(idChamp, indexe) {  
+                            log(idChamp)
+                                                const i = indexe || 0
                                                 const champs = idChamp.split('.')
                                                 let objetAValider = this.form
 
                                                 for (champ of champs) {
-
-                                                    //TODO à modifier éventuellement pour groupes répétables
-                                                    objetAValider = Array.isArray(objetAValider) ? objetAValider[0] : objetAValider
-
-                                                    if (!objetAValider[`${champ}`] && objetAValider[`${champ}`] !== false ) {
-                                                        return ''
+                                                    if (Array.isArray(objetAValider)) {
+                                                        objetAValider = objetAValider[i] || objetAValider[0]
                                                     }
-                                                    objetAValider = objetAValider[`${champ}`]
-                                                }              
 
+                                                    if (!objetAValider[`${champ}`] && objetAValider[`${champ}`] !== false) {
+                                                        //Si un indexe est spécifié, nous sommes dans un repeatable. Si objetAValider est null, on ajoute l'indexe au nom du champ (format [index]) et on essaie d'obtenir la valeur
+                                                        if (indexe >= 0) {
+                                                            objetAValider = objetAValider[`${champ}[${indexe}]`]
+                                                            if (!objetAValider && objetAValider !== false) {
+log('rien')
+
+                                                                return ''
+                                                            }
+                                                        } else {
+log('rien')
+                                                            return ''
+                                                        }
+                                                    } else {
+                                                        objetAValider = objetAValider[`${champ}`]
+                                                    }
+                                                }              
+                            log(objetAValider)
                                                 return objetAValider || ''
                                             };"
-                                            + $" ({vif} ? true : false)")
-                                    .GetCompletionValue()
-                                    .AsBoolean();
+                                             + $" ({vif.ToString().Replace("prefixId$", prefixId)} ? true : false)")
+                                     .GetCompletionValue()
+                                     .AsBoolean();
 
 
                                 /*Jint.Runtime.Debugger..Step += (sender, info) =>
@@ -268,7 +279,7 @@ namespace FRW.PR.Extra.Controllers
 
                     var inputV = new ComponentValidation();
                     inputV.ParseAttributes(dictItem);
-                    inputV.GroupName = groupName;
+                    inputV.GroupName = prefixId + groupName;
                     inputV.PrefixId = prefixId;
                     if (inputV.Type != TypeInput.SKIP)
                     {

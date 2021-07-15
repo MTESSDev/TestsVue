@@ -332,12 +332,12 @@ form:
                     RetourEcole: Retour aux études ou en formation
                     DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
                     PrecisionRaisonDemandeEmploiAutreRaison: Autre
-                - name: PrecisionRaisonDemandeEmploiAutre
+                - name: PrecisionRaisonEmployeur
                   v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('DirigeEmployeurOrganisme')
                   type: text
                   label: 
                     fr: Précisez l'employeur ou l'organisme
-                - name: PrecisionRaisonDemandeEmploiAutre
+                - name: PrecisionRaisonDemandeEmploi
                   v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('PrecisionRaisonDemandeEmploiAutreRaison')
                   type: text
                   label: 
