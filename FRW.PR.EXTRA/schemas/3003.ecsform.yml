@@ -330,13 +330,19 @@ form:
                   options: 
                     AideRechercheEmploi: Aide à la recherche d'emploi
                     RetourEcole: Retour aux études ou en formation
-                    DirigeEmployeurOrganisme: Référence d'un employeur ou d'un organisme
+                    ReferenceEmployeur: Référence d'un employeur (ex. subvention)
+                    ReferenceOrganisme: Référence d'un organisme
                     PrecisionRaisonDemandeEmploiAutreRaison: Autre
                 - name: PrecisionRaisonEmployeur
-                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('DirigeEmployeurOrganisme')
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('ReferenceEmployeur')
                   type: text
                   label: 
-                    fr: Précisez l'employeur ou l'organisme
+                    fr: Précisez l'employeur
+                - name: PrecisionOrganisme
+                  v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('ReferenceOrganisme')
+                  type: text
+                  label: 
+                    fr: Précisez l'organisme
                 - name: PrecisionRaisonDemandeEmploi
                   v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('PrecisionRaisonDemandeEmploiAutreRaison')
                   type: text
