@@ -338,12 +338,12 @@ form:
                   type: text
                   label: 
                     fr: Précisez l'employeur
-                - name: PrecisionOrganisme
+                - name: PrecisionRaisonOrganisme
                   v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('ReferenceOrganisme')
                   type: text
                   label: 
                     fr: Précisez l'organisme
-                - name: PrecisionRaisonDemandeEmploi
+                - name: PrecisionRaisonDemandeAideEmploi
                   v-if: val(`${name}.prefixId$PrecisionRaisonDemandeEmploi`).includes('PrecisionRaisonDemandeEmploiAutreRaison')
                   type: text
                   label: 
